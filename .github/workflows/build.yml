@@ -1,0 +1,88 @@
+name: Build On Push
+
+on: [push, pull_request]
+
+jobs:
+  build:
+    runs-on: ${{matrix.os}}
+    name: Build
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: Windows
+            os: windows-latest
+            cmake_flags: -DBANANA_BUILD_EXAMPLES=ON
+            examples: >
+              connector-default-blocking connector-winapi-blocking connector-cpr-blocking connector-any-blocking connector-beast-blocking
+              connector-default-async connector-winapi-async connector-cpr-async connector-any-async
+            binary_path: "example/bin/banana-example-$name.exe"
+            packages: |
+              pip install conan
+
+          - name: Linux
+            os: ubuntu-latest
+            cmake_flags: -DBANANA_BUILD_EXAMPLES=ON -DBANANA_EXAMPLES_ENABLE_CORO=ON -DCMAKE_CXX_COMPILER=g++-10 -DCMAKE_CXX_FLAGS=-fcoroutines
+            examples: >
+              connector-default-blocking connector-cpr-blocking connector-any-blocking connector-beast-blocking
+              connector-default-async connector-cpr-async connector-any-async
+              connector-beast-coro
+              custom-connector-blocking
+            binary_path: "example/bin/banana-example-$name"
+            packages: |
+              sudo apt-get install libssl-dev g++-10 curl
+              pip install conan
+
+          - name: macOS
+            os: macos-latest
+            cmake_flags: -DBANANA_BUILD_EXAMPLES=ON
+            examples: >
+              connector-default-blocking connector-cpr-blocking connector-any-blocking connector-beast-blocking
+              connector-default-async connector-cpr-async connector-any-async
+              custom-connector-blocking
+            binary_path: "example/bin/banana-example-$name"
+            packages: |
+              brew install openssl conan curl
+
+          - name: Linux (bundled cpr)
+            os: ubuntu-latest
+            cmake_flags: -DBANANA_BUILD_EXAMPLES=ON -DBANANA_USE_BUNDLED_CPR=ON
+            examples: >
+              connector-default-blocking connector-cpr-blocking
+              connector-default-async connector-cpr-async
+            binary_path: "example/bin/banana-example-$name"
+            packages: |
+              sudo apt-get install libssl-dev
+              pip install conan
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Install python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.7'
+
+      - name: Install dependencies
+        run: ${{matrix.packages}}
+        if: ${{matrix.packages}}
+
+      - name: Create Build Environment
+        run: cmake -E make_directory ${{github.workspace}}/build
+
+      - name: Configure CMake
+        shell: bash
+        working-directory: ${{github.workspace}}/build
+        run: |
+          cmake .. -DCMAKE_BUILD_TYPE=Debug ${{matrix.cmake_flags}}
+
+      - name: Build and run banana examples
+        working-directory: ${{github.workspace}}/build
+        shell: bash
+        run: |
+          for name in $(echo "${{matrix.examples}}" | tr " " "\n")
+          do
+            cmake --build . --config Debug --target banana-example-${name}
+            binary_path="$(eval echo ${{matrix.binary_path}})"
+            ${binary_path} "${{secrets.TG_TEST_BOT_TOKEN}}" "${{secrets.TG_TEST_USER}}" "${name}" "${{matrix.name}}"
+          done

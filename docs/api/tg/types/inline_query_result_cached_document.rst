@@ -1,0 +1,48 @@
+.. _banana-api-tg-types-inline_query_result_cached_document:
+
+inline_query_result_cached_document_t
+=====================================
+
+.. cpp:struct:: banana::api::inline_query_result_cached_document_t
+
+   Represents a link to a file stored on the Telegram servers. By default, this file will be sent by the user with an optional caption. Alternatively, you can use input_message_content to send a message with the specified content instead of the file.
+
+   .. cpp:member:: string_t type
+
+   Type of the result, must be document
+
+   .. cpp:member:: string_t id
+
+   Unique identifier for this result, 1-64 bytes
+
+   .. cpp:member:: string_t title
+
+   Title for the result
+
+   .. cpp:member:: string_t document_file_id
+
+   A valid file identifier for the file
+
+   .. cpp:member:: optional_t<string_t> description
+
+   Short description of the result
+
+   .. cpp:member:: optional_t<string_t> caption
+
+   Caption of the document to be sent, 0-1024 characters after entities parsing
+
+   .. cpp:member:: optional_t<string_t> parse_mode
+
+   Mode for parsing entities in the document caption. See formatting options for more details.
+
+   .. cpp:member:: optional_t<array_t<message_entity_t>> caption_entities
+
+   List of special entities that appear in the caption, which can be specified instead of parse_mode
+
+   .. cpp:member:: optional_t<inline_keyboard_markup_t> reply_markup
+
+   Inline keyboard attached to the message
+
+   .. cpp:member:: optional_t<input_message_content_t> input_message_content
+
+   Content of the message to be sent instead of the file

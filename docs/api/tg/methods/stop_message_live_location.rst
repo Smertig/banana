@@ -1,0 +1,36 @@
+.. _banana-api-tg-methods-stop_message_live_location:
+
+stop_message_live_location
+==========================
+
+.. cpp:namespace:: banana::api
+.. cpp:function:: template <class Connector> \
+                  api_result<variant_t<message_t, boolean_t>, Connector&&> stop_message_live_location(Connector&& connector, stop_message_live_location_args_t args)
+
+.. cpp:function:: template <class Connector> \
+                  api_result<variant_t<message_t, boolean_t>, Connector&&> call(Connector&& connector, stop_message_live_location_args_t args)
+
+   ``connector`` is any object satisfying :ref:`connector concept <banana-api-banana-connectors>`.
+
+   Use this method to stop updating a live location message before live_period expires. On success, if the message was sent by the bot, the sent Message is returned, otherwise True is returned.
+
+.. cpp:struct:: stop_message_live_location_args_t
+
+   Arguments that should be passed to :cpp:func:`stop_message_live_location`.
+
+
+   .. cpp:member:: optional_t<variant_t<integer_t, string_t>> chat_id
+
+   Required if inline_message_id is not specified. Unique identifier for the target chat or username of the target channel (in the format @channelusername)
+
+   .. cpp:member:: optional_t<integer_t> message_id
+
+   Required if inline_message_id is not specified. Identifier of the message with live location to stop
+
+   .. cpp:member:: optional_t<string_t> inline_message_id
+
+   Required if chat_id and message_id are not specified. Identifier of the inline message
+
+   .. cpp:member:: optional_t<inline_keyboard_markup_t> reply_markup
+
+   A JSON-serialized object for a new inline keyboard.

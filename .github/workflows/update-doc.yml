@@ -1,0 +1,42 @@
+name: Update Documentation
+
+on: push
+
+jobs:
+  docs:
+    runs-on: ubuntu-latest
+    name: Build and update docs
+
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - name: Install python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.7'
+
+      - name: Install python deps
+        working-directory: "docs"
+        shell: bash
+        run: pip install -r requirements.txt
+
+      - name: Clone documentation branch
+        uses: actions/checkout@v2
+        with:
+          ref: "gh-pages"
+          path: gh-pages
+
+      - name: Build documentation
+        working-directory: "docs"
+        shell: bash
+        run: |
+          sphinx-multiversion . _build
+          cp -r _build/* ../gh-pages
+
+      - name: Publish Docs to gh-pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: gh-pages
