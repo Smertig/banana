@@ -136,15 +136,16 @@ for name, method in api_methods.items():
 
     dump_type(out_api, args_cpp_type)
 
-    params_info = ''.join(f'\n * @param args__{param["name"]} {param["description"]}' for param in method['params'])
+    params_info = '@param connector Any object satisfying connector concept (see `banana::connector` namespace)' +\
+                  ''.join(f'\n * @param args__{param["name"]} {param["description"]}' for param in method['params'])
 
     out_api.write(f'''/**
  * {method["desc"]}
  * 
- * @param connector Connector{params_info}
+ * {params_info}
  */
 template <class Connector>
-decltype(auto) {uname}(Connector&& connector, {args_cpp_type.cpp_name} args{" = {}" if not method['params'] else ""}) {{
+api_result<{return_type}, Connector&&> {uname}(Connector&& connector, {args_cpp_type.cpp_name} args{" = {}" if not method['params'] else ""}) {{
     return std::forward<Connector>(connector).template request<{return_type}>("{name}", deser::serialize(std::move(args)), [](expected<std::string> request_result) -> expected<{return_type}> {{
         if (!request_result.has_value()) {{
             return banana::error_t<>{{ "[{uname}] Request error: " + request_result.error() }};
@@ -162,10 +163,10 @@ decltype(auto) {uname}(Connector&& connector, {args_cpp_type.cpp_name} args{" = 
 /**
  * {method["desc"]}
  *
- * @param connector Connector{params_info}
+ * {params_info}
  */
 template <class Connector>
-decltype(auto) call(Connector&& connector, {args_cpp_type.cpp_name} args) {{
+api_result<{return_type}, Connector&&> call(Connector&& connector, {args_cpp_type.cpp_name} args) {{
     return {uname}(std::forward<Connector>(connector), std::move(args));
 }}
 
