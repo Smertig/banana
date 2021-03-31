@@ -10,7 +10,7 @@ A type satisfies the concept ``connector`` if it has a method with the following
 .. code-block:: C++
 
    template <class T>
-   impl-defined-<T> request(std::string_view method, std::optional<std::string> body, banana::expected<std::string>(*then)(banana::expected<std::string>));
+   impl-defined-<T> request(std::string_view method, std::optional<std::string> body, banana::expected<T>(*then)(banana::expected<std::string>));
 
 The signature of this method defines the properties of the connector.
 For example, this method can return the following types:
