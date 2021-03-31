@@ -5,7 +5,7 @@
 namespace banana::connector {
 
 // TODO: proxy support
-class basic_cpr {
+class basic_cpr_monadic {
     struct proxy_t {
         std::string url;  // IP:port
         std::string cred; // log:pass
@@ -16,13 +16,15 @@ class basic_cpr {
     std::optional<proxy_t> m_proxy;
 
 public:
-    explicit basic_cpr(std::string token);
+    explicit basic_cpr_monadic(std::string token);
 
     expected<std::string> do_request(std::string_view method, std::optional<std::string> body);
 };
 
-using cpr_blocking_monadic = make_blocking<basic_cpr>;
-using cpr_blocking = make_throwing<cpr_blocking_monadic>;
-using cpr_async = make_async<basic_cpr>;
+using basic_cpr = meta::unwrap_blocking<basic_cpr_monadic>;
+
+using cpr_blocking_monadic = meta::make_blocking_monadic<basic_cpr_monadic>;
+using cpr_blocking         = meta::make_blocking<basic_cpr>;
+using cpr_async            = meta::wrap_async<cpr_blocking>;
 
 } // namespace banana::connector

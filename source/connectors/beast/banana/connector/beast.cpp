@@ -177,7 +177,7 @@ boost::asio::awaitable<std::string> do_coro_request(
 
 namespace banana::connector {
 
-basic_beast::basic_beast(std::string token, boost::asio::io_context& io_context, boost::asio::ssl::context& ssl_context) :
+basic_beast_monadic::basic_beast_monadic(std::string token, boost::asio::io_context& io_context, boost::asio::ssl::context& ssl_context) :
     m_token(std::move(token)),
     m_io_context(io_context),
     m_ssl_context(ssl_context)
@@ -185,7 +185,7 @@ basic_beast::basic_beast(std::string token, boost::asio::io_context& io_context,
     // nothing
 }
 
-expected<std::string> basic_beast::do_request(std::string_view method, std::optional<std::string> body) {
+expected<std::string> basic_beast_monadic::do_request(std::string_view method, std::optional<std::string> body) {
     try {
         std::string target = "/bot" + m_token + "/" + std::string(method);
         return expected(::do_blocking_request(m_io_context, m_ssl_context, m_api_path, m_api_port, target, body ? std::string_view(*body) : ""));
@@ -196,7 +196,7 @@ expected<std::string> basic_beast::do_request(std::string_view method, std::opti
 }
 
 #if defined(BOOST_ASIO_HAS_CO_AWAIT)
-boost::asio::awaitable<expected<std::string>> basic_beast::do_coro_request(std::string_view method, std::optional<std::string> body) {
+boost::asio::awaitable<expected<std::string>> basic_beast_monadic::do_coro_request(std::string_view method, std::optional<std::string> body) {
     try {
         std::string target = "/bot" + m_token + "/" + std::string(method);
         co_return expected(co_await ::do_coro_request(m_io_context, m_ssl_context, m_api_path, m_api_port, target, body ? std::string_view(*body) : ""));

@@ -6,11 +6,11 @@
 #include <fstream>
 
 /// Stupid but working custom connector example
-class basic_dumb_connector {
+class basic_dumb_connector_monadic {
     std::string m_token;
 
 public:
-    explicit basic_dumb_connector(std::string token) : m_token(std::move(token)) {
+    explicit basic_dumb_connector_monadic(std::string token) : m_token(std::move(token)) {
         // nothing
     }
 
@@ -56,8 +56,10 @@ public:
 };
 
 // Use helper traits to generate connector interface from `basic_dumb_connector`
-using dumb_connector_monadic = banana::connector::make_blocking<basic_dumb_connector>;
-using dumb_connector = banana::connector::make_throwing<dumb_connector_monadic>;
+using basic_dumb_connector = banana::connector::meta::unwrap_blocking<basic_dumb_connector_monadic>;
+
+using dumb_connector_monadic = banana::connector::meta::make_blocking_monadic<basic_dumb_connector_monadic>;
+using dumb_connector         = banana::connector::meta::make_blocking<basic_dumb_connector>;
 
 static_assert(std::is_same_v<
     banana::api_result<banana::api::message_t, dumb_connector_monadic>,

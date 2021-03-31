@@ -37,7 +37,6 @@ endfunction()
 add_banana_example(connector-default-blocking banana-default)
 add_banana_example(connector-default-async banana-default)
 
-add_banana_example(connector-any-async banana-default)
 add_banana_example(connector-any-blocking banana-default)
 
 add_banana_example(connector-cpr-blocking banana-cpr)

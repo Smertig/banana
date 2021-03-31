@@ -30,11 +30,11 @@ std::ostream& operator<<(std::ostream& os, ErrorCode code) {
 
 namespace banana::connector {
 
-basic_cpr::basic_cpr(std::string token) : m_token(std::move(token)) {
+basic_cpr_monadic::basic_cpr_monadic(std::string token) : m_token(std::move(token)) {
     // nothing
 }
 
-expected<std::string> basic_cpr::do_request(std::string_view method, std::optional<std::string> body) {
+expected<std::string> basic_cpr_monadic::do_request(std::string_view method, std::optional<std::string> body) {
     cpr::Session session;
 
     std::string url;

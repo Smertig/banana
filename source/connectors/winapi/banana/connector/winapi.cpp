@@ -57,11 +57,11 @@ public:
 
 namespace banana::connector {
 
-basic_winapi::basic_winapi(std::string token) : m_token(std::move(token)) {
+basic_winapi_monadic::basic_winapi_monadic(std::string token) : m_token(std::move(token)) {
     // nothing
 }
 
-expected<std::string> basic_winapi::do_request(std::string_view method, std::optional<std::string> body) {
+expected<std::string> basic_winapi_monadic::do_request(std::string_view method, std::optional<std::string> body) {
     std::optional<std::string> header;
     if (body.has_value()) {
         header = "Content-Type: application/json\r\n";

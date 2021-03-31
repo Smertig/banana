@@ -4,18 +4,21 @@
 
 namespace banana::connector {
 
+template <class R>
 struct basic_any {
     template <class Connector>
-    /* implicit */ basic_any(Connector connector) : do_request([connector = std::move(connector)](auto&&... args) mutable { return connector.do_request(std::forward<decltype(args)>(args)...); }) {
+    /* implicit */ basic_any(Connector connector) : do_request([connector = std::move(connector)](std::string_view method, std::optional<std::string> body) mutable -> R { return connector.do_request(method, std::move(body)); }) {
         // nothing
     }
 
     // Note: member-function simulation
-    std::function<expected<std::string>(std::string_view, std::optional<std::string>)> do_request;
+    std::function<R(std::string_view, std::optional<std::string>)> do_request;
 };
 
-using any_blocking_monadic = make_blocking<basic_any>;
-using any_blocking = make_throwing<any_blocking_monadic>;
-using any_async = make_async<basic_any>;
+template <class Connector>
+basic_any(Connector connector) -> basic_any<decltype(connector.do_request(std::declval<std::string_view>(), std::declval<std::optional<std::string>>()))>;
+
+using any_blocking         = meta::make_blocking<basic_any<std::string>>;
+using any_blocking_monadic = meta::make_blocking_monadic<basic_any<expected<std::string>>>;
 
 } // namespace banana::connector
