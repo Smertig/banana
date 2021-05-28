@@ -202,11 +202,10 @@ struct serializer<api::callback_game_t> {
     static constexpr bool nullable = false;
 
     static std::optional<std::string> try_parse(const nlohmann::json& j, api::callback_game_t& out) {
-        return "not implemented";
+        return std::nullopt;
     }
 
     static nlohmann::json dump(api::callback_game_t in) {
-        assert(false && "not implemented");
         return nlohmann::json{};
     }
 
