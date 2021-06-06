@@ -36,7 +36,7 @@ if(BANANA_USE_BUNDLED_CPR)
 
     FetchContent_Declare(cpr
         GIT_REPOSITORY https://github.com/whoshuu/cpr.git
-        GIT_TAG        fe29aee4ca4bfc9d17802e7623c2ee574b1d1e9b
+        GIT_TAG        f4622efcb59d84071ae11404ae61bd821c1c344b
     )
     FetchContent_MakeAvailable(cpr)
 endif()
