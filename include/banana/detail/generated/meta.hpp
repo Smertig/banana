@@ -160,6 +160,20 @@ template <>
 constexpr std::string_view name_of<api::bot_command_t> = "bot_command_t";
 
 template <>
+struct reflector<api::callback_game_t> {
+    template <class F>
+    static void for_each_field(F&& f) {
+        using namespace std::literals;
+    }
+};
+
+template <>
+constexpr bool is_reflectable_v<api::callback_game_t> = true;
+
+template <>
+constexpr std::string_view name_of<api::callback_game_t> = "callback_game_t";
+
+template <>
 struct reflector<api::callback_query_t> {
     template <class F>
     static void for_each_field(F&& f) {
@@ -1472,6 +1486,20 @@ constexpr bool is_reflectable_v<api::input_contact_message_content_t> = true;
 
 template <>
 constexpr std::string_view name_of<api::input_contact_message_content_t> = "input_contact_message_content_t";
+
+template <>
+struct reflector<api::input_file_t> {
+    template <class F>
+    static void for_each_field(F&& f) {
+        using namespace std::literals;
+    }
+};
+
+template <>
+constexpr bool is_reflectable_v<api::input_file_t> = true;
+
+template <>
+constexpr std::string_view name_of<api::input_file_t> = "input_file_t";
 
 template <>
 struct reflector<api::input_location_message_content_t> {

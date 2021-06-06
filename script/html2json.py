@@ -138,6 +138,16 @@ methods['getMe'] = {
     'return_type': 'User'
 }
 
+types['CallbackGame'] = {
+    'desc': 'A placeholder, currently holds no information. Use BotFather to set up your game.',
+    'fields': []
+}
+
+types['InputFile'] = {
+    'desc': 'This object represents the contents of a file to be uploaded. Must be posted using multipart/form-data in the usual way that files are uploaded via the browser.',
+    'fields': []
+}
+
 json.dump({
     'types': types,
     'methods': methods

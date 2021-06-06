@@ -5,6 +5,7 @@ namespace banana::api {
 struct animation_t;
 struct audio_t;
 struct bot_command_t;
+struct callback_game_t;
 struct callback_query_t;
 struct chat_location_t;
 struct chat_member_t;
@@ -45,6 +46,7 @@ struct inline_query_result_video_t;
 struct inline_query_result_voice_t;
 struct inline_query_t;
 struct input_contact_message_content_t;
+struct input_file_t;
 struct input_location_message_content_t;
 struct input_media_animation_t;
 struct input_media_audio_t;
@@ -133,6 +135,10 @@ struct bot_command_t {
     string_t description; // Description of the command, 3-256 characters.
 };
 
+// A placeholder, currently holds no information. Use BotFather to set up your game.
+struct callback_game_t {
+};
+
 // Describes actions that a non-administrator user is allowed to take in a chat.
 struct chat_permissions_t {
     optional_t<boolean_t> can_send_messages;         // True, if the user is allowed to send text messages, contacts, locations and venues
@@ -190,6 +196,10 @@ struct file_t {
 struct force_reply_t {
     boolean_t             force_reply; // Shows reply interface to the user, as if they manually selected the bot's message and tapped 'Reply'
     optional_t<boolean_t> selective;   // Use this parameter if you want to force reply from specific users only. Targets: 1) users that are @mentioned in the text of the Message object; 2) if the bot's message is a reply (has reply_to_message_id), sender of the original message.
+};
+
+// This object represents the contents of a file to be uploaded. Must be posted using multipart/form-data in the usual way that files are uploaded via the browser.
+struct input_file_t {
 };
 
 // This object contains basic information about an invoice.

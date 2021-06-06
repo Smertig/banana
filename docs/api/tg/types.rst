@@ -14,6 +14,7 @@ File
    animation_t <types/animation>
    audio_t <types/audio>
    bot_command_t <types/bot_command>
+   callback_game_t <types/callback_game>
    callback_query_t <types/callback_query>
    chat_location_t <types/chat_location>
    chat_member_t <types/chat_member>
@@ -55,6 +56,7 @@ File
    inline_query_result_voice_t <types/inline_query_result_voice>
    inline_query_t <types/inline_query>
    input_contact_message_content_t <types/input_contact_message_content>
+   input_file_t <types/input_file>
    input_location_message_content_t <types/input_location_message_content>
    input_media_animation_t <types/input_media_animation>
    input_media_audio_t <types/input_media_audio>
