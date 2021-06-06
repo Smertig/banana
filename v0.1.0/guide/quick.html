@@ -4,7 +4,8 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>Quick Start &#8212; banana  documentation</title>
     
   <link rel="stylesheet" href="../_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
@@ -1152,7 +1153,7 @@
         
               <div>
                 
-  <div class="section" id="quick-start">
+  <section id="quick-start">
 <span id="banana-guide-quick"></span><h1>Quick Start<a class="headerlink" href="#quick-start" title="Permalink to this headline">¶</a></h1>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -1164,7 +1165,7 @@ abstracting from the Telegram API implementation.</p>
 <p>You’ve been warned!</p>
 </div>
 <p>There is still only one way to add <code class="docutils literal notranslate"><span class="pre">banana</span></code> to your project – as a CMake subdirectory.</p>
-<div class="section" id="adding-as-a-cmake-subdirectory">
+<section id="adding-as-a-cmake-subdirectory">
 <h2>Adding as a CMake subdirectory<a class="headerlink" href="#adding-as-a-cmake-subdirectory" title="Permalink to this headline">¶</a></h2>
 <p>First of all you need to add <code class="docutils literal notranslate"><span class="pre">banana</span></code> as a subdirectory to your CMakeLists:</p>
 <div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="c"># Assuming banana is cloned to project-dir/external/banana</span>
@@ -1181,11 +1182,11 @@ abstracting from the Telegram API implementation.</p>
 </pre></div>
 </div>
 <p>However, you also need a <a class="reference internal" href="../api/banana/connectors.html#banana-api-banana-connectors"><span class="std std-ref">connector</span></a> to make API requests.</p>
-</div>
-<div class="section" id="choosing-a-connector">
+</section>
+<section id="choosing-a-connector">
 <h2>Choosing a connector<a class="headerlink" href="#choosing-a-connector" title="Permalink to this headline">¶</a></h2>
 <p>Let’s start with the simplest blocking connector.</p>
-<div class="section" id="windows">
+<section id="windows">
 <h3>Windows<a class="headerlink" href="#windows" title="Permalink to this headline">¶</a></h3>
 <p><a class="reference internal" href="../api/banana/connectors/winapi.html#banana-api-banana-connectors-winapi"><span class="std std-ref">WinAPI-connector</span></a> is the only dependency-free connector. It’s built on top of WinAPI, so it doesn’t require any additional libraries to make https requests.</p>
 <div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">target_link_libraries</span><span class="p">(</span><span class="s">your-project-name</span> <span class="s">PRIVATE</span> <span class="s">banana-winapi</span><span class="p">)</span> <span class="c"># banana-winapi includes banana</span>
@@ -1193,11 +1194,11 @@ abstracting from the Telegram API implementation.</p>
 </div>
 <div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;banana/connector/winapi.hpp&gt;</span><span class="cp"></span>
 
-<span class="n">banana</span><span class="o">::</span><span class="n">connector</span><span class="o">::</span><span class="n">winapi_blocking</span> <span class="n">connector</span><span class="p">(</span><span class="s">&quot;&lt;TG_BOT_TOKEN&gt;&quot;</span><span class="p">);</span>
+<span class="n">banana</span><span class="o">::</span><span class="n">connector</span><span class="o">::</span><span class="n">winapi_blocking</span> <span class="nf">connector</span><span class="p">(</span><span class="s">&quot;&lt;TG_BOT_TOKEN&gt;&quot;</span><span class="p">);</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="linux-macos">
+</section>
+<section id="linux-macos">
 <h3>Linux/macOS<a class="headerlink" href="#linux-macos" title="Permalink to this headline">¶</a></h3>
 <p><a class="reference internal" href="../api/banana/connectors/cpr.html#banana-api-banana-connectors-cpr"><span class="std std-ref">cpr-based connector</span></a> is the best choice for non-windows OS. It depends on <a class="reference external" href="https://github.com/whoshuu/cpr">cpr</a>, <strong>which in turn requires OpenSSL</strong>.</p>
 <div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">target_link_libraries</span><span class="p">(</span><span class="s">your-project-name</span> <span class="s">PRIVATE</span> <span class="s">banana-cpr</span><span class="p">)</span> <span class="c"># banana-cpr includes banana</span>
@@ -1210,11 +1211,11 @@ abstracting from the Telegram API implementation.</p>
 </ul>
 <div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;banana/connector/cpr.hpp&gt;</span><span class="cp"></span>
 
-<span class="n">banana</span><span class="o">::</span><span class="n">connector</span><span class="o">::</span><span class="n">cpr_blocking</span> <span class="n">connector</span><span class="p">(</span><span class="s">&quot;&lt;TG_BOT_TOKEN&gt;&quot;</span><span class="p">);</span>
+<span class="n">banana</span><span class="o">::</span><span class="n">connector</span><span class="o">::</span><span class="n">cpr_blocking</span> <span class="nf">connector</span><span class="p">(</span><span class="s">&quot;&lt;TG_BOT_TOKEN&gt;&quot;</span><span class="p">);</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="default-connector">
+</section>
+<section id="default-connector">
 <h3>“Default” connector<a class="headerlink" href="#default-connector" title="Permalink to this headline">¶</a></h3>
 <p>To choose connector in a truly cross-platform way, you can use default connector (if you don’t want to link OpenSSL for <a class="reference internal" href="../api/banana/connectors/cpr.html#banana-api-banana-connectors-cpr"><span class="std std-ref">cpr</span></a> on Windows and hate <a class="reference internal" href="../api/banana/connectors/beast.html#banana-api-banana-connectors-beast"><span class="std std-ref">boost-based connector</span></a>).
 There is an additional CMake target <code class="docutils literal notranslate"><span class="pre">banana-default</span></code> that provides header <code class="docutils literal notranslate"><span class="pre">#include</span> <span class="pre">&lt;banana/connector/default.hpp&gt;</span></code> and <code class="docutils literal notranslate"><span class="pre">default_blocking_monadic</span></code> and <code class="docutils literal notranslate"><span class="pre">default_blocking</span></code> connectors:</p>
@@ -1232,9 +1233,9 @@ There is an additional CMake target <code class="docutils literal notranslate"><
 </ul>
 </dd>
 </dl>
-</div>
-</div>
-<div class="section" id="hello-world">
+</section>
+</section>
+<section id="hello-world">
 <h2>Hello, world!<a class="headerlink" href="#hello-world" title="Permalink to this headline">¶</a></h2>
 <p>The following piece of code shows how to send simple <code class="docutils literal notranslate"><span class="pre">&quot;Hello,</span> <span class="pre">world!&quot;</span></code> message. We use “default” connector as an example.</p>
 <div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;banana/connector/default.hpp&gt;</span><span class="cp"></span>
@@ -1252,9 +1253,9 @@ There is an additional CMake target <code class="docutils literal notranslate"><
 <span class="p">}</span>
 </pre></div>
 </div>
-<div class="section" id="line-by-line-explanation">
+<section id="line-by-line-explanation">
 <h3>Line-by-line explanation<a class="headerlink" href="#line-by-line-explanation" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">banana</span><span class="o">::</span><span class="n">connector</span><span class="o">::</span><span class="n">default_blocking</span> <span class="n">connector</span><span class="p">(</span><span class="s">&quot;&lt;TG_BOT_TOKEN&gt;&quot;</span><span class="p">);</span>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">banana</span><span class="o">::</span><span class="n">connector</span><span class="o">::</span><span class="n">default_blocking</span> <span class="nf">connector</span><span class="p">(</span><span class="s">&quot;&lt;TG_BOT_TOKEN&gt;&quot;</span><span class="p">);</span>
 </pre></div>
 </div>
 <p>Create <code class="docutils literal notranslate"><span class="pre">default_blocking</span></code> connector that returns <code class="docutils literal notranslate"><span class="pre">T</span></code> from any API request or throws an exception in case of error. If you don’t like exceptions, try <code class="docutils literal notranslate"><span class="pre">default_blocking_monadic</span></code> instead.</p>
@@ -1266,9 +1267,9 @@ There is an additional CMake target <code class="docutils literal notranslate"><
 </pre></div>
 </div>
 <p>Print message id. That’s all ✨</p>
-</div>
-</div>
-</div>
+</section>
+</section>
+</section>
 
 
               </div>

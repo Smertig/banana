@@ -4,7 +4,8 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>beast-based connectors &#8212; banana  documentation</title>
     
   <link rel="stylesheet" href="../../../_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
@@ -1103,7 +1104,7 @@
         
               <div>
                 
-  <div class="section" id="beast-based-connectors">
+  <section id="beast-based-connectors">
 <span id="banana-api-banana-connectors-beast"></span><h1>beast-based connectors<a class="headerlink" href="#beast-based-connectors" title="Permalink to this headline">¶</a></h1>
 <blockquote>
 <div><p>Available connectors</p>
@@ -1148,7 +1149,7 @@
 <dl>
 <dt>Example</dt><dd><div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;banana/connector/beast.hpp&gt;</span><span class="cp"></span>
 
-<span class="n">banana</span><span class="o">::</span><span class="n">connector</span><span class="o">::</span><span class="n">beast_blocking</span> <span class="n">connector</span><span class="p">(</span><span class="s">&quot;TG_BOT_TOKEN&quot;</span><span class="p">);</span>
+<span class="n">banana</span><span class="o">::</span><span class="n">connector</span><span class="o">::</span><span class="n">beast_blocking</span> <span class="nf">connector</span><span class="p">(</span><span class="s">&quot;TG_BOT_TOKEN&quot;</span><span class="p">);</span>
 <span class="n">banana</span><span class="o">::</span><span class="n">api</span><span class="o">::</span><span class="n">message_t</span> <span class="n">msg</span> <span class="o">=</span> <span class="n">banana</span><span class="o">::</span><span class="n">api</span><span class="o">::</span><span class="n">send_message</span><span class="p">(</span><span class="n">connector</span><span class="p">,</span> <span class="p">{</span> <span class="s">&quot;@user&quot;</span><span class="p">,</span> <span class="s">&quot;Hello, world!&quot;</span> <span class="p">});</span>
 </pre></div>
 </div>
@@ -1176,7 +1177,7 @@
 <dl>
 <dt>Example</dt><dd><div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;banana/connector/beast.hpp&gt;</span><span class="cp"></span>
 
-<span class="n">banana</span><span class="o">::</span><span class="n">connector</span><span class="o">::</span><span class="n">beast_blocking_monadic</span> <span class="n">connector</span><span class="p">(</span><span class="s">&quot;TG_BOT_TOKEN&quot;</span><span class="p">);</span>
+<span class="n">banana</span><span class="o">::</span><span class="n">connector</span><span class="o">::</span><span class="n">beast_blocking_monadic</span> <span class="nf">connector</span><span class="p">(</span><span class="s">&quot;TG_BOT_TOKEN&quot;</span><span class="p">);</span>
 <span class="n">banana</span><span class="o">::</span><span class="n">expected</span><span class="o">&lt;</span><span class="n">banana</span><span class="o">::</span><span class="n">api</span><span class="o">::</span><span class="n">message_t</span><span class="o">&gt;</span> <span class="n">msg</span> <span class="o">=</span> <span class="n">banana</span><span class="o">::</span><span class="n">api</span><span class="o">::</span><span class="n">send_message</span><span class="p">(</span><span class="n">connector</span><span class="p">,</span> <span class="p">{</span> <span class="s">&quot;@user&quot;</span><span class="p">,</span> <span class="s">&quot;Hello, world!&quot;</span> <span class="p">});</span>
 </pre></div>
 </div>
@@ -1204,7 +1205,7 @@
 <dl>
 <dt>Example</dt><dd><div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;banana/connector/beast.hpp&gt;</span><span class="cp"></span>
 
-<span class="n">banana</span><span class="o">::</span><span class="n">connector</span><span class="o">::</span><span class="n">beast_coro</span> <span class="n">connector</span><span class="p">(</span><span class="s">&quot;TG_BOT_TOKEN&quot;</span><span class="p">);</span>
+<span class="n">banana</span><span class="o">::</span><span class="n">connector</span><span class="o">::</span><span class="n">beast_coro</span> <span class="nf">connector</span><span class="p">(</span><span class="s">&quot;TG_BOT_TOKEN&quot;</span><span class="p">);</span>
 <span class="n">banana</span><span class="o">::</span><span class="n">api</span><span class="o">::</span><span class="n">message_t</span> <span class="n">msg</span> <span class="o">=</span> <span class="k">co_await</span> <span class="n">banana</span><span class="o">::</span><span class="n">api</span><span class="o">::</span><span class="n">send_message</span><span class="p">(</span><span class="n">connector</span><span class="p">,</span> <span class="p">{</span> <span class="s">&quot;@user&quot;</span><span class="p">,</span> <span class="s">&quot;Hello, world!&quot;</span> <span class="p">});</span>
 </pre></div>
 </div>
@@ -1232,13 +1233,13 @@
 <dl>
 <dt>Example</dt><dd><div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;banana/connector/beast.hpp&gt;</span><span class="cp"></span>
 
-<span class="n">banana</span><span class="o">::</span><span class="n">connector</span><span class="o">::</span><span class="n">beast_coro_monadic</span> <span class="n">connector</span><span class="p">(</span><span class="s">&quot;TG_BOT_TOKEN&quot;</span><span class="p">);</span>
+<span class="n">banana</span><span class="o">::</span><span class="n">connector</span><span class="o">::</span><span class="n">beast_coro_monadic</span> <span class="nf">connector</span><span class="p">(</span><span class="s">&quot;TG_BOT_TOKEN&quot;</span><span class="p">);</span>
 <span class="n">banana</span><span class="o">::</span><span class="n">expected</span><span class="o">&lt;</span><span class="n">banana</span><span class="o">::</span><span class="n">api</span><span class="o">::</span><span class="n">message_t</span><span class="o">&gt;</span> <span class="n">msg</span> <span class="o">=</span> <span class="k">co_await</span> <span class="n">banana</span><span class="o">::</span><span class="n">api</span><span class="o">::</span><span class="n">send_message</span><span class="p">(</span><span class="n">connector</span><span class="p">,</span> <span class="p">{</span> <span class="s">&quot;@user&quot;</span><span class="p">,</span> <span class="s">&quot;Hello, world!&quot;</span> <span class="p">});</span>
 </pre></div>
 </div>
 </dd>
 </dl>
-</div>
+</section>
 
 
               </div>
