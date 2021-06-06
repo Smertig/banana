@@ -31,26 +31,26 @@ find_package(Threads REQUIRED)
 function(add_banana_example name connector)
     set(example banana-example-${name})
     add_executable(${example} ${name}.cpp)
-    target_link_libraries(${example} ${connector} Threads::Threads ${CONAN_TARGETS})
+    target_link_libraries(${example} ${connector} Threads::Threads ${ARGN})
 endfunction()
 
-add_banana_example(connector-default-blocking banana-default)
-add_banana_example(connector-default-async banana-default)
+add_banana_example(connector-default-blocking banana-default CONAN_PKG::cpr)
+add_banana_example(connector-default-async banana-default CONAN_PKG::cpr)
 
-add_banana_example(connector-any-blocking banana-default)
+add_banana_example(connector-any-blocking banana-default CONAN_PKG::cpr)
 
-add_banana_example(connector-cpr-blocking banana-cpr)
-add_banana_example(connector-cpr-async banana-cpr)
+add_banana_example(connector-cpr-blocking banana-cpr CONAN_PKG::cpr)
+add_banana_example(connector-cpr-async banana-cpr CONAN_PKG::cpr)
 
 if (WIN32)
     add_banana_example(connector-winapi-blocking banana-winapi)
     add_banana_example(connector-winapi-async banana-winapi)
 endif()
 
-add_banana_example(connector-beast-blocking banana-beast)
+add_banana_example(connector-beast-blocking banana-beast CONAN_PKG::boost CONAN_PKG::openssl)
 
 if (BANANA_EXAMPLES_ENABLE_CORO)
-    add_banana_example(connector-beast-coro banana-beast)
+    add_banana_example(connector-beast-coro banana-beast CONAN_PKG::boost CONAN_PKG::openssl)
 endif()
 
 if (NOT WIN32)

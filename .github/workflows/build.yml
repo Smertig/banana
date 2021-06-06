@@ -14,8 +14,8 @@ jobs:
             os: windows-latest
             cmake_flags: -DBANANA_BUILD_EXAMPLES=ON
             examples: >
-              connector-default-blocking connector-winapi-blocking connector-cpr-blocking connector-any-blocking connector-beast-blocking
-              connector-default-async connector-winapi-async connector-cpr-async
+              connector-default-blocking connector-winapi-blocking connector-any-blocking connector-beast-blocking
+              connector-default-async connector-winapi-async
             binary_path: "example/bin/banana-example-$name.exe"
             packages: |
               pip install conan
