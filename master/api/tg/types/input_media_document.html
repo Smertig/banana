@@ -175,6 +175,11 @@
         </a>
        </li>
        <li class="toctree-l4">
+        <a class="reference internal" href="callback_game.html">
+         callback_game_t
+        </a>
+       </li>
+       <li class="toctree-l4">
         <a class="reference internal" href="callback_query.html">
          callback_query_t
         </a>
@@ -377,6 +382,11 @@
        <li class="toctree-l4">
         <a class="reference internal" href="input_contact_message_content.html">
          input_contact_message_content_t
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="input_file.html">
+         input_file_t
         </a>
        </li>
        <li class="toctree-l4">
@@ -1124,7 +1134,7 @@
 <p>File to send. Pass a file_id to send a file that exists on the Telegram servers (recommended), pass an HTTP URL for Telegram to get a file from the Internet, or pass “attach://&lt;file_attach_name&gt;” to upload a new one using multipart/form-data under &lt;file_attach_name&gt; name. More info on Sending Files »</p>
 <dl class="cpp member">
 <dt id="_CPPv4N6banana3api22input_media_document_t5thumbE">
-<span id="_CPPv3N6banana3api22input_media_document_t5thumbE"></span><span id="_CPPv2N6banana3api22input_media_document_t5thumbE"></span><span id="banana::api::input_media_document_t::thumb__optional_t:variant_t:input_file_t.string_t::"></span><span class="pre">optional_t</span><span class="pre">&lt;</span><span class="pre">variant_t</span><span class="pre">&lt;</span><span class="pre">input_file_t</span><span class="pre">,</span> <a class="reference internal" href="../../banana/basic_types.html#_CPPv4N6banana8string_tE" title="banana::string_t"><span class="pre">string_t</span></a><span class="pre">&gt;</span><span class="pre">&gt;</span> <code class="sig-name descname"><span class="pre">thumb</span></code><a class="headerlink" href="#_CPPv4N6banana3api22input_media_document_t5thumbE" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv3N6banana3api22input_media_document_t5thumbE"></span><span id="_CPPv2N6banana3api22input_media_document_t5thumbE"></span><span id="banana::api::input_media_document_t::thumb__optional_t:variant_t:input_file_t.string_t::"></span><span class="pre">optional_t</span><span class="pre">&lt;</span><span class="pre">variant_t</span><span class="pre">&lt;</span><a class="reference internal" href="input_file.html#_CPPv4N6banana3api12input_file_tE" title="banana::api::input_file_t"><span class="pre">input_file_t</span></a><span class="pre">,</span> <a class="reference internal" href="../../banana/basic_types.html#_CPPv4N6banana8string_tE" title="banana::string_t"><span class="pre">string_t</span></a><span class="pre">&gt;</span><span class="pre">&gt;</span> <code class="sig-name descname"><span class="pre">thumb</span></code><a class="headerlink" href="#_CPPv4N6banana3api22input_media_document_t5thumbE" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <p>Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail’s width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can’t be reused and can be only uploaded as a new file, so you can pass “attach://&lt;file_attach_name&gt;” if the thumbnail was uploaded using multipart/form-data under &lt;file_attach_name&gt;. More info on Sending Files »</p>
