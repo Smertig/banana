@@ -25,7 +25,7 @@
 
 int main(int argc, char** argv) {
     banana::connector::default_blocking connector("<TG_BOT_TOKEN>")
-    banana::api::send_message(connector, { "@smertig", "Hello, world!" });
+    banana::api::send_message(connector, { /* .chat_id = */ "@smertig", /* .text = */ "Hello, world!" });
 }
 ```
 
