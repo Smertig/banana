@@ -19,23 +19,26 @@ public:
 
     expected<std::string> do_request(std::string_view method, std::optional<std::string> body);
 
+    void do_async_request(std::string_view method, std::optional<std::string> body, std::unique_ptr<async_handler> handler);
+
 #if defined(BOOST_ASIO_HAS_CO_AWAIT)
     boost::asio::awaitable<expected<std::string>> do_coro_request(std::string_view method, std::optional<std::string> body);
 #endif
 };
 
-using basic_beast = meta::unwrap_blocking<basic_beast_monadic>;
-
+using basic_beast            = meta::unwrap_blocking<basic_beast_monadic>;
 using beast_blocking_monadic = meta::make_blocking_monadic<basic_beast_monadic>;
 using beast_blocking         = meta::make_blocking<basic_beast>;
+using beast_future_monadic   = meta::make_future_monadic<basic_beast_monadic>;
+using beast_future           = meta::make_future<basic_beast_monadic>;
 
 #if defined(BOOST_ASIO_HAS_CO_AWAIT)
-struct beast_coro_monadic : basic_beast {
-    using basic_beast::basic_beast;
+struct beast_coro_monadic : basic_beast_monadic {
+    using basic_beast_monadic::basic_beast_monadic;
 
     template <class T>
     boost::asio::awaitable<expected<T>> request(std::string_view method, std::optional<std::string> body, banana::expected<T>(*then)(banana::expected<std::string>)) {
-        co_return then(co_await basic_beast::do_coro_request(method, std::move(body)));
+        co_return then(co_await basic_beast_monadic::do_coro_request(method, std::move(body)));
     }
 };
 

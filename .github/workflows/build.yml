@@ -15,6 +15,7 @@ jobs:
             cmake_flags: -DBANANA_BUILD_EXAMPLES=ON
             examples: >
               connector-default-blocking connector-winapi-blocking connector-any-blocking connector-beast-blocking
+              connector-beast-future
               connector-default-async connector-winapi-async
             binary_path: "example/bin/banana-example-$name.exe"
             packages: |
@@ -25,6 +26,7 @@ jobs:
             cmake_flags: -DBANANA_BUILD_EXAMPLES=ON -DBANANA_EXAMPLES_ENABLE_CORO=ON -DCMAKE_CXX_COMPILER=g++-10 -DCMAKE_CXX_FLAGS=-fcoroutines
             examples: >
               connector-default-blocking connector-cpr-blocking connector-any-blocking connector-beast-blocking
+              connector-beast-future
               connector-default-async connector-cpr-async
               connector-beast-coro
               custom-connector-blocking
@@ -38,6 +40,7 @@ jobs:
             cmake_flags: -DBANANA_BUILD_EXAMPLES=ON
             examples: >
               connector-default-blocking connector-cpr-blocking connector-any-blocking connector-beast-blocking
+              connector-beast-future
               connector-default-async connector-cpr-async
               custom-connector-blocking
             binary_path: "example/bin/banana-example-$name"
