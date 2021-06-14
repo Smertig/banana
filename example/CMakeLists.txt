@@ -14,6 +14,10 @@ else()
     set(CMAKE_CXX_STANDARD 17)
 endif()
 
+if (MSVC)
+    add_definitions(/bigobj)
+endif()
+
 include(${PROJECT_SOURCE_DIR}/cmake/conan.cmake)
 
 conan_check()
