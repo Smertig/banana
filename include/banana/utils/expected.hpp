@@ -15,13 +15,16 @@ struct error_t {
 
 template <class T, class E = std::string>
 class expected {
-    using storage_t = std::variant<T, E>;
+    using storage_t = std::variant<std::monostate, T, E>;
 
     void check_value_valid() const {
         assert(!m_storage.valueless_by_exception());
-        if (m_storage.index() != 0) {
+        if (m_storage.index() == 0) {
+            throw std::runtime_error("bad expected access, null state");
+        }
+        else if (m_storage.index() == 2) {
             if constexpr (std::is_same_v<std::string, E>) {
-                throw std::runtime_error("bad expected access, contains error: " + std::get<1>(m_storage));
+                throw std::runtime_error("bad expected access, contains error: " + std::get<2>(m_storage));
             }
             else {
                 throw std::runtime_error("bad expected access, contains error");
@@ -31,22 +34,27 @@ class expected {
 
     void check_error_valid() const {
         assert(!m_storage.valueless_by_exception());
-        if (m_storage.index() != 1) {
+        if (m_storage.index() == 0) {
+            throw std::runtime_error("bad expected access, null state");
+        }
+        else if (m_storage.index() == 1) {
             throw std::runtime_error("bad expected access, contains value");
         }
     }
 
 public:
-    explicit expected(T value) : m_storage(std::in_place_index<0>, std::move(value)) {
+    explicit expected() = default;
+
+    explicit expected(T value) : m_storage(std::in_place_index<1>, std::move(value)) {
         // nothing
     }
 
-    /* implicit */ expected(error_t<E> error) : m_storage(std::in_place_index<1>, std::move(error.value)) {
+    /* implicit */ expected(error_t<E> error) : m_storage(std::in_place_index<2>, std::move(error.value)) {
         // nothing
     }
 
     bool has_value() const {
-        return m_storage.index() == 0;
+        return m_storage.index() == 1;
     }
 
     explicit operator bool() const noexcept {
@@ -60,7 +68,7 @@ public:
 
     const E& error() const noexcept {
         check_error_valid();
-        return *std::get_if<1>(&m_storage);
+        return *std::get_if<2>(&m_storage);
     }
 
     T& value() {
@@ -70,7 +78,7 @@ public:
 
     E& error() noexcept {
         check_error_valid();
-        return *std::get_if<1>(&m_storage);
+        return *std::get_if<2>(&m_storage);
     }
 
     template <class U>
@@ -89,12 +97,12 @@ public:
 
     const T& operator*() const noexcept {
         assert(has_value());
-        return *std::get_if<0>(&m_storage);
+        return *std::get_if<1>(&m_storage);
     }
 
     T& operator*() noexcept {
         assert(has_value());
-        return *std::get_if<0>(&m_storage);
+        return *std::get_if<1>(&m_storage);
     }
 
     const T* operator->() const noexcept {
