@@ -197,41 +197,6 @@ struct serializer<std::variant<Ts...>> {
     }
 };
 
-template <>
-struct serializer<api::callback_game_t> {
-    static constexpr bool nullable = false;
-
-    static std::optional<std::string> try_parse(const nlohmann::json& j, api::callback_game_t& out) {
-        return std::nullopt;
-    }
-
-    static nlohmann::json dump(api::callback_game_t in) {
-        return nlohmann::json{};
-    }
-
-    static std::string get_name() {
-        return "callback_game_t";
-    }
-};
-
-template <>
-struct serializer<api::input_file_t> {
-    static constexpr bool nullable = false;
-
-    static std::optional<std::string> try_parse(const nlohmann::json& j, api::input_file_t& out) {
-        return "not implemented";
-    }
-
-    static nlohmann::json dump(api::input_file_t in) {
-        assert(false && "not implemented");
-        return nlohmann::json{};
-    }
-
-    static std::string get_name() {
-        return "input_file_t";
-    }
-};
-
 template <class T>
 std::optional<std::string> try_parse_field(const nlohmann::json& j, std::string_view key, T& out) {
     using serializer_t = serializer<T>;
