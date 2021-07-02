@@ -21,8 +21,8 @@ inline_query_result_cached_sticker_t
 
    .. cpp:member:: optional_t<inline_keyboard_markup_t> reply_markup
 
-   Inline keyboard attached to the message
+   Optional. Inline keyboard attached to the message
 
    .. cpp:member:: optional_t<input_message_content_t> input_message_content
 
-   Content of the message to be sent instead of the sticker
+   Optional. Content of the message to be sent instead of the sticker

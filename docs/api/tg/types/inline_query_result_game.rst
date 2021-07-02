@@ -21,4 +21,4 @@ inline_query_result_game_t
 
    .. cpp:member:: optional_t<inline_keyboard_markup_t> reply_markup
 
-   Inline keyboard attached to the message
+   Optional. Inline keyboard attached to the message

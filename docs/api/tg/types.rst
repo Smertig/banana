@@ -13,11 +13,27 @@ File
 
    animation_t <types/animation>
    audio_t <types/audio>
+   bot_command_scope_all_chat_administrators_t <types/bot_command_scope_all_chat_administrators>
+   bot_command_scope_all_group_chats_t <types/bot_command_scope_all_group_chats>
+   bot_command_scope_all_private_chats_t <types/bot_command_scope_all_private_chats>
+   bot_command_scope_chat_administrators_t <types/bot_command_scope_chat_administrators>
+   bot_command_scope_chat_member_t <types/bot_command_scope_chat_member>
+   bot_command_scope_chat_t <types/bot_command_scope_chat>
+   bot_command_scope_default_t <types/bot_command_scope_default>
+   bot_command_scope_t <types/bot_command_scope>
    bot_command_t <types/bot_command>
    callback_game_t <types/callback_game>
    callback_query_t <types/callback_query>
+   chat_invite_link_t <types/chat_invite_link>
    chat_location_t <types/chat_location>
+   chat_member_administrator_t <types/chat_member_administrator>
+   chat_member_banned_t <types/chat_member_banned>
+   chat_member_left_t <types/chat_member_left>
+   chat_member_member_t <types/chat_member_member>
+   chat_member_owner_t <types/chat_member_owner>
+   chat_member_restricted_t <types/chat_member_restricted>
    chat_member_t <types/chat_member>
+   chat_member_updated_t <types/chat_member_updated>
    chat_permissions_t <types/chat_permissions>
    chat_photo_t <types/chat_photo>
    chat_t <types/chat>
@@ -57,6 +73,7 @@ File
    inline_query_t <types/inline_query>
    input_contact_message_content_t <types/input_contact_message_content>
    input_file_t <types/input_file>
+   input_invoice_message_content_t <types/input_invoice_message_content>
    input_location_message_content_t <types/input_location_message_content>
    input_media_animation_t <types/input_media_animation>
    input_media_audio_t <types/input_media_audio>
@@ -74,6 +91,7 @@ File
    location_t <types/location>
    login_url_t <types/login_url>
    mask_position_t <types/mask_position>
+   message_auto_delete_timer_changed_t <types/message_auto_delete_timer_changed>
    message_entity_t <types/message_entity>
    message_id_t <types/message_id>
    message_t <types/message>
@@ -111,5 +129,9 @@ File
    venue_t <types/venue>
    video_note_t <types/video_note>
    video_t <types/video>
+   voice_chat_ended_t <types/voice_chat_ended>
+   voice_chat_participants_invited_t <types/voice_chat_participants_invited>
+   voice_chat_scheduled_t <types/voice_chat_scheduled>
+   voice_chat_started_t <types/voice_chat_started>
    voice_t <types/voice>
    webhook_info_t <types/webhook_info>

@@ -31,9 +31,9 @@ promote_chat_member
 
    Pass True, if the administrator's presence in the chat is hidden
 
-   .. cpp:member:: optional_t<boolean_t> can_change_info
+   .. cpp:member:: optional_t<boolean_t> can_manage_chat
 
-   Pass True, if the administrator can change chat title, photo and other settings
+   Pass True, if the administrator can access the chat event log, chat statistics, message statistics in channels, see channel members, see anonymous administrators in supergroups and ignore slow mode. Implied by any other administrator privilege
 
    .. cpp:member:: optional_t<boolean_t> can_post_messages
 
@@ -47,18 +47,26 @@ promote_chat_member
 
    Pass True, if the administrator can delete messages of other users
 
-   .. cpp:member:: optional_t<boolean_t> can_invite_users
+   .. cpp:member:: optional_t<boolean_t> can_manage_voice_chats
 
-   Pass True, if the administrator can invite new users to the chat
+   Pass True, if the administrator can manage voice chats
 
    .. cpp:member:: optional_t<boolean_t> can_restrict_members
 
    Pass True, if the administrator can restrict, ban or unban chat members
 
-   .. cpp:member:: optional_t<boolean_t> can_pin_messages
-
-   Pass True, if the administrator can pin messages, supergroups only
-
    .. cpp:member:: optional_t<boolean_t> can_promote_members
 
    Pass True, if the administrator can add new administrators with a subset of their own privileges or demote administrators that he has promoted, directly or indirectly (promoted by administrators that were appointed by him)
+
+   .. cpp:member:: optional_t<boolean_t> can_change_info
+
+   Pass True, if the administrator can change chat title, photo and other settings
+
+   .. cpp:member:: optional_t<boolean_t> can_invite_users
+
+   Pass True, if the administrator can invite new users to the chat
+
+   .. cpp:member:: optional_t<boolean_t> can_pin_messages
+
+   Pass True, if the administrator can pin messages, supergroups only

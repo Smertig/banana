@@ -12,7 +12,7 @@ copy_message
 
    ``connector`` is any object satisfying :ref:`connector concept <banana-api-banana-connectors>`.
 
-   Use this method to copy messages of any kind. The method is analogous to the method forwardMessages, but the copied message doesn't have a link to the original message. Returns the MessageId of the sent message on success.
+   Use this method to copy messages of any kind. Service messages and invoice messages can't be copied. The method is analogous to the method forwardMessage, but the copied message doesn't have a link to the original message. Returns the MessageId of the sent message on success.
 
 .. cpp:struct:: copy_message_args_t
 

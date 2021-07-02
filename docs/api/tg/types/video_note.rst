@@ -25,8 +25,8 @@ video_note_t
 
    .. cpp:member:: optional_t<photo_size_t> thumb
 
-   Video thumbnail
+   Optional. Video thumbnail
 
    .. cpp:member:: optional_t<integer_t> file_size
 
-   File size
+   Optional. File size

@@ -21,12 +21,12 @@ message_entity_t
 
    .. cpp:member:: optional_t<string_t> url
 
-   For “text_link” only, url that will be opened after user taps on the text
+   Optional. For “text_link” only, url that will be opened after user taps on the text
 
    .. cpp:member:: optional_t<user_t> user
 
-   For “text_mention” only, the mentioned user
+   Optional. For “text_mention” only, the mentioned user
 
    .. cpp:member:: optional_t<string_t> language
 
-   For “pre” only, the programming language of the entity text
+   Optional. For “pre” only, the programming language of the entity text

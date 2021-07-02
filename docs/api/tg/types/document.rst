@@ -17,16 +17,16 @@ document_t
 
    .. cpp:member:: optional_t<photo_size_t> thumb
 
-   Document thumbnail as defined by sender
+   Optional. Document thumbnail as defined by sender
 
    .. cpp:member:: optional_t<string_t> file_name
 
-   Original filename as defined by sender
+   Optional. Original filename as defined by sender
 
    .. cpp:member:: optional_t<string_t> mime_type
 
-   MIME type of the file as defined by sender
+   Optional. MIME type of the file as defined by sender
 
    .. cpp:member:: optional_t<integer_t> file_size
 
-   File size
+   Optional. File size

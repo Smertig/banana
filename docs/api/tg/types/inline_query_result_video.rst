@@ -5,7 +5,7 @@ inline_query_result_video_t
 
 .. cpp:struct:: banana::api::inline_query_result_video_t
 
-   Represents a link to a page containing an embedded video player or a video file. By default, this video file will be sent by the user with an optional caption. Alternatively, you can use input_message_content to send a message with the specified content instead of the video.
+   Represents a link to a page containing an embedded video player or a video file. By default, this video file will be sent by the user with an optional caption. Alternatively, you can use input_message_content to send a message with the specified content instead of the video. If an InlineQueryResultVideo message contains an embedded video (e.g., YouTube), you must replace its content using input_message_content.
 
    .. cpp:member:: string_t type
 
@@ -33,36 +33,36 @@ inline_query_result_video_t
 
    .. cpp:member:: optional_t<string_t> caption
 
-   Caption of the video to be sent, 0-1024 characters after entities parsing
+   Optional. Caption of the video to be sent, 0-1024 characters after entities parsing
 
    .. cpp:member:: optional_t<string_t> parse_mode
 
-   Mode for parsing entities in the video caption. See formatting options for more details.
+   Optional. Mode for parsing entities in the video caption. See formatting options for more details.
 
    .. cpp:member:: optional_t<array_t<message_entity_t>> caption_entities
 
-   List of special entities that appear in the caption, which can be specified instead of parse_mode
+   Optional. List of special entities that appear in the caption, which can be specified instead of parse_mode
 
    .. cpp:member:: optional_t<integer_t> video_width
 
-   Video width
+   Optional. Video width
 
    .. cpp:member:: optional_t<integer_t> video_height
 
-   Video height
+   Optional. Video height
 
    .. cpp:member:: optional_t<integer_t> video_duration
 
-   Video duration in seconds
+   Optional. Video duration in seconds
 
    .. cpp:member:: optional_t<string_t> description
 
-   Short description of the result
+   Optional. Short description of the result
 
    .. cpp:member:: optional_t<inline_keyboard_markup_t> reply_markup
 
-   Inline keyboard attached to the message
+   Optional. Inline keyboard attached to the message
 
    .. cpp:member:: optional_t<input_message_content_t> input_message_content
 
-   Content of the message to be sent instead of the video. This field is required if InlineQueryResultVideo is used to send an HTML-page as a result (e.g., a YouTube video).
+   Optional. Content of the message to be sent instead of the video. This field is required if InlineQueryResultVideo is used to send an HTML-page as a result (e.g., a YouTube video).

@@ -60,18 +60,18 @@ struct answer_callback_query_args_t {
     string_t              callback_query_id; // Unique identifier for the query to be answered
     optional_t<string_t>  text;              // Text of the notification. If not specified, nothing will be shown to the user, 0-200 characters
     optional_t<boolean_t> show_alert;        // If true, an alert will be shown by the client instead of a notification at the top of the chat screen. Defaults to false.
-    optional_t<string_t>  url;               // URL that will be opened by the user's client. If you have created a Game and accepted the conditions via @Botfather, specify the URL that opens your game — note that this will only work if the query comes from a callback_game button.Otherwise, you may use links like t.me/your_bot?start=XXXX that open your bot with a parameter.
+    optional_t<string_t>  url;               // URL that will be opened by the user's client. If you have created a Game and accepted the conditions via @Botfather, specify the URL that opens your game — note that this will only work if the query comes from a callback_game button.   Otherwise, you may use links like t.me/your_bot?start=XXXX that open your bot with a parameter.
     optional_t<integer_t> cache_time;        // The maximum amount of time in seconds that the result of the callback query may be cached client-side. Telegram apps will support caching starting in version 3.14. Defaults to 0.
 };
 
 /**
- * Use this method to send answers to callback queries sent from inline keyboards. The answer will be displayed to the user as a notification at the top of the chat screen or as an alert. On success, True is returned.
+ * Use this method to send answers to callback queries sent from inline keyboards. The answer will be displayed to the user as a notification at the top of the chat screen or as an alert. On success, True is returned. Alternatively, the user can be redirected to the specified Game URL. For this option to work, you must first create a game for your bot via @Botfather and accept the terms. Otherwise, you may use links like t.me/your_bot?start=XXXX that open your bot with a parameter.
  * 
  * @param connector Any object satisfying connector concept (see `banana::connector` namespace)
  * @param args__callback_query_id Unique identifier for the query to be answered
  * @param args__text Text of the notification. If not specified, nothing will be shown to the user, 0-200 characters
  * @param args__show_alert If true, an alert will be shown by the client instead of a notification at the top of the chat screen. Defaults to false.
- * @param args__url URL that will be opened by the user's client. If you have created a Game and accepted the conditions via @Botfather, specify the URL that opens your game — note that this will only work if the query comes from a callback_game button.Otherwise, you may use links like t.me/your_bot?start=XXXX that open your bot with a parameter.
+ * @param args__url URL that will be opened by the user's client. If you have created a Game and accepted the conditions via @Botfather, specify the URL that opens your game — note that this will only work if the query comes from a callback_game button.   Otherwise, you may use links like t.me/your_bot?start=XXXX that open your bot with a parameter.
  * @param args__cache_time The maximum amount of time in seconds that the result of the callback query may be cached client-side. Telegram apps will support caching starting in version 3.14. Defaults to 0.
  */
 template <class Connector>
@@ -91,13 +91,13 @@ api_result<boolean_t, Connector&&> answer_callback_query(Connector&& connector, 
 }
 
 /**
- * Use this method to send answers to callback queries sent from inline keyboards. The answer will be displayed to the user as a notification at the top of the chat screen or as an alert. On success, True is returned.
+ * Use this method to send answers to callback queries sent from inline keyboards. The answer will be displayed to the user as a notification at the top of the chat screen or as an alert. On success, True is returned. Alternatively, the user can be redirected to the specified Game URL. For this option to work, you must first create a game for your bot via @Botfather and accept the terms. Otherwise, you may use links like t.me/your_bot?start=XXXX that open your bot with a parameter.
  *
  * @param connector Any object satisfying connector concept (see `banana::connector` namespace)
  * @param args__callback_query_id Unique identifier for the query to be answered
  * @param args__text Text of the notification. If not specified, nothing will be shown to the user, 0-200 characters
  * @param args__show_alert If true, an alert will be shown by the client instead of a notification at the top of the chat screen. Defaults to false.
- * @param args__url URL that will be opened by the user's client. If you have created a Game and accepted the conditions via @Botfather, specify the URL that opens your game — note that this will only work if the query comes from a callback_game button.Otherwise, you may use links like t.me/your_bot?start=XXXX that open your bot with a parameter.
+ * @param args__url URL that will be opened by the user's client. If you have created a Game and accepted the conditions via @Botfather, specify the URL that opens your game — note that this will only work if the query comes from a callback_game button.   Otherwise, you may use links like t.me/your_bot?start=XXXX that open your bot with a parameter.
  * @param args__cache_time The maximum amount of time in seconds that the result of the callback query may be cached client-side. Telegram apps will support caching starting in version 3.14. Defaults to 0.
  */
 template <class Connector>
@@ -113,11 +113,11 @@ struct answer_inline_query_args_t {
     optional_t<boolean_t>          is_personal;         // Pass True, if results may be cached on the server side only for the user that sent the query. By default, results may be returned to any user who sends the same query
     optional_t<string_t>           next_offset;         // Pass the offset that a client should send in the next query with the same text to receive more results. Pass an empty string if there are no more results or if you don't support pagination. Offset length can't exceed 64 bytes.
     optional_t<string_t>           switch_pm_text;      // If passed, clients will display a button with specified text that switches the user to a private chat with the bot and sends the bot a start message with the parameter switch_pm_parameter
-    optional_t<string_t>           switch_pm_parameter; // Deep-linking parameter for the /start message sent to the bot when user presses the switch button. 1-64 characters, only A-Z, a-z, 0-9, _ and - are allowed.Example: An inline bot that sends YouTube videos can ask the user to connect the bot to their YouTube account to adapt search results accordingly. To do this, it displays a 'Connect your YouTube account' button above the results, or even before showing any. The user presses the button, switches to a private chat with the bot and, in doing so, passes a start parameter that instructs the bot to return an oauth link. Once done, the bot can offer a switch_inline button so that the user can easily return to the chat where they wanted to use the bot's inline capabilities.
+    optional_t<string_t>           switch_pm_parameter; // Deep-linking parameter for the /start message sent to the bot when user presses the switch button. 1-64 characters, only A-Z, a-z, 0-9, _ and - are allowed.   Example: An inline bot that sends YouTube videos can ask the user to connect the bot to their YouTube account to adapt search results accordingly. To do this, it displays a 'Connect your YouTube account' button above the results, or even before showing any. The user presses the button, switches to a private chat with the bot and, in doing so, passes a start parameter that instructs the bot to return an oauth link. Once done, the bot can offer a switch_inline button so that the user can easily return to the chat where they wanted to use the bot's inline capabilities.
 };
 
 /**
- * Use this method to send answers to an inline query. On success, True is returned.No more than 50 results per query are allowed.
+ * Use this method to send answers to an inline query. On success, True is returned. No more than 50 results per query are allowed.
  * 
  * @param connector Any object satisfying connector concept (see `banana::connector` namespace)
  * @param args__inline_query_id Unique identifier for the answered query
@@ -126,7 +126,7 @@ struct answer_inline_query_args_t {
  * @param args__is_personal Pass True, if results may be cached on the server side only for the user that sent the query. By default, results may be returned to any user who sends the same query
  * @param args__next_offset Pass the offset that a client should send in the next query with the same text to receive more results. Pass an empty string if there are no more results or if you don't support pagination. Offset length can't exceed 64 bytes.
  * @param args__switch_pm_text If passed, clients will display a button with specified text that switches the user to a private chat with the bot and sends the bot a start message with the parameter switch_pm_parameter
- * @param args__switch_pm_parameter Deep-linking parameter for the /start message sent to the bot when user presses the switch button. 1-64 characters, only A-Z, a-z, 0-9, _ and - are allowed.Example: An inline bot that sends YouTube videos can ask the user to connect the bot to their YouTube account to adapt search results accordingly. To do this, it displays a 'Connect your YouTube account' button above the results, or even before showing any. The user presses the button, switches to a private chat with the bot and, in doing so, passes a start parameter that instructs the bot to return an oauth link. Once done, the bot can offer a switch_inline button so that the user can easily return to the chat where they wanted to use the bot's inline capabilities.
+ * @param args__switch_pm_parameter Deep-linking parameter for the /start message sent to the bot when user presses the switch button. 1-64 characters, only A-Z, a-z, 0-9, _ and - are allowed.   Example: An inline bot that sends YouTube videos can ask the user to connect the bot to their YouTube account to adapt search results accordingly. To do this, it displays a 'Connect your YouTube account' button above the results, or even before showing any. The user presses the button, switches to a private chat with the bot and, in doing so, passes a start parameter that instructs the bot to return an oauth link. Once done, the bot can offer a switch_inline button so that the user can easily return to the chat where they wanted to use the bot's inline capabilities.
  */
 template <class Connector>
 api_result<boolean_t, Connector&&> answer_inline_query(Connector&& connector, answer_inline_query_args_t args) {
@@ -145,7 +145,7 @@ api_result<boolean_t, Connector&&> answer_inline_query(Connector&& connector, an
 }
 
 /**
- * Use this method to send answers to an inline query. On success, True is returned.No more than 50 results per query are allowed.
+ * Use this method to send answers to an inline query. On success, True is returned. No more than 50 results per query are allowed.
  *
  * @param connector Any object satisfying connector concept (see `banana::connector` namespace)
  * @param args__inline_query_id Unique identifier for the answered query
@@ -154,7 +154,7 @@ api_result<boolean_t, Connector&&> answer_inline_query(Connector&& connector, an
  * @param args__is_personal Pass True, if results may be cached on the server side only for the user that sent the query. By default, results may be returned to any user who sends the same query
  * @param args__next_offset Pass the offset that a client should send in the next query with the same text to receive more results. Pass an empty string if there are no more results or if you don't support pagination. Offset length can't exceed 64 bytes.
  * @param args__switch_pm_text If passed, clients will display a button with specified text that switches the user to a private chat with the bot and sends the bot a start message with the parameter switch_pm_parameter
- * @param args__switch_pm_parameter Deep-linking parameter for the /start message sent to the bot when user presses the switch button. 1-64 characters, only A-Z, a-z, 0-9, _ and - are allowed.Example: An inline bot that sends YouTube videos can ask the user to connect the bot to their YouTube account to adapt search results accordingly. To do this, it displays a 'Connect your YouTube account' button above the results, or even before showing any. The user presses the button, switches to a private chat with the bot and, in doing so, passes a start parameter that instructs the bot to return an oauth link. Once done, the bot can offer a switch_inline button so that the user can easily return to the chat where they wanted to use the bot's inline capabilities.
+ * @param args__switch_pm_parameter Deep-linking parameter for the /start message sent to the bot when user presses the switch button. 1-64 characters, only A-Z, a-z, 0-9, _ and - are allowed.   Example: An inline bot that sends YouTube videos can ask the user to connect the bot to their YouTube account to adapt search results accordingly. To do this, it displays a 'Connect your YouTube account' button above the results, or even before showing any. The user presses the button, switches to a private chat with the bot and, in doing so, passes a start parameter that instructs the bot to return an oauth link. Once done, the bot can offer a switch_inline button so that the user can easily return to the chat where they wanted to use the bot's inline capabilities.
  */
 template <class Connector>
 api_result<boolean_t, Connector&&> call(Connector&& connector, answer_inline_query_args_t args) {
@@ -252,6 +252,88 @@ api_result<boolean_t, Connector&&> call(Connector&& connector, answer_shipping_q
     return answer_shipping_query(std::forward<Connector>(connector), std::move(args));
 }
 
+// Arguments to ban_chat_member method
+struct ban_chat_member_args_t {
+    variant_t<integer_t, string_t> chat_id;         // Unique identifier for the target group or username of the target supergroup or channel (in the format @channelusername)
+    integer_t                      user_id;         // Unique identifier of the target user
+    optional_t<integer_t>          until_date;      // Date when the user will be unbanned, unix time. If user is banned for more than 366 days or less than 30 seconds from the current time they are considered to be banned forever. Applied for supergroups and channels only.
+    optional_t<boolean_t>          revoke_messages; // Pass True to delete all messages from the chat for the user that is being removed. If False, the user will be able to see messages in the group that were sent before the user was removed. Always True for supergroups and channels.
+};
+
+/**
+ * Use this method to ban a user in a group, a supergroup or a channel. In the case of supergroups and channels, the user will not be able to return to the chat on their own using invite links, etc., unless unbanned first. The bot must be an administrator in the chat for this to work and must have the appropriate admin rights. Returns True on success.
+ * 
+ * @param connector Any object satisfying connector concept (see `banana::connector` namespace)
+ * @param args__chat_id Unique identifier for the target group or username of the target supergroup or channel (in the format @channelusername)
+ * @param args__user_id Unique identifier of the target user
+ * @param args__until_date Date when the user will be unbanned, unix time. If user is banned for more than 366 days or less than 30 seconds from the current time they are considered to be banned forever. Applied for supergroups and channels only.
+ * @param args__revoke_messages Pass True to delete all messages from the chat for the user that is being removed. If False, the user will be able to see messages in the group that were sent before the user was removed. Always True for supergroups and channels.
+ */
+template <class Connector>
+api_result<boolean_t, Connector&&> ban_chat_member(Connector&& connector, ban_chat_member_args_t args) {
+    return std::forward<Connector>(connector).template request<boolean_t>("banChatMember", deser::serialize(std::move(args)), [](expected<std::string> request_result) -> expected<boolean_t> {
+        if (!request_result.has_value()) {
+            return banana::error_t<>{ "[ban_chat_member] Request error: " + request_result.error() };
+        }
+
+        expected<boolean_t> deser_result = deser::deserialize<boolean_t>(request_result.value());
+        if (!deser_result.has_value()) {
+            return banana::error_t<>{ "[ban_chat_member] Deserialization error: " + deser_result.error() };
+        }
+
+        return deser_result;
+    });
+}
+
+/**
+ * Use this method to ban a user in a group, a supergroup or a channel. In the case of supergroups and channels, the user will not be able to return to the chat on their own using invite links, etc., unless unbanned first. The bot must be an administrator in the chat for this to work and must have the appropriate admin rights. Returns True on success.
+ *
+ * @param connector Any object satisfying connector concept (see `banana::connector` namespace)
+ * @param args__chat_id Unique identifier for the target group or username of the target supergroup or channel (in the format @channelusername)
+ * @param args__user_id Unique identifier of the target user
+ * @param args__until_date Date when the user will be unbanned, unix time. If user is banned for more than 366 days or less than 30 seconds from the current time they are considered to be banned forever. Applied for supergroups and channels only.
+ * @param args__revoke_messages Pass True to delete all messages from the chat for the user that is being removed. If False, the user will be able to see messages in the group that were sent before the user was removed. Always True for supergroups and channels.
+ */
+template <class Connector>
+api_result<boolean_t, Connector&&> call(Connector&& connector, ban_chat_member_args_t args) {
+    return ban_chat_member(std::forward<Connector>(connector), std::move(args));
+}
+
+// Arguments to close method
+struct close_args_t {
+};
+
+/**
+ * Use this method to close the bot instance before moving it from one local server to another. You need to delete the webhook before calling this method to ensure that the bot isn't launched again after server restart. The method will return error 429 in the first 10 minutes after the bot is launched. Returns True on success. Requires no parameters.
+ * 
+ * @param connector Any object satisfying connector concept (see `banana::connector` namespace)
+ */
+template <class Connector>
+api_result<boolean_t, Connector&&> close(Connector&& connector, close_args_t args = {}) {
+    return std::forward<Connector>(connector).template request<boolean_t>("close", deser::serialize(std::move(args)), [](expected<std::string> request_result) -> expected<boolean_t> {
+        if (!request_result.has_value()) {
+            return banana::error_t<>{ "[close] Request error: " + request_result.error() };
+        }
+
+        expected<boolean_t> deser_result = deser::deserialize<boolean_t>(request_result.value());
+        if (!deser_result.has_value()) {
+            return banana::error_t<>{ "[close] Deserialization error: " + deser_result.error() };
+        }
+
+        return deser_result;
+    });
+}
+
+/**
+ * Use this method to close the bot instance before moving it from one local server to another. You need to delete the webhook before calling this method to ensure that the bot isn't launched again after server restart. The method will return error 429 in the first 10 minutes after the bot is launched. Returns True on success. Requires no parameters.
+ *
+ * @param connector Any object satisfying connector concept (see `banana::connector` namespace)
+ */
+template <class Connector>
+api_result<boolean_t, Connector&&> call(Connector&& connector, close_args_t args) {
+    return close(std::forward<Connector>(connector), std::move(args));
+}
+
 // Arguments to copy_message method
 struct copy_message_args_t {
     variant_t<integer_t, string_t>                                                                                   chat_id;                     // Unique identifier for the target chat or username of the target channel (in the format @channelusername)
@@ -267,7 +349,7 @@ struct copy_message_args_t {
 };
 
 /**
- * Use this method to copy messages of any kind. The method is analogous to the method forwardMessages, but the copied message doesn't have a link to the original message. Returns the MessageId of the sent message on success.
+ * Use this method to copy messages of any kind. Service messages and invoice messages can't be copied. The method is analogous to the method forwardMessage, but the copied message doesn't have a link to the original message. Returns the MessageId of the sent message on success.
  * 
  * @param connector Any object satisfying connector concept (see `banana::connector` namespace)
  * @param args__chat_id Unique identifier for the target chat or username of the target channel (in the format @channelusername)
@@ -298,7 +380,7 @@ api_result<message_id_t, Connector&&> copy_message(Connector&& connector, copy_m
 }
 
 /**
- * Use this method to copy messages of any kind. The method is analogous to the method forwardMessages, but the copied message doesn't have a link to the original message. Returns the MessageId of the sent message on success.
+ * Use this method to copy messages of any kind. Service messages and invoice messages can't be copied. The method is analogous to the method forwardMessage, but the copied message doesn't have a link to the original message. Returns the MessageId of the sent message on success.
  *
  * @param connector Any object satisfying connector concept (see `banana::connector` namespace)
  * @param args__chat_id Unique identifier for the target chat or username of the target channel (in the format @channelusername)
@@ -315,6 +397,50 @@ api_result<message_id_t, Connector&&> copy_message(Connector&& connector, copy_m
 template <class Connector>
 api_result<message_id_t, Connector&&> call(Connector&& connector, copy_message_args_t args) {
     return copy_message(std::forward<Connector>(connector), std::move(args));
+}
+
+// Arguments to create_chat_invite_link method
+struct create_chat_invite_link_args_t {
+    variant_t<integer_t, string_t> chat_id;      // Unique identifier for the target chat or username of the target channel (in the format @channelusername)
+    optional_t<integer_t>          expire_date;  // Point in time (Unix timestamp) when the link will expire
+    optional_t<integer_t>          member_limit; // Maximum number of users that can be members of the chat simultaneously after joining the chat via this invite link; 1-99999
+};
+
+/**
+ * Use this method to create an additional invite link for a chat. The bot must be an administrator in the chat for this to work and must have the appropriate admin rights. The link can be revoked using the method revokeChatInviteLink. Returns the new invite link as ChatInviteLink object.
+ * 
+ * @param connector Any object satisfying connector concept (see `banana::connector` namespace)
+ * @param args__chat_id Unique identifier for the target chat or username of the target channel (in the format @channelusername)
+ * @param args__expire_date Point in time (Unix timestamp) when the link will expire
+ * @param args__member_limit Maximum number of users that can be members of the chat simultaneously after joining the chat via this invite link; 1-99999
+ */
+template <class Connector>
+api_result<chat_invite_link_t, Connector&&> create_chat_invite_link(Connector&& connector, create_chat_invite_link_args_t args) {
+    return std::forward<Connector>(connector).template request<chat_invite_link_t>("createChatInviteLink", deser::serialize(std::move(args)), [](expected<std::string> request_result) -> expected<chat_invite_link_t> {
+        if (!request_result.has_value()) {
+            return banana::error_t<>{ "[create_chat_invite_link] Request error: " + request_result.error() };
+        }
+
+        expected<chat_invite_link_t> deser_result = deser::deserialize<chat_invite_link_t>(request_result.value());
+        if (!deser_result.has_value()) {
+            return banana::error_t<>{ "[create_chat_invite_link] Deserialization error: " + deser_result.error() };
+        }
+
+        return deser_result;
+    });
+}
+
+/**
+ * Use this method to create an additional invite link for a chat. The bot must be an administrator in the chat for this to work and must have the appropriate admin rights. The link can be revoked using the method revokeChatInviteLink. Returns the new invite link as ChatInviteLink object.
+ *
+ * @param connector Any object satisfying connector concept (see `banana::connector` namespace)
+ * @param args__chat_id Unique identifier for the target chat or username of the target channel (in the format @channelusername)
+ * @param args__expire_date Point in time (Unix timestamp) when the link will expire
+ * @param args__member_limit Maximum number of users that can be members of the chat simultaneously after joining the chat via this invite link; 1-99999
+ */
+template <class Connector>
+api_result<chat_invite_link_t, Connector&&> call(Connector&& connector, create_chat_invite_link_args_t args) {
+    return create_chat_invite_link(std::forward<Connector>(connector), std::move(args));
 }
 
 // Arguments to create_new_sticker_set method
@@ -459,7 +585,7 @@ struct delete_message_args_t {
 };
 
 /**
- * Use this method to delete a message, including service messages, with the following limitations:- A message can only be deleted if it was sent less than 48 hours ago.- A dice message in a private chat can only be deleted if it was sent more than 24 hours ago.- Bots can delete outgoing messages in private chats, groups, and supergroups.- Bots can delete incoming messages in private chats.- Bots granted can_post_messages permissions can delete outgoing messages in channels.- If the bot is an administrator of a group, it can delete any message there.- If the bot has can_delete_messages permission in a supergroup or a channel, it can delete any message there.Returns True on success.
+ * Use this method to delete a message, including service messages, with the following limitations: - A message can only be deleted if it was sent less than 48 hours ago. - A dice message in a private chat can only be deleted if it was sent more than 24 hours ago. - Bots can delete outgoing messages in private chats, groups, and supergroups. - Bots can delete incoming messages in private chats. - Bots granted can_post_messages permissions can delete outgoing messages in channels. - If the bot is an administrator of a group, it can delete any message there. - If the bot has can_delete_messages permission in a supergroup or a channel, it can delete any message there. Returns True on success.
  * 
  * @param connector Any object satisfying connector concept (see `banana::connector` namespace)
  * @param args__chat_id Unique identifier for the target chat or username of the target channel (in the format @channelusername)
@@ -482,7 +608,7 @@ api_result<boolean_t, Connector&&> delete_message(Connector&& connector, delete_
 }
 
 /**
- * Use this method to delete a message, including service messages, with the following limitations:- A message can only be deleted if it was sent less than 48 hours ago.- A dice message in a private chat can only be deleted if it was sent more than 24 hours ago.- Bots can delete outgoing messages in private chats, groups, and supergroups.- Bots can delete incoming messages in private chats.- Bots granted can_post_messages permissions can delete outgoing messages in channels.- If the bot is an administrator of a group, it can delete any message there.- If the bot has can_delete_messages permission in a supergroup or a channel, it can delete any message there.Returns True on success.
+ * Use this method to delete a message, including service messages, with the following limitations: - A message can only be deleted if it was sent less than 48 hours ago. - A dice message in a private chat can only be deleted if it was sent more than 24 hours ago. - Bots can delete outgoing messages in private chats, groups, and supergroups. - Bots can delete incoming messages in private chats. - Bots granted can_post_messages permissions can delete outgoing messages in channels. - If the bot is an administrator of a group, it can delete any message there. - If the bot has can_delete_messages permission in a supergroup or a channel, it can delete any message there. Returns True on success.
  *
  * @param connector Any object satisfying connector concept (see `banana::connector` namespace)
  * @param args__chat_id Unique identifier for the target chat or username of the target channel (in the format @channelusername)
@@ -491,6 +617,47 @@ api_result<boolean_t, Connector&&> delete_message(Connector&& connector, delete_
 template <class Connector>
 api_result<boolean_t, Connector&&> call(Connector&& connector, delete_message_args_t args) {
     return delete_message(std::forward<Connector>(connector), std::move(args));
+}
+
+// Arguments to delete_my_commands method
+struct delete_my_commands_args_t {
+    optional_t<bot_command_scope_t> scope;         // A JSON-serialized object, describing scope of users for which the commands are relevant. Defaults to BotCommandScopeDefault.
+    optional_t<string_t>            language_code; // A two-letter ISO 639-1 language code. If empty, commands will be applied to all users from the given scope, for whose language there are no dedicated commands
+};
+
+/**
+ * Use this method to delete the list of the bot's commands for the given scope and user language. After deletion, higher level commands will be shown to affected users. Returns True on success.
+ * 
+ * @param connector Any object satisfying connector concept (see `banana::connector` namespace)
+ * @param args__scope A JSON-serialized object, describing scope of users for which the commands are relevant. Defaults to BotCommandScopeDefault.
+ * @param args__language_code A two-letter ISO 639-1 language code. If empty, commands will be applied to all users from the given scope, for whose language there are no dedicated commands
+ */
+template <class Connector>
+api_result<boolean_t, Connector&&> delete_my_commands(Connector&& connector, delete_my_commands_args_t args) {
+    return std::forward<Connector>(connector).template request<boolean_t>("deleteMyCommands", deser::serialize(std::move(args)), [](expected<std::string> request_result) -> expected<boolean_t> {
+        if (!request_result.has_value()) {
+            return banana::error_t<>{ "[delete_my_commands] Request error: " + request_result.error() };
+        }
+
+        expected<boolean_t> deser_result = deser::deserialize<boolean_t>(request_result.value());
+        if (!deser_result.has_value()) {
+            return banana::error_t<>{ "[delete_my_commands] Deserialization error: " + deser_result.error() };
+        }
+
+        return deser_result;
+    });
+}
+
+/**
+ * Use this method to delete the list of the bot's commands for the given scope and user language. After deletion, higher level commands will be shown to affected users. Returns True on success.
+ *
+ * @param connector Any object satisfying connector concept (see `banana::connector` namespace)
+ * @param args__scope A JSON-serialized object, describing scope of users for which the commands are relevant. Defaults to BotCommandScopeDefault.
+ * @param args__language_code A two-letter ISO 639-1 language code. If empty, commands will be applied to all users from the given scope, for whose language there are no dedicated commands
+ */
+template <class Connector>
+api_result<boolean_t, Connector&&> call(Connector&& connector, delete_my_commands_args_t args) {
+    return delete_my_commands(std::forward<Connector>(connector), std::move(args));
 }
 
 // Arguments to delete_sticker_from_set method
@@ -567,6 +734,53 @@ api_result<boolean_t, Connector&&> delete_webhook(Connector&& connector, delete_
 template <class Connector>
 api_result<boolean_t, Connector&&> call(Connector&& connector, delete_webhook_args_t args) {
     return delete_webhook(std::forward<Connector>(connector), std::move(args));
+}
+
+// Arguments to edit_chat_invite_link method
+struct edit_chat_invite_link_args_t {
+    variant_t<integer_t, string_t> chat_id;      // Unique identifier for the target chat or username of the target channel (in the format @channelusername)
+    string_t                       invite_link;  // The invite link to edit
+    optional_t<integer_t>          expire_date;  // Point in time (Unix timestamp) when the link will expire
+    optional_t<integer_t>          member_limit; // Maximum number of users that can be members of the chat simultaneously after joining the chat via this invite link; 1-99999
+};
+
+/**
+ * Use this method to edit a non-primary invite link created by the bot. The bot must be an administrator in the chat for this to work and must have the appropriate admin rights. Returns the edited invite link as a ChatInviteLink object.
+ * 
+ * @param connector Any object satisfying connector concept (see `banana::connector` namespace)
+ * @param args__chat_id Unique identifier for the target chat or username of the target channel (in the format @channelusername)
+ * @param args__invite_link The invite link to edit
+ * @param args__expire_date Point in time (Unix timestamp) when the link will expire
+ * @param args__member_limit Maximum number of users that can be members of the chat simultaneously after joining the chat via this invite link; 1-99999
+ */
+template <class Connector>
+api_result<chat_invite_link_t, Connector&&> edit_chat_invite_link(Connector&& connector, edit_chat_invite_link_args_t args) {
+    return std::forward<Connector>(connector).template request<chat_invite_link_t>("editChatInviteLink", deser::serialize(std::move(args)), [](expected<std::string> request_result) -> expected<chat_invite_link_t> {
+        if (!request_result.has_value()) {
+            return banana::error_t<>{ "[edit_chat_invite_link] Request error: " + request_result.error() };
+        }
+
+        expected<chat_invite_link_t> deser_result = deser::deserialize<chat_invite_link_t>(request_result.value());
+        if (!deser_result.has_value()) {
+            return banana::error_t<>{ "[edit_chat_invite_link] Deserialization error: " + deser_result.error() };
+        }
+
+        return deser_result;
+    });
+}
+
+/**
+ * Use this method to edit a non-primary invite link created by the bot. The bot must be an administrator in the chat for this to work and must have the appropriate admin rights. Returns the edited invite link as a ChatInviteLink object.
+ *
+ * @param connector Any object satisfying connector concept (see `banana::connector` namespace)
+ * @param args__chat_id Unique identifier for the target chat or username of the target channel (in the format @channelusername)
+ * @param args__invite_link The invite link to edit
+ * @param args__expire_date Point in time (Unix timestamp) when the link will expire
+ * @param args__member_limit Maximum number of users that can be members of the chat simultaneously after joining the chat via this invite link; 1-99999
+ */
+template <class Connector>
+api_result<chat_invite_link_t, Connector&&> call(Connector&& connector, edit_chat_invite_link_args_t args) {
+    return edit_chat_invite_link(std::forward<Connector>(connector), std::move(args));
 }
 
 // Arguments to edit_message_caption method
@@ -849,7 +1063,7 @@ struct export_chat_invite_link_args_t {
 };
 
 /**
- * Use this method to generate a new invite link for a chat; any previously generated link is revoked. The bot must be an administrator in the chat for this to work and must have the appropriate admin rights. Returns the new invite link as String on success.
+ * Use this method to generate a new primary invite link for a chat; any previously generated primary link is revoked. The bot must be an administrator in the chat for this to work and must have the appropriate admin rights. Returns the new invite link as String on success.
  * 
  * @param connector Any object satisfying connector concept (see `banana::connector` namespace)
  * @param args__chat_id Unique identifier for the target chat or username of the target channel (in the format @channelusername)
@@ -871,7 +1085,7 @@ api_result<string_t, Connector&&> export_chat_invite_link(Connector&& connector,
 }
 
 /**
- * Use this method to generate a new invite link for a chat; any previously generated link is revoked. The bot must be an administrator in the chat for this to work and must have the appropriate admin rights. Returns the new invite link as String on success.
+ * Use this method to generate a new primary invite link for a chat; any previously generated primary link is revoked. The bot must be an administrator in the chat for this to work and must have the appropriate admin rights. Returns the new invite link as String on success.
  *
  * @param connector Any object satisfying connector concept (see `banana::connector` namespace)
  * @param args__chat_id Unique identifier for the target chat or username of the target channel (in the format @channelusername)
@@ -890,7 +1104,7 @@ struct forward_message_args_t {
 };
 
 /**
- * Use this method to forward messages of any kind. On success, the sent Message is returned.
+ * Use this method to forward messages of any kind. Service messages can't be forwarded. On success, the sent Message is returned.
  * 
  * @param connector Any object satisfying connector concept (see `banana::connector` namespace)
  * @param args__chat_id Unique identifier for the target chat or username of the target channel (in the format @channelusername)
@@ -915,7 +1129,7 @@ api_result<message_t, Connector&&> forward_message(Connector&& connector, forwar
 }
 
 /**
- * Use this method to forward messages of any kind. On success, the sent Message is returned.
+ * Use this method to forward messages of any kind. Service messages can't be forwarded. On success, the sent Message is returned.
  *
  * @param connector Any object satisfying connector concept (see `banana::connector` namespace)
  * @param args__chat_id Unique identifier for the target chat or username of the target channel (in the format @channelusername)
@@ -1045,8 +1259,8 @@ api_result<chat_member_t, Connector&&> call(Connector&& connector, get_chat_memb
     return get_chat_member(std::forward<Connector>(connector), std::move(args));
 }
 
-// Arguments to get_chat_members_count method
-struct get_chat_members_count_args_t {
+// Arguments to get_chat_member_count method
+struct get_chat_member_count_args_t {
     variant_t<integer_t, string_t> chat_id; // Unique identifier for the target chat or username of the target supergroup or channel (in the format @channelusername)
 };
 
@@ -1057,15 +1271,15 @@ struct get_chat_members_count_args_t {
  * @param args__chat_id Unique identifier for the target chat or username of the target supergroup or channel (in the format @channelusername)
  */
 template <class Connector>
-api_result<integer_t, Connector&&> get_chat_members_count(Connector&& connector, get_chat_members_count_args_t args) {
-    return std::forward<Connector>(connector).template request<integer_t>("getChatMembersCount", deser::serialize(std::move(args)), [](expected<std::string> request_result) -> expected<integer_t> {
+api_result<integer_t, Connector&&> get_chat_member_count(Connector&& connector, get_chat_member_count_args_t args) {
+    return std::forward<Connector>(connector).template request<integer_t>("getChatMemberCount", deser::serialize(std::move(args)), [](expected<std::string> request_result) -> expected<integer_t> {
         if (!request_result.has_value()) {
-            return banana::error_t<>{ "[get_chat_members_count] Request error: " + request_result.error() };
+            return banana::error_t<>{ "[get_chat_member_count] Request error: " + request_result.error() };
         }
 
         expected<integer_t> deser_result = deser::deserialize<integer_t>(request_result.value());
         if (!deser_result.has_value()) {
-            return banana::error_t<>{ "[get_chat_members_count] Deserialization error: " + deser_result.error() };
+            return banana::error_t<>{ "[get_chat_member_count] Deserialization error: " + deser_result.error() };
         }
 
         return deser_result;
@@ -1079,8 +1293,8 @@ api_result<integer_t, Connector&&> get_chat_members_count(Connector&& connector,
  * @param args__chat_id Unique identifier for the target chat or username of the target supergroup or channel (in the format @channelusername)
  */
 template <class Connector>
-api_result<integer_t, Connector&&> call(Connector&& connector, get_chat_members_count_args_t args) {
-    return get_chat_members_count(std::forward<Connector>(connector), std::move(args));
+api_result<integer_t, Connector&&> call(Connector&& connector, get_chat_member_count_args_t args) {
+    return get_chat_member_count(std::forward<Connector>(connector), std::move(args));
 }
 
 // Arguments to get_file method
@@ -1130,7 +1344,7 @@ struct get_game_high_scores_args_t {
 };
 
 /**
- * Use this method to get data for high score tables. Will return the score of the specified user and several of their neighbors in a game. On success, returns an Array of GameHighScore objects.
+ * Use this method to get data for high score tables. Will return the score of the specified user and several of their neighbors in a game. On success, returns an Array of GameHighScore objects. This method will currently return scores for the target user, plus two of their closest neighbors on each side. Will also return the top three users if the user and his neighbors are not among them. Please note that this behavior is subject to change.
  * 
  * @param connector Any object satisfying connector concept (see `banana::connector` namespace)
  * @param args__user_id Target user id
@@ -1155,7 +1369,7 @@ api_result<array_t<game_high_score_t>, Connector&&> get_game_high_scores(Connect
 }
 
 /**
- * Use this method to get data for high score tables. Will return the score of the specified user and several of their neighbors in a game. On success, returns an Array of GameHighScore objects.
+ * Use this method to get data for high score tables. Will return the score of the specified user and several of their neighbors in a game. On success, returns an Array of GameHighScore objects. This method will currently return scores for the target user, plus two of their closest neighbors on each side. Will also return the top three users if the user and his neighbors are not among them. Please note that this behavior is subject to change.
  *
  * @param connector Any object satisfying connector concept (see `banana::connector` namespace)
  * @param args__user_id Target user id
@@ -1203,6 +1417,47 @@ api_result<user_t, Connector&&> call(Connector&& connector, get_me_args_t args) 
     return get_me(std::forward<Connector>(connector), std::move(args));
 }
 
+// Arguments to get_my_commands method
+struct get_my_commands_args_t {
+    optional_t<bot_command_scope_t> scope;         // A JSON-serialized object, describing scope of users. Defaults to BotCommandScopeDefault.
+    optional_t<string_t>            language_code; // A two-letter ISO 639-1 language code or an empty string
+};
+
+/**
+ * Use this method to get the current list of the bot's commands for the given scope and user language. Returns Array of BotCommand on success. If commands aren't set, an empty list is returned.
+ * 
+ * @param connector Any object satisfying connector concept (see `banana::connector` namespace)
+ * @param args__scope A JSON-serialized object, describing scope of users. Defaults to BotCommandScopeDefault.
+ * @param args__language_code A two-letter ISO 639-1 language code or an empty string
+ */
+template <class Connector>
+api_result<array_t<bot_command_t>, Connector&&> get_my_commands(Connector&& connector, get_my_commands_args_t args) {
+    return std::forward<Connector>(connector).template request<array_t<bot_command_t>>("getMyCommands", deser::serialize(std::move(args)), [](expected<std::string> request_result) -> expected<array_t<bot_command_t>> {
+        if (!request_result.has_value()) {
+            return banana::error_t<>{ "[get_my_commands] Request error: " + request_result.error() };
+        }
+
+        expected<array_t<bot_command_t>> deser_result = deser::deserialize<array_t<bot_command_t>>(request_result.value());
+        if (!deser_result.has_value()) {
+            return banana::error_t<>{ "[get_my_commands] Deserialization error: " + deser_result.error() };
+        }
+
+        return deser_result;
+    });
+}
+
+/**
+ * Use this method to get the current list of the bot's commands for the given scope and user language. Returns Array of BotCommand on success. If commands aren't set, an empty list is returned.
+ *
+ * @param connector Any object satisfying connector concept (see `banana::connector` namespace)
+ * @param args__scope A JSON-serialized object, describing scope of users. Defaults to BotCommandScopeDefault.
+ * @param args__language_code A two-letter ISO 639-1 language code or an empty string
+ */
+template <class Connector>
+api_result<array_t<bot_command_t>, Connector&&> call(Connector&& connector, get_my_commands_args_t args) {
+    return get_my_commands(std::forward<Connector>(connector), std::move(args));
+}
+
 // Arguments to get_sticker_set method
 struct get_sticker_set_args_t {
     string_t name; // Name of the sticker set
@@ -1246,7 +1501,7 @@ struct get_updates_args_t {
     optional_t<integer_t>         offset;          // Identifier of the first update to be returned. Must be greater by one than the highest among the identifiers of previously received updates. By default, updates starting with the earliest unconfirmed update are returned. An update is considered confirmed as soon as getUpdates is called with an offset higher than its update_id. The negative offset can be specified to retrieve updates starting from -offset update from the end of the updates queue. All previous updates will forgotten.
     optional_t<integer_t>         limit;           // Limits the number of updates to be retrieved. Values between 1-100 are accepted. Defaults to 100.
     optional_t<integer_t>         timeout;         // Timeout in seconds for long polling. Defaults to 0, i.e. usual short polling. Should be positive, short polling should be used for testing purposes only.
-    optional_t<array_t<string_t>> allowed_updates; // A JSON-serialized list of the update types you want your bot to receive. For example, specify [“message”, “edited_channel_post”, “callback_query”] to only receive updates of these types. See Update for a complete list of available update types. Specify an empty list to receive all updates regardless of type (default). If not specified, the previous setting will be used.Please note that this parameter doesn't affect updates created before the call to the getUpdates, so unwanted updates may be received for a short period of time.
+    optional_t<array_t<string_t>> allowed_updates; // A JSON-serialized list of the update types you want your bot to receive. For example, specify [“message”, “edited_channel_post”, “callback_query”] to only receive updates of these types. See Update for a complete list of available update types. Specify an empty list to receive all update types except chat_member (default). If not specified, the previous setting will be used.   Please note that this parameter doesn't affect updates created before the call to the getUpdates, so unwanted updates may be received for a short period of time.
 };
 
 /**
@@ -1256,7 +1511,7 @@ struct get_updates_args_t {
  * @param args__offset Identifier of the first update to be returned. Must be greater by one than the highest among the identifiers of previously received updates. By default, updates starting with the earliest unconfirmed update are returned. An update is considered confirmed as soon as getUpdates is called with an offset higher than its update_id. The negative offset can be specified to retrieve updates starting from -offset update from the end of the updates queue. All previous updates will forgotten.
  * @param args__limit Limits the number of updates to be retrieved. Values between 1-100 are accepted. Defaults to 100.
  * @param args__timeout Timeout in seconds for long polling. Defaults to 0, i.e. usual short polling. Should be positive, short polling should be used for testing purposes only.
- * @param args__allowed_updates A JSON-serialized list of the update types you want your bot to receive. For example, specify [“message”, “edited_channel_post”, “callback_query”] to only receive updates of these types. See Update for a complete list of available update types. Specify an empty list to receive all updates regardless of type (default). If not specified, the previous setting will be used.Please note that this parameter doesn't affect updates created before the call to the getUpdates, so unwanted updates may be received for a short period of time.
+ * @param args__allowed_updates A JSON-serialized list of the update types you want your bot to receive. For example, specify [“message”, “edited_channel_post”, “callback_query”] to only receive updates of these types. See Update for a complete list of available update types. Specify an empty list to receive all update types except chat_member (default). If not specified, the previous setting will be used.   Please note that this parameter doesn't affect updates created before the call to the getUpdates, so unwanted updates may be received for a short period of time.
  */
 template <class Connector>
 api_result<array_t<update_t>, Connector&&> get_updates(Connector&& connector, get_updates_args_t args) {
@@ -1281,7 +1536,7 @@ api_result<array_t<update_t>, Connector&&> get_updates(Connector&& connector, ge
  * @param args__offset Identifier of the first update to be returned. Must be greater by one than the highest among the identifiers of previously received updates. By default, updates starting with the earliest unconfirmed update are returned. An update is considered confirmed as soon as getUpdates is called with an offset higher than its update_id. The negative offset can be specified to retrieve updates starting from -offset update from the end of the updates queue. All previous updates will forgotten.
  * @param args__limit Limits the number of updates to be retrieved. Values between 1-100 are accepted. Defaults to 100.
  * @param args__timeout Timeout in seconds for long polling. Defaults to 0, i.e. usual short polling. Should be positive, short polling should be used for testing purposes only.
- * @param args__allowed_updates A JSON-serialized list of the update types you want your bot to receive. For example, specify [“message”, “edited_channel_post”, “callback_query”] to only receive updates of these types. See Update for a complete list of available update types. Specify an empty list to receive all updates regardless of type (default). If not specified, the previous setting will be used.Please note that this parameter doesn't affect updates created before the call to the getUpdates, so unwanted updates may be received for a short period of time.
+ * @param args__allowed_updates A JSON-serialized list of the update types you want your bot to receive. For example, specify [“message”, “edited_channel_post”, “callback_query”] to only receive updates of these types. See Update for a complete list of available update types. Specify an empty list to receive all update types except chat_member (default). If not specified, the previous setting will be used.   Please note that this parameter doesn't affect updates created before the call to the getUpdates, so unwanted updates may be received for a short period of time.
  */
 template <class Connector>
 api_result<array_t<update_t>, Connector&&> call(Connector&& connector, get_updates_args_t args) {
@@ -1332,31 +1587,25 @@ api_result<user_profile_photos_t, Connector&&> call(Connector&& connector, get_u
     return get_user_profile_photos(std::forward<Connector>(connector), std::move(args));
 }
 
-// Arguments to kick_chat_member method
-struct kick_chat_member_args_t {
-    variant_t<integer_t, string_t> chat_id;    // Unique identifier for the target group or username of the target supergroup or channel (in the format @channelusername)
-    integer_t                      user_id;    // Unique identifier of the target user
-    optional_t<integer_t>          until_date; // Date when the user will be unbanned, unix time. If user is banned for more than 366 days or less than 30 seconds from the current time they are considered to be banned forever
+// Arguments to get_webhook_info method
+struct get_webhook_info_args_t {
 };
 
 /**
- * Use this method to kick a user from a group, a supergroup or a channel. In the case of supergroups and channels, the user will not be able to return to the group on their own using invite links, etc., unless unbanned first. The bot must be an administrator in the chat for this to work and must have the appropriate admin rights. Returns True on success.
+ * Use this method to get current webhook status. Requires no parameters. On success, returns a WebhookInfo object. If the bot is using getUpdates, will return an object with the url field empty.
  * 
  * @param connector Any object satisfying connector concept (see `banana::connector` namespace)
- * @param args__chat_id Unique identifier for the target group or username of the target supergroup or channel (in the format @channelusername)
- * @param args__user_id Unique identifier of the target user
- * @param args__until_date Date when the user will be unbanned, unix time. If user is banned for more than 366 days or less than 30 seconds from the current time they are considered to be banned forever
  */
 template <class Connector>
-api_result<boolean_t, Connector&&> kick_chat_member(Connector&& connector, kick_chat_member_args_t args) {
-    return std::forward<Connector>(connector).template request<boolean_t>("kickChatMember", deser::serialize(std::move(args)), [](expected<std::string> request_result) -> expected<boolean_t> {
+api_result<webhook_info_t, Connector&&> get_webhook_info(Connector&& connector, get_webhook_info_args_t args = {}) {
+    return std::forward<Connector>(connector).template request<webhook_info_t>("getWebhookInfo", deser::serialize(std::move(args)), [](expected<std::string> request_result) -> expected<webhook_info_t> {
         if (!request_result.has_value()) {
-            return banana::error_t<>{ "[kick_chat_member] Request error: " + request_result.error() };
+            return banana::error_t<>{ "[get_webhook_info] Request error: " + request_result.error() };
         }
 
-        expected<boolean_t> deser_result = deser::deserialize<boolean_t>(request_result.value());
+        expected<webhook_info_t> deser_result = deser::deserialize<webhook_info_t>(request_result.value());
         if (!deser_result.has_value()) {
-            return banana::error_t<>{ "[kick_chat_member] Deserialization error: " + deser_result.error() };
+            return banana::error_t<>{ "[get_webhook_info] Deserialization error: " + deser_result.error() };
         }
 
         return deser_result;
@@ -1364,16 +1613,13 @@ api_result<boolean_t, Connector&&> kick_chat_member(Connector&& connector, kick_
 }
 
 /**
- * Use this method to kick a user from a group, a supergroup or a channel. In the case of supergroups and channels, the user will not be able to return to the group on their own using invite links, etc., unless unbanned first. The bot must be an administrator in the chat for this to work and must have the appropriate admin rights. Returns True on success.
+ * Use this method to get current webhook status. Requires no parameters. On success, returns a WebhookInfo object. If the bot is using getUpdates, will return an object with the url field empty.
  *
  * @param connector Any object satisfying connector concept (see `banana::connector` namespace)
- * @param args__chat_id Unique identifier for the target group or username of the target supergroup or channel (in the format @channelusername)
- * @param args__user_id Unique identifier of the target user
- * @param args__until_date Date when the user will be unbanned, unix time. If user is banned for more than 366 days or less than 30 seconds from the current time they are considered to be banned forever
  */
 template <class Connector>
-api_result<boolean_t, Connector&&> call(Connector&& connector, kick_chat_member_args_t args) {
-    return kick_chat_member(std::forward<Connector>(connector), std::move(args));
+api_result<webhook_info_t, Connector&&> call(Connector&& connector, get_webhook_info_args_t args) {
+    return get_webhook_info(std::forward<Connector>(connector), std::move(args));
 }
 
 // Arguments to leave_chat method
@@ -1412,6 +1658,41 @@ api_result<boolean_t, Connector&&> leave_chat(Connector&& connector, leave_chat_
 template <class Connector>
 api_result<boolean_t, Connector&&> call(Connector&& connector, leave_chat_args_t args) {
     return leave_chat(std::forward<Connector>(connector), std::move(args));
+}
+
+// Arguments to log_out method
+struct log_out_args_t {
+};
+
+/**
+ * Use this method to log out from the cloud Bot API server before launching the bot locally. You must log out the bot before running it locally, otherwise there is no guarantee that the bot will receive updates. After a successful call, you can immediately log in on a local server, but will not be able to log in back to the cloud Bot API server for 10 minutes. Returns True on success. Requires no parameters.
+ * 
+ * @param connector Any object satisfying connector concept (see `banana::connector` namespace)
+ */
+template <class Connector>
+api_result<boolean_t, Connector&&> log_out(Connector&& connector, log_out_args_t args = {}) {
+    return std::forward<Connector>(connector).template request<boolean_t>("logOut", deser::serialize(std::move(args)), [](expected<std::string> request_result) -> expected<boolean_t> {
+        if (!request_result.has_value()) {
+            return banana::error_t<>{ "[log_out] Request error: " + request_result.error() };
+        }
+
+        expected<boolean_t> deser_result = deser::deserialize<boolean_t>(request_result.value());
+        if (!deser_result.has_value()) {
+            return banana::error_t<>{ "[log_out] Deserialization error: " + deser_result.error() };
+        }
+
+        return deser_result;
+    });
+}
+
+/**
+ * Use this method to log out from the cloud Bot API server before launching the bot locally. You must log out the bot before running it locally, otherwise there is no guarantee that the bot will receive updates. After a successful call, you can immediately log in on a local server, but will not be able to log in back to the cloud Bot API server for 10 minutes. Returns True on success. Requires no parameters.
+ *
+ * @param connector Any object satisfying connector concept (see `banana::connector` namespace)
+ */
+template <class Connector>
+api_result<boolean_t, Connector&&> call(Connector&& connector, log_out_args_t args) {
+    return log_out(std::forward<Connector>(connector), std::move(args));
 }
 
 // Arguments to pin_chat_message method
@@ -1460,17 +1741,19 @@ api_result<boolean_t, Connector&&> call(Connector&& connector, pin_chat_message_
 
 // Arguments to promote_chat_member method
 struct promote_chat_member_args_t {
-    variant_t<integer_t, string_t> chat_id;              // Unique identifier for the target chat or username of the target channel (in the format @channelusername)
-    integer_t                      user_id;              // Unique identifier of the target user
-    optional_t<boolean_t>          is_anonymous;         // Pass True, if the administrator's presence in the chat is hidden
-    optional_t<boolean_t>          can_change_info;      // Pass True, if the administrator can change chat title, photo and other settings
-    optional_t<boolean_t>          can_post_messages;    // Pass True, if the administrator can create channel posts, channels only
-    optional_t<boolean_t>          can_edit_messages;    // Pass True, if the administrator can edit messages of other users and can pin messages, channels only
-    optional_t<boolean_t>          can_delete_messages;  // Pass True, if the administrator can delete messages of other users
-    optional_t<boolean_t>          can_invite_users;     // Pass True, if the administrator can invite new users to the chat
-    optional_t<boolean_t>          can_restrict_members; // Pass True, if the administrator can restrict, ban or unban chat members
-    optional_t<boolean_t>          can_pin_messages;     // Pass True, if the administrator can pin messages, supergroups only
-    optional_t<boolean_t>          can_promote_members;  // Pass True, if the administrator can add new administrators with a subset of their own privileges or demote administrators that he has promoted, directly or indirectly (promoted by administrators that were appointed by him)
+    variant_t<integer_t, string_t> chat_id;                // Unique identifier for the target chat or username of the target channel (in the format @channelusername)
+    integer_t                      user_id;                // Unique identifier of the target user
+    optional_t<boolean_t>          is_anonymous;           // Pass True, if the administrator's presence in the chat is hidden
+    optional_t<boolean_t>          can_manage_chat;        // Pass True, if the administrator can access the chat event log, chat statistics, message statistics in channels, see channel members, see anonymous administrators in supergroups and ignore slow mode. Implied by any other administrator privilege
+    optional_t<boolean_t>          can_post_messages;      // Pass True, if the administrator can create channel posts, channels only
+    optional_t<boolean_t>          can_edit_messages;      // Pass True, if the administrator can edit messages of other users and can pin messages, channels only
+    optional_t<boolean_t>          can_delete_messages;    // Pass True, if the administrator can delete messages of other users
+    optional_t<boolean_t>          can_manage_voice_chats; // Pass True, if the administrator can manage voice chats
+    optional_t<boolean_t>          can_restrict_members;   // Pass True, if the administrator can restrict, ban or unban chat members
+    optional_t<boolean_t>          can_promote_members;    // Pass True, if the administrator can add new administrators with a subset of their own privileges or demote administrators that he has promoted, directly or indirectly (promoted by administrators that were appointed by him)
+    optional_t<boolean_t>          can_change_info;        // Pass True, if the administrator can change chat title, photo and other settings
+    optional_t<boolean_t>          can_invite_users;       // Pass True, if the administrator can invite new users to the chat
+    optional_t<boolean_t>          can_pin_messages;       // Pass True, if the administrator can pin messages, supergroups only
 };
 
 /**
@@ -1480,14 +1763,16 @@ struct promote_chat_member_args_t {
  * @param args__chat_id Unique identifier for the target chat or username of the target channel (in the format @channelusername)
  * @param args__user_id Unique identifier of the target user
  * @param args__is_anonymous Pass True, if the administrator's presence in the chat is hidden
- * @param args__can_change_info Pass True, if the administrator can change chat title, photo and other settings
+ * @param args__can_manage_chat Pass True, if the administrator can access the chat event log, chat statistics, message statistics in channels, see channel members, see anonymous administrators in supergroups and ignore slow mode. Implied by any other administrator privilege
  * @param args__can_post_messages Pass True, if the administrator can create channel posts, channels only
  * @param args__can_edit_messages Pass True, if the administrator can edit messages of other users and can pin messages, channels only
  * @param args__can_delete_messages Pass True, if the administrator can delete messages of other users
- * @param args__can_invite_users Pass True, if the administrator can invite new users to the chat
+ * @param args__can_manage_voice_chats Pass True, if the administrator can manage voice chats
  * @param args__can_restrict_members Pass True, if the administrator can restrict, ban or unban chat members
- * @param args__can_pin_messages Pass True, if the administrator can pin messages, supergroups only
  * @param args__can_promote_members Pass True, if the administrator can add new administrators with a subset of their own privileges or demote administrators that he has promoted, directly or indirectly (promoted by administrators that were appointed by him)
+ * @param args__can_change_info Pass True, if the administrator can change chat title, photo and other settings
+ * @param args__can_invite_users Pass True, if the administrator can invite new users to the chat
+ * @param args__can_pin_messages Pass True, if the administrator can pin messages, supergroups only
  */
 template <class Connector>
 api_result<boolean_t, Connector&&> promote_chat_member(Connector&& connector, promote_chat_member_args_t args) {
@@ -1512,14 +1797,16 @@ api_result<boolean_t, Connector&&> promote_chat_member(Connector&& connector, pr
  * @param args__chat_id Unique identifier for the target chat or username of the target channel (in the format @channelusername)
  * @param args__user_id Unique identifier of the target user
  * @param args__is_anonymous Pass True, if the administrator's presence in the chat is hidden
- * @param args__can_change_info Pass True, if the administrator can change chat title, photo and other settings
+ * @param args__can_manage_chat Pass True, if the administrator can access the chat event log, chat statistics, message statistics in channels, see channel members, see anonymous administrators in supergroups and ignore slow mode. Implied by any other administrator privilege
  * @param args__can_post_messages Pass True, if the administrator can create channel posts, channels only
  * @param args__can_edit_messages Pass True, if the administrator can edit messages of other users and can pin messages, channels only
  * @param args__can_delete_messages Pass True, if the administrator can delete messages of other users
- * @param args__can_invite_users Pass True, if the administrator can invite new users to the chat
+ * @param args__can_manage_voice_chats Pass True, if the administrator can manage voice chats
  * @param args__can_restrict_members Pass True, if the administrator can restrict, ban or unban chat members
- * @param args__can_pin_messages Pass True, if the administrator can pin messages, supergroups only
  * @param args__can_promote_members Pass True, if the administrator can add new administrators with a subset of their own privileges or demote administrators that he has promoted, directly or indirectly (promoted by administrators that were appointed by him)
+ * @param args__can_change_info Pass True, if the administrator can change chat title, photo and other settings
+ * @param args__can_invite_users Pass True, if the administrator can invite new users to the chat
+ * @param args__can_pin_messages Pass True, if the administrator can pin messages, supergroups only
  */
 template <class Connector>
 api_result<boolean_t, Connector&&> call(Connector&& connector, promote_chat_member_args_t args) {
@@ -1571,6 +1858,47 @@ api_result<boolean_t, Connector&&> restrict_chat_member(Connector&& connector, r
 template <class Connector>
 api_result<boolean_t, Connector&&> call(Connector&& connector, restrict_chat_member_args_t args) {
     return restrict_chat_member(std::forward<Connector>(connector), std::move(args));
+}
+
+// Arguments to revoke_chat_invite_link method
+struct revoke_chat_invite_link_args_t {
+    variant_t<integer_t, string_t> chat_id;     // Unique identifier of the target chat or username of the target channel (in the format @channelusername)
+    string_t                       invite_link; // The invite link to revoke
+};
+
+/**
+ * Use this method to revoke an invite link created by the bot. If the primary link is revoked, a new link is automatically generated. The bot must be an administrator in the chat for this to work and must have the appropriate admin rights. Returns the revoked invite link as ChatInviteLink object.
+ * 
+ * @param connector Any object satisfying connector concept (see `banana::connector` namespace)
+ * @param args__chat_id Unique identifier of the target chat or username of the target channel (in the format @channelusername)
+ * @param args__invite_link The invite link to revoke
+ */
+template <class Connector>
+api_result<chat_invite_link_t, Connector&&> revoke_chat_invite_link(Connector&& connector, revoke_chat_invite_link_args_t args) {
+    return std::forward<Connector>(connector).template request<chat_invite_link_t>("revokeChatInviteLink", deser::serialize(std::move(args)), [](expected<std::string> request_result) -> expected<chat_invite_link_t> {
+        if (!request_result.has_value()) {
+            return banana::error_t<>{ "[revoke_chat_invite_link] Request error: " + request_result.error() };
+        }
+
+        expected<chat_invite_link_t> deser_result = deser::deserialize<chat_invite_link_t>(request_result.value());
+        if (!deser_result.has_value()) {
+            return banana::error_t<>{ "[revoke_chat_invite_link] Deserialization error: " + deser_result.error() };
+        }
+
+        return deser_result;
+    });
+}
+
+/**
+ * Use this method to revoke an invite link created by the bot. If the primary link is revoked, a new link is automatically generated. The bot must be an administrator in the chat for this to work and must have the appropriate admin rights. Returns the revoked invite link as ChatInviteLink object.
+ *
+ * @param connector Any object satisfying connector concept (see `banana::connector` namespace)
+ * @param args__chat_id Unique identifier of the target chat or username of the target channel (in the format @channelusername)
+ * @param args__invite_link The invite link to revoke
+ */
+template <class Connector>
+api_result<chat_invite_link_t, Connector&&> call(Connector&& connector, revoke_chat_invite_link_args_t args) {
+    return revoke_chat_invite_link(std::forward<Connector>(connector), std::move(args));
 }
 
 // Arguments to send_animation method
@@ -1665,7 +1993,7 @@ struct send_audio_args_t {
 };
 
 /**
- * Use this method to send audio files, if you want Telegram clients to display them in the music player. Your audio must be in the .MP3 or .M4A format. On success, the sent Message is returned. Bots can currently send audio files of up to 50 MB in size, this limit may be changed in the future.
+ * Use this method to send audio files, if you want Telegram clients to display them in the music player. Your audio must be in the .MP3 or .M4A format. On success, the sent Message is returned. Bots can currently send audio files of up to 50 MB in size, this limit may be changed in the future. For sending voice messages, use the sendVoice method instead.
  * 
  * @param connector Any object satisfying connector concept (see `banana::connector` namespace)
  * @param args__chat_id Unique identifier for the target chat or username of the target channel (in the format @channelusername)
@@ -1699,7 +2027,7 @@ api_result<message_t, Connector&&> send_audio(Connector&& connector, send_audio_
 }
 
 /**
- * Use this method to send audio files, if you want Telegram clients to display them in the music player. Your audio must be in the .MP3 or .M4A format. On success, the sent Message is returned. Bots can currently send audio files of up to 50 MB in size, this limit may be changed in the future.
+ * Use this method to send audio files, if you want Telegram clients to display them in the music player. Your audio must be in the .MP3 or .M4A format. On success, the sent Message is returned. Bots can currently send audio files of up to 50 MB in size, this limit may be changed in the future. For sending voice messages, use the sendVoice method instead.
  *
  * @param connector Any object satisfying connector concept (see `banana::connector` namespace)
  * @param args__chat_id Unique identifier for the target chat or username of the target channel (in the format @channelusername)
@@ -1728,7 +2056,7 @@ struct send_chat_action_args_t {
 };
 
 /**
- * Use this method when you need to tell the user that something is happening on the bot's side. The status is set for 5 seconds or less (when a message arrives from your bot, Telegram clients clear its typing status). Returns True on success.
+ * Use this method when you need to tell the user that something is happening on the bot's side. The status is set for 5 seconds or less (when a message arrives from your bot, Telegram clients clear its typing status). Returns True on success. Example: The ImageBot needs some time to process a request and upload the image. Instead of sending a text message along the lines of “Retrieving image, please wait…”, the bot may use sendChatAction with action = upload_photo. The user will see a “sending photo” status for the bot. We only recommend using this method when a response from the bot will take a noticeable amount of time to arrive.
  * 
  * @param connector Any object satisfying connector concept (see `banana::connector` namespace)
  * @param args__chat_id Unique identifier for the target chat or username of the target channel (in the format @channelusername)
@@ -1751,7 +2079,7 @@ api_result<boolean_t, Connector&&> send_chat_action(Connector&& connector, send_
 }
 
 /**
- * Use this method when you need to tell the user that something is happening on the bot's side. The status is set for 5 seconds or less (when a message arrives from your bot, Telegram clients clear its typing status). Returns True on success.
+ * Use this method when you need to tell the user that something is happening on the bot's side. The status is set for 5 seconds or less (when a message arrives from your bot, Telegram clients clear its typing status). Returns True on success. Example: The ImageBot needs some time to process a request and upload the image. Instead of sending a text message along the lines of “Retrieving image, please wait…”, the bot may use sendChatAction with action = upload_photo. The user will see a “sending photo” status for the bot. We only recommend using this method when a response from the bot will take a noticeable amount of time to arrive.
  *
  * @param connector Any object satisfying connector concept (see `banana::connector` namespace)
  * @param args__chat_id Unique identifier for the target chat or username of the target channel (in the format @channelusername)
@@ -1827,7 +2155,7 @@ api_result<message_t, Connector&&> call(Connector&& connector, send_contact_args
 // Arguments to send_dice method
 struct send_dice_args_t {
     variant_t<integer_t, string_t>                                                                                   chat_id;                     // Unique identifier for the target chat or username of the target channel (in the format @channelusername)
-    optional_t<string_t>                                                                                             emoji;                       // Emoji on which the dice throw animation is based. Currently, must be one of “”, “”, “”, “”, or “”. Dice can have values 1-6 for “” and “”, values 1-5 for “” and “”, and values 1-64 for “”. Defaults to “”
+    optional_t<string_t>                                                                                             emoji;                       // Emoji on which the dice throw animation is based. Currently, must be one of “🎲”, “🎯”, “🏀”, “⚽”, “🎳”, or “🎰”. Dice can have values 1-6 for “🎲”, “🎯” and “🎳”, values 1-5 for “🏀” and “⚽”, and values 1-64 for “🎰”. Defaults to “🎲”
     optional_t<boolean_t>                                                                                            disable_notification;        // Sends the message silently. Users will receive a notification with no sound.
     optional_t<integer_t>                                                                                            reply_to_message_id;         // If the message is a reply, ID of the original message
     optional_t<boolean_t>                                                                                            allow_sending_without_reply; // Pass True, if the message should be sent even if the specified replied-to message is not found
@@ -1839,7 +2167,7 @@ struct send_dice_args_t {
  * 
  * @param connector Any object satisfying connector concept (see `banana::connector` namespace)
  * @param args__chat_id Unique identifier for the target chat or username of the target channel (in the format @channelusername)
- * @param args__emoji Emoji on which the dice throw animation is based. Currently, must be one of “”, “”, “”, “”, or “”. Dice can have values 1-6 for “” and “”, values 1-5 for “” and “”, and values 1-64 for “”. Defaults to “”
+ * @param args__emoji Emoji on which the dice throw animation is based. Currently, must be one of “🎲”, “🎯”, “🏀”, “⚽”, “🎳”, or “🎰”. Dice can have values 1-6 for “🎲”, “🎯” and “🎳”, values 1-5 for “🏀” and “⚽”, and values 1-64 for “🎰”. Defaults to “🎲”
  * @param args__disable_notification Sends the message silently. Users will receive a notification with no sound.
  * @param args__reply_to_message_id If the message is a reply, ID of the original message
  * @param args__allow_sending_without_reply Pass True, if the message should be sent even if the specified replied-to message is not found
@@ -1866,7 +2194,7 @@ api_result<message_t, Connector&&> send_dice(Connector&& connector, send_dice_ar
  *
  * @param connector Any object satisfying connector concept (see `banana::connector` namespace)
  * @param args__chat_id Unique identifier for the target chat or username of the target channel (in the format @channelusername)
- * @param args__emoji Emoji on which the dice throw animation is based. Currently, must be one of “”, “”, “”, “”, or “”. Dice can have values 1-6 for “” and “”, values 1-5 for “” and “”, and values 1-64 for “”. Defaults to “”
+ * @param args__emoji Emoji on which the dice throw animation is based. Currently, must be one of “🎲”, “🎯”, “🏀”, “⚽”, “🎳”, or “🎰”. Dice can have values 1-6 for “🎲”, “🎯” and “🎳”, values 1-5 for “🏀” and “⚽”, and values 1-64 for “🎰”. Defaults to “🎲”
  * @param args__disable_notification Sends the message silently. Users will receive a notification with no sound.
  * @param args__reply_to_message_id If the message is a reply, ID of the original message
  * @param args__allow_sending_without_reply Pass True, if the message should be sent even if the specified replied-to message is not found
@@ -2000,14 +2328,16 @@ api_result<message_t, Connector&&> call(Connector&& connector, send_game_args_t 
 
 // Arguments to send_invoice method
 struct send_invoice_args_t {
-    integer_t                            chat_id;                       // Unique identifier for the target private chat
+    variant_t<integer_t, string_t>       chat_id;                       // Unique identifier for the target chat or username of the target channel (in the format @channelusername)
     string_t                             title;                         // Product name, 1-32 characters
     string_t                             description;                   // Product description, 1-255 characters
     string_t                             payload;                       // Bot-defined invoice payload, 1-128 bytes. This will not be displayed to the user, use for your internal processes.
     string_t                             provider_token;                // Payments provider token, obtained via Botfather
-    string_t                             start_parameter;               // Unique deep-linking parameter that can be used to generate this invoice when used as a start parameter
     string_t                             currency;                      // Three-letter ISO 4217 currency code, see more on currencies
     array_t<labeled_price_t>             prices;                        // Price breakdown, a JSON-serialized list of components (e.g. product price, tax, discount, delivery cost, delivery tax, bonus, etc.)
+    optional_t<integer_t>                max_tip_amount;                // The maximum accepted amount for tips in the smallest units of the currency (integer, not float/double). For example, for a maximum tip of US$ 1.45 pass max_tip_amount = 145. See the exp parameter in currencies.json, it shows the number of digits past the decimal point for each currency (2 for the majority of currencies). Defaults to 0
+    optional_t<array_t<integer_t>>       suggested_tip_amounts;         // A JSON-serialized array of suggested amounts of tips in the smallest units of the currency (integer, not float/double). At most 4 suggested tip amounts can be specified. The suggested tip amounts must be positive, passed in a strictly increased order and must not exceed max_tip_amount.
+    optional_t<string_t>                 start_parameter;               // Unique deep-linking parameter. If left empty, forwarded copies of the sent message will have a Pay button, allowing multiple users to pay directly from the forwarded message, using the same invoice. If non-empty, forwarded copies of the sent message will have a URL button with a deep link to the bot (instead of a Pay button), with the value used as the start parameter
     optional_t<string_t>                 provider_data;                 // A JSON-serialized data about the invoice, which will be shared with the payment provider. A detailed description of required fields should be provided by the payment provider.
     optional_t<string_t>                 photo_url;                     // URL of the product photo for the invoice. Can be a photo of the goods or a marketing image for a service. People like it better when they see what they are paying for.
     optional_t<integer_t>                photo_size;                    // Photo size
@@ -2030,14 +2360,16 @@ struct send_invoice_args_t {
  * Use this method to send invoices. On success, the sent Message is returned.
  * 
  * @param connector Any object satisfying connector concept (see `banana::connector` namespace)
- * @param args__chat_id Unique identifier for the target private chat
+ * @param args__chat_id Unique identifier for the target chat or username of the target channel (in the format @channelusername)
  * @param args__title Product name, 1-32 characters
  * @param args__description Product description, 1-255 characters
  * @param args__payload Bot-defined invoice payload, 1-128 bytes. This will not be displayed to the user, use for your internal processes.
  * @param args__provider_token Payments provider token, obtained via Botfather
- * @param args__start_parameter Unique deep-linking parameter that can be used to generate this invoice when used as a start parameter
  * @param args__currency Three-letter ISO 4217 currency code, see more on currencies
  * @param args__prices Price breakdown, a JSON-serialized list of components (e.g. product price, tax, discount, delivery cost, delivery tax, bonus, etc.)
+ * @param args__max_tip_amount The maximum accepted amount for tips in the smallest units of the currency (integer, not float/double). For example, for a maximum tip of US$ 1.45 pass max_tip_amount = 145. See the exp parameter in currencies.json, it shows the number of digits past the decimal point for each currency (2 for the majority of currencies). Defaults to 0
+ * @param args__suggested_tip_amounts A JSON-serialized array of suggested amounts of tips in the smallest units of the currency (integer, not float/double). At most 4 suggested tip amounts can be specified. The suggested tip amounts must be positive, passed in a strictly increased order and must not exceed max_tip_amount.
+ * @param args__start_parameter Unique deep-linking parameter. If left empty, forwarded copies of the sent message will have a Pay button, allowing multiple users to pay directly from the forwarded message, using the same invoice. If non-empty, forwarded copies of the sent message will have a URL button with a deep link to the bot (instead of a Pay button), with the value used as the start parameter
  * @param args__provider_data A JSON-serialized data about the invoice, which will be shared with the payment provider. A detailed description of required fields should be provided by the payment provider.
  * @param args__photo_url URL of the product photo for the invoice. Can be a photo of the goods or a marketing image for a service. People like it better when they see what they are paying for.
  * @param args__photo_size Photo size
@@ -2075,14 +2407,16 @@ api_result<message_t, Connector&&> send_invoice(Connector&& connector, send_invo
  * Use this method to send invoices. On success, the sent Message is returned.
  *
  * @param connector Any object satisfying connector concept (see `banana::connector` namespace)
- * @param args__chat_id Unique identifier for the target private chat
+ * @param args__chat_id Unique identifier for the target chat or username of the target channel (in the format @channelusername)
  * @param args__title Product name, 1-32 characters
  * @param args__description Product description, 1-255 characters
  * @param args__payload Bot-defined invoice payload, 1-128 bytes. This will not be displayed to the user, use for your internal processes.
  * @param args__provider_token Payments provider token, obtained via Botfather
- * @param args__start_parameter Unique deep-linking parameter that can be used to generate this invoice when used as a start parameter
  * @param args__currency Three-letter ISO 4217 currency code, see more on currencies
  * @param args__prices Price breakdown, a JSON-serialized list of components (e.g. product price, tax, discount, delivery cost, delivery tax, bonus, etc.)
+ * @param args__max_tip_amount The maximum accepted amount for tips in the smallest units of the currency (integer, not float/double). For example, for a maximum tip of US$ 1.45 pass max_tip_amount = 145. See the exp parameter in currencies.json, it shows the number of digits past the decimal point for each currency (2 for the majority of currencies). Defaults to 0
+ * @param args__suggested_tip_amounts A JSON-serialized array of suggested amounts of tips in the smallest units of the currency (integer, not float/double). At most 4 suggested tip amounts can be specified. The suggested tip amounts must be positive, passed in a strictly increased order and must not exceed max_tip_amount.
+ * @param args__start_parameter Unique deep-linking parameter. If left empty, forwarded copies of the sent message will have a Pay button, allowing multiple users to pay directly from the forwarded message, using the same invoice. If non-empty, forwarded copies of the sent message will have a URL button with a deep link to the bot (instead of a Pay button), with the value used as the start parameter
  * @param args__provider_data A JSON-serialized data about the invoice, which will be shared with the payment provider. A detailed description of required fields should be provided by the payment provider.
  * @param args__photo_url URL of the product photo for the invoice. Can be a photo of the goods or a marketing image for a service. People like it better when they see what they are paying for.
  * @param args__photo_size Photo size
@@ -2288,7 +2622,7 @@ api_result<message_t, Connector&&> call(Connector&& connector, send_message_args
 // Arguments to send_photo method
 struct send_photo_args_t {
     variant_t<integer_t, string_t>                                                                                   chat_id;                     // Unique identifier for the target chat or username of the target channel (in the format @channelusername)
-    variant_t<input_file_t, string_t>                                                                                photo;                       // Photo to send. Pass a file_id as String to send a photo that exists on the Telegram servers (recommended), pass an HTTP URL as a String for Telegram to get a photo from the Internet, or upload a new photo using multipart/form-data. More info on Sending Files »
+    variant_t<input_file_t, string_t>                                                                                photo;                       // Photo to send. Pass a file_id as String to send a photo that exists on the Telegram servers (recommended), pass an HTTP URL as a String for Telegram to get a photo from the Internet, or upload a new photo using multipart/form-data. The photo must be at most 10 MB in size. The photo's width and height must not exceed 10000 in total. Width and height ratio must be at most 20. More info on Sending Files »
     optional_t<string_t>                                                                                             caption;                     // Photo caption (may also be used when resending photos by file_id), 0-1024 characters after entities parsing
     optional_t<string_t>                                                                                             parse_mode;                  // Mode for parsing entities in the photo caption. See formatting options for more details.
     optional_t<array_t<message_entity_t>>                                                                            caption_entities;            // List of special entities that appear in the caption, which can be specified instead of parse_mode
@@ -2303,7 +2637,7 @@ struct send_photo_args_t {
  * 
  * @param connector Any object satisfying connector concept (see `banana::connector` namespace)
  * @param args__chat_id Unique identifier for the target chat or username of the target channel (in the format @channelusername)
- * @param args__photo Photo to send. Pass a file_id as String to send a photo that exists on the Telegram servers (recommended), pass an HTTP URL as a String for Telegram to get a photo from the Internet, or upload a new photo using multipart/form-data. More info on Sending Files »
+ * @param args__photo Photo to send. Pass a file_id as String to send a photo that exists on the Telegram servers (recommended), pass an HTTP URL as a String for Telegram to get a photo from the Internet, or upload a new photo using multipart/form-data. The photo must be at most 10 MB in size. The photo's width and height must not exceed 10000 in total. Width and height ratio must be at most 20. More info on Sending Files »
  * @param args__caption Photo caption (may also be used when resending photos by file_id), 0-1024 characters after entities parsing
  * @param args__parse_mode Mode for parsing entities in the photo caption. See formatting options for more details.
  * @param args__caption_entities List of special entities that appear in the caption, which can be specified instead of parse_mode
@@ -2333,7 +2667,7 @@ api_result<message_t, Connector&&> send_photo(Connector&& connector, send_photo_
  *
  * @param connector Any object satisfying connector concept (see `banana::connector` namespace)
  * @param args__chat_id Unique identifier for the target chat or username of the target channel (in the format @channelusername)
- * @param args__photo Photo to send. Pass a file_id as String to send a photo that exists on the Telegram servers (recommended), pass an HTTP URL as a String for Telegram to get a photo from the Internet, or upload a new photo using multipart/form-data. More info on Sending Files »
+ * @param args__photo Photo to send. Pass a file_id as String to send a photo that exists on the Telegram servers (recommended), pass an HTTP URL as a String for Telegram to get a photo from the Internet, or upload a new photo using multipart/form-data. The photo must be at most 10 MB in size. The photo's width and height must not exceed 10000 in total. Width and height ratio must be at most 20. More info on Sending Files »
  * @param args__caption Photo caption (may also be used when resending photos by file_id), 0-1024 characters after entities parsing
  * @param args__parse_mode Mode for parsing entities in the photo caption. See formatting options for more details.
  * @param args__caption_entities List of special entities that appear in the caption, which can be specified instead of parse_mode
@@ -3071,14 +3405,18 @@ api_result<variant_t<message_t, boolean_t>, Connector&&> call(Connector&& connec
 
 // Arguments to set_my_commands method
 struct set_my_commands_args_t {
-    array_t<bot_command_t> commands; // A JSON-serialized list of bot commands to be set as the list of the bot's commands. At most 100 commands can be specified.
+    array_t<bot_command_t>          commands;      // A JSON-serialized list of bot commands to be set as the list of the bot's commands. At most 100 commands can be specified.
+    optional_t<bot_command_scope_t> scope;         // A JSON-serialized object, describing scope of users for which the commands are relevant. Defaults to BotCommandScopeDefault.
+    optional_t<string_t>            language_code; // A two-letter ISO 639-1 language code. If empty, commands will be applied to all users from the given scope, for whose language there are no dedicated commands
 };
 
 /**
- * Use this method to change the list of the bot's commands. Returns True on success.
+ * Use this method to change the list of the bot's commands. See https://core.telegram.org/bots#commands for more details about bot commands. Returns True on success.
  * 
  * @param connector Any object satisfying connector concept (see `banana::connector` namespace)
  * @param args__commands A JSON-serialized list of bot commands to be set as the list of the bot's commands. At most 100 commands can be specified.
+ * @param args__scope A JSON-serialized object, describing scope of users for which the commands are relevant. Defaults to BotCommandScopeDefault.
+ * @param args__language_code A two-letter ISO 639-1 language code. If empty, commands will be applied to all users from the given scope, for whose language there are no dedicated commands
  */
 template <class Connector>
 api_result<boolean_t, Connector&&> set_my_commands(Connector&& connector, set_my_commands_args_t args) {
@@ -3097,10 +3435,12 @@ api_result<boolean_t, Connector&&> set_my_commands(Connector&& connector, set_my
 }
 
 /**
- * Use this method to change the list of the bot's commands. Returns True on success.
+ * Use this method to change the list of the bot's commands. See https://core.telegram.org/bots#commands for more details about bot commands. Returns True on success.
  *
  * @param connector Any object satisfying connector concept (see `banana::connector` namespace)
  * @param args__commands A JSON-serialized list of bot commands to be set as the list of the bot's commands. At most 100 commands can be specified.
+ * @param args__scope A JSON-serialized object, describing scope of users for which the commands are relevant. Defaults to BotCommandScopeDefault.
+ * @param args__language_code A two-letter ISO 639-1 language code. If empty, commands will be applied to all users from the given scope, for whose language there are no dedicated commands
  */
 template <class Connector>
 api_result<boolean_t, Connector&&> call(Connector&& connector, set_my_commands_args_t args) {
@@ -3114,7 +3454,7 @@ struct set_passport_data_errors_args_t {
 };
 
 /**
- * Informs a user that some of the Telegram Passport elements they provided contains errors. The user will not be able to re-submit their Passport to you until the errors are fixed (the contents of the field for which you returned the error must change). Returns True on success.
+ * Informs a user that some of the Telegram Passport elements they provided contains errors. The user will not be able to re-submit their Passport to you until the errors are fixed (the contents of the field for which you returned the error must change). Returns True on success. Use this if the data submitted by the user doesn't satisfy the standards your service requires for any reason. For example, if a birthday date seems invalid, a submitted document is blurry, a scan shows evidence of tampering, etc. Supply some details in the error message to make sure the user knows how to correct the issues.
  * 
  * @param connector Any object satisfying connector concept (see `banana::connector` namespace)
  * @param args__user_id User identifier
@@ -3137,7 +3477,7 @@ api_result<boolean_t, Connector&&> set_passport_data_errors(Connector&& connecto
 }
 
 /**
- * Informs a user that some of the Telegram Passport elements they provided contains errors. The user will not be able to re-submit their Passport to you until the errors are fixed (the contents of the field for which you returned the error must change). Returns True on success.
+ * Informs a user that some of the Telegram Passport elements they provided contains errors. The user will not be able to re-submit their Passport to you until the errors are fixed (the contents of the field for which you returned the error must change). Returns True on success. Use this if the data submitted by the user doesn't satisfy the standards your service requires for any reason. For example, if a birthday date seems invalid, a submitted document is blurry, a scan shows evidence of tampering, etc. Supply some details in the error message to make sure the user knows how to correct the issues.
  *
  * @param connector Any object satisfying connector concept (see `banana::connector` namespace)
  * @param args__user_id User identifier
@@ -3239,19 +3579,19 @@ struct set_webhook_args_t {
     optional_t<input_file_t>      certificate;          // Upload your public key certificate so that the root certificate in use can be checked. See our self-signed guide for details.
     optional_t<string_t>          ip_address;           // The fixed IP address which will be used to send webhook requests instead of the IP address resolved through DNS
     optional_t<integer_t>         max_connections;      // Maximum allowed number of simultaneous HTTPS connections to the webhook for update delivery, 1-100. Defaults to 40. Use lower values to limit the load on your bot's server, and higher values to increase your bot's throughput.
-    optional_t<array_t<string_t>> allowed_updates;      // A JSON-serialized list of the update types you want your bot to receive. For example, specify [“message”, “edited_channel_post”, “callback_query”] to only receive updates of these types. See Update for a complete list of available update types. Specify an empty list to receive all updates regardless of type (default). If not specified, the previous setting will be used.Please note that this parameter doesn't affect updates created before the call to the setWebhook, so unwanted updates may be received for a short period of time.
+    optional_t<array_t<string_t>> allowed_updates;      // A JSON-serialized list of the update types you want your bot to receive. For example, specify [“message”, “edited_channel_post”, “callback_query”] to only receive updates of these types. See Update for a complete list of available update types. Specify an empty list to receive all update types except chat_member (default). If not specified, the previous setting will be used. Please note that this parameter doesn't affect updates created before the call to the setWebhook, so unwanted updates may be received for a short period of time.
     optional_t<boolean_t>         drop_pending_updates; // Pass True to drop all pending updates
 };
 
 /**
- * Use this method to specify a url and receive incoming updates via an outgoing webhook. Whenever there is an update for the bot, we will send an HTTPS POST request to the specified url, containing a JSON-serialized Update. In case of an unsuccessful request, we will give up after a reasonable amount of attempts. Returns True on success.
+ * Use this method to specify a url and receive incoming updates via an outgoing webhook. Whenever there is an update for the bot, we will send an HTTPS POST request to the specified url, containing a JSON-serialized Update. In case of an unsuccessful request, we will give up after a reasonable amount of attempts. Returns True on success. If you'd like to make sure that the Webhook request comes from Telegram, we recommend using a secret path in the URL, e.g. https://www.example.com/<token>. Since nobody else knows your bot's token, you can be pretty sure it's us.
  * 
  * @param connector Any object satisfying connector concept (see `banana::connector` namespace)
  * @param args__url HTTPS url to send updates to. Use an empty string to remove webhook integration
  * @param args__certificate Upload your public key certificate so that the root certificate in use can be checked. See our self-signed guide for details.
  * @param args__ip_address The fixed IP address which will be used to send webhook requests instead of the IP address resolved through DNS
  * @param args__max_connections Maximum allowed number of simultaneous HTTPS connections to the webhook for update delivery, 1-100. Defaults to 40. Use lower values to limit the load on your bot's server, and higher values to increase your bot's throughput.
- * @param args__allowed_updates A JSON-serialized list of the update types you want your bot to receive. For example, specify [“message”, “edited_channel_post”, “callback_query”] to only receive updates of these types. See Update for a complete list of available update types. Specify an empty list to receive all updates regardless of type (default). If not specified, the previous setting will be used.Please note that this parameter doesn't affect updates created before the call to the setWebhook, so unwanted updates may be received for a short period of time.
+ * @param args__allowed_updates A JSON-serialized list of the update types you want your bot to receive. For example, specify [“message”, “edited_channel_post”, “callback_query”] to only receive updates of these types. See Update for a complete list of available update types. Specify an empty list to receive all update types except chat_member (default). If not specified, the previous setting will be used. Please note that this parameter doesn't affect updates created before the call to the setWebhook, so unwanted updates may be received for a short period of time.
  * @param args__drop_pending_updates Pass True to drop all pending updates
  */
 template <class Connector>
@@ -3271,14 +3611,14 @@ api_result<boolean_t, Connector&&> set_webhook(Connector&& connector, set_webhoo
 }
 
 /**
- * Use this method to specify a url and receive incoming updates via an outgoing webhook. Whenever there is an update for the bot, we will send an HTTPS POST request to the specified url, containing a JSON-serialized Update. In case of an unsuccessful request, we will give up after a reasonable amount of attempts. Returns True on success.
+ * Use this method to specify a url and receive incoming updates via an outgoing webhook. Whenever there is an update for the bot, we will send an HTTPS POST request to the specified url, containing a JSON-serialized Update. In case of an unsuccessful request, we will give up after a reasonable amount of attempts. Returns True on success. If you'd like to make sure that the Webhook request comes from Telegram, we recommend using a secret path in the URL, e.g. https://www.example.com/<token>. Since nobody else knows your bot's token, you can be pretty sure it's us.
  *
  * @param connector Any object satisfying connector concept (see `banana::connector` namespace)
  * @param args__url HTTPS url to send updates to. Use an empty string to remove webhook integration
  * @param args__certificate Upload your public key certificate so that the root certificate in use can be checked. See our self-signed guide for details.
  * @param args__ip_address The fixed IP address which will be used to send webhook requests instead of the IP address resolved through DNS
  * @param args__max_connections Maximum allowed number of simultaneous HTTPS connections to the webhook for update delivery, 1-100. Defaults to 40. Use lower values to limit the load on your bot's server, and higher values to increase your bot's throughput.
- * @param args__allowed_updates A JSON-serialized list of the update types you want your bot to receive. For example, specify [“message”, “edited_channel_post”, “callback_query”] to only receive updates of these types. See Update for a complete list of available update types. Specify an empty list to receive all updates regardless of type (default). If not specified, the previous setting will be used.Please note that this parameter doesn't affect updates created before the call to the setWebhook, so unwanted updates may be received for a short period of time.
+ * @param args__allowed_updates A JSON-serialized list of the update types you want your bot to receive. For example, specify [“message”, “edited_channel_post”, “callback_query”] to only receive updates of these types. See Update for a complete list of available update types. Specify an empty list to receive all update types except chat_member (default). If not specified, the previous setting will be used. Please note that this parameter doesn't affect updates created before the call to the setWebhook, so unwanted updates may be received for a short period of time.
  * @param args__drop_pending_updates Pass True to drop all pending updates
  */
 template <class Connector>
@@ -3385,7 +3725,7 @@ struct unban_chat_member_args_t {
 };
 
 /**
- * Use this method to unban a previously kicked user in a supergroup or channel. The user will not return to the group or channel automatically, but will be able to join via link, etc. The bot must be an administrator for this to work. By default, this method guarantees that after the call the user is not a member of the chat, but will be able to join it. So if the user is a member of the chat they will also be removed from the chat. If you don't want this, use the parameter only_if_banned. Returns True on success.
+ * Use this method to unban a previously banned user in a supergroup or channel. The user will not return to the group or channel automatically, but will be able to join via link, etc. The bot must be an administrator for this to work. By default, this method guarantees that after the call the user is not a member of the chat, but will be able to join it. So if the user is a member of the chat they will also be removed from the chat. If you don't want this, use the parameter only_if_banned. Returns True on success.
  * 
  * @param connector Any object satisfying connector concept (see `banana::connector` namespace)
  * @param args__chat_id Unique identifier for the target group or username of the target supergroup or channel (in the format @username)
@@ -3409,7 +3749,7 @@ api_result<boolean_t, Connector&&> unban_chat_member(Connector&& connector, unba
 }
 
 /**
- * Use this method to unban a previously kicked user in a supergroup or channel. The user will not return to the group or channel automatically, but will be able to join via link, etc. The bot must be an administrator for this to work. By default, this method guarantees that after the call the user is not a member of the chat, but will be able to join it. So if the user is a member of the chat they will also be removed from the chat. If you don't want this, use the parameter only_if_banned. Returns True on success.
+ * Use this method to unban a previously banned user in a supergroup or channel. The user will not return to the group or channel automatically, but will be able to join via link, etc. The bot must be an administrator for this to work. By default, this method guarantees that after the call the user is not a member of the chat, but will be able to join it. So if the user is a member of the chat they will also be removed from the chat. If you don't want this, use the parameter only_if_banned. Returns True on success.
  *
  * @param connector Any object satisfying connector concept (see `banana::connector` namespace)
  * @param args__chat_id Unique identifier for the target group or username of the target supergroup or channel (in the format @username)

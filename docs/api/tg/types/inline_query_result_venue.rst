@@ -33,36 +33,36 @@ inline_query_result_venue_t
 
    .. cpp:member:: optional_t<string_t> foursquare_id
 
-   Foursquare identifier of the venue if known
+   Optional. Foursquare identifier of the venue if known
 
    .. cpp:member:: optional_t<string_t> foursquare_type
 
-   Foursquare type of the venue, if known. (For example, “arts_entertainment/default”, “arts_entertainment/aquarium” or “food/icecream”.)
+   Optional. Foursquare type of the venue, if known. (For example, “arts_entertainment/default”, “arts_entertainment/aquarium” or “food/icecream”.)
 
    .. cpp:member:: optional_t<string_t> google_place_id
 
-   Google Places identifier of the venue
+   Optional. Google Places identifier of the venue
 
    .. cpp:member:: optional_t<string_t> google_place_type
 
-   Google Places type of the venue. (See supported types.)
+   Optional. Google Places type of the venue. (See supported types.)
 
    .. cpp:member:: optional_t<inline_keyboard_markup_t> reply_markup
 
-   Inline keyboard attached to the message
+   Optional. Inline keyboard attached to the message
 
    .. cpp:member:: optional_t<input_message_content_t> input_message_content
 
-   Content of the message to be sent instead of the venue
+   Optional. Content of the message to be sent instead of the venue
 
    .. cpp:member:: optional_t<string_t> thumb_url
 
-   Url of the thumbnail for the result
+   Optional. Url of the thumbnail for the result
 
    .. cpp:member:: optional_t<integer_t> thumb_width
 
-   Thumbnail width
+   Optional. Thumbnail width
 
    .. cpp:member:: optional_t<integer_t> thumb_height
 
-   Thumbnail height
+   Optional. Thumbnail height

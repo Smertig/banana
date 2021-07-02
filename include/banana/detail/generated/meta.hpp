@@ -144,6 +144,133 @@ template <>
 constexpr std::string_view name_of<api::audio_t> = "audio_t";
 
 template <>
+struct reflector<api::ban_chat_member_args_t> {
+    template <class F>
+    static void for_each_field(F&& f) {
+        using namespace std::literals;
+        f("chat_id"sv, &api::ban_chat_member_args_t::chat_id);
+        f("user_id"sv, &api::ban_chat_member_args_t::user_id);
+        f("until_date"sv, &api::ban_chat_member_args_t::until_date);
+        f("revoke_messages"sv, &api::ban_chat_member_args_t::revoke_messages);
+    }
+};
+
+template <>
+constexpr bool is_reflectable_v<api::ban_chat_member_args_t> = true;
+
+template <>
+constexpr std::string_view name_of<api::ban_chat_member_args_t> = "ban_chat_member_args_t";
+
+template <>
+struct reflector<api::bot_command_scope_all_chat_administrators_t> {
+    template <class F>
+    static void for_each_field(F&& f) {
+        using namespace std::literals;
+        f("type"sv, &api::bot_command_scope_all_chat_administrators_t::type);
+    }
+};
+
+template <>
+constexpr bool is_reflectable_v<api::bot_command_scope_all_chat_administrators_t> = true;
+
+template <>
+constexpr std::string_view name_of<api::bot_command_scope_all_chat_administrators_t> = "bot_command_scope_all_chat_administrators_t";
+
+template <>
+struct reflector<api::bot_command_scope_all_group_chats_t> {
+    template <class F>
+    static void for_each_field(F&& f) {
+        using namespace std::literals;
+        f("type"sv, &api::bot_command_scope_all_group_chats_t::type);
+    }
+};
+
+template <>
+constexpr bool is_reflectable_v<api::bot_command_scope_all_group_chats_t> = true;
+
+template <>
+constexpr std::string_view name_of<api::bot_command_scope_all_group_chats_t> = "bot_command_scope_all_group_chats_t";
+
+template <>
+struct reflector<api::bot_command_scope_all_private_chats_t> {
+    template <class F>
+    static void for_each_field(F&& f) {
+        using namespace std::literals;
+        f("type"sv, &api::bot_command_scope_all_private_chats_t::type);
+    }
+};
+
+template <>
+constexpr bool is_reflectable_v<api::bot_command_scope_all_private_chats_t> = true;
+
+template <>
+constexpr std::string_view name_of<api::bot_command_scope_all_private_chats_t> = "bot_command_scope_all_private_chats_t";
+
+template <>
+struct reflector<api::bot_command_scope_chat_administrators_t> {
+    template <class F>
+    static void for_each_field(F&& f) {
+        using namespace std::literals;
+        f("type"sv, &api::bot_command_scope_chat_administrators_t::type);
+        f("chat_id"sv, &api::bot_command_scope_chat_administrators_t::chat_id);
+    }
+};
+
+template <>
+constexpr bool is_reflectable_v<api::bot_command_scope_chat_administrators_t> = true;
+
+template <>
+constexpr std::string_view name_of<api::bot_command_scope_chat_administrators_t> = "bot_command_scope_chat_administrators_t";
+
+template <>
+struct reflector<api::bot_command_scope_chat_member_t> {
+    template <class F>
+    static void for_each_field(F&& f) {
+        using namespace std::literals;
+        f("type"sv, &api::bot_command_scope_chat_member_t::type);
+        f("chat_id"sv, &api::bot_command_scope_chat_member_t::chat_id);
+        f("user_id"sv, &api::bot_command_scope_chat_member_t::user_id);
+    }
+};
+
+template <>
+constexpr bool is_reflectable_v<api::bot_command_scope_chat_member_t> = true;
+
+template <>
+constexpr std::string_view name_of<api::bot_command_scope_chat_member_t> = "bot_command_scope_chat_member_t";
+
+template <>
+struct reflector<api::bot_command_scope_chat_t> {
+    template <class F>
+    static void for_each_field(F&& f) {
+        using namespace std::literals;
+        f("type"sv, &api::bot_command_scope_chat_t::type);
+        f("chat_id"sv, &api::bot_command_scope_chat_t::chat_id);
+    }
+};
+
+template <>
+constexpr bool is_reflectable_v<api::bot_command_scope_chat_t> = true;
+
+template <>
+constexpr std::string_view name_of<api::bot_command_scope_chat_t> = "bot_command_scope_chat_t";
+
+template <>
+struct reflector<api::bot_command_scope_default_t> {
+    template <class F>
+    static void for_each_field(F&& f) {
+        using namespace std::literals;
+        f("type"sv, &api::bot_command_scope_default_t::type);
+    }
+};
+
+template <>
+constexpr bool is_reflectable_v<api::bot_command_scope_default_t> = true;
+
+template <>
+constexpr std::string_view name_of<api::bot_command_scope_default_t> = "bot_command_scope_default_t";
+
+template <>
 struct reflector<api::bot_command_t> {
     template <class F>
     static void for_each_field(F&& f) {
@@ -195,6 +322,26 @@ template <>
 constexpr std::string_view name_of<api::callback_query_t> = "callback_query_t";
 
 template <>
+struct reflector<api::chat_invite_link_t> {
+    template <class F>
+    static void for_each_field(F&& f) {
+        using namespace std::literals;
+        f("invite_link"sv, &api::chat_invite_link_t::invite_link);
+        f("creator"sv, &api::chat_invite_link_t::creator);
+        f("is_primary"sv, &api::chat_invite_link_t::is_primary);
+        f("is_revoked"sv, &api::chat_invite_link_t::is_revoked);
+        f("expire_date"sv, &api::chat_invite_link_t::expire_date);
+        f("member_limit"sv, &api::chat_invite_link_t::member_limit);
+    }
+};
+
+template <>
+constexpr bool is_reflectable_v<api::chat_invite_link_t> = true;
+
+template <>
+constexpr std::string_view name_of<api::chat_invite_link_t> = "chat_invite_link_t";
+
+template <>
 struct reflector<api::chat_location_t> {
     template <class F>
     static void for_each_field(F&& f) {
@@ -211,38 +358,146 @@ template <>
 constexpr std::string_view name_of<api::chat_location_t> = "chat_location_t";
 
 template <>
-struct reflector<api::chat_member_t> {
+struct reflector<api::chat_member_administrator_t> {
     template <class F>
     static void for_each_field(F&& f) {
         using namespace std::literals;
-        f("user"sv, &api::chat_member_t::user);
-        f("status"sv, &api::chat_member_t::status);
-        f("custom_title"sv, &api::chat_member_t::custom_title);
-        f("is_anonymous"sv, &api::chat_member_t::is_anonymous);
-        f("can_be_edited"sv, &api::chat_member_t::can_be_edited);
-        f("can_post_messages"sv, &api::chat_member_t::can_post_messages);
-        f("can_edit_messages"sv, &api::chat_member_t::can_edit_messages);
-        f("can_delete_messages"sv, &api::chat_member_t::can_delete_messages);
-        f("can_restrict_members"sv, &api::chat_member_t::can_restrict_members);
-        f("can_promote_members"sv, &api::chat_member_t::can_promote_members);
-        f("can_change_info"sv, &api::chat_member_t::can_change_info);
-        f("can_invite_users"sv, &api::chat_member_t::can_invite_users);
-        f("can_pin_messages"sv, &api::chat_member_t::can_pin_messages);
-        f("is_member"sv, &api::chat_member_t::is_member);
-        f("can_send_messages"sv, &api::chat_member_t::can_send_messages);
-        f("can_send_media_messages"sv, &api::chat_member_t::can_send_media_messages);
-        f("can_send_polls"sv, &api::chat_member_t::can_send_polls);
-        f("can_send_other_messages"sv, &api::chat_member_t::can_send_other_messages);
-        f("can_add_web_page_previews"sv, &api::chat_member_t::can_add_web_page_previews);
-        f("until_date"sv, &api::chat_member_t::until_date);
+        f("status"sv, &api::chat_member_administrator_t::status);
+        f("user"sv, &api::chat_member_administrator_t::user);
+        f("can_be_edited"sv, &api::chat_member_administrator_t::can_be_edited);
+        f("custom_title"sv, &api::chat_member_administrator_t::custom_title);
+        f("is_anonymous"sv, &api::chat_member_administrator_t::is_anonymous);
+        f("can_manage_chat"sv, &api::chat_member_administrator_t::can_manage_chat);
+        f("can_post_messages"sv, &api::chat_member_administrator_t::can_post_messages);
+        f("can_edit_messages"sv, &api::chat_member_administrator_t::can_edit_messages);
+        f("can_delete_messages"sv, &api::chat_member_administrator_t::can_delete_messages);
+        f("can_manage_voice_chats"sv, &api::chat_member_administrator_t::can_manage_voice_chats);
+        f("can_restrict_members"sv, &api::chat_member_administrator_t::can_restrict_members);
+        f("can_promote_members"sv, &api::chat_member_administrator_t::can_promote_members);
+        f("can_change_info"sv, &api::chat_member_administrator_t::can_change_info);
+        f("can_invite_users"sv, &api::chat_member_administrator_t::can_invite_users);
+        f("can_pin_messages"sv, &api::chat_member_administrator_t::can_pin_messages);
     }
 };
 
 template <>
-constexpr bool is_reflectable_v<api::chat_member_t> = true;
+constexpr bool is_reflectable_v<api::chat_member_administrator_t> = true;
 
 template <>
-constexpr std::string_view name_of<api::chat_member_t> = "chat_member_t";
+constexpr std::string_view name_of<api::chat_member_administrator_t> = "chat_member_administrator_t";
+
+template <>
+struct reflector<api::chat_member_banned_t> {
+    template <class F>
+    static void for_each_field(F&& f) {
+        using namespace std::literals;
+        f("status"sv, &api::chat_member_banned_t::status);
+        f("user"sv, &api::chat_member_banned_t::user);
+        f("until_date"sv, &api::chat_member_banned_t::until_date);
+    }
+};
+
+template <>
+constexpr bool is_reflectable_v<api::chat_member_banned_t> = true;
+
+template <>
+constexpr std::string_view name_of<api::chat_member_banned_t> = "chat_member_banned_t";
+
+template <>
+struct reflector<api::chat_member_left_t> {
+    template <class F>
+    static void for_each_field(F&& f) {
+        using namespace std::literals;
+        f("status"sv, &api::chat_member_left_t::status);
+        f("user"sv, &api::chat_member_left_t::user);
+    }
+};
+
+template <>
+constexpr bool is_reflectable_v<api::chat_member_left_t> = true;
+
+template <>
+constexpr std::string_view name_of<api::chat_member_left_t> = "chat_member_left_t";
+
+template <>
+struct reflector<api::chat_member_member_t> {
+    template <class F>
+    static void for_each_field(F&& f) {
+        using namespace std::literals;
+        f("status"sv, &api::chat_member_member_t::status);
+        f("user"sv, &api::chat_member_member_t::user);
+    }
+};
+
+template <>
+constexpr bool is_reflectable_v<api::chat_member_member_t> = true;
+
+template <>
+constexpr std::string_view name_of<api::chat_member_member_t> = "chat_member_member_t";
+
+template <>
+struct reflector<api::chat_member_owner_t> {
+    template <class F>
+    static void for_each_field(F&& f) {
+        using namespace std::literals;
+        f("status"sv, &api::chat_member_owner_t::status);
+        f("user"sv, &api::chat_member_owner_t::user);
+        f("custom_title"sv, &api::chat_member_owner_t::custom_title);
+        f("is_anonymous"sv, &api::chat_member_owner_t::is_anonymous);
+    }
+};
+
+template <>
+constexpr bool is_reflectable_v<api::chat_member_owner_t> = true;
+
+template <>
+constexpr std::string_view name_of<api::chat_member_owner_t> = "chat_member_owner_t";
+
+template <>
+struct reflector<api::chat_member_restricted_t> {
+    template <class F>
+    static void for_each_field(F&& f) {
+        using namespace std::literals;
+        f("status"sv, &api::chat_member_restricted_t::status);
+        f("user"sv, &api::chat_member_restricted_t::user);
+        f("is_member"sv, &api::chat_member_restricted_t::is_member);
+        f("can_change_info"sv, &api::chat_member_restricted_t::can_change_info);
+        f("can_invite_users"sv, &api::chat_member_restricted_t::can_invite_users);
+        f("can_pin_messages"sv, &api::chat_member_restricted_t::can_pin_messages);
+        f("can_send_messages"sv, &api::chat_member_restricted_t::can_send_messages);
+        f("can_send_media_messages"sv, &api::chat_member_restricted_t::can_send_media_messages);
+        f("can_send_polls"sv, &api::chat_member_restricted_t::can_send_polls);
+        f("can_send_other_messages"sv, &api::chat_member_restricted_t::can_send_other_messages);
+        f("can_add_web_page_previews"sv, &api::chat_member_restricted_t::can_add_web_page_previews);
+        f("until_date"sv, &api::chat_member_restricted_t::until_date);
+    }
+};
+
+template <>
+constexpr bool is_reflectable_v<api::chat_member_restricted_t> = true;
+
+template <>
+constexpr std::string_view name_of<api::chat_member_restricted_t> = "chat_member_restricted_t";
+
+template <>
+struct reflector<api::chat_member_updated_t> {
+    template <class F>
+    static void for_each_field(F&& f) {
+        using namespace std::literals;
+        f("chat"sv, &api::chat_member_updated_t::chat);
+        f("from"sv, &api::chat_member_updated_t::from);
+        f("date"sv, &api::chat_member_updated_t::date);
+        f("old_chat_member"sv, &api::chat_member_updated_t::old_chat_member);
+        f("new_chat_member"sv, &api::chat_member_updated_t::new_chat_member);
+        f("invite_link"sv, &api::chat_member_updated_t::invite_link);
+    }
+};
+
+template <>
+constexpr bool is_reflectable_v<api::chat_member_updated_t> = true;
+
+template <>
+constexpr std::string_view name_of<api::chat_member_updated_t> = "chat_member_updated_t";
 
 template <>
 struct reflector<api::chat_permissions_t> {
@@ -302,6 +557,7 @@ struct reflector<api::chat_t> {
         f("pinned_message"sv, &api::chat_t::pinned_message);
         f("permissions"sv, &api::chat_t::permissions);
         f("slow_mode_delay"sv, &api::chat_t::slow_mode_delay);
+        f("message_auto_delete_time"sv, &api::chat_t::message_auto_delete_time);
         f("sticker_set_name"sv, &api::chat_t::sticker_set_name);
         f("can_set_sticker_set"sv, &api::chat_t::can_set_sticker_set);
         f("linked_chat_id"sv, &api::chat_t::linked_chat_id);
@@ -333,6 +589,20 @@ constexpr bool is_reflectable_v<api::chosen_inline_result_t> = true;
 
 template <>
 constexpr std::string_view name_of<api::chosen_inline_result_t> = "chosen_inline_result_t";
+
+template <>
+struct reflector<api::close_args_t> {
+    template <class F>
+    static void for_each_field(F&& f) {
+        using namespace std::literals;
+    }
+};
+
+template <>
+constexpr bool is_reflectable_v<api::close_args_t> = true;
+
+template <>
+constexpr std::string_view name_of<api::close_args_t> = "close_args_t";
 
 template <>
 struct reflector<api::contact_t> {
@@ -376,6 +646,23 @@ constexpr bool is_reflectable_v<api::copy_message_args_t> = true;
 
 template <>
 constexpr std::string_view name_of<api::copy_message_args_t> = "copy_message_args_t";
+
+template <>
+struct reflector<api::create_chat_invite_link_args_t> {
+    template <class F>
+    static void for_each_field(F&& f) {
+        using namespace std::literals;
+        f("chat_id"sv, &api::create_chat_invite_link_args_t::chat_id);
+        f("expire_date"sv, &api::create_chat_invite_link_args_t::expire_date);
+        f("member_limit"sv, &api::create_chat_invite_link_args_t::member_limit);
+    }
+};
+
+template <>
+constexpr bool is_reflectable_v<api::create_chat_invite_link_args_t> = true;
+
+template <>
+constexpr std::string_view name_of<api::create_chat_invite_link_args_t> = "create_chat_invite_link_args_t";
 
 template <>
 struct reflector<api::create_new_sticker_set_args_t> {
@@ -446,6 +733,22 @@ template <>
 constexpr std::string_view name_of<api::delete_message_args_t> = "delete_message_args_t";
 
 template <>
+struct reflector<api::delete_my_commands_args_t> {
+    template <class F>
+    static void for_each_field(F&& f) {
+        using namespace std::literals;
+        f("scope"sv, &api::delete_my_commands_args_t::scope);
+        f("language_code"sv, &api::delete_my_commands_args_t::language_code);
+    }
+};
+
+template <>
+constexpr bool is_reflectable_v<api::delete_my_commands_args_t> = true;
+
+template <>
+constexpr std::string_view name_of<api::delete_my_commands_args_t> = "delete_my_commands_args_t";
+
+template <>
 struct reflector<api::delete_sticker_from_set_args_t> {
     template <class F>
     static void for_each_field(F&& f) {
@@ -510,6 +813,24 @@ constexpr bool is_reflectable_v<api::document_t> = true;
 
 template <>
 constexpr std::string_view name_of<api::document_t> = "document_t";
+
+template <>
+struct reflector<api::edit_chat_invite_link_args_t> {
+    template <class F>
+    static void for_each_field(F&& f) {
+        using namespace std::literals;
+        f("chat_id"sv, &api::edit_chat_invite_link_args_t::chat_id);
+        f("invite_link"sv, &api::edit_chat_invite_link_args_t::invite_link);
+        f("expire_date"sv, &api::edit_chat_invite_link_args_t::expire_date);
+        f("member_limit"sv, &api::edit_chat_invite_link_args_t::member_limit);
+    }
+};
+
+template <>
+constexpr bool is_reflectable_v<api::edit_chat_invite_link_args_t> = true;
+
+template <>
+constexpr std::string_view name_of<api::edit_chat_invite_link_args_t> = "edit_chat_invite_link_args_t";
 
 template <>
 struct reflector<api::edit_message_caption_args_t> {
@@ -694,6 +1015,7 @@ struct reflector<api::force_reply_t> {
     static void for_each_field(F&& f) {
         using namespace std::literals;
         f("force_reply"sv, &api::force_reply_t::force_reply);
+        f("input_field_placeholder"sv, &api::force_reply_t::input_field_placeholder);
         f("selective"sv, &api::force_reply_t::selective);
     }
 };
@@ -806,19 +1128,19 @@ template <>
 constexpr std::string_view name_of<api::get_chat_member_args_t> = "get_chat_member_args_t";
 
 template <>
-struct reflector<api::get_chat_members_count_args_t> {
+struct reflector<api::get_chat_member_count_args_t> {
     template <class F>
     static void for_each_field(F&& f) {
         using namespace std::literals;
-        f("chat_id"sv, &api::get_chat_members_count_args_t::chat_id);
+        f("chat_id"sv, &api::get_chat_member_count_args_t::chat_id);
     }
 };
 
 template <>
-constexpr bool is_reflectable_v<api::get_chat_members_count_args_t> = true;
+constexpr bool is_reflectable_v<api::get_chat_member_count_args_t> = true;
 
 template <>
-constexpr std::string_view name_of<api::get_chat_members_count_args_t> = "get_chat_members_count_args_t";
+constexpr std::string_view name_of<api::get_chat_member_count_args_t> = "get_chat_member_count_args_t";
 
 template <>
 struct reflector<api::get_file_args_t> {
@@ -866,6 +1188,22 @@ constexpr bool is_reflectable_v<api::get_me_args_t> = true;
 
 template <>
 constexpr std::string_view name_of<api::get_me_args_t> = "get_me_args_t";
+
+template <>
+struct reflector<api::get_my_commands_args_t> {
+    template <class F>
+    static void for_each_field(F&& f) {
+        using namespace std::literals;
+        f("scope"sv, &api::get_my_commands_args_t::scope);
+        f("language_code"sv, &api::get_my_commands_args_t::language_code);
+    }
+};
+
+template <>
+constexpr bool is_reflectable_v<api::get_my_commands_args_t> = true;
+
+template <>
+constexpr std::string_view name_of<api::get_my_commands_args_t> = "get_my_commands_args_t";
 
 template <>
 struct reflector<api::get_sticker_set_args_t> {
@@ -916,6 +1254,20 @@ constexpr bool is_reflectable_v<api::get_user_profile_photos_args_t> = true;
 
 template <>
 constexpr std::string_view name_of<api::get_user_profile_photos_args_t> = "get_user_profile_photos_args_t";
+
+template <>
+struct reflector<api::get_webhook_info_args_t> {
+    template <class F>
+    static void for_each_field(F&& f) {
+        using namespace std::literals;
+    }
+};
+
+template <>
+constexpr bool is_reflectable_v<api::get_webhook_info_args_t> = true;
+
+template <>
+constexpr std::string_view name_of<api::get_webhook_info_args_t> = "get_webhook_info_args_t";
 
 template <>
 struct reflector<api::inline_keyboard_button_t> {
@@ -1457,9 +1809,10 @@ struct reflector<api::inline_query_t> {
         using namespace std::literals;
         f("id"sv, &api::inline_query_t::id);
         f("from"sv, &api::inline_query_t::from);
-        f("location"sv, &api::inline_query_t::location);
         f("query"sv, &api::inline_query_t::query);
         f("offset"sv, &api::inline_query_t::offset);
+        f("chat_type"sv, &api::inline_query_t::chat_type);
+        f("location"sv, &api::inline_query_t::location);
     }
 };
 
@@ -1500,6 +1853,40 @@ constexpr bool is_reflectable_v<api::input_file_t> = true;
 
 template <>
 constexpr std::string_view name_of<api::input_file_t> = "input_file_t";
+
+template <>
+struct reflector<api::input_invoice_message_content_t> {
+    template <class F>
+    static void for_each_field(F&& f) {
+        using namespace std::literals;
+        f("title"sv, &api::input_invoice_message_content_t::title);
+        f("description"sv, &api::input_invoice_message_content_t::description);
+        f("payload"sv, &api::input_invoice_message_content_t::payload);
+        f("provider_token"sv, &api::input_invoice_message_content_t::provider_token);
+        f("currency"sv, &api::input_invoice_message_content_t::currency);
+        f("prices"sv, &api::input_invoice_message_content_t::prices);
+        f("max_tip_amount"sv, &api::input_invoice_message_content_t::max_tip_amount);
+        f("suggested_tip_amounts"sv, &api::input_invoice_message_content_t::suggested_tip_amounts);
+        f("provider_data"sv, &api::input_invoice_message_content_t::provider_data);
+        f("photo_url"sv, &api::input_invoice_message_content_t::photo_url);
+        f("photo_size"sv, &api::input_invoice_message_content_t::photo_size);
+        f("photo_width"sv, &api::input_invoice_message_content_t::photo_width);
+        f("photo_height"sv, &api::input_invoice_message_content_t::photo_height);
+        f("need_name"sv, &api::input_invoice_message_content_t::need_name);
+        f("need_phone_number"sv, &api::input_invoice_message_content_t::need_phone_number);
+        f("need_email"sv, &api::input_invoice_message_content_t::need_email);
+        f("need_shipping_address"sv, &api::input_invoice_message_content_t::need_shipping_address);
+        f("send_phone_number_to_provider"sv, &api::input_invoice_message_content_t::send_phone_number_to_provider);
+        f("send_email_to_provider"sv, &api::input_invoice_message_content_t::send_email_to_provider);
+        f("is_flexible"sv, &api::input_invoice_message_content_t::is_flexible);
+    }
+};
+
+template <>
+constexpr bool is_reflectable_v<api::input_invoice_message_content_t> = true;
+
+template <>
+constexpr std::string_view name_of<api::input_invoice_message_content_t> = "input_invoice_message_content_t";
 
 template <>
 struct reflector<api::input_location_message_content_t> {
@@ -1724,23 +2111,6 @@ template <>
 constexpr std::string_view name_of<api::keyboard_button_t> = "keyboard_button_t";
 
 template <>
-struct reflector<api::kick_chat_member_args_t> {
-    template <class F>
-    static void for_each_field(F&& f) {
-        using namespace std::literals;
-        f("chat_id"sv, &api::kick_chat_member_args_t::chat_id);
-        f("user_id"sv, &api::kick_chat_member_args_t::user_id);
-        f("until_date"sv, &api::kick_chat_member_args_t::until_date);
-    }
-};
-
-template <>
-constexpr bool is_reflectable_v<api::kick_chat_member_args_t> = true;
-
-template <>
-constexpr std::string_view name_of<api::kick_chat_member_args_t> = "kick_chat_member_args_t";
-
-template <>
 struct reflector<api::labeled_price_t> {
     template <class F>
     static void for_each_field(F&& f) {
@@ -1792,6 +2162,20 @@ template <>
 constexpr std::string_view name_of<api::location_t> = "location_t";
 
 template <>
+struct reflector<api::log_out_args_t> {
+    template <class F>
+    static void for_each_field(F&& f) {
+        using namespace std::literals;
+    }
+};
+
+template <>
+constexpr bool is_reflectable_v<api::log_out_args_t> = true;
+
+template <>
+constexpr std::string_view name_of<api::log_out_args_t> = "log_out_args_t";
+
+template <>
 struct reflector<api::login_url_t> {
     template <class F>
     static void for_each_field(F&& f) {
@@ -1826,6 +2210,21 @@ constexpr bool is_reflectable_v<api::mask_position_t> = true;
 
 template <>
 constexpr std::string_view name_of<api::mask_position_t> = "mask_position_t";
+
+template <>
+struct reflector<api::message_auto_delete_timer_changed_t> {
+    template <class F>
+    static void for_each_field(F&& f) {
+        using namespace std::literals;
+        f("message_auto_delete_time"sv, &api::message_auto_delete_timer_changed_t::message_auto_delete_time);
+    }
+};
+
+template <>
+constexpr bool is_reflectable_v<api::message_auto_delete_timer_changed_t> = true;
+
+template <>
+constexpr std::string_view name_of<api::message_auto_delete_timer_changed_t> = "message_auto_delete_timer_changed_t";
 
 template <>
 struct reflector<api::message_entity_t> {
@@ -1909,6 +2308,7 @@ struct reflector<api::message_t> {
         f("group_chat_created"sv, &api::message_t::group_chat_created);
         f("supergroup_chat_created"sv, &api::message_t::supergroup_chat_created);
         f("channel_chat_created"sv, &api::message_t::channel_chat_created);
+        f("message_auto_delete_timer_changed"sv, &api::message_t::message_auto_delete_timer_changed);
         f("migrate_to_chat_id"sv, &api::message_t::migrate_to_chat_id);
         f("migrate_from_chat_id"sv, &api::message_t::migrate_from_chat_id);
         f("pinned_message"sv, &api::message_t::pinned_message);
@@ -1917,6 +2317,10 @@ struct reflector<api::message_t> {
         f("connected_website"sv, &api::message_t::connected_website);
         f("passport_data"sv, &api::message_t::passport_data);
         f("proximity_alert_triggered"sv, &api::message_t::proximity_alert_triggered);
+        f("voice_chat_scheduled"sv, &api::message_t::voice_chat_scheduled);
+        f("voice_chat_started"sv, &api::message_t::voice_chat_started);
+        f("voice_chat_ended"sv, &api::message_t::voice_chat_ended);
+        f("voice_chat_participants_invited"sv, &api::message_t::voice_chat_participants_invited);
         f("reply_markup"sv, &api::message_t::reply_markup);
     }
 };
@@ -2267,14 +2671,16 @@ struct reflector<api::promote_chat_member_args_t> {
         f("chat_id"sv, &api::promote_chat_member_args_t::chat_id);
         f("user_id"sv, &api::promote_chat_member_args_t::user_id);
         f("is_anonymous"sv, &api::promote_chat_member_args_t::is_anonymous);
-        f("can_change_info"sv, &api::promote_chat_member_args_t::can_change_info);
+        f("can_manage_chat"sv, &api::promote_chat_member_args_t::can_manage_chat);
         f("can_post_messages"sv, &api::promote_chat_member_args_t::can_post_messages);
         f("can_edit_messages"sv, &api::promote_chat_member_args_t::can_edit_messages);
         f("can_delete_messages"sv, &api::promote_chat_member_args_t::can_delete_messages);
-        f("can_invite_users"sv, &api::promote_chat_member_args_t::can_invite_users);
+        f("can_manage_voice_chats"sv, &api::promote_chat_member_args_t::can_manage_voice_chats);
         f("can_restrict_members"sv, &api::promote_chat_member_args_t::can_restrict_members);
-        f("can_pin_messages"sv, &api::promote_chat_member_args_t::can_pin_messages);
         f("can_promote_members"sv, &api::promote_chat_member_args_t::can_promote_members);
+        f("can_change_info"sv, &api::promote_chat_member_args_t::can_change_info);
+        f("can_invite_users"sv, &api::promote_chat_member_args_t::can_invite_users);
+        f("can_pin_messages"sv, &api::promote_chat_member_args_t::can_pin_messages);
     }
 };
 
@@ -2309,6 +2715,7 @@ struct reflector<api::reply_keyboard_markup_t> {
         f("keyboard"sv, &api::reply_keyboard_markup_t::keyboard);
         f("resize_keyboard"sv, &api::reply_keyboard_markup_t::resize_keyboard);
         f("one_time_keyboard"sv, &api::reply_keyboard_markup_t::one_time_keyboard);
+        f("input_field_placeholder"sv, &api::reply_keyboard_markup_t::input_field_placeholder);
         f("selective"sv, &api::reply_keyboard_markup_t::selective);
     }
 };
@@ -2368,6 +2775,22 @@ constexpr bool is_reflectable_v<api::restrict_chat_member_args_t> = true;
 
 template <>
 constexpr std::string_view name_of<api::restrict_chat_member_args_t> = "restrict_chat_member_args_t";
+
+template <>
+struct reflector<api::revoke_chat_invite_link_args_t> {
+    template <class F>
+    static void for_each_field(F&& f) {
+        using namespace std::literals;
+        f("chat_id"sv, &api::revoke_chat_invite_link_args_t::chat_id);
+        f("invite_link"sv, &api::revoke_chat_invite_link_args_t::invite_link);
+    }
+};
+
+template <>
+constexpr bool is_reflectable_v<api::revoke_chat_invite_link_args_t> = true;
+
+template <>
+constexpr std::string_view name_of<api::revoke_chat_invite_link_args_t> = "revoke_chat_invite_link_args_t";
 
 template <>
 struct reflector<api::send_animation_args_t> {
@@ -2537,9 +2960,11 @@ struct reflector<api::send_invoice_args_t> {
         f("description"sv, &api::send_invoice_args_t::description);
         f("payload"sv, &api::send_invoice_args_t::payload);
         f("provider_token"sv, &api::send_invoice_args_t::provider_token);
-        f("start_parameter"sv, &api::send_invoice_args_t::start_parameter);
         f("currency"sv, &api::send_invoice_args_t::currency);
         f("prices"sv, &api::send_invoice_args_t::prices);
+        f("max_tip_amount"sv, &api::send_invoice_args_t::max_tip_amount);
+        f("suggested_tip_amounts"sv, &api::send_invoice_args_t::suggested_tip_amounts);
+        f("start_parameter"sv, &api::send_invoice_args_t::start_parameter);
         f("provider_data"sv, &api::send_invoice_args_t::provider_data);
         f("photo_url"sv, &api::send_invoice_args_t::photo_url);
         f("photo_size"sv, &api::send_invoice_args_t::photo_size);
@@ -2932,6 +3357,8 @@ struct reflector<api::set_my_commands_args_t> {
     static void for_each_field(F&& f) {
         using namespace std::literals;
         f("commands"sv, &api::set_my_commands_args_t::commands);
+        f("scope"sv, &api::set_my_commands_args_t::scope);
+        f("language_code"sv, &api::set_my_commands_args_t::language_code);
     }
 };
 
@@ -3230,6 +3657,8 @@ struct reflector<api::update_t> {
         f("pre_checkout_query"sv, &api::update_t::pre_checkout_query);
         f("poll"sv, &api::update_t::poll);
         f("poll_answer"sv, &api::update_t::poll_answer);
+        f("my_chat_member"sv, &api::update_t::my_chat_member);
+        f("chat_member"sv, &api::update_t::chat_member);
     }
 };
 
@@ -3357,6 +3786,65 @@ constexpr bool is_reflectable_v<api::video_t> = true;
 
 template <>
 constexpr std::string_view name_of<api::video_t> = "video_t";
+
+template <>
+struct reflector<api::voice_chat_ended_t> {
+    template <class F>
+    static void for_each_field(F&& f) {
+        using namespace std::literals;
+        f("duration"sv, &api::voice_chat_ended_t::duration);
+    }
+};
+
+template <>
+constexpr bool is_reflectable_v<api::voice_chat_ended_t> = true;
+
+template <>
+constexpr std::string_view name_of<api::voice_chat_ended_t> = "voice_chat_ended_t";
+
+template <>
+struct reflector<api::voice_chat_participants_invited_t> {
+    template <class F>
+    static void for_each_field(F&& f) {
+        using namespace std::literals;
+        f("users"sv, &api::voice_chat_participants_invited_t::users);
+    }
+};
+
+template <>
+constexpr bool is_reflectable_v<api::voice_chat_participants_invited_t> = true;
+
+template <>
+constexpr std::string_view name_of<api::voice_chat_participants_invited_t> = "voice_chat_participants_invited_t";
+
+template <>
+struct reflector<api::voice_chat_scheduled_t> {
+    template <class F>
+    static void for_each_field(F&& f) {
+        using namespace std::literals;
+        f("start_date"sv, &api::voice_chat_scheduled_t::start_date);
+    }
+};
+
+template <>
+constexpr bool is_reflectable_v<api::voice_chat_scheduled_t> = true;
+
+template <>
+constexpr std::string_view name_of<api::voice_chat_scheduled_t> = "voice_chat_scheduled_t";
+
+template <>
+struct reflector<api::voice_chat_started_t> {
+    template <class F>
+    static void for_each_field(F&& f) {
+        using namespace std::literals;
+    }
+};
+
+template <>
+constexpr bool is_reflectable_v<api::voice_chat_started_t> = true;
+
+template <>
+constexpr std::string_view name_of<api::voice_chat_started_t> = "voice_chat_started_t";
 
 template <>
 struct reflector<api::voice_t> {

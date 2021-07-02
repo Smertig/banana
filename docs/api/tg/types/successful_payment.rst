@@ -21,11 +21,11 @@ successful_payment_t
 
    .. cpp:member:: optional_t<string_t> shipping_option_id
 
-   Identifier of the shipping option chosen by the user
+   Optional. Identifier of the shipping option chosen by the user
 
    .. cpp:member:: optional_t<order_info_t> order_info
 
-   Order info provided by the user
+   Optional. Order info provided by the user
 
    .. cpp:member:: string_t telegram_payment_charge_id
 

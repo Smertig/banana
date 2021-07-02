@@ -17,8 +17,8 @@ input_contact_message_content_t
 
    .. cpp:member:: optional_t<string_t> last_name
 
-   Contact's last name
+   Optional. Contact's last name
 
    .. cpp:member:: optional_t<string_t> vcard
 
-   Additional data about the contact in the form of a vCard, 0-2048 bytes
+   Optional. Additional data about the contact in the form of a vCard, 0-2048 bytes

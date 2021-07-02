@@ -29,4 +29,4 @@ sticker_set_t
 
    .. cpp:member:: optional_t<photo_size_t> thumb
 
-   Sticker set thumbnail in the .WEBP or .TGS format
+   Optional. Sticker set thumbnail in the .WEBP or .TGS format

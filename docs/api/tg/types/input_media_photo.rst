@@ -17,12 +17,12 @@ input_media_photo_t
 
    .. cpp:member:: optional_t<string_t> caption
 
-   Caption of the photo to be sent, 0-1024 characters after entities parsing
+   Optional. Caption of the photo to be sent, 0-1024 characters after entities parsing
 
    .. cpp:member:: optional_t<string_t> parse_mode
 
-   Mode for parsing entities in the photo caption. See formatting options for more details.
+   Optional. Mode for parsing entities in the photo caption. See formatting options for more details.
 
    .. cpp:member:: optional_t<array_t<message_entity_t>> caption_entities
 
-   List of special entities that appear in the caption, which can be specified instead of parse_mode
+   Optional. List of special entities that appear in the caption, which can be specified instead of parse_mode

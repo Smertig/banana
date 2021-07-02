@@ -17,11 +17,11 @@ callback_query_t
 
    .. cpp:member:: optional_t<message_t> message
 
-   Message with the callback button that originated the query. Note that message content and message date will not be available if the message is too old
+   Optional. Message with the callback button that originated the query. Note that message content and message date will not be available if the message is too old
 
    .. cpp:member:: optional_t<string_t> inline_message_id
 
-   Identifier of the message sent via the bot in inline mode, that originated the query.
+   Optional. Identifier of the message sent via the bot in inline mode, that originated the query.
 
    .. cpp:member:: string_t chat_instance
 
@@ -29,8 +29,8 @@ callback_query_t
 
    .. cpp:member:: optional_t<string_t> data
 
-   Data associated with the callback button. Be aware that a bad client can send arbitrary data in this field.
+   Optional. Data associated with the callback button. Be aware that a bad client can send arbitrary data in this field.
 
    .. cpp:member:: optional_t<string_t> game_short_name
 
-   Short name of a Game to be returned, serves as the unique identifier for the game
+   Optional. Short name of a Game to be returned, serves as the unique identifier for the game

@@ -17,11 +17,11 @@ chosen_inline_result_t
 
    .. cpp:member:: optional_t<location_t> location
 
-   Sender location, only for bots that require user location
+   Optional. Sender location, only for bots that require user location
 
    .. cpp:member:: optional_t<string_t> inline_message_id
 
-   Identifier of the sent inline message. Available only if there is an inline keyboard attached to the message. Will be also received in callback queries and can be used to edit the message.
+   Optional. Identifier of the sent inline message. Available only if there is an inline keyboard attached to the message. Will be also received in callback queries and can be used to edit the message.
 
    .. cpp:member:: string_t query
 

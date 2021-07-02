@@ -13,7 +13,7 @@ poll_t
 
    .. cpp:member:: string_t question
 
-   Poll question, 1-255 characters
+   Poll question, 1-300 characters
 
    .. cpp:member:: array_t<poll_option_t> options
 
@@ -41,20 +41,20 @@ poll_t
 
    .. cpp:member:: optional_t<integer_t> correct_option_id
 
-   0-based identifier of the correct answer option. Available only for polls in the quiz mode, which are closed, or was sent (not forwarded) by the bot or to the private chat with the bot.
+   Optional. 0-based identifier of the correct answer option. Available only for polls in the quiz mode, which are closed, or was sent (not forwarded) by the bot or to the private chat with the bot.
 
    .. cpp:member:: optional_t<string_t> explanation
 
-   Text that is shown when a user chooses an incorrect answer or taps on the lamp icon in a quiz-style poll, 0-200 characters
+   Optional. Text that is shown when a user chooses an incorrect answer or taps on the lamp icon in a quiz-style poll, 0-200 characters
 
    .. cpp:member:: optional_t<array_t<message_entity_t>> explanation_entities
 
-   Special entities like usernames, URLs, bot commands, etc. that appear in the explanation
+   Optional. Special entities like usernames, URLs, bot commands, etc. that appear in the explanation
 
    .. cpp:member:: optional_t<integer_t> open_period
 
-   Amount of time in seconds the poll will be active after creation
+   Optional. Amount of time in seconds the poll will be active after creation
 
    .. cpp:member:: optional_t<integer_t> close_date
 
-   Point in time (Unix timestamp) when the poll will be automatically closed
+   Optional. Point in time (Unix timestamp) when the poll will be automatically closed

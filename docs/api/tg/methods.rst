@@ -16,13 +16,18 @@ File
    answer_inline_query <methods/answer_inline_query>
    answer_pre_checkout_query <methods/answer_pre_checkout_query>
    answer_shipping_query <methods/answer_shipping_query>
+   ban_chat_member <methods/ban_chat_member>
+   close <methods/close>
    copy_message <methods/copy_message>
+   create_chat_invite_link <methods/create_chat_invite_link>
    create_new_sticker_set <methods/create_new_sticker_set>
    delete_chat_photo <methods/delete_chat_photo>
    delete_chat_sticker_set <methods/delete_chat_sticker_set>
    delete_message <methods/delete_message>
+   delete_my_commands <methods/delete_my_commands>
    delete_sticker_from_set <methods/delete_sticker_from_set>
    delete_webhook <methods/delete_webhook>
+   edit_chat_invite_link <methods/edit_chat_invite_link>
    edit_message_caption <methods/edit_message_caption>
    edit_message_live_location <methods/edit_message_live_location>
    edit_message_media <methods/edit_message_media>
@@ -33,18 +38,21 @@ File
    get_chat <methods/get_chat>
    get_chat_administrators <methods/get_chat_administrators>
    get_chat_member <methods/get_chat_member>
-   get_chat_members_count <methods/get_chat_members_count>
+   get_chat_member_count <methods/get_chat_member_count>
    get_file <methods/get_file>
    get_game_high_scores <methods/get_game_high_scores>
    get_me <methods/get_me>
+   get_my_commands <methods/get_my_commands>
    get_sticker_set <methods/get_sticker_set>
    get_updates <methods/get_updates>
    get_user_profile_photos <methods/get_user_profile_photos>
-   kick_chat_member <methods/kick_chat_member>
+   get_webhook_info <methods/get_webhook_info>
    leave_chat <methods/leave_chat>
+   log_out <methods/log_out>
    pin_chat_message <methods/pin_chat_message>
    promote_chat_member <methods/promote_chat_member>
    restrict_chat_member <methods/restrict_chat_member>
+   revoke_chat_invite_link <methods/revoke_chat_invite_link>
    send_animation <methods/send_animation>
    send_audio <methods/send_audio>
    send_chat_action <methods/send_chat_action>

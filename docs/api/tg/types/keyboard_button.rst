@@ -13,12 +13,12 @@ keyboard_button_t
 
    .. cpp:member:: optional_t<boolean_t> request_contact
 
-   If True, the user's phone number will be sent as a contact when the button is pressed. Available in private chats only
+   Optional. If True, the user's phone number will be sent as a contact when the button is pressed. Available in private chats only
 
    .. cpp:member:: optional_t<boolean_t> request_location
 
-   If True, the user's current location will be sent when the button is pressed. Available in private chats only
+   Optional. If True, the user's current location will be sent when the button is pressed. Available in private chats only
 
    .. cpp:member:: optional_t<keyboard_button_poll_type_t> request_poll
 
-   If specified, the user will be asked to create a poll and send it to the bot when the button is pressed. Available in private chats only
+   Optional. If specified, the user will be asked to create a poll and send it to the bot when the button is pressed. Available in private chats only

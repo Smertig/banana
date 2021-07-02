@@ -25,16 +25,16 @@ input_venue_message_content_t
 
    .. cpp:member:: optional_t<string_t> foursquare_id
 
-   Foursquare identifier of the venue, if known
+   Optional. Foursquare identifier of the venue, if known
 
    .. cpp:member:: optional_t<string_t> foursquare_type
 
-   Foursquare type of the venue, if known. (For example, “arts_entertainment/default”, “arts_entertainment/aquarium” or “food/icecream”.)
+   Optional. Foursquare type of the venue, if known. (For example, “arts_entertainment/default”, “arts_entertainment/aquarium” or “food/icecream”.)
 
    .. cpp:member:: optional_t<string_t> google_place_id
 
-   Google Places identifier of the venue
+   Optional. Google Places identifier of the venue
 
    .. cpp:member:: optional_t<string_t> google_place_type
 
-   Google Places type of the venue. (See supported types.)
+   Optional. Google Places type of the venue. (See supported types.)
