@@ -167,11 +167,6 @@ api_result<{return_type}, Connector&&> call(Connector&& connector, {args_cpp_typ
 
 out_api.write('} // banana::api\n')
 
-for type_name in sorted(deser_types):
-    out_dump_impl.write(f'template expected<{type_name}> deserialize<{type_name}>(std::string_view);\n')
-
-out_dump_impl.write('\n')
-
 for type_name in sorted(ser_types):
     out_dump_impl.write(f'template std::optional<std::string> serialize<{type_name}>({type_name} value);\n')
 

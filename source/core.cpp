@@ -74,12 +74,12 @@ namespace banana {
 template <class T>
 expected<T> response_handler<T>::process(expected<std::string> response) const {
     if (!response.has_value()) {
-        return banana::error_t<>{ "[" + std::string(context) + "] Request error: " + response.error() };
+        return (error_maker_t{} << "[" << context << "] Request error: " << response.error()).finalize();
     }
 
     expected<T> deser_result = deser::deserialize<T>(response.value());
     if (!deser_result.has_value()) {
-        return banana::error_t<>{ "[" + std::string(context) + "] Deserialization error: " + deser_result.error() };
+        return (error_maker_t{} << "[" << context << "] Deserialization error: " << deser_result.error()).finalize();
     }
 
     return deser_result;

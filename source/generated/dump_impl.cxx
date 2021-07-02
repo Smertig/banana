@@ -1,24 +1,3 @@
-template expected<array_t<bot_command_t>> deserialize<array_t<bot_command_t>>(std::string_view);
-template expected<array_t<chat_member_t>> deserialize<array_t<chat_member_t>>(std::string_view);
-template expected<array_t<game_high_score_t>> deserialize<array_t<game_high_score_t>>(std::string_view);
-template expected<array_t<message_t>> deserialize<array_t<message_t>>(std::string_view);
-template expected<array_t<update_t>> deserialize<array_t<update_t>>(std::string_view);
-template expected<boolean_t> deserialize<boolean_t>(std::string_view);
-template expected<chat_invite_link_t> deserialize<chat_invite_link_t>(std::string_view);
-template expected<chat_member_t> deserialize<chat_member_t>(std::string_view);
-template expected<chat_t> deserialize<chat_t>(std::string_view);
-template expected<file_t> deserialize<file_t>(std::string_view);
-template expected<integer_t> deserialize<integer_t>(std::string_view);
-template expected<message_id_t> deserialize<message_id_t>(std::string_view);
-template expected<message_t> deserialize<message_t>(std::string_view);
-template expected<poll_t> deserialize<poll_t>(std::string_view);
-template expected<sticker_set_t> deserialize<sticker_set_t>(std::string_view);
-template expected<string_t> deserialize<string_t>(std::string_view);
-template expected<user_profile_photos_t> deserialize<user_profile_photos_t>(std::string_view);
-template expected<user_t> deserialize<user_t>(std::string_view);
-template expected<variant_t<message_t, boolean_t>> deserialize<variant_t<message_t, boolean_t>>(std::string_view);
-template expected<webhook_info_t> deserialize<webhook_info_t>(std::string_view);
-
 template std::optional<std::string> serialize<add_sticker_to_set_args_t>(add_sticker_to_set_args_t value);
 template std::optional<std::string> serialize<answer_callback_query_args_t>(answer_callback_query_args_t value);
 template std::optional<std::string> serialize<answer_inline_query_args_t>(answer_inline_query_args_t value);
