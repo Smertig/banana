@@ -11,6 +11,7 @@ OUT_SOURCE_PATH = "../source/generated"
 out_types = open(OUT_INCLUDE_PATH + '/types.hpp', 'w')
 out_api = open(OUT_INCLUDE_PATH + '/api.hpp', 'w')
 out_dump_impl = open(OUT_SOURCE_PATH + '/dump_impl.cxx', 'w')
+out_resp_impl = open(OUT_SOURCE_PATH + '/resp_impl.cxx', 'w')
 out_meta = open(OUT_INCLUDE_PATH + '/meta.hpp', 'w')
 
 out_api.write("#include <banana/detail/api_header.hpp>\n\n")
@@ -146,18 +147,7 @@ for name, method in api_methods.items():
  */
 template <class Connector>
 api_result<{return_type}, Connector&&> {uname}(Connector&& connector, {args_cpp_type.cpp_name} args{" = {}" if not method['params'] else ""}) {{
-    return std::forward<Connector>(connector).template request<{return_type}>("{name}", deser::serialize(std::move(args)), [](expected<std::string> request_result) -> expected<{return_type}> {{
-        if (!request_result.has_value()) {{
-            return banana::error_t<>{{ "[{uname}] Request error: " + request_result.error() }};
-        }}
-
-        expected<{return_type}> deser_result = deser::deserialize<{return_type}>(request_result.value());
-        if (!deser_result.has_value()) {{
-            return banana::error_t<>{{ "[{uname}] Deserialization error: " + deser_result.error() }};
-        }}
-
-        return deser_result;
-    }});
+    return std::forward<Connector>(connector).template request<{return_type}>("{name}", deser::serialize(std::move(args)), response_handler<{return_type}>{{ "{uname}" }});
 }}
 
 /**
@@ -184,3 +174,6 @@ out_dump_impl.write('\n')
 
 for type_name in sorted(ser_types):
     out_dump_impl.write(f'template std::optional<std::string> serialize<{type_name}>({type_name} value);\n')
+
+for type_name in sorted(deser_types):
+    out_resp_impl.write(f'template struct response_handler<{type_name}>;\n')

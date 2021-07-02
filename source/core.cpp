@@ -68,3 +68,25 @@ using namespace banana::api;
 #include "generated/dump_impl.cxx"
 
 } // namespace banana::deser
+
+namespace banana {
+
+template <class T>
+expected<T> response_handler<T>::process(expected<std::string> response) const {
+    if (!response.has_value()) {
+        return banana::error_t<>{ "[" + std::string(context) + "] Request error: " + response.error() };
+    }
+
+    expected<T> deser_result = deser::deserialize<T>(response.value());
+    if (!deser_result.has_value()) {
+        return banana::error_t<>{ "[" + std::string(context) + "] Deserialization error: " + deser_result.error() };
+    }
+
+    return deser_result;
+}
+
+using namespace banana::api;
+
+#include "generated/resp_impl.cxx"
+
+} // namespace banana

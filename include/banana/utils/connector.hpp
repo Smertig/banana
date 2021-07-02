@@ -1,6 +1,7 @@
 #pragma once
 
 #include <banana/utils/expected.hpp>
+#include <banana/detail/response_handler.hpp>
 
 #include <string>
 #include <string_view>
@@ -11,7 +12,7 @@
 namespace banana {
 
 template <class T, class Connector>
-using api_result = decltype(std::declval<Connector>().request(std::declval<std::string_view>(), std::declval<std::string>(), std::declval<expected<T>(*)(expected<std::string>)>()));
+using api_result = decltype(std::declval<Connector>().request(std::declval<std::string_view>(), std::declval<std::string>(), std::declval<response_handler<T>>()));
 
 namespace connector {
 
@@ -44,9 +45,9 @@ struct make_blocking : Connector {
     static_assert(std::is_same_v<std::string, decltype(std::declval<Connector>().do_request(std::declval<std::string_view>(), std::declval<std::optional<std::string>>()))>);
 
     template <class T>
-    T request(std::string_view method, std::optional<std::string> body, expected<T>(*then)(expected<std::string>)) {
+    T request(std::string_view method, std::optional<std::string> body, banana::response_handler<T> handler) {
         std::string response = Connector::do_request(method, std::move(body));
-        return then(expected(std::move(response))).value();
+        return handler.process(expected(std::move(response))).value();
     }
 };
 
@@ -59,8 +60,8 @@ struct make_blocking_monadic : Connector {
     static_assert(std::is_same_v<expected<std::string>, decltype(std::declval<Connector>().do_request(std::declval<std::string_view>(), std::declval<std::optional<std::string>>()))>);
 
     template <class T>
-    expected<T> request(std::string_view method, std::optional<std::string> body, expected<T>(*then)(expected<std::string>)) {
-        return then(Connector::do_request(method, std::move(body)));
+    expected<T> request(std::string_view method, std::optional<std::string> body, banana::response_handler<T> handler) {
+        return handler.process(Connector::do_request(method, std::move(body)));
     }
 };
 
@@ -70,8 +71,8 @@ struct wrap_async : Connector {
     using Connector::Connector;
 
     template <class T>
-    auto request(std::string_view method, std::optional<std::string> body, expected<T>(*then)(expected<std::string>)) -> std::future<decltype(Connector::request(method, body, then))> {
-        return std::async(std::launch::async, &Connector::template request<T>, this, method, std::move(body), then);
+    auto request(std::string_view method, std::optional<std::string> body, banana::response_handler<T> handler) -> std::future<decltype(Connector::request(method, body, handler))> {
+        return std::async(std::launch::async, &Connector::template request<T>, this, method, std::move(body), std::move(handler));
     }
 };
 
@@ -84,15 +85,15 @@ struct make_future : Connector {
     static_assert(std::is_same_v<void, decltype(std::declval<Connector>().do_async_request(std::declval<std::string_view>(), std::declval<std::optional<std::string>>(), std::declval<std::unique_ptr<async_handler>>()))>);
 
     template <class T>
-    std::future<T> request(std::string_view method, std::optional<std::string> body, expected<T>(*then)(expected<std::string>)) {
+    std::future<T> request(std::string_view method, std::optional<std::string> body, banana::response_handler<T> handler) {
         struct promise_handler : async_handler {
-            expected<T>(*then)(expected<std::string>) = nullptr;
+            banana::response_handler<T> handler;
             std::promise<T> promise;
 
-            explicit promise_handler(expected<T>(*then)(expected<std::string>)) : then(then) {}
+            explicit promise_handler(banana::response_handler<T> handler) : handler(std::move(handler)) {}
 
             void on_result(expected<std::string> result) final {
-                auto final_result = then(std::move(result));
+                auto final_result = handler.process(std::move(result));
                 if (final_result) {
                     promise.set_value(std::move(*final_result));
                 }
@@ -102,10 +103,10 @@ struct make_future : Connector {
             }
         };
 
-        auto handler = std::make_unique<promise_handler>(then);
+        auto handler2 = std::make_unique<promise_handler>(std::move(handler));
         auto result = handler->promise.get_future();
 
-        Connector::do_async_request(method, std::move(body), std::move(handler));
+        Connector::do_async_request(method, std::move(body), std::move(handler2));
 
         return result;
     }
@@ -120,22 +121,22 @@ struct make_future_monadic : Connector {
     static_assert(std::is_same_v<void, decltype(std::declval<Connector>().do_async_request(std::declval<std::string_view>(), std::declval<std::optional<std::string>>(), std::declval<std::unique_ptr<async_handler>>()))>);
 
     template <class T>
-    std::future<expected<T>> request(std::string_view method, std::optional<std::string> body, expected<T>(*then)(expected<std::string>)) {
+    std::future<expected<T>> request(std::string_view method, std::optional<std::string> body, banana::response_handler<T> handler) {
         struct promise_handler : async_handler {
-            expected<T>(*then)(expected<std::string>) = nullptr;
+            banana::response_handler<T> handler;
             std::promise<expected<T>> promise;
 
-            explicit promise_handler(expected<T>(*then)(expected<std::string>)) : then(then) {}
+            explicit promise_handler(banana::response_handler<T> handler) : handler(std::move(handler)) {}
 
             void on_result(expected<std::string> result) final {
-                promise.set_value(then(std::move(result)));
+                promise.set_value(handler.process(std::move(result)));
             }
         };
 
-        auto handler = std::make_unique<promise_handler>(then);
+        auto handler2 = std::make_unique<promise_handler>(std::move(handler));
         auto result = handler->promise.get_future();
 
-        Connector::do_async_request(method, std::move(body), std::move(handler));
+        Connector::do_async_request(method, std::move(body), std::move(handler2));
 
         return result;
     }

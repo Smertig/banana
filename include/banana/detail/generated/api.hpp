@@ -25,18 +25,7 @@ struct add_sticker_to_set_args_t {
  */
 template <class Connector>
 api_result<boolean_t, Connector&&> add_sticker_to_set(Connector&& connector, add_sticker_to_set_args_t args) {
-    return std::forward<Connector>(connector).template request<boolean_t>("addStickerToSet", deser::serialize(std::move(args)), [](expected<std::string> request_result) -> expected<boolean_t> {
-        if (!request_result.has_value()) {
-            return banana::error_t<>{ "[add_sticker_to_set] Request error: " + request_result.error() };
-        }
-
-        expected<boolean_t> deser_result = deser::deserialize<boolean_t>(request_result.value());
-        if (!deser_result.has_value()) {
-            return banana::error_t<>{ "[add_sticker_to_set] Deserialization error: " + deser_result.error() };
-        }
-
-        return deser_result;
-    });
+    return std::forward<Connector>(connector).template request<boolean_t>("addStickerToSet", deser::serialize(std::move(args)), response_handler<boolean_t>{ "add_sticker_to_set" });
 }
 
 /**
@@ -76,18 +65,7 @@ struct answer_callback_query_args_t {
  */
 template <class Connector>
 api_result<boolean_t, Connector&&> answer_callback_query(Connector&& connector, answer_callback_query_args_t args) {
-    return std::forward<Connector>(connector).template request<boolean_t>("answerCallbackQuery", deser::serialize(std::move(args)), [](expected<std::string> request_result) -> expected<boolean_t> {
-        if (!request_result.has_value()) {
-            return banana::error_t<>{ "[answer_callback_query] Request error: " + request_result.error() };
-        }
-
-        expected<boolean_t> deser_result = deser::deserialize<boolean_t>(request_result.value());
-        if (!deser_result.has_value()) {
-            return banana::error_t<>{ "[answer_callback_query] Deserialization error: " + deser_result.error() };
-        }
-
-        return deser_result;
-    });
+    return std::forward<Connector>(connector).template request<boolean_t>("answerCallbackQuery", deser::serialize(std::move(args)), response_handler<boolean_t>{ "answer_callback_query" });
 }
 
 /**
@@ -130,18 +108,7 @@ struct answer_inline_query_args_t {
  */
 template <class Connector>
 api_result<boolean_t, Connector&&> answer_inline_query(Connector&& connector, answer_inline_query_args_t args) {
-    return std::forward<Connector>(connector).template request<boolean_t>("answerInlineQuery", deser::serialize(std::move(args)), [](expected<std::string> request_result) -> expected<boolean_t> {
-        if (!request_result.has_value()) {
-            return banana::error_t<>{ "[answer_inline_query] Request error: " + request_result.error() };
-        }
-
-        expected<boolean_t> deser_result = deser::deserialize<boolean_t>(request_result.value());
-        if (!deser_result.has_value()) {
-            return banana::error_t<>{ "[answer_inline_query] Deserialization error: " + deser_result.error() };
-        }
-
-        return deser_result;
-    });
+    return std::forward<Connector>(connector).template request<boolean_t>("answerInlineQuery", deser::serialize(std::move(args)), response_handler<boolean_t>{ "answer_inline_query" });
 }
 
 /**
@@ -178,18 +145,7 @@ struct answer_pre_checkout_query_args_t {
  */
 template <class Connector>
 api_result<boolean_t, Connector&&> answer_pre_checkout_query(Connector&& connector, answer_pre_checkout_query_args_t args) {
-    return std::forward<Connector>(connector).template request<boolean_t>("answerPreCheckoutQuery", deser::serialize(std::move(args)), [](expected<std::string> request_result) -> expected<boolean_t> {
-        if (!request_result.has_value()) {
-            return banana::error_t<>{ "[answer_pre_checkout_query] Request error: " + request_result.error() };
-        }
-
-        expected<boolean_t> deser_result = deser::deserialize<boolean_t>(request_result.value());
-        if (!deser_result.has_value()) {
-            return banana::error_t<>{ "[answer_pre_checkout_query] Deserialization error: " + deser_result.error() };
-        }
-
-        return deser_result;
-    });
+    return std::forward<Connector>(connector).template request<boolean_t>("answerPreCheckoutQuery", deser::serialize(std::move(args)), response_handler<boolean_t>{ "answer_pre_checkout_query" });
 }
 
 /**
@@ -224,18 +180,7 @@ struct answer_shipping_query_args_t {
  */
 template <class Connector>
 api_result<boolean_t, Connector&&> answer_shipping_query(Connector&& connector, answer_shipping_query_args_t args) {
-    return std::forward<Connector>(connector).template request<boolean_t>("answerShippingQuery", deser::serialize(std::move(args)), [](expected<std::string> request_result) -> expected<boolean_t> {
-        if (!request_result.has_value()) {
-            return banana::error_t<>{ "[answer_shipping_query] Request error: " + request_result.error() };
-        }
-
-        expected<boolean_t> deser_result = deser::deserialize<boolean_t>(request_result.value());
-        if (!deser_result.has_value()) {
-            return banana::error_t<>{ "[answer_shipping_query] Deserialization error: " + deser_result.error() };
-        }
-
-        return deser_result;
-    });
+    return std::forward<Connector>(connector).template request<boolean_t>("answerShippingQuery", deser::serialize(std::move(args)), response_handler<boolean_t>{ "answer_shipping_query" });
 }
 
 /**
@@ -271,18 +216,7 @@ struct ban_chat_member_args_t {
  */
 template <class Connector>
 api_result<boolean_t, Connector&&> ban_chat_member(Connector&& connector, ban_chat_member_args_t args) {
-    return std::forward<Connector>(connector).template request<boolean_t>("banChatMember", deser::serialize(std::move(args)), [](expected<std::string> request_result) -> expected<boolean_t> {
-        if (!request_result.has_value()) {
-            return banana::error_t<>{ "[ban_chat_member] Request error: " + request_result.error() };
-        }
-
-        expected<boolean_t> deser_result = deser::deserialize<boolean_t>(request_result.value());
-        if (!deser_result.has_value()) {
-            return banana::error_t<>{ "[ban_chat_member] Deserialization error: " + deser_result.error() };
-        }
-
-        return deser_result;
-    });
+    return std::forward<Connector>(connector).template request<boolean_t>("banChatMember", deser::serialize(std::move(args)), response_handler<boolean_t>{ "ban_chat_member" });
 }
 
 /**
@@ -310,18 +244,7 @@ struct close_args_t {
  */
 template <class Connector>
 api_result<boolean_t, Connector&&> close(Connector&& connector, close_args_t args = {}) {
-    return std::forward<Connector>(connector).template request<boolean_t>("close", deser::serialize(std::move(args)), [](expected<std::string> request_result) -> expected<boolean_t> {
-        if (!request_result.has_value()) {
-            return banana::error_t<>{ "[close] Request error: " + request_result.error() };
-        }
-
-        expected<boolean_t> deser_result = deser::deserialize<boolean_t>(request_result.value());
-        if (!deser_result.has_value()) {
-            return banana::error_t<>{ "[close] Deserialization error: " + deser_result.error() };
-        }
-
-        return deser_result;
-    });
+    return std::forward<Connector>(connector).template request<boolean_t>("close", deser::serialize(std::move(args)), response_handler<boolean_t>{ "close" });
 }
 
 /**
@@ -365,18 +288,7 @@ struct copy_message_args_t {
  */
 template <class Connector>
 api_result<message_id_t, Connector&&> copy_message(Connector&& connector, copy_message_args_t args) {
-    return std::forward<Connector>(connector).template request<message_id_t>("copyMessage", deser::serialize(std::move(args)), [](expected<std::string> request_result) -> expected<message_id_t> {
-        if (!request_result.has_value()) {
-            return banana::error_t<>{ "[copy_message] Request error: " + request_result.error() };
-        }
-
-        expected<message_id_t> deser_result = deser::deserialize<message_id_t>(request_result.value());
-        if (!deser_result.has_value()) {
-            return banana::error_t<>{ "[copy_message] Deserialization error: " + deser_result.error() };
-        }
-
-        return deser_result;
-    });
+    return std::forward<Connector>(connector).template request<message_id_t>("copyMessage", deser::serialize(std::move(args)), response_handler<message_id_t>{ "copy_message" });
 }
 
 /**
@@ -416,18 +328,7 @@ struct create_chat_invite_link_args_t {
  */
 template <class Connector>
 api_result<chat_invite_link_t, Connector&&> create_chat_invite_link(Connector&& connector, create_chat_invite_link_args_t args) {
-    return std::forward<Connector>(connector).template request<chat_invite_link_t>("createChatInviteLink", deser::serialize(std::move(args)), [](expected<std::string> request_result) -> expected<chat_invite_link_t> {
-        if (!request_result.has_value()) {
-            return banana::error_t<>{ "[create_chat_invite_link] Request error: " + request_result.error() };
-        }
-
-        expected<chat_invite_link_t> deser_result = deser::deserialize<chat_invite_link_t>(request_result.value());
-        if (!deser_result.has_value()) {
-            return banana::error_t<>{ "[create_chat_invite_link] Deserialization error: " + deser_result.error() };
-        }
-
-        return deser_result;
-    });
+    return std::forward<Connector>(connector).template request<chat_invite_link_t>("createChatInviteLink", deser::serialize(std::move(args)), response_handler<chat_invite_link_t>{ "create_chat_invite_link" });
 }
 
 /**
@@ -470,18 +371,7 @@ struct create_new_sticker_set_args_t {
  */
 template <class Connector>
 api_result<boolean_t, Connector&&> create_new_sticker_set(Connector&& connector, create_new_sticker_set_args_t args) {
-    return std::forward<Connector>(connector).template request<boolean_t>("createNewStickerSet", deser::serialize(std::move(args)), [](expected<std::string> request_result) -> expected<boolean_t> {
-        if (!request_result.has_value()) {
-            return banana::error_t<>{ "[create_new_sticker_set] Request error: " + request_result.error() };
-        }
-
-        expected<boolean_t> deser_result = deser::deserialize<boolean_t>(request_result.value());
-        if (!deser_result.has_value()) {
-            return banana::error_t<>{ "[create_new_sticker_set] Deserialization error: " + deser_result.error() };
-        }
-
-        return deser_result;
-    });
+    return std::forward<Connector>(connector).template request<boolean_t>("createNewStickerSet", deser::serialize(std::move(args)), response_handler<boolean_t>{ "create_new_sticker_set" });
 }
 
 /**
@@ -515,18 +405,7 @@ struct delete_chat_photo_args_t {
  */
 template <class Connector>
 api_result<boolean_t, Connector&&> delete_chat_photo(Connector&& connector, delete_chat_photo_args_t args) {
-    return std::forward<Connector>(connector).template request<boolean_t>("deleteChatPhoto", deser::serialize(std::move(args)), [](expected<std::string> request_result) -> expected<boolean_t> {
-        if (!request_result.has_value()) {
-            return banana::error_t<>{ "[delete_chat_photo] Request error: " + request_result.error() };
-        }
-
-        expected<boolean_t> deser_result = deser::deserialize<boolean_t>(request_result.value());
-        if (!deser_result.has_value()) {
-            return banana::error_t<>{ "[delete_chat_photo] Deserialization error: " + deser_result.error() };
-        }
-
-        return deser_result;
-    });
+    return std::forward<Connector>(connector).template request<boolean_t>("deleteChatPhoto", deser::serialize(std::move(args)), response_handler<boolean_t>{ "delete_chat_photo" });
 }
 
 /**
@@ -553,18 +432,7 @@ struct delete_chat_sticker_set_args_t {
  */
 template <class Connector>
 api_result<boolean_t, Connector&&> delete_chat_sticker_set(Connector&& connector, delete_chat_sticker_set_args_t args) {
-    return std::forward<Connector>(connector).template request<boolean_t>("deleteChatStickerSet", deser::serialize(std::move(args)), [](expected<std::string> request_result) -> expected<boolean_t> {
-        if (!request_result.has_value()) {
-            return banana::error_t<>{ "[delete_chat_sticker_set] Request error: " + request_result.error() };
-        }
-
-        expected<boolean_t> deser_result = deser::deserialize<boolean_t>(request_result.value());
-        if (!deser_result.has_value()) {
-            return banana::error_t<>{ "[delete_chat_sticker_set] Deserialization error: " + deser_result.error() };
-        }
-
-        return deser_result;
-    });
+    return std::forward<Connector>(connector).template request<boolean_t>("deleteChatStickerSet", deser::serialize(std::move(args)), response_handler<boolean_t>{ "delete_chat_sticker_set" });
 }
 
 /**
@@ -593,18 +461,7 @@ struct delete_message_args_t {
  */
 template <class Connector>
 api_result<boolean_t, Connector&&> delete_message(Connector&& connector, delete_message_args_t args) {
-    return std::forward<Connector>(connector).template request<boolean_t>("deleteMessage", deser::serialize(std::move(args)), [](expected<std::string> request_result) -> expected<boolean_t> {
-        if (!request_result.has_value()) {
-            return banana::error_t<>{ "[delete_message] Request error: " + request_result.error() };
-        }
-
-        expected<boolean_t> deser_result = deser::deserialize<boolean_t>(request_result.value());
-        if (!deser_result.has_value()) {
-            return banana::error_t<>{ "[delete_message] Deserialization error: " + deser_result.error() };
-        }
-
-        return deser_result;
-    });
+    return std::forward<Connector>(connector).template request<boolean_t>("deleteMessage", deser::serialize(std::move(args)), response_handler<boolean_t>{ "delete_message" });
 }
 
 /**
@@ -634,18 +491,7 @@ struct delete_my_commands_args_t {
  */
 template <class Connector>
 api_result<boolean_t, Connector&&> delete_my_commands(Connector&& connector, delete_my_commands_args_t args) {
-    return std::forward<Connector>(connector).template request<boolean_t>("deleteMyCommands", deser::serialize(std::move(args)), [](expected<std::string> request_result) -> expected<boolean_t> {
-        if (!request_result.has_value()) {
-            return banana::error_t<>{ "[delete_my_commands] Request error: " + request_result.error() };
-        }
-
-        expected<boolean_t> deser_result = deser::deserialize<boolean_t>(request_result.value());
-        if (!deser_result.has_value()) {
-            return banana::error_t<>{ "[delete_my_commands] Deserialization error: " + deser_result.error() };
-        }
-
-        return deser_result;
-    });
+    return std::forward<Connector>(connector).template request<boolean_t>("deleteMyCommands", deser::serialize(std::move(args)), response_handler<boolean_t>{ "delete_my_commands" });
 }
 
 /**
@@ -673,18 +519,7 @@ struct delete_sticker_from_set_args_t {
  */
 template <class Connector>
 api_result<boolean_t, Connector&&> delete_sticker_from_set(Connector&& connector, delete_sticker_from_set_args_t args) {
-    return std::forward<Connector>(connector).template request<boolean_t>("deleteStickerFromSet", deser::serialize(std::move(args)), [](expected<std::string> request_result) -> expected<boolean_t> {
-        if (!request_result.has_value()) {
-            return banana::error_t<>{ "[delete_sticker_from_set] Request error: " + request_result.error() };
-        }
-
-        expected<boolean_t> deser_result = deser::deserialize<boolean_t>(request_result.value());
-        if (!deser_result.has_value()) {
-            return banana::error_t<>{ "[delete_sticker_from_set] Deserialization error: " + deser_result.error() };
-        }
-
-        return deser_result;
-    });
+    return std::forward<Connector>(connector).template request<boolean_t>("deleteStickerFromSet", deser::serialize(std::move(args)), response_handler<boolean_t>{ "delete_sticker_from_set" });
 }
 
 /**
@@ -711,18 +546,7 @@ struct delete_webhook_args_t {
  */
 template <class Connector>
 api_result<boolean_t, Connector&&> delete_webhook(Connector&& connector, delete_webhook_args_t args) {
-    return std::forward<Connector>(connector).template request<boolean_t>("deleteWebhook", deser::serialize(std::move(args)), [](expected<std::string> request_result) -> expected<boolean_t> {
-        if (!request_result.has_value()) {
-            return banana::error_t<>{ "[delete_webhook] Request error: " + request_result.error() };
-        }
-
-        expected<boolean_t> deser_result = deser::deserialize<boolean_t>(request_result.value());
-        if (!deser_result.has_value()) {
-            return banana::error_t<>{ "[delete_webhook] Deserialization error: " + deser_result.error() };
-        }
-
-        return deser_result;
-    });
+    return std::forward<Connector>(connector).template request<boolean_t>("deleteWebhook", deser::serialize(std::move(args)), response_handler<boolean_t>{ "delete_webhook" });
 }
 
 /**
@@ -755,18 +579,7 @@ struct edit_chat_invite_link_args_t {
  */
 template <class Connector>
 api_result<chat_invite_link_t, Connector&&> edit_chat_invite_link(Connector&& connector, edit_chat_invite_link_args_t args) {
-    return std::forward<Connector>(connector).template request<chat_invite_link_t>("editChatInviteLink", deser::serialize(std::move(args)), [](expected<std::string> request_result) -> expected<chat_invite_link_t> {
-        if (!request_result.has_value()) {
-            return banana::error_t<>{ "[edit_chat_invite_link] Request error: " + request_result.error() };
-        }
-
-        expected<chat_invite_link_t> deser_result = deser::deserialize<chat_invite_link_t>(request_result.value());
-        if (!deser_result.has_value()) {
-            return banana::error_t<>{ "[edit_chat_invite_link] Deserialization error: " + deser_result.error() };
-        }
-
-        return deser_result;
-    });
+    return std::forward<Connector>(connector).template request<chat_invite_link_t>("editChatInviteLink", deser::serialize(std::move(args)), response_handler<chat_invite_link_t>{ "edit_chat_invite_link" });
 }
 
 /**
@@ -808,18 +621,7 @@ struct edit_message_caption_args_t {
  */
 template <class Connector>
 api_result<variant_t<message_t, boolean_t>, Connector&&> edit_message_caption(Connector&& connector, edit_message_caption_args_t args) {
-    return std::forward<Connector>(connector).template request<variant_t<message_t, boolean_t>>("editMessageCaption", deser::serialize(std::move(args)), [](expected<std::string> request_result) -> expected<variant_t<message_t, boolean_t>> {
-        if (!request_result.has_value()) {
-            return banana::error_t<>{ "[edit_message_caption] Request error: " + request_result.error() };
-        }
-
-        expected<variant_t<message_t, boolean_t>> deser_result = deser::deserialize<variant_t<message_t, boolean_t>>(request_result.value());
-        if (!deser_result.has_value()) {
-            return banana::error_t<>{ "[edit_message_caption] Deserialization error: " + deser_result.error() };
-        }
-
-        return deser_result;
-    });
+    return std::forward<Connector>(connector).template request<variant_t<message_t, boolean_t>>("editMessageCaption", deser::serialize(std::move(args)), response_handler<variant_t<message_t, boolean_t>>{ "edit_message_caption" });
 }
 
 /**
@@ -868,18 +670,7 @@ struct edit_message_live_location_args_t {
  */
 template <class Connector>
 api_result<variant_t<message_t, boolean_t>, Connector&&> edit_message_live_location(Connector&& connector, edit_message_live_location_args_t args) {
-    return std::forward<Connector>(connector).template request<variant_t<message_t, boolean_t>>("editMessageLiveLocation", deser::serialize(std::move(args)), [](expected<std::string> request_result) -> expected<variant_t<message_t, boolean_t>> {
-        if (!request_result.has_value()) {
-            return banana::error_t<>{ "[edit_message_live_location] Request error: " + request_result.error() };
-        }
-
-        expected<variant_t<message_t, boolean_t>> deser_result = deser::deserialize<variant_t<message_t, boolean_t>>(request_result.value());
-        if (!deser_result.has_value()) {
-            return banana::error_t<>{ "[edit_message_live_location] Deserialization error: " + deser_result.error() };
-        }
-
-        return deser_result;
-    });
+    return std::forward<Connector>(connector).template request<variant_t<message_t, boolean_t>>("editMessageLiveLocation", deser::serialize(std::move(args)), response_handler<variant_t<message_t, boolean_t>>{ "edit_message_live_location" });
 }
 
 /**
@@ -922,18 +713,7 @@ struct edit_message_media_args_t {
  */
 template <class Connector>
 api_result<variant_t<message_t, boolean_t>, Connector&&> edit_message_media(Connector&& connector, edit_message_media_args_t args) {
-    return std::forward<Connector>(connector).template request<variant_t<message_t, boolean_t>>("editMessageMedia", deser::serialize(std::move(args)), [](expected<std::string> request_result) -> expected<variant_t<message_t, boolean_t>> {
-        if (!request_result.has_value()) {
-            return banana::error_t<>{ "[edit_message_media] Request error: " + request_result.error() };
-        }
-
-        expected<variant_t<message_t, boolean_t>> deser_result = deser::deserialize<variant_t<message_t, boolean_t>>(request_result.value());
-        if (!deser_result.has_value()) {
-            return banana::error_t<>{ "[edit_message_media] Deserialization error: " + deser_result.error() };
-        }
-
-        return deser_result;
-    });
+    return std::forward<Connector>(connector).template request<variant_t<message_t, boolean_t>>("editMessageMedia", deser::serialize(std::move(args)), response_handler<variant_t<message_t, boolean_t>>{ "edit_message_media" });
 }
 
 /**
@@ -970,18 +750,7 @@ struct edit_message_reply_markup_args_t {
  */
 template <class Connector>
 api_result<variant_t<message_t, boolean_t>, Connector&&> edit_message_reply_markup(Connector&& connector, edit_message_reply_markup_args_t args) {
-    return std::forward<Connector>(connector).template request<variant_t<message_t, boolean_t>>("editMessageReplyMarkup", deser::serialize(std::move(args)), [](expected<std::string> request_result) -> expected<variant_t<message_t, boolean_t>> {
-        if (!request_result.has_value()) {
-            return banana::error_t<>{ "[edit_message_reply_markup] Request error: " + request_result.error() };
-        }
-
-        expected<variant_t<message_t, boolean_t>> deser_result = deser::deserialize<variant_t<message_t, boolean_t>>(request_result.value());
-        if (!deser_result.has_value()) {
-            return banana::error_t<>{ "[edit_message_reply_markup] Deserialization error: " + deser_result.error() };
-        }
-
-        return deser_result;
-    });
+    return std::forward<Connector>(connector).template request<variant_t<message_t, boolean_t>>("editMessageReplyMarkup", deser::serialize(std::move(args)), response_handler<variant_t<message_t, boolean_t>>{ "edit_message_reply_markup" });
 }
 
 /**
@@ -1025,18 +794,7 @@ struct edit_message_text_args_t {
  */
 template <class Connector>
 api_result<variant_t<message_t, boolean_t>, Connector&&> edit_message_text(Connector&& connector, edit_message_text_args_t args) {
-    return std::forward<Connector>(connector).template request<variant_t<message_t, boolean_t>>("editMessageText", deser::serialize(std::move(args)), [](expected<std::string> request_result) -> expected<variant_t<message_t, boolean_t>> {
-        if (!request_result.has_value()) {
-            return banana::error_t<>{ "[edit_message_text] Request error: " + request_result.error() };
-        }
-
-        expected<variant_t<message_t, boolean_t>> deser_result = deser::deserialize<variant_t<message_t, boolean_t>>(request_result.value());
-        if (!deser_result.has_value()) {
-            return banana::error_t<>{ "[edit_message_text] Deserialization error: " + deser_result.error() };
-        }
-
-        return deser_result;
-    });
+    return std::forward<Connector>(connector).template request<variant_t<message_t, boolean_t>>("editMessageText", deser::serialize(std::move(args)), response_handler<variant_t<message_t, boolean_t>>{ "edit_message_text" });
 }
 
 /**
@@ -1070,18 +828,7 @@ struct export_chat_invite_link_args_t {
  */
 template <class Connector>
 api_result<string_t, Connector&&> export_chat_invite_link(Connector&& connector, export_chat_invite_link_args_t args) {
-    return std::forward<Connector>(connector).template request<string_t>("exportChatInviteLink", deser::serialize(std::move(args)), [](expected<std::string> request_result) -> expected<string_t> {
-        if (!request_result.has_value()) {
-            return banana::error_t<>{ "[export_chat_invite_link] Request error: " + request_result.error() };
-        }
-
-        expected<string_t> deser_result = deser::deserialize<string_t>(request_result.value());
-        if (!deser_result.has_value()) {
-            return banana::error_t<>{ "[export_chat_invite_link] Deserialization error: " + deser_result.error() };
-        }
-
-        return deser_result;
-    });
+    return std::forward<Connector>(connector).template request<string_t>("exportChatInviteLink", deser::serialize(std::move(args)), response_handler<string_t>{ "export_chat_invite_link" });
 }
 
 /**
@@ -1114,18 +861,7 @@ struct forward_message_args_t {
  */
 template <class Connector>
 api_result<message_t, Connector&&> forward_message(Connector&& connector, forward_message_args_t args) {
-    return std::forward<Connector>(connector).template request<message_t>("forwardMessage", deser::serialize(std::move(args)), [](expected<std::string> request_result) -> expected<message_t> {
-        if (!request_result.has_value()) {
-            return banana::error_t<>{ "[forward_message] Request error: " + request_result.error() };
-        }
-
-        expected<message_t> deser_result = deser::deserialize<message_t>(request_result.value());
-        if (!deser_result.has_value()) {
-            return banana::error_t<>{ "[forward_message] Deserialization error: " + deser_result.error() };
-        }
-
-        return deser_result;
-    });
+    return std::forward<Connector>(connector).template request<message_t>("forwardMessage", deser::serialize(std::move(args)), response_handler<message_t>{ "forward_message" });
 }
 
 /**
@@ -1155,18 +891,7 @@ struct get_chat_args_t {
  */
 template <class Connector>
 api_result<chat_t, Connector&&> get_chat(Connector&& connector, get_chat_args_t args) {
-    return std::forward<Connector>(connector).template request<chat_t>("getChat", deser::serialize(std::move(args)), [](expected<std::string> request_result) -> expected<chat_t> {
-        if (!request_result.has_value()) {
-            return banana::error_t<>{ "[get_chat] Request error: " + request_result.error() };
-        }
-
-        expected<chat_t> deser_result = deser::deserialize<chat_t>(request_result.value());
-        if (!deser_result.has_value()) {
-            return banana::error_t<>{ "[get_chat] Deserialization error: " + deser_result.error() };
-        }
-
-        return deser_result;
-    });
+    return std::forward<Connector>(connector).template request<chat_t>("getChat", deser::serialize(std::move(args)), response_handler<chat_t>{ "get_chat" });
 }
 
 /**
@@ -1193,18 +918,7 @@ struct get_chat_administrators_args_t {
  */
 template <class Connector>
 api_result<array_t<chat_member_t>, Connector&&> get_chat_administrators(Connector&& connector, get_chat_administrators_args_t args) {
-    return std::forward<Connector>(connector).template request<array_t<chat_member_t>>("getChatAdministrators", deser::serialize(std::move(args)), [](expected<std::string> request_result) -> expected<array_t<chat_member_t>> {
-        if (!request_result.has_value()) {
-            return banana::error_t<>{ "[get_chat_administrators] Request error: " + request_result.error() };
-        }
-
-        expected<array_t<chat_member_t>> deser_result = deser::deserialize<array_t<chat_member_t>>(request_result.value());
-        if (!deser_result.has_value()) {
-            return banana::error_t<>{ "[get_chat_administrators] Deserialization error: " + deser_result.error() };
-        }
-
-        return deser_result;
-    });
+    return std::forward<Connector>(connector).template request<array_t<chat_member_t>>("getChatAdministrators", deser::serialize(std::move(args)), response_handler<array_t<chat_member_t>>{ "get_chat_administrators" });
 }
 
 /**
@@ -1233,18 +947,7 @@ struct get_chat_member_args_t {
  */
 template <class Connector>
 api_result<chat_member_t, Connector&&> get_chat_member(Connector&& connector, get_chat_member_args_t args) {
-    return std::forward<Connector>(connector).template request<chat_member_t>("getChatMember", deser::serialize(std::move(args)), [](expected<std::string> request_result) -> expected<chat_member_t> {
-        if (!request_result.has_value()) {
-            return banana::error_t<>{ "[get_chat_member] Request error: " + request_result.error() };
-        }
-
-        expected<chat_member_t> deser_result = deser::deserialize<chat_member_t>(request_result.value());
-        if (!deser_result.has_value()) {
-            return banana::error_t<>{ "[get_chat_member] Deserialization error: " + deser_result.error() };
-        }
-
-        return deser_result;
-    });
+    return std::forward<Connector>(connector).template request<chat_member_t>("getChatMember", deser::serialize(std::move(args)), response_handler<chat_member_t>{ "get_chat_member" });
 }
 
 /**
@@ -1272,18 +975,7 @@ struct get_chat_member_count_args_t {
  */
 template <class Connector>
 api_result<integer_t, Connector&&> get_chat_member_count(Connector&& connector, get_chat_member_count_args_t args) {
-    return std::forward<Connector>(connector).template request<integer_t>("getChatMemberCount", deser::serialize(std::move(args)), [](expected<std::string> request_result) -> expected<integer_t> {
-        if (!request_result.has_value()) {
-            return banana::error_t<>{ "[get_chat_member_count] Request error: " + request_result.error() };
-        }
-
-        expected<integer_t> deser_result = deser::deserialize<integer_t>(request_result.value());
-        if (!deser_result.has_value()) {
-            return banana::error_t<>{ "[get_chat_member_count] Deserialization error: " + deser_result.error() };
-        }
-
-        return deser_result;
-    });
+    return std::forward<Connector>(connector).template request<integer_t>("getChatMemberCount", deser::serialize(std::move(args)), response_handler<integer_t>{ "get_chat_member_count" });
 }
 
 /**
@@ -1310,18 +1002,7 @@ struct get_file_args_t {
  */
 template <class Connector>
 api_result<file_t, Connector&&> get_file(Connector&& connector, get_file_args_t args) {
-    return std::forward<Connector>(connector).template request<file_t>("getFile", deser::serialize(std::move(args)), [](expected<std::string> request_result) -> expected<file_t> {
-        if (!request_result.has_value()) {
-            return banana::error_t<>{ "[get_file] Request error: " + request_result.error() };
-        }
-
-        expected<file_t> deser_result = deser::deserialize<file_t>(request_result.value());
-        if (!deser_result.has_value()) {
-            return banana::error_t<>{ "[get_file] Deserialization error: " + deser_result.error() };
-        }
-
-        return deser_result;
-    });
+    return std::forward<Connector>(connector).template request<file_t>("getFile", deser::serialize(std::move(args)), response_handler<file_t>{ "get_file" });
 }
 
 /**
@@ -1354,18 +1035,7 @@ struct get_game_high_scores_args_t {
  */
 template <class Connector>
 api_result<array_t<game_high_score_t>, Connector&&> get_game_high_scores(Connector&& connector, get_game_high_scores_args_t args) {
-    return std::forward<Connector>(connector).template request<array_t<game_high_score_t>>("getGameHighScores", deser::serialize(std::move(args)), [](expected<std::string> request_result) -> expected<array_t<game_high_score_t>> {
-        if (!request_result.has_value()) {
-            return banana::error_t<>{ "[get_game_high_scores] Request error: " + request_result.error() };
-        }
-
-        expected<array_t<game_high_score_t>> deser_result = deser::deserialize<array_t<game_high_score_t>>(request_result.value());
-        if (!deser_result.has_value()) {
-            return banana::error_t<>{ "[get_game_high_scores] Deserialization error: " + deser_result.error() };
-        }
-
-        return deser_result;
-    });
+    return std::forward<Connector>(connector).template request<array_t<game_high_score_t>>("getGameHighScores", deser::serialize(std::move(args)), response_handler<array_t<game_high_score_t>>{ "get_game_high_scores" });
 }
 
 /**
@@ -1393,18 +1063,7 @@ struct get_me_args_t {
  */
 template <class Connector>
 api_result<user_t, Connector&&> get_me(Connector&& connector, get_me_args_t args = {}) {
-    return std::forward<Connector>(connector).template request<user_t>("getMe", deser::serialize(std::move(args)), [](expected<std::string> request_result) -> expected<user_t> {
-        if (!request_result.has_value()) {
-            return banana::error_t<>{ "[get_me] Request error: " + request_result.error() };
-        }
-
-        expected<user_t> deser_result = deser::deserialize<user_t>(request_result.value());
-        if (!deser_result.has_value()) {
-            return banana::error_t<>{ "[get_me] Deserialization error: " + deser_result.error() };
-        }
-
-        return deser_result;
-    });
+    return std::forward<Connector>(connector).template request<user_t>("getMe", deser::serialize(std::move(args)), response_handler<user_t>{ "get_me" });
 }
 
 /**
@@ -1432,18 +1091,7 @@ struct get_my_commands_args_t {
  */
 template <class Connector>
 api_result<array_t<bot_command_t>, Connector&&> get_my_commands(Connector&& connector, get_my_commands_args_t args) {
-    return std::forward<Connector>(connector).template request<array_t<bot_command_t>>("getMyCommands", deser::serialize(std::move(args)), [](expected<std::string> request_result) -> expected<array_t<bot_command_t>> {
-        if (!request_result.has_value()) {
-            return banana::error_t<>{ "[get_my_commands] Request error: " + request_result.error() };
-        }
-
-        expected<array_t<bot_command_t>> deser_result = deser::deserialize<array_t<bot_command_t>>(request_result.value());
-        if (!deser_result.has_value()) {
-            return banana::error_t<>{ "[get_my_commands] Deserialization error: " + deser_result.error() };
-        }
-
-        return deser_result;
-    });
+    return std::forward<Connector>(connector).template request<array_t<bot_command_t>>("getMyCommands", deser::serialize(std::move(args)), response_handler<array_t<bot_command_t>>{ "get_my_commands" });
 }
 
 /**
@@ -1471,18 +1119,7 @@ struct get_sticker_set_args_t {
  */
 template <class Connector>
 api_result<sticker_set_t, Connector&&> get_sticker_set(Connector&& connector, get_sticker_set_args_t args) {
-    return std::forward<Connector>(connector).template request<sticker_set_t>("getStickerSet", deser::serialize(std::move(args)), [](expected<std::string> request_result) -> expected<sticker_set_t> {
-        if (!request_result.has_value()) {
-            return banana::error_t<>{ "[get_sticker_set] Request error: " + request_result.error() };
-        }
-
-        expected<sticker_set_t> deser_result = deser::deserialize<sticker_set_t>(request_result.value());
-        if (!deser_result.has_value()) {
-            return banana::error_t<>{ "[get_sticker_set] Deserialization error: " + deser_result.error() };
-        }
-
-        return deser_result;
-    });
+    return std::forward<Connector>(connector).template request<sticker_set_t>("getStickerSet", deser::serialize(std::move(args)), response_handler<sticker_set_t>{ "get_sticker_set" });
 }
 
 /**
@@ -1515,18 +1152,7 @@ struct get_updates_args_t {
  */
 template <class Connector>
 api_result<array_t<update_t>, Connector&&> get_updates(Connector&& connector, get_updates_args_t args) {
-    return std::forward<Connector>(connector).template request<array_t<update_t>>("getUpdates", deser::serialize(std::move(args)), [](expected<std::string> request_result) -> expected<array_t<update_t>> {
-        if (!request_result.has_value()) {
-            return banana::error_t<>{ "[get_updates] Request error: " + request_result.error() };
-        }
-
-        expected<array_t<update_t>> deser_result = deser::deserialize<array_t<update_t>>(request_result.value());
-        if (!deser_result.has_value()) {
-            return banana::error_t<>{ "[get_updates] Deserialization error: " + deser_result.error() };
-        }
-
-        return deser_result;
-    });
+    return std::forward<Connector>(connector).template request<array_t<update_t>>("getUpdates", deser::serialize(std::move(args)), response_handler<array_t<update_t>>{ "get_updates" });
 }
 
 /**
@@ -1560,18 +1186,7 @@ struct get_user_profile_photos_args_t {
  */
 template <class Connector>
 api_result<user_profile_photos_t, Connector&&> get_user_profile_photos(Connector&& connector, get_user_profile_photos_args_t args) {
-    return std::forward<Connector>(connector).template request<user_profile_photos_t>("getUserProfilePhotos", deser::serialize(std::move(args)), [](expected<std::string> request_result) -> expected<user_profile_photos_t> {
-        if (!request_result.has_value()) {
-            return banana::error_t<>{ "[get_user_profile_photos] Request error: " + request_result.error() };
-        }
-
-        expected<user_profile_photos_t> deser_result = deser::deserialize<user_profile_photos_t>(request_result.value());
-        if (!deser_result.has_value()) {
-            return banana::error_t<>{ "[get_user_profile_photos] Deserialization error: " + deser_result.error() };
-        }
-
-        return deser_result;
-    });
+    return std::forward<Connector>(connector).template request<user_profile_photos_t>("getUserProfilePhotos", deser::serialize(std::move(args)), response_handler<user_profile_photos_t>{ "get_user_profile_photos" });
 }
 
 /**
@@ -1598,18 +1213,7 @@ struct get_webhook_info_args_t {
  */
 template <class Connector>
 api_result<webhook_info_t, Connector&&> get_webhook_info(Connector&& connector, get_webhook_info_args_t args = {}) {
-    return std::forward<Connector>(connector).template request<webhook_info_t>("getWebhookInfo", deser::serialize(std::move(args)), [](expected<std::string> request_result) -> expected<webhook_info_t> {
-        if (!request_result.has_value()) {
-            return banana::error_t<>{ "[get_webhook_info] Request error: " + request_result.error() };
-        }
-
-        expected<webhook_info_t> deser_result = deser::deserialize<webhook_info_t>(request_result.value());
-        if (!deser_result.has_value()) {
-            return banana::error_t<>{ "[get_webhook_info] Deserialization error: " + deser_result.error() };
-        }
-
-        return deser_result;
-    });
+    return std::forward<Connector>(connector).template request<webhook_info_t>("getWebhookInfo", deser::serialize(std::move(args)), response_handler<webhook_info_t>{ "get_webhook_info" });
 }
 
 /**
@@ -1635,18 +1239,7 @@ struct leave_chat_args_t {
  */
 template <class Connector>
 api_result<boolean_t, Connector&&> leave_chat(Connector&& connector, leave_chat_args_t args) {
-    return std::forward<Connector>(connector).template request<boolean_t>("leaveChat", deser::serialize(std::move(args)), [](expected<std::string> request_result) -> expected<boolean_t> {
-        if (!request_result.has_value()) {
-            return banana::error_t<>{ "[leave_chat] Request error: " + request_result.error() };
-        }
-
-        expected<boolean_t> deser_result = deser::deserialize<boolean_t>(request_result.value());
-        if (!deser_result.has_value()) {
-            return banana::error_t<>{ "[leave_chat] Deserialization error: " + deser_result.error() };
-        }
-
-        return deser_result;
-    });
+    return std::forward<Connector>(connector).template request<boolean_t>("leaveChat", deser::serialize(std::move(args)), response_handler<boolean_t>{ "leave_chat" });
 }
 
 /**
@@ -1671,18 +1264,7 @@ struct log_out_args_t {
  */
 template <class Connector>
 api_result<boolean_t, Connector&&> log_out(Connector&& connector, log_out_args_t args = {}) {
-    return std::forward<Connector>(connector).template request<boolean_t>("logOut", deser::serialize(std::move(args)), [](expected<std::string> request_result) -> expected<boolean_t> {
-        if (!request_result.has_value()) {
-            return banana::error_t<>{ "[log_out] Request error: " + request_result.error() };
-        }
-
-        expected<boolean_t> deser_result = deser::deserialize<boolean_t>(request_result.value());
-        if (!deser_result.has_value()) {
-            return banana::error_t<>{ "[log_out] Deserialization error: " + deser_result.error() };
-        }
-
-        return deser_result;
-    });
+    return std::forward<Connector>(connector).template request<boolean_t>("logOut", deser::serialize(std::move(args)), response_handler<boolean_t>{ "log_out" });
 }
 
 /**
@@ -1712,18 +1294,7 @@ struct pin_chat_message_args_t {
  */
 template <class Connector>
 api_result<boolean_t, Connector&&> pin_chat_message(Connector&& connector, pin_chat_message_args_t args) {
-    return std::forward<Connector>(connector).template request<boolean_t>("pinChatMessage", deser::serialize(std::move(args)), [](expected<std::string> request_result) -> expected<boolean_t> {
-        if (!request_result.has_value()) {
-            return banana::error_t<>{ "[pin_chat_message] Request error: " + request_result.error() };
-        }
-
-        expected<boolean_t> deser_result = deser::deserialize<boolean_t>(request_result.value());
-        if (!deser_result.has_value()) {
-            return banana::error_t<>{ "[pin_chat_message] Deserialization error: " + deser_result.error() };
-        }
-
-        return deser_result;
-    });
+    return std::forward<Connector>(connector).template request<boolean_t>("pinChatMessage", deser::serialize(std::move(args)), response_handler<boolean_t>{ "pin_chat_message" });
 }
 
 /**
@@ -1776,18 +1347,7 @@ struct promote_chat_member_args_t {
  */
 template <class Connector>
 api_result<boolean_t, Connector&&> promote_chat_member(Connector&& connector, promote_chat_member_args_t args) {
-    return std::forward<Connector>(connector).template request<boolean_t>("promoteChatMember", deser::serialize(std::move(args)), [](expected<std::string> request_result) -> expected<boolean_t> {
-        if (!request_result.has_value()) {
-            return banana::error_t<>{ "[promote_chat_member] Request error: " + request_result.error() };
-        }
-
-        expected<boolean_t> deser_result = deser::deserialize<boolean_t>(request_result.value());
-        if (!deser_result.has_value()) {
-            return banana::error_t<>{ "[promote_chat_member] Deserialization error: " + deser_result.error() };
-        }
-
-        return deser_result;
-    });
+    return std::forward<Connector>(connector).template request<boolean_t>("promoteChatMember", deser::serialize(std::move(args)), response_handler<boolean_t>{ "promote_chat_member" });
 }
 
 /**
@@ -1832,18 +1392,7 @@ struct restrict_chat_member_args_t {
  */
 template <class Connector>
 api_result<boolean_t, Connector&&> restrict_chat_member(Connector&& connector, restrict_chat_member_args_t args) {
-    return std::forward<Connector>(connector).template request<boolean_t>("restrictChatMember", deser::serialize(std::move(args)), [](expected<std::string> request_result) -> expected<boolean_t> {
-        if (!request_result.has_value()) {
-            return banana::error_t<>{ "[restrict_chat_member] Request error: " + request_result.error() };
-        }
-
-        expected<boolean_t> deser_result = deser::deserialize<boolean_t>(request_result.value());
-        if (!deser_result.has_value()) {
-            return banana::error_t<>{ "[restrict_chat_member] Deserialization error: " + deser_result.error() };
-        }
-
-        return deser_result;
-    });
+    return std::forward<Connector>(connector).template request<boolean_t>("restrictChatMember", deser::serialize(std::move(args)), response_handler<boolean_t>{ "restrict_chat_member" });
 }
 
 /**
@@ -1875,18 +1424,7 @@ struct revoke_chat_invite_link_args_t {
  */
 template <class Connector>
 api_result<chat_invite_link_t, Connector&&> revoke_chat_invite_link(Connector&& connector, revoke_chat_invite_link_args_t args) {
-    return std::forward<Connector>(connector).template request<chat_invite_link_t>("revokeChatInviteLink", deser::serialize(std::move(args)), [](expected<std::string> request_result) -> expected<chat_invite_link_t> {
-        if (!request_result.has_value()) {
-            return banana::error_t<>{ "[revoke_chat_invite_link] Request error: " + request_result.error() };
-        }
-
-        expected<chat_invite_link_t> deser_result = deser::deserialize<chat_invite_link_t>(request_result.value());
-        if (!deser_result.has_value()) {
-            return banana::error_t<>{ "[revoke_chat_invite_link] Deserialization error: " + deser_result.error() };
-        }
-
-        return deser_result;
-    });
+    return std::forward<Connector>(connector).template request<chat_invite_link_t>("revokeChatInviteLink", deser::serialize(std::move(args)), response_handler<chat_invite_link_t>{ "revoke_chat_invite_link" });
 }
 
 /**
@@ -1938,18 +1476,7 @@ struct send_animation_args_t {
  */
 template <class Connector>
 api_result<message_t, Connector&&> send_animation(Connector&& connector, send_animation_args_t args) {
-    return std::forward<Connector>(connector).template request<message_t>("sendAnimation", deser::serialize(std::move(args)), [](expected<std::string> request_result) -> expected<message_t> {
-        if (!request_result.has_value()) {
-            return banana::error_t<>{ "[send_animation] Request error: " + request_result.error() };
-        }
-
-        expected<message_t> deser_result = deser::deserialize<message_t>(request_result.value());
-        if (!deser_result.has_value()) {
-            return banana::error_t<>{ "[send_animation] Deserialization error: " + deser_result.error() };
-        }
-
-        return deser_result;
-    });
+    return std::forward<Connector>(connector).template request<message_t>("sendAnimation", deser::serialize(std::move(args)), response_handler<message_t>{ "send_animation" });
 }
 
 /**
@@ -2012,18 +1539,7 @@ struct send_audio_args_t {
  */
 template <class Connector>
 api_result<message_t, Connector&&> send_audio(Connector&& connector, send_audio_args_t args) {
-    return std::forward<Connector>(connector).template request<message_t>("sendAudio", deser::serialize(std::move(args)), [](expected<std::string> request_result) -> expected<message_t> {
-        if (!request_result.has_value()) {
-            return banana::error_t<>{ "[send_audio] Request error: " + request_result.error() };
-        }
-
-        expected<message_t> deser_result = deser::deserialize<message_t>(request_result.value());
-        if (!deser_result.has_value()) {
-            return banana::error_t<>{ "[send_audio] Deserialization error: " + deser_result.error() };
-        }
-
-        return deser_result;
-    });
+    return std::forward<Connector>(connector).template request<message_t>("sendAudio", deser::serialize(std::move(args)), response_handler<message_t>{ "send_audio" });
 }
 
 /**
@@ -2064,18 +1580,7 @@ struct send_chat_action_args_t {
  */
 template <class Connector>
 api_result<boolean_t, Connector&&> send_chat_action(Connector&& connector, send_chat_action_args_t args) {
-    return std::forward<Connector>(connector).template request<boolean_t>("sendChatAction", deser::serialize(std::move(args)), [](expected<std::string> request_result) -> expected<boolean_t> {
-        if (!request_result.has_value()) {
-            return banana::error_t<>{ "[send_chat_action] Request error: " + request_result.error() };
-        }
-
-        expected<boolean_t> deser_result = deser::deserialize<boolean_t>(request_result.value());
-        if (!deser_result.has_value()) {
-            return banana::error_t<>{ "[send_chat_action] Deserialization error: " + deser_result.error() };
-        }
-
-        return deser_result;
-    });
+    return std::forward<Connector>(connector).template request<boolean_t>("sendChatAction", deser::serialize(std::move(args)), response_handler<boolean_t>{ "send_chat_action" });
 }
 
 /**
@@ -2119,18 +1624,7 @@ struct send_contact_args_t {
  */
 template <class Connector>
 api_result<message_t, Connector&&> send_contact(Connector&& connector, send_contact_args_t args) {
-    return std::forward<Connector>(connector).template request<message_t>("sendContact", deser::serialize(std::move(args)), [](expected<std::string> request_result) -> expected<message_t> {
-        if (!request_result.has_value()) {
-            return banana::error_t<>{ "[send_contact] Request error: " + request_result.error() };
-        }
-
-        expected<message_t> deser_result = deser::deserialize<message_t>(request_result.value());
-        if (!deser_result.has_value()) {
-            return banana::error_t<>{ "[send_contact] Deserialization error: " + deser_result.error() };
-        }
-
-        return deser_result;
-    });
+    return std::forward<Connector>(connector).template request<message_t>("sendContact", deser::serialize(std::move(args)), response_handler<message_t>{ "send_contact" });
 }
 
 /**
@@ -2175,18 +1669,7 @@ struct send_dice_args_t {
  */
 template <class Connector>
 api_result<message_t, Connector&&> send_dice(Connector&& connector, send_dice_args_t args) {
-    return std::forward<Connector>(connector).template request<message_t>("sendDice", deser::serialize(std::move(args)), [](expected<std::string> request_result) -> expected<message_t> {
-        if (!request_result.has_value()) {
-            return banana::error_t<>{ "[send_dice] Request error: " + request_result.error() };
-        }
-
-        expected<message_t> deser_result = deser::deserialize<message_t>(request_result.value());
-        if (!deser_result.has_value()) {
-            return banana::error_t<>{ "[send_dice] Deserialization error: " + deser_result.error() };
-        }
-
-        return deser_result;
-    });
+    return std::forward<Connector>(connector).template request<message_t>("sendDice", deser::serialize(std::move(args)), response_handler<message_t>{ "send_dice" });
 }
 
 /**
@@ -2238,18 +1721,7 @@ struct send_document_args_t {
  */
 template <class Connector>
 api_result<message_t, Connector&&> send_document(Connector&& connector, send_document_args_t args) {
-    return std::forward<Connector>(connector).template request<message_t>("sendDocument", deser::serialize(std::move(args)), [](expected<std::string> request_result) -> expected<message_t> {
-        if (!request_result.has_value()) {
-            return banana::error_t<>{ "[send_document] Request error: " + request_result.error() };
-        }
-
-        expected<message_t> deser_result = deser::deserialize<message_t>(request_result.value());
-        if (!deser_result.has_value()) {
-            return banana::error_t<>{ "[send_document] Deserialization error: " + deser_result.error() };
-        }
-
-        return deser_result;
-    });
+    return std::forward<Connector>(connector).template request<message_t>("sendDocument", deser::serialize(std::move(args)), response_handler<message_t>{ "send_document" });
 }
 
 /**
@@ -2296,18 +1768,7 @@ struct send_game_args_t {
  */
 template <class Connector>
 api_result<message_t, Connector&&> send_game(Connector&& connector, send_game_args_t args) {
-    return std::forward<Connector>(connector).template request<message_t>("sendGame", deser::serialize(std::move(args)), [](expected<std::string> request_result) -> expected<message_t> {
-        if (!request_result.has_value()) {
-            return banana::error_t<>{ "[send_game] Request error: " + request_result.error() };
-        }
-
-        expected<message_t> deser_result = deser::deserialize<message_t>(request_result.value());
-        if (!deser_result.has_value()) {
-            return banana::error_t<>{ "[send_game] Deserialization error: " + deser_result.error() };
-        }
-
-        return deser_result;
-    });
+    return std::forward<Connector>(connector).template request<message_t>("sendGame", deser::serialize(std::move(args)), response_handler<message_t>{ "send_game" });
 }
 
 /**
@@ -2389,18 +1850,7 @@ struct send_invoice_args_t {
  */
 template <class Connector>
 api_result<message_t, Connector&&> send_invoice(Connector&& connector, send_invoice_args_t args) {
-    return std::forward<Connector>(connector).template request<message_t>("sendInvoice", deser::serialize(std::move(args)), [](expected<std::string> request_result) -> expected<message_t> {
-        if (!request_result.has_value()) {
-            return banana::error_t<>{ "[send_invoice] Request error: " + request_result.error() };
-        }
-
-        expected<message_t> deser_result = deser::deserialize<message_t>(request_result.value());
-        if (!deser_result.has_value()) {
-            return banana::error_t<>{ "[send_invoice] Deserialization error: " + deser_result.error() };
-        }
-
-        return deser_result;
-    });
+    return std::forward<Connector>(connector).template request<message_t>("sendInvoice", deser::serialize(std::move(args)), response_handler<message_t>{ "send_invoice" });
 }
 
 /**
@@ -2472,18 +1922,7 @@ struct send_location_args_t {
  */
 template <class Connector>
 api_result<message_t, Connector&&> send_location(Connector&& connector, send_location_args_t args) {
-    return std::forward<Connector>(connector).template request<message_t>("sendLocation", deser::serialize(std::move(args)), [](expected<std::string> request_result) -> expected<message_t> {
-        if (!request_result.has_value()) {
-            return banana::error_t<>{ "[send_location] Request error: " + request_result.error() };
-        }
-
-        expected<message_t> deser_result = deser::deserialize<message_t>(request_result.value());
-        if (!deser_result.has_value()) {
-            return banana::error_t<>{ "[send_location] Deserialization error: " + deser_result.error() };
-        }
-
-        return deser_result;
-    });
+    return std::forward<Connector>(connector).template request<message_t>("sendLocation", deser::serialize(std::move(args)), response_handler<message_t>{ "send_location" });
 }
 
 /**
@@ -2528,18 +1967,7 @@ struct send_media_group_args_t {
  */
 template <class Connector>
 api_result<array_t<message_t>, Connector&&> send_media_group(Connector&& connector, send_media_group_args_t args) {
-    return std::forward<Connector>(connector).template request<array_t<message_t>>("sendMediaGroup", deser::serialize(std::move(args)), [](expected<std::string> request_result) -> expected<array_t<message_t>> {
-        if (!request_result.has_value()) {
-            return banana::error_t<>{ "[send_media_group] Request error: " + request_result.error() };
-        }
-
-        expected<array_t<message_t>> deser_result = deser::deserialize<array_t<message_t>>(request_result.value());
-        if (!deser_result.has_value()) {
-            return banana::error_t<>{ "[send_media_group] Deserialization error: " + deser_result.error() };
-        }
-
-        return deser_result;
-    });
+    return std::forward<Connector>(connector).template request<array_t<message_t>>("sendMediaGroup", deser::serialize(std::move(args)), response_handler<array_t<message_t>>{ "send_media_group" });
 }
 
 /**
@@ -2586,18 +2014,7 @@ struct send_message_args_t {
  */
 template <class Connector>
 api_result<message_t, Connector&&> send_message(Connector&& connector, send_message_args_t args) {
-    return std::forward<Connector>(connector).template request<message_t>("sendMessage", deser::serialize(std::move(args)), [](expected<std::string> request_result) -> expected<message_t> {
-        if (!request_result.has_value()) {
-            return banana::error_t<>{ "[send_message] Request error: " + request_result.error() };
-        }
-
-        expected<message_t> deser_result = deser::deserialize<message_t>(request_result.value());
-        if (!deser_result.has_value()) {
-            return banana::error_t<>{ "[send_message] Deserialization error: " + deser_result.error() };
-        }
-
-        return deser_result;
-    });
+    return std::forward<Connector>(connector).template request<message_t>("sendMessage", deser::serialize(std::move(args)), response_handler<message_t>{ "send_message" });
 }
 
 /**
@@ -2648,18 +2065,7 @@ struct send_photo_args_t {
  */
 template <class Connector>
 api_result<message_t, Connector&&> send_photo(Connector&& connector, send_photo_args_t args) {
-    return std::forward<Connector>(connector).template request<message_t>("sendPhoto", deser::serialize(std::move(args)), [](expected<std::string> request_result) -> expected<message_t> {
-        if (!request_result.has_value()) {
-            return banana::error_t<>{ "[send_photo] Request error: " + request_result.error() };
-        }
-
-        expected<message_t> deser_result = deser::deserialize<message_t>(request_result.value());
-        if (!deser_result.has_value()) {
-            return banana::error_t<>{ "[send_photo] Deserialization error: " + deser_result.error() };
-        }
-
-        return deser_result;
-    });
+    return std::forward<Connector>(connector).template request<message_t>("sendPhoto", deser::serialize(std::move(args)), response_handler<message_t>{ "send_photo" });
 }
 
 /**
@@ -2726,18 +2132,7 @@ struct send_poll_args_t {
  */
 template <class Connector>
 api_result<message_t, Connector&&> send_poll(Connector&& connector, send_poll_args_t args) {
-    return std::forward<Connector>(connector).template request<message_t>("sendPoll", deser::serialize(std::move(args)), [](expected<std::string> request_result) -> expected<message_t> {
-        if (!request_result.has_value()) {
-            return banana::error_t<>{ "[send_poll] Request error: " + request_result.error() };
-        }
-
-        expected<message_t> deser_result = deser::deserialize<message_t>(request_result.value());
-        if (!deser_result.has_value()) {
-            return banana::error_t<>{ "[send_poll] Deserialization error: " + deser_result.error() };
-        }
-
-        return deser_result;
-    });
+    return std::forward<Connector>(connector).template request<message_t>("sendPoll", deser::serialize(std::move(args)), response_handler<message_t>{ "send_poll" });
 }
 
 /**
@@ -2790,18 +2185,7 @@ struct send_sticker_args_t {
  */
 template <class Connector>
 api_result<message_t, Connector&&> send_sticker(Connector&& connector, send_sticker_args_t args) {
-    return std::forward<Connector>(connector).template request<message_t>("sendSticker", deser::serialize(std::move(args)), [](expected<std::string> request_result) -> expected<message_t> {
-        if (!request_result.has_value()) {
-            return banana::error_t<>{ "[send_sticker] Request error: " + request_result.error() };
-        }
-
-        expected<message_t> deser_result = deser::deserialize<message_t>(request_result.value());
-        if (!deser_result.has_value()) {
-            return banana::error_t<>{ "[send_sticker] Deserialization error: " + deser_result.error() };
-        }
-
-        return deser_result;
-    });
+    return std::forward<Connector>(connector).template request<message_t>("sendSticker", deser::serialize(std::move(args)), response_handler<message_t>{ "send_sticker" });
 }
 
 /**
@@ -2857,18 +2241,7 @@ struct send_venue_args_t {
  */
 template <class Connector>
 api_result<message_t, Connector&&> send_venue(Connector&& connector, send_venue_args_t args) {
-    return std::forward<Connector>(connector).template request<message_t>("sendVenue", deser::serialize(std::move(args)), [](expected<std::string> request_result) -> expected<message_t> {
-        if (!request_result.has_value()) {
-            return banana::error_t<>{ "[send_venue] Request error: " + request_result.error() };
-        }
-
-        expected<message_t> deser_result = deser::deserialize<message_t>(request_result.value());
-        if (!deser_result.has_value()) {
-            return banana::error_t<>{ "[send_venue] Deserialization error: " + deser_result.error() };
-        }
-
-        return deser_result;
-    });
+    return std::forward<Connector>(connector).template request<message_t>("sendVenue", deser::serialize(std::move(args)), response_handler<message_t>{ "send_venue" });
 }
 
 /**
@@ -2933,18 +2306,7 @@ struct send_video_args_t {
  */
 template <class Connector>
 api_result<message_t, Connector&&> send_video(Connector&& connector, send_video_args_t args) {
-    return std::forward<Connector>(connector).template request<message_t>("sendVideo", deser::serialize(std::move(args)), [](expected<std::string> request_result) -> expected<message_t> {
-        if (!request_result.has_value()) {
-            return banana::error_t<>{ "[send_video] Request error: " + request_result.error() };
-        }
-
-        expected<message_t> deser_result = deser::deserialize<message_t>(request_result.value());
-        if (!deser_result.has_value()) {
-            return banana::error_t<>{ "[send_video] Deserialization error: " + deser_result.error() };
-        }
-
-        return deser_result;
-    });
+    return std::forward<Connector>(connector).template request<message_t>("sendVideo", deser::serialize(std::move(args)), response_handler<message_t>{ "send_video" });
 }
 
 /**
@@ -3000,18 +2362,7 @@ struct send_video_note_args_t {
  */
 template <class Connector>
 api_result<message_t, Connector&&> send_video_note(Connector&& connector, send_video_note_args_t args) {
-    return std::forward<Connector>(connector).template request<message_t>("sendVideoNote", deser::serialize(std::move(args)), [](expected<std::string> request_result) -> expected<message_t> {
-        if (!request_result.has_value()) {
-            return banana::error_t<>{ "[send_video_note] Request error: " + request_result.error() };
-        }
-
-        expected<message_t> deser_result = deser::deserialize<message_t>(request_result.value());
-        if (!deser_result.has_value()) {
-            return banana::error_t<>{ "[send_video_note] Deserialization error: " + deser_result.error() };
-        }
-
-        return deser_result;
-    });
+    return std::forward<Connector>(connector).template request<message_t>("sendVideoNote", deser::serialize(std::move(args)), response_handler<message_t>{ "send_video_note" });
 }
 
 /**
@@ -3064,18 +2415,7 @@ struct send_voice_args_t {
  */
 template <class Connector>
 api_result<message_t, Connector&&> send_voice(Connector&& connector, send_voice_args_t args) {
-    return std::forward<Connector>(connector).template request<message_t>("sendVoice", deser::serialize(std::move(args)), [](expected<std::string> request_result) -> expected<message_t> {
-        if (!request_result.has_value()) {
-            return banana::error_t<>{ "[send_voice] Request error: " + request_result.error() };
-        }
-
-        expected<message_t> deser_result = deser::deserialize<message_t>(request_result.value());
-        if (!deser_result.has_value()) {
-            return banana::error_t<>{ "[send_voice] Deserialization error: " + deser_result.error() };
-        }
-
-        return deser_result;
-    });
+    return std::forward<Connector>(connector).template request<message_t>("sendVoice", deser::serialize(std::move(args)), response_handler<message_t>{ "send_voice" });
 }
 
 /**
@@ -3115,18 +2455,7 @@ struct set_chat_administrator_custom_title_args_t {
  */
 template <class Connector>
 api_result<boolean_t, Connector&&> set_chat_administrator_custom_title(Connector&& connector, set_chat_administrator_custom_title_args_t args) {
-    return std::forward<Connector>(connector).template request<boolean_t>("setChatAdministratorCustomTitle", deser::serialize(std::move(args)), [](expected<std::string> request_result) -> expected<boolean_t> {
-        if (!request_result.has_value()) {
-            return banana::error_t<>{ "[set_chat_administrator_custom_title] Request error: " + request_result.error() };
-        }
-
-        expected<boolean_t> deser_result = deser::deserialize<boolean_t>(request_result.value());
-        if (!deser_result.has_value()) {
-            return banana::error_t<>{ "[set_chat_administrator_custom_title] Deserialization error: " + deser_result.error() };
-        }
-
-        return deser_result;
-    });
+    return std::forward<Connector>(connector).template request<boolean_t>("setChatAdministratorCustomTitle", deser::serialize(std::move(args)), response_handler<boolean_t>{ "set_chat_administrator_custom_title" });
 }
 
 /**
@@ -3157,18 +2486,7 @@ struct set_chat_description_args_t {
  */
 template <class Connector>
 api_result<boolean_t, Connector&&> set_chat_description(Connector&& connector, set_chat_description_args_t args) {
-    return std::forward<Connector>(connector).template request<boolean_t>("setChatDescription", deser::serialize(std::move(args)), [](expected<std::string> request_result) -> expected<boolean_t> {
-        if (!request_result.has_value()) {
-            return banana::error_t<>{ "[set_chat_description] Request error: " + request_result.error() };
-        }
-
-        expected<boolean_t> deser_result = deser::deserialize<boolean_t>(request_result.value());
-        if (!deser_result.has_value()) {
-            return banana::error_t<>{ "[set_chat_description] Deserialization error: " + deser_result.error() };
-        }
-
-        return deser_result;
-    });
+    return std::forward<Connector>(connector).template request<boolean_t>("setChatDescription", deser::serialize(std::move(args)), response_handler<boolean_t>{ "set_chat_description" });
 }
 
 /**
@@ -3198,18 +2516,7 @@ struct set_chat_permissions_args_t {
  */
 template <class Connector>
 api_result<boolean_t, Connector&&> set_chat_permissions(Connector&& connector, set_chat_permissions_args_t args) {
-    return std::forward<Connector>(connector).template request<boolean_t>("setChatPermissions", deser::serialize(std::move(args)), [](expected<std::string> request_result) -> expected<boolean_t> {
-        if (!request_result.has_value()) {
-            return banana::error_t<>{ "[set_chat_permissions] Request error: " + request_result.error() };
-        }
-
-        expected<boolean_t> deser_result = deser::deserialize<boolean_t>(request_result.value());
-        if (!deser_result.has_value()) {
-            return banana::error_t<>{ "[set_chat_permissions] Deserialization error: " + deser_result.error() };
-        }
-
-        return deser_result;
-    });
+    return std::forward<Connector>(connector).template request<boolean_t>("setChatPermissions", deser::serialize(std::move(args)), response_handler<boolean_t>{ "set_chat_permissions" });
 }
 
 /**
@@ -3239,18 +2546,7 @@ struct set_chat_photo_args_t {
  */
 template <class Connector>
 api_result<boolean_t, Connector&&> set_chat_photo(Connector&& connector, set_chat_photo_args_t args) {
-    return std::forward<Connector>(connector).template request<boolean_t>("setChatPhoto", deser::serialize(std::move(args)), [](expected<std::string> request_result) -> expected<boolean_t> {
-        if (!request_result.has_value()) {
-            return banana::error_t<>{ "[set_chat_photo] Request error: " + request_result.error() };
-        }
-
-        expected<boolean_t> deser_result = deser::deserialize<boolean_t>(request_result.value());
-        if (!deser_result.has_value()) {
-            return banana::error_t<>{ "[set_chat_photo] Deserialization error: " + deser_result.error() };
-        }
-
-        return deser_result;
-    });
+    return std::forward<Connector>(connector).template request<boolean_t>("setChatPhoto", deser::serialize(std::move(args)), response_handler<boolean_t>{ "set_chat_photo" });
 }
 
 /**
@@ -3280,18 +2576,7 @@ struct set_chat_sticker_set_args_t {
  */
 template <class Connector>
 api_result<boolean_t, Connector&&> set_chat_sticker_set(Connector&& connector, set_chat_sticker_set_args_t args) {
-    return std::forward<Connector>(connector).template request<boolean_t>("setChatStickerSet", deser::serialize(std::move(args)), [](expected<std::string> request_result) -> expected<boolean_t> {
-        if (!request_result.has_value()) {
-            return banana::error_t<>{ "[set_chat_sticker_set] Request error: " + request_result.error() };
-        }
-
-        expected<boolean_t> deser_result = deser::deserialize<boolean_t>(request_result.value());
-        if (!deser_result.has_value()) {
-            return banana::error_t<>{ "[set_chat_sticker_set] Deserialization error: " + deser_result.error() };
-        }
-
-        return deser_result;
-    });
+    return std::forward<Connector>(connector).template request<boolean_t>("setChatStickerSet", deser::serialize(std::move(args)), response_handler<boolean_t>{ "set_chat_sticker_set" });
 }
 
 /**
@@ -3321,18 +2606,7 @@ struct set_chat_title_args_t {
  */
 template <class Connector>
 api_result<boolean_t, Connector&&> set_chat_title(Connector&& connector, set_chat_title_args_t args) {
-    return std::forward<Connector>(connector).template request<boolean_t>("setChatTitle", deser::serialize(std::move(args)), [](expected<std::string> request_result) -> expected<boolean_t> {
-        if (!request_result.has_value()) {
-            return banana::error_t<>{ "[set_chat_title] Request error: " + request_result.error() };
-        }
-
-        expected<boolean_t> deser_result = deser::deserialize<boolean_t>(request_result.value());
-        if (!deser_result.has_value()) {
-            return banana::error_t<>{ "[set_chat_title] Deserialization error: " + deser_result.error() };
-        }
-
-        return deser_result;
-    });
+    return std::forward<Connector>(connector).template request<boolean_t>("setChatTitle", deser::serialize(std::move(args)), response_handler<boolean_t>{ "set_chat_title" });
 }
 
 /**
@@ -3372,18 +2646,7 @@ struct set_game_score_args_t {
  */
 template <class Connector>
 api_result<variant_t<message_t, boolean_t>, Connector&&> set_game_score(Connector&& connector, set_game_score_args_t args) {
-    return std::forward<Connector>(connector).template request<variant_t<message_t, boolean_t>>("setGameScore", deser::serialize(std::move(args)), [](expected<std::string> request_result) -> expected<variant_t<message_t, boolean_t>> {
-        if (!request_result.has_value()) {
-            return banana::error_t<>{ "[set_game_score] Request error: " + request_result.error() };
-        }
-
-        expected<variant_t<message_t, boolean_t>> deser_result = deser::deserialize<variant_t<message_t, boolean_t>>(request_result.value());
-        if (!deser_result.has_value()) {
-            return banana::error_t<>{ "[set_game_score] Deserialization error: " + deser_result.error() };
-        }
-
-        return deser_result;
-    });
+    return std::forward<Connector>(connector).template request<variant_t<message_t, boolean_t>>("setGameScore", deser::serialize(std::move(args)), response_handler<variant_t<message_t, boolean_t>>{ "set_game_score" });
 }
 
 /**
@@ -3420,18 +2683,7 @@ struct set_my_commands_args_t {
  */
 template <class Connector>
 api_result<boolean_t, Connector&&> set_my_commands(Connector&& connector, set_my_commands_args_t args) {
-    return std::forward<Connector>(connector).template request<boolean_t>("setMyCommands", deser::serialize(std::move(args)), [](expected<std::string> request_result) -> expected<boolean_t> {
-        if (!request_result.has_value()) {
-            return banana::error_t<>{ "[set_my_commands] Request error: " + request_result.error() };
-        }
-
-        expected<boolean_t> deser_result = deser::deserialize<boolean_t>(request_result.value());
-        if (!deser_result.has_value()) {
-            return banana::error_t<>{ "[set_my_commands] Deserialization error: " + deser_result.error() };
-        }
-
-        return deser_result;
-    });
+    return std::forward<Connector>(connector).template request<boolean_t>("setMyCommands", deser::serialize(std::move(args)), response_handler<boolean_t>{ "set_my_commands" });
 }
 
 /**
@@ -3462,18 +2714,7 @@ struct set_passport_data_errors_args_t {
  */
 template <class Connector>
 api_result<boolean_t, Connector&&> set_passport_data_errors(Connector&& connector, set_passport_data_errors_args_t args) {
-    return std::forward<Connector>(connector).template request<boolean_t>("setPassportDataErrors", deser::serialize(std::move(args)), [](expected<std::string> request_result) -> expected<boolean_t> {
-        if (!request_result.has_value()) {
-            return banana::error_t<>{ "[set_passport_data_errors] Request error: " + request_result.error() };
-        }
-
-        expected<boolean_t> deser_result = deser::deserialize<boolean_t>(request_result.value());
-        if (!deser_result.has_value()) {
-            return banana::error_t<>{ "[set_passport_data_errors] Deserialization error: " + deser_result.error() };
-        }
-
-        return deser_result;
-    });
+    return std::forward<Connector>(connector).template request<boolean_t>("setPassportDataErrors", deser::serialize(std::move(args)), response_handler<boolean_t>{ "set_passport_data_errors" });
 }
 
 /**
@@ -3503,18 +2744,7 @@ struct set_sticker_position_in_set_args_t {
  */
 template <class Connector>
 api_result<boolean_t, Connector&&> set_sticker_position_in_set(Connector&& connector, set_sticker_position_in_set_args_t args) {
-    return std::forward<Connector>(connector).template request<boolean_t>("setStickerPositionInSet", deser::serialize(std::move(args)), [](expected<std::string> request_result) -> expected<boolean_t> {
-        if (!request_result.has_value()) {
-            return banana::error_t<>{ "[set_sticker_position_in_set] Request error: " + request_result.error() };
-        }
-
-        expected<boolean_t> deser_result = deser::deserialize<boolean_t>(request_result.value());
-        if (!deser_result.has_value()) {
-            return banana::error_t<>{ "[set_sticker_position_in_set] Deserialization error: " + deser_result.error() };
-        }
-
-        return deser_result;
-    });
+    return std::forward<Connector>(connector).template request<boolean_t>("setStickerPositionInSet", deser::serialize(std::move(args)), response_handler<boolean_t>{ "set_sticker_position_in_set" });
 }
 
 /**
@@ -3546,18 +2776,7 @@ struct set_sticker_set_thumb_args_t {
  */
 template <class Connector>
 api_result<boolean_t, Connector&&> set_sticker_set_thumb(Connector&& connector, set_sticker_set_thumb_args_t args) {
-    return std::forward<Connector>(connector).template request<boolean_t>("setStickerSetThumb", deser::serialize(std::move(args)), [](expected<std::string> request_result) -> expected<boolean_t> {
-        if (!request_result.has_value()) {
-            return banana::error_t<>{ "[set_sticker_set_thumb] Request error: " + request_result.error() };
-        }
-
-        expected<boolean_t> deser_result = deser::deserialize<boolean_t>(request_result.value());
-        if (!deser_result.has_value()) {
-            return banana::error_t<>{ "[set_sticker_set_thumb] Deserialization error: " + deser_result.error() };
-        }
-
-        return deser_result;
-    });
+    return std::forward<Connector>(connector).template request<boolean_t>("setStickerSetThumb", deser::serialize(std::move(args)), response_handler<boolean_t>{ "set_sticker_set_thumb" });
 }
 
 /**
@@ -3596,18 +2815,7 @@ struct set_webhook_args_t {
  */
 template <class Connector>
 api_result<boolean_t, Connector&&> set_webhook(Connector&& connector, set_webhook_args_t args) {
-    return std::forward<Connector>(connector).template request<boolean_t>("setWebhook", deser::serialize(std::move(args)), [](expected<std::string> request_result) -> expected<boolean_t> {
-        if (!request_result.has_value()) {
-            return banana::error_t<>{ "[set_webhook] Request error: " + request_result.error() };
-        }
-
-        expected<boolean_t> deser_result = deser::deserialize<boolean_t>(request_result.value());
-        if (!deser_result.has_value()) {
-            return banana::error_t<>{ "[set_webhook] Deserialization error: " + deser_result.error() };
-        }
-
-        return deser_result;
-    });
+    return std::forward<Connector>(connector).template request<boolean_t>("setWebhook", deser::serialize(std::move(args)), response_handler<boolean_t>{ "set_webhook" });
 }
 
 /**
@@ -3645,18 +2853,7 @@ struct stop_message_live_location_args_t {
  */
 template <class Connector>
 api_result<variant_t<message_t, boolean_t>, Connector&&> stop_message_live_location(Connector&& connector, stop_message_live_location_args_t args) {
-    return std::forward<Connector>(connector).template request<variant_t<message_t, boolean_t>>("stopMessageLiveLocation", deser::serialize(std::move(args)), [](expected<std::string> request_result) -> expected<variant_t<message_t, boolean_t>> {
-        if (!request_result.has_value()) {
-            return banana::error_t<>{ "[stop_message_live_location] Request error: " + request_result.error() };
-        }
-
-        expected<variant_t<message_t, boolean_t>> deser_result = deser::deserialize<variant_t<message_t, boolean_t>>(request_result.value());
-        if (!deser_result.has_value()) {
-            return banana::error_t<>{ "[stop_message_live_location] Deserialization error: " + deser_result.error() };
-        }
-
-        return deser_result;
-    });
+    return std::forward<Connector>(connector).template request<variant_t<message_t, boolean_t>>("stopMessageLiveLocation", deser::serialize(std::move(args)), response_handler<variant_t<message_t, boolean_t>>{ "stop_message_live_location" });
 }
 
 /**
@@ -3690,18 +2887,7 @@ struct stop_poll_args_t {
  */
 template <class Connector>
 api_result<poll_t, Connector&&> stop_poll(Connector&& connector, stop_poll_args_t args) {
-    return std::forward<Connector>(connector).template request<poll_t>("stopPoll", deser::serialize(std::move(args)), [](expected<std::string> request_result) -> expected<poll_t> {
-        if (!request_result.has_value()) {
-            return banana::error_t<>{ "[stop_poll] Request error: " + request_result.error() };
-        }
-
-        expected<poll_t> deser_result = deser::deserialize<poll_t>(request_result.value());
-        if (!deser_result.has_value()) {
-            return banana::error_t<>{ "[stop_poll] Deserialization error: " + deser_result.error() };
-        }
-
-        return deser_result;
-    });
+    return std::forward<Connector>(connector).template request<poll_t>("stopPoll", deser::serialize(std::move(args)), response_handler<poll_t>{ "stop_poll" });
 }
 
 /**
@@ -3734,18 +2920,7 @@ struct unban_chat_member_args_t {
  */
 template <class Connector>
 api_result<boolean_t, Connector&&> unban_chat_member(Connector&& connector, unban_chat_member_args_t args) {
-    return std::forward<Connector>(connector).template request<boolean_t>("unbanChatMember", deser::serialize(std::move(args)), [](expected<std::string> request_result) -> expected<boolean_t> {
-        if (!request_result.has_value()) {
-            return banana::error_t<>{ "[unban_chat_member] Request error: " + request_result.error() };
-        }
-
-        expected<boolean_t> deser_result = deser::deserialize<boolean_t>(request_result.value());
-        if (!deser_result.has_value()) {
-            return banana::error_t<>{ "[unban_chat_member] Deserialization error: " + deser_result.error() };
-        }
-
-        return deser_result;
-    });
+    return std::forward<Connector>(connector).template request<boolean_t>("unbanChatMember", deser::serialize(std::move(args)), response_handler<boolean_t>{ "unban_chat_member" });
 }
 
 /**
@@ -3774,18 +2949,7 @@ struct unpin_all_chat_messages_args_t {
  */
 template <class Connector>
 api_result<boolean_t, Connector&&> unpin_all_chat_messages(Connector&& connector, unpin_all_chat_messages_args_t args) {
-    return std::forward<Connector>(connector).template request<boolean_t>("unpinAllChatMessages", deser::serialize(std::move(args)), [](expected<std::string> request_result) -> expected<boolean_t> {
-        if (!request_result.has_value()) {
-            return banana::error_t<>{ "[unpin_all_chat_messages] Request error: " + request_result.error() };
-        }
-
-        expected<boolean_t> deser_result = deser::deserialize<boolean_t>(request_result.value());
-        if (!deser_result.has_value()) {
-            return banana::error_t<>{ "[unpin_all_chat_messages] Deserialization error: " + deser_result.error() };
-        }
-
-        return deser_result;
-    });
+    return std::forward<Connector>(connector).template request<boolean_t>("unpinAllChatMessages", deser::serialize(std::move(args)), response_handler<boolean_t>{ "unpin_all_chat_messages" });
 }
 
 /**
@@ -3814,18 +2978,7 @@ struct unpin_chat_message_args_t {
  */
 template <class Connector>
 api_result<boolean_t, Connector&&> unpin_chat_message(Connector&& connector, unpin_chat_message_args_t args) {
-    return std::forward<Connector>(connector).template request<boolean_t>("unpinChatMessage", deser::serialize(std::move(args)), [](expected<std::string> request_result) -> expected<boolean_t> {
-        if (!request_result.has_value()) {
-            return banana::error_t<>{ "[unpin_chat_message] Request error: " + request_result.error() };
-        }
-
-        expected<boolean_t> deser_result = deser::deserialize<boolean_t>(request_result.value());
-        if (!deser_result.has_value()) {
-            return banana::error_t<>{ "[unpin_chat_message] Deserialization error: " + deser_result.error() };
-        }
-
-        return deser_result;
-    });
+    return std::forward<Connector>(connector).template request<boolean_t>("unpinChatMessage", deser::serialize(std::move(args)), response_handler<boolean_t>{ "unpin_chat_message" });
 }
 
 /**
@@ -3855,18 +3008,7 @@ struct upload_sticker_file_args_t {
  */
 template <class Connector>
 api_result<file_t, Connector&&> upload_sticker_file(Connector&& connector, upload_sticker_file_args_t args) {
-    return std::forward<Connector>(connector).template request<file_t>("uploadStickerFile", deser::serialize(std::move(args)), [](expected<std::string> request_result) -> expected<file_t> {
-        if (!request_result.has_value()) {
-            return banana::error_t<>{ "[upload_sticker_file] Request error: " + request_result.error() };
-        }
-
-        expected<file_t> deser_result = deser::deserialize<file_t>(request_result.value());
-        if (!deser_result.has_value()) {
-            return banana::error_t<>{ "[upload_sticker_file] Deserialization error: " + deser_result.error() };
-        }
-
-        return deser_result;
-    });
+    return std::forward<Connector>(connector).template request<file_t>("uploadStickerFile", deser::serialize(std::move(args)), response_handler<file_t>{ "upload_sticker_file" });
 }
 
 /**
