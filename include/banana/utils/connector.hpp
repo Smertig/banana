@@ -104,7 +104,7 @@ struct make_future : Connector {
         };
 
         auto handler2 = std::make_unique<promise_handler>(std::move(handler));
-        auto result = handler->promise.get_future();
+        auto result = handler2->promise.get_future();
 
         Connector::do_async_request(method, std::move(body), std::move(handler2));
 
@@ -134,7 +134,7 @@ struct make_future_monadic : Connector {
         };
 
         auto handler2 = std::make_unique<promise_handler>(std::move(handler));
-        auto result = handler->promise.get_future();
+        auto result = handler2->promise.get_future();
 
         Connector::do_async_request(method, std::move(body), std::move(handler2));
 
