@@ -25,7 +25,7 @@ struct add_sticker_to_set_args_t {
  */
 template <class Connector>
 api_result<boolean_t, Connector&&> add_sticker_to_set(Connector&& connector, add_sticker_to_set_args_t args) {
-    return std::forward<Connector>(connector).template request<boolean_t>("addStickerToSet", deser::serialize(std::move(args)), response_handler<boolean_t>{ "add_sticker_to_set" });
+    return generic_call(static_cast<Connector&&>(connector), serialize_args(std::move(args)), response_handler<boolean_t>{ "add_sticker_to_set" });
 }
 
 /**
@@ -41,7 +41,7 @@ api_result<boolean_t, Connector&&> add_sticker_to_set(Connector&& connector, add
  */
 template <class Connector>
 api_result<boolean_t, Connector&&> call(Connector&& connector, add_sticker_to_set_args_t args) {
-    return add_sticker_to_set(std::forward<Connector>(connector), std::move(args));
+    return add_sticker_to_set(static_cast<Connector&&>(connector), std::move(args));
 }
 
 // Arguments to answer_callback_query method
@@ -65,7 +65,7 @@ struct answer_callback_query_args_t {
  */
 template <class Connector>
 api_result<boolean_t, Connector&&> answer_callback_query(Connector&& connector, answer_callback_query_args_t args) {
-    return std::forward<Connector>(connector).template request<boolean_t>("answerCallbackQuery", deser::serialize(std::move(args)), response_handler<boolean_t>{ "answer_callback_query" });
+    return generic_call(static_cast<Connector&&>(connector), serialize_args(std::move(args)), response_handler<boolean_t>{ "answer_callback_query" });
 }
 
 /**
@@ -80,7 +80,7 @@ api_result<boolean_t, Connector&&> answer_callback_query(Connector&& connector, 
  */
 template <class Connector>
 api_result<boolean_t, Connector&&> call(Connector&& connector, answer_callback_query_args_t args) {
-    return answer_callback_query(std::forward<Connector>(connector), std::move(args));
+    return answer_callback_query(static_cast<Connector&&>(connector), std::move(args));
 }
 
 // Arguments to answer_inline_query method
@@ -108,7 +108,7 @@ struct answer_inline_query_args_t {
  */
 template <class Connector>
 api_result<boolean_t, Connector&&> answer_inline_query(Connector&& connector, answer_inline_query_args_t args) {
-    return std::forward<Connector>(connector).template request<boolean_t>("answerInlineQuery", deser::serialize(std::move(args)), response_handler<boolean_t>{ "answer_inline_query" });
+    return generic_call(static_cast<Connector&&>(connector), serialize_args(std::move(args)), response_handler<boolean_t>{ "answer_inline_query" });
 }
 
 /**
@@ -125,7 +125,7 @@ api_result<boolean_t, Connector&&> answer_inline_query(Connector&& connector, an
  */
 template <class Connector>
 api_result<boolean_t, Connector&&> call(Connector&& connector, answer_inline_query_args_t args) {
-    return answer_inline_query(std::forward<Connector>(connector), std::move(args));
+    return answer_inline_query(static_cast<Connector&&>(connector), std::move(args));
 }
 
 // Arguments to answer_pre_checkout_query method
@@ -145,7 +145,7 @@ struct answer_pre_checkout_query_args_t {
  */
 template <class Connector>
 api_result<boolean_t, Connector&&> answer_pre_checkout_query(Connector&& connector, answer_pre_checkout_query_args_t args) {
-    return std::forward<Connector>(connector).template request<boolean_t>("answerPreCheckoutQuery", deser::serialize(std::move(args)), response_handler<boolean_t>{ "answer_pre_checkout_query" });
+    return generic_call(static_cast<Connector&&>(connector), serialize_args(std::move(args)), response_handler<boolean_t>{ "answer_pre_checkout_query" });
 }
 
 /**
@@ -158,7 +158,7 @@ api_result<boolean_t, Connector&&> answer_pre_checkout_query(Connector&& connect
  */
 template <class Connector>
 api_result<boolean_t, Connector&&> call(Connector&& connector, answer_pre_checkout_query_args_t args) {
-    return answer_pre_checkout_query(std::forward<Connector>(connector), std::move(args));
+    return answer_pre_checkout_query(static_cast<Connector&&>(connector), std::move(args));
 }
 
 // Arguments to answer_shipping_query method
@@ -180,7 +180,7 @@ struct answer_shipping_query_args_t {
  */
 template <class Connector>
 api_result<boolean_t, Connector&&> answer_shipping_query(Connector&& connector, answer_shipping_query_args_t args) {
-    return std::forward<Connector>(connector).template request<boolean_t>("answerShippingQuery", deser::serialize(std::move(args)), response_handler<boolean_t>{ "answer_shipping_query" });
+    return generic_call(static_cast<Connector&&>(connector), serialize_args(std::move(args)), response_handler<boolean_t>{ "answer_shipping_query" });
 }
 
 /**
@@ -194,7 +194,7 @@ api_result<boolean_t, Connector&&> answer_shipping_query(Connector&& connector, 
  */
 template <class Connector>
 api_result<boolean_t, Connector&&> call(Connector&& connector, answer_shipping_query_args_t args) {
-    return answer_shipping_query(std::forward<Connector>(connector), std::move(args));
+    return answer_shipping_query(static_cast<Connector&&>(connector), std::move(args));
 }
 
 // Arguments to ban_chat_member method
@@ -216,7 +216,7 @@ struct ban_chat_member_args_t {
  */
 template <class Connector>
 api_result<boolean_t, Connector&&> ban_chat_member(Connector&& connector, ban_chat_member_args_t args) {
-    return std::forward<Connector>(connector).template request<boolean_t>("banChatMember", deser::serialize(std::move(args)), response_handler<boolean_t>{ "ban_chat_member" });
+    return generic_call(static_cast<Connector&&>(connector), serialize_args(std::move(args)), response_handler<boolean_t>{ "ban_chat_member" });
 }
 
 /**
@@ -230,7 +230,7 @@ api_result<boolean_t, Connector&&> ban_chat_member(Connector&& connector, ban_ch
  */
 template <class Connector>
 api_result<boolean_t, Connector&&> call(Connector&& connector, ban_chat_member_args_t args) {
-    return ban_chat_member(std::forward<Connector>(connector), std::move(args));
+    return ban_chat_member(static_cast<Connector&&>(connector), std::move(args));
 }
 
 // Arguments to close method
@@ -244,7 +244,7 @@ struct close_args_t {
  */
 template <class Connector>
 api_result<boolean_t, Connector&&> close(Connector&& connector, close_args_t args = {}) {
-    return std::forward<Connector>(connector).template request<boolean_t>("close", deser::serialize(std::move(args)), response_handler<boolean_t>{ "close" });
+    return generic_call(static_cast<Connector&&>(connector), serialize_args(std::move(args)), response_handler<boolean_t>{ "close" });
 }
 
 /**
@@ -254,7 +254,7 @@ api_result<boolean_t, Connector&&> close(Connector&& connector, close_args_t arg
  */
 template <class Connector>
 api_result<boolean_t, Connector&&> call(Connector&& connector, close_args_t args) {
-    return close(std::forward<Connector>(connector), std::move(args));
+    return close(static_cast<Connector&&>(connector), std::move(args));
 }
 
 // Arguments to copy_message method
@@ -288,7 +288,7 @@ struct copy_message_args_t {
  */
 template <class Connector>
 api_result<message_id_t, Connector&&> copy_message(Connector&& connector, copy_message_args_t args) {
-    return std::forward<Connector>(connector).template request<message_id_t>("copyMessage", deser::serialize(std::move(args)), response_handler<message_id_t>{ "copy_message" });
+    return generic_call(static_cast<Connector&&>(connector), serialize_args(std::move(args)), response_handler<message_id_t>{ "copy_message" });
 }
 
 /**
@@ -308,7 +308,7 @@ api_result<message_id_t, Connector&&> copy_message(Connector&& connector, copy_m
  */
 template <class Connector>
 api_result<message_id_t, Connector&&> call(Connector&& connector, copy_message_args_t args) {
-    return copy_message(std::forward<Connector>(connector), std::move(args));
+    return copy_message(static_cast<Connector&&>(connector), std::move(args));
 }
 
 // Arguments to create_chat_invite_link method
@@ -328,7 +328,7 @@ struct create_chat_invite_link_args_t {
  */
 template <class Connector>
 api_result<chat_invite_link_t, Connector&&> create_chat_invite_link(Connector&& connector, create_chat_invite_link_args_t args) {
-    return std::forward<Connector>(connector).template request<chat_invite_link_t>("createChatInviteLink", deser::serialize(std::move(args)), response_handler<chat_invite_link_t>{ "create_chat_invite_link" });
+    return generic_call(static_cast<Connector&&>(connector), serialize_args(std::move(args)), response_handler<chat_invite_link_t>{ "create_chat_invite_link" });
 }
 
 /**
@@ -341,7 +341,7 @@ api_result<chat_invite_link_t, Connector&&> create_chat_invite_link(Connector&& 
  */
 template <class Connector>
 api_result<chat_invite_link_t, Connector&&> call(Connector&& connector, create_chat_invite_link_args_t args) {
-    return create_chat_invite_link(std::forward<Connector>(connector), std::move(args));
+    return create_chat_invite_link(static_cast<Connector&&>(connector), std::move(args));
 }
 
 // Arguments to create_new_sticker_set method
@@ -371,7 +371,7 @@ struct create_new_sticker_set_args_t {
  */
 template <class Connector>
 api_result<boolean_t, Connector&&> create_new_sticker_set(Connector&& connector, create_new_sticker_set_args_t args) {
-    return std::forward<Connector>(connector).template request<boolean_t>("createNewStickerSet", deser::serialize(std::move(args)), response_handler<boolean_t>{ "create_new_sticker_set" });
+    return generic_call(static_cast<Connector&&>(connector), serialize_args(std::move(args)), response_handler<boolean_t>{ "create_new_sticker_set" });
 }
 
 /**
@@ -389,7 +389,7 @@ api_result<boolean_t, Connector&&> create_new_sticker_set(Connector&& connector,
  */
 template <class Connector>
 api_result<boolean_t, Connector&&> call(Connector&& connector, create_new_sticker_set_args_t args) {
-    return create_new_sticker_set(std::forward<Connector>(connector), std::move(args));
+    return create_new_sticker_set(static_cast<Connector&&>(connector), std::move(args));
 }
 
 // Arguments to delete_chat_photo method
@@ -405,7 +405,7 @@ struct delete_chat_photo_args_t {
  */
 template <class Connector>
 api_result<boolean_t, Connector&&> delete_chat_photo(Connector&& connector, delete_chat_photo_args_t args) {
-    return std::forward<Connector>(connector).template request<boolean_t>("deleteChatPhoto", deser::serialize(std::move(args)), response_handler<boolean_t>{ "delete_chat_photo" });
+    return generic_call(static_cast<Connector&&>(connector), serialize_args(std::move(args)), response_handler<boolean_t>{ "delete_chat_photo" });
 }
 
 /**
@@ -416,7 +416,7 @@ api_result<boolean_t, Connector&&> delete_chat_photo(Connector&& connector, dele
  */
 template <class Connector>
 api_result<boolean_t, Connector&&> call(Connector&& connector, delete_chat_photo_args_t args) {
-    return delete_chat_photo(std::forward<Connector>(connector), std::move(args));
+    return delete_chat_photo(static_cast<Connector&&>(connector), std::move(args));
 }
 
 // Arguments to delete_chat_sticker_set method
@@ -432,7 +432,7 @@ struct delete_chat_sticker_set_args_t {
  */
 template <class Connector>
 api_result<boolean_t, Connector&&> delete_chat_sticker_set(Connector&& connector, delete_chat_sticker_set_args_t args) {
-    return std::forward<Connector>(connector).template request<boolean_t>("deleteChatStickerSet", deser::serialize(std::move(args)), response_handler<boolean_t>{ "delete_chat_sticker_set" });
+    return generic_call(static_cast<Connector&&>(connector), serialize_args(std::move(args)), response_handler<boolean_t>{ "delete_chat_sticker_set" });
 }
 
 /**
@@ -443,7 +443,7 @@ api_result<boolean_t, Connector&&> delete_chat_sticker_set(Connector&& connector
  */
 template <class Connector>
 api_result<boolean_t, Connector&&> call(Connector&& connector, delete_chat_sticker_set_args_t args) {
-    return delete_chat_sticker_set(std::forward<Connector>(connector), std::move(args));
+    return delete_chat_sticker_set(static_cast<Connector&&>(connector), std::move(args));
 }
 
 // Arguments to delete_message method
@@ -461,7 +461,7 @@ struct delete_message_args_t {
  */
 template <class Connector>
 api_result<boolean_t, Connector&&> delete_message(Connector&& connector, delete_message_args_t args) {
-    return std::forward<Connector>(connector).template request<boolean_t>("deleteMessage", deser::serialize(std::move(args)), response_handler<boolean_t>{ "delete_message" });
+    return generic_call(static_cast<Connector&&>(connector), serialize_args(std::move(args)), response_handler<boolean_t>{ "delete_message" });
 }
 
 /**
@@ -473,7 +473,7 @@ api_result<boolean_t, Connector&&> delete_message(Connector&& connector, delete_
  */
 template <class Connector>
 api_result<boolean_t, Connector&&> call(Connector&& connector, delete_message_args_t args) {
-    return delete_message(std::forward<Connector>(connector), std::move(args));
+    return delete_message(static_cast<Connector&&>(connector), std::move(args));
 }
 
 // Arguments to delete_my_commands method
@@ -491,7 +491,7 @@ struct delete_my_commands_args_t {
  */
 template <class Connector>
 api_result<boolean_t, Connector&&> delete_my_commands(Connector&& connector, delete_my_commands_args_t args) {
-    return std::forward<Connector>(connector).template request<boolean_t>("deleteMyCommands", deser::serialize(std::move(args)), response_handler<boolean_t>{ "delete_my_commands" });
+    return generic_call(static_cast<Connector&&>(connector), serialize_args(std::move(args)), response_handler<boolean_t>{ "delete_my_commands" });
 }
 
 /**
@@ -503,7 +503,7 @@ api_result<boolean_t, Connector&&> delete_my_commands(Connector&& connector, del
  */
 template <class Connector>
 api_result<boolean_t, Connector&&> call(Connector&& connector, delete_my_commands_args_t args) {
-    return delete_my_commands(std::forward<Connector>(connector), std::move(args));
+    return delete_my_commands(static_cast<Connector&&>(connector), std::move(args));
 }
 
 // Arguments to delete_sticker_from_set method
@@ -519,7 +519,7 @@ struct delete_sticker_from_set_args_t {
  */
 template <class Connector>
 api_result<boolean_t, Connector&&> delete_sticker_from_set(Connector&& connector, delete_sticker_from_set_args_t args) {
-    return std::forward<Connector>(connector).template request<boolean_t>("deleteStickerFromSet", deser::serialize(std::move(args)), response_handler<boolean_t>{ "delete_sticker_from_set" });
+    return generic_call(static_cast<Connector&&>(connector), serialize_args(std::move(args)), response_handler<boolean_t>{ "delete_sticker_from_set" });
 }
 
 /**
@@ -530,7 +530,7 @@ api_result<boolean_t, Connector&&> delete_sticker_from_set(Connector&& connector
  */
 template <class Connector>
 api_result<boolean_t, Connector&&> call(Connector&& connector, delete_sticker_from_set_args_t args) {
-    return delete_sticker_from_set(std::forward<Connector>(connector), std::move(args));
+    return delete_sticker_from_set(static_cast<Connector&&>(connector), std::move(args));
 }
 
 // Arguments to delete_webhook method
@@ -546,7 +546,7 @@ struct delete_webhook_args_t {
  */
 template <class Connector>
 api_result<boolean_t, Connector&&> delete_webhook(Connector&& connector, delete_webhook_args_t args) {
-    return std::forward<Connector>(connector).template request<boolean_t>("deleteWebhook", deser::serialize(std::move(args)), response_handler<boolean_t>{ "delete_webhook" });
+    return generic_call(static_cast<Connector&&>(connector), serialize_args(std::move(args)), response_handler<boolean_t>{ "delete_webhook" });
 }
 
 /**
@@ -557,7 +557,7 @@ api_result<boolean_t, Connector&&> delete_webhook(Connector&& connector, delete_
  */
 template <class Connector>
 api_result<boolean_t, Connector&&> call(Connector&& connector, delete_webhook_args_t args) {
-    return delete_webhook(std::forward<Connector>(connector), std::move(args));
+    return delete_webhook(static_cast<Connector&&>(connector), std::move(args));
 }
 
 // Arguments to edit_chat_invite_link method
@@ -579,7 +579,7 @@ struct edit_chat_invite_link_args_t {
  */
 template <class Connector>
 api_result<chat_invite_link_t, Connector&&> edit_chat_invite_link(Connector&& connector, edit_chat_invite_link_args_t args) {
-    return std::forward<Connector>(connector).template request<chat_invite_link_t>("editChatInviteLink", deser::serialize(std::move(args)), response_handler<chat_invite_link_t>{ "edit_chat_invite_link" });
+    return generic_call(static_cast<Connector&&>(connector), serialize_args(std::move(args)), response_handler<chat_invite_link_t>{ "edit_chat_invite_link" });
 }
 
 /**
@@ -593,7 +593,7 @@ api_result<chat_invite_link_t, Connector&&> edit_chat_invite_link(Connector&& co
  */
 template <class Connector>
 api_result<chat_invite_link_t, Connector&&> call(Connector&& connector, edit_chat_invite_link_args_t args) {
-    return edit_chat_invite_link(std::forward<Connector>(connector), std::move(args));
+    return edit_chat_invite_link(static_cast<Connector&&>(connector), std::move(args));
 }
 
 // Arguments to edit_message_caption method
@@ -621,7 +621,7 @@ struct edit_message_caption_args_t {
  */
 template <class Connector>
 api_result<variant_t<message_t, boolean_t>, Connector&&> edit_message_caption(Connector&& connector, edit_message_caption_args_t args) {
-    return std::forward<Connector>(connector).template request<variant_t<message_t, boolean_t>>("editMessageCaption", deser::serialize(std::move(args)), response_handler<variant_t<message_t, boolean_t>>{ "edit_message_caption" });
+    return generic_call(static_cast<Connector&&>(connector), serialize_args(std::move(args)), response_handler<variant_t<message_t, boolean_t>>{ "edit_message_caption" });
 }
 
 /**
@@ -638,7 +638,7 @@ api_result<variant_t<message_t, boolean_t>, Connector&&> edit_message_caption(Co
  */
 template <class Connector>
 api_result<variant_t<message_t, boolean_t>, Connector&&> call(Connector&& connector, edit_message_caption_args_t args) {
-    return edit_message_caption(std::forward<Connector>(connector), std::move(args));
+    return edit_message_caption(static_cast<Connector&&>(connector), std::move(args));
 }
 
 // Arguments to edit_message_live_location method
@@ -670,7 +670,7 @@ struct edit_message_live_location_args_t {
  */
 template <class Connector>
 api_result<variant_t<message_t, boolean_t>, Connector&&> edit_message_live_location(Connector&& connector, edit_message_live_location_args_t args) {
-    return std::forward<Connector>(connector).template request<variant_t<message_t, boolean_t>>("editMessageLiveLocation", deser::serialize(std::move(args)), response_handler<variant_t<message_t, boolean_t>>{ "edit_message_live_location" });
+    return generic_call(static_cast<Connector&&>(connector), serialize_args(std::move(args)), response_handler<variant_t<message_t, boolean_t>>{ "edit_message_live_location" });
 }
 
 /**
@@ -689,7 +689,7 @@ api_result<variant_t<message_t, boolean_t>, Connector&&> edit_message_live_locat
  */
 template <class Connector>
 api_result<variant_t<message_t, boolean_t>, Connector&&> call(Connector&& connector, edit_message_live_location_args_t args) {
-    return edit_message_live_location(std::forward<Connector>(connector), std::move(args));
+    return edit_message_live_location(static_cast<Connector&&>(connector), std::move(args));
 }
 
 // Arguments to edit_message_media method
@@ -713,7 +713,7 @@ struct edit_message_media_args_t {
  */
 template <class Connector>
 api_result<variant_t<message_t, boolean_t>, Connector&&> edit_message_media(Connector&& connector, edit_message_media_args_t args) {
-    return std::forward<Connector>(connector).template request<variant_t<message_t, boolean_t>>("editMessageMedia", deser::serialize(std::move(args)), response_handler<variant_t<message_t, boolean_t>>{ "edit_message_media" });
+    return generic_call(static_cast<Connector&&>(connector), serialize_args(std::move(args)), response_handler<variant_t<message_t, boolean_t>>{ "edit_message_media" });
 }
 
 /**
@@ -728,7 +728,7 @@ api_result<variant_t<message_t, boolean_t>, Connector&&> edit_message_media(Conn
  */
 template <class Connector>
 api_result<variant_t<message_t, boolean_t>, Connector&&> call(Connector&& connector, edit_message_media_args_t args) {
-    return edit_message_media(std::forward<Connector>(connector), std::move(args));
+    return edit_message_media(static_cast<Connector&&>(connector), std::move(args));
 }
 
 // Arguments to edit_message_reply_markup method
@@ -750,7 +750,7 @@ struct edit_message_reply_markup_args_t {
  */
 template <class Connector>
 api_result<variant_t<message_t, boolean_t>, Connector&&> edit_message_reply_markup(Connector&& connector, edit_message_reply_markup_args_t args) {
-    return std::forward<Connector>(connector).template request<variant_t<message_t, boolean_t>>("editMessageReplyMarkup", deser::serialize(std::move(args)), response_handler<variant_t<message_t, boolean_t>>{ "edit_message_reply_markup" });
+    return generic_call(static_cast<Connector&&>(connector), serialize_args(std::move(args)), response_handler<variant_t<message_t, boolean_t>>{ "edit_message_reply_markup" });
 }
 
 /**
@@ -764,7 +764,7 @@ api_result<variant_t<message_t, boolean_t>, Connector&&> edit_message_reply_mark
  */
 template <class Connector>
 api_result<variant_t<message_t, boolean_t>, Connector&&> call(Connector&& connector, edit_message_reply_markup_args_t args) {
-    return edit_message_reply_markup(std::forward<Connector>(connector), std::move(args));
+    return edit_message_reply_markup(static_cast<Connector&&>(connector), std::move(args));
 }
 
 // Arguments to edit_message_text method
@@ -794,7 +794,7 @@ struct edit_message_text_args_t {
  */
 template <class Connector>
 api_result<variant_t<message_t, boolean_t>, Connector&&> edit_message_text(Connector&& connector, edit_message_text_args_t args) {
-    return std::forward<Connector>(connector).template request<variant_t<message_t, boolean_t>>("editMessageText", deser::serialize(std::move(args)), response_handler<variant_t<message_t, boolean_t>>{ "edit_message_text" });
+    return generic_call(static_cast<Connector&&>(connector), serialize_args(std::move(args)), response_handler<variant_t<message_t, boolean_t>>{ "edit_message_text" });
 }
 
 /**
@@ -812,7 +812,7 @@ api_result<variant_t<message_t, boolean_t>, Connector&&> edit_message_text(Conne
  */
 template <class Connector>
 api_result<variant_t<message_t, boolean_t>, Connector&&> call(Connector&& connector, edit_message_text_args_t args) {
-    return edit_message_text(std::forward<Connector>(connector), std::move(args));
+    return edit_message_text(static_cast<Connector&&>(connector), std::move(args));
 }
 
 // Arguments to export_chat_invite_link method
@@ -828,7 +828,7 @@ struct export_chat_invite_link_args_t {
  */
 template <class Connector>
 api_result<string_t, Connector&&> export_chat_invite_link(Connector&& connector, export_chat_invite_link_args_t args) {
-    return std::forward<Connector>(connector).template request<string_t>("exportChatInviteLink", deser::serialize(std::move(args)), response_handler<string_t>{ "export_chat_invite_link" });
+    return generic_call(static_cast<Connector&&>(connector), serialize_args(std::move(args)), response_handler<string_t>{ "export_chat_invite_link" });
 }
 
 /**
@@ -839,7 +839,7 @@ api_result<string_t, Connector&&> export_chat_invite_link(Connector&& connector,
  */
 template <class Connector>
 api_result<string_t, Connector&&> call(Connector&& connector, export_chat_invite_link_args_t args) {
-    return export_chat_invite_link(std::forward<Connector>(connector), std::move(args));
+    return export_chat_invite_link(static_cast<Connector&&>(connector), std::move(args));
 }
 
 // Arguments to forward_message method
@@ -861,7 +861,7 @@ struct forward_message_args_t {
  */
 template <class Connector>
 api_result<message_t, Connector&&> forward_message(Connector&& connector, forward_message_args_t args) {
-    return std::forward<Connector>(connector).template request<message_t>("forwardMessage", deser::serialize(std::move(args)), response_handler<message_t>{ "forward_message" });
+    return generic_call(static_cast<Connector&&>(connector), serialize_args(std::move(args)), response_handler<message_t>{ "forward_message" });
 }
 
 /**
@@ -875,7 +875,7 @@ api_result<message_t, Connector&&> forward_message(Connector&& connector, forwar
  */
 template <class Connector>
 api_result<message_t, Connector&&> call(Connector&& connector, forward_message_args_t args) {
-    return forward_message(std::forward<Connector>(connector), std::move(args));
+    return forward_message(static_cast<Connector&&>(connector), std::move(args));
 }
 
 // Arguments to get_chat method
@@ -891,7 +891,7 @@ struct get_chat_args_t {
  */
 template <class Connector>
 api_result<chat_t, Connector&&> get_chat(Connector&& connector, get_chat_args_t args) {
-    return std::forward<Connector>(connector).template request<chat_t>("getChat", deser::serialize(std::move(args)), response_handler<chat_t>{ "get_chat" });
+    return generic_call(static_cast<Connector&&>(connector), serialize_args(std::move(args)), response_handler<chat_t>{ "get_chat" });
 }
 
 /**
@@ -902,7 +902,7 @@ api_result<chat_t, Connector&&> get_chat(Connector&& connector, get_chat_args_t 
  */
 template <class Connector>
 api_result<chat_t, Connector&&> call(Connector&& connector, get_chat_args_t args) {
-    return get_chat(std::forward<Connector>(connector), std::move(args));
+    return get_chat(static_cast<Connector&&>(connector), std::move(args));
 }
 
 // Arguments to get_chat_administrators method
@@ -918,7 +918,7 @@ struct get_chat_administrators_args_t {
  */
 template <class Connector>
 api_result<array_t<chat_member_t>, Connector&&> get_chat_administrators(Connector&& connector, get_chat_administrators_args_t args) {
-    return std::forward<Connector>(connector).template request<array_t<chat_member_t>>("getChatAdministrators", deser::serialize(std::move(args)), response_handler<array_t<chat_member_t>>{ "get_chat_administrators" });
+    return generic_call(static_cast<Connector&&>(connector), serialize_args(std::move(args)), response_handler<array_t<chat_member_t>>{ "get_chat_administrators" });
 }
 
 /**
@@ -929,7 +929,7 @@ api_result<array_t<chat_member_t>, Connector&&> get_chat_administrators(Connecto
  */
 template <class Connector>
 api_result<array_t<chat_member_t>, Connector&&> call(Connector&& connector, get_chat_administrators_args_t args) {
-    return get_chat_administrators(std::forward<Connector>(connector), std::move(args));
+    return get_chat_administrators(static_cast<Connector&&>(connector), std::move(args));
 }
 
 // Arguments to get_chat_member method
@@ -947,7 +947,7 @@ struct get_chat_member_args_t {
  */
 template <class Connector>
 api_result<chat_member_t, Connector&&> get_chat_member(Connector&& connector, get_chat_member_args_t args) {
-    return std::forward<Connector>(connector).template request<chat_member_t>("getChatMember", deser::serialize(std::move(args)), response_handler<chat_member_t>{ "get_chat_member" });
+    return generic_call(static_cast<Connector&&>(connector), serialize_args(std::move(args)), response_handler<chat_member_t>{ "get_chat_member" });
 }
 
 /**
@@ -959,7 +959,7 @@ api_result<chat_member_t, Connector&&> get_chat_member(Connector&& connector, ge
  */
 template <class Connector>
 api_result<chat_member_t, Connector&&> call(Connector&& connector, get_chat_member_args_t args) {
-    return get_chat_member(std::forward<Connector>(connector), std::move(args));
+    return get_chat_member(static_cast<Connector&&>(connector), std::move(args));
 }
 
 // Arguments to get_chat_member_count method
@@ -975,7 +975,7 @@ struct get_chat_member_count_args_t {
  */
 template <class Connector>
 api_result<integer_t, Connector&&> get_chat_member_count(Connector&& connector, get_chat_member_count_args_t args) {
-    return std::forward<Connector>(connector).template request<integer_t>("getChatMemberCount", deser::serialize(std::move(args)), response_handler<integer_t>{ "get_chat_member_count" });
+    return generic_call(static_cast<Connector&&>(connector), serialize_args(std::move(args)), response_handler<integer_t>{ "get_chat_member_count" });
 }
 
 /**
@@ -986,7 +986,7 @@ api_result<integer_t, Connector&&> get_chat_member_count(Connector&& connector, 
  */
 template <class Connector>
 api_result<integer_t, Connector&&> call(Connector&& connector, get_chat_member_count_args_t args) {
-    return get_chat_member_count(std::forward<Connector>(connector), std::move(args));
+    return get_chat_member_count(static_cast<Connector&&>(connector), std::move(args));
 }
 
 // Arguments to get_file method
@@ -1002,7 +1002,7 @@ struct get_file_args_t {
  */
 template <class Connector>
 api_result<file_t, Connector&&> get_file(Connector&& connector, get_file_args_t args) {
-    return std::forward<Connector>(connector).template request<file_t>("getFile", deser::serialize(std::move(args)), response_handler<file_t>{ "get_file" });
+    return generic_call(static_cast<Connector&&>(connector), serialize_args(std::move(args)), response_handler<file_t>{ "get_file" });
 }
 
 /**
@@ -1013,7 +1013,7 @@ api_result<file_t, Connector&&> get_file(Connector&& connector, get_file_args_t 
  */
 template <class Connector>
 api_result<file_t, Connector&&> call(Connector&& connector, get_file_args_t args) {
-    return get_file(std::forward<Connector>(connector), std::move(args));
+    return get_file(static_cast<Connector&&>(connector), std::move(args));
 }
 
 // Arguments to get_game_high_scores method
@@ -1035,7 +1035,7 @@ struct get_game_high_scores_args_t {
  */
 template <class Connector>
 api_result<array_t<game_high_score_t>, Connector&&> get_game_high_scores(Connector&& connector, get_game_high_scores_args_t args) {
-    return std::forward<Connector>(connector).template request<array_t<game_high_score_t>>("getGameHighScores", deser::serialize(std::move(args)), response_handler<array_t<game_high_score_t>>{ "get_game_high_scores" });
+    return generic_call(static_cast<Connector&&>(connector), serialize_args(std::move(args)), response_handler<array_t<game_high_score_t>>{ "get_game_high_scores" });
 }
 
 /**
@@ -1049,7 +1049,7 @@ api_result<array_t<game_high_score_t>, Connector&&> get_game_high_scores(Connect
  */
 template <class Connector>
 api_result<array_t<game_high_score_t>, Connector&&> call(Connector&& connector, get_game_high_scores_args_t args) {
-    return get_game_high_scores(std::forward<Connector>(connector), std::move(args));
+    return get_game_high_scores(static_cast<Connector&&>(connector), std::move(args));
 }
 
 // Arguments to get_me method
@@ -1063,7 +1063,7 @@ struct get_me_args_t {
  */
 template <class Connector>
 api_result<user_t, Connector&&> get_me(Connector&& connector, get_me_args_t args = {}) {
-    return std::forward<Connector>(connector).template request<user_t>("getMe", deser::serialize(std::move(args)), response_handler<user_t>{ "get_me" });
+    return generic_call(static_cast<Connector&&>(connector), serialize_args(std::move(args)), response_handler<user_t>{ "get_me" });
 }
 
 /**
@@ -1073,7 +1073,7 @@ api_result<user_t, Connector&&> get_me(Connector&& connector, get_me_args_t args
  */
 template <class Connector>
 api_result<user_t, Connector&&> call(Connector&& connector, get_me_args_t args) {
-    return get_me(std::forward<Connector>(connector), std::move(args));
+    return get_me(static_cast<Connector&&>(connector), std::move(args));
 }
 
 // Arguments to get_my_commands method
@@ -1091,7 +1091,7 @@ struct get_my_commands_args_t {
  */
 template <class Connector>
 api_result<array_t<bot_command_t>, Connector&&> get_my_commands(Connector&& connector, get_my_commands_args_t args) {
-    return std::forward<Connector>(connector).template request<array_t<bot_command_t>>("getMyCommands", deser::serialize(std::move(args)), response_handler<array_t<bot_command_t>>{ "get_my_commands" });
+    return generic_call(static_cast<Connector&&>(connector), serialize_args(std::move(args)), response_handler<array_t<bot_command_t>>{ "get_my_commands" });
 }
 
 /**
@@ -1103,7 +1103,7 @@ api_result<array_t<bot_command_t>, Connector&&> get_my_commands(Connector&& conn
  */
 template <class Connector>
 api_result<array_t<bot_command_t>, Connector&&> call(Connector&& connector, get_my_commands_args_t args) {
-    return get_my_commands(std::forward<Connector>(connector), std::move(args));
+    return get_my_commands(static_cast<Connector&&>(connector), std::move(args));
 }
 
 // Arguments to get_sticker_set method
@@ -1119,7 +1119,7 @@ struct get_sticker_set_args_t {
  */
 template <class Connector>
 api_result<sticker_set_t, Connector&&> get_sticker_set(Connector&& connector, get_sticker_set_args_t args) {
-    return std::forward<Connector>(connector).template request<sticker_set_t>("getStickerSet", deser::serialize(std::move(args)), response_handler<sticker_set_t>{ "get_sticker_set" });
+    return generic_call(static_cast<Connector&&>(connector), serialize_args(std::move(args)), response_handler<sticker_set_t>{ "get_sticker_set" });
 }
 
 /**
@@ -1130,7 +1130,7 @@ api_result<sticker_set_t, Connector&&> get_sticker_set(Connector&& connector, ge
  */
 template <class Connector>
 api_result<sticker_set_t, Connector&&> call(Connector&& connector, get_sticker_set_args_t args) {
-    return get_sticker_set(std::forward<Connector>(connector), std::move(args));
+    return get_sticker_set(static_cast<Connector&&>(connector), std::move(args));
 }
 
 // Arguments to get_updates method
@@ -1152,7 +1152,7 @@ struct get_updates_args_t {
  */
 template <class Connector>
 api_result<array_t<update_t>, Connector&&> get_updates(Connector&& connector, get_updates_args_t args) {
-    return std::forward<Connector>(connector).template request<array_t<update_t>>("getUpdates", deser::serialize(std::move(args)), response_handler<array_t<update_t>>{ "get_updates" });
+    return generic_call(static_cast<Connector&&>(connector), serialize_args(std::move(args)), response_handler<array_t<update_t>>{ "get_updates" });
 }
 
 /**
@@ -1166,7 +1166,7 @@ api_result<array_t<update_t>, Connector&&> get_updates(Connector&& connector, ge
  */
 template <class Connector>
 api_result<array_t<update_t>, Connector&&> call(Connector&& connector, get_updates_args_t args) {
-    return get_updates(std::forward<Connector>(connector), std::move(args));
+    return get_updates(static_cast<Connector&&>(connector), std::move(args));
 }
 
 // Arguments to get_user_profile_photos method
@@ -1186,7 +1186,7 @@ struct get_user_profile_photos_args_t {
  */
 template <class Connector>
 api_result<user_profile_photos_t, Connector&&> get_user_profile_photos(Connector&& connector, get_user_profile_photos_args_t args) {
-    return std::forward<Connector>(connector).template request<user_profile_photos_t>("getUserProfilePhotos", deser::serialize(std::move(args)), response_handler<user_profile_photos_t>{ "get_user_profile_photos" });
+    return generic_call(static_cast<Connector&&>(connector), serialize_args(std::move(args)), response_handler<user_profile_photos_t>{ "get_user_profile_photos" });
 }
 
 /**
@@ -1199,7 +1199,7 @@ api_result<user_profile_photos_t, Connector&&> get_user_profile_photos(Connector
  */
 template <class Connector>
 api_result<user_profile_photos_t, Connector&&> call(Connector&& connector, get_user_profile_photos_args_t args) {
-    return get_user_profile_photos(std::forward<Connector>(connector), std::move(args));
+    return get_user_profile_photos(static_cast<Connector&&>(connector), std::move(args));
 }
 
 // Arguments to get_webhook_info method
@@ -1213,7 +1213,7 @@ struct get_webhook_info_args_t {
  */
 template <class Connector>
 api_result<webhook_info_t, Connector&&> get_webhook_info(Connector&& connector, get_webhook_info_args_t args = {}) {
-    return std::forward<Connector>(connector).template request<webhook_info_t>("getWebhookInfo", deser::serialize(std::move(args)), response_handler<webhook_info_t>{ "get_webhook_info" });
+    return generic_call(static_cast<Connector&&>(connector), serialize_args(std::move(args)), response_handler<webhook_info_t>{ "get_webhook_info" });
 }
 
 /**
@@ -1223,7 +1223,7 @@ api_result<webhook_info_t, Connector&&> get_webhook_info(Connector&& connector, 
  */
 template <class Connector>
 api_result<webhook_info_t, Connector&&> call(Connector&& connector, get_webhook_info_args_t args) {
-    return get_webhook_info(std::forward<Connector>(connector), std::move(args));
+    return get_webhook_info(static_cast<Connector&&>(connector), std::move(args));
 }
 
 // Arguments to leave_chat method
@@ -1239,7 +1239,7 @@ struct leave_chat_args_t {
  */
 template <class Connector>
 api_result<boolean_t, Connector&&> leave_chat(Connector&& connector, leave_chat_args_t args) {
-    return std::forward<Connector>(connector).template request<boolean_t>("leaveChat", deser::serialize(std::move(args)), response_handler<boolean_t>{ "leave_chat" });
+    return generic_call(static_cast<Connector&&>(connector), serialize_args(std::move(args)), response_handler<boolean_t>{ "leave_chat" });
 }
 
 /**
@@ -1250,7 +1250,7 @@ api_result<boolean_t, Connector&&> leave_chat(Connector&& connector, leave_chat_
  */
 template <class Connector>
 api_result<boolean_t, Connector&&> call(Connector&& connector, leave_chat_args_t args) {
-    return leave_chat(std::forward<Connector>(connector), std::move(args));
+    return leave_chat(static_cast<Connector&&>(connector), std::move(args));
 }
 
 // Arguments to log_out method
@@ -1264,7 +1264,7 @@ struct log_out_args_t {
  */
 template <class Connector>
 api_result<boolean_t, Connector&&> log_out(Connector&& connector, log_out_args_t args = {}) {
-    return std::forward<Connector>(connector).template request<boolean_t>("logOut", deser::serialize(std::move(args)), response_handler<boolean_t>{ "log_out" });
+    return generic_call(static_cast<Connector&&>(connector), serialize_args(std::move(args)), response_handler<boolean_t>{ "log_out" });
 }
 
 /**
@@ -1274,7 +1274,7 @@ api_result<boolean_t, Connector&&> log_out(Connector&& connector, log_out_args_t
  */
 template <class Connector>
 api_result<boolean_t, Connector&&> call(Connector&& connector, log_out_args_t args) {
-    return log_out(std::forward<Connector>(connector), std::move(args));
+    return log_out(static_cast<Connector&&>(connector), std::move(args));
 }
 
 // Arguments to pin_chat_message method
@@ -1294,7 +1294,7 @@ struct pin_chat_message_args_t {
  */
 template <class Connector>
 api_result<boolean_t, Connector&&> pin_chat_message(Connector&& connector, pin_chat_message_args_t args) {
-    return std::forward<Connector>(connector).template request<boolean_t>("pinChatMessage", deser::serialize(std::move(args)), response_handler<boolean_t>{ "pin_chat_message" });
+    return generic_call(static_cast<Connector&&>(connector), serialize_args(std::move(args)), response_handler<boolean_t>{ "pin_chat_message" });
 }
 
 /**
@@ -1307,7 +1307,7 @@ api_result<boolean_t, Connector&&> pin_chat_message(Connector&& connector, pin_c
  */
 template <class Connector>
 api_result<boolean_t, Connector&&> call(Connector&& connector, pin_chat_message_args_t args) {
-    return pin_chat_message(std::forward<Connector>(connector), std::move(args));
+    return pin_chat_message(static_cast<Connector&&>(connector), std::move(args));
 }
 
 // Arguments to promote_chat_member method
@@ -1347,7 +1347,7 @@ struct promote_chat_member_args_t {
  */
 template <class Connector>
 api_result<boolean_t, Connector&&> promote_chat_member(Connector&& connector, promote_chat_member_args_t args) {
-    return std::forward<Connector>(connector).template request<boolean_t>("promoteChatMember", deser::serialize(std::move(args)), response_handler<boolean_t>{ "promote_chat_member" });
+    return generic_call(static_cast<Connector&&>(connector), serialize_args(std::move(args)), response_handler<boolean_t>{ "promote_chat_member" });
 }
 
 /**
@@ -1370,7 +1370,7 @@ api_result<boolean_t, Connector&&> promote_chat_member(Connector&& connector, pr
  */
 template <class Connector>
 api_result<boolean_t, Connector&&> call(Connector&& connector, promote_chat_member_args_t args) {
-    return promote_chat_member(std::forward<Connector>(connector), std::move(args));
+    return promote_chat_member(static_cast<Connector&&>(connector), std::move(args));
 }
 
 // Arguments to restrict_chat_member method
@@ -1392,7 +1392,7 @@ struct restrict_chat_member_args_t {
  */
 template <class Connector>
 api_result<boolean_t, Connector&&> restrict_chat_member(Connector&& connector, restrict_chat_member_args_t args) {
-    return std::forward<Connector>(connector).template request<boolean_t>("restrictChatMember", deser::serialize(std::move(args)), response_handler<boolean_t>{ "restrict_chat_member" });
+    return generic_call(static_cast<Connector&&>(connector), serialize_args(std::move(args)), response_handler<boolean_t>{ "restrict_chat_member" });
 }
 
 /**
@@ -1406,7 +1406,7 @@ api_result<boolean_t, Connector&&> restrict_chat_member(Connector&& connector, r
  */
 template <class Connector>
 api_result<boolean_t, Connector&&> call(Connector&& connector, restrict_chat_member_args_t args) {
-    return restrict_chat_member(std::forward<Connector>(connector), std::move(args));
+    return restrict_chat_member(static_cast<Connector&&>(connector), std::move(args));
 }
 
 // Arguments to revoke_chat_invite_link method
@@ -1424,7 +1424,7 @@ struct revoke_chat_invite_link_args_t {
  */
 template <class Connector>
 api_result<chat_invite_link_t, Connector&&> revoke_chat_invite_link(Connector&& connector, revoke_chat_invite_link_args_t args) {
-    return std::forward<Connector>(connector).template request<chat_invite_link_t>("revokeChatInviteLink", deser::serialize(std::move(args)), response_handler<chat_invite_link_t>{ "revoke_chat_invite_link" });
+    return generic_call(static_cast<Connector&&>(connector), serialize_args(std::move(args)), response_handler<chat_invite_link_t>{ "revoke_chat_invite_link" });
 }
 
 /**
@@ -1436,7 +1436,7 @@ api_result<chat_invite_link_t, Connector&&> revoke_chat_invite_link(Connector&& 
  */
 template <class Connector>
 api_result<chat_invite_link_t, Connector&&> call(Connector&& connector, revoke_chat_invite_link_args_t args) {
-    return revoke_chat_invite_link(std::forward<Connector>(connector), std::move(args));
+    return revoke_chat_invite_link(static_cast<Connector&&>(connector), std::move(args));
 }
 
 // Arguments to send_animation method
@@ -1476,7 +1476,7 @@ struct send_animation_args_t {
  */
 template <class Connector>
 api_result<message_t, Connector&&> send_animation(Connector&& connector, send_animation_args_t args) {
-    return std::forward<Connector>(connector).template request<message_t>("sendAnimation", deser::serialize(std::move(args)), response_handler<message_t>{ "send_animation" });
+    return generic_call(static_cast<Connector&&>(connector), serialize_args(std::move(args)), response_handler<message_t>{ "send_animation" });
 }
 
 /**
@@ -1499,7 +1499,7 @@ api_result<message_t, Connector&&> send_animation(Connector&& connector, send_an
  */
 template <class Connector>
 api_result<message_t, Connector&&> call(Connector&& connector, send_animation_args_t args) {
-    return send_animation(std::forward<Connector>(connector), std::move(args));
+    return send_animation(static_cast<Connector&&>(connector), std::move(args));
 }
 
 // Arguments to send_audio method
@@ -1539,7 +1539,7 @@ struct send_audio_args_t {
  */
 template <class Connector>
 api_result<message_t, Connector&&> send_audio(Connector&& connector, send_audio_args_t args) {
-    return std::forward<Connector>(connector).template request<message_t>("sendAudio", deser::serialize(std::move(args)), response_handler<message_t>{ "send_audio" });
+    return generic_call(static_cast<Connector&&>(connector), serialize_args(std::move(args)), response_handler<message_t>{ "send_audio" });
 }
 
 /**
@@ -1562,7 +1562,7 @@ api_result<message_t, Connector&&> send_audio(Connector&& connector, send_audio_
  */
 template <class Connector>
 api_result<message_t, Connector&&> call(Connector&& connector, send_audio_args_t args) {
-    return send_audio(std::forward<Connector>(connector), std::move(args));
+    return send_audio(static_cast<Connector&&>(connector), std::move(args));
 }
 
 // Arguments to send_chat_action method
@@ -1580,7 +1580,7 @@ struct send_chat_action_args_t {
  */
 template <class Connector>
 api_result<boolean_t, Connector&&> send_chat_action(Connector&& connector, send_chat_action_args_t args) {
-    return std::forward<Connector>(connector).template request<boolean_t>("sendChatAction", deser::serialize(std::move(args)), response_handler<boolean_t>{ "send_chat_action" });
+    return generic_call(static_cast<Connector&&>(connector), serialize_args(std::move(args)), response_handler<boolean_t>{ "send_chat_action" });
 }
 
 /**
@@ -1592,7 +1592,7 @@ api_result<boolean_t, Connector&&> send_chat_action(Connector&& connector, send_
  */
 template <class Connector>
 api_result<boolean_t, Connector&&> call(Connector&& connector, send_chat_action_args_t args) {
-    return send_chat_action(std::forward<Connector>(connector), std::move(args));
+    return send_chat_action(static_cast<Connector&&>(connector), std::move(args));
 }
 
 // Arguments to send_contact method
@@ -1624,7 +1624,7 @@ struct send_contact_args_t {
  */
 template <class Connector>
 api_result<message_t, Connector&&> send_contact(Connector&& connector, send_contact_args_t args) {
-    return std::forward<Connector>(connector).template request<message_t>("sendContact", deser::serialize(std::move(args)), response_handler<message_t>{ "send_contact" });
+    return generic_call(static_cast<Connector&&>(connector), serialize_args(std::move(args)), response_handler<message_t>{ "send_contact" });
 }
 
 /**
@@ -1643,7 +1643,7 @@ api_result<message_t, Connector&&> send_contact(Connector&& connector, send_cont
  */
 template <class Connector>
 api_result<message_t, Connector&&> call(Connector&& connector, send_contact_args_t args) {
-    return send_contact(std::forward<Connector>(connector), std::move(args));
+    return send_contact(static_cast<Connector&&>(connector), std::move(args));
 }
 
 // Arguments to send_dice method
@@ -1669,7 +1669,7 @@ struct send_dice_args_t {
  */
 template <class Connector>
 api_result<message_t, Connector&&> send_dice(Connector&& connector, send_dice_args_t args) {
-    return std::forward<Connector>(connector).template request<message_t>("sendDice", deser::serialize(std::move(args)), response_handler<message_t>{ "send_dice" });
+    return generic_call(static_cast<Connector&&>(connector), serialize_args(std::move(args)), response_handler<message_t>{ "send_dice" });
 }
 
 /**
@@ -1685,7 +1685,7 @@ api_result<message_t, Connector&&> send_dice(Connector&& connector, send_dice_ar
  */
 template <class Connector>
 api_result<message_t, Connector&&> call(Connector&& connector, send_dice_args_t args) {
-    return send_dice(std::forward<Connector>(connector), std::move(args));
+    return send_dice(static_cast<Connector&&>(connector), std::move(args));
 }
 
 // Arguments to send_document method
@@ -1721,7 +1721,7 @@ struct send_document_args_t {
  */
 template <class Connector>
 api_result<message_t, Connector&&> send_document(Connector&& connector, send_document_args_t args) {
-    return std::forward<Connector>(connector).template request<message_t>("sendDocument", deser::serialize(std::move(args)), response_handler<message_t>{ "send_document" });
+    return generic_call(static_cast<Connector&&>(connector), serialize_args(std::move(args)), response_handler<message_t>{ "send_document" });
 }
 
 /**
@@ -1742,7 +1742,7 @@ api_result<message_t, Connector&&> send_document(Connector&& connector, send_doc
  */
 template <class Connector>
 api_result<message_t, Connector&&> call(Connector&& connector, send_document_args_t args) {
-    return send_document(std::forward<Connector>(connector), std::move(args));
+    return send_document(static_cast<Connector&&>(connector), std::move(args));
 }
 
 // Arguments to send_game method
@@ -1768,7 +1768,7 @@ struct send_game_args_t {
  */
 template <class Connector>
 api_result<message_t, Connector&&> send_game(Connector&& connector, send_game_args_t args) {
-    return std::forward<Connector>(connector).template request<message_t>("sendGame", deser::serialize(std::move(args)), response_handler<message_t>{ "send_game" });
+    return generic_call(static_cast<Connector&&>(connector), serialize_args(std::move(args)), response_handler<message_t>{ "send_game" });
 }
 
 /**
@@ -1784,7 +1784,7 @@ api_result<message_t, Connector&&> send_game(Connector&& connector, send_game_ar
  */
 template <class Connector>
 api_result<message_t, Connector&&> call(Connector&& connector, send_game_args_t args) {
-    return send_game(std::forward<Connector>(connector), std::move(args));
+    return send_game(static_cast<Connector&&>(connector), std::move(args));
 }
 
 // Arguments to send_invoice method
@@ -1850,7 +1850,7 @@ struct send_invoice_args_t {
  */
 template <class Connector>
 api_result<message_t, Connector&&> send_invoice(Connector&& connector, send_invoice_args_t args) {
-    return std::forward<Connector>(connector).template request<message_t>("sendInvoice", deser::serialize(std::move(args)), response_handler<message_t>{ "send_invoice" });
+    return generic_call(static_cast<Connector&&>(connector), serialize_args(std::move(args)), response_handler<message_t>{ "send_invoice" });
 }
 
 /**
@@ -1886,7 +1886,7 @@ api_result<message_t, Connector&&> send_invoice(Connector&& connector, send_invo
  */
 template <class Connector>
 api_result<message_t, Connector&&> call(Connector&& connector, send_invoice_args_t args) {
-    return send_invoice(std::forward<Connector>(connector), std::move(args));
+    return send_invoice(static_cast<Connector&&>(connector), std::move(args));
 }
 
 // Arguments to send_location method
@@ -1922,7 +1922,7 @@ struct send_location_args_t {
  */
 template <class Connector>
 api_result<message_t, Connector&&> send_location(Connector&& connector, send_location_args_t args) {
-    return std::forward<Connector>(connector).template request<message_t>("sendLocation", deser::serialize(std::move(args)), response_handler<message_t>{ "send_location" });
+    return generic_call(static_cast<Connector&&>(connector), serialize_args(std::move(args)), response_handler<message_t>{ "send_location" });
 }
 
 /**
@@ -1943,7 +1943,7 @@ api_result<message_t, Connector&&> send_location(Connector&& connector, send_loc
  */
 template <class Connector>
 api_result<message_t, Connector&&> call(Connector&& connector, send_location_args_t args) {
-    return send_location(std::forward<Connector>(connector), std::move(args));
+    return send_location(static_cast<Connector&&>(connector), std::move(args));
 }
 
 // Arguments to send_media_group method
@@ -1967,7 +1967,7 @@ struct send_media_group_args_t {
  */
 template <class Connector>
 api_result<array_t<message_t>, Connector&&> send_media_group(Connector&& connector, send_media_group_args_t args) {
-    return std::forward<Connector>(connector).template request<array_t<message_t>>("sendMediaGroup", deser::serialize(std::move(args)), response_handler<array_t<message_t>>{ "send_media_group" });
+    return generic_call(static_cast<Connector&&>(connector), serialize_args(std::move(args)), response_handler<array_t<message_t>>{ "send_media_group" });
 }
 
 /**
@@ -1982,7 +1982,7 @@ api_result<array_t<message_t>, Connector&&> send_media_group(Connector&& connect
  */
 template <class Connector>
 api_result<array_t<message_t>, Connector&&> call(Connector&& connector, send_media_group_args_t args) {
-    return send_media_group(std::forward<Connector>(connector), std::move(args));
+    return send_media_group(static_cast<Connector&&>(connector), std::move(args));
 }
 
 // Arguments to send_message method
@@ -2014,7 +2014,7 @@ struct send_message_args_t {
  */
 template <class Connector>
 api_result<message_t, Connector&&> send_message(Connector&& connector, send_message_args_t args) {
-    return std::forward<Connector>(connector).template request<message_t>("sendMessage", deser::serialize(std::move(args)), response_handler<message_t>{ "send_message" });
+    return generic_call(static_cast<Connector&&>(connector), serialize_args(std::move(args)), response_handler<message_t>{ "send_message" });
 }
 
 /**
@@ -2033,7 +2033,7 @@ api_result<message_t, Connector&&> send_message(Connector&& connector, send_mess
  */
 template <class Connector>
 api_result<message_t, Connector&&> call(Connector&& connector, send_message_args_t args) {
-    return send_message(std::forward<Connector>(connector), std::move(args));
+    return send_message(static_cast<Connector&&>(connector), std::move(args));
 }
 
 // Arguments to send_photo method
@@ -2065,7 +2065,7 @@ struct send_photo_args_t {
  */
 template <class Connector>
 api_result<message_t, Connector&&> send_photo(Connector&& connector, send_photo_args_t args) {
-    return std::forward<Connector>(connector).template request<message_t>("sendPhoto", deser::serialize(std::move(args)), response_handler<message_t>{ "send_photo" });
+    return generic_call(static_cast<Connector&&>(connector), serialize_args(std::move(args)), response_handler<message_t>{ "send_photo" });
 }
 
 /**
@@ -2084,7 +2084,7 @@ api_result<message_t, Connector&&> send_photo(Connector&& connector, send_photo_
  */
 template <class Connector>
 api_result<message_t, Connector&&> call(Connector&& connector, send_photo_args_t args) {
-    return send_photo(std::forward<Connector>(connector), std::move(args));
+    return send_photo(static_cast<Connector&&>(connector), std::move(args));
 }
 
 // Arguments to send_poll method
@@ -2132,7 +2132,7 @@ struct send_poll_args_t {
  */
 template <class Connector>
 api_result<message_t, Connector&&> send_poll(Connector&& connector, send_poll_args_t args) {
-    return std::forward<Connector>(connector).template request<message_t>("sendPoll", deser::serialize(std::move(args)), response_handler<message_t>{ "send_poll" });
+    return generic_call(static_cast<Connector&&>(connector), serialize_args(std::move(args)), response_handler<message_t>{ "send_poll" });
 }
 
 /**
@@ -2159,7 +2159,7 @@ api_result<message_t, Connector&&> send_poll(Connector&& connector, send_poll_ar
  */
 template <class Connector>
 api_result<message_t, Connector&&> call(Connector&& connector, send_poll_args_t args) {
-    return send_poll(std::forward<Connector>(connector), std::move(args));
+    return send_poll(static_cast<Connector&&>(connector), std::move(args));
 }
 
 // Arguments to send_sticker method
@@ -2185,7 +2185,7 @@ struct send_sticker_args_t {
  */
 template <class Connector>
 api_result<message_t, Connector&&> send_sticker(Connector&& connector, send_sticker_args_t args) {
-    return std::forward<Connector>(connector).template request<message_t>("sendSticker", deser::serialize(std::move(args)), response_handler<message_t>{ "send_sticker" });
+    return generic_call(static_cast<Connector&&>(connector), serialize_args(std::move(args)), response_handler<message_t>{ "send_sticker" });
 }
 
 /**
@@ -2201,7 +2201,7 @@ api_result<message_t, Connector&&> send_sticker(Connector&& connector, send_stic
  */
 template <class Connector>
 api_result<message_t, Connector&&> call(Connector&& connector, send_sticker_args_t args) {
-    return send_sticker(std::forward<Connector>(connector), std::move(args));
+    return send_sticker(static_cast<Connector&&>(connector), std::move(args));
 }
 
 // Arguments to send_venue method
@@ -2241,7 +2241,7 @@ struct send_venue_args_t {
  */
 template <class Connector>
 api_result<message_t, Connector&&> send_venue(Connector&& connector, send_venue_args_t args) {
-    return std::forward<Connector>(connector).template request<message_t>("sendVenue", deser::serialize(std::move(args)), response_handler<message_t>{ "send_venue" });
+    return generic_call(static_cast<Connector&&>(connector), serialize_args(std::move(args)), response_handler<message_t>{ "send_venue" });
 }
 
 /**
@@ -2264,7 +2264,7 @@ api_result<message_t, Connector&&> send_venue(Connector&& connector, send_venue_
  */
 template <class Connector>
 api_result<message_t, Connector&&> call(Connector&& connector, send_venue_args_t args) {
-    return send_venue(std::forward<Connector>(connector), std::move(args));
+    return send_venue(static_cast<Connector&&>(connector), std::move(args));
 }
 
 // Arguments to send_video method
@@ -2306,7 +2306,7 @@ struct send_video_args_t {
  */
 template <class Connector>
 api_result<message_t, Connector&&> send_video(Connector&& connector, send_video_args_t args) {
-    return std::forward<Connector>(connector).template request<message_t>("sendVideo", deser::serialize(std::move(args)), response_handler<message_t>{ "send_video" });
+    return generic_call(static_cast<Connector&&>(connector), serialize_args(std::move(args)), response_handler<message_t>{ "send_video" });
 }
 
 /**
@@ -2330,7 +2330,7 @@ api_result<message_t, Connector&&> send_video(Connector&& connector, send_video_
  */
 template <class Connector>
 api_result<message_t, Connector&&> call(Connector&& connector, send_video_args_t args) {
-    return send_video(std::forward<Connector>(connector), std::move(args));
+    return send_video(static_cast<Connector&&>(connector), std::move(args));
 }
 
 // Arguments to send_video_note method
@@ -2362,7 +2362,7 @@ struct send_video_note_args_t {
  */
 template <class Connector>
 api_result<message_t, Connector&&> send_video_note(Connector&& connector, send_video_note_args_t args) {
-    return std::forward<Connector>(connector).template request<message_t>("sendVideoNote", deser::serialize(std::move(args)), response_handler<message_t>{ "send_video_note" });
+    return generic_call(static_cast<Connector&&>(connector), serialize_args(std::move(args)), response_handler<message_t>{ "send_video_note" });
 }
 
 /**
@@ -2381,7 +2381,7 @@ api_result<message_t, Connector&&> send_video_note(Connector&& connector, send_v
  */
 template <class Connector>
 api_result<message_t, Connector&&> call(Connector&& connector, send_video_note_args_t args) {
-    return send_video_note(std::forward<Connector>(connector), std::move(args));
+    return send_video_note(static_cast<Connector&&>(connector), std::move(args));
 }
 
 // Arguments to send_voice method
@@ -2415,7 +2415,7 @@ struct send_voice_args_t {
  */
 template <class Connector>
 api_result<message_t, Connector&&> send_voice(Connector&& connector, send_voice_args_t args) {
-    return std::forward<Connector>(connector).template request<message_t>("sendVoice", deser::serialize(std::move(args)), response_handler<message_t>{ "send_voice" });
+    return generic_call(static_cast<Connector&&>(connector), serialize_args(std::move(args)), response_handler<message_t>{ "send_voice" });
 }
 
 /**
@@ -2435,7 +2435,7 @@ api_result<message_t, Connector&&> send_voice(Connector&& connector, send_voice_
  */
 template <class Connector>
 api_result<message_t, Connector&&> call(Connector&& connector, send_voice_args_t args) {
-    return send_voice(std::forward<Connector>(connector), std::move(args));
+    return send_voice(static_cast<Connector&&>(connector), std::move(args));
 }
 
 // Arguments to set_chat_administrator_custom_title method
@@ -2455,7 +2455,7 @@ struct set_chat_administrator_custom_title_args_t {
  */
 template <class Connector>
 api_result<boolean_t, Connector&&> set_chat_administrator_custom_title(Connector&& connector, set_chat_administrator_custom_title_args_t args) {
-    return std::forward<Connector>(connector).template request<boolean_t>("setChatAdministratorCustomTitle", deser::serialize(std::move(args)), response_handler<boolean_t>{ "set_chat_administrator_custom_title" });
+    return generic_call(static_cast<Connector&&>(connector), serialize_args(std::move(args)), response_handler<boolean_t>{ "set_chat_administrator_custom_title" });
 }
 
 /**
@@ -2468,7 +2468,7 @@ api_result<boolean_t, Connector&&> set_chat_administrator_custom_title(Connector
  */
 template <class Connector>
 api_result<boolean_t, Connector&&> call(Connector&& connector, set_chat_administrator_custom_title_args_t args) {
-    return set_chat_administrator_custom_title(std::forward<Connector>(connector), std::move(args));
+    return set_chat_administrator_custom_title(static_cast<Connector&&>(connector), std::move(args));
 }
 
 // Arguments to set_chat_description method
@@ -2486,7 +2486,7 @@ struct set_chat_description_args_t {
  */
 template <class Connector>
 api_result<boolean_t, Connector&&> set_chat_description(Connector&& connector, set_chat_description_args_t args) {
-    return std::forward<Connector>(connector).template request<boolean_t>("setChatDescription", deser::serialize(std::move(args)), response_handler<boolean_t>{ "set_chat_description" });
+    return generic_call(static_cast<Connector&&>(connector), serialize_args(std::move(args)), response_handler<boolean_t>{ "set_chat_description" });
 }
 
 /**
@@ -2498,7 +2498,7 @@ api_result<boolean_t, Connector&&> set_chat_description(Connector&& connector, s
  */
 template <class Connector>
 api_result<boolean_t, Connector&&> call(Connector&& connector, set_chat_description_args_t args) {
-    return set_chat_description(std::forward<Connector>(connector), std::move(args));
+    return set_chat_description(static_cast<Connector&&>(connector), std::move(args));
 }
 
 // Arguments to set_chat_permissions method
@@ -2516,7 +2516,7 @@ struct set_chat_permissions_args_t {
  */
 template <class Connector>
 api_result<boolean_t, Connector&&> set_chat_permissions(Connector&& connector, set_chat_permissions_args_t args) {
-    return std::forward<Connector>(connector).template request<boolean_t>("setChatPermissions", deser::serialize(std::move(args)), response_handler<boolean_t>{ "set_chat_permissions" });
+    return generic_call(static_cast<Connector&&>(connector), serialize_args(std::move(args)), response_handler<boolean_t>{ "set_chat_permissions" });
 }
 
 /**
@@ -2528,7 +2528,7 @@ api_result<boolean_t, Connector&&> set_chat_permissions(Connector&& connector, s
  */
 template <class Connector>
 api_result<boolean_t, Connector&&> call(Connector&& connector, set_chat_permissions_args_t args) {
-    return set_chat_permissions(std::forward<Connector>(connector), std::move(args));
+    return set_chat_permissions(static_cast<Connector&&>(connector), std::move(args));
 }
 
 // Arguments to set_chat_photo method
@@ -2546,7 +2546,7 @@ struct set_chat_photo_args_t {
  */
 template <class Connector>
 api_result<boolean_t, Connector&&> set_chat_photo(Connector&& connector, set_chat_photo_args_t args) {
-    return std::forward<Connector>(connector).template request<boolean_t>("setChatPhoto", deser::serialize(std::move(args)), response_handler<boolean_t>{ "set_chat_photo" });
+    return generic_call(static_cast<Connector&&>(connector), serialize_args(std::move(args)), response_handler<boolean_t>{ "set_chat_photo" });
 }
 
 /**
@@ -2558,7 +2558,7 @@ api_result<boolean_t, Connector&&> set_chat_photo(Connector&& connector, set_cha
  */
 template <class Connector>
 api_result<boolean_t, Connector&&> call(Connector&& connector, set_chat_photo_args_t args) {
-    return set_chat_photo(std::forward<Connector>(connector), std::move(args));
+    return set_chat_photo(static_cast<Connector&&>(connector), std::move(args));
 }
 
 // Arguments to set_chat_sticker_set method
@@ -2576,7 +2576,7 @@ struct set_chat_sticker_set_args_t {
  */
 template <class Connector>
 api_result<boolean_t, Connector&&> set_chat_sticker_set(Connector&& connector, set_chat_sticker_set_args_t args) {
-    return std::forward<Connector>(connector).template request<boolean_t>("setChatStickerSet", deser::serialize(std::move(args)), response_handler<boolean_t>{ "set_chat_sticker_set" });
+    return generic_call(static_cast<Connector&&>(connector), serialize_args(std::move(args)), response_handler<boolean_t>{ "set_chat_sticker_set" });
 }
 
 /**
@@ -2588,7 +2588,7 @@ api_result<boolean_t, Connector&&> set_chat_sticker_set(Connector&& connector, s
  */
 template <class Connector>
 api_result<boolean_t, Connector&&> call(Connector&& connector, set_chat_sticker_set_args_t args) {
-    return set_chat_sticker_set(std::forward<Connector>(connector), std::move(args));
+    return set_chat_sticker_set(static_cast<Connector&&>(connector), std::move(args));
 }
 
 // Arguments to set_chat_title method
@@ -2606,7 +2606,7 @@ struct set_chat_title_args_t {
  */
 template <class Connector>
 api_result<boolean_t, Connector&&> set_chat_title(Connector&& connector, set_chat_title_args_t args) {
-    return std::forward<Connector>(connector).template request<boolean_t>("setChatTitle", deser::serialize(std::move(args)), response_handler<boolean_t>{ "set_chat_title" });
+    return generic_call(static_cast<Connector&&>(connector), serialize_args(std::move(args)), response_handler<boolean_t>{ "set_chat_title" });
 }
 
 /**
@@ -2618,7 +2618,7 @@ api_result<boolean_t, Connector&&> set_chat_title(Connector&& connector, set_cha
  */
 template <class Connector>
 api_result<boolean_t, Connector&&> call(Connector&& connector, set_chat_title_args_t args) {
-    return set_chat_title(std::forward<Connector>(connector), std::move(args));
+    return set_chat_title(static_cast<Connector&&>(connector), std::move(args));
 }
 
 // Arguments to set_game_score method
@@ -2646,7 +2646,7 @@ struct set_game_score_args_t {
  */
 template <class Connector>
 api_result<variant_t<message_t, boolean_t>, Connector&&> set_game_score(Connector&& connector, set_game_score_args_t args) {
-    return std::forward<Connector>(connector).template request<variant_t<message_t, boolean_t>>("setGameScore", deser::serialize(std::move(args)), response_handler<variant_t<message_t, boolean_t>>{ "set_game_score" });
+    return generic_call(static_cast<Connector&&>(connector), serialize_args(std::move(args)), response_handler<variant_t<message_t, boolean_t>>{ "set_game_score" });
 }
 
 /**
@@ -2663,7 +2663,7 @@ api_result<variant_t<message_t, boolean_t>, Connector&&> set_game_score(Connecto
  */
 template <class Connector>
 api_result<variant_t<message_t, boolean_t>, Connector&&> call(Connector&& connector, set_game_score_args_t args) {
-    return set_game_score(std::forward<Connector>(connector), std::move(args));
+    return set_game_score(static_cast<Connector&&>(connector), std::move(args));
 }
 
 // Arguments to set_my_commands method
@@ -2683,7 +2683,7 @@ struct set_my_commands_args_t {
  */
 template <class Connector>
 api_result<boolean_t, Connector&&> set_my_commands(Connector&& connector, set_my_commands_args_t args) {
-    return std::forward<Connector>(connector).template request<boolean_t>("setMyCommands", deser::serialize(std::move(args)), response_handler<boolean_t>{ "set_my_commands" });
+    return generic_call(static_cast<Connector&&>(connector), serialize_args(std::move(args)), response_handler<boolean_t>{ "set_my_commands" });
 }
 
 /**
@@ -2696,7 +2696,7 @@ api_result<boolean_t, Connector&&> set_my_commands(Connector&& connector, set_my
  */
 template <class Connector>
 api_result<boolean_t, Connector&&> call(Connector&& connector, set_my_commands_args_t args) {
-    return set_my_commands(std::forward<Connector>(connector), std::move(args));
+    return set_my_commands(static_cast<Connector&&>(connector), std::move(args));
 }
 
 // Arguments to set_passport_data_errors method
@@ -2714,7 +2714,7 @@ struct set_passport_data_errors_args_t {
  */
 template <class Connector>
 api_result<boolean_t, Connector&&> set_passport_data_errors(Connector&& connector, set_passport_data_errors_args_t args) {
-    return std::forward<Connector>(connector).template request<boolean_t>("setPassportDataErrors", deser::serialize(std::move(args)), response_handler<boolean_t>{ "set_passport_data_errors" });
+    return generic_call(static_cast<Connector&&>(connector), serialize_args(std::move(args)), response_handler<boolean_t>{ "set_passport_data_errors" });
 }
 
 /**
@@ -2726,7 +2726,7 @@ api_result<boolean_t, Connector&&> set_passport_data_errors(Connector&& connecto
  */
 template <class Connector>
 api_result<boolean_t, Connector&&> call(Connector&& connector, set_passport_data_errors_args_t args) {
-    return set_passport_data_errors(std::forward<Connector>(connector), std::move(args));
+    return set_passport_data_errors(static_cast<Connector&&>(connector), std::move(args));
 }
 
 // Arguments to set_sticker_position_in_set method
@@ -2744,7 +2744,7 @@ struct set_sticker_position_in_set_args_t {
  */
 template <class Connector>
 api_result<boolean_t, Connector&&> set_sticker_position_in_set(Connector&& connector, set_sticker_position_in_set_args_t args) {
-    return std::forward<Connector>(connector).template request<boolean_t>("setStickerPositionInSet", deser::serialize(std::move(args)), response_handler<boolean_t>{ "set_sticker_position_in_set" });
+    return generic_call(static_cast<Connector&&>(connector), serialize_args(std::move(args)), response_handler<boolean_t>{ "set_sticker_position_in_set" });
 }
 
 /**
@@ -2756,7 +2756,7 @@ api_result<boolean_t, Connector&&> set_sticker_position_in_set(Connector&& conne
  */
 template <class Connector>
 api_result<boolean_t, Connector&&> call(Connector&& connector, set_sticker_position_in_set_args_t args) {
-    return set_sticker_position_in_set(std::forward<Connector>(connector), std::move(args));
+    return set_sticker_position_in_set(static_cast<Connector&&>(connector), std::move(args));
 }
 
 // Arguments to set_sticker_set_thumb method
@@ -2776,7 +2776,7 @@ struct set_sticker_set_thumb_args_t {
  */
 template <class Connector>
 api_result<boolean_t, Connector&&> set_sticker_set_thumb(Connector&& connector, set_sticker_set_thumb_args_t args) {
-    return std::forward<Connector>(connector).template request<boolean_t>("setStickerSetThumb", deser::serialize(std::move(args)), response_handler<boolean_t>{ "set_sticker_set_thumb" });
+    return generic_call(static_cast<Connector&&>(connector), serialize_args(std::move(args)), response_handler<boolean_t>{ "set_sticker_set_thumb" });
 }
 
 /**
@@ -2789,7 +2789,7 @@ api_result<boolean_t, Connector&&> set_sticker_set_thumb(Connector&& connector, 
  */
 template <class Connector>
 api_result<boolean_t, Connector&&> call(Connector&& connector, set_sticker_set_thumb_args_t args) {
-    return set_sticker_set_thumb(std::forward<Connector>(connector), std::move(args));
+    return set_sticker_set_thumb(static_cast<Connector&&>(connector), std::move(args));
 }
 
 // Arguments to set_webhook method
@@ -2815,7 +2815,7 @@ struct set_webhook_args_t {
  */
 template <class Connector>
 api_result<boolean_t, Connector&&> set_webhook(Connector&& connector, set_webhook_args_t args) {
-    return std::forward<Connector>(connector).template request<boolean_t>("setWebhook", deser::serialize(std::move(args)), response_handler<boolean_t>{ "set_webhook" });
+    return generic_call(static_cast<Connector&&>(connector), serialize_args(std::move(args)), response_handler<boolean_t>{ "set_webhook" });
 }
 
 /**
@@ -2831,7 +2831,7 @@ api_result<boolean_t, Connector&&> set_webhook(Connector&& connector, set_webhoo
  */
 template <class Connector>
 api_result<boolean_t, Connector&&> call(Connector&& connector, set_webhook_args_t args) {
-    return set_webhook(std::forward<Connector>(connector), std::move(args));
+    return set_webhook(static_cast<Connector&&>(connector), std::move(args));
 }
 
 // Arguments to stop_message_live_location method
@@ -2853,7 +2853,7 @@ struct stop_message_live_location_args_t {
  */
 template <class Connector>
 api_result<variant_t<message_t, boolean_t>, Connector&&> stop_message_live_location(Connector&& connector, stop_message_live_location_args_t args) {
-    return std::forward<Connector>(connector).template request<variant_t<message_t, boolean_t>>("stopMessageLiveLocation", deser::serialize(std::move(args)), response_handler<variant_t<message_t, boolean_t>>{ "stop_message_live_location" });
+    return generic_call(static_cast<Connector&&>(connector), serialize_args(std::move(args)), response_handler<variant_t<message_t, boolean_t>>{ "stop_message_live_location" });
 }
 
 /**
@@ -2867,7 +2867,7 @@ api_result<variant_t<message_t, boolean_t>, Connector&&> stop_message_live_locat
  */
 template <class Connector>
 api_result<variant_t<message_t, boolean_t>, Connector&&> call(Connector&& connector, stop_message_live_location_args_t args) {
-    return stop_message_live_location(std::forward<Connector>(connector), std::move(args));
+    return stop_message_live_location(static_cast<Connector&&>(connector), std::move(args));
 }
 
 // Arguments to stop_poll method
@@ -2887,7 +2887,7 @@ struct stop_poll_args_t {
  */
 template <class Connector>
 api_result<poll_t, Connector&&> stop_poll(Connector&& connector, stop_poll_args_t args) {
-    return std::forward<Connector>(connector).template request<poll_t>("stopPoll", deser::serialize(std::move(args)), response_handler<poll_t>{ "stop_poll" });
+    return generic_call(static_cast<Connector&&>(connector), serialize_args(std::move(args)), response_handler<poll_t>{ "stop_poll" });
 }
 
 /**
@@ -2900,7 +2900,7 @@ api_result<poll_t, Connector&&> stop_poll(Connector&& connector, stop_poll_args_
  */
 template <class Connector>
 api_result<poll_t, Connector&&> call(Connector&& connector, stop_poll_args_t args) {
-    return stop_poll(std::forward<Connector>(connector), std::move(args));
+    return stop_poll(static_cast<Connector&&>(connector), std::move(args));
 }
 
 // Arguments to unban_chat_member method
@@ -2920,7 +2920,7 @@ struct unban_chat_member_args_t {
  */
 template <class Connector>
 api_result<boolean_t, Connector&&> unban_chat_member(Connector&& connector, unban_chat_member_args_t args) {
-    return std::forward<Connector>(connector).template request<boolean_t>("unbanChatMember", deser::serialize(std::move(args)), response_handler<boolean_t>{ "unban_chat_member" });
+    return generic_call(static_cast<Connector&&>(connector), serialize_args(std::move(args)), response_handler<boolean_t>{ "unban_chat_member" });
 }
 
 /**
@@ -2933,7 +2933,7 @@ api_result<boolean_t, Connector&&> unban_chat_member(Connector&& connector, unba
  */
 template <class Connector>
 api_result<boolean_t, Connector&&> call(Connector&& connector, unban_chat_member_args_t args) {
-    return unban_chat_member(std::forward<Connector>(connector), std::move(args));
+    return unban_chat_member(static_cast<Connector&&>(connector), std::move(args));
 }
 
 // Arguments to unpin_all_chat_messages method
@@ -2949,7 +2949,7 @@ struct unpin_all_chat_messages_args_t {
  */
 template <class Connector>
 api_result<boolean_t, Connector&&> unpin_all_chat_messages(Connector&& connector, unpin_all_chat_messages_args_t args) {
-    return std::forward<Connector>(connector).template request<boolean_t>("unpinAllChatMessages", deser::serialize(std::move(args)), response_handler<boolean_t>{ "unpin_all_chat_messages" });
+    return generic_call(static_cast<Connector&&>(connector), serialize_args(std::move(args)), response_handler<boolean_t>{ "unpin_all_chat_messages" });
 }
 
 /**
@@ -2960,7 +2960,7 @@ api_result<boolean_t, Connector&&> unpin_all_chat_messages(Connector&& connector
  */
 template <class Connector>
 api_result<boolean_t, Connector&&> call(Connector&& connector, unpin_all_chat_messages_args_t args) {
-    return unpin_all_chat_messages(std::forward<Connector>(connector), std::move(args));
+    return unpin_all_chat_messages(static_cast<Connector&&>(connector), std::move(args));
 }
 
 // Arguments to unpin_chat_message method
@@ -2978,7 +2978,7 @@ struct unpin_chat_message_args_t {
  */
 template <class Connector>
 api_result<boolean_t, Connector&&> unpin_chat_message(Connector&& connector, unpin_chat_message_args_t args) {
-    return std::forward<Connector>(connector).template request<boolean_t>("unpinChatMessage", deser::serialize(std::move(args)), response_handler<boolean_t>{ "unpin_chat_message" });
+    return generic_call(static_cast<Connector&&>(connector), serialize_args(std::move(args)), response_handler<boolean_t>{ "unpin_chat_message" });
 }
 
 /**
@@ -2990,7 +2990,7 @@ api_result<boolean_t, Connector&&> unpin_chat_message(Connector&& connector, unp
  */
 template <class Connector>
 api_result<boolean_t, Connector&&> call(Connector&& connector, unpin_chat_message_args_t args) {
-    return unpin_chat_message(std::forward<Connector>(connector), std::move(args));
+    return unpin_chat_message(static_cast<Connector&&>(connector), std::move(args));
 }
 
 // Arguments to upload_sticker_file method
@@ -3008,7 +3008,7 @@ struct upload_sticker_file_args_t {
  */
 template <class Connector>
 api_result<file_t, Connector&&> upload_sticker_file(Connector&& connector, upload_sticker_file_args_t args) {
-    return std::forward<Connector>(connector).template request<file_t>("uploadStickerFile", deser::serialize(std::move(args)), response_handler<file_t>{ "upload_sticker_file" });
+    return generic_call(static_cast<Connector&&>(connector), serialize_args(std::move(args)), response_handler<file_t>{ "upload_sticker_file" });
 }
 
 /**
@@ -3020,7 +3020,7 @@ api_result<file_t, Connector&&> upload_sticker_file(Connector&& connector, uploa
  */
 template <class Connector>
 api_result<file_t, Connector&&> call(Connector&& connector, upload_sticker_file_args_t args) {
-    return upload_sticker_file(std::forward<Connector>(connector), std::move(args));
+    return upload_sticker_file(static_cast<Connector&&>(connector), std::move(args));
 }
 
 } // banana::api

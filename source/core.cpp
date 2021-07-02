@@ -63,23 +63,24 @@ expected<T> deserialize(std::string_view value) {
     return extract_api_result(value).then(detail::try_parse<T>);
 }
 
-using namespace banana::api;
-
-#include "generated/dump_impl.cxx"
-
 } // namespace banana::deser
 
 namespace banana {
 
 template <class T>
+serialized_args_t<T> serialize_args(T args) {
+    return { deser::serialize(std::move(args)) };
+}
+
+template <class T>
 expected<T> response_handler<T>::process(expected<std::string> response) const {
     if (!response.has_value()) {
-        return (error_maker_t{} << "[" << context << "] Request error: " << response.error()).finalize();
+        return (error_maker_t{} << "[" << method << "] Request error: " << response.error()).finalize();
     }
 
     expected<T> deser_result = deser::deserialize<T>(response.value());
     if (!deser_result.has_value()) {
-        return (error_maker_t{} << "[" << context << "] Deserialization error: " << deser_result.error()).finalize();
+        return (error_maker_t{} << "[" << method << "] Deserialization error: " << deser_result.error()).finalize();
     }
 
     return deser_result;
@@ -88,5 +89,6 @@ expected<T> response_handler<T>::process(expected<std::string> response) const {
 using namespace banana::api;
 
 #include "generated/resp_impl.cxx"
+#include "generated/serialize_impl.cxx"
 
 } // namespace banana

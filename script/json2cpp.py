@@ -10,13 +10,14 @@ OUT_SOURCE_PATH = "../source/generated"
 
 out_types = open(OUT_INCLUDE_PATH + '/types.hpp', 'w')
 out_api = open(OUT_INCLUDE_PATH + '/api.hpp', 'w')
-out_dump_impl = open(OUT_SOURCE_PATH + '/dump_impl.cxx', 'w')
+out_ser_impl = open(OUT_SOURCE_PATH + '/serialize_impl.cxx', 'w')
 out_resp_impl = open(OUT_SOURCE_PATH + '/resp_impl.cxx', 'w')
 out_meta = open(OUT_INCLUDE_PATH + '/meta.hpp', 'w')
 
 out_api.write("#include <banana/detail/api_header.hpp>\n\n")
 out_types.write("#include <banana/detail/types_header.hpp>\n\n")
 out_meta.write("#include <banana/detail/meta_header.hpp>\n\n")
+
 
 def sort_by_cpp_name(names):
     return sorted(names, key=lambda api_name: get_cpp_type(api_name).cpp_name)
@@ -147,7 +148,7 @@ for name, method in api_methods.items():
  */
 template <class Connector>
 api_result<{return_type}, Connector&&> {uname}(Connector&& connector, {args_cpp_type.cpp_name} args{" = {}" if not method['params'] else ""}) {{
-    return std::forward<Connector>(connector).template request<{return_type}>("{name}", deser::serialize(std::move(args)), response_handler<{return_type}>{{ "{uname}" }});
+    return generic_call(static_cast<Connector&&>(connector), serialize_args(std::move(args)), response_handler<{return_type}>{{ "{uname}" }});
 }}
 
 /**
@@ -157,7 +158,7 @@ api_result<{return_type}, Connector&&> {uname}(Connector&& connector, {args_cpp_
  */
 template <class Connector>
 api_result<{return_type}, Connector&&> call(Connector&& connector, {args_cpp_type.cpp_name} args) {{
-    return {uname}(std::forward<Connector>(connector), std::move(args));
+    return {uname}(static_cast<Connector&&>(connector), std::move(args));
 }}
 
 ''')
@@ -168,7 +169,7 @@ api_result<{return_type}, Connector&&> call(Connector&& connector, {args_cpp_typ
 out_api.write('} // banana::api\n')
 
 for type_name in sorted(ser_types):
-    out_dump_impl.write(f'template std::optional<std::string> serialize<{type_name}>({type_name} value);\n')
+    out_ser_impl.write(f'template serialized_args_t<{type_name}> serialize_args<{type_name}>({type_name} value);\n')
 
 for type_name in sorted(deser_types):
     out_resp_impl.write(f'template struct response_handler<{type_name}>;\n')
