@@ -5,7 +5,7 @@ file_t
 
 .. cpp:struct:: banana::api::file_t
 
-   This object represents a file ready to be downloaded. The file can be downloaded via the link https://api.telegram.org/file/bot<token>/<file_path>. It is guaranteed that the link will be valid for at least 1 hour. When the link expires, a new one can be requested by calling getFile.
+   This object represents a file ready to be downloaded. The file can be downloaded via the link https://api.telegram.org/file/bot<token>/<file_path>. It is guaranteed that the link will be valid for at least 1 hour. When the link expires, a new one can be requested by calling getFile. Maximum file size to download is 20 MB
 
    .. cpp:member:: string_t file_id
 
@@ -17,8 +17,8 @@ file_t
 
    .. cpp:member:: optional_t<integer_t> file_size
 
-   File size, if known
+   Optional. File size, if known
 
    .. cpp:member:: optional_t<string_t> file_path
 
-   File path. Use https://api.telegram.org/file/bot<token>/<file_path> to get the file.
+   Optional. File path. Use https://api.telegram.org/file/bot<token>/<file_path> to get the file.

@@ -19,9 +19,9 @@ send_invoice
    Arguments that should be passed to :cpp:func:`send_invoice`.
 
 
-   .. cpp:member:: integer_t chat_id
+   .. cpp:member:: variant_t<integer_t, string_t> chat_id
 
-   Unique identifier for the target private chat
+   Unique identifier for the target chat or username of the target channel (in the format @channelusername)
 
    .. cpp:member:: string_t title
 
@@ -39,10 +39,6 @@ send_invoice
 
    Payments provider token, obtained via Botfather
 
-   .. cpp:member:: string_t start_parameter
-
-   Unique deep-linking parameter that can be used to generate this invoice when used as a start parameter
-
    .. cpp:member:: string_t currency
 
    Three-letter ISO 4217 currency code, see more on currencies
@@ -50,6 +46,18 @@ send_invoice
    .. cpp:member:: array_t<labeled_price_t> prices
 
    Price breakdown, a JSON-serialized list of components (e.g. product price, tax, discount, delivery cost, delivery tax, bonus, etc.)
+
+   .. cpp:member:: optional_t<integer_t> max_tip_amount
+
+   The maximum accepted amount for tips in the smallest units of the currency (integer, not float/double). For example, for a maximum tip of US$ 1.45 pass max_tip_amount = 145. See the exp parameter in currencies.json, it shows the number of digits past the decimal point for each currency (2 for the majority of currencies). Defaults to 0
+
+   .. cpp:member:: optional_t<array_t<integer_t>> suggested_tip_amounts
+
+   A JSON-serialized array of suggested amounts of tips in the smallest units of the currency (integer, not float/double). At most 4 suggested tip amounts can be specified. The suggested tip amounts must be positive, passed in a strictly increased order and must not exceed max_tip_amount.
+
+   .. cpp:member:: optional_t<string_t> start_parameter
+
+   Unique deep-linking parameter. If left empty, forwarded copies of the sent message will have a Pay button, allowing multiple users to pay directly from the forwarded message, using the same invoice. If non-empty, forwarded copies of the sent message will have a URL button with a deep link to the bot (instead of a Pay button), with the value used as the start parameter
 
    .. cpp:member:: optional_t<string_t> provider_data
 

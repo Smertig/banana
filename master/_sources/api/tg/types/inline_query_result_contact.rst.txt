@@ -25,28 +25,28 @@ inline_query_result_contact_t
 
    .. cpp:member:: optional_t<string_t> last_name
 
-   Contact's last name
+   Optional. Contact's last name
 
    .. cpp:member:: optional_t<string_t> vcard
 
-   Additional data about the contact in the form of a vCard, 0-2048 bytes
+   Optional. Additional data about the contact in the form of a vCard, 0-2048 bytes
 
    .. cpp:member:: optional_t<inline_keyboard_markup_t> reply_markup
 
-   Inline keyboard attached to the message
+   Optional. Inline keyboard attached to the message
 
    .. cpp:member:: optional_t<input_message_content_t> input_message_content
 
-   Content of the message to be sent instead of the contact
+   Optional. Content of the message to be sent instead of the contact
 
    .. cpp:member:: optional_t<string_t> thumb_url
 
-   Url of the thumbnail for the result
+   Optional. Url of the thumbnail for the result
 
    .. cpp:member:: optional_t<integer_t> thumb_width
 
-   Thumbnail width
+   Optional. Thumbnail width
 
    .. cpp:member:: optional_t<integer_t> thumb_height
 
-   Thumbnail height
+   Optional. Thumbnail height

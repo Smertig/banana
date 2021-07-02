@@ -29,20 +29,20 @@ sticker_t
 
    .. cpp:member:: optional_t<photo_size_t> thumb
 
-   Sticker thumbnail in the .WEBP or .JPG format
+   Optional. Sticker thumbnail in the .WEBP or .JPG format
 
    .. cpp:member:: optional_t<string_t> emoji
 
-   Emoji associated with the sticker
+   Optional. Emoji associated with the sticker
 
    .. cpp:member:: optional_t<string_t> set_name
 
-   Name of the sticker set to which the sticker belongs
+   Optional. Name of the sticker set to which the sticker belongs
 
    .. cpp:member:: optional_t<mask_position_t> mask_position
 
-   For mask stickers, the position where the mask should be placed
+   Optional. For mask stickers, the position where the mask should be placed
 
    .. cpp:member:: optional_t<integer_t> file_size
 
-   File size
+   Optional. File size

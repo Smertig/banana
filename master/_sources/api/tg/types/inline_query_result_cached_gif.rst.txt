@@ -21,24 +21,24 @@ inline_query_result_cached_gif_t
 
    .. cpp:member:: optional_t<string_t> title
 
-   Title for the result
+   Optional. Title for the result
 
    .. cpp:member:: optional_t<string_t> caption
 
-   Caption of the GIF file to be sent, 0-1024 characters after entities parsing
+   Optional. Caption of the GIF file to be sent, 0-1024 characters after entities parsing
 
    .. cpp:member:: optional_t<string_t> parse_mode
 
-   Mode for parsing entities in the caption. See formatting options for more details.
+   Optional. Mode for parsing entities in the caption. See formatting options for more details.
 
    .. cpp:member:: optional_t<array_t<message_entity_t>> caption_entities
 
-   List of special entities that appear in the caption, which can be specified instead of parse_mode
+   Optional. List of special entities that appear in the caption, which can be specified instead of parse_mode
 
    .. cpp:member:: optional_t<inline_keyboard_markup_t> reply_markup
 
-   Inline keyboard attached to the message
+   Optional. Inline keyboard attached to the message
 
    .. cpp:member:: optional_t<input_message_content_t> input_message_content
 
-   Content of the message to be sent instead of the GIF animation
+   Optional. Content of the message to be sent instead of the GIF animation

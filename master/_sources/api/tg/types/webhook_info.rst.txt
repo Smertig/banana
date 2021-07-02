@@ -21,20 +21,20 @@ webhook_info_t
 
    .. cpp:member:: optional_t<string_t> ip_address
 
-   Currently used webhook IP address
+   Optional. Currently used webhook IP address
 
    .. cpp:member:: optional_t<integer_t> last_error_date
 
-   Unix time for the most recent error that happened when trying to deliver an update via webhook
+   Optional. Unix time for the most recent error that happened when trying to deliver an update via webhook
 
    .. cpp:member:: optional_t<string_t> last_error_message
 
-   Error message in human-readable format for the most recent error that happened when trying to deliver an update via webhook
+   Optional. Error message in human-readable format for the most recent error that happened when trying to deliver an update via webhook
 
    .. cpp:member:: optional_t<integer_t> max_connections
 
-   Maximum allowed number of simultaneous HTTPS connections to the webhook for update delivery
+   Optional. Maximum allowed number of simultaneous HTTPS connections to the webhook for update delivery
 
    .. cpp:member:: optional_t<array_t<string_t>> allowed_updates
 
-   A list of update types the bot is subscribed to. Defaults to all update types
+   Optional. A list of update types the bot is subscribed to. Defaults to all update types except chat_member

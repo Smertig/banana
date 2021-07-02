@@ -29,16 +29,16 @@ video_t
 
    .. cpp:member:: optional_t<photo_size_t> thumb
 
-   Video thumbnail
+   Optional. Video thumbnail
 
    .. cpp:member:: optional_t<string_t> file_name
 
-   Original filename as defined by sender
+   Optional. Original filename as defined by sender
 
    .. cpp:member:: optional_t<string_t> mime_type
 
-   Mime type of a file as defined by sender
+   Optional. Mime type of a file as defined by sender
 
    .. cpp:member:: optional_t<integer_t> file_size
 
-   File size
+   Optional. File size

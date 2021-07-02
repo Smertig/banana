@@ -25,4 +25,4 @@ photo_size_t
 
    .. cpp:member:: optional_t<integer_t> file_size
 
-   File size
+   Optional. File size

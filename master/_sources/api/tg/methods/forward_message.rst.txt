@@ -12,7 +12,7 @@ forward_message
 
    ``connector`` is any object satisfying :ref:`connector concept <banana-api-banana-connectors>`.
 
-   Use this method to forward messages of any kind. On success, the sent Message is returned.
+   Use this method to forward messages of any kind. Service messages can't be forwarded. On success, the sent Message is returned.
 
 .. cpp:struct:: forward_message_args_t
 

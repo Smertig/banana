@@ -25,28 +25,28 @@ inline_query_result_article_t
 
    .. cpp:member:: optional_t<inline_keyboard_markup_t> reply_markup
 
-   Inline keyboard attached to the message
+   Optional. Inline keyboard attached to the message
 
    .. cpp:member:: optional_t<string_t> url
 
-   URL of the result
+   Optional. URL of the result
 
    .. cpp:member:: optional_t<boolean_t> hide_url
 
-   Pass True, if you don't want the URL to be shown in the message
+   Optional. Pass True, if you don't want the URL to be shown in the message
 
    .. cpp:member:: optional_t<string_t> description
 
-   Short description of the result
+   Optional. Short description of the result
 
    .. cpp:member:: optional_t<string_t> thumb_url
 
-   Url of the thumbnail for the result
+   Optional. Url of the thumbnail for the result
 
    .. cpp:member:: optional_t<integer_t> thumb_width
 
-   Thumbnail width
+   Optional. Thumbnail width
 
    .. cpp:member:: optional_t<integer_t> thumb_height
 
-   Thumbnail height
+   Optional. Thumbnail height

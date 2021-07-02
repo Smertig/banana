@@ -21,24 +21,24 @@ audio_t
 
    .. cpp:member:: optional_t<string_t> performer
 
-   Performer of the audio as defined by sender or by audio tags
+   Optional. Performer of the audio as defined by sender or by audio tags
 
    .. cpp:member:: optional_t<string_t> title
 
-   Title of the audio as defined by sender or by audio tags
+   Optional. Title of the audio as defined by sender or by audio tags
 
    .. cpp:member:: optional_t<string_t> file_name
 
-   Original filename as defined by sender
+   Optional. Original filename as defined by sender
 
    .. cpp:member:: optional_t<string_t> mime_type
 
-   MIME type of the file as defined by sender
+   Optional. MIME type of the file as defined by sender
 
    .. cpp:member:: optional_t<integer_t> file_size
 
-   File size
+   Optional. File size
 
    .. cpp:member:: optional_t<photo_size_t> thumb
 
-   Thumbnail of the album cover to which the music file belongs
+   Optional. Thumbnail of the album cover to which the music file belongs
