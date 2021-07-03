@@ -7,9 +7,6 @@ set_chat_sticker_set
 .. cpp:function:: template <class Connector> \
                   api_result<boolean_t, Connector&&> set_chat_sticker_set(Connector&& connector, set_chat_sticker_set_args_t args)
 
-.. cpp:function:: template <class Connector> \
-                  api_result<boolean_t, Connector&&> call(Connector&& connector, set_chat_sticker_set_args_t args)
-
    ``connector`` is any object satisfying :ref:`connector concept <banana-api-banana-connectors>`.
 
    Use this method to set a new group sticker set for a supergroup. The bot must be an administrator in the chat for this to work and must have the appropriate admin rights. Use the field can_set_sticker_set optionally returned in getChat requests to check if the bot can use this method. Returns True on success.

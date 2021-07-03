@@ -7,9 +7,6 @@ get_webhook_info
 .. cpp:function:: template <class Connector> \
                   api_result<webhook_info_t, Connector&&> get_webhook_info(Connector&& connector, get_webhook_info_args_t args)
 
-.. cpp:function:: template <class Connector> \
-                  api_result<webhook_info_t, Connector&&> call(Connector&& connector, get_webhook_info_args_t args)
-
    ``connector`` is any object satisfying :ref:`connector concept <banana-api-banana-connectors>`.
 
    Use this method to get current webhook status. Requires no parameters. On success, returns a WebhookInfo object. If the bot is using getUpdates, will return an object with the url field empty.

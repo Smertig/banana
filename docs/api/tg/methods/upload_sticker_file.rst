@@ -7,9 +7,6 @@ upload_sticker_file
 .. cpp:function:: template <class Connector> \
                   api_result<file_t, Connector&&> upload_sticker_file(Connector&& connector, upload_sticker_file_args_t args)
 
-.. cpp:function:: template <class Connector> \
-                  api_result<file_t, Connector&&> call(Connector&& connector, upload_sticker_file_args_t args)
-
    ``connector`` is any object satisfying :ref:`connector concept <banana-api-banana-connectors>`.
 
    Use this method to upload a .PNG file with a sticker for later use in createNewStickerSet and addStickerToSet methods (can be used multiple times). Returns the uploaded File on success.

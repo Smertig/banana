@@ -89,9 +89,6 @@ for name, method in api_methods.items():
 .. cpp:function:: template <class Connector> \\
                   api_result<{return_type.cpp_name}, Connector&&> {doc_name}(Connector&& connector, {doc_name}_args_t args)
 
-.. cpp:function:: template <class Connector> \\
-                  api_result<{return_type.cpp_name}, Connector&&> call(Connector&& connector, {doc_name}_args_t args)
-
    ``connector`` is any object satisfying :ref:`connector concept <banana-api-banana-connectors>`.
 
    {method['desc']}

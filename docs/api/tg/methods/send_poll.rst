@@ -7,9 +7,6 @@ send_poll
 .. cpp:function:: template <class Connector> \
                   api_result<message_t, Connector&&> send_poll(Connector&& connector, send_poll_args_t args)
 
-.. cpp:function:: template <class Connector> \
-                  api_result<message_t, Connector&&> call(Connector&& connector, send_poll_args_t args)
-
    ``connector`` is any object satisfying :ref:`connector concept <banana-api-banana-connectors>`.
 
    Use this method to send a native poll. On success, the sent Message is returned.

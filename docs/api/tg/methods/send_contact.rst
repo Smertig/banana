@@ -7,9 +7,6 @@ send_contact
 .. cpp:function:: template <class Connector> \
                   api_result<message_t, Connector&&> send_contact(Connector&& connector, send_contact_args_t args)
 
-.. cpp:function:: template <class Connector> \
-                  api_result<message_t, Connector&&> call(Connector&& connector, send_contact_args_t args)
-
    ``connector`` is any object satisfying :ref:`connector concept <banana-api-banana-connectors>`.
 
    Use this method to send phone contacts. On success, the sent Message is returned.

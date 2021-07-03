@@ -7,9 +7,6 @@ send_message
 .. cpp:function:: template <class Connector> \
                   api_result<message_t, Connector&&> send_message(Connector&& connector, send_message_args_t args)
 
-.. cpp:function:: template <class Connector> \
-                  api_result<message_t, Connector&&> call(Connector&& connector, send_message_args_t args)
-
    ``connector`` is any object satisfying :ref:`connector concept <banana-api-banana-connectors>`.
 
    Use this method to send text messages. On success, the sent Message is returned.

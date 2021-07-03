@@ -7,9 +7,6 @@ send_video
 .. cpp:function:: template <class Connector> \
                   api_result<message_t, Connector&&> send_video(Connector&& connector, send_video_args_t args)
 
-.. cpp:function:: template <class Connector> \
-                  api_result<message_t, Connector&&> call(Connector&& connector, send_video_args_t args)
-
    ``connector`` is any object satisfying :ref:`connector concept <banana-api-banana-connectors>`.
 
    Use this method to send video files, Telegram clients support mp4 videos (other formats may be sent as Document). On success, the sent Message is returned. Bots can currently send video files of up to 50 MB in size, this limit may be changed in the future.

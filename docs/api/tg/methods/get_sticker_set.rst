@@ -7,9 +7,6 @@ get_sticker_set
 .. cpp:function:: template <class Connector> \
                   api_result<sticker_set_t, Connector&&> get_sticker_set(Connector&& connector, get_sticker_set_args_t args)
 
-.. cpp:function:: template <class Connector> \
-                  api_result<sticker_set_t, Connector&&> call(Connector&& connector, get_sticker_set_args_t args)
-
    ``connector`` is any object satisfying :ref:`connector concept <banana-api-banana-connectors>`.
 
    Use this method to get a sticker set. On success, a StickerSet object is returned.

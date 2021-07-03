@@ -7,9 +7,6 @@ answer_inline_query
 .. cpp:function:: template <class Connector> \
                   api_result<boolean_t, Connector&&> answer_inline_query(Connector&& connector, answer_inline_query_args_t args)
 
-.. cpp:function:: template <class Connector> \
-                  api_result<boolean_t, Connector&&> call(Connector&& connector, answer_inline_query_args_t args)
-
    ``connector`` is any object satisfying :ref:`connector concept <banana-api-banana-connectors>`.
 
    Use this method to send answers to an inline query. On success, True is returned. No more than 50 results per query are allowed.

@@ -7,9 +7,6 @@ send_animation
 .. cpp:function:: template <class Connector> \
                   api_result<message_t, Connector&&> send_animation(Connector&& connector, send_animation_args_t args)
 
-.. cpp:function:: template <class Connector> \
-                  api_result<message_t, Connector&&> call(Connector&& connector, send_animation_args_t args)
-
    ``connector`` is any object satisfying :ref:`connector concept <banana-api-banana-connectors>`.
 
    Use this method to send animation files (GIF or H.264/MPEG-4 AVC video without sound). On success, the sent Message is returned. Bots can currently send animation files of up to 50 MB in size, this limit may be changed in the future.

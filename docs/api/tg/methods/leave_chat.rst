@@ -7,9 +7,6 @@ leave_chat
 .. cpp:function:: template <class Connector> \
                   api_result<boolean_t, Connector&&> leave_chat(Connector&& connector, leave_chat_args_t args)
 
-.. cpp:function:: template <class Connector> \
-                  api_result<boolean_t, Connector&&> call(Connector&& connector, leave_chat_args_t args)
-
    ``connector`` is any object satisfying :ref:`connector concept <banana-api-banana-connectors>`.
 
    Use this method for your bot to leave a group, supergroup or channel. Returns True on success.

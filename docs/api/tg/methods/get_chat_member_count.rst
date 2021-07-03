@@ -7,9 +7,6 @@ get_chat_member_count
 .. cpp:function:: template <class Connector> \
                   api_result<integer_t, Connector&&> get_chat_member_count(Connector&& connector, get_chat_member_count_args_t args)
 
-.. cpp:function:: template <class Connector> \
-                  api_result<integer_t, Connector&&> call(Connector&& connector, get_chat_member_count_args_t args)
-
    ``connector`` is any object satisfying :ref:`connector concept <banana-api-banana-connectors>`.
 
    Use this method to get the number of members in a chat. Returns Int on success.

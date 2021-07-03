@@ -7,9 +7,6 @@ send_video_note
 .. cpp:function:: template <class Connector> \
                   api_result<message_t, Connector&&> send_video_note(Connector&& connector, send_video_note_args_t args)
 
-.. cpp:function:: template <class Connector> \
-                  api_result<message_t, Connector&&> call(Connector&& connector, send_video_note_args_t args)
-
    ``connector`` is any object satisfying :ref:`connector concept <banana-api-banana-connectors>`.
 
    As of v.4.0, Telegram clients support rounded square mp4 videos of up to 1 minute long. Use this method to send video messages. On success, the sent Message is returned.

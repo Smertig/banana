@@ -7,9 +7,6 @@ send_document
 .. cpp:function:: template <class Connector> \
                   api_result<message_t, Connector&&> send_document(Connector&& connector, send_document_args_t args)
 
-.. cpp:function:: template <class Connector> \
-                  api_result<message_t, Connector&&> call(Connector&& connector, send_document_args_t args)
-
    ``connector`` is any object satisfying :ref:`connector concept <banana-api-banana-connectors>`.
 
    Use this method to send general files. On success, the sent Message is returned. Bots can currently send files of any type of up to 50 MB in size, this limit may be changed in the future.

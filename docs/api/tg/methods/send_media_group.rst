@@ -7,9 +7,6 @@ send_media_group
 .. cpp:function:: template <class Connector> \
                   api_result<array_t<message_t>, Connector&&> send_media_group(Connector&& connector, send_media_group_args_t args)
 
-.. cpp:function:: template <class Connector> \
-                  api_result<array_t<message_t>, Connector&&> call(Connector&& connector, send_media_group_args_t args)
-
    ``connector`` is any object satisfying :ref:`connector concept <banana-api-banana-connectors>`.
 
    Use this method to send a group of photos, videos, documents or audios as an album. Documents and audio files can be only grouped in an album with messages of the same type. On success, an array of Messages that were sent is returned.

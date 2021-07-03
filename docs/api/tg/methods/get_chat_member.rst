@@ -7,9 +7,6 @@ get_chat_member
 .. cpp:function:: template <class Connector> \
                   api_result<chat_member_t, Connector&&> get_chat_member(Connector&& connector, get_chat_member_args_t args)
 
-.. cpp:function:: template <class Connector> \
-                  api_result<chat_member_t, Connector&&> call(Connector&& connector, get_chat_member_args_t args)
-
    ``connector`` is any object satisfying :ref:`connector concept <banana-api-banana-connectors>`.
 
    Use this method to get information about a member of a chat. Returns a ChatMember object on success.

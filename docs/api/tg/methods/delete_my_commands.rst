@@ -7,9 +7,6 @@ delete_my_commands
 .. cpp:function:: template <class Connector> \
                   api_result<boolean_t, Connector&&> delete_my_commands(Connector&& connector, delete_my_commands_args_t args)
 
-.. cpp:function:: template <class Connector> \
-                  api_result<boolean_t, Connector&&> call(Connector&& connector, delete_my_commands_args_t args)
-
    ``connector`` is any object satisfying :ref:`connector concept <banana-api-banana-connectors>`.
 
    Use this method to delete the list of the bot's commands for the given scope and user language. After deletion, higher level commands will be shown to affected users. Returns True on success.

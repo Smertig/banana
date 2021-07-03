@@ -7,9 +7,6 @@ send_venue
 .. cpp:function:: template <class Connector> \
                   api_result<message_t, Connector&&> send_venue(Connector&& connector, send_venue_args_t args)
 
-.. cpp:function:: template <class Connector> \
-                  api_result<message_t, Connector&&> call(Connector&& connector, send_venue_args_t args)
-
    ``connector`` is any object satisfying :ref:`connector concept <banana-api-banana-connectors>`.
 
    Use this method to send information about a venue. On success, the sent Message is returned.
