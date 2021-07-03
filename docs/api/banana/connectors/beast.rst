@@ -8,7 +8,7 @@ beast-based connectors
   blocking
      :cpp:class:`beast_blocking`, :cpp:class:`beast_blocking_monadic`
   async
-     ❌
+     :cpp:class:`beast_future`, :cpp:class:`beast_future_monadic`
   coroutine
      :cpp:class:`beast_coro`, :cpp:class:`beast_coro_monadic`
 
@@ -68,6 +68,54 @@ Example
 
      banana::connector::beast_blocking_monadic connector("TG_BOT_TOKEN");
      banana::expected<banana::api::message_t> msg = banana::api::send_message(connector, { "@user", "Hello, world!" });
+
+----------------------
+
+.. cpp:namespace: banana::connector
+.. cpp:class:: beast_future
+
+   boost::beast-based non-blocking connector with exception-based error handling.
+
+   .. cpp:function:: beast_future::beast_future(std::string token, boost::asio::io_context& io_context, boost::asio::ssl::context& ssl_context)
+
+      Default constructor accepting Telegram Bot token, I/O and ssl context.
+
+   .. cpp:function:: template <class T> \
+                     std::future<T> request(std::string_view method, std::optional<std::string> body, expected<T>(*then)(expected<std::string>))
+
+      Part of the required connector interface.
+
+Example
+   .. code-block:: C++
+
+      #include <banana/connector/beast.hpp>
+
+      banana::connector::beast_future connector("TG_BOT_TOKEN");
+      std::future<banana::api::message_t> msg = banana::api::send_message(connector, { "@user", "Hello, world!" });
+
+----------------------
+
+.. cpp:namespace: banana::connector
+.. cpp:class:: beast_future_monadic
+
+   boost::beast-based non-blocking connector with monadic error handling.
+
+   .. cpp:function:: beast_future_monadic::beast_future_monadic(std::string token, boost::asio::io_context& io_context, boost::asio::ssl::context& ssl_context)
+
+      Default constructor accepting Telegram Bot token, I/O and ssl context.
+
+   .. cpp:function:: template <class T> \
+                     std::future<expected<T>> request(std::string_view method, std::optional<std::string> body, expected<T>(*then)(expected<std::string>))
+
+      Part of the required connector interface.
+
+Example
+  .. code-block:: C++
+
+     #include <banana/connector/beast.hpp>
+
+     banana::connector::beast_future_monadic connector("TG_BOT_TOKEN");
+     std::future<banana::expected<banana::api::message_t>> msg = banana::api::send_message(connector, { "@user", "Hello, world!" });
 
 ----------------------
 
