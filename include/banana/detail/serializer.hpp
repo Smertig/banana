@@ -7,7 +7,7 @@ namespace banana {
 
 template <class T>
 struct serialized_args_t {
-    std::optional<std::string> data;
+    std::string data;
 };
 
 template <class T>

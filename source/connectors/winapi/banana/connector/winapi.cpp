@@ -61,9 +61,9 @@ basic_winapi_monadic::basic_winapi_monadic(std::string token) : m_token(std::mov
     // nothing
 }
 
-expected<std::string> basic_winapi_monadic::do_request(std::string_view method, std::optional<std::string> body) {
+expected<std::string> basic_winapi_monadic::do_request(std::string_view method, std::string body) {
     std::optional<std::string> header;
-    if (body.has_value()) {
+    if (!body.empty()) {
         header = "Content-Type: application/json\r\n";
     }
 
@@ -98,8 +98,8 @@ expected<std::string> basic_winapi_monadic::do_request(std::string_view method, 
     if (!HttpSendRequestA(http_file,
             header ? header->data() : nullptr,
             static_cast<DWORD>(header ? header->size() : 0),
-            body ? body->data() : nullptr,
-            static_cast<DWORD>(body ? body->size() : 0)
+            body.data(),
+            static_cast<DWORD>(body.size())
     )) {
         std::ostringstream os;
         os << "HttpSendRequest error #" << GetLastError();

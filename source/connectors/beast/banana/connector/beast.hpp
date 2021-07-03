@@ -17,12 +17,12 @@ class basic_beast_monadic {
 public:
     explicit basic_beast_monadic(std::string token, boost::asio::io_context& io_context, boost::asio::ssl::context& ssl_context);
 
-    expected<std::string> do_request(std::string_view method, std::optional<std::string> body);
+    expected<std::string> do_request(std::string_view method, std::string body);
 
-    void do_async_request(std::string_view method, std::optional<std::string> body, std::unique_ptr<async_handler> handler);
+    void do_async_request(std::string_view method, std::string body, std::unique_ptr<async_handler> handler);
 
 #if defined(BOOST_ASIO_HAS_CO_AWAIT)
-    boost::asio::awaitable<expected<std::string>> do_coro_request(std::string_view method, std::optional<std::string> body);
+    boost::asio::awaitable<expected<std::string>> do_coro_request(std::string_view method, std::string body);
 #endif
 };
 
@@ -37,7 +37,7 @@ struct beast_coro_monadic : basic_beast_monadic {
     using basic_beast_monadic::basic_beast_monadic;
 
     template <class Traits, class R = typename Traits::response_type>
-    boost::asio::awaitable<expected<R>> request(std::optional<std::string> body) {
+    boost::asio::awaitable<expected<R>> request(std::string body) {
         co_return deserialize<Traits>(co_await basic_beast_monadic::do_coro_request(Traits::native_name, std::move(body)));
     }
 };
@@ -46,7 +46,7 @@ struct beast_coro : beast_coro_monadic {
     using beast_coro_monadic::beast_coro_monadic;
 
     template <class Traits, class R = typename Traits::response_type>
-    boost::asio::awaitable<R> request(std::optional<std::string> body) {
+    boost::asio::awaitable<R> request(std::string body) {
         expected<R> result = co_await beast_coro_monadic::request<Traits>(std::move(body));
         co_return std::move(result).value();
     }

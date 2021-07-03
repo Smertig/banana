@@ -27,10 +27,10 @@ public:
 namespace banana::deser {
 
 template <class T>
-std::optional<std::string> serialize(T value) {
+std::string serialize(T value) {
     auto j = detail::to_json(std::move(value));
     if (j.is_null()) {
-        return std::nullopt;
+        return "";
     }
 
     return j.dump();

@@ -10,7 +10,7 @@ A type satisfies the concept ``connector`` if it has a method with the following
 .. code-block:: C++
 
    template <class Traits, class R = typename Traits::response_type>
-   impl-defined-<R> request(std::optional<std::string> body);
+   impl-defined-<R> request(std::string body);
 
 The signature of this method defines the properties of the connector.
 For example, this method can return the following types:

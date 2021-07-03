@@ -303,17 +303,17 @@ basic_beast_monadic::basic_beast_monadic(std::string token, boost::asio::io_cont
     // nothing
 }
 
-expected<std::string> basic_beast_monadic::do_request(std::string_view method, std::optional<std::string> body) {
+expected<std::string> basic_beast_monadic::do_request(std::string_view method, std::string body) {
     try {
         std::string target = "/bot" + m_token + "/" + std::string(method);
-        return expected(::do_blocking_request(m_io_context, m_ssl_context, m_api_path, m_api_port, target, body ? std::string_view(*body) : ""));
+        return expected(::do_blocking_request(m_io_context, m_ssl_context, m_api_path, m_api_port, target, body));
     }
     catch (std::exception& e) {
         return error_t<>{ e.what() };
     }
 }
 
-void basic_beast_monadic::do_async_request(std::string_view method, std::optional<std::string> body, std::unique_ptr<async_handler> handler) {
+void basic_beast_monadic::do_async_request(std::string_view method, std::string body, std::unique_ptr<async_handler> handler) {
     struct http_session : public basic_http_session {
         using basic_http_session::basic_http_session;
 
@@ -343,14 +343,14 @@ void basic_beast_monadic::do_async_request(std::string_view method, std::optiona
     auto session = std::make_shared<http_session>(m_io_context, m_ssl_context);
 
     session->set_handler(std::move(handler));
-    session->run(m_api_path, m_api_port, target, body ? std::string_view(*body) : "");
+    session->run(m_api_path, m_api_port, target, body);
 }
 
 #if defined(BOOST_ASIO_HAS_CO_AWAIT)
-boost::asio::awaitable<expected<std::string>> basic_beast_monadic::do_coro_request(std::string_view method, std::optional<std::string> body) {
+boost::asio::awaitable<expected<std::string>> basic_beast_monadic::do_coro_request(std::string_view method, std::string body) {
     try {
         std::string target = "/bot" + m_token + "/" + std::string(method);
-        co_return expected(co_await ::do_coro_request(m_io_context, m_ssl_context, m_api_path, m_api_port, target, body ? std::string_view(*body) : ""));
+        co_return expected(co_await ::do_coro_request(m_io_context, m_ssl_context, m_api_path, m_api_port, target, body));
     }
     catch (std::exception& e) {
         co_return error_t<>{ e.what() };

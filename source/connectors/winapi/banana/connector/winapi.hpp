@@ -11,7 +11,7 @@ class basic_winapi_monadic {
 public:
     explicit basic_winapi_monadic(std::string token);
 
-    expected<std::string> do_request(std::string_view method, std::optional<std::string> body);
+    expected<std::string> do_request(std::string_view method, std::string body);
 };
 
 using basic_winapi = meta::unwrap_blocking<basic_winapi_monadic>;

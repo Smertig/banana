@@ -15,7 +15,7 @@ public:
     }
 
     /// Our connector is stupid so it will use `curl` utility to make requests
-    banana::expected<std::string> do_request(std::string_view method, std::optional<std::string> body) {
+    banana::expected<std::string> do_request(std::string_view method, std::string body) {
         // Temporarily files
         const std::string temp_input  = "./input.tmp";
         const std::string temp_output = "./output.tmp";

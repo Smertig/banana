@@ -18,7 +18,7 @@ class basic_cpr_monadic {
 public:
     explicit basic_cpr_monadic(std::string token);
 
-    expected<std::string> do_request(std::string_view method, std::optional<std::string> body);
+    expected<std::string> do_request(std::string_view method, std::string body);
 };
 
 using basic_cpr = meta::unwrap_blocking<basic_cpr_monadic>;

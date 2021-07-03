@@ -34,7 +34,7 @@ basic_cpr_monadic::basic_cpr_monadic(std::string token) : m_token(std::move(toke
     // nothing
 }
 
-expected<std::string> basic_cpr_monadic::do_request(std::string_view method, std::optional<std::string> body) {
+expected<std::string> basic_cpr_monadic::do_request(std::string_view method, std::string body) {
     cpr::Session session;
 
     std::string url;
@@ -46,8 +46,8 @@ expected<std::string> basic_cpr_monadic::do_request(std::string_view method, std
 
     session.SetUrl(std::move(url));
 
-    if (body) {
-        session.SetBody(cpr::Body{ std::move(*body) });
+    if (!body.empty()) {
+        session.SetBody(cpr::Body{ std::move(body) });
         session.SetHeader({
             { "Content-Type", "application/json" }
         });

@@ -33,7 +33,7 @@ Dependencies
       Default constructor accepting Telegram Bot token.
 
    .. cpp:function:: template <class Traits, class R = typename Traits::response_type> \
-                     R request(std::optional<std::string> body)
+                     R request(std::string body)
 
       Part of the required connector interface.
 
@@ -57,7 +57,7 @@ Example
       Default constructor accepting Telegram Bot token.
 
    .. cpp:function:: template <class Traits, class R = typename Traits::response_type> \
-                     expected<R> request(std::optional<std::string> body)
+                     expected<R> request(std::string body)
 
       Part of the required connector interface.
 
@@ -81,7 +81,7 @@ Example
       Default constructor accepting Telegram Bot token.
 
    .. cpp:function:: template <class Traits, class R = typename Traits::response_type> \
-                     std::future<R> request(std::optional<std::string> body)
+                     std::future<R> request(std::string body)
 
       Part of the required connector interface.
 
