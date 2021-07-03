@@ -1270,7 +1270,7 @@
 To use any function from <code class="docutils literal notranslate"><span class="pre">banana::api</span></code> you need a connector object.
 A type satisfies the concept <code class="docutils literal notranslate"><span class="pre">connector</span></code> if it has a method with the following signature:</p>
 <div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">Traits</span><span class="p">,</span> <span class="k">class</span> <span class="nc">R</span> <span class="o">=</span> <span class="k">typename</span> <span class="nc">Traits</span><span class="o">::</span><span class="n">response_type</span><span class="o">&gt;</span>
-<span class="n">impl</span><span class="o">-</span><span class="n">defined</span><span class="o">-&lt;</span><span class="n">R</span><span class="o">&gt;</span> <span class="n">request</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">optional</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">body</span><span class="p">);</span>
+<span class="n">impl</span><span class="o">-</span><span class="n">defined</span><span class="o">-&lt;</span><span class="n">R</span><span class="o">&gt;</span> <span class="n">request</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">body</span><span class="p">);</span>
 </pre></div>
 </div>
 <p>The signature of this method defines the properties of the connector.
