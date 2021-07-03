@@ -7,9 +7,6 @@ ban_chat_member
 .. cpp:function:: template <class Connector> \
                   api_result<boolean_t, Connector&&> ban_chat_member(Connector&& connector, ban_chat_member_args_t args)
 
-.. cpp:function:: template <class Connector> \
-                  api_result<boolean_t, Connector&&> call(Connector&& connector, ban_chat_member_args_t args)
-
    ``connector`` is any object satisfying :ref:`connector concept <banana-api-banana-connectors>`.
 
    Use this method to ban a user in a group, a supergroup or a channel. In the case of supergroups and channels, the user will not be able to return to the chat on their own using invite links, etc., unless unbanned first. The bot must be an administrator in the chat for this to work and must have the appropriate admin rights. Returns True on success.

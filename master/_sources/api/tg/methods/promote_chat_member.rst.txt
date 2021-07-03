@@ -7,9 +7,6 @@ promote_chat_member
 .. cpp:function:: template <class Connector> \
                   api_result<boolean_t, Connector&&> promote_chat_member(Connector&& connector, promote_chat_member_args_t args)
 
-.. cpp:function:: template <class Connector> \
-                  api_result<boolean_t, Connector&&> call(Connector&& connector, promote_chat_member_args_t args)
-
    ``connector`` is any object satisfying :ref:`connector concept <banana-api-banana-connectors>`.
 
    Use this method to promote or demote a user in a supergroup or a channel. The bot must be an administrator in the chat for this to work and must have the appropriate admin rights. Pass False for all boolean parameters to demote a user. Returns True on success.

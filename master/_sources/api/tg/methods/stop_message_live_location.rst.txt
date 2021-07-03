@@ -7,9 +7,6 @@ stop_message_live_location
 .. cpp:function:: template <class Connector> \
                   api_result<variant_t<message_t, boolean_t>, Connector&&> stop_message_live_location(Connector&& connector, stop_message_live_location_args_t args)
 
-.. cpp:function:: template <class Connector> \
-                  api_result<variant_t<message_t, boolean_t>, Connector&&> call(Connector&& connector, stop_message_live_location_args_t args)
-
    ``connector`` is any object satisfying :ref:`connector concept <banana-api-banana-connectors>`.
 
    Use this method to stop updating a live location message before live_period expires. On success, if the message was sent by the bot, the sent Message is returned, otherwise True is returned.

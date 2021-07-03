@@ -7,9 +7,6 @@ set_chat_permissions
 .. cpp:function:: template <class Connector> \
                   api_result<boolean_t, Connector&&> set_chat_permissions(Connector&& connector, set_chat_permissions_args_t args)
 
-.. cpp:function:: template <class Connector> \
-                  api_result<boolean_t, Connector&&> call(Connector&& connector, set_chat_permissions_args_t args)
-
    ``connector`` is any object satisfying :ref:`connector concept <banana-api-banana-connectors>`.
 
    Use this method to set default chat permissions for all members. The bot must be an administrator in the group or a supergroup for this to work and must have the can_restrict_members admin rights. Returns True on success.

@@ -7,9 +7,6 @@ get_my_commands
 .. cpp:function:: template <class Connector> \
                   api_result<array_t<bot_command_t>, Connector&&> get_my_commands(Connector&& connector, get_my_commands_args_t args)
 
-.. cpp:function:: template <class Connector> \
-                  api_result<array_t<bot_command_t>, Connector&&> call(Connector&& connector, get_my_commands_args_t args)
-
    ``connector`` is any object satisfying :ref:`connector concept <banana-api-banana-connectors>`.
 
    Use this method to get the current list of the bot's commands for the given scope and user language. Returns Array of BotCommand on success. If commands aren't set, an empty list is returned.

@@ -7,9 +7,6 @@ create_new_sticker_set
 .. cpp:function:: template <class Connector> \
                   api_result<boolean_t, Connector&&> create_new_sticker_set(Connector&& connector, create_new_sticker_set_args_t args)
 
-.. cpp:function:: template <class Connector> \
-                  api_result<boolean_t, Connector&&> call(Connector&& connector, create_new_sticker_set_args_t args)
-
    ``connector`` is any object satisfying :ref:`connector concept <banana-api-banana-connectors>`.
 
    Use this method to create a new sticker set owned by a user. The bot will be able to edit the sticker set thus created. You must use exactly one of the fields png_sticker or tgs_sticker. Returns True on success.

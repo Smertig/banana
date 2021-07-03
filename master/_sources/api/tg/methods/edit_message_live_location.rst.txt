@@ -7,9 +7,6 @@ edit_message_live_location
 .. cpp:function:: template <class Connector> \
                   api_result<variant_t<message_t, boolean_t>, Connector&&> edit_message_live_location(Connector&& connector, edit_message_live_location_args_t args)
 
-.. cpp:function:: template <class Connector> \
-                  api_result<variant_t<message_t, boolean_t>, Connector&&> call(Connector&& connector, edit_message_live_location_args_t args)
-
    ``connector`` is any object satisfying :ref:`connector concept <banana-api-banana-connectors>`.
 
    Use this method to edit live location messages. A location can be edited until its live_period expires or editing is explicitly disabled by a call to stopMessageLiveLocation. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned.

@@ -7,9 +7,6 @@ set_my_commands
 .. cpp:function:: template <class Connector> \
                   api_result<boolean_t, Connector&&> set_my_commands(Connector&& connector, set_my_commands_args_t args)
 
-.. cpp:function:: template <class Connector> \
-                  api_result<boolean_t, Connector&&> call(Connector&& connector, set_my_commands_args_t args)
-
    ``connector`` is any object satisfying :ref:`connector concept <banana-api-banana-connectors>`.
 
    Use this method to change the list of the bot's commands. See https://core.telegram.org/bots#commands for more details about bot commands. Returns True on success.

@@ -7,9 +7,6 @@ edit_chat_invite_link
 .. cpp:function:: template <class Connector> \
                   api_result<chat_invite_link_t, Connector&&> edit_chat_invite_link(Connector&& connector, edit_chat_invite_link_args_t args)
 
-.. cpp:function:: template <class Connector> \
-                  api_result<chat_invite_link_t, Connector&&> call(Connector&& connector, edit_chat_invite_link_args_t args)
-
    ``connector`` is any object satisfying :ref:`connector concept <banana-api-banana-connectors>`.
 
    Use this method to edit a non-primary invite link created by the bot. The bot must be an administrator in the chat for this to work and must have the appropriate admin rights. Returns the edited invite link as a ChatInviteLink object.

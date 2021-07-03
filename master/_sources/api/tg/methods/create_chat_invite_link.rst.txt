@@ -7,9 +7,6 @@ create_chat_invite_link
 .. cpp:function:: template <class Connector> \
                   api_result<chat_invite_link_t, Connector&&> create_chat_invite_link(Connector&& connector, create_chat_invite_link_args_t args)
 
-.. cpp:function:: template <class Connector> \
-                  api_result<chat_invite_link_t, Connector&&> call(Connector&& connector, create_chat_invite_link_args_t args)
-
    ``connector`` is any object satisfying :ref:`connector concept <banana-api-banana-connectors>`.
 
    Use this method to create an additional invite link for a chat. The bot must be an administrator in the chat for this to work and must have the appropriate admin rights. The link can be revoked using the method revokeChatInviteLink. Returns the new invite link as ChatInviteLink object.

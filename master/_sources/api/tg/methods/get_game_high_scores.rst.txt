@@ -7,9 +7,6 @@ get_game_high_scores
 .. cpp:function:: template <class Connector> \
                   api_result<array_t<game_high_score_t>, Connector&&> get_game_high_scores(Connector&& connector, get_game_high_scores_args_t args)
 
-.. cpp:function:: template <class Connector> \
-                  api_result<array_t<game_high_score_t>, Connector&&> call(Connector&& connector, get_game_high_scores_args_t args)
-
    ``connector`` is any object satisfying :ref:`connector concept <banana-api-banana-connectors>`.
 
    Use this method to get data for high score tables. Will return the score of the specified user and several of their neighbors in a game. On success, returns an Array of GameHighScore objects. This method will currently return scores for the target user, plus two of their closest neighbors on each side. Will also return the top three users if the user and his neighbors are not among them. Please note that this behavior is subject to change.

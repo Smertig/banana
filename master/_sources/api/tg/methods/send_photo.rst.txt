@@ -7,9 +7,6 @@ send_photo
 .. cpp:function:: template <class Connector> \
                   api_result<message_t, Connector&&> send_photo(Connector&& connector, send_photo_args_t args)
 
-.. cpp:function:: template <class Connector> \
-                  api_result<message_t, Connector&&> call(Connector&& connector, send_photo_args_t args)
-
    ``connector`` is any object satisfying :ref:`connector concept <banana-api-banana-connectors>`.
 
    Use this method to send photos. On success, the sent Message is returned.

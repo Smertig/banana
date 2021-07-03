@@ -7,9 +7,6 @@ send_dice
 .. cpp:function:: template <class Connector> \
                   api_result<message_t, Connector&&> send_dice(Connector&& connector, send_dice_args_t args)
 
-.. cpp:function:: template <class Connector> \
-                  api_result<message_t, Connector&&> call(Connector&& connector, send_dice_args_t args)
-
    ``connector`` is any object satisfying :ref:`connector concept <banana-api-banana-connectors>`.
 
    Use this method to send an animated emoji that will display a random value. On success, the sent Message is returned.

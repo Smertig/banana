@@ -7,9 +7,6 @@ delete_webhook
 .. cpp:function:: template <class Connector> \
                   api_result<boolean_t, Connector&&> delete_webhook(Connector&& connector, delete_webhook_args_t args)
 
-.. cpp:function:: template <class Connector> \
-                  api_result<boolean_t, Connector&&> call(Connector&& connector, delete_webhook_args_t args)
-
    ``connector`` is any object satisfying :ref:`connector concept <banana-api-banana-connectors>`.
 
    Use this method to remove webhook integration if you decide to switch back to getUpdates. Returns True on success.

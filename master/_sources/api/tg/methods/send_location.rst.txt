@@ -7,9 +7,6 @@ send_location
 .. cpp:function:: template <class Connector> \
                   api_result<message_t, Connector&&> send_location(Connector&& connector, send_location_args_t args)
 
-.. cpp:function:: template <class Connector> \
-                  api_result<message_t, Connector&&> call(Connector&& connector, send_location_args_t args)
-
    ``connector`` is any object satisfying :ref:`connector concept <banana-api-banana-connectors>`.
 
    Use this method to send point on the map. On success, the sent Message is returned.

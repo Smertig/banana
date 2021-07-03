@@ -7,9 +7,6 @@ get_chat_administrators
 .. cpp:function:: template <class Connector> \
                   api_result<array_t<chat_member_t>, Connector&&> get_chat_administrators(Connector&& connector, get_chat_administrators_args_t args)
 
-.. cpp:function:: template <class Connector> \
-                  api_result<array_t<chat_member_t>, Connector&&> call(Connector&& connector, get_chat_administrators_args_t args)
-
    ``connector`` is any object satisfying :ref:`connector concept <banana-api-banana-connectors>`.
 
    Use this method to get a list of administrators in a chat. On success, returns an Array of ChatMember objects that contains information about all chat administrators except other bots. If the chat is a group or a supergroup and no administrators were appointed, only the creator will be returned.
