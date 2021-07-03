@@ -1269,18 +1269,18 @@
 <p>Connector is a key concept of the banana library.
 To use any function from <code class="docutils literal notranslate"><span class="pre">banana::api</span></code> you need a connector object.
 A type satisfies the concept <code class="docutils literal notranslate"><span class="pre">connector</span></code> if it has a method with the following signature:</p>
-<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">T</span><span class="o">&gt;</span>
-<span class="n">impl</span><span class="o">-</span><span class="n">defined</span><span class="o">-&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="n">request</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">string_view</span> <span class="n">method</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">optional</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">body</span><span class="p">,</span> <span class="n">banana</span><span class="o">::</span><span class="n">response_handler</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="n">handler</span><span class="p">);</span>
+<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">Traits</span><span class="p">,</span> <span class="k">class</span> <span class="nc">R</span> <span class="o">=</span> <span class="k">typename</span> <span class="nc">Traits</span><span class="o">::</span><span class="n">response_type</span><span class="o">&gt;</span>
+<span class="n">impl</span><span class="o">-</span><span class="n">defined</span><span class="o">-&lt;</span><span class="n">R</span><span class="o">&gt;</span> <span class="n">request</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">optional</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">body</span><span class="p">);</span>
 </pre></div>
 </div>
 <p>The signature of this method defines the properties of the connector.
 For example, this method can return the following types:</p>
 <ul class="simple">
-<li><p>Raw <code class="docutils literal notranslate"><span class="pre">T</span></code> is returned by blocking connector that throws an exception in case of error</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">banana::expected&lt;T&gt;</span></code> – blocking connector that returns either result or an error</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">std::future&lt;T&gt;</span></code> – non-blocking connector</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">boost::asio::awaitable&lt;T&gt;</span></code> – coroutine-based connector that throws an exception in case of error</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">boost::asio::awaitable&lt;banana::expected&lt;T&gt;&gt;</span></code> – coroutine-based connector that returns either value or error</p></li>
+<li><p>Raw <code class="docutils literal notranslate"><span class="pre">R</span></code> is returned by blocking connector that throws an exception in case of error</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">banana::expected&lt;R&gt;</span></code> – blocking connector that returns either result or an error</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">std::future&lt;R&gt;</span></code> – non-blocking connector</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">boost::asio::awaitable&lt;R&gt;</span></code> – coroutine-based connector that throws an exception in case of error</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">boost::asio::awaitable&lt;banana::expected&lt;R&gt;&gt;</span></code> – coroutine-based connector that returns either value or error</p></li>
 <li><p>and so on..</p></li>
 </ul>
 <p>The <cite>banana</cite> library provides several bundled connector types with different properties:</p>
