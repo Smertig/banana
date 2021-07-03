@@ -36,7 +36,7 @@ Dependencies
       Default constructor accepting Telegram Bot token.
 
    .. cpp:function:: template <class T> \
-                     T request(std::string_view method, std::optional<std::string> body, expected<T>(*then)(expected<std::string>))
+                     T request(std::string_view method, std::optional<std::string> body, response_handler<T> handler)
 
       Part of the required connector interface.
 
@@ -60,7 +60,7 @@ Example
       Default constructor accepting Telegram Bot token.
 
    .. cpp:function:: template <class T> \
-                     expected<T> request(std::string_view method, std::optional<std::string> body, expected<T>(*then)(expected<std::string>))
+                     expected<T> request(std::string_view method, std::optional<std::string> body, response_handler<T> handler)
 
       Part of the required connector interface.
 
@@ -84,7 +84,7 @@ Example
       Default constructor accepting Telegram Bot token.
 
    .. cpp:function:: template <class T> \
-                     std::future<T> request(std::string_view method, std::optional<std::string> body, expected<T>(*then)(expected<std::string>))
+                     std::future<T> request(std::string_view method, std::optional<std::string> body, response_handler<T> handler)
 
       Part of the required connector interface.
 
