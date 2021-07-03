@@ -1,7 +1,7 @@
 #pragma once
 
 #include <banana/types.hpp>
-#include <banana/utils/meta.hpp>
+#include <banana/meta.hpp>
 #include <banana/utils/expected.hpp>
 
 #include <nlohmann/json.hpp>

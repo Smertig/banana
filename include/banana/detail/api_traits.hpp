@@ -1,9 +1,9 @@
 #pragma once
 
-#include <string_view>
+#include <banana/detail/api_types_fwd.hpp>
+#include <banana/detail/api_enums.hpp>
 
-#include "generated/api_enums.hpp"
-#include "generated/api_fwd.hpp"
+#include <string_view>
 
 namespace banana::meta {
 

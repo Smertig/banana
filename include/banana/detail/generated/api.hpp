@@ -1,7 +1,3 @@
-#include <banana/detail/api_header.hpp>
-
-namespace banana::api {
-
 // Arguments to add_sticker_to_set method
 struct add_sticker_to_set_args_t {
     integer_t                                     user_id;       // User identifier of sticker set owner
@@ -1860,4 +1856,3 @@ api_result<api::file_t, Connector&&> upload_sticker_file(Connector&& connector, 
     return call(static_cast<Connector&&>(connector), static_cast<upload_sticker_file_args_t&&>(args));
 }
 
-} // namespace banana::api

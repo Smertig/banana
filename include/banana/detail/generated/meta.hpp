@@ -1,7 +1,3 @@
-#include <banana/detail/meta_header.hpp>
-
-namespace banana::meta {
-
 template <>
 struct reflector<api::add_sticker_to_set_args_t> {
     template <class F>
@@ -3887,4 +3883,3 @@ constexpr bool is_reflectable_v<api::webhook_info_t> = true;
 template <>
 constexpr std::string_view name_of<api::webhook_info_t> = "webhook_info_t";
 
-} // banana::meta

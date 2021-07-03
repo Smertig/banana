@@ -1,5 +1,3 @@
-namespace banana::api {
-
 struct add_sticker_to_set_args_t;
 struct answer_callback_query_args_t;
 struct answer_inline_query_args_t;
@@ -78,5 +76,3 @@ struct unban_chat_member_args_t;
 struct unpin_all_chat_messages_args_t;
 struct unpin_chat_message_args_t;
 struct upload_sticker_file_args_t;
-
-} // namespace banana::api

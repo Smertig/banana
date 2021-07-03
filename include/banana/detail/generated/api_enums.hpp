@@ -1,5 +1,3 @@
-namespace banana::api {
-
 enum class method {
     add_sticker_to_set,
     answer_callback_query,
@@ -81,4 +79,3 @@ enum class method {
     upload_sticker_file,
 };
 
-} // namespace banana::api

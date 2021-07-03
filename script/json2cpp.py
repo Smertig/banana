@@ -2,24 +2,20 @@
 
 import inflection
 import networkx
-import itertools
 from api import CppType, get_api_type_names, get_methods, get_cpp_type
 
 OUT_INCLUDE_PATH = "../include/banana/detail/generated"
 OUT_SOURCE_PATH = "../source/generated"
 
 out_types = open(OUT_INCLUDE_PATH + '/types.hpp', 'w')
+out_types_fwd = open(OUT_INCLUDE_PATH + '/types_fwd.hpp', 'w')
 out_api = open(OUT_INCLUDE_PATH + '/api.hpp', 'w')
-out_api_fwd = open(OUT_INCLUDE_PATH + '/api_fwd.hpp', 'w')
+out_api_types_fwd = open(OUT_INCLUDE_PATH + '/api_types_fwd.hpp', 'w')
 out_api_enums = open(OUT_INCLUDE_PATH + '/api_enums.hpp', 'w')
 out_api_traits = open(OUT_INCLUDE_PATH + '/api_traits.hpp', 'w')
 out_ser_impl = open(OUT_SOURCE_PATH + '/serialize_impl.cxx', 'w')
 out_resp_impl = open(OUT_SOURCE_PATH + '/resp_impl.cxx', 'w')
 out_meta = open(OUT_INCLUDE_PATH + '/meta.hpp', 'w')
-
-out_api.write("#include <banana/detail/api_header.hpp>\n\n")
-out_types.write("#include <banana/detail/types_header.hpp>\n\n")
-out_meta.write("#include <banana/detail/meta_header.hpp>\n\n")
 
 
 def sort_by_cpp_name(names):
@@ -59,15 +55,12 @@ def dump_type(out, cpp_type: CppType):
     out.write('};\n\n')
 
 
-out_types.write('namespace banana::api {\n\n')
-
 # forward declarations
 
 for api_name in api_type_names:
     cpp_type = get_cpp_type(api_name)
     if cpp_type.aliased_cpp_type is None and not cpp_type.artificial:
-        out_types.write(f"struct {cpp_type.cpp_name};\n")
-out_types.write('\n')
+        out_types_fwd.write(f"struct {cpp_type.cpp_name};\n")
 
 # dependencies graph
 
@@ -88,8 +81,6 @@ out_types.write("/// Types with dependencies\n\n")
 for component in networkx.weakly_connected_components(G):
     for api_name in networkx.lexicographical_topological_sort(G.subgraph(component)):
         dump_type(out_types, get_cpp_type(api_name))
-
-out_types.write('} // banana::api\n')
 
 
 def dump_type_reflection(cpp_type: CppType):
@@ -113,7 +104,6 @@ def dump_type_reflection(cpp_type: CppType):
     out_meta.write(f'constexpr std::string_view name_of<api::{cpp_type.cpp_name}> = "{cpp_type.cpp_name}";\n')
     out_meta.write('\n')
 
-out_meta.write('namespace banana::meta {\n\n')
 
 for api_name in api_refl_type_names:
     cpp_type = get_cpp_type(api_name)
@@ -121,7 +111,6 @@ for api_name in api_refl_type_names:
         continue
     dump_type_reflection(cpp_type)
 
-out_meta.write('} // banana::meta\n')
 
 def get_param_type(p):
     t = get_cpp_type(p['type']).cpp_name
@@ -129,9 +118,6 @@ def get_param_type(p):
         t = 'optional_t<{}>'.format(t)
     return t
 
-out_api.write('namespace banana::api {\n\n')
-out_api_fwd.write('namespace banana::api {\n\n')
-out_api_enums.write('namespace banana::api {\n\n')
 
 deser_types = set()
 ser_types = set()
@@ -144,7 +130,7 @@ for name, method in api_methods.items():
     args_cpp_type = get_cpp_type(name + 'Args')
 
     dump_type(out_api, args_cpp_type)
-    out_api_fwd.write(f'struct {args_cpp_type.cpp_name};\n')
+    out_api_types_fwd.write(f'struct {args_cpp_type.cpp_name};\n')
 
     params_info = '@param connector Any object satisfying connector concept (see `banana::connector` namespace)' +\
                   ''.join(f'\n * @param args__{param["name"]} {param["description"]}' for param in method['params'])
@@ -182,10 +168,6 @@ struct detail::by_request_type_impl<{args_cpp_type.qual_cpp_name}> {{
     ser_types.add(args_cpp_type.qual_cpp_name)
 
 out_api_enums.write("};\n\n")
-
-out_api.write('} // namespace banana::api\n')
-out_api_fwd.write('\n} // namespace banana::api\n')
-out_api_enums.write('} // namespace banana::api\n')
 
 for type_name in sorted(ser_types):
     out_ser_impl.write(f'template serialized_args_t<{type_name}> serialize_args<{type_name}>({type_name} value);\n')

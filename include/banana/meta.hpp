@@ -14,4 +14,6 @@ constexpr bool is_reflectable_v = false;
 template <class T>
 constexpr std::string_view name_of = "<unknown>";
 
+#include "detail/generated/meta.hpp"
+
 } // namespace banana::meta
