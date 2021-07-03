@@ -9,17 +9,17 @@ A type satisfies the concept ``connector`` if it has a method with the following
 
 .. code-block:: C++
 
-   template <class T>
-   impl-defined-<T> request(std::string_view method, std::optional<std::string> body, banana::response_handler<T> handler);
+   template <class Traits, class R = typename Traits::response_type>
+   impl-defined-<R> request(std::optional<std::string> body);
 
 The signature of this method defines the properties of the connector.
 For example, this method can return the following types:
 
-- Raw ``T`` is returned by blocking connector that throws an exception in case of error
-- ``banana::expected<T>`` -- blocking connector that returns either result or an error
-- ``std::future<T>`` -- non-blocking connector
-- ``boost::asio::awaitable<T>`` -- coroutine-based connector that throws an exception in case of error
-- ``boost::asio::awaitable<banana::expected<T>>`` -- coroutine-based connector that returns either value or error
+- Raw ``R`` is returned by blocking connector that throws an exception in case of error
+- ``banana::expected<R>`` -- blocking connector that returns either result or an error
+- ``std::future<R>`` -- non-blocking connector
+- ``boost::asio::awaitable<R>`` -- coroutine-based connector that throws an exception in case of error
+- ``boost::asio::awaitable<banana::expected<R>>`` -- coroutine-based connector that returns either value or error
 - and so on..
 
 The `banana` library provides several bundled connector types with different properties:

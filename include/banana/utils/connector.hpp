@@ -11,8 +11,8 @@
 
 namespace banana {
 
-template <class T, class Connector>
-using api_result = decltype(std::declval<Connector>().request(std::declval<std::string_view>(), std::declval<std::string>(), std::declval<response_handler<T>>()));
+template <class R, class Connector>
+using api_result = decltype(std::declval<Connector>().template request<void, R>(std::declval<std::optional<std::string>>()));
 
 namespace connector {
 
@@ -37,63 +37,60 @@ struct unwrap_blocking : Connector {
 };
 
 // Convert raw `Connector` with `std::string do_request(std::string_view, std::optional<std::string>)` method
-// into generic blocking exception-based converter (`T`)
+// into generic blocking exception-based connector (`R`)
 template <class Connector>
 struct make_blocking : Connector {
     using Connector::Connector;
 
     static_assert(std::is_same_v<std::string, decltype(std::declval<Connector>().do_request(std::declval<std::string_view>(), std::declval<std::optional<std::string>>()))>);
 
-    template <class T>
-    T request(std::string_view method, std::optional<std::string> body, banana::response_handler<T> handler) {
-        std::string response = Connector::do_request(method, std::move(body));
-        return handler.process(expected(std::move(response))).value();
+    template <class Traits, class R = typename Traits::response_type>
+    R request(std::optional<std::string> body) {
+        std::string response = Connector::do_request(Traits::native_name, std::move(body));
+        return deserialize<Traits>(expected(std::move(response))).value();
     }
 };
 
 // Convert raw `Connector` with `expected<std::string> do_request(std::string_view, std::optional<std::string>)` method
-// into generic blocking converter with monadic error handling (`expected<T>`)
+// into generic blocking connector with monadic error handling (`expected<R>`)
 template <class Connector>
 struct make_blocking_monadic : Connector {
     using Connector::Connector;
 
     static_assert(std::is_same_v<expected<std::string>, decltype(std::declval<Connector>().do_request(std::declval<std::string_view>(), std::declval<std::optional<std::string>>()))>);
 
-    template <class T>
-    expected<T> request(std::string_view method, std::optional<std::string> body, banana::response_handler<T> handler) {
-        return handler.process(Connector::do_request(method, std::move(body)));
+    template <class Traits, class R = typename Traits::response_type>
+    expected<R> request(std::optional<std::string> body) {
+        return deserialize<Traits>(Connector::do_request(Traits::native_name, std::move(body)));
     }
 };
 
-// Convert generic blocking `Connector` with `R request<T>(..)` method into generic async connector (`std::future<R>`)
+// Convert generic blocking `Connector` with `R request<Traits, R>(..)` method into generic async connector (`std::future<R>`)
 template <class Connector>
 struct wrap_async : Connector {
     using Connector::Connector;
 
-    template <class T>
-    auto request(std::string_view method, std::optional<std::string> body, banana::response_handler<T> handler) -> std::future<decltype(Connector::request(method, body, handler))> {
-        return std::async(std::launch::async, &Connector::template request<T>, this, method, std::move(body), std::move(handler));
+    template <class Traits, class R = typename Traits::response_type>
+    auto request(std::optional<std::string> body) -> std::future<decltype(Connector::template request<Traits, R>(body))> {
+        return std::async(std::launch::async, &Connector::template request<Traits, R>, this, std::move(body));
     }
 };
 
 // Convert raw `Connector` with `void do_async_request(std::string_view, std::optional<std::string>, std::unique_ptr<async_handler>)` method
-// into generic async exception-based converter (`std::future<T>`)
+// into generic async exception-based connector (`std::future<R>`)
 template <class Connector>
 struct make_future : Connector {
     using Connector::Connector;
 
     static_assert(std::is_same_v<void, decltype(std::declval<Connector>().do_async_request(std::declval<std::string_view>(), std::declval<std::optional<std::string>>(), std::declval<std::unique_ptr<async_handler>>()))>);
 
-    template <class T>
-    std::future<T> request(std::string_view method, std::optional<std::string> body, banana::response_handler<T> handler) {
+    template <class Traits, class R = typename Traits::response_type>
+    std::future<R> request(std::optional<std::string> body) {
         struct promise_handler : async_handler {
-            banana::response_handler<T> handler;
-            std::promise<T> promise;
-
-            explicit promise_handler(banana::response_handler<T> handler) : handler(std::move(handler)) {}
+            std::promise<R> promise;
 
             void on_result(expected<std::string> result) final {
-                auto final_result = handler.process(std::move(result));
+                auto final_result = deserialize<Traits>(std::move(result));
                 if (final_result) {
                     promise.set_value(std::move(*final_result));
                 }
@@ -103,40 +100,37 @@ struct make_future : Connector {
             }
         };
 
-        auto handler2 = std::make_unique<promise_handler>(std::move(handler));
-        auto result = handler2->promise.get_future();
+        auto handler = std::make_unique<promise_handler>();
+        auto result = handler->promise.get_future();
 
-        Connector::do_async_request(method, std::move(body), std::move(handler2));
+        Connector::do_async_request(Traits::native_name, std::move(body), std::move(handler));
 
         return result;
     }
 };
 
 // Convert raw `Connector` with `void do_async_request(std::string_view, std::optional<std::string>, std::unique_ptr<async_handler>)` method
-// into generic async connector with monadic error handling (`std::future<expected<T>>`)
+// into generic async connector with monadic error handling (`std::future<expected<R>>`)
 template <class Connector>
 struct make_future_monadic : Connector {
     using Connector::Connector;
 
     static_assert(std::is_same_v<void, decltype(std::declval<Connector>().do_async_request(std::declval<std::string_view>(), std::declval<std::optional<std::string>>(), std::declval<std::unique_ptr<async_handler>>()))>);
 
-    template <class T>
-    std::future<expected<T>> request(std::string_view method, std::optional<std::string> body, banana::response_handler<T> handler) {
+    template <class Traits, class R = typename Traits::response_type>
+    std::future<expected<R>> request(std::optional<std::string> body) {
         struct promise_handler : async_handler {
-            banana::response_handler<T> handler;
-            std::promise<expected<T>> promise;
-
-            explicit promise_handler(banana::response_handler<T> handler) : handler(std::move(handler)) {}
+            std::promise<expected<R>> promise;
 
             void on_result(expected<std::string> result) final {
-                promise.set_value(handler.process(std::move(result)));
+                promise.set_value(deserialize<Traits>(std::move(result)));
             }
         };
 
-        auto handler2 = std::make_unique<promise_handler>(std::move(handler));
-        auto result = handler2->promise.get_future();
+        auto handler = std::make_unique<promise_handler>();
+        auto result = handler->promise.get_future();
 
-        Connector::do_async_request(method, std::move(body), std::move(handler2));
+        Connector::do_async_request(Traits::native_name, std::move(body), std::move(handler));
 
         return result;
     }

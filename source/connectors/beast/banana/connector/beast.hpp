@@ -36,18 +36,18 @@ using beast_future           = meta::make_future<basic_beast_monadic>;
 struct beast_coro_monadic : basic_beast_monadic {
     using basic_beast_monadic::basic_beast_monadic;
 
-    template <class T>
-    boost::asio::awaitable<expected<T>> request(std::string_view method, std::optional<std::string> body, banana::response_handler<T> handler) {
-        co_return handler.process(co_await basic_beast_monadic::do_coro_request(method, std::move(body)));
+    template <class Traits, class R = typename Traits::response_type>
+    boost::asio::awaitable<expected<R>> request(std::optional<std::string> body) {
+        co_return deserialize<Traits>(co_await basic_beast_monadic::do_coro_request(Traits::native_name, std::move(body)));
     }
 };
 
 struct beast_coro : beast_coro_monadic {
     using beast_coro_monadic::beast_coro_monadic;
 
-    template <class T>
-    boost::asio::awaitable<T> request(std::string_view method, std::optional<std::string> body, banana::response_handler<T> handler) {
-        expected<T> result = co_await beast_coro_monadic::request(method, std::move(body), std::move(handler));
+    template <class Traits, class R = typename Traits::response_type>
+    boost::asio::awaitable<R> request(std::optional<std::string> body) {
+        expected<R> result = co_await beast_coro_monadic::request<Traits>(std::move(body));
         co_return std::move(result).value();
     }
 };

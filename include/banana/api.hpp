@@ -11,7 +11,7 @@ namespace banana::api {
 
 template <class Connector, class Args, class Traits = meta::api_traits_by_request<Args>>
 api_result<typename Traits::response_type, Connector&&> call(Connector&& connector, serialized_args_t<Args> args) {
-    return std::forward<Connector>(connector).template request<typename Traits::response_type>(Traits::native_name, std::move(args.data), response_handler<typename Traits::response_type>{ Traits::native_name });
+    return std::forward<Connector>(connector).template request<Traits>(std::move(args.data));
 }
 
 template <class Connector, class Args, class Traits = meta::api_traits_by_request<Args>>
