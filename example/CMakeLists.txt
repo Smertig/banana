@@ -61,3 +61,5 @@ endif()
 if (NOT WIN32)
     add_banana_example(custom-connector-blocking banana)
 endif()
+
+add_banana_example(generic-api-call banana-default CONAN_PKG::cpr)

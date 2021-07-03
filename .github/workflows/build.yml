@@ -17,6 +17,7 @@ jobs:
               connector-default-blocking connector-winapi-blocking connector-any-blocking connector-beast-blocking
               connector-beast-future
               connector-default-async connector-winapi-async
+              generic-api-call
             binary_path: "example/bin/banana-example-$name.exe"
             packages: |
               pip install conan
@@ -30,6 +31,7 @@ jobs:
               connector-default-async connector-cpr-async
               connector-beast-coro
               custom-connector-blocking
+              generic-api-call
             binary_path: "example/bin/banana-example-$name"
             packages: |
               sudo apt-get install libssl-dev g++-10 curl
@@ -43,6 +45,7 @@ jobs:
               connector-beast-future
               connector-default-async connector-cpr-async
               custom-connector-blocking
+              generic-api-call
             binary_path: "example/bin/banana-example-$name"
             packages: |
               brew install openssl conan curl
@@ -53,6 +56,7 @@ jobs:
             examples: >
               connector-default-blocking connector-cpr-blocking
               connector-default-async connector-cpr-async
+              generic-api-call
             binary_path: "example/bin/banana-example-$name"
             packages: |
               sudo apt-get install libssl-dev

@@ -10,6 +10,9 @@ OUT_SOURCE_PATH = "../source/generated"
 
 out_types = open(OUT_INCLUDE_PATH + '/types.hpp', 'w')
 out_api = open(OUT_INCLUDE_PATH + '/api.hpp', 'w')
+out_api_fwd = open(OUT_INCLUDE_PATH + '/api_fwd.hpp', 'w')
+out_api_enums = open(OUT_INCLUDE_PATH + '/api_enums.hpp', 'w')
+out_api_traits = open(OUT_INCLUDE_PATH + '/api_traits.hpp', 'w')
 out_ser_impl = open(OUT_SOURCE_PATH + '/serialize_impl.cxx', 'w')
 out_resp_impl = open(OUT_SOURCE_PATH + '/resp_impl.cxx', 'w')
 out_meta = open(OUT_INCLUDE_PATH + '/meta.hpp', 'w')
@@ -127,16 +130,21 @@ def get_param_type(p):
     return t
 
 out_api.write('namespace banana::api {\n\n')
+out_api_fwd.write('namespace banana::api {\n\n')
+out_api_enums.write('namespace banana::api {\n\n')
 
 deser_types = set()
 ser_types = set()
 
+out_api_enums.write('enum class method {\n')
+
 for name, method in api_methods.items():
     uname = inflection.underscore(name)
-    return_type = get_cpp_type(method['return_type']).cpp_name
+    return_type = get_cpp_type(method['return_type']).qual_cpp_name
     args_cpp_type = get_cpp_type(name + 'Args')
 
     dump_type(out_api, args_cpp_type)
+    out_api_fwd.write(f'struct {args_cpp_type.cpp_name};\n')
 
     params_info = '@param connector Any object satisfying connector concept (see `banana::connector` namespace)' +\
                   ''.join(f'\n * @param args__{param["name"]} {param["description"]}' for param in method['params'])
@@ -148,25 +156,36 @@ for name, method in api_methods.items():
  */
 template <class Connector>
 api_result<{return_type}, Connector&&> {uname}(Connector&& connector, {args_cpp_type.cpp_name} args{" = {}" if not method['params'] else ""}) {{
-    return generic_call(static_cast<Connector&&>(connector), serialize_args(std::move(args)), response_handler<{return_type}>{{ "{uname}" }});
+    return call(static_cast<Connector&&>(connector), static_cast<{args_cpp_type.cpp_name}&&>(args));
 }}
 
-/**
- * {method["desc"]}
- *
- * {params_info}
- */
-template <class Connector>
-api_result<{return_type}, Connector&&> call(Connector&& connector, {args_cpp_type.cpp_name} args) {{
-    return {uname}(static_cast<Connector&&>(connector), std::move(args));
-}}
+''')
+    out_api_enums.write(f'    {uname},\n')
+
+    out_api_traits.write(f'''template <>
+struct api_traits<api::method::{uname}> {{
+    static inline constexpr std::string_view native_name = "{name}";
+    static inline constexpr std::string_view pretty_name = "{uname}";
+
+    using request_type  = {args_cpp_type.qual_cpp_name};
+    using response_type = {return_type};
+}};
+
+template <>
+struct detail::by_request_type_impl<{args_cpp_type.qual_cpp_name}> {{
+    using type = api_traits<api::method::{uname}>;
+}};
 
 ''')
 
     deser_types.add(return_type)
-    ser_types.add(args_cpp_type.cpp_name)
+    ser_types.add(args_cpp_type.qual_cpp_name)
 
-out_api.write('} // banana::api\n')
+out_api_enums.write("};\n\n")
+
+out_api.write('} // namespace banana::api\n')
+out_api_fwd.write('\n} // namespace banana::api\n')
+out_api_enums.write('} // namespace banana::api\n')
 
 for type_name in sorted(ser_types):
     out_ser_impl.write(f'template serialized_args_t<{type_name}> serialize_args<{type_name}>({type_name} value);\n')

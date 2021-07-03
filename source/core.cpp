@@ -86,8 +86,6 @@ expected<T> response_handler<T>::process(expected<std::string> response) const {
     return deser_result;
 }
 
-using namespace banana::api;
-
 #include "generated/resp_impl.cxx"
 #include "generated/serialize_impl.cxx"
 

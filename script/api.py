@@ -26,7 +26,8 @@ for name, method in _methods.items():
 class CppType:
     def __init__(self, api_name):
         self.api_name = api_name
-        self.cpp_name = CppType.to_cpp_type_name(api_name)
+        self.cpp_name = CppType.to_cpp_type_name(api_name, False)
+        self.qual_cpp_name = CppType.to_cpp_type_name(api_name, True)
 
         assert isinstance(self.api_name, str)
         assert isinstance(self.cpp_name, str)
@@ -51,19 +52,22 @@ class CppType:
     def standard_type(self):
         return CppType.is_standard_type(self.api_name)
 
+    def get_cpp_name(self, is_qualified: bool):
+        return self.qual_cpp_name if is_qualified else self.cpp_name
+
     @staticmethod
-    def to_cpp_type_name(s) -> str:
+    def to_cpp_type_name(s, is_qualified: bool) -> str:
         if CppType.is_standard_type(s):
             return CppType.to_standard_type(s)
 
         if s.startswith('Array of '):
-            return 'array_t<{}>'.format(get_cpp_type(s[len('Array of '):]).cpp_name)
+            return 'array_t<{}>'.format(get_cpp_type(s[len('Array of '):]).get_cpp_name(is_qualified))
 
         if s.find(' or ') >= 0:
-            variant_names = [get_cpp_type(part).cpp_name for part in s.split(' or ')]
+            variant_names = [get_cpp_type(part).get_cpp_name(is_qualified) for part in s.split(' or ')]
             return 'variant_t<{}>'.format(", ".join(variant_names))
 
-        return inflection.underscore(s) + '_t'
+        return ('api::' if is_qualified else '') + inflection.underscore(s) + '_t'
 
     @staticmethod
     def get_all_value_types(api_name: str):
