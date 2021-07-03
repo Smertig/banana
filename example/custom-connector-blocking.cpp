@@ -23,7 +23,7 @@ public:
         // Dump request body to file
         {
             std::ofstream tg_json(temp_input);
-            tg_json << body.value_or("");
+            tg_json << body;
         }
 
         // Prepare curl command that printing output to our temp file
