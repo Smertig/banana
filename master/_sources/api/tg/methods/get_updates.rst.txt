@@ -4,10 +4,10 @@ get_updates
 ===========
 
 .. cpp:namespace:: banana::api
-.. cpp:function:: template <class Connector> \
-                  api_result<array_t<update_t>, Connector&&> get_updates(Connector&& connector, get_updates_args_t args)
+.. cpp:function:: template <class Agent> \
+                  api_result<array_t<update_t>, Agent&&> get_updates(Agent&& agent, get_updates_args_t args)
 
-   ``connector`` is any object satisfying :ref:`connector concept <banana-api-banana-connectors>`.
+   ``agent`` is any object satisfying :ref:`agent concept <banana-api-banana-agents>`.
 
    Use this method to receive incoming updates using long polling (wiki). An Array of Update objects is returned.
 

@@ -7,4 +7,4 @@ User Guide
    :name: guide
 
    Quick start <guide/quick>
-   Basic: connectors <api/banana/connectors>
+   Basic: agents <api/banana/agents>

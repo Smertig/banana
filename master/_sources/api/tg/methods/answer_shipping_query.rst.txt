@@ -4,10 +4,10 @@ answer_shipping_query
 =====================
 
 .. cpp:namespace:: banana::api
-.. cpp:function:: template <class Connector> \
-                  api_result<boolean_t, Connector&&> answer_shipping_query(Connector&& connector, answer_shipping_query_args_t args)
+.. cpp:function:: template <class Agent> \
+                  api_result<boolean_t, Agent&&> answer_shipping_query(Agent&& agent, answer_shipping_query_args_t args)
 
-   ``connector`` is any object satisfying :ref:`connector concept <banana-api-banana-connectors>`.
+   ``agent`` is any object satisfying :ref:`agent concept <banana-api-banana-agents>`.
 
    If you sent an invoice requesting a shipping address and the parameter is_flexible was specified, the Bot API will send an Update with a shipping_query field to the bot. Use this method to reply to shipping queries. On success, True is returned.
 

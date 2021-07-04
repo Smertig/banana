@@ -79,23 +79,23 @@
     </a>
    </li>
    <li class="toctree-l2 collapsible-parent">
-    <a class="reference internal" href="../../banana/connectors.html">
-     Basic: connectors
+    <a class="reference internal" href="../../banana/agents.html">
+     Basic: agents
     </a>
     <ul class="collapse-ul">
      <li class="toctree-l3">
-      <a class="reference internal" href="../../banana/connectors/winapi.html">
-       WinAPI-based connectors
+      <a class="reference internal" href="../../banana/agents/winapi.html">
+       WinAPI-based agents
       </a>
      </li>
      <li class="toctree-l3">
-      <a class="reference internal" href="../../banana/connectors/cpr.html">
-       cpr-based connectors
+      <a class="reference internal" href="../../banana/agents/cpr.html">
+       cpr-based agents
       </a>
      </li>
      <li class="toctree-l3">
-      <a class="reference internal" href="../../banana/connectors/beast.html">
-       boost::beast-based connectors
+      <a class="reference internal" href="../../banana/agents/beast.html">
+       boost::beast-based agents
       </a>
      </li>
     </ul>
@@ -122,23 +122,23 @@
       </a>
      </li>
      <li class="toctree-l3 collapsible-parent">
-      <a class="reference internal" href="../../banana/connectors.html">
-       Banana Connectors
+      <a class="reference internal" href="../../banana/agents.html">
+       Banana Agents
       </a>
       <ul class="collapse-ul">
        <li class="toctree-l4">
-        <a class="reference internal" href="../../banana/connectors/winapi.html">
-         WinAPI-based connectors
+        <a class="reference internal" href="../../banana/agents/winapi.html">
+         WinAPI-based agents
         </a>
        </li>
        <li class="toctree-l4">
-        <a class="reference internal" href="../../banana/connectors/cpr.html">
-         cpr-based connectors
+        <a class="reference internal" href="../../banana/agents/cpr.html">
+         cpr-based agents
         </a>
        </li>
        <li class="toctree-l4">
-        <a class="reference internal" href="../../banana/connectors/beast.html">
-         boost::beast-based connectors
+        <a class="reference internal" href="../../banana/agents/beast.html">
+         boost::beast-based agents
         </a>
        </li>
       </ul>
@@ -1267,16 +1267,16 @@
   <section id="get-webhook-info">
 <span id="banana-api-tg-methods-get-webhook-info"></span><h1>get_webhook_info<a class="headerlink" href="#get-webhook-info" title="Permalink to this headline">¶</a></h1>
 <dl class="cpp function">
-<dt id="_CPPv4I0EN6banana3api16get_webhook_infoE10api_resultI14webhook_info_tRR9ConnectorERR9Connector23get_webhook_info_args_t">
-<span id="_CPPv3I0EN6banana3api16get_webhook_infoERR9Connector23get_webhook_info_args_t"></span><span id="_CPPv2I0EN6banana3api16get_webhook_infoERR9Connector23get_webhook_info_args_t"></span><span class="pre">template&lt;</span><span class="pre">class</span> <code class="sig-name descname"><span class="pre">Connector</span></code><span class="pre">&gt;</span><br /><span class="pre">api_result</span><span class="pre">&lt;</span><a class="reference internal" href="../types/webhook_info.html#_CPPv4N6banana3api14webhook_info_tE" title="banana::api::webhook_info_t"><span class="pre">webhook_info_t</span></a><span class="pre">,</span> <a class="reference internal" href="#_CPPv4I0EN6banana3api16get_webhook_infoE10api_resultI14webhook_info_tRR9ConnectorERR9Connector23get_webhook_info_args_t" title="banana::api::get_webhook_info::Connector"><span class="pre">Connector</span></a><span class="pre">&amp;</span><span class="pre">&amp;</span><span class="pre">&gt;</span> <code class="sig-name descname"><span class="pre">get_webhook_info</span></code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4I0EN6banana3api16get_webhook_infoE10api_resultI14webhook_info_tRR9ConnectorERR9Connector23get_webhook_info_args_t" title="banana::api::get_webhook_info::Connector"><span class="pre">Connector</span></a> <span class="pre">&amp;</span><span class="pre">&amp;</span><em><span class="pre">connector</span></em>, <a class="reference internal" href="#_CPPv4N6banana3api23get_webhook_info_args_tE" title="banana::api::get_webhook_info_args_t"><span class="pre">get_webhook_info_args_t</span></a> <em><span class="pre">args</span></em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4I0EN6banana3api16get_webhook_infoE10api_resultI14webhook_info_tRR9ConnectorERR9Connector23get_webhook_info_args_t" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p><code class="docutils literal notranslate"><span class="pre">connector</span></code> is any object satisfying <a class="reference internal" href="../../banana/connectors.html#banana-api-banana-connectors"><span class="std std-ref">connector concept</span></a>.</p>
+<dt id="_CPPv4I0EN6banana3api16get_webhook_infoE10api_resultI14webhook_info_tRR5AgentERR5Agent23get_webhook_info_args_t">
+<span id="_CPPv3I0EN6banana3api16get_webhook_infoERR5Agent23get_webhook_info_args_t"></span><span id="_CPPv2I0EN6banana3api16get_webhook_infoERR5Agent23get_webhook_info_args_t"></span><span class="pre">template&lt;</span><span class="pre">class</span> <code class="sig-name descname"><span class="pre">Agent</span></code><span class="pre">&gt;</span><br /><span class="pre">api_result</span><span class="pre">&lt;</span><a class="reference internal" href="../types/webhook_info.html#_CPPv4N6banana3api14webhook_info_tE" title="banana::api::webhook_info_t"><span class="pre">webhook_info_t</span></a><span class="pre">,</span> <a class="reference internal" href="#_CPPv4I0EN6banana3api16get_webhook_infoE10api_resultI14webhook_info_tRR5AgentERR5Agent23get_webhook_info_args_t" title="banana::api::get_webhook_info::Agent"><span class="pre">Agent</span></a><span class="pre">&amp;</span><span class="pre">&amp;</span><span class="pre">&gt;</span> <code class="sig-name descname"><span class="pre">get_webhook_info</span></code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4I0EN6banana3api16get_webhook_infoE10api_resultI14webhook_info_tRR5AgentERR5Agent23get_webhook_info_args_t" title="banana::api::get_webhook_info::Agent"><span class="pre">Agent</span></a> <span class="pre">&amp;</span><span class="pre">&amp;</span><em><span class="pre">agent</span></em>, <a class="reference internal" href="#_CPPv4N6banana3api23get_webhook_info_args_tE" title="banana::api::get_webhook_info_args_t"><span class="pre">get_webhook_info_args_t</span></a> <em><span class="pre">args</span></em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4I0EN6banana3api16get_webhook_infoE10api_resultI14webhook_info_tRR5AgentERR5Agent23get_webhook_info_args_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p><code class="docutils literal notranslate"><span class="pre">agent</span></code> is any object satisfying <a class="reference internal" href="../../banana/agents.html#banana-api-banana-agents"><span class="std std-ref">agent concept</span></a>.</p>
 <p>Use this method to get current webhook status. Requires no parameters. On success, returns a WebhookInfo object. If the bot is using getUpdates, will return an object with the url field empty.</p>
 </dd></dl>
 
 <dl class="cpp struct">
 <dt id="_CPPv4N6banana3api23get_webhook_info_args_tE">
 <span id="_CPPv3N6banana3api23get_webhook_info_args_tE"></span><span id="_CPPv2N6banana3api23get_webhook_info_args_tE"></span><span id="banana::api::get_webhook_info_args_t"></span><em class="property"><span class="pre">struct</span> </em><code class="sig-name descname"><span class="pre">get_webhook_info_args_t</span></code><a class="headerlink" href="#_CPPv4N6banana3api23get_webhook_info_args_tE" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Arguments that should be passed to <a class="reference internal" href="#_CPPv4I0EN6banana3api16get_webhook_infoE10api_resultI14webhook_info_tRR9ConnectorERR9Connector23get_webhook_info_args_t" title="banana::api::get_webhook_info"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">get_webhook_info()</span></code></a>.</p>
+<dd><p>Arguments that should be passed to <a class="reference internal" href="#_CPPv4I0EN6banana3api16get_webhook_infoE10api_resultI14webhook_info_tRR5AgentERR5Agent23get_webhook_info_args_t" title="banana::api::get_webhook_info"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">get_webhook_info()</span></code></a>.</p>
 </dd></dl>
 
 </section>

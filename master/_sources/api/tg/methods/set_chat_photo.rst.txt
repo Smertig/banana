@@ -4,10 +4,10 @@ set_chat_photo
 ==============
 
 .. cpp:namespace:: banana::api
-.. cpp:function:: template <class Connector> \
-                  api_result<boolean_t, Connector&&> set_chat_photo(Connector&& connector, set_chat_photo_args_t args)
+.. cpp:function:: template <class Agent> \
+                  api_result<boolean_t, Agent&&> set_chat_photo(Agent&& agent, set_chat_photo_args_t args)
 
-   ``connector`` is any object satisfying :ref:`connector concept <banana-api-banana-connectors>`.
+   ``agent`` is any object satisfying :ref:`agent concept <banana-api-banana-agents>`.
 
    Use this method to set a new profile photo for the chat. Photos can't be changed for private chats. The bot must be an administrator in the chat for this to work and must have the appropriate admin rights. Returns True on success.
 

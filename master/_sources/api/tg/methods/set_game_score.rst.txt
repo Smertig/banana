@@ -4,10 +4,10 @@ set_game_score
 ==============
 
 .. cpp:namespace:: banana::api
-.. cpp:function:: template <class Connector> \
-                  api_result<variant_t<message_t, boolean_t>, Connector&&> set_game_score(Connector&& connector, set_game_score_args_t args)
+.. cpp:function:: template <class Agent> \
+                  api_result<variant_t<message_t, boolean_t>, Agent&&> set_game_score(Agent&& agent, set_game_score_args_t args)
 
-   ``connector`` is any object satisfying :ref:`connector concept <banana-api-banana-connectors>`.
+   ``agent`` is any object satisfying :ref:`agent concept <banana-api-banana-agents>`.
 
    Use this method to set the score of the specified user in a game. On success, if the message was sent by the bot, returns the edited Message, otherwise returns True. Returns an error, if the new score is not greater than the user's current score in the chat and force is False.
 

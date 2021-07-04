@@ -9,4 +9,4 @@ The page contains all information about banana API:
    :name: api_banana
 
    Banana Basic Types <banana/basic_types>
-   Banana Connectors <banana/connectors>
+   Banana Agents <banana/agents>

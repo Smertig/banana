@@ -4,10 +4,10 @@ send_voice
 ==========
 
 .. cpp:namespace:: banana::api
-.. cpp:function:: template <class Connector> \
-                  api_result<message_t, Connector&&> send_voice(Connector&& connector, send_voice_args_t args)
+.. cpp:function:: template <class Agent> \
+                  api_result<message_t, Agent&&> send_voice(Agent&& agent, send_voice_args_t args)
 
-   ``connector`` is any object satisfying :ref:`connector concept <banana-api-banana-connectors>`.
+   ``agent`` is any object satisfying :ref:`agent concept <banana-api-banana-agents>`.
 
    Use this method to send audio files, if you want Telegram clients to display the file as a playable voice message. For this to work, your audio must be in an .OGG file encoded with OPUS (other formats may be sent as Audio or Document). On success, the sent Message is returned. Bots can currently send voice messages of up to 50 MB in size, this limit may be changed in the future.
 

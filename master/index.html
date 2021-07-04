@@ -78,23 +78,23 @@
     </a>
    </li>
    <li class="toctree-l2 collapsible-parent">
-    <a class="reference internal" href="api/banana/connectors.html">
-     Basic: connectors
+    <a class="reference internal" href="api/banana/agents.html">
+     Basic: agents
     </a>
     <ul class="collapse-ul">
      <li class="toctree-l3">
-      <a class="reference internal" href="api/banana/connectors/winapi.html">
-       WinAPI-based connectors
+      <a class="reference internal" href="api/banana/agents/winapi.html">
+       WinAPI-based agents
       </a>
      </li>
      <li class="toctree-l3">
-      <a class="reference internal" href="api/banana/connectors/cpr.html">
-       cpr-based connectors
+      <a class="reference internal" href="api/banana/agents/cpr.html">
+       cpr-based agents
       </a>
      </li>
      <li class="toctree-l3">
-      <a class="reference internal" href="api/banana/connectors/beast.html">
-       boost::beast-based connectors
+      <a class="reference internal" href="api/banana/agents/beast.html">
+       boost::beast-based agents
       </a>
      </li>
     </ul>
@@ -121,23 +121,23 @@
       </a>
      </li>
      <li class="toctree-l3 collapsible-parent">
-      <a class="reference internal" href="api/banana/connectors.html">
-       Banana Connectors
+      <a class="reference internal" href="api/banana/agents.html">
+       Banana Agents
       </a>
       <ul class="collapse-ul">
        <li class="toctree-l4">
-        <a class="reference internal" href="api/banana/connectors/winapi.html">
-         WinAPI-based connectors
+        <a class="reference internal" href="api/banana/agents/winapi.html">
+         WinAPI-based agents
         </a>
        </li>
        <li class="toctree-l4">
-        <a class="reference internal" href="api/banana/connectors/cpr.html">
-         cpr-based connectors
+        <a class="reference internal" href="api/banana/agents/cpr.html">
+         cpr-based agents
         </a>
        </li>
        <li class="toctree-l4">
-        <a class="reference internal" href="api/banana/connectors/beast.html">
-         boost::beast-based connectors
+        <a class="reference internal" href="api/banana/agents/beast.html">
+         boost::beast-based agents
         </a>
        </li>
       </ul>
@@ -1303,8 +1303,8 @@
 <ul class="simple">
 <li><p>Simple API</p></li>
 <li><p><strong>Single interface for both blocking, non-blocking and even coroutine-based operations</strong></p></li>
-<li><p>Generic in terms of networking backend (bundled support for <a class="reference internal" href="api/banana/connectors/winapi.html#banana-api-banana-connectors-winapi"><span class="std std-ref">WinAPI</span></a>, <a class="reference internal" href="api/banana/connectors/cpr.html#banana-api-banana-connectors-cpr"><span class="std std-ref">cpr</span></a> and <a class="reference internal" href="api/banana/connectors/beast.html#banana-api-banana-connectors-beast"><span class="std std-ref">boost::beast</span></a>)</p></li>
-<li><p>Extendable (see <a class="reference external" href="https://github.com/Smertig/banana/blob/master/example/custom-connector-blocking.cpp">custom-connector example</a>)</p></li>
+<li><p>Generic in terms of networking backend (bundled support for <a class="reference internal" href="api/banana/agents/winapi.html#banana-api-banana-agents-winapi"><span class="std std-ref">WinAPI</span></a>, <a class="reference internal" href="api/banana/agents/cpr.html#banana-api-banana-agents-cpr"><span class="std std-ref">cpr</span></a> and <a class="reference internal" href="api/banana/agents/beast.html#banana-api-banana-agents-beast"><span class="std std-ref">boost::beast</span></a>)</p></li>
+<li><p>Extendable (see <a class="reference external" href="https://github.com/Smertig/banana/blob/master/example/custom-agent-blocking.cpp">custom-agent example</a>)</p></li>
 <li><p>Automatically generated from <a class="reference external" href="https://core.telegram.org/bots/api">Telegram Bot API</a> 5.3 (thanks <a class="reference external" href="https://github.com/ark0f/tg-bot-api">ark0f/tg-bot-api</a>)</p></li>
 <li><p>Cross-platform (tested in CI on Windows, Linux and macOS)</p></li>
 </ul>
@@ -1326,14 +1326,14 @@ abstracting from the Telegram API implementation.</p>
 <li class="toctree-l1"><a class="reference internal" href="guide.html"> User Guide</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="guide/quick.html">Quick start</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="guide/quick.html#adding-as-a-cmake-subdirectory">Adding as a CMake subdirectory</a></li>
-<li class="toctree-l3"><a class="reference internal" href="guide/quick.html#choosing-a-connector">Choosing a connector</a></li>
+<li class="toctree-l3"><a class="reference internal" href="guide/quick.html#choosing-an-agent">Choosing an agent</a></li>
 <li class="toctree-l3"><a class="reference internal" href="guide/quick.html#hello-world">Hello, world!</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="api/banana/connectors.html">Basic: connectors</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="api/banana/connectors/winapi.html">WinAPI-based connectors</a></li>
-<li class="toctree-l3"><a class="reference internal" href="api/banana/connectors/cpr.html">cpr-based connectors</a></li>
-<li class="toctree-l3"><a class="reference internal" href="api/banana/connectors/beast.html">boost::beast-based connectors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/banana/agents.html">Basic: agents</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/banana/agents/winapi.html">WinAPI-based agents</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/banana/agents/cpr.html">cpr-based agents</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/banana/agents/beast.html">boost::beast-based agents</a></li>
 </ul>
 </li>
 </ul>
@@ -1341,7 +1341,7 @@ abstracting from the Telegram API implementation.</p>
 <li class="toctree-l1"><a class="reference internal" href="api.html"> API Reference</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="api/banana.html">Banana API</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="api/banana/basic_types.html">Banana Basic Types</a></li>
-<li class="toctree-l3"><a class="reference internal" href="api/banana/connectors.html">Banana Connectors</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/banana/agents.html">Banana Agents</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="api/tg.html">Telegram API</a><ul>

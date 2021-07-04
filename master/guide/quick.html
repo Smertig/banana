@@ -38,7 +38,7 @@
     <script src="../_static/sphinx-book-theme.7d483ff0a819d6edff12ce0b1ead3928.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Banana Connectors" href="../api/banana/connectors.html" />
+    <link rel="next" title="Banana Agents" href="../api/banana/agents.html" />
     <link rel="prev" title="User Guide" href="../guide.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -79,23 +79,23 @@
     </a>
    </li>
    <li class="toctree-l2 collapsible-parent">
-    <a class="reference internal" href="../api/banana/connectors.html">
-     Basic: connectors
+    <a class="reference internal" href="../api/banana/agents.html">
+     Basic: agents
     </a>
     <ul class="collapse-ul">
      <li class="toctree-l3">
-      <a class="reference internal" href="../api/banana/connectors/winapi.html">
-       WinAPI-based connectors
+      <a class="reference internal" href="../api/banana/agents/winapi.html">
+       WinAPI-based agents
       </a>
      </li>
      <li class="toctree-l3">
-      <a class="reference internal" href="../api/banana/connectors/cpr.html">
-       cpr-based connectors
+      <a class="reference internal" href="../api/banana/agents/cpr.html">
+       cpr-based agents
       </a>
      </li>
      <li class="toctree-l3">
-      <a class="reference internal" href="../api/banana/connectors/beast.html">
-       boost::beast-based connectors
+      <a class="reference internal" href="../api/banana/agents/beast.html">
+       boost::beast-based agents
       </a>
      </li>
     </ul>
@@ -122,23 +122,23 @@
       </a>
      </li>
      <li class="toctree-l3 collapsible-parent">
-      <a class="reference internal" href="../api/banana/connectors.html">
-       Banana Connectors
+      <a class="reference internal" href="../api/banana/agents.html">
+       Banana Agents
       </a>
       <ul class="collapse-ul">
        <li class="toctree-l4">
-        <a class="reference internal" href="../api/banana/connectors/winapi.html">
-         WinAPI-based connectors
+        <a class="reference internal" href="../api/banana/agents/winapi.html">
+         WinAPI-based agents
         </a>
        </li>
        <li class="toctree-l4">
-        <a class="reference internal" href="../api/banana/connectors/cpr.html">
-         cpr-based connectors
+        <a class="reference internal" href="../api/banana/agents/cpr.html">
+         cpr-based agents
         </a>
        </li>
        <li class="toctree-l4">
-        <a class="reference internal" href="../api/banana/connectors/beast.html">
-         boost::beast-based connectors
+        <a class="reference internal" href="../api/banana/agents/beast.html">
+         boost::beast-based agents
         </a>
        </li>
       </ul>
@@ -1268,8 +1268,8 @@
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#choosing-a-connector">
-   Choosing a connector
+  <a class="reference internal nav-link" href="#choosing-an-agent">
+   Choosing an agent
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
@@ -1283,8 +1283,8 @@
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#default-connector">
-     “Default” connector
+    <a class="reference internal nav-link" href="#default-agent">
+     “Default” agent
     </a>
    </li>
   </ul>
@@ -1341,26 +1341,26 @@ abstracting from the Telegram API implementation.</p>
 <span class="c1">// etc..</span>
 </pre></div>
 </div>
-<p>However, you also need a <a class="reference internal" href="../api/banana/connectors.html#banana-api-banana-connectors"><span class="std std-ref">connector</span></a> to make API requests.</p>
+<p>However, you also need an <a class="reference internal" href="../api/banana/agents.html#banana-api-banana-agents"><span class="std std-ref">agent</span></a> to make API requests.</p>
 </section>
-<section id="choosing-a-connector">
-<h2>Choosing a connector<a class="headerlink" href="#choosing-a-connector" title="Permalink to this headline">¶</a></h2>
-<p>Let’s start with the simplest blocking connector.</p>
+<section id="choosing-an-agent">
+<h2>Choosing an agent<a class="headerlink" href="#choosing-an-agent" title="Permalink to this headline">¶</a></h2>
+<p>Let’s start with the simplest blocking agent.</p>
 <section id="windows">
 <h3>Windows<a class="headerlink" href="#windows" title="Permalink to this headline">¶</a></h3>
-<p><a class="reference internal" href="../api/banana/connectors/winapi.html#banana-api-banana-connectors-winapi"><span class="std std-ref">WinAPI-connector</span></a> is the only dependency-free connector. It’s built on top of WinAPI, so it doesn’t require any additional libraries to make https requests.</p>
+<p><a class="reference internal" href="../api/banana/agents/winapi.html#banana-api-banana-agents-winapi"><span class="std std-ref">WinAPI-agent</span></a> is the only dependency-free agent. It’s built on top of WinAPI, so it doesn’t require any additional libraries to make https requests.</p>
 <div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">target_link_libraries</span><span class="p">(</span><span class="s">your-project-name</span> <span class="s">PRIVATE</span> <span class="s">banana-winapi</span><span class="p">)</span> <span class="c"># banana-winapi includes banana</span>
 </pre></div>
 </div>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;banana/connector/winapi.hpp&gt;</span><span class="cp"></span>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;banana/agent/winapi.hpp&gt;</span><span class="cp"></span>
 
-<span class="n">banana</span><span class="o">::</span><span class="n">connector</span><span class="o">::</span><span class="n">winapi_blocking</span> <span class="nf">connector</span><span class="p">(</span><span class="s">&quot;&lt;TG_BOT_TOKEN&gt;&quot;</span><span class="p">);</span>
+<span class="n">banana</span><span class="o">::</span><span class="n">agent</span><span class="o">::</span><span class="n">winapi_blocking</span> <span class="nf">agent</span><span class="p">(</span><span class="s">&quot;&lt;TG_BOT_TOKEN&gt;&quot;</span><span class="p">);</span>
 </pre></div>
 </div>
 </section>
 <section id="linux-macos">
 <h3>Linux/macOS<a class="headerlink" href="#linux-macos" title="Permalink to this headline">¶</a></h3>
-<p><a class="reference internal" href="../api/banana/connectors/cpr.html#banana-api-banana-connectors-cpr"><span class="std std-ref">cpr-based connector</span></a> is the best choice for non-windows OS. It depends on <a class="reference external" href="https://github.com/whoshuu/cpr">cpr</a>, <strong>which in turn requires OpenSSL</strong>.</p>
+<p><a class="reference internal" href="../api/banana/agents/cpr.html#banana-api-banana-agents-cpr"><span class="std std-ref">cpr-based agent</span></a> is the best choice for non-windows OS. It depends on <a class="reference external" href="https://github.com/whoshuu/cpr">cpr</a>, <strong>which in turn requires OpenSSL</strong>.</p>
 <div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">target_link_libraries</span><span class="p">(</span><span class="s">your-project-name</span> <span class="s">PRIVATE</span> <span class="s">banana-cpr</span><span class="p">)</span> <span class="c"># banana-cpr includes banana</span>
 </pre></div>
 </div>
@@ -1369,16 +1369,16 @@ abstracting from the Telegram API implementation.</p>
 <li><p>Manually add and link <code class="docutils literal notranslate"><span class="pre">cpr</span></code> library to your project</p></li>
 <li><p>Pass <code class="docutils literal notranslate"><span class="pre">-DBANANA_USE_BUNDLED_CPR=ON</span></code> to CMake (automatically download cpr using <code class="docutils literal notranslate"><span class="pre">FetchContent</span></code> and link it to <code class="docutils literal notranslate"><span class="pre">banana-cpr</span></code>)</p></li>
 </ul>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;banana/connector/cpr.hpp&gt;</span><span class="cp"></span>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;banana/agent/cpr.hpp&gt;</span><span class="cp"></span>
 
-<span class="n">banana</span><span class="o">::</span><span class="n">connector</span><span class="o">::</span><span class="n">cpr_blocking</span> <span class="nf">connector</span><span class="p">(</span><span class="s">&quot;&lt;TG_BOT_TOKEN&gt;&quot;</span><span class="p">);</span>
+<span class="n">banana</span><span class="o">::</span><span class="n">agent</span><span class="o">::</span><span class="n">cpr_blocking</span> <span class="nf">agent</span><span class="p">(</span><span class="s">&quot;&lt;TG_BOT_TOKEN&gt;&quot;</span><span class="p">);</span>
 </pre></div>
 </div>
 </section>
-<section id="default-connector">
-<h3>“Default” connector<a class="headerlink" href="#default-connector" title="Permalink to this headline">¶</a></h3>
-<p>To choose connector in a truly cross-platform way, you can use default connector (if you don’t want to link OpenSSL for <a class="reference internal" href="../api/banana/connectors/cpr.html#banana-api-banana-connectors-cpr"><span class="std std-ref">cpr</span></a> on Windows and hate <a class="reference internal" href="../api/banana/connectors/beast.html#banana-api-banana-connectors-beast"><span class="std std-ref">boost-based connector</span></a>).
-There is an additional CMake target <code class="docutils literal notranslate"><span class="pre">banana-default</span></code> that provides header <code class="docutils literal notranslate"><span class="pre">#include</span> <span class="pre">&lt;banana/connector/default.hpp&gt;</span></code> and <code class="docutils literal notranslate"><span class="pre">default_blocking_monadic</span></code> and <code class="docutils literal notranslate"><span class="pre">default_blocking</span></code> connectors:</p>
+<section id="default-agent">
+<h3>“Default” agent<a class="headerlink" href="#default-agent" title="Permalink to this headline">¶</a></h3>
+<p>To choose agent in a truly cross-platform way, you can use default agent (if you don’t want to link OpenSSL for <a class="reference internal" href="../api/banana/agents/cpr.html#banana-api-banana-agents-cpr"><span class="std std-ref">cpr</span></a> on Windows and hate <a class="reference internal" href="../api/banana/agents/beast.html#banana-api-banana-agents-beast"><span class="std std-ref">boost-based agent</span></a>).
+There is an additional CMake target <code class="docutils literal notranslate"><span class="pre">banana-default</span></code> that provides header <code class="docutils literal notranslate"><span class="pre">#include</span> <span class="pre">&lt;banana/agent/default.hpp&gt;</span></code> and <code class="docutils literal notranslate"><span class="pre">default_blocking_monadic</span></code> and <code class="docutils literal notranslate"><span class="pre">default_blocking</span></code> agents:</p>
 <dl class="simple">
 <dt>On Windows:</dt><dd><ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">using</span> <span class="pre">default_blocking</span> <span class="pre">=</span> <span class="pre">winapi_blocking;</span></code></p></li>
@@ -1397,17 +1397,17 @@ There is an additional CMake target <code class="docutils literal notranslate"><
 </section>
 <section id="hello-world">
 <h2>Hello, world!<a class="headerlink" href="#hello-world" title="Permalink to this headline">¶</a></h2>
-<p>The following piece of code shows how to send simple <code class="docutils literal notranslate"><span class="pre">&quot;Hello,</span> <span class="pre">world!&quot;</span></code> message. We use “default” connector as an example.</p>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;banana/connector/default.hpp&gt;</span><span class="cp"></span>
+<p>The following piece of code shows how to send simple <code class="docutils literal notranslate"><span class="pre">&quot;Hello,</span> <span class="pre">world!&quot;</span></code> message. We use “default” agent as an example.</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;banana/agent/default.hpp&gt;</span><span class="cp"></span>
 <span class="cp">#include</span> <span class="cpf">&lt;banana/api.hpp&gt;</span><span class="cp"></span>
 
 <span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp"></span>
 
 <span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
-    <span class="n">banana</span><span class="o">::</span><span class="n">connector</span><span class="o">::</span><span class="n">default_blocking</span> <span class="n">connector</span><span class="p">(</span><span class="s">&quot;&lt;TG_BOT_TOKEN&gt;&quot;</span><span class="p">);</span>
+    <span class="n">banana</span><span class="o">::</span><span class="n">agent</span><span class="o">::</span><span class="n">default_blocking</span> <span class="n">agent</span><span class="p">(</span><span class="s">&quot;&lt;TG_BOT_TOKEN&gt;&quot;</span><span class="p">);</span>
 
-    <span class="n">banana</span><span class="o">::</span><span class="n">api</span><span class="o">::</span><span class="n">message_t</span> <span class="n">message</span> <span class="o">=</span> <span class="n">banana</span><span class="o">::</span><span class="n">api</span><span class="o">::</span><span class="n">send_message</span><span class="p">(</span><span class="n">connector</span><span class="p">,</span> <span class="p">{</span> <span class="s">&quot;@username&quot;</span><span class="p">,</span> <span class="s">&quot;Hello, world!&quot;</span> <span class="p">});</span>
-    <span class="c1">// since C++20: banana::api::send_message(connector, { .chat_id = &quot;@username&quot;, .text = &quot;Hello, world!&quot; });</span>
+    <span class="n">banana</span><span class="o">::</span><span class="n">api</span><span class="o">::</span><span class="n">message_t</span> <span class="n">message</span> <span class="o">=</span> <span class="n">banana</span><span class="o">::</span><span class="n">api</span><span class="o">::</span><span class="n">send_message</span><span class="p">(</span><span class="n">agent</span><span class="p">,</span> <span class="p">{</span> <span class="s">&quot;@username&quot;</span><span class="p">,</span> <span class="s">&quot;Hello, world!&quot;</span> <span class="p">});</span>
+    <span class="c1">// since C++20: banana::api::send_message(agent, { .chat_id = &quot;@username&quot;, .text = &quot;Hello, world!&quot; });</span>
 
     <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;message sent: &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">message</span><span class="p">.</span><span class="n">message_id</span><span class="p">;</span>
 <span class="p">}</span>
@@ -1415,14 +1415,14 @@ There is an additional CMake target <code class="docutils literal notranslate"><
 </div>
 <section id="line-by-line-explanation">
 <h3>Line-by-line explanation<a class="headerlink" href="#line-by-line-explanation" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">banana</span><span class="o">::</span><span class="n">connector</span><span class="o">::</span><span class="n">default_blocking</span> <span class="nf">connector</span><span class="p">(</span><span class="s">&quot;&lt;TG_BOT_TOKEN&gt;&quot;</span><span class="p">);</span>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">banana</span><span class="o">::</span><span class="n">agent</span><span class="o">::</span><span class="n">default_blocking</span> <span class="nf">agent</span><span class="p">(</span><span class="s">&quot;&lt;TG_BOT_TOKEN&gt;&quot;</span><span class="p">);</span>
 </pre></div>
 </div>
-<p>Create <code class="docutils literal notranslate"><span class="pre">default_blocking</span></code> connector that returns <code class="docutils literal notranslate"><span class="pre">T</span></code> from any API request or throws an exception in case of error. If you don’t like exceptions, try <code class="docutils literal notranslate"><span class="pre">default_blocking_monadic</span></code> instead.</p>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">banana</span><span class="o">::</span><span class="n">api</span><span class="o">::</span><span class="n">message_t</span> <span class="n">message</span> <span class="o">=</span> <span class="n">banana</span><span class="o">::</span><span class="n">api</span><span class="o">::</span><span class="n">send_message</span><span class="p">(</span><span class="n">connector</span><span class="p">,</span> <span class="p">{</span> <span class="s">&quot;@username&quot;</span><span class="p">,</span> <span class="s">&quot;Hello, world!&quot;</span> <span class="p">});</span>
+<p>Create <code class="docutils literal notranslate"><span class="pre">default_blocking</span></code> agent that returns <code class="docutils literal notranslate"><span class="pre">T</span></code> from any API request or throws an exception in case of error. If you don’t like exceptions, try <code class="docutils literal notranslate"><span class="pre">default_blocking_monadic</span></code> instead.</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">banana</span><span class="o">::</span><span class="n">api</span><span class="o">::</span><span class="n">message_t</span> <span class="n">message</span> <span class="o">=</span> <span class="n">banana</span><span class="o">::</span><span class="n">api</span><span class="o">::</span><span class="n">send_message</span><span class="p">(</span><span class="n">agent</span><span class="p">,</span> <span class="p">{</span> <span class="s">&quot;@username&quot;</span><span class="p">,</span> <span class="s">&quot;Hello, world!&quot;</span> <span class="p">});</span>
 </pre></div>
 </div>
-<p>Make blocking request and get the result (see <a class="reference internal" href="../api/tg/methods/send_message.html#_CPPv4I0EN6banana3api12send_messageE10api_resultI9message_tRR9ConnectorERR9Connector19send_message_args_t" title="banana::api::send_message"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">banana::api::send_message()</span></code></a> for details)</p>
+<p>Make blocking request and get the result (see <a class="reference internal" href="../api/tg/methods/send_message.html#_CPPv4I0EN6banana3api12send_messageE10api_resultI9message_tRR5AgentERR5Agent19send_message_args_t" title="banana::api::send_message"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">banana::api::send_message()</span></code></a> for details)</p>
 <div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;message sent: &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">message</span><span class="p">.</span><span class="n">message_id</span><span class="p">;</span>
 </pre></div>
 </div>
@@ -1438,7 +1438,7 @@ There is an additional CMake target <code class="docutils literal notranslate"><
         <div class='prev-next-bottom'>
             
     <a class='left-prev' id="prev-link" href="../guide.html" title="previous page">User Guide</a>
-    <a class='right-next' id="next-link" href="../api/banana/connectors.html" title="next page">Banana Connectors</a>
+    <a class='right-next' id="next-link" href="../api/banana/agents.html" title="next page">Banana Agents</a>
 
         </div>
         

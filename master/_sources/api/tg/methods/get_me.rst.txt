@@ -4,10 +4,10 @@ get_me
 ======
 
 .. cpp:namespace:: banana::api
-.. cpp:function:: template <class Connector> \
-                  api_result<user_t, Connector&&> get_me(Connector&& connector, get_me_args_t args)
+.. cpp:function:: template <class Agent> \
+                  api_result<user_t, Agent&&> get_me(Agent&& agent, get_me_args_t args)
 
-   ``connector`` is any object satisfying :ref:`connector concept <banana-api-banana-connectors>`.
+   ``agent`` is any object satisfying :ref:`agent concept <banana-api-banana-agents>`.
 
    A simple method for testing your bot's auth token. Requires no parameters. Returns basic information about the bot in form of a User object.
 

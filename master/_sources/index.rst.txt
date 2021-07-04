@@ -8,8 +8,8 @@ Key features
 
 - Simple API
 - **Single interface for both blocking, non-blocking and even coroutine-based operations**
-- Generic in terms of networking backend (bundled support for :ref:`WinAPI <banana-api-banana-connectors-winapi>`, :ref:`cpr <banana-api-banana-connectors-cpr>` and :ref:`boost::beast <banana-api-banana-connectors-beast>`)
-- Extendable (see `custom-connector example <https://github.com/Smertig/banana/blob/master/example/custom-connector-blocking.cpp>`_)
+- Generic in terms of networking backend (bundled support for :ref:`WinAPI <banana-api-banana-agents-winapi>`, :ref:`cpr <banana-api-banana-agents-cpr>` and :ref:`boost::beast <banana-api-banana-agents-beast>`)
+- Extendable (see `custom-agent example <https://github.com/Smertig/banana/blob/master/example/custom-agent-blocking.cpp>`_)
 - Automatically generated from `Telegram Bot API <https://core.telegram.org/bots/api>`_ 5.3 (thanks `ark0f/tg-bot-api <https://github.com/ark0f/tg-bot-api>`_)
 - Cross-platform (tested in CI on Windows, Linux and macOS)
 

@@ -4,10 +4,10 @@ edit_message_caption
 ====================
 
 .. cpp:namespace:: banana::api
-.. cpp:function:: template <class Connector> \
-                  api_result<variant_t<message_t, boolean_t>, Connector&&> edit_message_caption(Connector&& connector, edit_message_caption_args_t args)
+.. cpp:function:: template <class Agent> \
+                  api_result<variant_t<message_t, boolean_t>, Agent&&> edit_message_caption(Agent&& agent, edit_message_caption_args_t args)
 
-   ``connector`` is any object satisfying :ref:`connector concept <banana-api-banana-connectors>`.
+   ``agent`` is any object satisfying :ref:`agent concept <banana-api-banana-agents>`.
 
    Use this method to edit captions of messages. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned.
 

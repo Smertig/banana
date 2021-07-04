@@ -4,10 +4,10 @@ delete_sticker_from_set
 =======================
 
 .. cpp:namespace:: banana::api
-.. cpp:function:: template <class Connector> \
-                  api_result<boolean_t, Connector&&> delete_sticker_from_set(Connector&& connector, delete_sticker_from_set_args_t args)
+.. cpp:function:: template <class Agent> \
+                  api_result<boolean_t, Agent&&> delete_sticker_from_set(Agent&& agent, delete_sticker_from_set_args_t args)
 
-   ``connector`` is any object satisfying :ref:`connector concept <banana-api-banana-connectors>`.
+   ``agent`` is any object satisfying :ref:`agent concept <banana-api-banana-agents>`.
 
    Use this method to delete a sticker from a set created by the bot. Returns True on success.
 
