@@ -4,10 +4,10 @@ send_sticker
 ============
 
 .. cpp:namespace:: banana::api
-.. cpp:function:: template <class Connector> \
-                  api_result<message_t, Connector&&> send_sticker(Connector&& connector, send_sticker_args_t args)
+.. cpp:function:: template <class Agent> \
+                  api_result<message_t, Agent&&> send_sticker(Agent&& agent, send_sticker_args_t args)
 
-   ``connector`` is any object satisfying :ref:`connector concept <banana-api-banana-connectors>`.
+   ``agent`` is any object satisfying :ref:`agent concept <banana-api-banana-agents>`.
 
    Use this method to send static .WEBP or animated .TGS stickers. On success, the sent Message is returned.
 

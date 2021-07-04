@@ -4,10 +4,10 @@ set_sticker_set_thumb
 =====================
 
 .. cpp:namespace:: banana::api
-.. cpp:function:: template <class Connector> \
-                  api_result<boolean_t, Connector&&> set_sticker_set_thumb(Connector&& connector, set_sticker_set_thumb_args_t args)
+.. cpp:function:: template <class Agent> \
+                  api_result<boolean_t, Agent&&> set_sticker_set_thumb(Agent&& agent, set_sticker_set_thumb_args_t args)
 
-   ``connector`` is any object satisfying :ref:`connector concept <banana-api-banana-connectors>`.
+   ``agent`` is any object satisfying :ref:`agent concept <banana-api-banana-agents>`.
 
    Use this method to set the thumbnail of a sticker set. Animated thumbnails can be set for animated sticker sets only. Returns True on success.
 

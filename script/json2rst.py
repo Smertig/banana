@@ -86,10 +86,10 @@ for name, method in api_methods.items():
 {'=' * len(doc_name)}
 
 .. cpp:namespace:: banana::api
-.. cpp:function:: template <class Connector> \\
-                  api_result<{return_type.cpp_name}, Connector&&> {doc_name}(Connector&& connector, {doc_name}_args_t args)
+.. cpp:function:: template <class Agent> \\
+                  api_result<{return_type.cpp_name}, Agent&&> {doc_name}(Agent&& agent, {doc_name}_args_t args)
 
-   ``connector`` is any object satisfying :ref:`connector concept <banana-api-banana-connectors>`.
+   ``agent`` is any object satisfying :ref:`agent concept <banana-api-banana-agents>`.
 
    {method['desc']}
 

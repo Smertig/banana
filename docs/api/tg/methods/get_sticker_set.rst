@@ -4,10 +4,10 @@ get_sticker_set
 ===============
 
 .. cpp:namespace:: banana::api
-.. cpp:function:: template <class Connector> \
-                  api_result<sticker_set_t, Connector&&> get_sticker_set(Connector&& connector, get_sticker_set_args_t args)
+.. cpp:function:: template <class Agent> \
+                  api_result<sticker_set_t, Agent&&> get_sticker_set(Agent&& agent, get_sticker_set_args_t args)
 
-   ``connector`` is any object satisfying :ref:`connector concept <banana-api-banana-connectors>`.
+   ``agent`` is any object satisfying :ref:`agent concept <banana-api-banana-agents>`.
 
    Use this method to get a sticker set. On success, a StickerSet object is returned.
 

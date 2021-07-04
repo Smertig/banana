@@ -132,7 +132,7 @@ for name, method in api_methods.items():
     dump_type(out_api, args_cpp_type)
     out_api_types_fwd.write(f'struct {args_cpp_type.cpp_name};\n')
 
-    params_info = '@param connector Any object satisfying connector concept (see `banana::connector` namespace)' +\
+    params_info = '@param agent Any object satisfying agent concept (see `banana::agent` namespace)' +\
                   ''.join(f'\n * @param args__{param["name"]} {param["description"]}' for param in method['params'])
 
     out_api.write(f'''/**
@@ -140,9 +140,9 @@ for name, method in api_methods.items():
  * 
  * {params_info}
  */
-template <class Connector>
-api_result<{return_type}, Connector&&> {uname}(Connector&& connector, {args_cpp_type.cpp_name} args{" = {}" if not method['params'] else ""}) {{
-    return call(static_cast<Connector&&>(connector), static_cast<{args_cpp_type.cpp_name}&&>(args));
+template <class Agent>
+api_result<{return_type}, Agent&&> {uname}(Agent&& agent, {args_cpp_type.cpp_name} args{" = {}" if not method['params'] else ""}) {{
+    return call(static_cast<Agent&&>(agent), static_cast<{args_cpp_type.cpp_name}&&>(args));
 }}
 
 ''')

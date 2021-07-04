@@ -14,9 +14,9 @@ jobs:
             os: windows-latest
             cmake_flags: -DBANANA_BUILD_EXAMPLES=ON
             examples: >
-              connector-default-blocking connector-winapi-blocking connector-any-blocking connector-beast-blocking
-              connector-beast-future
-              connector-default-async connector-winapi-async
+              agent-default-blocking agent-winapi-blocking agent-any-blocking agent-beast-blocking
+              agent-beast-future
+              agent-default-async agent-winapi-async
               generic-api-call
             binary_path: "example/bin/banana-example-$name.exe"
             packages: |
@@ -26,11 +26,11 @@ jobs:
             os: ubuntu-latest
             cmake_flags: -DBANANA_BUILD_EXAMPLES=ON -DBANANA_EXAMPLES_ENABLE_CORO=ON -DCMAKE_CXX_COMPILER=g++-10 -DCMAKE_CXX_FLAGS=-fcoroutines
             examples: >
-              connector-default-blocking connector-cpr-blocking connector-any-blocking connector-beast-blocking
-              connector-beast-future
-              connector-default-async connector-cpr-async
-              connector-beast-coro
-              custom-connector-blocking
+              agent-default-blocking agent-cpr-blocking agent-any-blocking agent-beast-blocking
+              agent-beast-future
+              agent-default-async agent-cpr-async
+              agent-beast-coro
+              custom-agent-blocking
               generic-api-call
             binary_path: "example/bin/banana-example-$name"
             packages: |
@@ -41,10 +41,10 @@ jobs:
             os: macos-latest
             cmake_flags: -DBANANA_BUILD_EXAMPLES=ON
             examples: >
-              connector-default-blocking connector-cpr-blocking connector-any-blocking connector-beast-blocking
-              connector-beast-future
-              connector-default-async connector-cpr-async
-              custom-connector-blocking
+              agent-default-blocking agent-cpr-blocking agent-any-blocking agent-beast-blocking
+              agent-beast-future
+              agent-default-async agent-cpr-async
+              custom-agent-blocking
               generic-api-call
             binary_path: "example/bin/banana-example-$name"
             packages: |
@@ -54,8 +54,8 @@ jobs:
             os: ubuntu-latest
             cmake_flags: -DBANANA_BUILD_EXAMPLES=ON -DBANANA_USE_BUNDLED_CPR=ON
             examples: >
-              connector-default-blocking connector-cpr-blocking
-              connector-default-async connector-cpr-async
+              agent-default-blocking agent-cpr-blocking
+              agent-default-async agent-cpr-async
               generic-api-call
             binary_path: "example/bin/banana-example-$name"
             packages: |

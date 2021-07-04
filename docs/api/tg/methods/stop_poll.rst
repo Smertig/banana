@@ -4,10 +4,10 @@ stop_poll
 =========
 
 .. cpp:namespace:: banana::api
-.. cpp:function:: template <class Connector> \
-                  api_result<poll_t, Connector&&> stop_poll(Connector&& connector, stop_poll_args_t args)
+.. cpp:function:: template <class Agent> \
+                  api_result<poll_t, Agent&&> stop_poll(Agent&& agent, stop_poll_args_t args)
 
-   ``connector`` is any object satisfying :ref:`connector concept <banana-api-banana-connectors>`.
+   ``agent`` is any object satisfying :ref:`agent concept <banana-api-banana-agents>`.
 
    Use this method to stop a poll which was sent by the bot. On success, the stopped Poll with the final results is returned.
 

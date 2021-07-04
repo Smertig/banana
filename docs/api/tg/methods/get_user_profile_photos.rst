@@ -4,10 +4,10 @@ get_user_profile_photos
 =======================
 
 .. cpp:namespace:: banana::api
-.. cpp:function:: template <class Connector> \
-                  api_result<user_profile_photos_t, Connector&&> get_user_profile_photos(Connector&& connector, get_user_profile_photos_args_t args)
+.. cpp:function:: template <class Agent> \
+                  api_result<user_profile_photos_t, Agent&&> get_user_profile_photos(Agent&& agent, get_user_profile_photos_args_t args)
 
-   ``connector`` is any object satisfying :ref:`connector concept <banana-api-banana-connectors>`.
+   ``agent`` is any object satisfying :ref:`agent concept <banana-api-banana-agents>`.
 
    Use this method to get a list of profile pictures for a user. Returns a UserProfilePhotos object.
 

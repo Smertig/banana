@@ -14,7 +14,7 @@ set(BANANA_ROOT_DIR ${PROJECT_SOURCE_DIR})
 
 # === Configuration options ===
 
-option(BANANA_USE_BUNDLED_CPR "Use CPR submodule for CPR connector" OFF)
+option(BANANA_USE_BUNDLED_CPR "Use CPR submodule for CPR agent" OFF)
 option(BANANA_BUILD_EXAMPLES "Build banana examples" OFF)
 
 # === Configuration logging ===

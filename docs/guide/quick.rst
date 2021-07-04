@@ -29,17 +29,17 @@ That's it. Now you can link ``banana`` target to your app:
    #include <banana/api.hpp> // Telegram API methods
    // etc..
 
-However, you also need a :ref:`connector <banana-api-banana-connectors>` to make API requests.
+However, you also need an :ref:`agent <banana-api-banana-agents>` to make API requests.
 
-Choosing a connector
+Choosing an agent
 ====================
 
-Let's start with the simplest blocking connector.
+Let's start with the simplest blocking agent.
 
 Windows
 -------
 
-:ref:`WinAPI-connector <banana-api-banana-connectors-winapi>` is the only dependency-free connector. It's built on top of WinAPI, so it doesn't require any additional libraries to make https requests.
+:ref:`WinAPI-agent <banana-api-banana-agents-winapi>` is the only dependency-free agent. It's built on top of WinAPI, so it doesn't require any additional libraries to make https requests.
 
 .. code-block:: cmake
 
@@ -47,14 +47,14 @@ Windows
 
 .. code-block:: c++
 
-   #include <banana/connector/winapi.hpp>
+   #include <banana/agent/winapi.hpp>
 
-   banana::connector::winapi_blocking connector("<TG_BOT_TOKEN>");
+   banana::agent::winapi_blocking agent("<TG_BOT_TOKEN>");
 
 Linux/macOS
 -----------
 
-:ref:`cpr-based connector <banana-api-banana-connectors-cpr>` is the best choice for non-windows OS. It depends on `cpr <https://github.com/whoshuu/cpr>`_, **which in turn requires OpenSSL**.
+:ref:`cpr-based agent <banana-api-banana-agents-cpr>` is the best choice for non-windows OS. It depends on `cpr <https://github.com/whoshuu/cpr>`_, **which in turn requires OpenSSL**.
 
 .. code-block:: cmake
 
@@ -67,15 +67,15 @@ You also should do any of:
 
 .. code-block:: c++
 
-   #include <banana/connector/cpr.hpp>
+   #include <banana/agent/cpr.hpp>
 
-   banana::connector::cpr_blocking connector("<TG_BOT_TOKEN>");
+   banana::agent::cpr_blocking agent("<TG_BOT_TOKEN>");
 
-"Default" connector
+"Default" agent
 -------------------
 
-To choose connector in a truly cross-platform way, you can use default connector (if you don't want to link OpenSSL for :ref:`cpr <banana-api-banana-connectors-cpr>` on Windows and hate :ref:`boost-based connector <banana-api-banana-connectors-beast>`).
-There is an additional CMake target ``banana-default`` that provides header ``#include <banana/connector/default.hpp>`` and ``default_blocking_monadic`` and ``default_blocking`` connectors:
+To choose agent in a truly cross-platform way, you can use default agent (if you don't want to link OpenSSL for :ref:`cpr <banana-api-banana-agents-cpr>` on Windows and hate :ref:`boost-based agent <banana-api-banana-agents-beast>`).
+There is an additional CMake target ``banana-default`` that provides header ``#include <banana/agent/default.hpp>`` and ``default_blocking_monadic`` and ``default_blocking`` agents:
 
 On Windows:
    - ``using default_blocking = winapi_blocking;``
@@ -90,20 +90,20 @@ Otherwise:
 Hello, world!
 =============
 
-The following piece of code shows how to send simple ``"Hello, world!"`` message. We use "default" connector as an example.
+The following piece of code shows how to send simple ``"Hello, world!"`` message. We use "default" agent as an example.
 
 .. code-block:: c++
 
-   #include <banana/connector/default.hpp>
+   #include <banana/agent/default.hpp>
    #include <banana/api.hpp>
 
    #include <iostream>
 
    int main() {
-       banana::connector::default_blocking connector("<TG_BOT_TOKEN>");
+       banana::agent::default_blocking agent("<TG_BOT_TOKEN>");
 
-       banana::api::message_t message = banana::api::send_message(connector, { "@username", "Hello, world!" });
-       // since C++20: banana::api::send_message(connector, { .chat_id = "@username", .text = "Hello, world!" });
+       banana::api::message_t message = banana::api::send_message(agent, { "@username", "Hello, world!" });
+       // since C++20: banana::api::send_message(agent, { .chat_id = "@username", .text = "Hello, world!" });
 
        std::cout << "message sent: " << message.message_id;
    }
@@ -113,13 +113,13 @@ Line-by-line explanation
 
 .. code-block:: c++
 
-   banana::connector::default_blocking connector("<TG_BOT_TOKEN>");
+   banana::agent::default_blocking agent("<TG_BOT_TOKEN>");
 
-Create ``default_blocking`` connector that returns ``T`` from any API request or throws an exception in case of error. If you don't like exceptions, try ``default_blocking_monadic`` instead.
+Create ``default_blocking`` agent that returns ``T`` from any API request or throws an exception in case of error. If you don't like exceptions, try ``default_blocking_monadic`` instead.
 
 .. code-block:: c++
 
-   banana::api::message_t message = banana::api::send_message(connector, { "@username", "Hello, world!" });
+   banana::api::message_t message = banana::api::send_message(agent, { "@username", "Hello, world!" });
 
 Make blocking request and get the result (see :cpp:func:`banana::api::send_message` for details)
 

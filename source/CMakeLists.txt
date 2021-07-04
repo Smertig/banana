@@ -10,6 +10,6 @@ target_compile_definitions(banana PUBLIC
         BANANA_VERSION_PATCH=${BANANA_VERSION_PATCH}
 )
 
-# === Connectors ===
+# === Agents ===
 
-add_subdirectory(connectors)
+add_subdirectory(agents)

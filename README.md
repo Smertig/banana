@@ -13,7 +13,7 @@
  - Simple API
  - **Single interface for both blocking, non-blocking and even coroutine-based operations**
  - Generic in terms of networking backend (bundled support for [`WinAPI`](https://docs.microsoft.com/en-us/windows/win32/api/wininet/nf-wininet-httpsendrequesta), [`cpr`](https://github.com/whoshuu/cpr) and [`boost::beast`](https://github.com/boostorg/beast))
- - Extendable (see [custom-connector](https://github.com/Smertig/banana/blob/master/example/custom-connector-blocking.cpp) example)
+ - Extendable (see [custom-agent](https://github.com/Smertig/banana/blob/master/example/custom-agent-blocking.cpp) example)
  - Automatically generated from [Telegram Bot API](https://core.telegram.org/bots/api) 5.3 (thanks [ark0f/tg-bot-api](https://github.com/ark0f/tg-bot-api))
  - Cross-platform (tested on Windows, Linux, macOS)
 
@@ -21,11 +21,11 @@
 
 ```c++
 #include <banana/api.hpp>
-#include <banana/connector/default.hpp>
+#include <banana/agent/default.hpp>
 
 int main(int argc, char** argv) {
-    banana::connector::default_blocking connector("<TG_BOT_TOKEN>")
-    banana::api::send_message(connector, { /* .chat_id = */ "@smertig", /* .text = */ "Hello, world!" });
+    banana::agent::default_blocking agent("<TG_BOT_TOKEN>")
+    banana::api::send_message(agent, { /* .chat_id = */ "@smertig", /* .text = */ "Hello, world!" });
 }
 ```
 
