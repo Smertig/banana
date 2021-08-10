@@ -1,0 +1,21 @@
+.. _banana-api-tg-methods-delete_sticker_from_set:
+
+delete_sticker_from_set
+=======================
+
+.. cpp:namespace:: banana::api
+.. cpp:function:: template <class Agent> \
+                  api_result<boolean_t, Agent&&> delete_sticker_from_set(Agent&& agent, delete_sticker_from_set_args_t args)
+
+   ``agent`` is any object satisfying :ref:`agent concept <banana-api-banana-agents>`.
+
+   Use this method to delete a sticker from a set created by the bot. Returns True on success.
+
+.. cpp:struct:: delete_sticker_from_set_args_t
+
+   Arguments that should be passed to :cpp:func:`delete_sticker_from_set`.
+
+
+   .. cpp:member:: string_t sticker
+
+   File identifier of the sticker
