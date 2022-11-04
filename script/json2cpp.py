@@ -141,8 +141,13 @@ for name, method in api_methods.items():
  * {params_info}
  */
 template <class Agent>
-api_result<{return_type}, Agent&&> {uname}(Agent&& agent, {args_cpp_type.cpp_name} args{" = {}" if not method['params'] else ""}) {{
-    return call(static_cast<Agent&&>(agent), static_cast<{args_cpp_type.cpp_name}&&>(args));
+api_result<{return_type}, Agent&&> {uname}(Agent&& agent{(", " + args_cpp_type.cpp_name + " args") if method['params'] else "" }) {{
+    return call(static_cast<Agent&&>(agent), {"std::move(args)" if method['params'] else (args_cpp_type.cpp_name+"{}")});
+}}
+
+template <class Agent, class F>
+void {uname}(Agent&& agent{(", " + args_cpp_type.cpp_name + " args") if method['params'] else "" }, F&& callback) {{
+    call(static_cast<Agent&&>(agent), {"std::move(args)" if method['params'] else (args_cpp_type.cpp_name+"{}")}, std::forward<F>(callback));
 }}
 
 ''')

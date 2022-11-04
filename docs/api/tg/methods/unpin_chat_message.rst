@@ -6,8 +6,12 @@ unpin_chat_message
 .. cpp:namespace:: banana::api
 .. cpp:function:: template <class Agent> \
                   api_result<boolean_t, Agent&&> unpin_chat_message(Agent&& agent, unpin_chat_message_args_t args)
+.. cpp:function:: template <class Agent> \
+                  void unpin_chat_message(Agent&& agent, unpin_chat_message_args_t args, F&& callback)
 
    ``agent`` is any object satisfying :ref:`agent concept <banana-api-banana-agents>`.
+
+   ``callback`` is any callable object accepting ``expected<boolean_t>``.
 
    Use this method to remove a message from the list of pinned messages in a chat. If the chat is not a private chat, the bot must be an administrator in the chat for this to work and must have the 'can_pin_messages' admin right in a supergroup or 'can_edit_messages' admin right in a channel. Returns True on success.
 

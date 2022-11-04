@@ -87,13 +87,20 @@ for name, method in api_methods.items():
 
 .. cpp:namespace:: banana::api
 .. cpp:function:: template <class Agent> \\
-                  api_result<{return_type.cpp_name}, Agent&&> {doc_name}(Agent&& agent, {doc_name}_args_t args)
+                  api_result<{return_type.cpp_name}, Agent&&> {doc_name}(Agent&& agent{(", " + doc_name + "_args_t args") if method["params"] else "" })
+.. cpp:function:: template <class Agent> \\
+                  void {doc_name}(Agent&& agent{(", " + doc_name + "_args_t args") if method["params"] else "" }, F&& callback)
 
    ``agent`` is any object satisfying :ref:`agent concept <banana-api-banana-agents>`.
 
+   ``callback`` is any callable object accepting ``expected<{return_type.cpp_name}>``.
+
    {method['desc']}
 
-.. cpp:struct:: {doc_name}_args_t
+''')
+
+        if method["params"]:
+            out_method.write(f'''.. cpp:struct:: {doc_name}_args_t
 
    Arguments that should be passed to :cpp:func:`{doc_name}`.
 

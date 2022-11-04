@@ -19,6 +19,16 @@ api_result<typename Traits::response_type, Agent&&> call(Agent&& agent, Args arg
     return call(static_cast<Agent&&>(agent), serialize_args(std::move(args)));
 }
 
+template <class Agent, class Args, class F, class Traits = meta::api_traits_by_request<Args>>
+void call(Agent&& agent, serialized_args_t<Args> args, F&& callback) {
+    return std::forward<Agent>(agent).template request<Traits>(std::move(args.data), std::forward<F>(callback));
+}
+
+template <class Agent, class Args, class F, class Traits = meta::api_traits_by_request<Args>>
+void call(Agent&& agent, Args args, F&& callback) {
+    return call(static_cast<Agent&&>(agent), serialize_args(std::move(args)), std::forward<F>(callback));
+}
+
 #include "detail/generated/api.hpp"
 
 } // namespace banana::api

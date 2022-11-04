@@ -31,6 +31,7 @@ using beast_blocking_monadic = meta::make_blocking_monadic<basic_beast_monadic>;
 using beast_blocking         = meta::make_blocking<basic_beast>;
 using beast_future_monadic   = meta::make_future_monadic<basic_beast_monadic>;
 using beast_future           = meta::make_future<basic_beast_monadic>;
+using beast_callback         = meta::make_callback<basic_beast_monadic>;
 
 #if defined(BOOST_ASIO_HAS_CO_AWAIT)
 struct beast_coro_monadic : basic_beast_monadic {

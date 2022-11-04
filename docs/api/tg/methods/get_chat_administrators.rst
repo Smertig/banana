@@ -6,8 +6,12 @@ get_chat_administrators
 .. cpp:namespace:: banana::api
 .. cpp:function:: template <class Agent> \
                   api_result<array_t<chat_member_t>, Agent&&> get_chat_administrators(Agent&& agent, get_chat_administrators_args_t args)
+.. cpp:function:: template <class Agent> \
+                  void get_chat_administrators(Agent&& agent, get_chat_administrators_args_t args, F&& callback)
 
    ``agent`` is any object satisfying :ref:`agent concept <banana-api-banana-agents>`.
+
+   ``callback`` is any callable object accepting ``expected<array_t<chat_member_t>>``.
 
    Use this method to get a list of administrators in a chat. On success, returns an Array of ChatMember objects that contains information about all chat administrators except other bots. If the chat is a group or a supergroup and no administrators were appointed, only the creator will be returned.
 

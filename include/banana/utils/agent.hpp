@@ -136,6 +136,31 @@ struct make_future_monadic : Agent {
     }
 };
 
+// Convert raw `Agent` with `void do_async_request(std::string_view, std::string std::unique_ptr<async_handler>)` method
+// into generic non-blocking callback-based agent with monadic error handling (calls `f(<expected<R>)`)
+template <class Agent>
+struct make_callback : Agent {
+    using Agent::Agent;
+
+    static_assert(std::is_same_v<void, decltype(std::declval<Agent>().do_async_request(std::declval<std::string_view>(), std::declval<std::string>(), std::declval<std::unique_ptr<async_handler>>()))>);
+
+    template <class Traits, class F, class R = typename Traits::response_type>
+    void request(std::string body, F&& callback) {
+        struct callback_handler : async_handler {
+            F callback;
+
+            void on_result(expected<std::string> result) final {
+                callback(deserialize<Traits>(std::move(result)));
+            }
+        };
+
+        auto handler = std::make_unique<callback_handler>();
+        handler->callback = std::forward<F>(callback);
+
+        Agent::do_async_request(Traits::native_name, std::move(body), std::move(handler));
+    }
+};
+
 } // namespace meta
 
 } // namespace agent

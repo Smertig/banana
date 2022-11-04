@@ -53,6 +53,7 @@ endif()
 
 add_banana_example(agent-beast-blocking banana-beast CONAN_PKG::boost CONAN_PKG::openssl)
 add_banana_example(agent-beast-future banana-beast CONAN_PKG::boost CONAN_PKG::openssl)
+add_banana_example(agent-beast-callback banana-beast CONAN_PKG::boost CONAN_PKG::openssl)
 
 if (BANANA_EXAMPLES_ENABLE_CORO)
     add_banana_example(agent-beast-coro banana-beast CONAN_PKG::boost CONAN_PKG::openssl)

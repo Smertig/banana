@@ -8,7 +8,7 @@ beast-based agents
   blocking
      :cpp:class:`beast_blocking`, :cpp:class:`beast_blocking_monadic`
   async
-     :cpp:class:`beast_future`, :cpp:class:`beast_future_monadic`
+     :cpp:class:`beast_future`, :cpp:class:`beast_future_monadic`, :cpp:class:`beast_callback`
   coroutine
      :cpp:class:`beast_coro`, :cpp:class:`beast_coro_monadic`
 
@@ -116,6 +116,31 @@ Example
 
      banana::agent::beast_future_monadic agent("TG_BOT_TOKEN");
      std::future<banana::expected<banana::api::message_t>> msg = banana::api::send_message(agent, { "@user", "Hello, world!" });
+
+----------------------
+
+.. cpp:namespace: banana::agent
+.. cpp:class:: beast_callback
+
+   boost::beast-based non-blocking agent with callback-based interface.
+
+   .. cpp:function:: beast_callback::beast_callback(std::string token, boost::asio::io_context& io_context, boost::asio::ssl::context& ssl_context)
+
+      Default constructor accepting Telegram Bot token, I/O and ssl context.
+
+   .. cpp:function:: template <class Traits, class F, class R = typename Traits::response_type> \
+                     void request(std::string body, F&& callback)
+
+      Part of the required agent interface.
+
+Example
+  .. code-block:: C++
+
+     #include <banana/agent/beast.hpp>
+
+     banana::agent::beast_callback agent("TG_BOT_TOKEN");
+     banana::api::send_message(agent, { "@user", "Hello, world!" },
+                               [] (banana::expected<banana::api::message_t> msg) { ... });
 
 ----------------------
 

@@ -6,8 +6,12 @@ send_photo
 .. cpp:namespace:: banana::api
 .. cpp:function:: template <class Agent> \
                   api_result<message_t, Agent&&> send_photo(Agent&& agent, send_photo_args_t args)
+.. cpp:function:: template <class Agent> \
+                  void send_photo(Agent&& agent, send_photo_args_t args, F&& callback)
 
    ``agent`` is any object satisfying :ref:`agent concept <banana-api-banana-agents>`.
+
+   ``callback`` is any callable object accepting ``expected<message_t>``.
 
    Use this method to send photos. On success, the sent Message is returned.
 

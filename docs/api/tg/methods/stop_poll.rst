@@ -6,8 +6,12 @@ stop_poll
 .. cpp:namespace:: banana::api
 .. cpp:function:: template <class Agent> \
                   api_result<poll_t, Agent&&> stop_poll(Agent&& agent, stop_poll_args_t args)
+.. cpp:function:: template <class Agent> \
+                  void stop_poll(Agent&& agent, stop_poll_args_t args, F&& callback)
 
    ``agent`` is any object satisfying :ref:`agent concept <banana-api-banana-agents>`.
+
+   ``callback`` is any callable object accepting ``expected<poll_t>``.
 
    Use this method to stop a poll which was sent by the bot. On success, the stopped Poll with the final results is returned.
 

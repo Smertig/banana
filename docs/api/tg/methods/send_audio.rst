@@ -6,8 +6,12 @@ send_audio
 .. cpp:namespace:: banana::api
 .. cpp:function:: template <class Agent> \
                   api_result<message_t, Agent&&> send_audio(Agent&& agent, send_audio_args_t args)
+.. cpp:function:: template <class Agent> \
+                  void send_audio(Agent&& agent, send_audio_args_t args, F&& callback)
 
    ``agent`` is any object satisfying :ref:`agent concept <banana-api-banana-agents>`.
+
+   ``callback`` is any callable object accepting ``expected<message_t>``.
 
    Use this method to send audio files, if you want Telegram clients to display them in the music player. Your audio must be in the .MP3 or .M4A format. On success, the sent Message is returned. Bots can currently send audio files of up to 50 MB in size, this limit may be changed in the future. For sending voice messages, use the sendVoice method instead.
 
