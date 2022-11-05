@@ -147,15 +147,16 @@ struct make_callback : Agent {
     template <class Traits, class F, class R = typename Traits::response_type>
     void request(std::string body, F&& callback) {
         struct callback_handler : async_handler {
-            F callback;
+            std::function<void(expected<R>)> callback;
+
+            callback_handler(F&& callback) : callback(std::forward<F>(callback)) { }
 
             void on_result(expected<std::string> result) final {
                 callback(deserialize<Traits>(std::move(result)));
             }
         };
 
-        auto handler = std::make_unique<callback_handler>();
-        handler->callback = std::forward<F>(callback);
+        auto handler = std::make_unique<callback_handler>(std::forward<F>(callback));
 
         Agent::do_async_request(Traits::native_name, std::move(body), std::move(handler));
     }
