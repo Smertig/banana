@@ -29,9 +29,12 @@ public:
 using basic_beast            = meta::unwrap_blocking<basic_beast_monadic>;
 using beast_blocking_monadic = meta::make_blocking_monadic<basic_beast_monadic>;
 using beast_blocking         = meta::make_blocking<basic_beast>;
-using beast_future_monadic   = meta::make_future_monadic<basic_beast_monadic>;
-using beast_future           = meta::make_future<basic_beast_monadic>;
-using beast_callback         = meta::make_callback<basic_beast_monadic>;
+using beast_async_monadic    = meta::make_async_monadic<basic_beast_monadic>;
+using beast_async            = meta::make_async<basic_beast_monadic>;
+
+// For backward compatibility
+using beast_future_monadic   = beast_async_monadic;
+using beast_future           = beast_async;
 
 #if defined(BOOST_ASIO_HAS_CO_AWAIT)
 struct beast_coro_monadic : basic_beast_monadic {
