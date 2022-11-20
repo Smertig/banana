@@ -6,7 +6,6 @@
 #include <string>
 #include <string_view>
 #include <optional>
-#include <functional>
 #include <future>
 
 namespace banana {
@@ -147,7 +146,7 @@ struct make_callback : Agent {
     template <class Traits, class F, class R = typename Traits::response_type>
     void request(std::string body, F&& callback) {
         struct callback_handler : async_handler {
-            std::function<void(expected<R>)> callback;
+            std::remove_const_t<std::remove_reference_t<F>> callback;
 
             callback_handler(F&& callback) : callback(std::forward<F>(callback)) { }
 
