@@ -6,8 +6,12 @@ get_chat_member
 .. cpp:namespace:: banana::api
 .. cpp:function:: template <class Agent> \
                   api_result<chat_member_t, Agent&&> get_chat_member(Agent&& agent, get_chat_member_args_t args)
+.. cpp:function:: template <class Agent> \
+                  void get_chat_member(Agent&& agent, get_chat_member_args_t args, F&& callback)
 
    ``agent`` is any object satisfying :ref:`agent concept <banana-api-banana-agents>`.
+
+   ``callback`` is any callable object accepting ``expected<chat_member_t>``.
 
    Use this method to get information about a member of a chat. Returns a ChatMember object on success.
 

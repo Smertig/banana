@@ -6,8 +6,12 @@ get_updates
 .. cpp:namespace:: banana::api
 .. cpp:function:: template <class Agent> \
                   api_result<array_t<update_t>, Agent&&> get_updates(Agent&& agent, get_updates_args_t args)
+.. cpp:function:: template <class Agent> \
+                  void get_updates(Agent&& agent, get_updates_args_t args, F&& callback)
 
    ``agent`` is any object satisfying :ref:`agent concept <banana-api-banana-agents>`.
+
+   ``callback`` is any callable object accepting ``expected<array_t<update_t>>``.
 
    Use this method to receive incoming updates using long polling (wiki). An Array of Update objects is returned.
 

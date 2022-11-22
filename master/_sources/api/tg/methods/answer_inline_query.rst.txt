@@ -6,8 +6,12 @@ answer_inline_query
 .. cpp:namespace:: banana::api
 .. cpp:function:: template <class Agent> \
                   api_result<boolean_t, Agent&&> answer_inline_query(Agent&& agent, answer_inline_query_args_t args)
+.. cpp:function:: template <class Agent> \
+                  void answer_inline_query(Agent&& agent, answer_inline_query_args_t args, F&& callback)
 
    ``agent`` is any object satisfying :ref:`agent concept <banana-api-banana-agents>`.
+
+   ``callback`` is any callable object accepting ``expected<boolean_t>``.
 
    Use this method to send answers to an inline query. On success, True is returned. No more than 50 results per query are allowed.
 

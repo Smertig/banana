@@ -6,8 +6,12 @@ get_user_profile_photos
 .. cpp:namespace:: banana::api
 .. cpp:function:: template <class Agent> \
                   api_result<user_profile_photos_t, Agent&&> get_user_profile_photos(Agent&& agent, get_user_profile_photos_args_t args)
+.. cpp:function:: template <class Agent> \
+                  void get_user_profile_photos(Agent&& agent, get_user_profile_photos_args_t args, F&& callback)
 
    ``agent`` is any object satisfying :ref:`agent concept <banana-api-banana-agents>`.
+
+   ``callback`` is any callable object accepting ``expected<user_profile_photos_t>``.
 
    Use this method to get a list of profile pictures for a user. Returns a UserProfilePhotos object.
 

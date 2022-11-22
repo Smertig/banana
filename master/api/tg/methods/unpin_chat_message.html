@@ -4,7 +4,7 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
     <title>unpin_chat_message &#8212; banana  documentation</title>
     
@@ -1270,7 +1270,13 @@
 <dl class="cpp function">
 <dt id="_CPPv4I0EN6banana3api18unpin_chat_messageE10api_resultI9boolean_tRR5AgentERR5Agent25unpin_chat_message_args_t">
 <span id="_CPPv3I0EN6banana3api18unpin_chat_messageERR5Agent25unpin_chat_message_args_t"></span><span id="_CPPv2I0EN6banana3api18unpin_chat_messageERR5Agent25unpin_chat_message_args_t"></span><span class="pre">template&lt;</span><span class="pre">class</span> <code class="sig-name descname"><span class="pre">Agent</span></code><span class="pre">&gt;</span><br /><span class="pre">api_result</span><span class="pre">&lt;</span><a class="reference internal" href="../../banana/basic_types.html#_CPPv4N6banana9boolean_tE" title="banana::boolean_t"><span class="pre">boolean_t</span></a><span class="pre">,</span> <a class="reference internal" href="#_CPPv4I0EN6banana3api18unpin_chat_messageE10api_resultI9boolean_tRR5AgentERR5Agent25unpin_chat_message_args_t" title="banana::api::unpin_chat_message::Agent"><span class="pre">Agent</span></a><span class="pre">&amp;</span><span class="pre">&amp;</span><span class="pre">&gt;</span> <code class="sig-name descname"><span class="pre">unpin_chat_message</span></code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4I0EN6banana3api18unpin_chat_messageE10api_resultI9boolean_tRR5AgentERR5Agent25unpin_chat_message_args_t" title="banana::api::unpin_chat_message::Agent"><span class="pre">Agent</span></a> <span class="pre">&amp;</span><span class="pre">&amp;</span><em><span class="pre">agent</span></em>, <a class="reference internal" href="#_CPPv4N6banana3api25unpin_chat_message_args_tE" title="banana::api::unpin_chat_message_args_t"><span class="pre">unpin_chat_message_args_t</span></a> <em><span class="pre">args</span></em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4I0EN6banana3api18unpin_chat_messageE10api_resultI9boolean_tRR5AgentERR5Agent25unpin_chat_message_args_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4I0EN6banana3api18unpin_chat_messageEvRR5Agent25unpin_chat_message_args_tRR1F">
+<span id="_CPPv3I0EN6banana3api18unpin_chat_messageERR5Agent25unpin_chat_message_args_tRR1F"></span><span id="_CPPv2I0EN6banana3api18unpin_chat_messageERR5Agent25unpin_chat_message_args_tRR1F"></span><span class="pre">template&lt;</span><span class="pre">class</span> <code class="sig-name descname"><span class="pre">Agent</span></code><span class="pre">&gt;</span><br /><span class="pre">void</span> <code class="sig-name descname"><span class="pre">unpin_chat_message</span></code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4I0EN6banana3api18unpin_chat_messageEvRR5Agent25unpin_chat_message_args_tRR1F" title="banana::api::unpin_chat_message::Agent"><span class="pre">Agent</span></a> <span class="pre">&amp;</span><span class="pre">&amp;</span><em><span class="pre">agent</span></em>, <a class="reference internal" href="#_CPPv4N6banana3api25unpin_chat_message_args_tE" title="banana::api::unpin_chat_message_args_t"><span class="pre">unpin_chat_message_args_t</span></a> <em><span class="pre">args</span></em>, <span class="pre">F</span> <span class="pre">&amp;</span><span class="pre">&amp;</span><em><span class="pre">callback</span></em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4I0EN6banana3api18unpin_chat_messageEvRR5Agent25unpin_chat_message_args_tRR1F" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p><code class="docutils literal notranslate"><span class="pre">agent</span></code> is any object satisfying <a class="reference internal" href="../../banana/agents.html#banana-api-banana-agents"><span class="std std-ref">agent concept</span></a>.</p>
+<p><code class="docutils literal notranslate"><span class="pre">callback</span></code> is any callable object accepting <code class="docutils literal notranslate"><span class="pre">expected&lt;boolean_t&gt;</span></code>.</p>
 <p>Use this method to remove a message from the list of pinned messages in a chat. If the chat is not a private chat, the bot must be an administrator in the chat for this to work and must have the ‘can_pin_messages’ admin right in a supergroup or ‘can_edit_messages’ admin right in a channel. Returns True on success.</p>
 </dd></dl>
 
@@ -1313,7 +1319,7 @@
         
           By Smertig<br/>
         
-            &copy; Copyright 2020-2021.<br/>
+            &copy; Copyright 2020-2022.<br/>
       </p>
     </div>
   </footer>

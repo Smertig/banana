@@ -6,8 +6,12 @@ set_chat_permissions
 .. cpp:namespace:: banana::api
 .. cpp:function:: template <class Agent> \
                   api_result<boolean_t, Agent&&> set_chat_permissions(Agent&& agent, set_chat_permissions_args_t args)
+.. cpp:function:: template <class Agent> \
+                  void set_chat_permissions(Agent&& agent, set_chat_permissions_args_t args, F&& callback)
 
    ``agent`` is any object satisfying :ref:`agent concept <banana-api-banana-agents>`.
+
+   ``callback`` is any callable object accepting ``expected<boolean_t>``.
 
    Use this method to set default chat permissions for all members. The bot must be an administrator in the group or a supergroup for this to work and must have the can_restrict_members admin rights. Returns True on success.
 

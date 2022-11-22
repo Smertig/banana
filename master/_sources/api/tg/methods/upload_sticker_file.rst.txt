@@ -6,8 +6,12 @@ upload_sticker_file
 .. cpp:namespace:: banana::api
 .. cpp:function:: template <class Agent> \
                   api_result<file_t, Agent&&> upload_sticker_file(Agent&& agent, upload_sticker_file_args_t args)
+.. cpp:function:: template <class Agent> \
+                  void upload_sticker_file(Agent&& agent, upload_sticker_file_args_t args, F&& callback)
 
    ``agent`` is any object satisfying :ref:`agent concept <banana-api-banana-agents>`.
+
+   ``callback`` is any callable object accepting ``expected<file_t>``.
 
    Use this method to upload a .PNG file with a sticker for later use in createNewStickerSet and addStickerToSet methods (can be used multiple times). Returns the uploaded File on success.
 

@@ -6,8 +6,12 @@ answer_pre_checkout_query
 .. cpp:namespace:: banana::api
 .. cpp:function:: template <class Agent> \
                   api_result<boolean_t, Agent&&> answer_pre_checkout_query(Agent&& agent, answer_pre_checkout_query_args_t args)
+.. cpp:function:: template <class Agent> \
+                  void answer_pre_checkout_query(Agent&& agent, answer_pre_checkout_query_args_t args, F&& callback)
 
    ``agent`` is any object satisfying :ref:`agent concept <banana-api-banana-agents>`.
+
+   ``callback`` is any callable object accepting ``expected<boolean_t>``.
 
    Once the user has confirmed their payment and shipping details, the Bot API sends the final confirmation in the form of an Update with the field pre_checkout_query. Use this method to respond to such pre-checkout queries. On success, True is returned. Note: The Bot API must receive an answer within 10 seconds after the pre-checkout query was sent.
 

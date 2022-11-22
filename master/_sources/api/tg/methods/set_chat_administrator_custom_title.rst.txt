@@ -6,8 +6,12 @@ set_chat_administrator_custom_title
 .. cpp:namespace:: banana::api
 .. cpp:function:: template <class Agent> \
                   api_result<boolean_t, Agent&&> set_chat_administrator_custom_title(Agent&& agent, set_chat_administrator_custom_title_args_t args)
+.. cpp:function:: template <class Agent> \
+                  void set_chat_administrator_custom_title(Agent&& agent, set_chat_administrator_custom_title_args_t args, F&& callback)
 
    ``agent`` is any object satisfying :ref:`agent concept <banana-api-banana-agents>`.
+
+   ``callback`` is any callable object accepting ``expected<boolean_t>``.
 
    Use this method to set a custom title for an administrator in a supergroup promoted by the bot. Returns True on success.
 

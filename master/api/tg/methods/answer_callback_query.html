@@ -4,7 +4,7 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
     <title>answer_callback_query &#8212; banana  documentation</title>
     
@@ -1270,7 +1270,13 @@
 <dl class="cpp function">
 <dt id="_CPPv4I0EN6banana3api21answer_callback_queryE10api_resultI9boolean_tRR5AgentERR5Agent28answer_callback_query_args_t">
 <span id="_CPPv3I0EN6banana3api21answer_callback_queryERR5Agent28answer_callback_query_args_t"></span><span id="_CPPv2I0EN6banana3api21answer_callback_queryERR5Agent28answer_callback_query_args_t"></span><span class="pre">template&lt;</span><span class="pre">class</span> <code class="sig-name descname"><span class="pre">Agent</span></code><span class="pre">&gt;</span><br /><span class="pre">api_result</span><span class="pre">&lt;</span><a class="reference internal" href="../../banana/basic_types.html#_CPPv4N6banana9boolean_tE" title="banana::boolean_t"><span class="pre">boolean_t</span></a><span class="pre">,</span> <a class="reference internal" href="#_CPPv4I0EN6banana3api21answer_callback_queryE10api_resultI9boolean_tRR5AgentERR5Agent28answer_callback_query_args_t" title="banana::api::answer_callback_query::Agent"><span class="pre">Agent</span></a><span class="pre">&amp;</span><span class="pre">&amp;</span><span class="pre">&gt;</span> <code class="sig-name descname"><span class="pre">answer_callback_query</span></code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4I0EN6banana3api21answer_callback_queryE10api_resultI9boolean_tRR5AgentERR5Agent28answer_callback_query_args_t" title="banana::api::answer_callback_query::Agent"><span class="pre">Agent</span></a> <span class="pre">&amp;</span><span class="pre">&amp;</span><em><span class="pre">agent</span></em>, <a class="reference internal" href="#_CPPv4N6banana3api28answer_callback_query_args_tE" title="banana::api::answer_callback_query_args_t"><span class="pre">answer_callback_query_args_t</span></a> <em><span class="pre">args</span></em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4I0EN6banana3api21answer_callback_queryE10api_resultI9boolean_tRR5AgentERR5Agent28answer_callback_query_args_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4I0EN6banana3api21answer_callback_queryEvRR5Agent28answer_callback_query_args_tRR1F">
+<span id="_CPPv3I0EN6banana3api21answer_callback_queryERR5Agent28answer_callback_query_args_tRR1F"></span><span id="_CPPv2I0EN6banana3api21answer_callback_queryERR5Agent28answer_callback_query_args_tRR1F"></span><span class="pre">template&lt;</span><span class="pre">class</span> <code class="sig-name descname"><span class="pre">Agent</span></code><span class="pre">&gt;</span><br /><span class="pre">void</span> <code class="sig-name descname"><span class="pre">answer_callback_query</span></code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4I0EN6banana3api21answer_callback_queryEvRR5Agent28answer_callback_query_args_tRR1F" title="banana::api::answer_callback_query::Agent"><span class="pre">Agent</span></a> <span class="pre">&amp;</span><span class="pre">&amp;</span><em><span class="pre">agent</span></em>, <a class="reference internal" href="#_CPPv4N6banana3api28answer_callback_query_args_tE" title="banana::api::answer_callback_query_args_t"><span class="pre">answer_callback_query_args_t</span></a> <em><span class="pre">args</span></em>, <span class="pre">F</span> <span class="pre">&amp;</span><span class="pre">&amp;</span><em><span class="pre">callback</span></em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4I0EN6banana3api21answer_callback_queryEvRR5Agent28answer_callback_query_args_tRR1F" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p><code class="docutils literal notranslate"><span class="pre">agent</span></code> is any object satisfying <a class="reference internal" href="../../banana/agents.html#banana-api-banana-agents"><span class="std std-ref">agent concept</span></a>.</p>
+<p><code class="docutils literal notranslate"><span class="pre">callback</span></code> is any callable object accepting <code class="docutils literal notranslate"><span class="pre">expected&lt;boolean_t&gt;</span></code>.</p>
 <p>Use this method to send answers to callback queries sent from inline keyboards. The answer will be displayed to the user as a notification at the top of the chat screen or as an alert. On success, True is returned. Alternatively, the user can be redirected to the specified Game URL. For this option to work, you must first create a game for your bot via &#64;Botfather and accept the terms. Otherwise, you may use links like t.me/your_bot?start=XXXX that open your bot with a parameter.</p>
 </dd></dl>
 
@@ -1331,7 +1337,7 @@
         
           By Smertig<br/>
         
-            &copy; Copyright 2020-2021.<br/>
+            &copy; Copyright 2020-2022.<br/>
       </p>
     </div>
   </footer>

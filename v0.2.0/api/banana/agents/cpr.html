@@ -4,7 +4,7 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
     <title>cpr-based agents &#8212; banana  documentation</title>
     
@@ -1310,10 +1310,10 @@ However, it requires OpenSSL installed on your machine.</p>
 </dd></dl>
 
 <dl>
-<dt>Example</dt><dd><div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;banana/agent/cpr.hpp&gt;</span><span class="cp"></span>
+<dt>Example</dt><dd><div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;banana/agent/cpr.hpp&gt;</span><span class="cp"></span>
 
-<span class="n">banana</span><span class="o">::</span><span class="n">agent</span><span class="o">::</span><span class="n">cpr_blocking</span> <span class="nf">agent</span><span class="p">(</span><span class="s">&quot;TG_BOT_TOKEN&quot;</span><span class="p">);</span>
-<span class="n">banana</span><span class="o">::</span><span class="n">api</span><span class="o">::</span><span class="n">message_t</span> <span class="n">msg</span> <span class="o">=</span> <span class="n">banana</span><span class="o">::</span><span class="n">api</span><span class="o">::</span><span class="n">send_message</span><span class="p">(</span><span class="n">agent</span><span class="p">,</span> <span class="p">{</span> <span class="s">&quot;@user&quot;</span><span class="p">,</span> <span class="s">&quot;Hello, world!&quot;</span> <span class="p">});</span>
+<span class="n">banana</span><span class="o">::</span><span class="n">agent</span><span class="o">::</span><span class="n">cpr_blocking</span><span class="w"> </span><span class="n">agent</span><span class="p">(</span><span class="s">&quot;TG_BOT_TOKEN&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="n">banana</span><span class="o">::</span><span class="n">api</span><span class="o">::</span><span class="n">message_t</span><span class="w"> </span><span class="n">msg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">banana</span><span class="o">::</span><span class="n">api</span><span class="o">::</span><span class="n">send_message</span><span class="p">(</span><span class="n">agent</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="s">&quot;@user&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Hello, world!&quot;</span><span class="w"> </span><span class="p">});</span><span class="w"></span>
 </pre></div>
 </div>
 </dd>
@@ -1338,10 +1338,10 @@ However, it requires OpenSSL installed on your machine.</p>
 </dd></dl>
 
 <dl>
-<dt>Example</dt><dd><div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;banana/agent/cpr.hpp&gt;</span><span class="cp"></span>
+<dt>Example</dt><dd><div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;banana/agent/cpr.hpp&gt;</span><span class="cp"></span>
 
-<span class="n">banana</span><span class="o">::</span><span class="n">agent</span><span class="o">::</span><span class="n">cpr_blocking_monadic</span> <span class="nf">agent</span><span class="p">(</span><span class="s">&quot;TG_BOT_TOKEN&quot;</span><span class="p">);</span>
-<span class="n">banana</span><span class="o">::</span><span class="n">expected</span><span class="o">&lt;</span><span class="n">banana</span><span class="o">::</span><span class="n">api</span><span class="o">::</span><span class="n">message_t</span><span class="o">&gt;</span> <span class="n">msg</span> <span class="o">=</span> <span class="n">banana</span><span class="o">::</span><span class="n">api</span><span class="o">::</span><span class="n">send_message</span><span class="p">(</span><span class="n">agent</span><span class="p">,</span> <span class="p">{</span> <span class="s">&quot;@user&quot;</span><span class="p">,</span> <span class="s">&quot;Hello, world!&quot;</span> <span class="p">});</span>
+<span class="n">banana</span><span class="o">::</span><span class="n">agent</span><span class="o">::</span><span class="n">cpr_blocking_monadic</span><span class="w"> </span><span class="n">agent</span><span class="p">(</span><span class="s">&quot;TG_BOT_TOKEN&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="n">banana</span><span class="o">::</span><span class="n">expected</span><span class="o">&lt;</span><span class="n">banana</span><span class="o">::</span><span class="n">api</span><span class="o">::</span><span class="n">message_t</span><span class="o">&gt;</span><span class="w"> </span><span class="n">msg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">banana</span><span class="o">::</span><span class="n">api</span><span class="o">::</span><span class="n">send_message</span><span class="p">(</span><span class="n">agent</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="s">&quot;@user&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Hello, world!&quot;</span><span class="w"> </span><span class="p">});</span><span class="w"></span>
 </pre></div>
 </div>
 </dd>
@@ -1366,10 +1366,10 @@ However, it requires OpenSSL installed on your machine.</p>
 </dd></dl>
 
 <dl>
-<dt>Example</dt><dd><div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;banana/agent/cpr.hpp&gt;</span><span class="cp"></span>
+<dt>Example</dt><dd><div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;banana/agent/cpr.hpp&gt;</span><span class="cp"></span>
 
-<span class="n">banana</span><span class="o">::</span><span class="n">agent</span><span class="o">::</span><span class="n">cpr_async</span> <span class="nf">agent</span><span class="p">(</span><span class="s">&quot;TG_BOT_TOKEN&quot;</span><span class="p">);</span>
-<span class="n">std</span><span class="o">::</span><span class="n">future</span><span class="o">&lt;</span><span class="n">banana</span><span class="o">::</span><span class="n">api</span><span class="o">::</span><span class="n">message_t</span><span class="o">&gt;</span> <span class="n">msg</span> <span class="o">=</span> <span class="n">banana</span><span class="o">::</span><span class="n">api</span><span class="o">::</span><span class="n">send_message</span><span class="p">(</span><span class="n">agent</span><span class="p">,</span> <span class="p">{</span> <span class="s">&quot;@user&quot;</span><span class="p">,</span> <span class="s">&quot;Hello, world!&quot;</span> <span class="p">});</span>
+<span class="n">banana</span><span class="o">::</span><span class="n">agent</span><span class="o">::</span><span class="n">cpr_async</span><span class="w"> </span><span class="n">agent</span><span class="p">(</span><span class="s">&quot;TG_BOT_TOKEN&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="n">std</span><span class="o">::</span><span class="n">future</span><span class="o">&lt;</span><span class="n">banana</span><span class="o">::</span><span class="n">api</span><span class="o">::</span><span class="n">message_t</span><span class="o">&gt;</span><span class="w"> </span><span class="n">msg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">banana</span><span class="o">::</span><span class="n">api</span><span class="o">::</span><span class="n">send_message</span><span class="p">(</span><span class="n">agent</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="s">&quot;@user&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Hello, world!&quot;</span><span class="w"> </span><span class="p">});</span><span class="w"></span>
 </pre></div>
 </div>
 </dd>
@@ -1395,7 +1395,7 @@ However, it requires OpenSSL installed on your machine.</p>
         
           By Smertig<br/>
         
-            &copy; Copyright 2020-2021.<br/>
+            &copy; Copyright 2020-2022.<br/>
       </p>
     </div>
   </footer>
