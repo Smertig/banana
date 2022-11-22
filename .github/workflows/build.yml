@@ -15,7 +15,7 @@ jobs:
             cmake_flags: -DBANANA_BUILD_EXAMPLES=ON
             examples: >
               agent-default-blocking agent-winapi-blocking agent-any-blocking agent-beast-blocking
-              agent-beast-future
+              agent-beast-async
               agent-default-async agent-winapi-async
               generic-api-call
             binary_path: "example/bin/banana-example-$name.exe"
@@ -27,7 +27,7 @@ jobs:
             cmake_flags: -DBANANA_BUILD_EXAMPLES=ON -DBANANA_EXAMPLES_ENABLE_CORO=ON -DCMAKE_CXX_COMPILER=g++-10 -DCMAKE_CXX_FLAGS=-fcoroutines
             examples: >
               agent-default-blocking agent-cpr-blocking agent-any-blocking agent-beast-blocking
-              agent-beast-future
+              agent-beast-async
               agent-default-async agent-cpr-async
               agent-beast-coro
               custom-agent-blocking
@@ -42,7 +42,7 @@ jobs:
             cmake_flags: -DBANANA_BUILD_EXAMPLES=ON
             examples: >
               agent-default-blocking agent-cpr-blocking agent-any-blocking agent-beast-blocking
-              agent-beast-future
+              agent-beast-async
               agent-default-async agent-cpr-async
               custom-agent-blocking
               generic-api-call
