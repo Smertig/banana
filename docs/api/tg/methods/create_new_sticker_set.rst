@@ -6,8 +6,12 @@ create_new_sticker_set
 .. cpp:namespace:: banana::api
 .. cpp:function:: template <class Agent> \
                   api_result<boolean_t, Agent&&> create_new_sticker_set(Agent&& agent, create_new_sticker_set_args_t args)
+.. cpp:function:: template <class Agent> \
+                  void create_new_sticker_set(Agent&& agent, create_new_sticker_set_args_t args, F&& callback)
 
    ``agent`` is any object satisfying :ref:`agent concept <banana-api-banana-agents>`.
+
+   ``callback`` is any callable object accepting ``expected<boolean_t>``.
 
    Use this method to create a new sticker set owned by a user. The bot will be able to edit the sticker set thus created. You must use exactly one of the fields png_sticker or tgs_sticker. Returns True on success.
 

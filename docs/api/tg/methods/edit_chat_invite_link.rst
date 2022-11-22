@@ -6,8 +6,12 @@ edit_chat_invite_link
 .. cpp:namespace:: banana::api
 .. cpp:function:: template <class Agent> \
                   api_result<chat_invite_link_t, Agent&&> edit_chat_invite_link(Agent&& agent, edit_chat_invite_link_args_t args)
+.. cpp:function:: template <class Agent> \
+                  void edit_chat_invite_link(Agent&& agent, edit_chat_invite_link_args_t args, F&& callback)
 
    ``agent`` is any object satisfying :ref:`agent concept <banana-api-banana-agents>`.
+
+   ``callback`` is any callable object accepting ``expected<chat_invite_link_t>``.
 
    Use this method to edit a non-primary invite link created by the bot. The bot must be an administrator in the chat for this to work and must have the appropriate admin rights. Returns the edited invite link as a ChatInviteLink object.
 

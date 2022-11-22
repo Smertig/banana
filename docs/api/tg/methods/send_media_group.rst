@@ -6,8 +6,12 @@ send_media_group
 .. cpp:namespace:: banana::api
 .. cpp:function:: template <class Agent> \
                   api_result<array_t<message_t>, Agent&&> send_media_group(Agent&& agent, send_media_group_args_t args)
+.. cpp:function:: template <class Agent> \
+                  void send_media_group(Agent&& agent, send_media_group_args_t args, F&& callback)
 
    ``agent`` is any object satisfying :ref:`agent concept <banana-api-banana-agents>`.
+
+   ``callback`` is any callable object accepting ``expected<array_t<message_t>>``.
 
    Use this method to send a group of photos, videos, documents or audios as an album. Documents and audio files can be only grouped in an album with messages of the same type. On success, an array of Messages that were sent is returned.
 

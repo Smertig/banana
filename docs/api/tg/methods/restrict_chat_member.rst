@@ -6,8 +6,12 @@ restrict_chat_member
 .. cpp:namespace:: banana::api
 .. cpp:function:: template <class Agent> \
                   api_result<boolean_t, Agent&&> restrict_chat_member(Agent&& agent, restrict_chat_member_args_t args)
+.. cpp:function:: template <class Agent> \
+                  void restrict_chat_member(Agent&& agent, restrict_chat_member_args_t args, F&& callback)
 
    ``agent`` is any object satisfying :ref:`agent concept <banana-api-banana-agents>`.
+
+   ``callback`` is any callable object accepting ``expected<boolean_t>``.
 
    Use this method to restrict a user in a supergroup. The bot must be an administrator in the supergroup for this to work and must have the appropriate admin rights. Pass True for all permissions to lift restrictions from a user. Returns True on success.
 

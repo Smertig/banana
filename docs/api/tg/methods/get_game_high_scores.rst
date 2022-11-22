@@ -6,8 +6,12 @@ get_game_high_scores
 .. cpp:namespace:: banana::api
 .. cpp:function:: template <class Agent> \
                   api_result<array_t<game_high_score_t>, Agent&&> get_game_high_scores(Agent&& agent, get_game_high_scores_args_t args)
+.. cpp:function:: template <class Agent> \
+                  void get_game_high_scores(Agent&& agent, get_game_high_scores_args_t args, F&& callback)
 
    ``agent`` is any object satisfying :ref:`agent concept <banana-api-banana-agents>`.
+
+   ``callback`` is any callable object accepting ``expected<array_t<game_high_score_t>>``.
 
    Use this method to get data for high score tables. Will return the score of the specified user and several of their neighbors in a game. On success, returns an Array of GameHighScore objects. This method will currently return scores for the target user, plus two of their closest neighbors on each side. Will also return the top three users if the user and his neighbors are not among them. Please note that this behavior is subject to change.
 

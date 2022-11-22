@@ -20,6 +20,7 @@ For example, this method can return the following types:
 - ``std::future<R>`` -- non-blocking agent
 - ``boost::asio::awaitable<R>`` -- coroutine-based agent that throws an exception in case of error
 - ``boost::asio::awaitable<banana::expected<R>>`` -- coroutine-based agent that returns either value or error
+- ``void`` -- non-blocking agent that calls functional object with ``banana::expected<R>`` as an argument
 - and so on..
 
 The `banana` library provides several bundled agent types with different properties:

@@ -6,8 +6,12 @@ stop_message_live_location
 .. cpp:namespace:: banana::api
 .. cpp:function:: template <class Agent> \
                   api_result<variant_t<message_t, boolean_t>, Agent&&> stop_message_live_location(Agent&& agent, stop_message_live_location_args_t args)
+.. cpp:function:: template <class Agent> \
+                  void stop_message_live_location(Agent&& agent, stop_message_live_location_args_t args, F&& callback)
 
    ``agent`` is any object satisfying :ref:`agent concept <banana-api-banana-agents>`.
+
+   ``callback`` is any callable object accepting ``expected<variant_t<message_t, boolean_t>>``.
 
    Use this method to stop updating a live location message before live_period expires. On success, if the message was sent by the bot, the sent Message is returned, otherwise True is returned.
 

@@ -21,7 +21,12 @@ struct add_sticker_to_set_args_t {
  */
 template <class Agent>
 api_result<boolean_t, Agent&&> add_sticker_to_set(Agent&& agent, add_sticker_to_set_args_t args) {
-    return call(static_cast<Agent&&>(agent), static_cast<add_sticker_to_set_args_t&&>(args));
+    return call(static_cast<Agent&&>(agent), std::move(args));
+}
+
+template <class Agent, class F>
+void add_sticker_to_set(Agent&& agent, add_sticker_to_set_args_t args, F&& callback) {
+    call(static_cast<Agent&&>(agent), std::move(args), std::forward<F>(callback));
 }
 
 // Arguments to answer_callback_query method
@@ -45,7 +50,12 @@ struct answer_callback_query_args_t {
  */
 template <class Agent>
 api_result<boolean_t, Agent&&> answer_callback_query(Agent&& agent, answer_callback_query_args_t args) {
-    return call(static_cast<Agent&&>(agent), static_cast<answer_callback_query_args_t&&>(args));
+    return call(static_cast<Agent&&>(agent), std::move(args));
+}
+
+template <class Agent, class F>
+void answer_callback_query(Agent&& agent, answer_callback_query_args_t args, F&& callback) {
+    call(static_cast<Agent&&>(agent), std::move(args), std::forward<F>(callback));
 }
 
 // Arguments to answer_inline_query method
@@ -73,7 +83,12 @@ struct answer_inline_query_args_t {
  */
 template <class Agent>
 api_result<boolean_t, Agent&&> answer_inline_query(Agent&& agent, answer_inline_query_args_t args) {
-    return call(static_cast<Agent&&>(agent), static_cast<answer_inline_query_args_t&&>(args));
+    return call(static_cast<Agent&&>(agent), std::move(args));
+}
+
+template <class Agent, class F>
+void answer_inline_query(Agent&& agent, answer_inline_query_args_t args, F&& callback) {
+    call(static_cast<Agent&&>(agent), std::move(args), std::forward<F>(callback));
 }
 
 // Arguments to answer_pre_checkout_query method
@@ -93,7 +108,12 @@ struct answer_pre_checkout_query_args_t {
  */
 template <class Agent>
 api_result<boolean_t, Agent&&> answer_pre_checkout_query(Agent&& agent, answer_pre_checkout_query_args_t args) {
-    return call(static_cast<Agent&&>(agent), static_cast<answer_pre_checkout_query_args_t&&>(args));
+    return call(static_cast<Agent&&>(agent), std::move(args));
+}
+
+template <class Agent, class F>
+void answer_pre_checkout_query(Agent&& agent, answer_pre_checkout_query_args_t args, F&& callback) {
+    call(static_cast<Agent&&>(agent), std::move(args), std::forward<F>(callback));
 }
 
 // Arguments to answer_shipping_query method
@@ -115,7 +135,12 @@ struct answer_shipping_query_args_t {
  */
 template <class Agent>
 api_result<boolean_t, Agent&&> answer_shipping_query(Agent&& agent, answer_shipping_query_args_t args) {
-    return call(static_cast<Agent&&>(agent), static_cast<answer_shipping_query_args_t&&>(args));
+    return call(static_cast<Agent&&>(agent), std::move(args));
+}
+
+template <class Agent, class F>
+void answer_shipping_query(Agent&& agent, answer_shipping_query_args_t args, F&& callback) {
+    call(static_cast<Agent&&>(agent), std::move(args), std::forward<F>(callback));
 }
 
 // Arguments to ban_chat_member method
@@ -137,7 +162,12 @@ struct ban_chat_member_args_t {
  */
 template <class Agent>
 api_result<boolean_t, Agent&&> ban_chat_member(Agent&& agent, ban_chat_member_args_t args) {
-    return call(static_cast<Agent&&>(agent), static_cast<ban_chat_member_args_t&&>(args));
+    return call(static_cast<Agent&&>(agent), std::move(args));
+}
+
+template <class Agent, class F>
+void ban_chat_member(Agent&& agent, ban_chat_member_args_t args, F&& callback) {
+    call(static_cast<Agent&&>(agent), std::move(args), std::forward<F>(callback));
 }
 
 // Arguments to close method
@@ -150,8 +180,13 @@ struct close_args_t {
  * @param agent Any object satisfying agent concept (see `banana::agent` namespace)
  */
 template <class Agent>
-api_result<boolean_t, Agent&&> close(Agent&& agent, close_args_t args = {}) {
-    return call(static_cast<Agent&&>(agent), static_cast<close_args_t&&>(args));
+api_result<boolean_t, Agent&&> close(Agent&& agent) {
+    return call(static_cast<Agent&&>(agent), close_args_t{});
+}
+
+template <class Agent, class F>
+void close(Agent&& agent, F&& callback) {
+    call(static_cast<Agent&&>(agent), close_args_t{}, std::forward<F>(callback));
 }
 
 // Arguments to copy_message method
@@ -185,7 +220,12 @@ struct copy_message_args_t {
  */
 template <class Agent>
 api_result<api::message_id_t, Agent&&> copy_message(Agent&& agent, copy_message_args_t args) {
-    return call(static_cast<Agent&&>(agent), static_cast<copy_message_args_t&&>(args));
+    return call(static_cast<Agent&&>(agent), std::move(args));
+}
+
+template <class Agent, class F>
+void copy_message(Agent&& agent, copy_message_args_t args, F&& callback) {
+    call(static_cast<Agent&&>(agent), std::move(args), std::forward<F>(callback));
 }
 
 // Arguments to create_chat_invite_link method
@@ -205,7 +245,12 @@ struct create_chat_invite_link_args_t {
  */
 template <class Agent>
 api_result<api::chat_invite_link_t, Agent&&> create_chat_invite_link(Agent&& agent, create_chat_invite_link_args_t args) {
-    return call(static_cast<Agent&&>(agent), static_cast<create_chat_invite_link_args_t&&>(args));
+    return call(static_cast<Agent&&>(agent), std::move(args));
+}
+
+template <class Agent, class F>
+void create_chat_invite_link(Agent&& agent, create_chat_invite_link_args_t args, F&& callback) {
+    call(static_cast<Agent&&>(agent), std::move(args), std::forward<F>(callback));
 }
 
 // Arguments to create_new_sticker_set method
@@ -235,7 +280,12 @@ struct create_new_sticker_set_args_t {
  */
 template <class Agent>
 api_result<boolean_t, Agent&&> create_new_sticker_set(Agent&& agent, create_new_sticker_set_args_t args) {
-    return call(static_cast<Agent&&>(agent), static_cast<create_new_sticker_set_args_t&&>(args));
+    return call(static_cast<Agent&&>(agent), std::move(args));
+}
+
+template <class Agent, class F>
+void create_new_sticker_set(Agent&& agent, create_new_sticker_set_args_t args, F&& callback) {
+    call(static_cast<Agent&&>(agent), std::move(args), std::forward<F>(callback));
 }
 
 // Arguments to delete_chat_photo method
@@ -251,7 +301,12 @@ struct delete_chat_photo_args_t {
  */
 template <class Agent>
 api_result<boolean_t, Agent&&> delete_chat_photo(Agent&& agent, delete_chat_photo_args_t args) {
-    return call(static_cast<Agent&&>(agent), static_cast<delete_chat_photo_args_t&&>(args));
+    return call(static_cast<Agent&&>(agent), std::move(args));
+}
+
+template <class Agent, class F>
+void delete_chat_photo(Agent&& agent, delete_chat_photo_args_t args, F&& callback) {
+    call(static_cast<Agent&&>(agent), std::move(args), std::forward<F>(callback));
 }
 
 // Arguments to delete_chat_sticker_set method
@@ -267,7 +322,12 @@ struct delete_chat_sticker_set_args_t {
  */
 template <class Agent>
 api_result<boolean_t, Agent&&> delete_chat_sticker_set(Agent&& agent, delete_chat_sticker_set_args_t args) {
-    return call(static_cast<Agent&&>(agent), static_cast<delete_chat_sticker_set_args_t&&>(args));
+    return call(static_cast<Agent&&>(agent), std::move(args));
+}
+
+template <class Agent, class F>
+void delete_chat_sticker_set(Agent&& agent, delete_chat_sticker_set_args_t args, F&& callback) {
+    call(static_cast<Agent&&>(agent), std::move(args), std::forward<F>(callback));
 }
 
 // Arguments to delete_message method
@@ -285,7 +345,12 @@ struct delete_message_args_t {
  */
 template <class Agent>
 api_result<boolean_t, Agent&&> delete_message(Agent&& agent, delete_message_args_t args) {
-    return call(static_cast<Agent&&>(agent), static_cast<delete_message_args_t&&>(args));
+    return call(static_cast<Agent&&>(agent), std::move(args));
+}
+
+template <class Agent, class F>
+void delete_message(Agent&& agent, delete_message_args_t args, F&& callback) {
+    call(static_cast<Agent&&>(agent), std::move(args), std::forward<F>(callback));
 }
 
 // Arguments to delete_my_commands method
@@ -303,7 +368,12 @@ struct delete_my_commands_args_t {
  */
 template <class Agent>
 api_result<boolean_t, Agent&&> delete_my_commands(Agent&& agent, delete_my_commands_args_t args) {
-    return call(static_cast<Agent&&>(agent), static_cast<delete_my_commands_args_t&&>(args));
+    return call(static_cast<Agent&&>(agent), std::move(args));
+}
+
+template <class Agent, class F>
+void delete_my_commands(Agent&& agent, delete_my_commands_args_t args, F&& callback) {
+    call(static_cast<Agent&&>(agent), std::move(args), std::forward<F>(callback));
 }
 
 // Arguments to delete_sticker_from_set method
@@ -319,7 +389,12 @@ struct delete_sticker_from_set_args_t {
  */
 template <class Agent>
 api_result<boolean_t, Agent&&> delete_sticker_from_set(Agent&& agent, delete_sticker_from_set_args_t args) {
-    return call(static_cast<Agent&&>(agent), static_cast<delete_sticker_from_set_args_t&&>(args));
+    return call(static_cast<Agent&&>(agent), std::move(args));
+}
+
+template <class Agent, class F>
+void delete_sticker_from_set(Agent&& agent, delete_sticker_from_set_args_t args, F&& callback) {
+    call(static_cast<Agent&&>(agent), std::move(args), std::forward<F>(callback));
 }
 
 // Arguments to delete_webhook method
@@ -335,7 +410,12 @@ struct delete_webhook_args_t {
  */
 template <class Agent>
 api_result<boolean_t, Agent&&> delete_webhook(Agent&& agent, delete_webhook_args_t args) {
-    return call(static_cast<Agent&&>(agent), static_cast<delete_webhook_args_t&&>(args));
+    return call(static_cast<Agent&&>(agent), std::move(args));
+}
+
+template <class Agent, class F>
+void delete_webhook(Agent&& agent, delete_webhook_args_t args, F&& callback) {
+    call(static_cast<Agent&&>(agent), std::move(args), std::forward<F>(callback));
 }
 
 // Arguments to edit_chat_invite_link method
@@ -357,7 +437,12 @@ struct edit_chat_invite_link_args_t {
  */
 template <class Agent>
 api_result<api::chat_invite_link_t, Agent&&> edit_chat_invite_link(Agent&& agent, edit_chat_invite_link_args_t args) {
-    return call(static_cast<Agent&&>(agent), static_cast<edit_chat_invite_link_args_t&&>(args));
+    return call(static_cast<Agent&&>(agent), std::move(args));
+}
+
+template <class Agent, class F>
+void edit_chat_invite_link(Agent&& agent, edit_chat_invite_link_args_t args, F&& callback) {
+    call(static_cast<Agent&&>(agent), std::move(args), std::forward<F>(callback));
 }
 
 // Arguments to edit_message_caption method
@@ -385,7 +470,12 @@ struct edit_message_caption_args_t {
  */
 template <class Agent>
 api_result<variant_t<api::message_t, boolean_t>, Agent&&> edit_message_caption(Agent&& agent, edit_message_caption_args_t args) {
-    return call(static_cast<Agent&&>(agent), static_cast<edit_message_caption_args_t&&>(args));
+    return call(static_cast<Agent&&>(agent), std::move(args));
+}
+
+template <class Agent, class F>
+void edit_message_caption(Agent&& agent, edit_message_caption_args_t args, F&& callback) {
+    call(static_cast<Agent&&>(agent), std::move(args), std::forward<F>(callback));
 }
 
 // Arguments to edit_message_live_location method
@@ -417,7 +507,12 @@ struct edit_message_live_location_args_t {
  */
 template <class Agent>
 api_result<variant_t<api::message_t, boolean_t>, Agent&&> edit_message_live_location(Agent&& agent, edit_message_live_location_args_t args) {
-    return call(static_cast<Agent&&>(agent), static_cast<edit_message_live_location_args_t&&>(args));
+    return call(static_cast<Agent&&>(agent), std::move(args));
+}
+
+template <class Agent, class F>
+void edit_message_live_location(Agent&& agent, edit_message_live_location_args_t args, F&& callback) {
+    call(static_cast<Agent&&>(agent), std::move(args), std::forward<F>(callback));
 }
 
 // Arguments to edit_message_media method
@@ -441,7 +536,12 @@ struct edit_message_media_args_t {
  */
 template <class Agent>
 api_result<variant_t<api::message_t, boolean_t>, Agent&&> edit_message_media(Agent&& agent, edit_message_media_args_t args) {
-    return call(static_cast<Agent&&>(agent), static_cast<edit_message_media_args_t&&>(args));
+    return call(static_cast<Agent&&>(agent), std::move(args));
+}
+
+template <class Agent, class F>
+void edit_message_media(Agent&& agent, edit_message_media_args_t args, F&& callback) {
+    call(static_cast<Agent&&>(agent), std::move(args), std::forward<F>(callback));
 }
 
 // Arguments to edit_message_reply_markup method
@@ -463,7 +563,12 @@ struct edit_message_reply_markup_args_t {
  */
 template <class Agent>
 api_result<variant_t<api::message_t, boolean_t>, Agent&&> edit_message_reply_markup(Agent&& agent, edit_message_reply_markup_args_t args) {
-    return call(static_cast<Agent&&>(agent), static_cast<edit_message_reply_markup_args_t&&>(args));
+    return call(static_cast<Agent&&>(agent), std::move(args));
+}
+
+template <class Agent, class F>
+void edit_message_reply_markup(Agent&& agent, edit_message_reply_markup_args_t args, F&& callback) {
+    call(static_cast<Agent&&>(agent), std::move(args), std::forward<F>(callback));
 }
 
 // Arguments to edit_message_text method
@@ -493,7 +598,12 @@ struct edit_message_text_args_t {
  */
 template <class Agent>
 api_result<variant_t<api::message_t, boolean_t>, Agent&&> edit_message_text(Agent&& agent, edit_message_text_args_t args) {
-    return call(static_cast<Agent&&>(agent), static_cast<edit_message_text_args_t&&>(args));
+    return call(static_cast<Agent&&>(agent), std::move(args));
+}
+
+template <class Agent, class F>
+void edit_message_text(Agent&& agent, edit_message_text_args_t args, F&& callback) {
+    call(static_cast<Agent&&>(agent), std::move(args), std::forward<F>(callback));
 }
 
 // Arguments to export_chat_invite_link method
@@ -509,7 +619,12 @@ struct export_chat_invite_link_args_t {
  */
 template <class Agent>
 api_result<string_t, Agent&&> export_chat_invite_link(Agent&& agent, export_chat_invite_link_args_t args) {
-    return call(static_cast<Agent&&>(agent), static_cast<export_chat_invite_link_args_t&&>(args));
+    return call(static_cast<Agent&&>(agent), std::move(args));
+}
+
+template <class Agent, class F>
+void export_chat_invite_link(Agent&& agent, export_chat_invite_link_args_t args, F&& callback) {
+    call(static_cast<Agent&&>(agent), std::move(args), std::forward<F>(callback));
 }
 
 // Arguments to forward_message method
@@ -531,7 +646,12 @@ struct forward_message_args_t {
  */
 template <class Agent>
 api_result<api::message_t, Agent&&> forward_message(Agent&& agent, forward_message_args_t args) {
-    return call(static_cast<Agent&&>(agent), static_cast<forward_message_args_t&&>(args));
+    return call(static_cast<Agent&&>(agent), std::move(args));
+}
+
+template <class Agent, class F>
+void forward_message(Agent&& agent, forward_message_args_t args, F&& callback) {
+    call(static_cast<Agent&&>(agent), std::move(args), std::forward<F>(callback));
 }
 
 // Arguments to get_chat method
@@ -547,7 +667,12 @@ struct get_chat_args_t {
  */
 template <class Agent>
 api_result<api::chat_t, Agent&&> get_chat(Agent&& agent, get_chat_args_t args) {
-    return call(static_cast<Agent&&>(agent), static_cast<get_chat_args_t&&>(args));
+    return call(static_cast<Agent&&>(agent), std::move(args));
+}
+
+template <class Agent, class F>
+void get_chat(Agent&& agent, get_chat_args_t args, F&& callback) {
+    call(static_cast<Agent&&>(agent), std::move(args), std::forward<F>(callback));
 }
 
 // Arguments to get_chat_administrators method
@@ -563,7 +688,12 @@ struct get_chat_administrators_args_t {
  */
 template <class Agent>
 api_result<array_t<api::chat_member_t>, Agent&&> get_chat_administrators(Agent&& agent, get_chat_administrators_args_t args) {
-    return call(static_cast<Agent&&>(agent), static_cast<get_chat_administrators_args_t&&>(args));
+    return call(static_cast<Agent&&>(agent), std::move(args));
+}
+
+template <class Agent, class F>
+void get_chat_administrators(Agent&& agent, get_chat_administrators_args_t args, F&& callback) {
+    call(static_cast<Agent&&>(agent), std::move(args), std::forward<F>(callback));
 }
 
 // Arguments to get_chat_member method
@@ -581,7 +711,12 @@ struct get_chat_member_args_t {
  */
 template <class Agent>
 api_result<api::chat_member_t, Agent&&> get_chat_member(Agent&& agent, get_chat_member_args_t args) {
-    return call(static_cast<Agent&&>(agent), static_cast<get_chat_member_args_t&&>(args));
+    return call(static_cast<Agent&&>(agent), std::move(args));
+}
+
+template <class Agent, class F>
+void get_chat_member(Agent&& agent, get_chat_member_args_t args, F&& callback) {
+    call(static_cast<Agent&&>(agent), std::move(args), std::forward<F>(callback));
 }
 
 // Arguments to get_chat_member_count method
@@ -597,7 +732,12 @@ struct get_chat_member_count_args_t {
  */
 template <class Agent>
 api_result<integer_t, Agent&&> get_chat_member_count(Agent&& agent, get_chat_member_count_args_t args) {
-    return call(static_cast<Agent&&>(agent), static_cast<get_chat_member_count_args_t&&>(args));
+    return call(static_cast<Agent&&>(agent), std::move(args));
+}
+
+template <class Agent, class F>
+void get_chat_member_count(Agent&& agent, get_chat_member_count_args_t args, F&& callback) {
+    call(static_cast<Agent&&>(agent), std::move(args), std::forward<F>(callback));
 }
 
 // Arguments to get_file method
@@ -613,7 +753,12 @@ struct get_file_args_t {
  */
 template <class Agent>
 api_result<api::file_t, Agent&&> get_file(Agent&& agent, get_file_args_t args) {
-    return call(static_cast<Agent&&>(agent), static_cast<get_file_args_t&&>(args));
+    return call(static_cast<Agent&&>(agent), std::move(args));
+}
+
+template <class Agent, class F>
+void get_file(Agent&& agent, get_file_args_t args, F&& callback) {
+    call(static_cast<Agent&&>(agent), std::move(args), std::forward<F>(callback));
 }
 
 // Arguments to get_game_high_scores method
@@ -635,7 +780,12 @@ struct get_game_high_scores_args_t {
  */
 template <class Agent>
 api_result<array_t<api::game_high_score_t>, Agent&&> get_game_high_scores(Agent&& agent, get_game_high_scores_args_t args) {
-    return call(static_cast<Agent&&>(agent), static_cast<get_game_high_scores_args_t&&>(args));
+    return call(static_cast<Agent&&>(agent), std::move(args));
+}
+
+template <class Agent, class F>
+void get_game_high_scores(Agent&& agent, get_game_high_scores_args_t args, F&& callback) {
+    call(static_cast<Agent&&>(agent), std::move(args), std::forward<F>(callback));
 }
 
 // Arguments to get_me method
@@ -648,8 +798,13 @@ struct get_me_args_t {
  * @param agent Any object satisfying agent concept (see `banana::agent` namespace)
  */
 template <class Agent>
-api_result<api::user_t, Agent&&> get_me(Agent&& agent, get_me_args_t args = {}) {
-    return call(static_cast<Agent&&>(agent), static_cast<get_me_args_t&&>(args));
+api_result<api::user_t, Agent&&> get_me(Agent&& agent) {
+    return call(static_cast<Agent&&>(agent), get_me_args_t{});
+}
+
+template <class Agent, class F>
+void get_me(Agent&& agent, F&& callback) {
+    call(static_cast<Agent&&>(agent), get_me_args_t{}, std::forward<F>(callback));
 }
 
 // Arguments to get_my_commands method
@@ -667,7 +822,12 @@ struct get_my_commands_args_t {
  */
 template <class Agent>
 api_result<array_t<api::bot_command_t>, Agent&&> get_my_commands(Agent&& agent, get_my_commands_args_t args) {
-    return call(static_cast<Agent&&>(agent), static_cast<get_my_commands_args_t&&>(args));
+    return call(static_cast<Agent&&>(agent), std::move(args));
+}
+
+template <class Agent, class F>
+void get_my_commands(Agent&& agent, get_my_commands_args_t args, F&& callback) {
+    call(static_cast<Agent&&>(agent), std::move(args), std::forward<F>(callback));
 }
 
 // Arguments to get_sticker_set method
@@ -683,7 +843,12 @@ struct get_sticker_set_args_t {
  */
 template <class Agent>
 api_result<api::sticker_set_t, Agent&&> get_sticker_set(Agent&& agent, get_sticker_set_args_t args) {
-    return call(static_cast<Agent&&>(agent), static_cast<get_sticker_set_args_t&&>(args));
+    return call(static_cast<Agent&&>(agent), std::move(args));
+}
+
+template <class Agent, class F>
+void get_sticker_set(Agent&& agent, get_sticker_set_args_t args, F&& callback) {
+    call(static_cast<Agent&&>(agent), std::move(args), std::forward<F>(callback));
 }
 
 // Arguments to get_updates method
@@ -705,7 +870,12 @@ struct get_updates_args_t {
  */
 template <class Agent>
 api_result<array_t<api::update_t>, Agent&&> get_updates(Agent&& agent, get_updates_args_t args) {
-    return call(static_cast<Agent&&>(agent), static_cast<get_updates_args_t&&>(args));
+    return call(static_cast<Agent&&>(agent), std::move(args));
+}
+
+template <class Agent, class F>
+void get_updates(Agent&& agent, get_updates_args_t args, F&& callback) {
+    call(static_cast<Agent&&>(agent), std::move(args), std::forward<F>(callback));
 }
 
 // Arguments to get_user_profile_photos method
@@ -725,7 +895,12 @@ struct get_user_profile_photos_args_t {
  */
 template <class Agent>
 api_result<api::user_profile_photos_t, Agent&&> get_user_profile_photos(Agent&& agent, get_user_profile_photos_args_t args) {
-    return call(static_cast<Agent&&>(agent), static_cast<get_user_profile_photos_args_t&&>(args));
+    return call(static_cast<Agent&&>(agent), std::move(args));
+}
+
+template <class Agent, class F>
+void get_user_profile_photos(Agent&& agent, get_user_profile_photos_args_t args, F&& callback) {
+    call(static_cast<Agent&&>(agent), std::move(args), std::forward<F>(callback));
 }
 
 // Arguments to get_webhook_info method
@@ -738,8 +913,13 @@ struct get_webhook_info_args_t {
  * @param agent Any object satisfying agent concept (see `banana::agent` namespace)
  */
 template <class Agent>
-api_result<api::webhook_info_t, Agent&&> get_webhook_info(Agent&& agent, get_webhook_info_args_t args = {}) {
-    return call(static_cast<Agent&&>(agent), static_cast<get_webhook_info_args_t&&>(args));
+api_result<api::webhook_info_t, Agent&&> get_webhook_info(Agent&& agent) {
+    return call(static_cast<Agent&&>(agent), get_webhook_info_args_t{});
+}
+
+template <class Agent, class F>
+void get_webhook_info(Agent&& agent, F&& callback) {
+    call(static_cast<Agent&&>(agent), get_webhook_info_args_t{}, std::forward<F>(callback));
 }
 
 // Arguments to leave_chat method
@@ -755,7 +935,12 @@ struct leave_chat_args_t {
  */
 template <class Agent>
 api_result<boolean_t, Agent&&> leave_chat(Agent&& agent, leave_chat_args_t args) {
-    return call(static_cast<Agent&&>(agent), static_cast<leave_chat_args_t&&>(args));
+    return call(static_cast<Agent&&>(agent), std::move(args));
+}
+
+template <class Agent, class F>
+void leave_chat(Agent&& agent, leave_chat_args_t args, F&& callback) {
+    call(static_cast<Agent&&>(agent), std::move(args), std::forward<F>(callback));
 }
 
 // Arguments to log_out method
@@ -768,8 +953,13 @@ struct log_out_args_t {
  * @param agent Any object satisfying agent concept (see `banana::agent` namespace)
  */
 template <class Agent>
-api_result<boolean_t, Agent&&> log_out(Agent&& agent, log_out_args_t args = {}) {
-    return call(static_cast<Agent&&>(agent), static_cast<log_out_args_t&&>(args));
+api_result<boolean_t, Agent&&> log_out(Agent&& agent) {
+    return call(static_cast<Agent&&>(agent), log_out_args_t{});
+}
+
+template <class Agent, class F>
+void log_out(Agent&& agent, F&& callback) {
+    call(static_cast<Agent&&>(agent), log_out_args_t{}, std::forward<F>(callback));
 }
 
 // Arguments to pin_chat_message method
@@ -789,7 +979,12 @@ struct pin_chat_message_args_t {
  */
 template <class Agent>
 api_result<boolean_t, Agent&&> pin_chat_message(Agent&& agent, pin_chat_message_args_t args) {
-    return call(static_cast<Agent&&>(agent), static_cast<pin_chat_message_args_t&&>(args));
+    return call(static_cast<Agent&&>(agent), std::move(args));
+}
+
+template <class Agent, class F>
+void pin_chat_message(Agent&& agent, pin_chat_message_args_t args, F&& callback) {
+    call(static_cast<Agent&&>(agent), std::move(args), std::forward<F>(callback));
 }
 
 // Arguments to promote_chat_member method
@@ -829,7 +1024,12 @@ struct promote_chat_member_args_t {
  */
 template <class Agent>
 api_result<boolean_t, Agent&&> promote_chat_member(Agent&& agent, promote_chat_member_args_t args) {
-    return call(static_cast<Agent&&>(agent), static_cast<promote_chat_member_args_t&&>(args));
+    return call(static_cast<Agent&&>(agent), std::move(args));
+}
+
+template <class Agent, class F>
+void promote_chat_member(Agent&& agent, promote_chat_member_args_t args, F&& callback) {
+    call(static_cast<Agent&&>(agent), std::move(args), std::forward<F>(callback));
 }
 
 // Arguments to restrict_chat_member method
@@ -851,7 +1051,12 @@ struct restrict_chat_member_args_t {
  */
 template <class Agent>
 api_result<boolean_t, Agent&&> restrict_chat_member(Agent&& agent, restrict_chat_member_args_t args) {
-    return call(static_cast<Agent&&>(agent), static_cast<restrict_chat_member_args_t&&>(args));
+    return call(static_cast<Agent&&>(agent), std::move(args));
+}
+
+template <class Agent, class F>
+void restrict_chat_member(Agent&& agent, restrict_chat_member_args_t args, F&& callback) {
+    call(static_cast<Agent&&>(agent), std::move(args), std::forward<F>(callback));
 }
 
 // Arguments to revoke_chat_invite_link method
@@ -869,7 +1074,12 @@ struct revoke_chat_invite_link_args_t {
  */
 template <class Agent>
 api_result<api::chat_invite_link_t, Agent&&> revoke_chat_invite_link(Agent&& agent, revoke_chat_invite_link_args_t args) {
-    return call(static_cast<Agent&&>(agent), static_cast<revoke_chat_invite_link_args_t&&>(args));
+    return call(static_cast<Agent&&>(agent), std::move(args));
+}
+
+template <class Agent, class F>
+void revoke_chat_invite_link(Agent&& agent, revoke_chat_invite_link_args_t args, F&& callback) {
+    call(static_cast<Agent&&>(agent), std::move(args), std::forward<F>(callback));
 }
 
 // Arguments to send_animation method
@@ -909,7 +1119,12 @@ struct send_animation_args_t {
  */
 template <class Agent>
 api_result<api::message_t, Agent&&> send_animation(Agent&& agent, send_animation_args_t args) {
-    return call(static_cast<Agent&&>(agent), static_cast<send_animation_args_t&&>(args));
+    return call(static_cast<Agent&&>(agent), std::move(args));
+}
+
+template <class Agent, class F>
+void send_animation(Agent&& agent, send_animation_args_t args, F&& callback) {
+    call(static_cast<Agent&&>(agent), std::move(args), std::forward<F>(callback));
 }
 
 // Arguments to send_audio method
@@ -949,7 +1164,12 @@ struct send_audio_args_t {
  */
 template <class Agent>
 api_result<api::message_t, Agent&&> send_audio(Agent&& agent, send_audio_args_t args) {
-    return call(static_cast<Agent&&>(agent), static_cast<send_audio_args_t&&>(args));
+    return call(static_cast<Agent&&>(agent), std::move(args));
+}
+
+template <class Agent, class F>
+void send_audio(Agent&& agent, send_audio_args_t args, F&& callback) {
+    call(static_cast<Agent&&>(agent), std::move(args), std::forward<F>(callback));
 }
 
 // Arguments to send_chat_action method
@@ -967,7 +1187,12 @@ struct send_chat_action_args_t {
  */
 template <class Agent>
 api_result<boolean_t, Agent&&> send_chat_action(Agent&& agent, send_chat_action_args_t args) {
-    return call(static_cast<Agent&&>(agent), static_cast<send_chat_action_args_t&&>(args));
+    return call(static_cast<Agent&&>(agent), std::move(args));
+}
+
+template <class Agent, class F>
+void send_chat_action(Agent&& agent, send_chat_action_args_t args, F&& callback) {
+    call(static_cast<Agent&&>(agent), std::move(args), std::forward<F>(callback));
 }
 
 // Arguments to send_contact method
@@ -999,7 +1224,12 @@ struct send_contact_args_t {
  */
 template <class Agent>
 api_result<api::message_t, Agent&&> send_contact(Agent&& agent, send_contact_args_t args) {
-    return call(static_cast<Agent&&>(agent), static_cast<send_contact_args_t&&>(args));
+    return call(static_cast<Agent&&>(agent), std::move(args));
+}
+
+template <class Agent, class F>
+void send_contact(Agent&& agent, send_contact_args_t args, F&& callback) {
+    call(static_cast<Agent&&>(agent), std::move(args), std::forward<F>(callback));
 }
 
 // Arguments to send_dice method
@@ -1025,7 +1255,12 @@ struct send_dice_args_t {
  */
 template <class Agent>
 api_result<api::message_t, Agent&&> send_dice(Agent&& agent, send_dice_args_t args) {
-    return call(static_cast<Agent&&>(agent), static_cast<send_dice_args_t&&>(args));
+    return call(static_cast<Agent&&>(agent), std::move(args));
+}
+
+template <class Agent, class F>
+void send_dice(Agent&& agent, send_dice_args_t args, F&& callback) {
+    call(static_cast<Agent&&>(agent), std::move(args), std::forward<F>(callback));
 }
 
 // Arguments to send_document method
@@ -1061,7 +1296,12 @@ struct send_document_args_t {
  */
 template <class Agent>
 api_result<api::message_t, Agent&&> send_document(Agent&& agent, send_document_args_t args) {
-    return call(static_cast<Agent&&>(agent), static_cast<send_document_args_t&&>(args));
+    return call(static_cast<Agent&&>(agent), std::move(args));
+}
+
+template <class Agent, class F>
+void send_document(Agent&& agent, send_document_args_t args, F&& callback) {
+    call(static_cast<Agent&&>(agent), std::move(args), std::forward<F>(callback));
 }
 
 // Arguments to send_game method
@@ -1087,7 +1327,12 @@ struct send_game_args_t {
  */
 template <class Agent>
 api_result<api::message_t, Agent&&> send_game(Agent&& agent, send_game_args_t args) {
-    return call(static_cast<Agent&&>(agent), static_cast<send_game_args_t&&>(args));
+    return call(static_cast<Agent&&>(agent), std::move(args));
+}
+
+template <class Agent, class F>
+void send_game(Agent&& agent, send_game_args_t args, F&& callback) {
+    call(static_cast<Agent&&>(agent), std::move(args), std::forward<F>(callback));
 }
 
 // Arguments to send_invoice method
@@ -1153,7 +1398,12 @@ struct send_invoice_args_t {
  */
 template <class Agent>
 api_result<api::message_t, Agent&&> send_invoice(Agent&& agent, send_invoice_args_t args) {
-    return call(static_cast<Agent&&>(agent), static_cast<send_invoice_args_t&&>(args));
+    return call(static_cast<Agent&&>(agent), std::move(args));
+}
+
+template <class Agent, class F>
+void send_invoice(Agent&& agent, send_invoice_args_t args, F&& callback) {
+    call(static_cast<Agent&&>(agent), std::move(args), std::forward<F>(callback));
 }
 
 // Arguments to send_location method
@@ -1189,7 +1439,12 @@ struct send_location_args_t {
  */
 template <class Agent>
 api_result<api::message_t, Agent&&> send_location(Agent&& agent, send_location_args_t args) {
-    return call(static_cast<Agent&&>(agent), static_cast<send_location_args_t&&>(args));
+    return call(static_cast<Agent&&>(agent), std::move(args));
+}
+
+template <class Agent, class F>
+void send_location(Agent&& agent, send_location_args_t args, F&& callback) {
+    call(static_cast<Agent&&>(agent), std::move(args), std::forward<F>(callback));
 }
 
 // Arguments to send_media_group method
@@ -1213,7 +1468,12 @@ struct send_media_group_args_t {
  */
 template <class Agent>
 api_result<array_t<api::message_t>, Agent&&> send_media_group(Agent&& agent, send_media_group_args_t args) {
-    return call(static_cast<Agent&&>(agent), static_cast<send_media_group_args_t&&>(args));
+    return call(static_cast<Agent&&>(agent), std::move(args));
+}
+
+template <class Agent, class F>
+void send_media_group(Agent&& agent, send_media_group_args_t args, F&& callback) {
+    call(static_cast<Agent&&>(agent), std::move(args), std::forward<F>(callback));
 }
 
 // Arguments to send_message method
@@ -1245,7 +1505,12 @@ struct send_message_args_t {
  */
 template <class Agent>
 api_result<api::message_t, Agent&&> send_message(Agent&& agent, send_message_args_t args) {
-    return call(static_cast<Agent&&>(agent), static_cast<send_message_args_t&&>(args));
+    return call(static_cast<Agent&&>(agent), std::move(args));
+}
+
+template <class Agent, class F>
+void send_message(Agent&& agent, send_message_args_t args, F&& callback) {
+    call(static_cast<Agent&&>(agent), std::move(args), std::forward<F>(callback));
 }
 
 // Arguments to send_photo method
@@ -1277,7 +1542,12 @@ struct send_photo_args_t {
  */
 template <class Agent>
 api_result<api::message_t, Agent&&> send_photo(Agent&& agent, send_photo_args_t args) {
-    return call(static_cast<Agent&&>(agent), static_cast<send_photo_args_t&&>(args));
+    return call(static_cast<Agent&&>(agent), std::move(args));
+}
+
+template <class Agent, class F>
+void send_photo(Agent&& agent, send_photo_args_t args, F&& callback) {
+    call(static_cast<Agent&&>(agent), std::move(args), std::forward<F>(callback));
 }
 
 // Arguments to send_poll method
@@ -1325,7 +1595,12 @@ struct send_poll_args_t {
  */
 template <class Agent>
 api_result<api::message_t, Agent&&> send_poll(Agent&& agent, send_poll_args_t args) {
-    return call(static_cast<Agent&&>(agent), static_cast<send_poll_args_t&&>(args));
+    return call(static_cast<Agent&&>(agent), std::move(args));
+}
+
+template <class Agent, class F>
+void send_poll(Agent&& agent, send_poll_args_t args, F&& callback) {
+    call(static_cast<Agent&&>(agent), std::move(args), std::forward<F>(callback));
 }
 
 // Arguments to send_sticker method
@@ -1351,7 +1626,12 @@ struct send_sticker_args_t {
  */
 template <class Agent>
 api_result<api::message_t, Agent&&> send_sticker(Agent&& agent, send_sticker_args_t args) {
-    return call(static_cast<Agent&&>(agent), static_cast<send_sticker_args_t&&>(args));
+    return call(static_cast<Agent&&>(agent), std::move(args));
+}
+
+template <class Agent, class F>
+void send_sticker(Agent&& agent, send_sticker_args_t args, F&& callback) {
+    call(static_cast<Agent&&>(agent), std::move(args), std::forward<F>(callback));
 }
 
 // Arguments to send_venue method
@@ -1391,7 +1671,12 @@ struct send_venue_args_t {
  */
 template <class Agent>
 api_result<api::message_t, Agent&&> send_venue(Agent&& agent, send_venue_args_t args) {
-    return call(static_cast<Agent&&>(agent), static_cast<send_venue_args_t&&>(args));
+    return call(static_cast<Agent&&>(agent), std::move(args));
+}
+
+template <class Agent, class F>
+void send_venue(Agent&& agent, send_venue_args_t args, F&& callback) {
+    call(static_cast<Agent&&>(agent), std::move(args), std::forward<F>(callback));
 }
 
 // Arguments to send_video method
@@ -1433,7 +1718,12 @@ struct send_video_args_t {
  */
 template <class Agent>
 api_result<api::message_t, Agent&&> send_video(Agent&& agent, send_video_args_t args) {
-    return call(static_cast<Agent&&>(agent), static_cast<send_video_args_t&&>(args));
+    return call(static_cast<Agent&&>(agent), std::move(args));
+}
+
+template <class Agent, class F>
+void send_video(Agent&& agent, send_video_args_t args, F&& callback) {
+    call(static_cast<Agent&&>(agent), std::move(args), std::forward<F>(callback));
 }
 
 // Arguments to send_video_note method
@@ -1465,7 +1755,12 @@ struct send_video_note_args_t {
  */
 template <class Agent>
 api_result<api::message_t, Agent&&> send_video_note(Agent&& agent, send_video_note_args_t args) {
-    return call(static_cast<Agent&&>(agent), static_cast<send_video_note_args_t&&>(args));
+    return call(static_cast<Agent&&>(agent), std::move(args));
+}
+
+template <class Agent, class F>
+void send_video_note(Agent&& agent, send_video_note_args_t args, F&& callback) {
+    call(static_cast<Agent&&>(agent), std::move(args), std::forward<F>(callback));
 }
 
 // Arguments to send_voice method
@@ -1499,7 +1794,12 @@ struct send_voice_args_t {
  */
 template <class Agent>
 api_result<api::message_t, Agent&&> send_voice(Agent&& agent, send_voice_args_t args) {
-    return call(static_cast<Agent&&>(agent), static_cast<send_voice_args_t&&>(args));
+    return call(static_cast<Agent&&>(agent), std::move(args));
+}
+
+template <class Agent, class F>
+void send_voice(Agent&& agent, send_voice_args_t args, F&& callback) {
+    call(static_cast<Agent&&>(agent), std::move(args), std::forward<F>(callback));
 }
 
 // Arguments to set_chat_administrator_custom_title method
@@ -1519,7 +1819,12 @@ struct set_chat_administrator_custom_title_args_t {
  */
 template <class Agent>
 api_result<boolean_t, Agent&&> set_chat_administrator_custom_title(Agent&& agent, set_chat_administrator_custom_title_args_t args) {
-    return call(static_cast<Agent&&>(agent), static_cast<set_chat_administrator_custom_title_args_t&&>(args));
+    return call(static_cast<Agent&&>(agent), std::move(args));
+}
+
+template <class Agent, class F>
+void set_chat_administrator_custom_title(Agent&& agent, set_chat_administrator_custom_title_args_t args, F&& callback) {
+    call(static_cast<Agent&&>(agent), std::move(args), std::forward<F>(callback));
 }
 
 // Arguments to set_chat_description method
@@ -1537,7 +1842,12 @@ struct set_chat_description_args_t {
  */
 template <class Agent>
 api_result<boolean_t, Agent&&> set_chat_description(Agent&& agent, set_chat_description_args_t args) {
-    return call(static_cast<Agent&&>(agent), static_cast<set_chat_description_args_t&&>(args));
+    return call(static_cast<Agent&&>(agent), std::move(args));
+}
+
+template <class Agent, class F>
+void set_chat_description(Agent&& agent, set_chat_description_args_t args, F&& callback) {
+    call(static_cast<Agent&&>(agent), std::move(args), std::forward<F>(callback));
 }
 
 // Arguments to set_chat_permissions method
@@ -1555,7 +1865,12 @@ struct set_chat_permissions_args_t {
  */
 template <class Agent>
 api_result<boolean_t, Agent&&> set_chat_permissions(Agent&& agent, set_chat_permissions_args_t args) {
-    return call(static_cast<Agent&&>(agent), static_cast<set_chat_permissions_args_t&&>(args));
+    return call(static_cast<Agent&&>(agent), std::move(args));
+}
+
+template <class Agent, class F>
+void set_chat_permissions(Agent&& agent, set_chat_permissions_args_t args, F&& callback) {
+    call(static_cast<Agent&&>(agent), std::move(args), std::forward<F>(callback));
 }
 
 // Arguments to set_chat_photo method
@@ -1573,7 +1888,12 @@ struct set_chat_photo_args_t {
  */
 template <class Agent>
 api_result<boolean_t, Agent&&> set_chat_photo(Agent&& agent, set_chat_photo_args_t args) {
-    return call(static_cast<Agent&&>(agent), static_cast<set_chat_photo_args_t&&>(args));
+    return call(static_cast<Agent&&>(agent), std::move(args));
+}
+
+template <class Agent, class F>
+void set_chat_photo(Agent&& agent, set_chat_photo_args_t args, F&& callback) {
+    call(static_cast<Agent&&>(agent), std::move(args), std::forward<F>(callback));
 }
 
 // Arguments to set_chat_sticker_set method
@@ -1591,7 +1911,12 @@ struct set_chat_sticker_set_args_t {
  */
 template <class Agent>
 api_result<boolean_t, Agent&&> set_chat_sticker_set(Agent&& agent, set_chat_sticker_set_args_t args) {
-    return call(static_cast<Agent&&>(agent), static_cast<set_chat_sticker_set_args_t&&>(args));
+    return call(static_cast<Agent&&>(agent), std::move(args));
+}
+
+template <class Agent, class F>
+void set_chat_sticker_set(Agent&& agent, set_chat_sticker_set_args_t args, F&& callback) {
+    call(static_cast<Agent&&>(agent), std::move(args), std::forward<F>(callback));
 }
 
 // Arguments to set_chat_title method
@@ -1609,7 +1934,12 @@ struct set_chat_title_args_t {
  */
 template <class Agent>
 api_result<boolean_t, Agent&&> set_chat_title(Agent&& agent, set_chat_title_args_t args) {
-    return call(static_cast<Agent&&>(agent), static_cast<set_chat_title_args_t&&>(args));
+    return call(static_cast<Agent&&>(agent), std::move(args));
+}
+
+template <class Agent, class F>
+void set_chat_title(Agent&& agent, set_chat_title_args_t args, F&& callback) {
+    call(static_cast<Agent&&>(agent), std::move(args), std::forward<F>(callback));
 }
 
 // Arguments to set_game_score method
@@ -1637,7 +1967,12 @@ struct set_game_score_args_t {
  */
 template <class Agent>
 api_result<variant_t<api::message_t, boolean_t>, Agent&&> set_game_score(Agent&& agent, set_game_score_args_t args) {
-    return call(static_cast<Agent&&>(agent), static_cast<set_game_score_args_t&&>(args));
+    return call(static_cast<Agent&&>(agent), std::move(args));
+}
+
+template <class Agent, class F>
+void set_game_score(Agent&& agent, set_game_score_args_t args, F&& callback) {
+    call(static_cast<Agent&&>(agent), std::move(args), std::forward<F>(callback));
 }
 
 // Arguments to set_my_commands method
@@ -1657,7 +1992,12 @@ struct set_my_commands_args_t {
  */
 template <class Agent>
 api_result<boolean_t, Agent&&> set_my_commands(Agent&& agent, set_my_commands_args_t args) {
-    return call(static_cast<Agent&&>(agent), static_cast<set_my_commands_args_t&&>(args));
+    return call(static_cast<Agent&&>(agent), std::move(args));
+}
+
+template <class Agent, class F>
+void set_my_commands(Agent&& agent, set_my_commands_args_t args, F&& callback) {
+    call(static_cast<Agent&&>(agent), std::move(args), std::forward<F>(callback));
 }
 
 // Arguments to set_passport_data_errors method
@@ -1675,7 +2015,12 @@ struct set_passport_data_errors_args_t {
  */
 template <class Agent>
 api_result<boolean_t, Agent&&> set_passport_data_errors(Agent&& agent, set_passport_data_errors_args_t args) {
-    return call(static_cast<Agent&&>(agent), static_cast<set_passport_data_errors_args_t&&>(args));
+    return call(static_cast<Agent&&>(agent), std::move(args));
+}
+
+template <class Agent, class F>
+void set_passport_data_errors(Agent&& agent, set_passport_data_errors_args_t args, F&& callback) {
+    call(static_cast<Agent&&>(agent), std::move(args), std::forward<F>(callback));
 }
 
 // Arguments to set_sticker_position_in_set method
@@ -1693,7 +2038,12 @@ struct set_sticker_position_in_set_args_t {
  */
 template <class Agent>
 api_result<boolean_t, Agent&&> set_sticker_position_in_set(Agent&& agent, set_sticker_position_in_set_args_t args) {
-    return call(static_cast<Agent&&>(agent), static_cast<set_sticker_position_in_set_args_t&&>(args));
+    return call(static_cast<Agent&&>(agent), std::move(args));
+}
+
+template <class Agent, class F>
+void set_sticker_position_in_set(Agent&& agent, set_sticker_position_in_set_args_t args, F&& callback) {
+    call(static_cast<Agent&&>(agent), std::move(args), std::forward<F>(callback));
 }
 
 // Arguments to set_sticker_set_thumb method
@@ -1713,7 +2063,12 @@ struct set_sticker_set_thumb_args_t {
  */
 template <class Agent>
 api_result<boolean_t, Agent&&> set_sticker_set_thumb(Agent&& agent, set_sticker_set_thumb_args_t args) {
-    return call(static_cast<Agent&&>(agent), static_cast<set_sticker_set_thumb_args_t&&>(args));
+    return call(static_cast<Agent&&>(agent), std::move(args));
+}
+
+template <class Agent, class F>
+void set_sticker_set_thumb(Agent&& agent, set_sticker_set_thumb_args_t args, F&& callback) {
+    call(static_cast<Agent&&>(agent), std::move(args), std::forward<F>(callback));
 }
 
 // Arguments to set_webhook method
@@ -1739,7 +2094,12 @@ struct set_webhook_args_t {
  */
 template <class Agent>
 api_result<boolean_t, Agent&&> set_webhook(Agent&& agent, set_webhook_args_t args) {
-    return call(static_cast<Agent&&>(agent), static_cast<set_webhook_args_t&&>(args));
+    return call(static_cast<Agent&&>(agent), std::move(args));
+}
+
+template <class Agent, class F>
+void set_webhook(Agent&& agent, set_webhook_args_t args, F&& callback) {
+    call(static_cast<Agent&&>(agent), std::move(args), std::forward<F>(callback));
 }
 
 // Arguments to stop_message_live_location method
@@ -1761,7 +2121,12 @@ struct stop_message_live_location_args_t {
  */
 template <class Agent>
 api_result<variant_t<api::message_t, boolean_t>, Agent&&> stop_message_live_location(Agent&& agent, stop_message_live_location_args_t args) {
-    return call(static_cast<Agent&&>(agent), static_cast<stop_message_live_location_args_t&&>(args));
+    return call(static_cast<Agent&&>(agent), std::move(args));
+}
+
+template <class Agent, class F>
+void stop_message_live_location(Agent&& agent, stop_message_live_location_args_t args, F&& callback) {
+    call(static_cast<Agent&&>(agent), std::move(args), std::forward<F>(callback));
 }
 
 // Arguments to stop_poll method
@@ -1781,7 +2146,12 @@ struct stop_poll_args_t {
  */
 template <class Agent>
 api_result<api::poll_t, Agent&&> stop_poll(Agent&& agent, stop_poll_args_t args) {
-    return call(static_cast<Agent&&>(agent), static_cast<stop_poll_args_t&&>(args));
+    return call(static_cast<Agent&&>(agent), std::move(args));
+}
+
+template <class Agent, class F>
+void stop_poll(Agent&& agent, stop_poll_args_t args, F&& callback) {
+    call(static_cast<Agent&&>(agent), std::move(args), std::forward<F>(callback));
 }
 
 // Arguments to unban_chat_member method
@@ -1801,7 +2171,12 @@ struct unban_chat_member_args_t {
  */
 template <class Agent>
 api_result<boolean_t, Agent&&> unban_chat_member(Agent&& agent, unban_chat_member_args_t args) {
-    return call(static_cast<Agent&&>(agent), static_cast<unban_chat_member_args_t&&>(args));
+    return call(static_cast<Agent&&>(agent), std::move(args));
+}
+
+template <class Agent, class F>
+void unban_chat_member(Agent&& agent, unban_chat_member_args_t args, F&& callback) {
+    call(static_cast<Agent&&>(agent), std::move(args), std::forward<F>(callback));
 }
 
 // Arguments to unpin_all_chat_messages method
@@ -1817,7 +2192,12 @@ struct unpin_all_chat_messages_args_t {
  */
 template <class Agent>
 api_result<boolean_t, Agent&&> unpin_all_chat_messages(Agent&& agent, unpin_all_chat_messages_args_t args) {
-    return call(static_cast<Agent&&>(agent), static_cast<unpin_all_chat_messages_args_t&&>(args));
+    return call(static_cast<Agent&&>(agent), std::move(args));
+}
+
+template <class Agent, class F>
+void unpin_all_chat_messages(Agent&& agent, unpin_all_chat_messages_args_t args, F&& callback) {
+    call(static_cast<Agent&&>(agent), std::move(args), std::forward<F>(callback));
 }
 
 // Arguments to unpin_chat_message method
@@ -1835,7 +2215,12 @@ struct unpin_chat_message_args_t {
  */
 template <class Agent>
 api_result<boolean_t, Agent&&> unpin_chat_message(Agent&& agent, unpin_chat_message_args_t args) {
-    return call(static_cast<Agent&&>(agent), static_cast<unpin_chat_message_args_t&&>(args));
+    return call(static_cast<Agent&&>(agent), std::move(args));
+}
+
+template <class Agent, class F>
+void unpin_chat_message(Agent&& agent, unpin_chat_message_args_t args, F&& callback) {
+    call(static_cast<Agent&&>(agent), std::move(args), std::forward<F>(callback));
 }
 
 // Arguments to upload_sticker_file method
@@ -1853,6 +2238,11 @@ struct upload_sticker_file_args_t {
  */
 template <class Agent>
 api_result<api::file_t, Agent&&> upload_sticker_file(Agent&& agent, upload_sticker_file_args_t args) {
-    return call(static_cast<Agent&&>(agent), static_cast<upload_sticker_file_args_t&&>(args));
+    return call(static_cast<Agent&&>(agent), std::move(args));
+}
+
+template <class Agent, class F>
+void upload_sticker_file(Agent&& agent, upload_sticker_file_args_t args, F&& callback) {
+    call(static_cast<Agent&&>(agent), std::move(args), std::forward<F>(callback));
 }
 

@@ -6,8 +6,12 @@ set_my_commands
 .. cpp:namespace:: banana::api
 .. cpp:function:: template <class Agent> \
                   api_result<boolean_t, Agent&&> set_my_commands(Agent&& agent, set_my_commands_args_t args)
+.. cpp:function:: template <class Agent> \
+                  void set_my_commands(Agent&& agent, set_my_commands_args_t args, F&& callback)
 
    ``agent`` is any object satisfying :ref:`agent concept <banana-api-banana-agents>`.
+
+   ``callback`` is any callable object accepting ``expected<boolean_t>``.
 
    Use this method to change the list of the bot's commands. See https://core.telegram.org/bots#commands for more details about bot commands. Returns True on success.
 

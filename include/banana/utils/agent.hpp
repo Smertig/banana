@@ -6,7 +6,6 @@
 #include <string>
 #include <string_view>
 #include <optional>
-#include <functional>
 #include <future>
 
 namespace banana {
@@ -79,7 +78,7 @@ struct wrap_async : Agent {
 // Convert raw `Agent` with `void do_async_request(std::string_view, std::string, std::unique_ptr<async_handler>)` method
 // into generic async exception-based agent (`std::future<R>`)
 template <class Agent>
-struct make_future : Agent {
+struct make_async : Agent {
     using Agent::Agent;
 
     static_assert(std::is_same_v<void, decltype(std::declval<Agent>().do_async_request(std::declval<std::string_view>(), std::declval<std::string>(), std::declval<std::unique_ptr<async_handler>>()))>);
@@ -110,9 +109,9 @@ struct make_future : Agent {
 };
 
 // Convert raw `Agent` with `void do_async_request(std::string_view, std::string std::unique_ptr<async_handler>)` method
-// into generic async agent with monadic error handling (`std::future<expected<R>>`)
+// into generic async agent with monadic error handling (`returns std::future<expected<R>>` or calls `f(expected<R>)`)
 template <class Agent>
-struct make_future_monadic : Agent {
+struct make_async_monadic : Agent {
     using Agent::Agent;
 
     static_assert(std::is_same_v<void, decltype(std::declval<Agent>().do_async_request(std::declval<std::string_view>(), std::declval<std::string>(), std::declval<std::unique_ptr<async_handler>>()))>);
@@ -134,7 +133,30 @@ struct make_future_monadic : Agent {
 
         return result;
     }
+
+    template <class Traits, class F, class R = typename Traits::response_type>
+    void request(std::string body, F&& callback) {
+        struct callback_handler : async_handler {
+            std::remove_const_t<std::remove_reference_t<F>> callback;
+
+            callback_handler(F&& callback) : callback(std::forward<F>(callback)) { }
+
+            void on_result(expected<std::string> result) final {
+                callback(deserialize<Traits>(std::move(result)));
+            }
+        };
+
+        auto handler = std::make_unique<callback_handler>(std::forward<F>(callback));
+
+        Agent::do_async_request(Traits::native_name, std::move(body), std::move(handler));
+    }
 };
+
+// For backward compatibility
+template <class Agent>
+using make_future = make_async<Agent>;
+template <class Agent>
+using make_future_monadic = make_async_monadic<Agent>;
 
 } // namespace meta
 

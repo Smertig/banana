@@ -6,8 +6,12 @@ send_video_note
 .. cpp:namespace:: banana::api
 .. cpp:function:: template <class Agent> \
                   api_result<message_t, Agent&&> send_video_note(Agent&& agent, send_video_note_args_t args)
+.. cpp:function:: template <class Agent> \
+                  void send_video_note(Agent&& agent, send_video_note_args_t args, F&& callback)
 
    ``agent`` is any object satisfying :ref:`agent concept <banana-api-banana-agents>`.
+
+   ``callback`` is any callable object accepting ``expected<message_t>``.
 
    As of v.4.0, Telegram clients support rounded square mp4 videos of up to 1 minute long. Use this method to send video messages. On success, the sent Message is returned.
 
