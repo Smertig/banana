@@ -74,6 +74,9 @@ std::string do_blocking_request(
         current_state = "write";
         [[maybe_unused]] std::size_t bytes_sent = boost::beast::http::write(stream, req);
 
+        // Set a timeout on the operation
+        boost::beast::get_lowest_layer(stream).expires_after(std::chrono::seconds(60));
+
         // Receive the HTTP response
         current_state = "read";
         boost::beast::flat_buffer buffer; // (Must persist between reads)
@@ -180,6 +183,9 @@ public:
         if (ec) {
             return on_fail(ec, "write");
         }
+
+        // Set a timeout on the operation
+        boost::beast::get_lowest_layer(m_stream).expires_after(std::chrono::seconds(60));
 
         // Receive the HTTP response
         boost::beast::http::async_read(m_stream, m_buffer, m_res, boost::beast::bind_front_handler(&basic_http_session::on_read, shared_from_this()));
