@@ -1270,8 +1270,8 @@
 <p>Agent is a key concept of the banana library.
 To use any function from <code class="docutils literal notranslate"><span class="pre">banana::api</span></code> you need a agent object.
 A type satisfies the concept <code class="docutils literal notranslate"><span class="pre">agent</span></code> if it has a method with the following signature:</p>
-<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">Traits</span><span class="p">,</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">R</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">typename</span><span class="w"> </span><span class="nc">Traits</span><span class="o">::</span><span class="n">response_type</span><span class="o">&gt;</span><span class="w"></span>
-<span class="n">impl</span><span class="o">-</span><span class="n">defined</span><span class="o">-&lt;</span><span class="n">R</span><span class="o">&gt;</span><span class="w"> </span><span class="n">request</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="n">body</span><span class="p">);</span><span class="w"></span>
+<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">Traits</span><span class="p">,</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">R</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">typename</span><span class="w"> </span><span class="nc">Traits</span><span class="o">::</span><span class="n">response_type</span><span class="o">&gt;</span>
+<span class="n">impl</span><span class="o">-</span><span class="n">defined</span><span class="o">-&lt;</span><span class="n">R</span><span class="o">&gt;</span><span class="w"> </span><span class="n">request</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="n">body</span><span class="p">);</span>
 </pre></div>
 </div>
 <p>The signature of this method defines the properties of the agent.
@@ -1314,7 +1314,7 @@ For example, this method can return the following types:</p>
         
           By Smertig<br/>
         
-            &copy; Copyright 2020-2022.<br/>
+            &copy; Copyright 2020-2023.<br/>
       </p>
     </div>
   </footer>
