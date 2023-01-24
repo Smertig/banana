@@ -24,7 +24,7 @@
 #include <banana/agent/default.hpp>
 
 int main(int argc, char** argv) {
-    banana::agent::default_blocking agent("<TG_BOT_TOKEN>")
+    banana::agent::default_blocking agent("<TG_BOT_TOKEN>");
     banana::api::send_message(agent, { /* .chat_id = */ "@smertig", /* .text = */ "Hello, world!" });
 }
 ```
