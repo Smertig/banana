@@ -42,7 +42,7 @@ edit_message_caption
 
    .. cpp:member:: optional_t<array_t<message_entity_t>> caption_entities
 
-   List of special entities that appear in the caption, which can be specified instead of parse_mode
+   A JSON-serialized list of special entities that appear in the caption, which can be specified instead of parse_mode
 
    .. cpp:member:: optional_t<inline_keyboard_markup_t> reply_markup
 

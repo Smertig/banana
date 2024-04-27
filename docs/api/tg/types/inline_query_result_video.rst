@@ -21,11 +21,11 @@ inline_query_result_video_t
 
    .. cpp:member:: string_t mime_type
 
-   Mime type of the content of video url, “text/html” or “video/mp4”
+   MIME type of the content of the video URL, “text/html” or “video/mp4”
 
-   .. cpp:member:: string_t thumb_url
+   .. cpp:member:: string_t thumbnail_url
 
-   URL of the thumbnail (jpeg only) for the video
+   URL of the thumbnail (JPEG only) for the video
 
    .. cpp:member:: string_t title
 

@@ -13,7 +13,7 @@ promote_chat_member
 
    ``callback`` is any callable object accepting ``expected<boolean_t>``.
 
-   Use this method to promote or demote a user in a supergroup or a channel. The bot must be an administrator in the chat for this to work and must have the appropriate admin rights. Pass False for all boolean parameters to demote a user. Returns True on success.
+   Use this method to promote or demote a user in a supergroup or a channel. The bot must be an administrator in the chat for this to work and must have the appropriate administrator rights. Pass False for all boolean parameters to demote a user. Returns True on success.
 
 .. cpp:struct:: promote_chat_member_args_t
 
@@ -30,44 +30,60 @@ promote_chat_member
 
    .. cpp:member:: optional_t<boolean_t> is_anonymous
 
-   Pass True, if the administrator's presence in the chat is hidden
+   Pass True if the administrator's presence in the chat is hidden
 
    .. cpp:member:: optional_t<boolean_t> can_manage_chat
 
-   Pass True, if the administrator can access the chat event log, chat statistics, message statistics in channels, see channel members, see anonymous administrators in supergroups and ignore slow mode. Implied by any other administrator privilege
-
-   .. cpp:member:: optional_t<boolean_t> can_post_messages
-
-   Pass True, if the administrator can create channel posts, channels only
-
-   .. cpp:member:: optional_t<boolean_t> can_edit_messages
-
-   Pass True, if the administrator can edit messages of other users and can pin messages, channels only
+   Pass True if the administrator can access the chat event log, get boost list, see hidden supergroup and channel members, report spam messages and ignore slow mode. Implied by any other administrator privilege.
 
    .. cpp:member:: optional_t<boolean_t> can_delete_messages
 
-   Pass True, if the administrator can delete messages of other users
+   Pass True if the administrator can delete messages of other users
 
-   .. cpp:member:: optional_t<boolean_t> can_manage_voice_chats
+   .. cpp:member:: optional_t<boolean_t> can_manage_video_chats
 
-   Pass True, if the administrator can manage voice chats
+   Pass True if the administrator can manage video chats
 
    .. cpp:member:: optional_t<boolean_t> can_restrict_members
 
-   Pass True, if the administrator can restrict, ban or unban chat members
+   Pass True if the administrator can restrict, ban or unban chat members, or access supergroup statistics
 
    .. cpp:member:: optional_t<boolean_t> can_promote_members
 
-   Pass True, if the administrator can add new administrators with a subset of their own privileges or demote administrators that he has promoted, directly or indirectly (promoted by administrators that were appointed by him)
+   Pass True if the administrator can add new administrators with a subset of their own privileges or demote administrators that they have promoted, directly or indirectly (promoted by administrators that were appointed by him)
 
    .. cpp:member:: optional_t<boolean_t> can_change_info
 
-   Pass True, if the administrator can change chat title, photo and other settings
+   Pass True if the administrator can change chat title, photo and other settings
 
    .. cpp:member:: optional_t<boolean_t> can_invite_users
 
-   Pass True, if the administrator can invite new users to the chat
+   Pass True if the administrator can invite new users to the chat
+
+   .. cpp:member:: optional_t<boolean_t> can_post_stories
+
+   Pass True if the administrator can post stories to the chat
+
+   .. cpp:member:: optional_t<boolean_t> can_edit_stories
+
+   Pass True if the administrator can edit stories posted by other users
+
+   .. cpp:member:: optional_t<boolean_t> can_delete_stories
+
+   Pass True if the administrator can delete stories posted by other users
+
+   .. cpp:member:: optional_t<boolean_t> can_post_messages
+
+   Pass True if the administrator can post messages in the channel, or access channel statistics; for channels only
+
+   .. cpp:member:: optional_t<boolean_t> can_edit_messages
+
+   Pass True if the administrator can edit messages of other users and can pin messages; for channels only
 
    .. cpp:member:: optional_t<boolean_t> can_pin_messages
 
-   Pass True, if the administrator can pin messages, supergroups only
+   Pass True if the administrator can pin messages; for supergroups only
+
+   .. cpp:member:: optional_t<boolean_t> can_manage_topics
+
+   Pass True if the user is allowed to create, rename, close, and reopen forum topics; for supergroups only

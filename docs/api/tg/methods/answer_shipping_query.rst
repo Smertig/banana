@@ -26,7 +26,7 @@ answer_shipping_query
 
    .. cpp:member:: boolean_t ok
 
-   Specify True if delivery to the specified address is possible and False if there are any problems (for example, if delivery to the specified address is not possible)
+   Pass True if delivery to the specified address is possible and False if there are any problems (for example, if delivery to the specified address is not possible)
 
    .. cpp:member:: optional_t<array_t<shipping_option_t>> shipping_options
 

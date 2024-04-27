@@ -11,49 +11,57 @@ message_t
 
    Unique message identifier inside this chat
 
+   .. cpp:member:: optional_t<integer_t> message_thread_id
+
+   Optional. Unique identifier of a message thread to which the message belongs; for supergroups only
+
    .. cpp:member:: optional_t<user_t> from
 
-   Optional. Sender, empty for messages sent to channels
+   Optional. Sender of the message; empty for messages sent to channels. For backward compatibility, the field contains a fake sender user in non-channel chats, if the message was sent on behalf of a chat.
 
    .. cpp:member:: optional_t<chat_t> sender_chat
 
-   Optional. Sender of the message, sent on behalf of a chat. The channel itself for channel messages. The supergroup itself for messages from anonymous group administrators. The linked channel for messages automatically forwarded to the discussion group
+   Optional. Sender of the message, sent on behalf of a chat. For example, the channel itself for channel posts, the supergroup itself for messages from anonymous group administrators, the linked channel for messages automatically forwarded to the discussion group. For backward compatibility, the field from contains a fake sender user in non-channel chats, if the message was sent on behalf of a chat.
+
+   .. cpp:member:: optional_t<integer_t> sender_boost_count
+
+   Optional. If the sender of the message boosted the chat, the number of boosts added by the user
 
    .. cpp:member:: integer_t date
 
-   Date the message was sent in Unix time
+   Date the message was sent in Unix time. It is always a positive number, representing a valid date.
 
    .. cpp:member:: chat_t chat
 
-   Conversation the message belongs to
+   Chat the message belongs to
 
-   .. cpp:member:: optional_t<user_t> forward_from
+   .. cpp:member:: optional_t<message_origin_t> forward_origin
 
-   Optional. For forwarded messages, sender of the original message
+   Optional. Information about the original message for forwarded messages
 
-   .. cpp:member:: optional_t<chat_t> forward_from_chat
+   .. cpp:member:: optional_t<boolean_t> is_topic_message
 
-   Optional. For messages forwarded from channels or from anonymous administrators, information about the original sender chat
+   Optional. True, if the message is sent to a forum topic
 
-   .. cpp:member:: optional_t<integer_t> forward_from_message_id
+   .. cpp:member:: optional_t<boolean_t> is_automatic_forward
 
-   Optional. For messages forwarded from channels, identifier of the original message in the channel
-
-   .. cpp:member:: optional_t<string_t> forward_signature
-
-   Optional. For messages forwarded from channels, signature of the post author if present
-
-   .. cpp:member:: optional_t<string_t> forward_sender_name
-
-   Optional. Sender's name for messages forwarded from users who disallow adding a link to their account in forwarded messages
-
-   .. cpp:member:: optional_t<integer_t> forward_date
-
-   Optional. For forwarded messages, date the original message was sent in Unix time
+   Optional. True, if the message is a channel post that was automatically forwarded to the connected discussion group
 
    .. cpp:member:: optional_t<message_t> reply_to_message
 
-   Optional. For replies, the original message. Note that the Message object in this field will not contain further reply_to_message fields even if it itself is a reply.
+   Optional. For replies in the same chat and message thread, the original message. Note that the Message object in this field will not contain further reply_to_message fields even if it itself is a reply.
+
+   .. cpp:member:: optional_t<external_reply_info_t> external_reply
+
+   Optional. Information about the message that is being replied to, which may come from another chat or forum topic
+
+   .. cpp:member:: optional_t<text_quote_t> quote
+
+   Optional. For replies that quote part of the original message, the quoted part of the message
+
+   .. cpp:member:: optional_t<story_t> reply_to_story
+
+   Optional. For replies to a story, the original story
 
    .. cpp:member:: optional_t<user_t> via_bot
 
@@ -62,6 +70,10 @@ message_t
    .. cpp:member:: optional_t<integer_t> edit_date
 
    Optional. Date the message was last edited in Unix time
+
+   .. cpp:member:: optional_t<boolean_t> has_protected_content
+
+   Optional. True, if the message can't be forwarded
 
    .. cpp:member:: optional_t<string_t> media_group_id
 
@@ -73,11 +85,15 @@ message_t
 
    .. cpp:member:: optional_t<string_t> text
 
-   Optional. For text messages, the actual UTF-8 text of the message, 0-4096 characters
+   Optional. For text messages, the actual UTF-8 text of the message
 
    .. cpp:member:: optional_t<array_t<message_entity_t>> entities
 
    Optional. For text messages, special entities like usernames, URLs, bot commands, etc. that appear in the text
+
+   .. cpp:member:: optional_t<link_preview_options_t> link_preview_options
+
+   Optional. Options used for link preview generation for the message, if it is a text message and link preview options were changed
 
    .. cpp:member:: optional_t<animation_t> animation
 
@@ -99,6 +115,10 @@ message_t
 
    Optional. Message is a sticker, information about the sticker
 
+   .. cpp:member:: optional_t<story_t> story
+
+   Optional. Message is a forwarded story
+
    .. cpp:member:: optional_t<video_t> video
 
    Optional. Message is a video, information about the video
@@ -113,11 +133,15 @@ message_t
 
    .. cpp:member:: optional_t<string_t> caption
 
-   Optional. Caption for the animation, audio, document, photo, video or voice, 0-1024 characters
+   Optional. Caption for the animation, audio, document, photo, video or voice
 
    .. cpp:member:: optional_t<array_t<message_entity_t>> caption_entities
 
    Optional. For messages with a caption, special entities like usernames, URLs, bot commands, etc. that appear in the caption
+
+   .. cpp:member:: optional_t<boolean_t> has_media_spoiler
+
+   Optional. True, if the message media is covered by a spoiler animation
 
    .. cpp:member:: optional_t<contact_t> contact
 
@@ -187,9 +211,9 @@ message_t
 
    Optional. The supergroup has been migrated from a group with the specified identifier. This number may have more than 32 significant bits and some programming languages may have difficulty/silent defects in interpreting it. But it has at most 52 significant bits, so a signed 64-bit integer or double-precision float type are safe for storing this identifier.
 
-   .. cpp:member:: optional_t<message_t> pinned_message
+   .. cpp:member:: optional_t<maybe_inaccessible_message_t> pinned_message
 
-   Optional. Specified message was pinned. Note that the Message object in this field will not contain further reply_to_message fields even if it is itself a reply.
+   Optional. Specified message was pinned. Note that the Message object in this field will not contain further reply_to_message fields even if it itself is a reply.
 
    .. cpp:member:: optional_t<invoice_t> invoice
 
@@ -199,9 +223,21 @@ message_t
 
    Optional. Message is a service message about a successful payment, information about the payment. More about payments »
 
+   .. cpp:member:: optional_t<users_shared_t> users_shared
+
+   Optional. Service message: users were shared with the bot
+
+   .. cpp:member:: optional_t<chat_shared_t> chat_shared
+
+   Optional. Service message: a chat was shared with the bot
+
    .. cpp:member:: optional_t<string_t> connected_website
 
    Optional. The domain name of the website on which the user has logged in. More about Telegram Login »
+
+   .. cpp:member:: optional_t<write_access_allowed_t> write_access_allowed
+
+   Optional. Service message: the user allowed the bot to write messages after adding it to the attachment or side menu, launching a Web App from a link, or accepting an explicit request from a Web App sent by the method requestWriteAccess
 
    .. cpp:member:: optional_t<passport_data_t> passport_data
 
@@ -211,21 +247,69 @@ message_t
 
    Optional. Service message. A user in the chat triggered another user's proximity alert while sharing Live Location.
 
-   .. cpp:member:: optional_t<voice_chat_scheduled_t> voice_chat_scheduled
+   .. cpp:member:: optional_t<chat_boost_added_t> boost_added
 
-   Optional. Service message: voice chat scheduled
+   Optional. Service message: user boosted the chat
 
-   .. cpp:member:: optional_t<voice_chat_started_t> voice_chat_started
+   .. cpp:member:: optional_t<forum_topic_created_t> forum_topic_created
 
-   Optional. Service message: voice chat started
+   Optional. Service message: forum topic created
 
-   .. cpp:member:: optional_t<voice_chat_ended_t> voice_chat_ended
+   .. cpp:member:: optional_t<forum_topic_edited_t> forum_topic_edited
 
-   Optional. Service message: voice chat ended
+   Optional. Service message: forum topic edited
 
-   .. cpp:member:: optional_t<voice_chat_participants_invited_t> voice_chat_participants_invited
+   .. cpp:member:: optional_t<forum_topic_closed_t> forum_topic_closed
 
-   Optional. Service message: new participants invited to a voice chat
+   Optional. Service message: forum topic closed
+
+   .. cpp:member:: optional_t<forum_topic_reopened_t> forum_topic_reopened
+
+   Optional. Service message: forum topic reopened
+
+   .. cpp:member:: optional_t<general_forum_topic_hidden_t> general_forum_topic_hidden
+
+   Optional. Service message: the 'General' forum topic hidden
+
+   .. cpp:member:: optional_t<general_forum_topic_unhidden_t> general_forum_topic_unhidden
+
+   Optional. Service message: the 'General' forum topic unhidden
+
+   .. cpp:member:: optional_t<giveaway_created_t> giveaway_created
+
+   Optional. Service message: a scheduled giveaway was created
+
+   .. cpp:member:: optional_t<giveaway_t> giveaway
+
+   Optional. The message is a scheduled giveaway message
+
+   .. cpp:member:: optional_t<giveaway_winners_t> giveaway_winners
+
+   Optional. A giveaway with public winners was completed
+
+   .. cpp:member:: optional_t<giveaway_completed_t> giveaway_completed
+
+   Optional. Service message: a giveaway without public winners was completed
+
+   .. cpp:member:: optional_t<video_chat_scheduled_t> video_chat_scheduled
+
+   Optional. Service message: video chat scheduled
+
+   .. cpp:member:: optional_t<video_chat_started_t> video_chat_started
+
+   Optional. Service message: video chat started
+
+   .. cpp:member:: optional_t<video_chat_ended_t> video_chat_ended
+
+   Optional. Service message: video chat ended
+
+   .. cpp:member:: optional_t<video_chat_participants_invited_t> video_chat_participants_invited
+
+   Optional. Service message: new participants invited to a video chat
+
+   .. cpp:member:: optional_t<web_app_data_t> web_app_data
+
+   Optional. Service message: data sent by a Web App
 
    .. cpp:member:: optional_t<inline_keyboard_markup_t> reply_markup
 

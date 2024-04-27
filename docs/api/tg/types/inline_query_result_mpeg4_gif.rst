@@ -17,7 +17,7 @@ inline_query_result_mpeg4_gif_t
 
    .. cpp:member:: string_t mpeg4_url
 
-   A valid URL for the MP4 file. File size must not exceed 1MB
+   A valid URL for the MPEG4 file. File size must not exceed 1MB
 
    .. cpp:member:: optional_t<integer_t> mpeg4_width
 
@@ -29,13 +29,13 @@ inline_query_result_mpeg4_gif_t
 
    .. cpp:member:: optional_t<integer_t> mpeg4_duration
 
-   Optional. Video duration
+   Optional. Video duration in seconds
 
-   .. cpp:member:: string_t thumb_url
+   .. cpp:member:: string_t thumbnail_url
 
    URL of the static (JPEG or GIF) or animated (MPEG4) thumbnail for the result
 
-   .. cpp:member:: optional_t<string_t> thumb_mime_type
+   .. cpp:member:: optional_t<string_t> thumbnail_mime_type
 
    Optional. MIME type of the thumbnail, must be one of “image/jpeg”, “image/gif”, or “video/mp4”. Defaults to “image/jpeg”
 

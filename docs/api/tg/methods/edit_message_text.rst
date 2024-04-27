@@ -42,11 +42,11 @@ edit_message_text
 
    .. cpp:member:: optional_t<array_t<message_entity_t>> entities
 
-   List of special entities that appear in message text, which can be specified instead of parse_mode
+   A JSON-serialized list of special entities that appear in message text, which can be specified instead of parse_mode
 
-   .. cpp:member:: optional_t<boolean_t> disable_web_page_preview
+   .. cpp:member:: optional_t<link_preview_options_t> link_preview_options
 
-   Disables link previews for links in this message
+   Link preview generation options for the message
 
    .. cpp:member:: optional_t<inline_keyboard_markup_t> reply_markup
 

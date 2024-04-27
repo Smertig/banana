@@ -22,9 +22,22 @@ File
    bot_command_scope_default_t <types/bot_command_scope_default>
    bot_command_scope_t <types/bot_command_scope>
    bot_command_t <types/bot_command>
+   bot_description_t <types/bot_description>
+   bot_name_t <types/bot_name>
+   bot_short_description_t <types/bot_short_description>
    callback_game_t <types/callback_game>
    callback_query_t <types/callback_query>
+   chat_administrator_rights_t <types/chat_administrator_rights>
+   chat_boost_added_t <types/chat_boost_added>
+   chat_boost_removed_t <types/chat_boost_removed>
+   chat_boost_source_gift_code_t <types/chat_boost_source_gift_code>
+   chat_boost_source_giveaway_t <types/chat_boost_source_giveaway>
+   chat_boost_source_premium_t <types/chat_boost_source_premium>
+   chat_boost_source_t <types/chat_boost_source>
+   chat_boost_t <types/chat_boost>
+   chat_boost_updated_t <types/chat_boost_updated>
    chat_invite_link_t <types/chat_invite_link>
+   chat_join_request_t <types/chat_join_request>
    chat_location_t <types/chat_location>
    chat_member_administrator_t <types/chat_member_administrator>
    chat_member_banned_t <types/chat_member_banned>
@@ -36,6 +49,7 @@ File
    chat_member_updated_t <types/chat_member_updated>
    chat_permissions_t <types/chat_permissions>
    chat_photo_t <types/chat_photo>
+   chat_shared_t <types/chat_shared>
    chat_t <types/chat>
    chosen_inline_result_t <types/chosen_inline_result>
    contact_t <types/contact>
@@ -43,10 +57,23 @@ File
    document_t <types/document>
    encrypted_credentials_t <types/encrypted_credentials>
    encrypted_passport_element_t <types/encrypted_passport_element>
+   external_reply_info_t <types/external_reply_info>
    file_t <types/file>
    force_reply_t <types/force_reply>
+   forum_topic_closed_t <types/forum_topic_closed>
+   forum_topic_created_t <types/forum_topic_created>
+   forum_topic_edited_t <types/forum_topic_edited>
+   forum_topic_reopened_t <types/forum_topic_reopened>
+   forum_topic_t <types/forum_topic>
    game_high_score_t <types/game_high_score>
    game_t <types/game>
+   general_forum_topic_hidden_t <types/general_forum_topic_hidden>
+   general_forum_topic_unhidden_t <types/general_forum_topic_unhidden>
+   giveaway_completed_t <types/giveaway_completed>
+   giveaway_created_t <types/giveaway_created>
+   giveaway_t <types/giveaway>
+   giveaway_winners_t <types/giveaway_winners>
+   inaccessible_message_t <types/inaccessible_message>
    inline_keyboard_button_t <types/inline_keyboard_button>
    inline_keyboard_markup_t <types/inline_keyboard_markup>
    inline_query_result_article_t <types/inline_query_result_article>
@@ -70,6 +97,7 @@ File
    inline_query_result_venue_t <types/inline_query_result_venue>
    inline_query_result_video_t <types/inline_query_result_video>
    inline_query_result_voice_t <types/inline_query_result_voice>
+   inline_query_results_button_t <types/inline_query_results_button>
    inline_query_t <types/inline_query>
    input_contact_message_content_t <types/input_contact_message_content>
    input_file_t <types/input_file>
@@ -82,18 +110,34 @@ File
    input_media_t <types/input_media>
    input_media_video_t <types/input_media_video>
    input_message_content_t <types/input_message_content>
+   input_sticker_t <types/input_sticker>
    input_text_message_content_t <types/input_text_message_content>
    input_venue_message_content_t <types/input_venue_message_content>
    invoice_t <types/invoice>
    keyboard_button_poll_type_t <types/keyboard_button_poll_type>
+   keyboard_button_request_chat_t <types/keyboard_button_request_chat>
+   keyboard_button_request_users_t <types/keyboard_button_request_users>
    keyboard_button_t <types/keyboard_button>
    labeled_price_t <types/labeled_price>
+   link_preview_options_t <types/link_preview_options>
    location_t <types/location>
    login_url_t <types/login_url>
    mask_position_t <types/mask_position>
+   maybe_inaccessible_message_t <types/maybe_inaccessible_message>
+   menu_button_commands_t <types/menu_button_commands>
+   menu_button_default_t <types/menu_button_default>
+   menu_button_t <types/menu_button>
+   menu_button_web_app_t <types/menu_button_web_app>
    message_auto_delete_timer_changed_t <types/message_auto_delete_timer_changed>
    message_entity_t <types/message_entity>
    message_id_t <types/message_id>
+   message_origin_channel_t <types/message_origin_channel>
+   message_origin_chat_t <types/message_origin_chat>
+   message_origin_hidden_user_t <types/message_origin_hidden_user>
+   message_origin_t <types/message_origin>
+   message_origin_user_t <types/message_origin_user>
+   message_reaction_count_updated_t <types/message_reaction_count_updated>
+   message_reaction_updated_t <types/message_reaction_updated>
    message_t <types/message>
    order_info_t <types/order_info>
    passport_data_t <types/passport_data>
@@ -114,24 +158,38 @@ File
    poll_t <types/poll>
    pre_checkout_query_t <types/pre_checkout_query>
    proximity_alert_triggered_t <types/proximity_alert_triggered>
+   reaction_count_t <types/reaction_count>
+   reaction_type_custom_emoji_t <types/reaction_type_custom_emoji>
+   reaction_type_emoji_t <types/reaction_type_emoji>
+   reaction_type_t <types/reaction_type>
    reply_keyboard_markup_t <types/reply_keyboard_markup>
    reply_keyboard_remove_t <types/reply_keyboard_remove>
+   reply_parameters_t <types/reply_parameters>
    response_parameters_t <types/response_parameters>
+   sent_web_app_message_t <types/sent_web_app_message>
    shipping_address_t <types/shipping_address>
    shipping_option_t <types/shipping_option>
    shipping_query_t <types/shipping_query>
    sticker_set_t <types/sticker_set>
    sticker_t <types/sticker>
+   story_t <types/story>
    successful_payment_t <types/successful_payment>
+   switch_inline_query_chosen_chat_t <types/switch_inline_query_chosen_chat>
+   text_quote_t <types/text_quote>
    update_t <types/update>
+   user_chat_boosts_t <types/user_chat_boosts>
    user_profile_photos_t <types/user_profile_photos>
    user_t <types/user>
+   users_shared_t <types/users_shared>
    venue_t <types/venue>
+   video_chat_ended_t <types/video_chat_ended>
+   video_chat_participants_invited_t <types/video_chat_participants_invited>
+   video_chat_scheduled_t <types/video_chat_scheduled>
+   video_chat_started_t <types/video_chat_started>
    video_note_t <types/video_note>
    video_t <types/video>
-   voice_chat_ended_t <types/voice_chat_ended>
-   voice_chat_participants_invited_t <types/voice_chat_participants_invited>
-   voice_chat_scheduled_t <types/voice_chat_scheduled>
-   voice_chat_started_t <types/voice_chat_started>
    voice_t <types/voice>
+   web_app_data_t <types/web_app_data>
+   web_app_info_t <types/web_app_info>
    webhook_info_t <types/webhook_info>
+   write_access_allowed_t <types/write_access_allowed>

@@ -13,7 +13,7 @@ get_chat
 
    ``callback`` is any callable object accepting ``expected<chat_t>``.
 
-   Use this method to get up to date information about the chat (current name of the user for one-on-one conversations, current username of a user, group or channel, etc.). Returns a Chat object on success.
+   Use this method to get up to date information about the chat. Returns a Chat object on success.
 
 .. cpp:struct:: get_chat_args_t
 

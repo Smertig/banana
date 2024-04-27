@@ -50,7 +50,7 @@ edit_message_live_location
 
    .. cpp:member:: optional_t<integer_t> proximity_alert_radius
 
-   Maximum distance for proximity alerts about approaching another chat member, in meters. Must be between 1 and 100000 if specified.
+   The maximum distance for proximity alerts about approaching another chat member, in meters. Must be between 1 and 100000 if specified.
 
    .. cpp:member:: optional_t<inline_keyboard_markup_t> reply_markup
 

@@ -17,7 +17,7 @@ inline_query_result_cached_mpeg4_gif_t
 
    .. cpp:member:: string_t mpeg4_file_id
 
-   A valid file identifier for the MP4 file
+   A valid file identifier for the MPEG4 file
 
    .. cpp:member:: optional_t<string_t> title
 

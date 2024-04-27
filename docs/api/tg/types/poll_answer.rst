@@ -11,10 +11,14 @@ poll_answer_t
 
    Unique poll identifier
 
-   .. cpp:member:: user_t user
+   .. cpp:member:: optional_t<chat_t> voter_chat
 
-   The user, who changed the answer to the poll
+   Optional. The chat that changed the answer to the poll, if the voter is anonymous
+
+   .. cpp:member:: optional_t<user_t> user
+
+   Optional. The user that changed the answer to the poll, if the voter isn't anonymous
 
    .. cpp:member:: array_t<integer_t> option_ids
 
-   0-based identifiers of answer options, chosen by the user. May be empty if the user retracted their vote.
+   0-based identifiers of chosen answer options. May be empty if the vote was retracted.

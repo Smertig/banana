@@ -13,7 +13,7 @@ answer_callback_query
 
    ``callback`` is any callable object accepting ``expected<boolean_t>``.
 
-   Use this method to send answers to callback queries sent from inline keyboards. The answer will be displayed to the user as a notification at the top of the chat screen or as an alert. On success, True is returned. Alternatively, the user can be redirected to the specified Game URL. For this option to work, you must first create a game for your bot via @Botfather and accept the terms. Otherwise, you may use links like t.me/your_bot?start=XXXX that open your bot with a parameter.
+   Use this method to send answers to callback queries sent from inline keyboards. The answer will be displayed to the user as a notification at the top of the chat screen or as an alert. On success, True is returned. Alternatively, the user can be redirected to the specified Game URL. For this option to work, you must first create a game for your bot via @BotFather and accept the terms. Otherwise, you may use links like t.me/your_bot?start=XXXX that open your bot with a parameter.
 
 .. cpp:struct:: answer_callback_query_args_t
 
@@ -30,11 +30,11 @@ answer_callback_query
 
    .. cpp:member:: optional_t<boolean_t> show_alert
 
-   If true, an alert will be shown by the client instead of a notification at the top of the chat screen. Defaults to false.
+   If True, an alert will be shown by the client instead of a notification at the top of the chat screen. Defaults to false.
 
    .. cpp:member:: optional_t<string_t> url
 
-   URL that will be opened by the user's client. If you have created a Game and accepted the conditions via @Botfather, specify the URL that opens your game — note that this will only work if the query comes from a callback_game button.   Otherwise, you may use links like t.me/your_bot?start=XXXX that open your bot with a parameter.
+   URL that will be opened by the user's client. If you have created a Game and accepted the conditions via @BotFather, specify the URL that opens your game - note that this will only work if the query comes from a callback_game button.   Otherwise, you may use links like t.me/your_bot?start=XXXX that open your bot with a parameter.
 
    .. cpp:member:: optional_t<integer_t> cache_time
 

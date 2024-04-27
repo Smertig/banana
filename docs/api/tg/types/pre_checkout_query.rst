@@ -33,4 +33,4 @@ pre_checkout_query_t
 
    .. cpp:member:: optional_t<order_info_t> order_info
 
-   Optional. Order info provided by the user
+   Optional. Order information provided by the user

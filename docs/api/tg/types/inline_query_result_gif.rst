@@ -29,13 +29,13 @@ inline_query_result_gif_t
 
    .. cpp:member:: optional_t<integer_t> gif_duration
 
-   Optional. Duration of the GIF
+   Optional. Duration of the GIF in seconds
 
-   .. cpp:member:: string_t thumb_url
+   .. cpp:member:: string_t thumbnail_url
 
    URL of the static (JPEG or GIF) or animated (MPEG4) thumbnail for the result
 
-   .. cpp:member:: optional_t<string_t> thumb_mime_type
+   .. cpp:member:: optional_t<string_t> thumbnail_mime_type
 
    Optional. MIME type of the thumbnail, must be one of “image/jpeg”, “image/gif”, or “video/mp4”. Defaults to “image/jpeg”
 

@@ -24,6 +24,10 @@ send_invoice
 
    Unique identifier for the target chat or username of the target channel (in the format @channelusername)
 
+   .. cpp:member:: optional_t<integer_t> message_thread_id
+
+   Unique identifier for the target message thread (topic) of the forum; for forum supergroups only
+
    .. cpp:member:: string_t title
 
    Product name, 1-32 characters
@@ -38,7 +42,7 @@ send_invoice
 
    .. cpp:member:: string_t provider_token
 
-   Payments provider token, obtained via Botfather
+   Payment provider token, obtained via @BotFather
 
    .. cpp:member:: string_t currency
 
@@ -62,7 +66,7 @@ send_invoice
 
    .. cpp:member:: optional_t<string_t> provider_data
 
-   A JSON-serialized data about the invoice, which will be shared with the payment provider. A detailed description of required fields should be provided by the payment provider.
+   JSON-serialized data about the invoice, which will be shared with the payment provider. A detailed description of required fields should be provided by the payment provider.
 
    .. cpp:member:: optional_t<string_t> photo_url
 
@@ -70,7 +74,7 @@ send_invoice
 
    .. cpp:member:: optional_t<integer_t> photo_size
 
-   Photo size
+   Photo size in bytes
 
    .. cpp:member:: optional_t<integer_t> photo_width
 
@@ -82,43 +86,43 @@ send_invoice
 
    .. cpp:member:: optional_t<boolean_t> need_name
 
-   Pass True, if you require the user's full name to complete the order
+   Pass True if you require the user's full name to complete the order
 
    .. cpp:member:: optional_t<boolean_t> need_phone_number
 
-   Pass True, if you require the user's phone number to complete the order
+   Pass True if you require the user's phone number to complete the order
 
    .. cpp:member:: optional_t<boolean_t> need_email
 
-   Pass True, if you require the user's email address to complete the order
+   Pass True if you require the user's email address to complete the order
 
    .. cpp:member:: optional_t<boolean_t> need_shipping_address
 
-   Pass True, if you require the user's shipping address to complete the order
+   Pass True if you require the user's shipping address to complete the order
 
    .. cpp:member:: optional_t<boolean_t> send_phone_number_to_provider
 
-   Pass True, if user's phone number should be sent to provider
+   Pass True if the user's phone number should be sent to provider
 
    .. cpp:member:: optional_t<boolean_t> send_email_to_provider
 
-   Pass True, if user's email address should be sent to provider
+   Pass True if the user's email address should be sent to provider
 
    .. cpp:member:: optional_t<boolean_t> is_flexible
 
-   Pass True, if the final price depends on the shipping method
+   Pass True if the final price depends on the shipping method
 
    .. cpp:member:: optional_t<boolean_t> disable_notification
 
    Sends the message silently. Users will receive a notification with no sound.
 
-   .. cpp:member:: optional_t<integer_t> reply_to_message_id
+   .. cpp:member:: optional_t<boolean_t> protect_content
 
-   If the message is a reply, ID of the original message
+   Protects the contents of the sent message from forwarding and saving
 
-   .. cpp:member:: optional_t<boolean_t> allow_sending_without_reply
+   .. cpp:member:: optional_t<reply_parameters_t> reply_parameters
 
-   Pass True, if the message should be sent even if the specified replied-to message is not found
+   Description of the message to reply to
 
    .. cpp:member:: optional_t<inline_keyboard_markup_t> reply_markup
 

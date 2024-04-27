@@ -23,10 +23,10 @@ video_note_t
 
    Duration of the video in seconds as defined by sender
 
-   .. cpp:member:: optional_t<photo_size_t> thumb
+   .. cpp:member:: optional_t<photo_size_t> thumbnail
 
    Optional. Video thumbnail
 
    .. cpp:member:: optional_t<integer_t> file_size
 
-   Optional. File size
+   Optional. File size in bytes

@@ -5,7 +5,7 @@ webhook_info_t
 
 .. cpp:struct:: banana::api::webhook_info_t
 
-   Contains information about the current status of a webhook.
+   Describes the current status of a webhook.
 
    .. cpp:member:: string_t url
 
@@ -31,9 +31,13 @@ webhook_info_t
 
    Optional. Error message in human-readable format for the most recent error that happened when trying to deliver an update via webhook
 
+   .. cpp:member:: optional_t<integer_t> last_synchronization_error_date
+
+   Optional. Unix time of the most recent error that happened when trying to synchronize available updates with Telegram datacenters
+
    .. cpp:member:: optional_t<integer_t> max_connections
 
-   Optional. Maximum allowed number of simultaneous HTTPS connections to the webhook for update delivery
+   Optional. The maximum allowed number of simultaneous HTTPS connections to the webhook for update delivery
 
    .. cpp:member:: optional_t<array_t<string_t>> allowed_updates
 

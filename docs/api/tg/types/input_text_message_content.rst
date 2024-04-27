@@ -19,6 +19,6 @@ input_text_message_content_t
 
    Optional. List of special entities that appear in message text, which can be specified instead of parse_mode
 
-   .. cpp:member:: optional_t<boolean_t> disable_web_page_preview
+   .. cpp:member:: optional_t<link_preview_options_t> link_preview_options
 
-   Optional. Disables link previews for links in the sent message
+   Optional. Link preview generation options for the message

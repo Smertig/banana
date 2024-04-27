@@ -22,7 +22,7 @@ unban_chat_member
 
    .. cpp:member:: variant_t<integer_t, string_t> chat_id
 
-   Unique identifier for the target group or username of the target supergroup or channel (in the format @username)
+   Unique identifier for the target group or username of the target supergroup or channel (in the format @channelusername)
 
    .. cpp:member:: integer_t user_id
 

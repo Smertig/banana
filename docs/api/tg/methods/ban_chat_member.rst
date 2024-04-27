@@ -13,7 +13,7 @@ ban_chat_member
 
    ``callback`` is any callable object accepting ``expected<boolean_t>``.
 
-   Use this method to ban a user in a group, a supergroup or a channel. In the case of supergroups and channels, the user will not be able to return to the chat on their own using invite links, etc., unless unbanned first. The bot must be an administrator in the chat for this to work and must have the appropriate admin rights. Returns True on success.
+   Use this method to ban a user in a group, a supergroup or a channel. In the case of supergroups and channels, the user will not be able to return to the chat on their own using invite links, etc., unless unbanned first. The bot must be an administrator in the chat for this to work and must have the appropriate administrator rights. Returns True on success.
 
 .. cpp:struct:: ban_chat_member_args_t
 
@@ -30,7 +30,7 @@ ban_chat_member
 
    .. cpp:member:: optional_t<integer_t> until_date
 
-   Date when the user will be unbanned, unix time. If user is banned for more than 366 days or less than 30 seconds from the current time they are considered to be banned forever. Applied for supergroups and channels only.
+   Date when the user will be unbanned; Unix time. If user is banned for more than 366 days or less than 30 seconds from the current time they are considered to be banned forever. Applied for supergroups and channels only.
 
    .. cpp:member:: optional_t<boolean_t> revoke_messages
 

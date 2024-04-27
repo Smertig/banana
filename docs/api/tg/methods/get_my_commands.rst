@@ -13,7 +13,7 @@ get_my_commands
 
    ``callback`` is any callable object accepting ``expected<array_t<bot_command_t>>``.
 
-   Use this method to get the current list of the bot's commands for the given scope and user language. Returns Array of BotCommand on success. If commands aren't set, an empty list is returned.
+   Use this method to get the current list of the bot's commands for the given scope and user language. Returns an Array of BotCommand objects. If commands aren't set, an empty list is returned.
 
 .. cpp:struct:: get_my_commands_args_t
 

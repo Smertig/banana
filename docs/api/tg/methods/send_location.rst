@@ -24,6 +24,10 @@ send_location
 
    Unique identifier for the target chat or username of the target channel (in the format @channelusername)
 
+   .. cpp:member:: optional_t<integer_t> message_thread_id
+
+   Unique identifier for the target message thread (topic) of the forum; for forum supergroups only
+
    .. cpp:member:: float_t latitude
 
    Latitude of the location
@@ -52,13 +56,13 @@ send_location
 
    Sends the message silently. Users will receive a notification with no sound.
 
-   .. cpp:member:: optional_t<integer_t> reply_to_message_id
+   .. cpp:member:: optional_t<boolean_t> protect_content
 
-   If the message is a reply, ID of the original message
+   Protects the contents of the sent message from forwarding and saving
 
-   .. cpp:member:: optional_t<boolean_t> allow_sending_without_reply
+   .. cpp:member:: optional_t<reply_parameters_t> reply_parameters
 
-   Pass True, if the message should be sent even if the specified replied-to message is not found
+   Description of the message to reply to
 
    .. cpp:member:: optional_t<variant_t<inline_keyboard_markup_t, reply_keyboard_markup_t, reply_keyboard_remove_t, force_reply_t>> reply_markup
 

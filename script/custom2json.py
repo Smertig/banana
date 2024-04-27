@@ -19,11 +19,11 @@ class RawStringRenderer(marko.Renderer):
     def render_paragraph(self, element):
         return f"{self.render_children(element)}"
 
-    def render_list(self, element):
-        assert False, element
+    def render_list(self, element: marko.block.List):
+        return "; ".join(self.render(child) for child in element.children)
 
     def render_list_item(self, element):
-        assert False, element
+        return f"{self.render_children(element)}"
 
     def render_quote(self, element):
         assert False, element

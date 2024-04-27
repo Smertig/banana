@@ -37,7 +37,7 @@ inline_query_result_document_t
 
    .. cpp:member:: string_t mime_type
 
-   Mime type of the content of the file, either “application/pdf” or “application/zip”
+   MIME type of the content of the file, either “application/pdf” or “application/zip”
 
    .. cpp:member:: optional_t<string_t> description
 
@@ -51,14 +51,14 @@ inline_query_result_document_t
 
    Optional. Content of the message to be sent instead of the file
 
-   .. cpp:member:: optional_t<string_t> thumb_url
+   .. cpp:member:: optional_t<string_t> thumbnail_url
 
-   Optional. URL of the thumbnail (jpeg only) for the file
+   Optional. URL of the thumbnail (JPEG only) for the file
 
-   .. cpp:member:: optional_t<integer_t> thumb_width
+   .. cpp:member:: optional_t<integer_t> thumbnail_width
 
    Optional. Thumbnail width
 
-   .. cpp:member:: optional_t<integer_t> thumb_height
+   .. cpp:member:: optional_t<integer_t> thumbnail_height
 
    Optional. Thumbnail height

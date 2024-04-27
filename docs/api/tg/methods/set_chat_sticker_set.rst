@@ -13,7 +13,7 @@ set_chat_sticker_set
 
    ``callback`` is any callable object accepting ``expected<boolean_t>``.
 
-   Use this method to set a new group sticker set for a supergroup. The bot must be an administrator in the chat for this to work and must have the appropriate admin rights. Use the field can_set_sticker_set optionally returned in getChat requests to check if the bot can use this method. Returns True on success.
+   Use this method to set a new group sticker set for a supergroup. The bot must be an administrator in the chat for this to work and must have the appropriate administrator rights. Use the field can_set_sticker_set optionally returned in getChat requests to check if the bot can use this method. Returns True on success.
 
 .. cpp:struct:: set_chat_sticker_set_args_t
 

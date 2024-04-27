@@ -13,7 +13,7 @@ upload_sticker_file
 
    ``callback`` is any callable object accepting ``expected<file_t>``.
 
-   Use this method to upload a .PNG file with a sticker for later use in createNewStickerSet and addStickerToSet methods (can be used multiple times). Returns the uploaded File on success.
+   Use this method to upload a file with a sticker for later use in the createNewStickerSet and addStickerToSet methods (the file can be used multiple times). Returns the uploaded File on success.
 
 .. cpp:struct:: upload_sticker_file_args_t
 
@@ -24,6 +24,10 @@ upload_sticker_file
 
    User identifier of sticker file owner
 
-   .. cpp:member:: input_file_t png_sticker
+   .. cpp:member:: input_file_t sticker
 
-   PNG image with the sticker, must be up to 512 kilobytes in size, dimensions must not exceed 512px, and either width or height must be exactly 512px. More info on Sending Files »
+   A file with the sticker in .WEBP, .PNG, .TGS, or .WEBM format. See https://core.telegram.org/stickers for technical requirements. More information on Sending Files »
+
+   .. cpp:member:: string_t sticker_format
+
+   Format of the sticker, must be one of “static”, “animated”, “video”

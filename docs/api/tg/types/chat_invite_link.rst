@@ -15,6 +15,10 @@ chat_invite_link_t
 
    Creator of the link
 
+   .. cpp:member:: boolean_t creates_join_request
+
+   True, if users joining the chat via the link need to be approved by chat administrators
+
    .. cpp:member:: boolean_t is_primary
 
    True, if the link is primary
@@ -23,10 +27,18 @@ chat_invite_link_t
 
    True, if the link is revoked
 
+   .. cpp:member:: optional_t<string_t> name
+
+   Optional. Invite link name
+
    .. cpp:member:: optional_t<integer_t> expire_date
 
    Optional. Point in time (Unix timestamp) when the link will expire or has been expired
 
    .. cpp:member:: optional_t<integer_t> member_limit
 
-   Optional. Maximum number of users that can be members of the chat simultaneously after joining the chat via this invite link; 1-99999
+   Optional. The maximum number of users that can be members of the chat simultaneously after joining the chat via this invite link; 1-99999
+
+   .. cpp:member:: optional_t<integer_t> pending_join_request_count
+
+   Optional. Number of pending join requests created using this link

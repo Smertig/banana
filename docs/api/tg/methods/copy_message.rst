@@ -13,7 +13,7 @@ copy_message
 
    ``callback`` is any callable object accepting ``expected<message_id_t>``.
 
-   Use this method to copy messages of any kind. Service messages and invoice messages can't be copied. The method is analogous to the method forwardMessage, but the copied message doesn't have a link to the original message. Returns the MessageId of the sent message on success.
+   Use this method to copy messages of any kind. Service messages, giveaway messages, giveaway winners messages, and invoice messages can't be copied. A quiz poll can be copied only if the value of the field correct_option_id is known to the bot. The method is analogous to the method forwardMessage, but the copied message doesn't have a link to the original message. Returns the MessageId of the sent message on success.
 
 .. cpp:struct:: copy_message_args_t
 
@@ -23,6 +23,10 @@ copy_message
    .. cpp:member:: variant_t<integer_t, string_t> chat_id
 
    Unique identifier for the target chat or username of the target channel (in the format @channelusername)
+
+   .. cpp:member:: optional_t<integer_t> message_thread_id
+
+   Unique identifier for the target message thread (topic) of the forum; for forum supergroups only
 
    .. cpp:member:: variant_t<integer_t, string_t> from_chat_id
 
@@ -42,19 +46,19 @@ copy_message
 
    .. cpp:member:: optional_t<array_t<message_entity_t>> caption_entities
 
-   List of special entities that appear in the new caption, which can be specified instead of parse_mode
+   A JSON-serialized list of special entities that appear in the new caption, which can be specified instead of parse_mode
 
    .. cpp:member:: optional_t<boolean_t> disable_notification
 
    Sends the message silently. Users will receive a notification with no sound.
 
-   .. cpp:member:: optional_t<integer_t> reply_to_message_id
+   .. cpp:member:: optional_t<boolean_t> protect_content
 
-   If the message is a reply, ID of the original message
+   Protects the contents of the sent message from forwarding and saving
 
-   .. cpp:member:: optional_t<boolean_t> allow_sending_without_reply
+   .. cpp:member:: optional_t<reply_parameters_t> reply_parameters
 
-   Pass True, if the message should be sent even if the specified replied-to message is not found
+   Description of the message to reply to
 
    .. cpp:member:: optional_t<variant_t<inline_keyboard_markup_t, reply_keyboard_markup_t, reply_keyboard_remove_t, force_reply_t>> reply_markup
 

@@ -5,7 +5,7 @@ passport_data_t
 
 .. cpp:struct:: banana::api::passport_data_t
 
-   Contains information about Telegram Passport data shared with the bot by the user.
+   Describes Telegram Passport data shared with the bot by the user.
 
    .. cpp:member:: array_t<encrypted_passport_element_t> data
 
