@@ -21,7 +21,7 @@ endif()
 include(${PROJECT_SOURCE_DIR}/cmake/conan.cmake)
 
 conan_check()
-conan_add_remote(NAME conan-center URL https://conan.bintray.com)
+conan_add_remote(NAME conan-center URL https://center.conan.io)
 
 conan_cmake_run(
         CONANFILE conanfile.py
