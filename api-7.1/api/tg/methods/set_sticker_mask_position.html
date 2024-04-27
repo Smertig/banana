@@ -1,0 +1,1833 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>set_sticker_mask_position &#8212; banana  documentation</title>
+    
+  <link rel="stylesheet" href="../../../_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
+
+    
+  <link rel="stylesheet"
+    href="../../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="../../../_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="../../../_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/sphinx-book-theme.e7340bb3dbd8dde6db86f25597f54a1b.css" type="text/css" />
+    
+  <link rel="preload" as="script" href="../../../_static/js/index.d3f166471bb80abb5163.js">
+
+    <script id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/sphinx-book-theme.7d483ff0a819d6edff12ce0b1ead3928.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="set_sticker_position_in_set" href="set_sticker_position_in_set.html" />
+    <link rel="prev" title="set_sticker_keywords" href="set_sticker_keywords.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="../../../index.html">
+  
+  
+  <h1 class="site-logo" id="site-title">banana  documentation</h1>
+  
+</a>
+</div><form class="bd-search d-flex align-items-center" action="../../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
+</form>
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <ul class="current nav sidenav_l1">
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../../../guide.html">
+   User Guide
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../guide/quick.html">
+     Quick start
+    </a>
+   </li>
+   <li class="toctree-l2 collapsible-parent">
+    <a class="reference internal" href="../../banana/agents.html">
+     Basic: agents
+    </a>
+    <ul class="collapse-ul">
+     <li class="toctree-l3">
+      <a class="reference internal" href="../../banana/agents/winapi.html">
+       WinAPI-based agents
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../../banana/agents/cpr.html">
+       cpr-based agents
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../../banana/agents/beast.html">
+       boost::beast-based agents
+      </a>
+     </li>
+    </ul>
+    <i class="fas fa-chevron-down">
+    </i>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 current active collapsible-parent">
+  <a class="reference internal" href="../../../api.html">
+   API Reference
+  </a>
+  <ul class="current collapse-ul">
+   <li class="toctree-l2 collapsible-parent">
+    <a class="reference internal" href="../../banana.html">
+     Banana API
+    </a>
+    <ul class="collapse-ul">
+     <li class="toctree-l3">
+      <a class="reference internal" href="../../banana/basic_types.html">
+       Banana Basic Types
+      </a>
+     </li>
+     <li class="toctree-l3 collapsible-parent">
+      <a class="reference internal" href="../../banana/agents.html">
+       Banana Agents
+      </a>
+      <ul class="collapse-ul">
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../banana/agents/winapi.html">
+         WinAPI-based agents
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../banana/agents/cpr.html">
+         cpr-based agents
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../banana/agents/beast.html">
+         boost::beast-based agents
+        </a>
+       </li>
+      </ul>
+      <i class="fas fa-chevron-down">
+      </i>
+     </li>
+    </ul>
+    <i class="fas fa-chevron-down">
+    </i>
+   </li>
+   <li class="toctree-l2 current active collapsible-parent">
+    <a class="reference internal" href="../../tg.html">
+     Telegram API
+    </a>
+    <ul class="current collapse-ul">
+     <li class="toctree-l3 collapsible-parent">
+      <a class="reference internal" href="../types.html">
+       Telegram Types
+      </a>
+      <ul class="collapse-ul">
+       <li class="toctree-l4">
+        <a class="reference internal" href="../types/animation.html">
+         animation_t
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../types/audio.html">
+         audio_t
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../types/bot_command_scope_all_chat_administrators.html">
+         bot_command_scope_all_chat_administrators_t
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../types/bot_command_scope_all_group_chats.html">
+         bot_command_scope_all_group_chats_t
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../types/bot_command_scope_all_private_chats.html">
+         bot_command_scope_all_private_chats_t
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../types/bot_command_scope_chat_administrators.html">
+         bot_command_scope_chat_administrators_t
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../types/bot_command_scope_chat_member.html">
+         bot_command_scope_chat_member_t
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../types/bot_command_scope_chat.html">
+         bot_command_scope_chat_t
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../types/bot_command_scope_default.html">
+         bot_command_scope_default_t
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../types/bot_command_scope.html">
+         bot_command_scope_t
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../types/bot_command.html">
+         bot_command_t
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../types/bot_description.html">
+         bot_description_t
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../types/bot_name.html">
+         bot_name_t
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../types/bot_short_description.html">
+         bot_short_description_t
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../types/callback_game.html">
+         callback_game_t
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../types/callback_query.html">
+         callback_query_t
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../types/chat_administrator_rights.html">
+         chat_administrator_rights_t
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../types/chat_boost_added.html">
+         chat_boost_added_t
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../types/chat_boost_removed.html">
+         chat_boost_removed_t
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../types/chat_boost_source_gift_code.html">
+         chat_boost_source_gift_code_t
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../types/chat_boost_source_giveaway.html">
+         chat_boost_source_giveaway_t
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../types/chat_boost_source_premium.html">
+         chat_boost_source_premium_t
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../types/chat_boost_source.html">
+         chat_boost_source_t
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../types/chat_boost.html">
+         chat_boost_t
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../types/chat_boost_updated.html">
+         chat_boost_updated_t
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../types/chat_invite_link.html">
+         chat_invite_link_t
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../types/chat_join_request.html">
+         chat_join_request_t
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../types/chat_location.html">
+         chat_location_t
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../types/chat_member_administrator.html">
+         chat_member_administrator_t
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../types/chat_member_banned.html">
+         chat_member_banned_t
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../types/chat_member_left.html">
+         chat_member_left_t
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../types/chat_member_member.html">
+         chat_member_member_t
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../types/chat_member_owner.html">
+         chat_member_owner_t
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../types/chat_member_restricted.html">
+         chat_member_restricted_t
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../types/chat_member.html">
+         chat_member_t
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../types/chat_member_updated.html">
+         chat_member_updated_t
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../types/chat_permissions.html">
+         chat_permissions_t
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../types/chat_photo.html">
+         chat_photo_t
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../types/chat_shared.html">
+         chat_shared_t
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../types/chat.html">
+         chat_t
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../types/chosen_inline_result.html">
+         chosen_inline_result_t
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../types/contact.html">
+         contact_t
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../types/dice.html">
+         dice_t
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../types/document.html">
+         document_t
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../types/encrypted_credentials.html">
+         encrypted_credentials_t
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../types/encrypted_passport_element.html">
+         encrypted_passport_element_t
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../types/external_reply_info.html">
+         external_reply_info_t
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../types/file.html">
+         file_t
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../types/force_reply.html">
+         force_reply_t
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../types/forum_topic_closed.html">
+         forum_topic_closed_t
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../types/forum_topic_created.html">
+         forum_topic_created_t
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../types/forum_topic_edited.html">
+         forum_topic_edited_t
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../types/forum_topic_reopened.html">
+         forum_topic_reopened_t
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../types/forum_topic.html">
+         forum_topic_t
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../types/game_high_score.html">
+         game_high_score_t
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../types/game.html">
+         game_t
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../types/general_forum_topic_hidden.html">
+         general_forum_topic_hidden_t
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../types/general_forum_topic_unhidden.html">
+         general_forum_topic_unhidden_t
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../types/giveaway_completed.html">
+         giveaway_completed_t
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../types/giveaway_created.html">
+         giveaway_created_t
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../types/giveaway.html">
+         giveaway_t
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../types/giveaway_winners.html">
+         giveaway_winners_t
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../types/inaccessible_message.html">
+         inaccessible_message_t
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../types/inline_keyboard_button.html">
+         inline_keyboard_button_t
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../types/inline_keyboard_markup.html">
+         inline_keyboard_markup_t
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../types/inline_query_result_article.html">
+         inline_query_result_article_t
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../types/inline_query_result_audio.html">
+         inline_query_result_audio_t
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../types/inline_query_result_cached_audio.html">
+         inline_query_result_cached_audio_t
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../types/inline_query_result_cached_document.html">
+         inline_query_result_cached_document_t
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../types/inline_query_result_cached_gif.html">
+         inline_query_result_cached_gif_t
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../types/inline_query_result_cached_mpeg4_gif.html">
+         inline_query_result_cached_mpeg4_gif_t
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../types/inline_query_result_cached_photo.html">
+         inline_query_result_cached_photo_t
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../types/inline_query_result_cached_sticker.html">
+         inline_query_result_cached_sticker_t
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../types/inline_query_result_cached_video.html">
+         inline_query_result_cached_video_t
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../types/inline_query_result_cached_voice.html">
+         inline_query_result_cached_voice_t
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../types/inline_query_result_contact.html">
+         inline_query_result_contact_t
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../types/inline_query_result_document.html">
+         inline_query_result_document_t
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../types/inline_query_result_game.html">
+         inline_query_result_game_t
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../types/inline_query_result_gif.html">
+         inline_query_result_gif_t
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../types/inline_query_result_location.html">
+         inline_query_result_location_t
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../types/inline_query_result_mpeg4_gif.html">
+         inline_query_result_mpeg4_gif_t
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../types/inline_query_result_photo.html">
+         inline_query_result_photo_t
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../types/inline_query_result.html">
+         inline_query_result_t
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../types/inline_query_result_venue.html">
+         inline_query_result_venue_t
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../types/inline_query_result_video.html">
+         inline_query_result_video_t
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../types/inline_query_result_voice.html">
+         inline_query_result_voice_t
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../types/inline_query_results_button.html">
+         inline_query_results_button_t
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../types/inline_query.html">
+         inline_query_t
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../types/input_contact_message_content.html">
+         input_contact_message_content_t
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../types/input_file.html">
+         input_file_t
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../types/input_invoice_message_content.html">
+         input_invoice_message_content_t
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../types/input_location_message_content.html">
+         input_location_message_content_t
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../types/input_media_animation.html">
+         input_media_animation_t
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../types/input_media_audio.html">
+         input_media_audio_t
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../types/input_media_document.html">
+         input_media_document_t
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../types/input_media_photo.html">
+         input_media_photo_t
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../types/input_media.html">
+         input_media_t
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../types/input_media_video.html">
+         input_media_video_t
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../types/input_message_content.html">
+         input_message_content_t
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../types/input_sticker.html">
+         input_sticker_t
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../types/input_text_message_content.html">
+         input_text_message_content_t
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../types/input_venue_message_content.html">
+         input_venue_message_content_t
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../types/invoice.html">
+         invoice_t
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../types/keyboard_button_poll_type.html">
+         keyboard_button_poll_type_t
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../types/keyboard_button_request_chat.html">
+         keyboard_button_request_chat_t
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../types/keyboard_button_request_users.html">
+         keyboard_button_request_users_t
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../types/keyboard_button.html">
+         keyboard_button_t
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../types/labeled_price.html">
+         labeled_price_t
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../types/link_preview_options.html">
+         link_preview_options_t
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../types/location.html">
+         location_t
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../types/login_url.html">
+         login_url_t
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../types/mask_position.html">
+         mask_position_t
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../types/maybe_inaccessible_message.html">
+         maybe_inaccessible_message_t
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../types/menu_button_commands.html">
+         menu_button_commands_t
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../types/menu_button_default.html">
+         menu_button_default_t
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../types/menu_button.html">
+         menu_button_t
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../types/menu_button_web_app.html">
+         menu_button_web_app_t
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../types/message_auto_delete_timer_changed.html">
+         message_auto_delete_timer_changed_t
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../types/message_entity.html">
+         message_entity_t
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../types/message_id.html">
+         message_id_t
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../types/message_origin_channel.html">
+         message_origin_channel_t
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../types/message_origin_chat.html">
+         message_origin_chat_t
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../types/message_origin_hidden_user.html">
+         message_origin_hidden_user_t
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../types/message_origin.html">
+         message_origin_t
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../types/message_origin_user.html">
+         message_origin_user_t
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../types/message_reaction_count_updated.html">
+         message_reaction_count_updated_t
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../types/message_reaction_updated.html">
+         message_reaction_updated_t
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../types/message.html">
+         message_t
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../types/order_info.html">
+         order_info_t
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../types/passport_data.html">
+         passport_data_t
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../types/passport_element_error_data_field.html">
+         passport_element_error_data_field_t
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../types/passport_element_error_file.html">
+         passport_element_error_file_t
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../types/passport_element_error_files.html">
+         passport_element_error_files_t
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../types/passport_element_error_front_side.html">
+         passport_element_error_front_side_t
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../types/passport_element_error_reverse_side.html">
+         passport_element_error_reverse_side_t
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../types/passport_element_error_selfie.html">
+         passport_element_error_selfie_t
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../types/passport_element_error.html">
+         passport_element_error_t
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../types/passport_element_error_translation_file.html">
+         passport_element_error_translation_file_t
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../types/passport_element_error_translation_files.html">
+         passport_element_error_translation_files_t
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../types/passport_element_error_unspecified.html">
+         passport_element_error_unspecified_t
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../types/passport_file.html">
+         passport_file_t
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../types/photo_size.html">
+         photo_size_t
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../types/poll_answer.html">
+         poll_answer_t
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../types/poll_option.html">
+         poll_option_t
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../types/poll.html">
+         poll_t
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../types/pre_checkout_query.html">
+         pre_checkout_query_t
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../types/proximity_alert_triggered.html">
+         proximity_alert_triggered_t
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../types/reaction_count.html">
+         reaction_count_t
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../types/reaction_type_custom_emoji.html">
+         reaction_type_custom_emoji_t
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../types/reaction_type_emoji.html">
+         reaction_type_emoji_t
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../types/reaction_type.html">
+         reaction_type_t
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../types/reply_keyboard_markup.html">
+         reply_keyboard_markup_t
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../types/reply_keyboard_remove.html">
+         reply_keyboard_remove_t
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../types/reply_parameters.html">
+         reply_parameters_t
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../types/response_parameters.html">
+         response_parameters_t
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../types/sent_web_app_message.html">
+         sent_web_app_message_t
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../types/shipping_address.html">
+         shipping_address_t
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../types/shipping_option.html">
+         shipping_option_t
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../types/shipping_query.html">
+         shipping_query_t
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../types/sticker_set.html">
+         sticker_set_t
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../types/sticker.html">
+         sticker_t
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../types/story.html">
+         story_t
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../types/successful_payment.html">
+         successful_payment_t
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../types/switch_inline_query_chosen_chat.html">
+         switch_inline_query_chosen_chat_t
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../types/text_quote.html">
+         text_quote_t
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../types/update.html">
+         update_t
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../types/user_chat_boosts.html">
+         user_chat_boosts_t
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../types/user_profile_photos.html">
+         user_profile_photos_t
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../types/user.html">
+         user_t
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../types/users_shared.html">
+         users_shared_t
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../types/venue.html">
+         venue_t
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../types/video_chat_ended.html">
+         video_chat_ended_t
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../types/video_chat_participants_invited.html">
+         video_chat_participants_invited_t
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../types/video_chat_scheduled.html">
+         video_chat_scheduled_t
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../types/video_chat_started.html">
+         video_chat_started_t
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../types/video_note.html">
+         video_note_t
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../types/video.html">
+         video_t
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../types/voice.html">
+         voice_t
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../types/web_app_data.html">
+         web_app_data_t
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../types/web_app_info.html">
+         web_app_info_t
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../types/webhook_info.html">
+         webhook_info_t
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../types/write_access_allowed.html">
+         write_access_allowed_t
+        </a>
+       </li>
+      </ul>
+      <i class="fas fa-chevron-down">
+      </i>
+     </li>
+     <li class="toctree-l3 current active collapsible-parent">
+      <a class="reference internal" href="../methods.html">
+       Telegram Methods
+      </a>
+      <ul class="current collapse-ul">
+       <li class="toctree-l4">
+        <a class="reference internal" href="add_sticker_to_set.html">
+         add_sticker_to_set
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="answer_callback_query.html">
+         answer_callback_query
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="answer_inline_query.html">
+         answer_inline_query
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="answer_pre_checkout_query.html">
+         answer_pre_checkout_query
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="answer_shipping_query.html">
+         answer_shipping_query
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="answer_web_app_query.html">
+         answer_web_app_query
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="approve_chat_join_request.html">
+         approve_chat_join_request
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ban_chat_member.html">
+         ban_chat_member
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ban_chat_sender_chat.html">
+         ban_chat_sender_chat
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="close.html">
+         close
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="close_forum_topic.html">
+         close_forum_topic
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="close_general_forum_topic.html">
+         close_general_forum_topic
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="copy_message.html">
+         copy_message
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="copy_messages.html">
+         copy_messages
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="create_chat_invite_link.html">
+         create_chat_invite_link
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="create_forum_topic.html">
+         create_forum_topic
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="create_invoice_link.html">
+         create_invoice_link
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="create_new_sticker_set.html">
+         create_new_sticker_set
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="decline_chat_join_request.html">
+         decline_chat_join_request
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="delete_chat_photo.html">
+         delete_chat_photo
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="delete_chat_sticker_set.html">
+         delete_chat_sticker_set
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="delete_forum_topic.html">
+         delete_forum_topic
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="delete_message.html">
+         delete_message
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="delete_messages.html">
+         delete_messages
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="delete_my_commands.html">
+         delete_my_commands
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="delete_sticker_from_set.html">
+         delete_sticker_from_set
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="delete_sticker_set.html">
+         delete_sticker_set
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="delete_webhook.html">
+         delete_webhook
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="edit_chat_invite_link.html">
+         edit_chat_invite_link
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="edit_forum_topic.html">
+         edit_forum_topic
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="edit_general_forum_topic.html">
+         edit_general_forum_topic
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="edit_message_caption.html">
+         edit_message_caption
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="edit_message_live_location.html">
+         edit_message_live_location
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="edit_message_media.html">
+         edit_message_media
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="edit_message_reply_markup.html">
+         edit_message_reply_markup
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="edit_message_text.html">
+         edit_message_text
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="export_chat_invite_link.html">
+         export_chat_invite_link
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="forward_message.html">
+         forward_message
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="forward_messages.html">
+         forward_messages
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="get_chat.html">
+         get_chat
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="get_chat_administrators.html">
+         get_chat_administrators
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="get_chat_member.html">
+         get_chat_member
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="get_chat_member_count.html">
+         get_chat_member_count
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="get_chat_menu_button.html">
+         get_chat_menu_button
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="get_custom_emoji_stickers.html">
+         get_custom_emoji_stickers
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="get_file.html">
+         get_file
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="get_forum_topic_icon_stickers.html">
+         get_forum_topic_icon_stickers
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="get_game_high_scores.html">
+         get_game_high_scores
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="get_me.html">
+         get_me
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="get_my_commands.html">
+         get_my_commands
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="get_my_default_administrator_rights.html">
+         get_my_default_administrator_rights
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="get_my_description.html">
+         get_my_description
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="get_my_name.html">
+         get_my_name
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="get_my_short_description.html">
+         get_my_short_description
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="get_sticker_set.html">
+         get_sticker_set
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="get_updates.html">
+         get_updates
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="get_user_chat_boosts.html">
+         get_user_chat_boosts
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="get_user_profile_photos.html">
+         get_user_profile_photos
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="get_webhook_info.html">
+         get_webhook_info
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="hide_general_forum_topic.html">
+         hide_general_forum_topic
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="leave_chat.html">
+         leave_chat
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="log_out.html">
+         log_out
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="pin_chat_message.html">
+         pin_chat_message
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="promote_chat_member.html">
+         promote_chat_member
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="reopen_forum_topic.html">
+         reopen_forum_topic
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="reopen_general_forum_topic.html">
+         reopen_general_forum_topic
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="restrict_chat_member.html">
+         restrict_chat_member
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="revoke_chat_invite_link.html">
+         revoke_chat_invite_link
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="send_animation.html">
+         send_animation
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="send_audio.html">
+         send_audio
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="send_chat_action.html">
+         send_chat_action
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="send_contact.html">
+         send_contact
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="send_dice.html">
+         send_dice
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="send_document.html">
+         send_document
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="send_game.html">
+         send_game
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="send_invoice.html">
+         send_invoice
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="send_location.html">
+         send_location
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="send_media_group.html">
+         send_media_group
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="send_message.html">
+         send_message
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="send_photo.html">
+         send_photo
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="send_poll.html">
+         send_poll
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="send_sticker.html">
+         send_sticker
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="send_venue.html">
+         send_venue
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="send_video.html">
+         send_video
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="send_video_note.html">
+         send_video_note
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="send_voice.html">
+         send_voice
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="set_chat_administrator_custom_title.html">
+         set_chat_administrator_custom_title
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="set_chat_description.html">
+         set_chat_description
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="set_chat_menu_button.html">
+         set_chat_menu_button
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="set_chat_permissions.html">
+         set_chat_permissions
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="set_chat_photo.html">
+         set_chat_photo
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="set_chat_sticker_set.html">
+         set_chat_sticker_set
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="set_chat_title.html">
+         set_chat_title
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="set_custom_emoji_sticker_set_thumbnail.html">
+         set_custom_emoji_sticker_set_thumbnail
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="set_game_score.html">
+         set_game_score
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="set_message_reaction.html">
+         set_message_reaction
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="set_my_commands.html">
+         set_my_commands
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="set_my_default_administrator_rights.html">
+         set_my_default_administrator_rights
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="set_my_description.html">
+         set_my_description
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="set_my_name.html">
+         set_my_name
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="set_my_short_description.html">
+         set_my_short_description
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="set_passport_data_errors.html">
+         set_passport_data_errors
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="set_sticker_emoji_list.html">
+         set_sticker_emoji_list
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="set_sticker_keywords.html">
+         set_sticker_keywords
+        </a>
+       </li>
+       <li class="toctree-l4 current active">
+        <a class="current reference internal" href="#">
+         set_sticker_mask_position
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="set_sticker_position_in_set.html">
+         set_sticker_position_in_set
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="set_sticker_set_thumbnail.html">
+         set_sticker_set_thumbnail
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="set_sticker_set_title.html">
+         set_sticker_set_title
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="set_webhook.html">
+         set_webhook
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="stop_message_live_location.html">
+         stop_message_live_location
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="stop_poll.html">
+         stop_poll
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="unban_chat_member.html">
+         unban_chat_member
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="unban_chat_sender_chat.html">
+         unban_chat_sender_chat
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="unhide_general_forum_topic.html">
+         unhide_general_forum_topic
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="unpin_all_chat_messages.html">
+         unpin_all_chat_messages
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="unpin_all_forum_topic_messages.html">
+         unpin_all_forum_topic_messages
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="unpin_all_general_forum_topic_messages.html">
+         unpin_all_general_forum_topic_messages
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="unpin_chat_message.html">
+         unpin_chat_message
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="upload_sticker_file.html">
+         upload_sticker_file
+        </a>
+       </li>
+      </ul>
+      <i class="fas fa-chevron-down">
+      </i>
+     </li>
+    </ul>
+    <i class="fas fa-chevron-down">
+    </i>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+</ul>
+
+</nav>
+<h3>Versions</h3>
+<ul>
+  <li><a href="../../../../v0.1.0/index.html">v0.1.0</a></li>
+  <li><a href="../../../../v0.2.0/index.html">v0.2.0</a></li>
+  <li><a href="set_sticker_mask_position.html">api-7.1</a></li>
+</ul>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../../../_sources/api/tg/methods/set_sticker_mask_position.rst.txt"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.rst</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+            <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                    data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+                    title="Fullscreen mode"><i
+                        class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <section id="set-sticker-mask-position">
+<span id="banana-api-tg-methods-set-sticker-mask-position"></span><h1>set_sticker_mask_position<a class="headerlink" href="#set-sticker-mask-position" title="Permalink to this headline">¶</a></h1>
+<dl class="cpp function">
+<dt id="_CPPv4I0EN6banana3api25set_sticker_mask_positionE10api_resultI9boolean_tRR5AgentERR5Agent32set_sticker_mask_position_args_t">
+<span id="_CPPv3I0EN6banana3api25set_sticker_mask_positionERR5Agent32set_sticker_mask_position_args_t"></span><span id="_CPPv2I0EN6banana3api25set_sticker_mask_positionERR5Agent32set_sticker_mask_position_args_t"></span><span class="pre">template&lt;</span><span class="pre">class</span> <code class="sig-name descname"><span class="pre">Agent</span></code><span class="pre">&gt;</span><br /><span class="pre">api_result</span><span class="pre">&lt;</span><a class="reference internal" href="../../banana/basic_types.html#_CPPv4N6banana9boolean_tE" title="banana::boolean_t"><span class="pre">boolean_t</span></a><span class="pre">,</span> <a class="reference internal" href="#_CPPv4I0EN6banana3api25set_sticker_mask_positionE10api_resultI9boolean_tRR5AgentERR5Agent32set_sticker_mask_position_args_t" title="banana::api::set_sticker_mask_position::Agent"><span class="pre">Agent</span></a><span class="pre">&amp;</span><span class="pre">&amp;</span><span class="pre">&gt;</span> <code class="sig-name descname"><span class="pre">set_sticker_mask_position</span></code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4I0EN6banana3api25set_sticker_mask_positionE10api_resultI9boolean_tRR5AgentERR5Agent32set_sticker_mask_position_args_t" title="banana::api::set_sticker_mask_position::Agent"><span class="pre">Agent</span></a> <span class="pre">&amp;</span><span class="pre">&amp;</span><em><span class="pre">agent</span></em>, <a class="reference internal" href="#_CPPv4N6banana3api32set_sticker_mask_position_args_tE" title="banana::api::set_sticker_mask_position_args_t"><span class="pre">set_sticker_mask_position_args_t</span></a> <em><span class="pre">args</span></em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4I0EN6banana3api25set_sticker_mask_positionE10api_resultI9boolean_tRR5AgentERR5Agent32set_sticker_mask_position_args_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4I0EN6banana3api25set_sticker_mask_positionEvRR5Agent32set_sticker_mask_position_args_tRR1F">
+<span id="_CPPv3I0EN6banana3api25set_sticker_mask_positionERR5Agent32set_sticker_mask_position_args_tRR1F"></span><span id="_CPPv2I0EN6banana3api25set_sticker_mask_positionERR5Agent32set_sticker_mask_position_args_tRR1F"></span><span class="pre">template&lt;</span><span class="pre">class</span> <code class="sig-name descname"><span class="pre">Agent</span></code><span class="pre">&gt;</span><br /><span class="pre">void</span> <code class="sig-name descname"><span class="pre">set_sticker_mask_position</span></code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4I0EN6banana3api25set_sticker_mask_positionEvRR5Agent32set_sticker_mask_position_args_tRR1F" title="banana::api::set_sticker_mask_position::Agent"><span class="pre">Agent</span></a> <span class="pre">&amp;</span><span class="pre">&amp;</span><em><span class="pre">agent</span></em>, <a class="reference internal" href="#_CPPv4N6banana3api32set_sticker_mask_position_args_tE" title="banana::api::set_sticker_mask_position_args_t"><span class="pre">set_sticker_mask_position_args_t</span></a> <em><span class="pre">args</span></em>, <span class="pre">F</span> <span class="pre">&amp;</span><span class="pre">&amp;</span><em><span class="pre">callback</span></em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4I0EN6banana3api25set_sticker_mask_positionEvRR5Agent32set_sticker_mask_position_args_tRR1F" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p><code class="docutils literal notranslate"><span class="pre">agent</span></code> is any object satisfying <a class="reference internal" href="../../banana/agents.html#banana-api-banana-agents"><span class="std std-ref">agent concept</span></a>.</p>
+<p><code class="docutils literal notranslate"><span class="pre">callback</span></code> is any callable object accepting <code class="docutils literal notranslate"><span class="pre">expected&lt;boolean_t&gt;</span></code>.</p>
+<p>Use this method to change the mask position of a mask sticker. The sticker must belong to a sticker set that was created by the bot. Returns True on success.</p>
+</dd></dl>
+
+<dl class="cpp struct">
+<dt id="_CPPv4N6banana3api32set_sticker_mask_position_args_tE">
+<span id="_CPPv3N6banana3api32set_sticker_mask_position_args_tE"></span><span id="_CPPv2N6banana3api32set_sticker_mask_position_args_tE"></span><span id="banana::api::set_sticker_mask_position_args_t"></span><em class="property"><span class="pre">struct</span> </em><code class="sig-name descname"><span class="pre">set_sticker_mask_position_args_t</span></code><a class="headerlink" href="#_CPPv4N6banana3api32set_sticker_mask_position_args_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Arguments that should be passed to <a class="reference internal" href="#_CPPv4I0EN6banana3api25set_sticker_mask_positionE10api_resultI9boolean_tRR5AgentERR5Agent32set_sticker_mask_position_args_t" title="banana::api::set_sticker_mask_position"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">set_sticker_mask_position()</span></code></a>.</p>
+<dl class="cpp member">
+<dt id="_CPPv4N6banana3api32set_sticker_mask_position_args_t7stickerE">
+<span id="_CPPv3N6banana3api32set_sticker_mask_position_args_t7stickerE"></span><span id="_CPPv2N6banana3api32set_sticker_mask_position_args_t7stickerE"></span><span id="banana::api::set_sticker_mask_position_args_t::sticker__string_t"></span><a class="reference internal" href="../../banana/basic_types.html#_CPPv4N6banana8string_tE" title="banana::string_t"><span class="pre">string_t</span></a> <code class="sig-name descname"><span class="pre">sticker</span></code><a class="headerlink" href="#_CPPv4N6banana3api32set_sticker_mask_position_args_t7stickerE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<p>File identifier of the sticker</p>
+<dl class="cpp member">
+<dt id="_CPPv4N6banana3api32set_sticker_mask_position_args_t13mask_positionE">
+<span id="_CPPv3N6banana3api32set_sticker_mask_position_args_t13mask_positionE"></span><span id="_CPPv2N6banana3api32set_sticker_mask_position_args_t13mask_positionE"></span><span id="banana::api::set_sticker_mask_position_args_t::mask_position__optional_t:mask_position_t:"></span><span class="pre">optional_t</span><span class="pre">&lt;</span><a class="reference internal" href="../types/mask_position.html#_CPPv4N6banana3api15mask_position_tE" title="banana::api::mask_position_t"><span class="pre">mask_position_t</span></a><span class="pre">&gt;</span> <code class="sig-name descname"><span class="pre">mask_position</span></code><a class="headerlink" href="#_CPPv4N6banana3api32set_sticker_mask_position_args_t13mask_positionE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<p>A JSON-serialized object with the position where the mask should be placed on faces. Omit the parameter to remove the mask position.</p>
+</dd></dl>
+
+</section>
+
+
+              </div>
+              
+        
+        <div class='prev-next-bottom'>
+            
+    <a class='left-prev' id="prev-link" href="set_sticker_keywords.html" title="previous page">set_sticker_keywords</a>
+    <a class='right-next' id="next-link" href="set_sticker_position_in_set.html" title="next page">set_sticker_position_in_set</a>
+
+        </div>
+        
+        </div>
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Smertig<br/>
+        
+            &copy; Copyright 2020-2024.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    
+  <script src="../../../_static/js/index.d3f166471bb80abb5163.js"></script>
+
+
+    
+  </body>
+</html>
