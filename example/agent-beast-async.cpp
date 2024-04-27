@@ -33,7 +33,7 @@ int main(int argc, const char** argv) {
         banana::agent::beast_async agent{ token, io_context, ctx };
 
         std::cout << "bot name: " << banana::api::get_me(agent).get().username.value() << "\n";
-        std::cout << "message sent: " << banana::api::send_message(agent, { target, message_text + " (throwing)" }).get().message_id << "\n";
+        std::cout << "message sent: " << banana::api::send_message(agent, { .chat_id = target, .text = message_text + " (throwing)" }).get().message_id << "\n";
     }
     catch (std::exception& e) {
         std::cout << "exception while running throwing " << name << ": " << e.what() << "\n";
@@ -44,7 +44,7 @@ int main(int argc, const char** argv) {
         banana::agent::beast_async_monadic agent{ token, io_context, ctx };
 
         std::cout << "bot name: " << banana::api::get_me(agent).get().value().username.value() << "\n";
-        std::cout << "message sent: " << banana::api::send_message(agent, { target, message_text + " (monadic)" }).get().value().message_id << "\n";
+        std::cout << "message sent: " << banana::api::send_message(agent, { .chat_id = target, .text = message_text + " (monadic)" }).get().value().message_id << "\n";
     }
     catch (std::exception& e) {
         std::cout << "exception while running monadic " << name << ": " << e.what() << "\n";
@@ -57,7 +57,7 @@ int main(int argc, const char** argv) {
         banana::api::get_me(agent, [] (banana::expected<banana::api::user_t> user) {
             std::cout << "bot name: " << user->username.value() << "\n";
         });
-        banana::api::send_message(agent, { target, message_text + " (callback)"}, [] (banana::expected<banana::api::message_t> msg) {
+        banana::api::send_message(agent, { .chat_id = target, .text = message_text + " (callback)"}, [] (banana::expected<banana::api::message_t> msg) {
             std::cout << "message sent: " << msg->message_id << "\n";
         });
     }

@@ -36,7 +36,7 @@ int main(int argc, const char** argv) {
         std::cout << "bot name: " << (co_await banana::api::get_me(agent)).username.value() << "\n";
 
         // TODO: workaround for double free bug in gcc-10.2
-        banana::api::send_message_args_t args{ target, message_text + " (throwing)" };
+        banana::api::send_message_args_t args{ .chat_id = target, .text = message_text + " (throwing)" };
         std::cout << "message sent: " << (co_await banana::api::send_message(agent, std::move(args))).message_id << "\n";
         co_return;
     }, [&](std::exception_ptr e) {
@@ -57,7 +57,7 @@ int main(int argc, const char** argv) {
         std::cout << "bot name: " << (co_await banana::api::get_me(agent)).value().username.value() << "\n";
 
         // TODO: workaround for double free bug in gcc-10.2
-        banana::api::send_message_args_t args{ target, message_text + " (monadic)" };
+        banana::api::send_message_args_t args{ .chat_id = target, .text = message_text + " (monadic)" };
         std::cout << "message sent: " << (co_await banana::api::send_message(agent, std::move(args))).value().message_id << "\n";
         co_return;
     }, [&](std::exception_ptr e) {

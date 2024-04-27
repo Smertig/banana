@@ -22,7 +22,7 @@ int main(int argc, const char** argv) {
         banana::agent::default_async agent(token);
 
         std::cout << "bot name: " << banana::api::get_me(agent).get().username.value() << "\n";
-        std::cout << "message sent: " << banana::api::send_message(agent, { target, message_text }).get().message_id << "\n";
+        std::cout << "message sent: " << banana::api::send_message(agent, { .chat_id = target, .text = message_text }).get().message_id << "\n";
     }
     catch (std::exception& e) {
         std::cout << "exception while running " << name << ": " << e.what() << "\n";

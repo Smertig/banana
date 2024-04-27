@@ -24,7 +24,7 @@ int main(int argc, const char** argv) {
         banana::agent::any_blocking agent = banana::agent::default_blocking(token);
 
         std::cout << "bot name: " << banana::api::get_me(agent).username.value() << "\n";
-        std::cout << "message sent: " << banana::api::send_message(agent, { target, message_text + " (throwing)" }).message_id << "\n";
+        std::cout << "message sent: " << banana::api::send_message(agent, { .chat_id = target, .text = message_text + " (throwing)" }).message_id << "\n";
     }
     catch (std::exception& e) {
         std::cout << "exception while running throwing " << name << ": " << e.what() << "\n";
@@ -35,7 +35,7 @@ int main(int argc, const char** argv) {
         banana::agent::any_blocking_monadic agent = banana::agent::default_blocking_monadic(token);
 
         std::cout << "bot name: " << banana::api::get_me(agent).value().username.value() << "\n";
-        std::cout << "message sent: " << banana::api::send_message(agent, { target, message_text + " (monadic)" }).value().message_id << "\n";
+        std::cout << "message sent: " << banana::api::send_message(agent, { .chat_id = target, .text = message_text + " (monadic)" }).value().message_id << "\n";
     }
     catch (std::exception& e) {
         std::cout << "exception while running monadic " << name << ": " << e.what() << "\n";

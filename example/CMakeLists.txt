@@ -8,11 +8,8 @@ option(BANANA_EXAMPLES_ENABLE_CORO "Build banana examples with coroutines" OFF)
 
 message(STATUS "[banana] Build examples with coroutines: ${BANANA_EXAMPLES_ENABLE_CORO}")
 
-if (BANANA_EXAMPLES_ENABLE_CORO)
-    set(CMAKE_CXX_STANDARD 20)
-else()
-    set(CMAKE_CXX_STANDARD 17)
-endif()
+set(CMAKE_CXX_STANDARD 20)
+set(CXX_STANDARD_REQUIRED ON)
 
 if (MSVC)
     add_definitions(/bigobj)

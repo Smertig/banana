@@ -88,7 +88,7 @@ int main(int argc, const char** argv) {
         dumb_agent agent(token);
 
         std::cout << "bot name: " << banana::api::get_me(agent).username.value() << "\n";
-        std::cout << "message sent: " << banana::api::send_message(agent, { target, message_text + " (throwing)" }).message_id << "\n";
+        std::cout << "message sent: " << banana::api::send_message(agent, { .chat_id = target, .text = message_text + " (throwing)" }).message_id << "\n";
     }
     catch (std::exception& e) {
         std::cout << "exception while running throwing " << name << ": " << e.what() << "\n";
@@ -99,7 +99,7 @@ int main(int argc, const char** argv) {
         dumb_agent_monadic agent(token);
 
         std::cout << "bot name: " << banana::api::get_me(agent).value().username.value() << "\n";
-        std::cout << "message sent: " << banana::api::send_message(agent, { target, message_text + " (monadic)" }).value().message_id << "\n";
+        std::cout << "message sent: " << banana::api::send_message(agent, { .chat_id = target, .text = message_text + " (monadic)" }).value().message_id << "\n";
     }
     catch (std::exception& e) {
         std::cout << "exception while running monadic " << name << ": " << e.what() << "\n";
