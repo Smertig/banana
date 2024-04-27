@@ -7,15 +7,15 @@ from api import CppType, get_api_type_names, get_methods, get_cpp_type
 OUT_INCLUDE_PATH = "../include/banana/detail/generated"
 OUT_SOURCE_PATH = "../source/generated"
 
-out_types = open(OUT_INCLUDE_PATH + '/types.hpp', 'w')
-out_types_fwd = open(OUT_INCLUDE_PATH + '/types_fwd.hpp', 'w')
-out_api = open(OUT_INCLUDE_PATH + '/api.hpp', 'w')
-out_api_types_fwd = open(OUT_INCLUDE_PATH + '/api_types_fwd.hpp', 'w')
-out_api_enums = open(OUT_INCLUDE_PATH + '/api_enums.hpp', 'w')
-out_api_traits = open(OUT_INCLUDE_PATH + '/api_traits.hpp', 'w')
-out_ser_impl = open(OUT_SOURCE_PATH + '/serialize_impl.cxx', 'w')
-out_resp_impl = open(OUT_SOURCE_PATH + '/resp_impl.cxx', 'w')
-out_meta = open(OUT_INCLUDE_PATH + '/meta.hpp', 'w')
+out_types = open(OUT_INCLUDE_PATH + '/types.hpp', 'w', encoding='utf8')
+out_types_fwd = open(OUT_INCLUDE_PATH + '/types_fwd.hpp', 'w', encoding='utf8')
+out_api = open(OUT_INCLUDE_PATH + '/api.hpp', 'w', encoding='utf8')
+out_api_types_fwd = open(OUT_INCLUDE_PATH + '/api_types_fwd.hpp', 'w', encoding='utf8')
+out_api_enums = open(OUT_INCLUDE_PATH + '/api_enums.hpp', 'w', encoding='utf8')
+out_api_traits = open(OUT_INCLUDE_PATH + '/api_traits.hpp', 'w', encoding='utf8')
+out_ser_impl = open(OUT_SOURCE_PATH + '/serialize_impl.cxx', 'w', encoding='utf8')
+out_resp_impl = open(OUT_SOURCE_PATH + '/resp_impl.cxx', 'w', encoding='utf8')
+out_meta = open(OUT_INCLUDE_PATH + '/meta.hpp', 'w', encoding='utf8')
 
 
 def sort_by_cpp_name(names):

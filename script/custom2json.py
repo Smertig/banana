@@ -1,7 +1,7 @@
 import json
 import marko
 
-with open('custom.json') as f:
+with open('custom.json', encoding='utf8') as f:
     custom_json = json.load(f)
 
 types = {}
@@ -156,4 +156,4 @@ for jmethod in custom_json['methods']:
 json.dump({
     'types': types,
     'methods': methods
-}, open('api.json', 'w'), indent='    ', sort_keys=True, ensure_ascii=False)
+}, open('api.json', 'w', encoding='utf8'), indent='    ', sort_keys=True, ensure_ascii=False)

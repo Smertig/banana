@@ -2,7 +2,7 @@ import json
 import inflection
 
 JSON_API_PATH = "./api.json"
-db = json.load(open(JSON_API_PATH, 'r'))
+db = json.load(open(JSON_API_PATH, 'r', encoding='utf8'))
 
 _types = db['types']
 _methods = db['methods']

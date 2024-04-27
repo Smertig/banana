@@ -33,7 +33,7 @@ for api_name in api_type_names:
     doc_name = inflection.underscore(api_name)
     out_types.write(f"   {cpp_type.cpp_name} <types/{doc_name}>\n")
 
-    with open(OUT_TG_API_PATH + f'/types/{doc_name}.rst', 'w') as out_type:
+    with open(OUT_TG_API_PATH + f'/types/{doc_name}.rst', 'w', encoding='utf8') as out_type:
         out_type.write(f'''.. _banana-api-tg-types-{doc_name}:
 
 {cpp_type.cpp_name}
@@ -77,7 +77,7 @@ for name, method in api_methods.items():
     doc_name = inflection.underscore(name)
     out_methods.write(f"   {doc_name} <methods/{doc_name}>\n")
 
-    with open(OUT_TG_API_PATH + f'/methods/{doc_name}.rst', 'w') as out_method:
+    with open(OUT_TG_API_PATH + f'/methods/{doc_name}.rst', 'w', encoding='utf8') as out_method:
         return_type = get_cpp_type(method['return_type'])
 
         out_method.write(f'''.. _banana-api-tg-methods-{doc_name}:
