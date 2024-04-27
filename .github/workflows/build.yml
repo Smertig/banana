@@ -20,7 +20,7 @@ jobs:
               generic-api-call
             binary_path: "example/bin/banana-example-$name.exe"
             packages: |
-              pip install conan
+              pip install conan==1.59
 
           - name: Linux
             os: ubuntu-latest
@@ -35,7 +35,7 @@ jobs:
             binary_path: "example/bin/banana-example-$name"
             packages: |
               sudo apt-get install libssl-dev g++-10 curl
-              pip install conan
+              pip install conan==1.59
 
           - name: macOS
             os: macos-latest
@@ -60,7 +60,7 @@ jobs:
             binary_path: "example/bin/banana-example-$name"
             packages: |
               sudo apt-get install libssl-dev
-              pip install conan
+              pip install conan==1.59
 
     steps:
       - uses: actions/checkout@v2
