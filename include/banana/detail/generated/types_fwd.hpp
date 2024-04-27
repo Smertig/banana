@@ -1,3 +1,4 @@
+/// Forward declarations
 struct animation_t;
 struct audio_t;
 struct bot_command_scope_all_chat_administrators_t;
@@ -116,3 +117,23 @@ struct voice_chat_scheduled_t;
 struct voice_chat_started_t;
 struct voice_t;
 struct webhook_info_t;
+
+/// Type aliases
+
+// This object represents the scope to which bot commands are applied. Currently, the following 7 scopes are supported:
+using bot_command_scope_t = variant_t<bot_command_scope_default_t, bot_command_scope_all_private_chats_t, bot_command_scope_all_group_chats_t, bot_command_scope_all_chat_administrators_t, bot_command_scope_chat_t, bot_command_scope_chat_administrators_t, bot_command_scope_chat_member_t>;
+
+// This object contains information about one member of a chat. Currently, the following 6 types of chat members are supported:
+using chat_member_t = variant_t<chat_member_owner_t, chat_member_administrator_t, chat_member_member_t, chat_member_restricted_t, chat_member_left_t, chat_member_banned_t>;
+
+// This object represents one result of an inline query. Telegram clients currently support results of the following 20 types:
+using inline_query_result_t = variant_t<inline_query_result_cached_audio_t, inline_query_result_cached_document_t, inline_query_result_cached_gif_t, inline_query_result_cached_mpeg4_gif_t, inline_query_result_cached_photo_t, inline_query_result_cached_sticker_t, inline_query_result_cached_video_t, inline_query_result_cached_voice_t, inline_query_result_article_t, inline_query_result_audio_t, inline_query_result_contact_t, inline_query_result_game_t, inline_query_result_document_t, inline_query_result_gif_t, inline_query_result_location_t, inline_query_result_mpeg4_gif_t, inline_query_result_photo_t, inline_query_result_venue_t, inline_query_result_video_t, inline_query_result_voice_t>;
+
+// This object represents the content of a media message to be sent. It should be one of
+using input_media_t = variant_t<input_media_animation_t, input_media_document_t, input_media_audio_t, input_media_photo_t, input_media_video_t>;
+
+// This object represents the content of a message to be sent as a result of an inline query. Telegram clients currently support the following 5 types:
+using input_message_content_t = variant_t<input_text_message_content_t, input_location_message_content_t, input_venue_message_content_t, input_contact_message_content_t, input_invoice_message_content_t>;
+
+// This object represents an error in the Telegram Passport element which was submitted that should be resolved by the user. It should be one of:
+using passport_element_error_t = variant_t<passport_element_error_data_field_t, passport_element_error_front_side_t, passport_element_error_reverse_side_t, passport_element_error_selfie_t, passport_element_error_file_t, passport_element_error_files_t, passport_element_error_translation_file_t, passport_element_error_translation_files_t, passport_element_error_unspecified_t>;

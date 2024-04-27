@@ -52,6 +52,10 @@ class CppType:
     def standard_type(self):
         return CppType.is_standard_type(self.api_name)
 
+    @property
+    def is_alias(self):
+        return self.aliased_cpp_type is not None
+
     def get_cpp_name(self, is_qualified: bool):
         return self.qual_cpp_name if is_qualified else self.cpp_name
 
@@ -88,12 +92,7 @@ class CppType:
 
         assert self.api_name in _types, "unknown type: " + self.api_name
 
-        def need_fully_predeclare(field):
-            if get_cpp_type(field['type']).aliased_cpp_type is not None:
-                return True
-            return not field['optional']
-
-        required_fields = set([field['type'] for field in _types[self.api_name]['fields'] if need_fully_predeclare(field)])
+        required_fields = set([field['type'] for field in _types[self.api_name]['fields'] if not field['optional']])
 
         return set.union(set(), *map(CppType.get_all_value_types, required_fields))
 

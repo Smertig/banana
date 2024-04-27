@@ -31,9 +31,7 @@ api_refl_type_names = sort_by_cpp_name(api_type_names + [f"{method_name}Args" fo
 def dump_type(out, cpp_type: CppType):
     out.write('// {}\n'.format(cpp_type.description))
 
-    if cpp_type.aliased_cpp_type:
-        out.write(f'using {cpp_type.cpp_name} = {cpp_type.aliased_cpp_type};\n\n')
-        return
+    assert not cpp_type.is_alias
 
     prepared_fields = []
 
@@ -57,10 +55,21 @@ def dump_type(out, cpp_type: CppType):
 
 # forward declarations
 
+out_types_fwd.write("/// Forward declarations\n")
 for api_name in api_type_names:
     cpp_type = get_cpp_type(api_name)
-    if cpp_type.aliased_cpp_type is None and not cpp_type.artificial:
+    if not cpp_type.is_alias and not cpp_type.artificial:
         out_types_fwd.write(f"struct {cpp_type.cpp_name};\n")
+
+out_types_fwd.write('\n')
+out_types_fwd.write("/// Type aliases\n")
+
+for api_name in api_type_names:
+    cpp_type = get_cpp_type(api_name)
+    if cpp_type.is_alias:
+        out_types_fwd.write('\n// {}\n'.format(cpp_type.description))
+        out_types_fwd.write(f'using {cpp_type.cpp_name} = {cpp_type.aliased_cpp_type};\n')
+
 
 # dependencies graph
 
@@ -74,13 +83,17 @@ out_types.write("/// Types without dependencies\n\n")
 
 for api_name in api_type_names:
     if not G.has_node(api_name):
-        dump_type(out_types, get_cpp_type(api_name))
+        cpp_type = get_cpp_type(api_name)
+        if not cpp_type.is_alias:
+            dump_type(out_types, cpp_type)
 
 out_types.write("/// Types with dependencies\n\n")
 
 for component in networkx.weakly_connected_components(G):
     for api_name in networkx.lexicographical_topological_sort(G.subgraph(component)):
-        dump_type(out_types, get_cpp_type(api_name))
+        cpp_type = get_cpp_type(api_name)
+        if not cpp_type.is_alias:
+            dump_type(out_types, cpp_type)
 
 
 def dump_type_reflection(cpp_type: CppType):

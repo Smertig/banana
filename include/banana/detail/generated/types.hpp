@@ -311,9 +311,6 @@ struct bot_command_scope_default_t {
     string_t type; // Scope type, must be default
 };
 
-// This object represents the scope to which bot commands are applied. Currently, the following 7 scopes are supported:
-using bot_command_scope_t = variant_t<bot_command_scope_default_t, bot_command_scope_all_private_chats_t, bot_command_scope_all_group_chats_t, bot_command_scope_all_chat_administrators_t, bot_command_scope_chat_t, bot_command_scope_chat_administrators_t, bot_command_scope_chat_member_t>;
-
 // This object represents a chat.
 struct chat_t {
     integer_t                      id;                       // Unique identifier for this chat. This number may have more than 32 significant bits and some programming languages may have difficulty/silent defects in interpreting it. But it has at most 52 significant bits, so a signed 64-bit integer or double-precision float type are safe for storing this identifier.
@@ -502,9 +499,6 @@ struct chat_member_restricted_t {
     integer_t until_date;                // Date when restrictions will be lifted for this user; unix time
 };
 
-// This object contains information about one member of a chat. Currently, the following 6 types of chat members are supported:
-using chat_member_t = variant_t<chat_member_owner_t, chat_member_administrator_t, chat_member_member_t, chat_member_restricted_t, chat_member_left_t, chat_member_banned_t>;
-
 // This object represents changes in the status of a chat member.
 struct chat_member_updated_t {
     chat_t                         chat;            // Chat the user belongs to
@@ -641,100 +635,6 @@ struct inline_keyboard_button_t {
 // This object represents an inline keyboard that appears right next to the message it belongs to.
 struct inline_keyboard_markup_t {
     array_t<array_t<inline_keyboard_button_t>> inline_keyboard; // Array of button rows, each represented by an Array of InlineKeyboardButton objects
-};
-
-// Represents a Game.
-struct inline_query_result_game_t {
-    string_t                             type;            // Type of the result, must be game
-    string_t                             id;              // Unique identifier for this result, 1-64 bytes
-    string_t                             game_short_name; // Short name of the game
-    optional_t<inline_keyboard_markup_t> reply_markup;    // Optional. Inline keyboard attached to the message
-};
-
-// Represents the content of a contact message to be sent as the result of an inline query.
-struct input_contact_message_content_t {
-    string_t             phone_number; // Contact's phone number
-    string_t             first_name;   // Contact's first name
-    optional_t<string_t> last_name;    // Optional. Contact's last name
-    optional_t<string_t> vcard;        // Optional. Additional data about the contact in the form of a vCard, 0-2048 bytes
-};
-
-// Represents the content of a location message to be sent as the result of an inline query.
-struct input_location_message_content_t {
-    float_t               latitude;               // Latitude of the location in degrees
-    float_t               longitude;              // Longitude of the location in degrees
-    optional_t<float_t>   horizontal_accuracy;    // Optional. The radius of uncertainty for the location, measured in meters; 0-1500
-    optional_t<integer_t> live_period;            // Optional. Period in seconds for which the location can be updated, should be between 60 and 86400.
-    optional_t<integer_t> heading;                // Optional. For live locations, a direction in which the user is moving, in degrees. Must be between 1 and 360 if specified.
-    optional_t<integer_t> proximity_alert_radius; // Optional. For live locations, a maximum distance for proximity alerts about approaching another chat member, in meters. Must be between 1 and 100000 if specified.
-};
-
-// Represents the content of a text message to be sent as the result of an inline query.
-struct input_text_message_content_t {
-    string_t                              message_text;             // Text of the message to be sent, 1-4096 characters
-    optional_t<string_t>                  parse_mode;               // Optional. Mode for parsing entities in the message text. See formatting options for more details.
-    optional_t<array_t<message_entity_t>> entities;                 // Optional. List of special entities that appear in message text, which can be specified instead of parse_mode
-    optional_t<boolean_t>                 disable_web_page_preview; // Optional. Disables link previews for links in the sent message
-};
-
-// Represents the content of a venue message to be sent as the result of an inline query.
-struct input_venue_message_content_t {
-    float_t              latitude;          // Latitude of the venue in degrees
-    float_t              longitude;         // Longitude of the venue in degrees
-    string_t             title;             // Name of the venue
-    string_t             address;           // Address of the venue
-    optional_t<string_t> foursquare_id;     // Optional. Foursquare identifier of the venue, if known
-    optional_t<string_t> foursquare_type;   // Optional. Foursquare type of the venue, if known. (For example, “arts_entertainment/default”, “arts_entertainment/aquarium” or “food/icecream”.)
-    optional_t<string_t> google_place_id;   // Optional. Google Places identifier of the venue
-    optional_t<string_t> google_place_type; // Optional. Google Places type of the venue. (See supported types.)
-};
-
-// This object represents a portion of the price for goods or services.
-struct labeled_price_t {
-    string_t  label;  // Portion label
-    integer_t amount; // Price of the product in the smallest units of the currency (integer, not float/double). For example, for a price of US$ 1.45 pass amount = 145. See the exp parameter in currencies.json, it shows the number of digits past the decimal point for each currency (2 for the majority of currencies).
-};
-
-// Represents the content of an invoice message to be sent as the result of an inline query.
-struct input_invoice_message_content_t {
-    string_t                       title;                         // Product name, 1-32 characters
-    string_t                       description;                   // Product description, 1-255 characters
-    string_t                       payload;                       // Bot-defined invoice payload, 1-128 bytes. This will not be displayed to the user, use for your internal processes.
-    string_t                       provider_token;                // Payment provider token, obtained via Botfather
-    string_t                       currency;                      // Three-letter ISO 4217 currency code, see more on currencies
-    array_t<labeled_price_t>       prices;                        // Price breakdown, a JSON-serialized list of components (e.g. product price, tax, discount, delivery cost, delivery tax, bonus, etc.)
-    optional_t<integer_t>          max_tip_amount;                // Optional. The maximum accepted amount for tips in the smallest units of the currency (integer, not float/double). For example, for a maximum tip of US$ 1.45 pass max_tip_amount = 145. See the exp parameter in currencies.json, it shows the number of digits past the decimal point for each currency (2 for the majority of currencies). Defaults to 0
-    optional_t<array_t<integer_t>> suggested_tip_amounts;         // Optional. A JSON-serialized array of suggested amounts of tip in the smallest units of the currency (integer, not float/double). At most 4 suggested tip amounts can be specified. The suggested tip amounts must be positive, passed in a strictly increased order and must not exceed max_tip_amount.
-    optional_t<string_t>           provider_data;                 // Optional. A JSON-serialized object for data about the invoice, which will be shared with the payment provider. A detailed description of the required fields should be provided by the payment provider.
-    optional_t<string_t>           photo_url;                     // Optional. URL of the product photo for the invoice. Can be a photo of the goods or a marketing image for a service. People like it better when they see what they are paying for.
-    optional_t<integer_t>          photo_size;                    // Optional. Photo size
-    optional_t<integer_t>          photo_width;                   // Optional. Photo width
-    optional_t<integer_t>          photo_height;                  // Optional. Photo height
-    optional_t<boolean_t>          need_name;                     // Optional. Pass True, if you require the user's full name to complete the order
-    optional_t<boolean_t>          need_phone_number;             // Optional. Pass True, if you require the user's phone number to complete the order
-    optional_t<boolean_t>          need_email;                    // Optional. Pass True, if you require the user's email address to complete the order
-    optional_t<boolean_t>          need_shipping_address;         // Optional. Pass True, if you require the user's shipping address to complete the order
-    optional_t<boolean_t>          send_phone_number_to_provider; // Optional. Pass True, if user's phone number should be sent to provider
-    optional_t<boolean_t>          send_email_to_provider;        // Optional. Pass True, if user's email address should be sent to provider
-    optional_t<boolean_t>          is_flexible;                   // Optional. Pass True, if the final price depends on the shipping method
-};
-
-// This object represents the content of a message to be sent as a result of an inline query. Telegram clients currently support the following 5 types:
-using input_message_content_t = variant_t<input_text_message_content_t, input_location_message_content_t, input_venue_message_content_t, input_contact_message_content_t, input_invoice_message_content_t>;
-
-// Represents a link to an article or web page.
-struct inline_query_result_article_t {
-    string_t                             type;                  // Type of the result, must be article
-    string_t                             id;                    // Unique identifier for this result, 1-64 Bytes
-    string_t                             title;                 // Title of the result
-    input_message_content_t              input_message_content; // Content of the message to be sent
-    optional_t<inline_keyboard_markup_t> reply_markup;          // Optional. Inline keyboard attached to the message
-    optional_t<string_t>                 url;                   // Optional. URL of the result
-    optional_t<boolean_t>                hide_url;              // Optional. Pass True, if you don't want the URL to be shown in the message
-    optional_t<string_t>                 description;           // Optional. Short description of the result
-    optional_t<string_t>                 thumb_url;             // Optional. Url of the thumbnail for the result
-    optional_t<integer_t>                thumb_width;           // Optional. Thumbnail width
-    optional_t<integer_t>                thumb_height;          // Optional. Thumbnail height
 };
 
 // Represents a link to an MP3 audio file. By default, this audio file will be sent by the user. Alternatively, you can use input_message_content to send a message with the specified content instead of the audio.
@@ -887,6 +787,14 @@ struct inline_query_result_document_t {
     optional_t<integer_t>                 thumb_height;          // Optional. Thumbnail height
 };
 
+// Represents a Game.
+struct inline_query_result_game_t {
+    string_t                             type;            // Type of the result, must be game
+    string_t                             id;              // Unique identifier for this result, 1-64 bytes
+    string_t                             game_short_name; // Short name of the game
+    optional_t<inline_keyboard_markup_t> reply_markup;    // Optional. Inline keyboard attached to the message
+};
+
 // Represents a link to an animated GIF file. By default, this animated GIF file will be sent by the user with optional caption. Alternatively, you can use input_message_content to send a message with the specified content instead of the animation.
 struct inline_query_result_gif_t {
     string_t                              type;                  // Type of the result, must be gif
@@ -1010,8 +918,88 @@ struct inline_query_result_voice_t {
     optional_t<input_message_content_t>   input_message_content; // Optional. Content of the message to be sent instead of the voice recording
 };
 
-// This object represents one result of an inline query. Telegram clients currently support results of the following 20 types:
-using inline_query_result_t = variant_t<inline_query_result_cached_audio_t, inline_query_result_cached_document_t, inline_query_result_cached_gif_t, inline_query_result_cached_mpeg4_gif_t, inline_query_result_cached_photo_t, inline_query_result_cached_sticker_t, inline_query_result_cached_video_t, inline_query_result_cached_voice_t, inline_query_result_article_t, inline_query_result_audio_t, inline_query_result_contact_t, inline_query_result_game_t, inline_query_result_document_t, inline_query_result_gif_t, inline_query_result_location_t, inline_query_result_mpeg4_gif_t, inline_query_result_photo_t, inline_query_result_venue_t, inline_query_result_video_t, inline_query_result_voice_t>;
+// Represents the content of a contact message to be sent as the result of an inline query.
+struct input_contact_message_content_t {
+    string_t             phone_number; // Contact's phone number
+    string_t             first_name;   // Contact's first name
+    optional_t<string_t> last_name;    // Optional. Contact's last name
+    optional_t<string_t> vcard;        // Optional. Additional data about the contact in the form of a vCard, 0-2048 bytes
+};
+
+// Represents the content of a location message to be sent as the result of an inline query.
+struct input_location_message_content_t {
+    float_t               latitude;               // Latitude of the location in degrees
+    float_t               longitude;              // Longitude of the location in degrees
+    optional_t<float_t>   horizontal_accuracy;    // Optional. The radius of uncertainty for the location, measured in meters; 0-1500
+    optional_t<integer_t> live_period;            // Optional. Period in seconds for which the location can be updated, should be between 60 and 86400.
+    optional_t<integer_t> heading;                // Optional. For live locations, a direction in which the user is moving, in degrees. Must be between 1 and 360 if specified.
+    optional_t<integer_t> proximity_alert_radius; // Optional. For live locations, a maximum distance for proximity alerts about approaching another chat member, in meters. Must be between 1 and 100000 if specified.
+};
+
+// Represents the content of a text message to be sent as the result of an inline query.
+struct input_text_message_content_t {
+    string_t                              message_text;             // Text of the message to be sent, 1-4096 characters
+    optional_t<string_t>                  parse_mode;               // Optional. Mode for parsing entities in the message text. See formatting options for more details.
+    optional_t<array_t<message_entity_t>> entities;                 // Optional. List of special entities that appear in message text, which can be specified instead of parse_mode
+    optional_t<boolean_t>                 disable_web_page_preview; // Optional. Disables link previews for links in the sent message
+};
+
+// Represents the content of a venue message to be sent as the result of an inline query.
+struct input_venue_message_content_t {
+    float_t              latitude;          // Latitude of the venue in degrees
+    float_t              longitude;         // Longitude of the venue in degrees
+    string_t             title;             // Name of the venue
+    string_t             address;           // Address of the venue
+    optional_t<string_t> foursquare_id;     // Optional. Foursquare identifier of the venue, if known
+    optional_t<string_t> foursquare_type;   // Optional. Foursquare type of the venue, if known. (For example, “arts_entertainment/default”, “arts_entertainment/aquarium” or “food/icecream”.)
+    optional_t<string_t> google_place_id;   // Optional. Google Places identifier of the venue
+    optional_t<string_t> google_place_type; // Optional. Google Places type of the venue. (See supported types.)
+};
+
+// This object represents a portion of the price for goods or services.
+struct labeled_price_t {
+    string_t  label;  // Portion label
+    integer_t amount; // Price of the product in the smallest units of the currency (integer, not float/double). For example, for a price of US$ 1.45 pass amount = 145. See the exp parameter in currencies.json, it shows the number of digits past the decimal point for each currency (2 for the majority of currencies).
+};
+
+// Represents the content of an invoice message to be sent as the result of an inline query.
+struct input_invoice_message_content_t {
+    string_t                       title;                         // Product name, 1-32 characters
+    string_t                       description;                   // Product description, 1-255 characters
+    string_t                       payload;                       // Bot-defined invoice payload, 1-128 bytes. This will not be displayed to the user, use for your internal processes.
+    string_t                       provider_token;                // Payment provider token, obtained via Botfather
+    string_t                       currency;                      // Three-letter ISO 4217 currency code, see more on currencies
+    array_t<labeled_price_t>       prices;                        // Price breakdown, a JSON-serialized list of components (e.g. product price, tax, discount, delivery cost, delivery tax, bonus, etc.)
+    optional_t<integer_t>          max_tip_amount;                // Optional. The maximum accepted amount for tips in the smallest units of the currency (integer, not float/double). For example, for a maximum tip of US$ 1.45 pass max_tip_amount = 145. See the exp parameter in currencies.json, it shows the number of digits past the decimal point for each currency (2 for the majority of currencies). Defaults to 0
+    optional_t<array_t<integer_t>> suggested_tip_amounts;         // Optional. A JSON-serialized array of suggested amounts of tip in the smallest units of the currency (integer, not float/double). At most 4 suggested tip amounts can be specified. The suggested tip amounts must be positive, passed in a strictly increased order and must not exceed max_tip_amount.
+    optional_t<string_t>           provider_data;                 // Optional. A JSON-serialized object for data about the invoice, which will be shared with the payment provider. A detailed description of the required fields should be provided by the payment provider.
+    optional_t<string_t>           photo_url;                     // Optional. URL of the product photo for the invoice. Can be a photo of the goods or a marketing image for a service. People like it better when they see what they are paying for.
+    optional_t<integer_t>          photo_size;                    // Optional. Photo size
+    optional_t<integer_t>          photo_width;                   // Optional. Photo width
+    optional_t<integer_t>          photo_height;                  // Optional. Photo height
+    optional_t<boolean_t>          need_name;                     // Optional. Pass True, if you require the user's full name to complete the order
+    optional_t<boolean_t>          need_phone_number;             // Optional. Pass True, if you require the user's phone number to complete the order
+    optional_t<boolean_t>          need_email;                    // Optional. Pass True, if you require the user's email address to complete the order
+    optional_t<boolean_t>          need_shipping_address;         // Optional. Pass True, if you require the user's shipping address to complete the order
+    optional_t<boolean_t>          send_phone_number_to_provider; // Optional. Pass True, if user's phone number should be sent to provider
+    optional_t<boolean_t>          send_email_to_provider;        // Optional. Pass True, if user's email address should be sent to provider
+    optional_t<boolean_t>          is_flexible;                   // Optional. Pass True, if the final price depends on the shipping method
+};
+
+// Represents a link to an article or web page.
+struct inline_query_result_article_t {
+    string_t                             type;                  // Type of the result, must be article
+    string_t                             id;                    // Unique identifier for this result, 1-64 Bytes
+    string_t                             title;                 // Title of the result
+    input_message_content_t              input_message_content; // Content of the message to be sent
+    optional_t<inline_keyboard_markup_t> reply_markup;          // Optional. Inline keyboard attached to the message
+    optional_t<string_t>                 url;                   // Optional. URL of the result
+    optional_t<boolean_t>                hide_url;              // Optional. Pass True, if you don't want the URL to be shown in the message
+    optional_t<string_t>                 description;           // Optional. Short description of the result
+    optional_t<string_t>                 thumb_url;             // Optional. Url of the thumbnail for the result
+    optional_t<integer_t>                thumb_width;           // Optional. Thumbnail width
+    optional_t<integer_t>                thumb_height;          // Optional. Thumbnail height
+};
 
 // This object represents one shipping option.
 struct shipping_option_t {
@@ -1079,9 +1067,6 @@ struct input_media_video_t {
     optional_t<integer_t>                         duration;           // Optional. Video duration
     optional_t<boolean_t>                         supports_streaming; // Optional. Pass True, if the uploaded video is suitable for streaming
 };
-
-// This object represents the content of a media message to be sent. It should be one of
-using input_media_t = variant_t<input_media_animation_t, input_media_document_t, input_media_audio_t, input_media_photo_t, input_media_video_t>;
 
 // Contains data required for decrypting and authenticating EncryptedPassportElement. See the Telegram Passport Documentation for a complete description of the data decryption and authentication processes.
 struct encrypted_credentials_t {
@@ -1182,9 +1167,6 @@ struct passport_element_error_unspecified_t {
     string_t element_hash; // Base64-encoded element hash
     string_t message;      // Error message
 };
-
-// This object represents an error in the Telegram Passport element which was submitted that should be resolved by the user. It should be one of:
-using passport_element_error_t = variant_t<passport_element_error_data_field_t, passport_element_error_front_side_t, passport_element_error_reverse_side_t, passport_element_error_selfie_t, passport_element_error_file_t, passport_element_error_files_t, passport_element_error_translation_file_t, passport_element_error_translation_files_t, passport_element_error_unspecified_t>;
 
 // This object contains information about one answer option in a poll.
 struct poll_option_t {
