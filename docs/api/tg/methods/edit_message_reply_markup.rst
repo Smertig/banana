@@ -6,7 +6,7 @@ edit_message_reply_markup
 .. cpp:namespace:: banana::api
 .. cpp:function:: template <class Agent> \
                   api_result<variant_t<message_t, boolean_t>, Agent&&> edit_message_reply_markup(Agent&& agent, edit_message_reply_markup_args_t args)
-.. cpp:function:: template <class Agent> \
+.. cpp:function:: template <class Agent, class F> \
                   void edit_message_reply_markup(Agent&& agent, edit_message_reply_markup_args_t args, F&& callback)
 
    ``agent`` is any object satisfying :ref:`agent concept <banana-api-banana-agents>`.

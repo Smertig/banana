@@ -6,7 +6,7 @@ forward_message
 .. cpp:namespace:: banana::api
 .. cpp:function:: template <class Agent> \
                   api_result<message_t, Agent&&> forward_message(Agent&& agent, forward_message_args_t args)
-.. cpp:function:: template <class Agent> \
+.. cpp:function:: template <class Agent, class F> \
                   void forward_message(Agent&& agent, forward_message_args_t args, F&& callback)
 
    ``agent`` is any object satisfying :ref:`agent concept <banana-api-banana-agents>`.

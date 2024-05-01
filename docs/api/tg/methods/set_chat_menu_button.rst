@@ -6,7 +6,7 @@ set_chat_menu_button
 .. cpp:namespace:: banana::api
 .. cpp:function:: template <class Agent> \
                   api_result<boolean_t, Agent&&> set_chat_menu_button(Agent&& agent, set_chat_menu_button_args_t args)
-.. cpp:function:: template <class Agent> \
+.. cpp:function:: template <class Agent, class F> \
                   void set_chat_menu_button(Agent&& agent, set_chat_menu_button_args_t args, F&& callback)
 
    ``agent`` is any object satisfying :ref:`agent concept <banana-api-banana-agents>`.

@@ -6,7 +6,7 @@ send_game
 .. cpp:namespace:: banana::api
 .. cpp:function:: template <class Agent> \
                   api_result<message_t, Agent&&> send_game(Agent&& agent, send_game_args_t args)
-.. cpp:function:: template <class Agent> \
+.. cpp:function:: template <class Agent, class F> \
                   void send_game(Agent&& agent, send_game_args_t args, F&& callback)
 
    ``agent`` is any object satisfying :ref:`agent concept <banana-api-banana-agents>`.

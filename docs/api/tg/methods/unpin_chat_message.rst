@@ -6,7 +6,7 @@ unpin_chat_message
 .. cpp:namespace:: banana::api
 .. cpp:function:: template <class Agent> \
                   api_result<boolean_t, Agent&&> unpin_chat_message(Agent&& agent, unpin_chat_message_args_t args)
-.. cpp:function:: template <class Agent> \
+.. cpp:function:: template <class Agent, class F> \
                   void unpin_chat_message(Agent&& agent, unpin_chat_message_args_t args, F&& callback)
 
    ``agent`` is any object satisfying :ref:`agent concept <banana-api-banana-agents>`.

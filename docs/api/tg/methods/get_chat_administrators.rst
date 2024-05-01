@@ -6,7 +6,7 @@ get_chat_administrators
 .. cpp:namespace:: banana::api
 .. cpp:function:: template <class Agent> \
                   api_result<array_t<chat_member_t>, Agent&&> get_chat_administrators(Agent&& agent, get_chat_administrators_args_t args)
-.. cpp:function:: template <class Agent> \
+.. cpp:function:: template <class Agent, class F> \
                   void get_chat_administrators(Agent&& agent, get_chat_administrators_args_t args, F&& callback)
 
    ``agent`` is any object satisfying :ref:`agent concept <banana-api-banana-agents>`.

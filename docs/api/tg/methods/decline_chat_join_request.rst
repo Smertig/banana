@@ -6,7 +6,7 @@ decline_chat_join_request
 .. cpp:namespace:: banana::api
 .. cpp:function:: template <class Agent> \
                   api_result<boolean_t, Agent&&> decline_chat_join_request(Agent&& agent, decline_chat_join_request_args_t args)
-.. cpp:function:: template <class Agent> \
+.. cpp:function:: template <class Agent, class F> \
                   void decline_chat_join_request(Agent&& agent, decline_chat_join_request_args_t args, F&& callback)
 
    ``agent`` is any object satisfying :ref:`agent concept <banana-api-banana-agents>`.

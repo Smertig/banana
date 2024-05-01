@@ -88,7 +88,7 @@ for name, method in api_methods.items():
 .. cpp:namespace:: banana::api
 .. cpp:function:: template <class Agent> \\
                   api_result<{return_type.cpp_name}, Agent&&> {doc_name}(Agent&& agent{(", " + doc_name + "_args_t args") if method["params"] else "" })
-.. cpp:function:: template <class Agent> \\
+.. cpp:function:: template <class Agent, class F> \\
                   void {doc_name}(Agent&& agent{(", " + doc_name + "_args_t args") if method["params"] else "" }, F&& callback)
 
    ``agent`` is any object satisfying :ref:`agent concept <banana-api-banana-agents>`.

@@ -6,7 +6,7 @@ get_me
 .. cpp:namespace:: banana::api
 .. cpp:function:: template <class Agent> \
                   api_result<user_t, Agent&&> get_me(Agent&& agent)
-.. cpp:function:: template <class Agent> \
+.. cpp:function:: template <class Agent, class F> \
                   void get_me(Agent&& agent, F&& callback)
 
    ``agent`` is any object satisfying :ref:`agent concept <banana-api-banana-agents>`.

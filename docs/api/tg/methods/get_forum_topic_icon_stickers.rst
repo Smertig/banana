@@ -6,7 +6,7 @@ get_forum_topic_icon_stickers
 .. cpp:namespace:: banana::api
 .. cpp:function:: template <class Agent> \
                   api_result<array_t<sticker_t>, Agent&&> get_forum_topic_icon_stickers(Agent&& agent)
-.. cpp:function:: template <class Agent> \
+.. cpp:function:: template <class Agent, class F> \
                   void get_forum_topic_icon_stickers(Agent&& agent, F&& callback)
 
    ``agent`` is any object satisfying :ref:`agent concept <banana-api-banana-agents>`.

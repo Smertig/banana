@@ -6,7 +6,7 @@ stop_message_live_location
 .. cpp:namespace:: banana::api
 .. cpp:function:: template <class Agent> \
                   api_result<variant_t<message_t, boolean_t>, Agent&&> stop_message_live_location(Agent&& agent, stop_message_live_location_args_t args)
-.. cpp:function:: template <class Agent> \
+.. cpp:function:: template <class Agent, class F> \
                   void stop_message_live_location(Agent&& agent, stop_message_live_location_args_t args, F&& callback)
 
    ``agent`` is any object satisfying :ref:`agent concept <banana-api-banana-agents>`.

@@ -6,7 +6,7 @@ create_invoice_link
 .. cpp:namespace:: banana::api
 .. cpp:function:: template <class Agent> \
                   api_result<string_t, Agent&&> create_invoice_link(Agent&& agent, create_invoice_link_args_t args)
-.. cpp:function:: template <class Agent> \
+.. cpp:function:: template <class Agent, class F> \
                   void create_invoice_link(Agent&& agent, create_invoice_link_args_t args, F&& callback)
 
    ``agent`` is any object satisfying :ref:`agent concept <banana-api-banana-agents>`.
