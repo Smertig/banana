@@ -38,8 +38,8 @@ templates_path = ['_templates']
 
 html_sidebars = {
     '**': [
-        'sidebar-search-bs.html',
-        'sbt-sidebar-nav.html',
+        'search-field.html',
+        'sidebar-nav-bs.html',
         #'sbt-sidebar-footer',
         'versioning.html',
     ],
