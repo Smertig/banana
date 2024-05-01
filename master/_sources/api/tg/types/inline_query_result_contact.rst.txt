@@ -39,14 +39,14 @@ inline_query_result_contact_t
 
    Optional. Content of the message to be sent instead of the contact
 
-   .. cpp:member:: optional_t<string_t> thumb_url
+   .. cpp:member:: optional_t<string_t> thumbnail_url
 
    Optional. Url of the thumbnail for the result
 
-   .. cpp:member:: optional_t<integer_t> thumb_width
+   .. cpp:member:: optional_t<integer_t> thumbnail_width
 
    Optional. Thumbnail width
 
-   .. cpp:member:: optional_t<integer_t> thumb_height
+   .. cpp:member:: optional_t<integer_t> thumbnail_height
 
    Optional. Thumbnail height

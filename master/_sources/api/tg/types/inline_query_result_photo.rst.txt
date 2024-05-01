@@ -17,9 +17,9 @@ inline_query_result_photo_t
 
    .. cpp:member:: string_t photo_url
 
-   A valid URL of the photo. Photo must be in jpeg format. Photo size must not exceed 5MB
+   A valid URL of the photo. Photo must be in JPEG format. Photo size must not exceed 5MB
 
-   .. cpp:member:: string_t thumb_url
+   .. cpp:member:: string_t thumbnail_url
 
    URL of the thumbnail for the photo
 

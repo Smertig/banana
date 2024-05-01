@@ -13,7 +13,7 @@ stop_poll
 
    ``callback`` is any callable object accepting ``expected<poll_t>``.
 
-   Use this method to stop a poll which was sent by the bot. On success, the stopped Poll with the final results is returned.
+   Use this method to stop a poll which was sent by the bot. On success, the stopped Poll is returned.
 
 .. cpp:struct:: stop_poll_args_t
 

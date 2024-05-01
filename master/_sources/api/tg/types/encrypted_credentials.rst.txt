@@ -5,7 +5,7 @@ encrypted_credentials_t
 
 .. cpp:struct:: banana::api::encrypted_credentials_t
 
-   Contains data required for decrypting and authenticating EncryptedPassportElement. See the Telegram Passport Documentation for a complete description of the data decryption and authentication processes.
+   Describes data required for decrypting and authenticating EncryptedPassportElement. See the Telegram Passport Documentation for a complete description of the data decryption and authentication processes.
 
    .. cpp:member:: string_t data
 

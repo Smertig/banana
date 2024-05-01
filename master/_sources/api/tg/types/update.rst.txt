@@ -9,23 +9,31 @@ update_t
 
    .. cpp:member:: integer_t update_id
 
-   The update's unique identifier. Update identifiers start from a certain positive number and increase sequentially. This ID becomes especially handy if you're using Webhooks, since it allows you to ignore repeated updates or to restore the correct update sequence, should they get out of order. If there are no new updates for at least a week, then identifier of the next update will be chosen randomly instead of sequentially.
+   The update's unique identifier. Update identifiers start from a certain positive number and increase sequentially. This identifier becomes especially handy if you're using webhooks, since it allows you to ignore repeated updates or to restore the correct update sequence, should they get out of order. If there are no new updates for at least a week, then identifier of the next update will be chosen randomly instead of sequentially.
 
    .. cpp:member:: optional_t<message_t> message
 
-   Optional. New incoming message of any kind — text, photo, sticker, etc.
+   Optional. New incoming message of any kind - text, photo, sticker, etc.
 
    .. cpp:member:: optional_t<message_t> edited_message
 
-   Optional. New version of a message that is known to the bot and was edited
+   Optional. New version of a message that is known to the bot and was edited. This update may at times be triggered by changes to message fields that are either unavailable or not actively used by your bot.
 
    .. cpp:member:: optional_t<message_t> channel_post
 
-   Optional. New incoming channel post of any kind — text, photo, sticker, etc.
+   Optional. New incoming channel post of any kind - text, photo, sticker, etc.
 
    .. cpp:member:: optional_t<message_t> edited_channel_post
 
-   Optional. New version of a channel post that is known to the bot and was edited
+   Optional. New version of a channel post that is known to the bot and was edited. This update may at times be triggered by changes to message fields that are either unavailable or not actively used by your bot.
+
+   .. cpp:member:: optional_t<message_reaction_updated_t> message_reaction
+
+   Optional. A reaction to a message was changed by a user. The bot must be an administrator in the chat and must explicitly specify "message_reaction" in the list of allowed_updates to receive these updates. The update isn't received for reactions set by bots.
+
+   .. cpp:member:: optional_t<message_reaction_count_updated_t> message_reaction_count
+
+   Optional. Reactions to a message with anonymous reactions were changed. The bot must be an administrator in the chat and must explicitly specify "message_reaction_count" in the list of allowed_updates to receive these updates. The updates are grouped and can be sent with delay up to a few minutes.
 
    .. cpp:member:: optional_t<inline_query_t> inline_query
 
@@ -49,7 +57,7 @@ update_t
 
    .. cpp:member:: optional_t<poll_t> poll
 
-   Optional. New poll state. Bots receive only updates about stopped polls and polls, which are sent by the bot
+   Optional. New poll state. Bots receive only updates about manually stopped polls and polls, which are sent by the bot
 
    .. cpp:member:: optional_t<poll_answer_t> poll_answer
 
@@ -61,4 +69,16 @@ update_t
 
    .. cpp:member:: optional_t<chat_member_updated_t> chat_member
 
-   Optional. A chat member's status was updated in a chat. The bot must be an administrator in the chat and must explicitly specify “chat_member” in the list of allowed_updates to receive these updates.
+   Optional. A chat member's status was updated in a chat. The bot must be an administrator in the chat and must explicitly specify "chat_member" in the list of allowed_updates to receive these updates.
+
+   .. cpp:member:: optional_t<chat_join_request_t> chat_join_request
+
+   Optional. A request to join the chat has been sent. The bot must have the can_invite_users administrator right in the chat to receive these updates.
+
+   .. cpp:member:: optional_t<chat_boost_updated_t> chat_boost
+
+   Optional. A chat boost was added or changed. The bot must be an administrator in the chat to receive these updates.
+
+   .. cpp:member:: optional_t<chat_boost_removed_t> removed_chat_boost
+
+   Optional. A boost was removed from a chat. The bot must be an administrator in the chat to receive these updates.

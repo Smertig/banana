@@ -13,7 +13,7 @@ set_chat_photo
 
    ``callback`` is any callable object accepting ``expected<boolean_t>``.
 
-   Use this method to set a new profile photo for the chat. Photos can't be changed for private chats. The bot must be an administrator in the chat for this to work and must have the appropriate admin rights. Returns True on success.
+   Use this method to set a new profile photo for the chat. Photos can't be changed for private chats. The bot must be an administrator in the chat for this to work and must have the appropriate administrator rights. Returns True on success.
 
 .. cpp:struct:: set_chat_photo_args_t
 

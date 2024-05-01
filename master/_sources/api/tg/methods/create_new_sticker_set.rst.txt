@@ -13,7 +13,7 @@ create_new_sticker_set
 
    ``callback`` is any callable object accepting ``expected<boolean_t>``.
 
-   Use this method to create a new sticker set owned by a user. The bot will be able to edit the sticker set thus created. You must use exactly one of the fields png_sticker or tgs_sticker. Returns True on success.
+   Use this method to create a new sticker set owned by a user. The bot will be able to edit the sticker set thus created. Returns True on success.
 
 .. cpp:struct:: create_new_sticker_set_args_t
 
@@ -26,28 +26,24 @@ create_new_sticker_set
 
    .. cpp:member:: string_t name
 
-   Short name of sticker set, to be used in t.me/addstickers/ URLs (e.g., animals). Can contain only english letters, digits and underscores. Must begin with a letter, can't contain consecutive underscores and must end in “_by_<bot username>”. <bot_username> is case insensitive. 1-64 characters.
+   Short name of sticker set, to be used in t.me/addstickers/ URLs (e.g., animals). Can contain only English letters, digits and underscores. Must begin with a letter, can't contain consecutive underscores and must end in "_by_<bot_username>". <bot_username> is case insensitive. 1-64 characters.
 
    .. cpp:member:: string_t title
 
    Sticker set title, 1-64 characters
 
-   .. cpp:member:: optional_t<variant_t<input_file_t, string_t>> png_sticker
+   .. cpp:member:: array_t<input_sticker_t> stickers
 
-   PNG image with the sticker, must be up to 512 kilobytes in size, dimensions must not exceed 512px, and either width or height must be exactly 512px. Pass a file_id as a String to send a file that already exists on the Telegram servers, pass an HTTP URL as a String for Telegram to get a file from the Internet, or upload a new one using multipart/form-data. More info on Sending Files »
+   A JSON-serialized list of 1-50 initial stickers to be added to the sticker set
 
-   .. cpp:member:: optional_t<input_file_t> tgs_sticker
+   .. cpp:member:: string_t sticker_format
 
-   TGS animation with the sticker, uploaded using multipart/form-data. See https://core.telegram.org/animated_stickers#technical-requirements for technical requirements
+   Format of stickers in the set, must be one of “static”, “animated”, “video”
 
-   .. cpp:member:: string_t emojis
+   .. cpp:member:: optional_t<string_t> sticker_type
 
-   One or more emoji corresponding to the sticker
+   Type of stickers in the set, pass “regular”, “mask”, or “custom_emoji”. By default, a regular sticker set is created.
 
-   .. cpp:member:: optional_t<boolean_t> contains_masks
+   .. cpp:member:: optional_t<boolean_t> needs_repainting
 
-   Pass True, if a set of mask stickers should be created
-
-   .. cpp:member:: optional_t<mask_position_t> mask_position
-
-   A JSON-serialized object for position where the mask should be placed on faces
+   Pass True if stickers in the sticker set must be repainted to the color of text when used in messages, the accent color if used as emoji status, white on chat photos, or another appropriate color based on context; for custom emoji sticker sets only

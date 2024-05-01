@@ -13,7 +13,7 @@ send_sticker
 
    ``callback`` is any callable object accepting ``expected<message_t>``.
 
-   Use this method to send static .WEBP or animated .TGS stickers. On success, the sent Message is returned.
+   Use this method to send static .WEBP, animated .TGS, or video .WEBM stickers. On success, the sent Message is returned.
 
 .. cpp:struct:: send_sticker_args_t
 
@@ -24,21 +24,29 @@ send_sticker
 
    Unique identifier for the target chat or username of the target channel (in the format @channelusername)
 
+   .. cpp:member:: optional_t<integer_t> message_thread_id
+
+   Unique identifier for the target message thread (topic) of the forum; for forum supergroups only
+
    .. cpp:member:: variant_t<input_file_t, string_t> sticker
 
-   Sticker to send. Pass a file_id as String to send a file that exists on the Telegram servers (recommended), pass an HTTP URL as a String for Telegram to get a .WEBP file from the Internet, or upload a new one using multipart/form-data. More info on Sending Files »
+   Sticker to send. Pass a file_id as String to send a file that exists on the Telegram servers (recommended), pass an HTTP URL as a String for Telegram to get a .WEBP sticker from the Internet, or upload a new .WEBP or .TGS sticker using multipart/form-data. More information on Sending Files ». Video stickers can only be sent by a file_id. Animated stickers can't be sent via an HTTP URL.
+
+   .. cpp:member:: optional_t<string_t> emoji
+
+   Emoji associated with the sticker; only for just uploaded stickers
 
    .. cpp:member:: optional_t<boolean_t> disable_notification
 
    Sends the message silently. Users will receive a notification with no sound.
 
-   .. cpp:member:: optional_t<integer_t> reply_to_message_id
+   .. cpp:member:: optional_t<boolean_t> protect_content
 
-   If the message is a reply, ID of the original message
+   Protects the contents of the sent message from forwarding and saving
 
-   .. cpp:member:: optional_t<boolean_t> allow_sending_without_reply
+   .. cpp:member:: optional_t<reply_parameters_t> reply_parameters
 
-   Pass True, if the message should be sent even if the specified replied-to message is not found
+   Description of the message to reply to
 
    .. cpp:member:: optional_t<variant_t<inline_keyboard_markup_t, reply_keyboard_markup_t, reply_keyboard_remove_t, force_reply_t>> reply_markup
 

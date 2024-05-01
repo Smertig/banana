@@ -5,7 +5,7 @@ response_parameters_t
 
 .. cpp:struct:: banana::api::response_parameters_t
 
-   Contains information about why a request was unsuccessful.
+   Describes why a request was unsuccessful.
 
    .. cpp:member:: optional_t<integer_t> migrate_to_chat_id
 

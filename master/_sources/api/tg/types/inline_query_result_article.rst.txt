@@ -33,20 +33,20 @@ inline_query_result_article_t
 
    .. cpp:member:: optional_t<boolean_t> hide_url
 
-   Optional. Pass True, if you don't want the URL to be shown in the message
+   Optional. Pass True if you don't want the URL to be shown in the message
 
    .. cpp:member:: optional_t<string_t> description
 
    Optional. Short description of the result
 
-   .. cpp:member:: optional_t<string_t> thumb_url
+   .. cpp:member:: optional_t<string_t> thumbnail_url
 
    Optional. Url of the thumbnail for the result
 
-   .. cpp:member:: optional_t<integer_t> thumb_width
+   .. cpp:member:: optional_t<integer_t> thumbnail_width
 
    Optional. Thumbnail width
 
-   .. cpp:member:: optional_t<integer_t> thumb_height
+   .. cpp:member:: optional_t<integer_t> thumbnail_height
 
    Optional. Thumbnail height

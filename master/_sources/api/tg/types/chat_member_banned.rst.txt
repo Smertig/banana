@@ -17,4 +17,4 @@ chat_member_banned_t
 
    .. cpp:member:: integer_t until_date
 
-   Date when restrictions will be lifted for this user; unix time
+   Date when restrictions will be lifted for this user; Unix time. If 0, then the user is banned forever

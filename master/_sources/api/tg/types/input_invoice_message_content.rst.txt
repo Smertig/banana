@@ -21,7 +21,7 @@ input_invoice_message_content_t
 
    .. cpp:member:: string_t provider_token
 
-   Payment provider token, obtained via Botfather
+   Payment provider token, obtained via @BotFather
 
    .. cpp:member:: string_t currency
 
@@ -45,11 +45,11 @@ input_invoice_message_content_t
 
    .. cpp:member:: optional_t<string_t> photo_url
 
-   Optional. URL of the product photo for the invoice. Can be a photo of the goods or a marketing image for a service. People like it better when they see what they are paying for.
+   Optional. URL of the product photo for the invoice. Can be a photo of the goods or a marketing image for a service.
 
    .. cpp:member:: optional_t<integer_t> photo_size
 
-   Optional. Photo size
+   Optional. Photo size in bytes
 
    .. cpp:member:: optional_t<integer_t> photo_width
 
@@ -61,28 +61,28 @@ input_invoice_message_content_t
 
    .. cpp:member:: optional_t<boolean_t> need_name
 
-   Optional. Pass True, if you require the user's full name to complete the order
+   Optional. Pass True if you require the user's full name to complete the order
 
    .. cpp:member:: optional_t<boolean_t> need_phone_number
 
-   Optional. Pass True, if you require the user's phone number to complete the order
+   Optional. Pass True if you require the user's phone number to complete the order
 
    .. cpp:member:: optional_t<boolean_t> need_email
 
-   Optional. Pass True, if you require the user's email address to complete the order
+   Optional. Pass True if you require the user's email address to complete the order
 
    .. cpp:member:: optional_t<boolean_t> need_shipping_address
 
-   Optional. Pass True, if you require the user's shipping address to complete the order
+   Optional. Pass True if you require the user's shipping address to complete the order
 
    .. cpp:member:: optional_t<boolean_t> send_phone_number_to_provider
 
-   Optional. Pass True, if user's phone number should be sent to provider
+   Optional. Pass True if the user's phone number should be sent to provider
 
    .. cpp:member:: optional_t<boolean_t> send_email_to_provider
 
-   Optional. Pass True, if user's email address should be sent to provider
+   Optional. Pass True if the user's email address should be sent to provider
 
    .. cpp:member:: optional_t<boolean_t> is_flexible
 
-   Optional. Pass True, if the final price depends on the shipping method
+   Optional. Pass True if the final price depends on the shipping method

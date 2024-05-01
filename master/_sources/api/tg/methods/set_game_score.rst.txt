@@ -13,7 +13,7 @@ set_game_score
 
    ``callback`` is any callable object accepting ``expected<variant_t<message_t, boolean_t>>``.
 
-   Use this method to set the score of the specified user in a game. On success, if the message was sent by the bot, returns the edited Message, otherwise returns True. Returns an error, if the new score is not greater than the user's current score in the chat and force is False.
+   Use this method to set the score of the specified user in a game message. On success, if the message is not an inline message, the Message is returned, otherwise True is returned. Returns an error, if the new score is not greater than the user's current score in the chat and force is False.
 
 .. cpp:struct:: set_game_score_args_t
 
@@ -30,11 +30,11 @@ set_game_score
 
    .. cpp:member:: optional_t<boolean_t> force
 
-   Pass True, if the high score is allowed to decrease. This can be useful when fixing mistakes or banning cheaters
+   Pass True if the high score is allowed to decrease. This can be useful when fixing mistakes or banning cheaters
 
    .. cpp:member:: optional_t<boolean_t> disable_edit_message
 
-   Pass True, if the game message should not be automatically edited to include the current scoreboard
+   Pass True if the game message should not be automatically edited to include the current scoreboard
 
    .. cpp:member:: optional_t<integer_t> chat_id
 

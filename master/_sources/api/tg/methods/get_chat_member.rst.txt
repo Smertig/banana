@@ -13,7 +13,7 @@ get_chat_member
 
    ``callback`` is any callable object accepting ``expected<chat_member_t>``.
 
-   Use this method to get information about a member of a chat. Returns a ChatMember object on success.
+   Use this method to get information about a member of a chat. The method is only guaranteed to work for other users if the bot is an administrator in the chat. Returns a ChatMember object on success.
 
 .. cpp:struct:: get_chat_member_args_t
 

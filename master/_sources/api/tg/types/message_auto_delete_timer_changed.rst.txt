@@ -9,4 +9,4 @@ message_auto_delete_timer_changed_t
 
    .. cpp:member:: integer_t message_auto_delete_time
 
-   New auto-delete time for messages in the chat
+   New auto-delete time for messages in the chat; in seconds

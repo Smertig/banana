@@ -15,9 +15,9 @@ callback_query_t
 
    Sender
 
-   .. cpp:member:: optional_t<message_t> message
+   .. cpp:member:: optional_t<maybe_inaccessible_message_t> message
 
-   Optional. Message with the callback button that originated the query. Note that message content and message date will not be available if the message is too old
+   Optional. Message sent by the bot with the callback button that originated the query
 
    .. cpp:member:: optional_t<string_t> inline_message_id
 
@@ -29,7 +29,7 @@ callback_query_t
 
    .. cpp:member:: optional_t<string_t> data
 
-   Optional. Data associated with the callback button. Be aware that a bad client can send arbitrary data in this field.
+   Optional. Data associated with the callback button. Be aware that the message originated the query can contain no callback buttons with this data.
 
    .. cpp:member:: optional_t<string_t> game_short_name
 

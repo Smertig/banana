@@ -15,18 +15,22 @@ sticker_set_t
 
    Sticker set title
 
+   .. cpp:member:: string_t sticker_type
+
+   Type of stickers in the set, currently one of “regular”, “mask”, “custom_emoji”
+
    .. cpp:member:: boolean_t is_animated
 
    True, if the sticker set contains animated stickers
 
-   .. cpp:member:: boolean_t contains_masks
+   .. cpp:member:: boolean_t is_video
 
-   True, if the sticker set contains masks
+   True, if the sticker set contains video stickers
 
    .. cpp:member:: array_t<sticker_t> stickers
 
    List of all set stickers
 
-   .. cpp:member:: optional_t<photo_size_t> thumb
+   .. cpp:member:: optional_t<photo_size_t> thumbnail
 
-   Optional. Sticker set thumbnail in the .WEBP or .TGS format
+   Optional. Sticker set thumbnail in the .WEBP, .TGS, or .WEBM format

@@ -9,8 +9,8 @@ bot_command_t
 
    .. cpp:member:: string_t command
 
-   Text of the command, 1-32 characters. Can contain only lowercase English letters, digits and underscores.
+   Text of the command; 1-32 characters. Can contain only lowercase English letters, digits and underscores.
 
    .. cpp:member:: string_t description
 
-   Description of the command, 3-256 characters.
+   Description of the command; 1-256 characters.

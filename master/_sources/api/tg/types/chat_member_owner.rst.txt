@@ -15,10 +15,10 @@ chat_member_owner_t
 
    Information about the user
 
-   .. cpp:member:: string_t custom_title
-
-   Custom title for this user
-
    .. cpp:member:: boolean_t is_anonymous
 
    True, if the user's presence in the chat is hidden
+
+   .. cpp:member:: optional_t<string_t> custom_title
+
+   Optional. Custom title for this user

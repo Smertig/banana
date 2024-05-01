@@ -17,7 +17,7 @@ passport_file_t
 
    .. cpp:member:: integer_t file_size
 
-   File size
+   File size in bytes
 
    .. cpp:member:: integer_t file_date
 

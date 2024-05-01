@@ -27,7 +27,7 @@ animation_t
 
    Duration of the video in seconds as defined by sender
 
-   .. cpp:member:: optional_t<photo_size_t> thumb
+   .. cpp:member:: optional_t<photo_size_t> thumbnail
 
    Optional. Animation thumbnail as defined by sender
 
@@ -41,4 +41,4 @@ animation_t
 
    .. cpp:member:: optional_t<integer_t> file_size
 
-   Optional. File size
+   Optional. File size in bytes. It can be bigger than 2^31 and some programming languages may have difficulty/silent defects in interpreting it. But it has at most 52 significant bits, so a signed 64-bit integer or double-precision float type are safe for storing this value.

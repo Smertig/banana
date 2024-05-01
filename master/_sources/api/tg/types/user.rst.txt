@@ -31,6 +31,14 @@ user_t
 
    Optional. IETF language tag of the user's language
 
+   .. cpp:member:: optional_t<boolean_t> is_premium
+
+   Optional. True, if this user is a Telegram Premium user
+
+   .. cpp:member:: optional_t<boolean_t> added_to_attachment_menu
+
+   Optional. True, if this user added the bot to the attachment menu
+
    .. cpp:member:: optional_t<boolean_t> can_join_groups
 
    Optional. True, if the bot can be invited to groups. Returned only in getMe.

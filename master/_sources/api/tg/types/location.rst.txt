@@ -7,13 +7,13 @@ location_t
 
    This object represents a point on the map.
 
-   .. cpp:member:: float_t longitude
-
-   Longitude as defined by sender
-
    .. cpp:member:: float_t latitude
 
    Latitude as defined by sender
+
+   .. cpp:member:: float_t longitude
+
+   Longitude as defined by sender
 
    .. cpp:member:: optional_t<float_t> horizontal_accuracy
 
@@ -21,7 +21,7 @@ location_t
 
    .. cpp:member:: optional_t<integer_t> live_period
 
-   Optional. Time relative to the message sending date, during which the location can be updated, in seconds. For active live locations only.
+   Optional. Time relative to the message sending date, during which the location can be updated; in seconds. For active live locations only.
 
    .. cpp:member:: optional_t<integer_t> heading
 
@@ -29,4 +29,4 @@ location_t
 
    .. cpp:member:: optional_t<integer_t> proximity_alert_radius
 
-   Optional. Maximum distance for proximity alerts about approaching another chat member, in meters. For sent live locations only.
+   Optional. The maximum distance for proximity alerts about approaching another chat member, in meters. For sent live locations only.

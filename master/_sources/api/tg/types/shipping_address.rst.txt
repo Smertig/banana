@@ -9,7 +9,7 @@ shipping_address_t
 
    .. cpp:member:: string_t country_code
 
-   ISO 3166-1 alpha-2 country code
+   Two-letter ISO 3166-1 alpha-2 country code
 
    .. cpp:member:: string_t state
 

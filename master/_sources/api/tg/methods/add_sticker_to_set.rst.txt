@@ -13,7 +13,7 @@ add_sticker_to_set
 
    ``callback`` is any callable object accepting ``expected<boolean_t>``.
 
-   Use this method to add a new sticker to a set created by the bot. You must use exactly one of the fields png_sticker or tgs_sticker. Animated stickers can be added to animated sticker sets and only to them. Animated sticker sets can have up to 50 stickers. Static sticker sets can have up to 120 stickers. Returns True on success.
+   Use this method to add a new sticker to a set created by the bot. The format of the added sticker must match the format of the other stickers in the set. Emoji sticker sets can have up to 200 stickers. Animated and video sticker sets can have up to 50 stickers. Static sticker sets can have up to 120 stickers. Returns True on success.
 
 .. cpp:struct:: add_sticker_to_set_args_t
 
@@ -28,18 +28,6 @@ add_sticker_to_set
 
    Sticker set name
 
-   .. cpp:member:: optional_t<variant_t<input_file_t, string_t>> png_sticker
+   .. cpp:member:: input_sticker_t sticker
 
-   PNG image with the sticker, must be up to 512 kilobytes in size, dimensions must not exceed 512px, and either width or height must be exactly 512px. Pass a file_id as a String to send a file that already exists on the Telegram servers, pass an HTTP URL as a String for Telegram to get a file from the Internet, or upload a new one using multipart/form-data. More info on Sending Files »
-
-   .. cpp:member:: optional_t<input_file_t> tgs_sticker
-
-   TGS animation with the sticker, uploaded using multipart/form-data. See https://core.telegram.org/animated_stickers#technical-requirements for technical requirements
-
-   .. cpp:member:: string_t emojis
-
-   One or more emoji corresponding to the sticker
-
-   .. cpp:member:: optional_t<mask_position_t> mask_position
-
-   A JSON-serialized object for position where the mask should be placed on faces
+   A JSON-serialized object with information about the added sticker. If exactly the same sticker had already been added to the set, then the set isn't changed.

@@ -24,6 +24,10 @@ send_media_group
 
    Unique identifier for the target chat or username of the target channel (in the format @channelusername)
 
+   .. cpp:member:: optional_t<integer_t> message_thread_id
+
+   Unique identifier for the target message thread (topic) of the forum; for forum supergroups only
+
    .. cpp:member:: array_t<variant_t<input_media_audio_t, input_media_document_t, input_media_photo_t, input_media_video_t>> media
 
    A JSON-serialized array describing messages to be sent, must include 2-10 items
@@ -32,10 +36,10 @@ send_media_group
 
    Sends messages silently. Users will receive a notification with no sound.
 
-   .. cpp:member:: optional_t<integer_t> reply_to_message_id
+   .. cpp:member:: optional_t<boolean_t> protect_content
 
-   If the messages are a reply, ID of the original message
+   Protects the contents of the sent messages from forwarding and saving
 
-   .. cpp:member:: optional_t<boolean_t> allow_sending_without_reply
+   .. cpp:member:: optional_t<reply_parameters_t> reply_parameters
 
-   Pass True, if the message should be sent even if the specified replied-to message is not found
+   Description of the message to reply to

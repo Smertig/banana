@@ -13,7 +13,7 @@ pin_chat_message
 
    ``callback`` is any callable object accepting ``expected<boolean_t>``.
 
-   Use this method to add a message to the list of pinned messages in a chat. If the chat is not a private chat, the bot must be an administrator in the chat for this to work and must have the 'can_pin_messages' admin right in a supergroup or 'can_edit_messages' admin right in a channel. Returns True on success.
+   Use this method to add a message to the list of pinned messages in a chat. If the chat is not a private chat, the bot must be an administrator in the chat for this to work and must have the 'can_pin_messages' administrator right in a supergroup or 'can_edit_messages' administrator right in a channel. Returns True on success.
 
 .. cpp:struct:: pin_chat_message_args_t
 
@@ -30,4 +30,4 @@ pin_chat_message
 
    .. cpp:member:: optional_t<boolean_t> disable_notification
 
-   Pass True, if it is not necessary to send a notification to all chat members about the new pinned message. Notifications are always disabled in channels and private chats.
+   Pass True if it is not necessary to send a notification to all chat members about the new pinned message. Notifications are always disabled in channels and private chats.
