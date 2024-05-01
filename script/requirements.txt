@@ -1,0 +1,3 @@
+marko==1.0.3
+inflection==0.5.1
+networkx==2.5
