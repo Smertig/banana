@@ -23,7 +23,6 @@ author = 'Smertig'
 
 
 # -- General configuration ---------------------------------------------------
-import sphinx_book_theme
 
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
@@ -36,12 +35,18 @@ extensions = [
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
 
+# How to fill: check out default side bars for your scheme and add `versioning.html` to it
+# Defaults for furo: https://pradyunsg.me/furo/customisation/sidebar/#default-design
 html_sidebars = {
     '**': [
-        'search-field.html',
-        'sidebar-nav-bs.html',
-        #'sbt-sidebar-footer',
+        'sidebar/brand.html',
+        'sidebar/search.html',
+        'sidebar/scroll-start.html',
+        'sidebar/navigation.html',
+        'sidebar/ethical-ads.html',
         'versioning.html',
+        'sidebar/scroll-end.html',
+        'sidebar/variant-selector.html',
     ],
 }
 
@@ -55,9 +60,7 @@ exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
 
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
-#
-# TODO: update theme after resolving https://github.com/readthedocs/sphinx_rtd_theme/issues/694
-html_theme = 'sphinx_book_theme'
+html_theme = 'furo'
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
