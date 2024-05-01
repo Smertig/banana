@@ -1,7 +1,7 @@
 import json
 import marko
 
-with open('custom.json', encoding='utf8') as f:
+with open('custom_v2.json', encoding='utf8') as f:
     custom_json = json.load(f)
 
 types = {}
@@ -116,17 +116,13 @@ def convert_param(param):
         'description': convert_text(param['description']),
         'name': param['name'],
         'optional': not param['required'],
-        'type': extract_type(param)
+        'type': extract_type(param['type_info'])
     }
 
 
 for jtype in custom_json['objects']:
-    if 'type' not in jtype:
-        types[jtype['name']] = {
-            'desc': jtype['description'],
-            'fields': []
-        }
-    elif jtype['type'] == 'properties':
+    assert 'type' in jtype
+    if jtype['type'] == 'properties':
         types[jtype['name']] = {
             'desc': convert_text(jtype['description']),
             'fields': [convert_param(field) for field in jtype.get('properties', [])]
@@ -140,6 +136,11 @@ for jtype in custom_json['objects']:
                 'optional': False,
                 'type': extract_type(jtype)
             }]
+        }
+    elif jtype['type'] == 'unknown':
+        types[jtype['name']] = {
+            'desc': jtype['description'],
+            'fields': []
         }
     else:
         assert False, jtype
