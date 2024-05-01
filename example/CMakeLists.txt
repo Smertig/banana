@@ -13,21 +13,13 @@ message(STATUS "[banana] Build examples with coroutines: ${BANANA_EXAMPLES_ENABL
 set(CMAKE_CXX_STANDARD 20)
 set(CXX_STANDARD_REQUIRED ON)
 
-include(${PROJECT_SOURCE_DIR}/cmake/conan.cmake)
-
-conan_check()
-conan_add_remote(NAME conan-center URL https://center.conan.io)
-
-conan_cmake_run(
-        CONANFILE conanfile.py
-        BASIC_SETUP CMAKE_TARGETS
-        BUILD missing
-)
-
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/.. ${CMAKE_CURRENT_BINARY_DIR}/banana-lib)
 
 # TODO: remove this?
 find_package(Threads REQUIRED)
+find_package(cpr CONFIG REQUIRED)
+find_package(Boost REQUIRED COMPONENTS beast)
+find_package(OpenSSL REQUIRED)
 
 function(add_banana_example name agent)
     set(example banana-example-${name})
@@ -35,28 +27,28 @@ function(add_banana_example name agent)
     target_link_libraries(${example} ${agent} Threads::Threads ${ARGN})
 endfunction()
 
-add_banana_example(agent-default-blocking banana-default CONAN_PKG::cpr)
-add_banana_example(agent-default-async banana-default CONAN_PKG::cpr)
+add_banana_example(agent-default-blocking banana-default cpr::cpr)
+add_banana_example(agent-default-async banana-default cpr::cpr)
 
-add_banana_example(agent-any-blocking banana-default CONAN_PKG::cpr)
+add_banana_example(agent-any-blocking banana-default cpr::cpr)
 
-add_banana_example(agent-cpr-blocking banana-cpr CONAN_PKG::cpr)
-add_banana_example(agent-cpr-async banana-cpr CONAN_PKG::cpr)
+add_banana_example(agent-cpr-blocking banana-cpr cpr::cpr)
+add_banana_example(agent-cpr-async banana-cpr cpr::cpr)
 
 if (WIN32)
     add_banana_example(agent-winapi-blocking banana-winapi)
     add_banana_example(agent-winapi-async banana-winapi)
 endif()
 
-add_banana_example(agent-beast-blocking banana-beast CONAN_PKG::boost CONAN_PKG::openssl)
-add_banana_example(agent-beast-async banana-beast CONAN_PKG::boost CONAN_PKG::openssl)
+add_banana_example(agent-beast-blocking banana-beast Boost::beast OpenSSL::SSL)
+add_banana_example(agent-beast-async banana-beast Boost::beast OpenSSL::SSL)
 
 if (BANANA_EXAMPLES_ENABLE_CORO)
-    add_banana_example(agent-beast-coro banana-beast CONAN_PKG::boost CONAN_PKG::openssl)
+    add_banana_example(agent-beast-coro banana-beast Boost::beast OpenSSL::SSL)
 endif()
 
 if (NOT WIN32)
     add_banana_example(custom-agent-blocking banana)
 endif()
 
-add_banana_example(generic-api-call banana-default CONAN_PKG::cpr)
+add_banana_example(generic-api-call banana-default cpr::cpr)

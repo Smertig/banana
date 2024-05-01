@@ -1,0 +1,15 @@
+{
+  "name" : "banana-examples",
+  "version-string" : "1.0.0",
+  "builtin-baseline" : "c591ac6466a55ef0a05a3d56bb1489ca36e50102",
+  "dependencies" : [ {
+    "name" : "cpr",
+    "version>=" : "1.10.5#2"
+  }, {
+    "name" : "boost-beast",
+    "version>=" : "1.84.0#1"
+  }, {
+    "name" : "openssl",
+    "version>=" : "3.3.0"
+  } ]
+}
