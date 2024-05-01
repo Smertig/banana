@@ -10,6 +10,10 @@ target_compile_definitions(banana PUBLIC
         BANANA_VERSION_PATCH=${BANANA_VERSION_PATCH}
 )
 
+if (MSVC)
+    target_compile_options(banana PUBLIC /bigobj)
+endif()
+
 # === Agents ===
 
 add_subdirectory(agents)

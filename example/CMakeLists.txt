@@ -11,10 +11,6 @@ message(STATUS "[banana] Build examples with coroutines: ${BANANA_EXAMPLES_ENABL
 set(CMAKE_CXX_STANDARD 20)
 set(CXX_STANDARD_REQUIRED ON)
 
-if (MSVC)
-    add_definitions(/bigobj)
-endif()
-
 include(${PROJECT_SOURCE_DIR}/cmake/conan.cmake)
 
 conan_check()
