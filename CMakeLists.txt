@@ -42,13 +42,3 @@ endif()
 # === Library ===
 
 add_subdirectory(source)
-
-# === Example ===
-
-if (BANANA_BUILD_EXAMPLES)
-    if (${PROJECT_SOURCE_DIR} STREQUAL ${CMAKE_SOURCE_DIR})
-        add_subdirectory(example)
-    else()
-        message(WARNING "[banana] Skip building examples, non-root cmake project")
-    endif()
-endif()

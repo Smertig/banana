@@ -1,3 +1,5 @@
+cmake_minimum_required(VERSION 3.14)
+
 project(banana-example)
 
 # === Configuration options ===
@@ -21,6 +23,8 @@ conan_cmake_run(
         BASIC_SETUP CMAKE_TARGETS
         BUILD missing
 )
+
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/.. ${CMAKE_CURRENT_BINARY_DIR}/banana-lib)
 
 # TODO: remove this?
 find_package(Threads REQUIRED)
