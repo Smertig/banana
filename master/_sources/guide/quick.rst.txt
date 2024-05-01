@@ -100,10 +100,17 @@ The following piece of code shows how to send simple ``"Hello, world!"`` message
    #include <iostream>
 
    int main() {
+       // create agent
        banana::agent::default_blocking agent("<TG_BOT_TOKEN>");
 
-       banana::api::message_t message = banana::api::send_message(agent, { "@username", "Hello, world!" });
-       // since C++20: banana::api::send_message(agent, { .chat_id = "@username", .text = "Hello, world!" });
+       // use API
+       banana::api::message_t message = banana::api::send_message(agent, { .chat_id = "@username", .text = "Hello, world!" });
+
+       // or in C++17
+       banana::api::send_message_args_t args;
+       args.chat_id = "@username";
+       args.text = "Hello, world!";
+       banana::api::message_t message = banana::api::send_message(agent, std::move(args));
 
        std::cout << "message sent: " << message.message_id;
    }
@@ -119,7 +126,7 @@ Create ``default_blocking`` agent that returns ``T`` from any API request or thr
 
 .. code-block:: c++
 
-   banana::api::message_t message = banana::api::send_message(agent, { "@username", "Hello, world!" });
+   banana::api::message_t message = banana::api::send_message(agent, { .chat_id = "@username", .text = "Hello, world!" });
 
 Make blocking request and get the result (see :cpp:func:`banana::api::send_message` for details)
 
