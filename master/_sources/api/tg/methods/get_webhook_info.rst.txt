@@ -6,7 +6,7 @@ get_webhook_info
 .. cpp:namespace:: banana::api
 .. cpp:function:: template <class Agent> \
                   api_result<webhook_info_t, Agent&&> get_webhook_info(Agent&& agent)
-.. cpp:function:: template <class Agent> \
+.. cpp:function:: template <class Agent, class F> \
                   void get_webhook_info(Agent&& agent, F&& callback)
 
    ``agent`` is any object satisfying :ref:`agent concept <banana-api-banana-agents>`.

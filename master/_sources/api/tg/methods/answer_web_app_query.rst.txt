@@ -6,7 +6,7 @@ answer_web_app_query
 .. cpp:namespace:: banana::api
 .. cpp:function:: template <class Agent> \
                   api_result<sent_web_app_message_t, Agent&&> answer_web_app_query(Agent&& agent, answer_web_app_query_args_t args)
-.. cpp:function:: template <class Agent> \
+.. cpp:function:: template <class Agent, class F> \
                   void answer_web_app_query(Agent&& agent, answer_web_app_query_args_t args, F&& callback)
 
    ``agent`` is any object satisfying :ref:`agent concept <banana-api-banana-agents>`.

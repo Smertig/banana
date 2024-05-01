@@ -6,7 +6,7 @@ send_video
 .. cpp:namespace:: banana::api
 .. cpp:function:: template <class Agent> \
                   api_result<message_t, Agent&&> send_video(Agent&& agent, send_video_args_t args)
-.. cpp:function:: template <class Agent> \
+.. cpp:function:: template <class Agent, class F> \
                   void send_video(Agent&& agent, send_video_args_t args, F&& callback)
 
    ``agent`` is any object satisfying :ref:`agent concept <banana-api-banana-agents>`.

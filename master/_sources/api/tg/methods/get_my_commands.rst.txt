@@ -6,7 +6,7 @@ get_my_commands
 .. cpp:namespace:: banana::api
 .. cpp:function:: template <class Agent> \
                   api_result<array_t<bot_command_t>, Agent&&> get_my_commands(Agent&& agent, get_my_commands_args_t args)
-.. cpp:function:: template <class Agent> \
+.. cpp:function:: template <class Agent, class F> \
                   void get_my_commands(Agent&& agent, get_my_commands_args_t args, F&& callback)
 
    ``agent`` is any object satisfying :ref:`agent concept <banana-api-banana-agents>`.

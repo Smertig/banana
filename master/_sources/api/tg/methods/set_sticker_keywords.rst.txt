@@ -6,7 +6,7 @@ set_sticker_keywords
 .. cpp:namespace:: banana::api
 .. cpp:function:: template <class Agent> \
                   api_result<boolean_t, Agent&&> set_sticker_keywords(Agent&& agent, set_sticker_keywords_args_t args)
-.. cpp:function:: template <class Agent> \
+.. cpp:function:: template <class Agent, class F> \
                   void set_sticker_keywords(Agent&& agent, set_sticker_keywords_args_t args, F&& callback)
 
    ``agent`` is any object satisfying :ref:`agent concept <banana-api-banana-agents>`.

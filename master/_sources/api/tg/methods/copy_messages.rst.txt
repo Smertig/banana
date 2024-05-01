@@ -6,7 +6,7 @@ copy_messages
 .. cpp:namespace:: banana::api
 .. cpp:function:: template <class Agent> \
                   api_result<array_t<message_id_t>, Agent&&> copy_messages(Agent&& agent, copy_messages_args_t args)
-.. cpp:function:: template <class Agent> \
+.. cpp:function:: template <class Agent, class F> \
                   void copy_messages(Agent&& agent, copy_messages_args_t args, F&& callback)
 
    ``agent`` is any object satisfying :ref:`agent concept <banana-api-banana-agents>`.

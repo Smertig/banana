@@ -6,7 +6,7 @@ get_my_default_administrator_rights
 .. cpp:namespace:: banana::api
 .. cpp:function:: template <class Agent> \
                   api_result<chat_administrator_rights_t, Agent&&> get_my_default_administrator_rights(Agent&& agent, get_my_default_administrator_rights_args_t args)
-.. cpp:function:: template <class Agent> \
+.. cpp:function:: template <class Agent, class F> \
                   void get_my_default_administrator_rights(Agent&& agent, get_my_default_administrator_rights_args_t args, F&& callback)
 
    ``agent`` is any object satisfying :ref:`agent concept <banana-api-banana-agents>`.

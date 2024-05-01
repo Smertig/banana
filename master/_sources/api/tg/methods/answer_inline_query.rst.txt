@@ -6,7 +6,7 @@ answer_inline_query
 .. cpp:namespace:: banana::api
 .. cpp:function:: template <class Agent> \
                   api_result<boolean_t, Agent&&> answer_inline_query(Agent&& agent, answer_inline_query_args_t args)
-.. cpp:function:: template <class Agent> \
+.. cpp:function:: template <class Agent, class F> \
                   void answer_inline_query(Agent&& agent, answer_inline_query_args_t args, F&& callback)
 
    ``agent`` is any object satisfying :ref:`agent concept <banana-api-banana-agents>`.

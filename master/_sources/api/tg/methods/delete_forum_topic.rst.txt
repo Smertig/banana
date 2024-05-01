@@ -6,7 +6,7 @@ delete_forum_topic
 .. cpp:namespace:: banana::api
 .. cpp:function:: template <class Agent> \
                   api_result<boolean_t, Agent&&> delete_forum_topic(Agent&& agent, delete_forum_topic_args_t args)
-.. cpp:function:: template <class Agent> \
+.. cpp:function:: template <class Agent, class F> \
                   void delete_forum_topic(Agent&& agent, delete_forum_topic_args_t args, F&& callback)
 
    ``agent`` is any object satisfying :ref:`agent concept <banana-api-banana-agents>`.

@@ -6,7 +6,7 @@ upload_sticker_file
 .. cpp:namespace:: banana::api
 .. cpp:function:: template <class Agent> \
                   api_result<file_t, Agent&&> upload_sticker_file(Agent&& agent, upload_sticker_file_args_t args)
-.. cpp:function:: template <class Agent> \
+.. cpp:function:: template <class Agent, class F> \
                   void upload_sticker_file(Agent&& agent, upload_sticker_file_args_t args, F&& callback)
 
    ``agent`` is any object satisfying :ref:`agent concept <banana-api-banana-agents>`.

@@ -6,7 +6,7 @@ get_game_high_scores
 .. cpp:namespace:: banana::api
 .. cpp:function:: template <class Agent> \
                   api_result<array_t<game_high_score_t>, Agent&&> get_game_high_scores(Agent&& agent, get_game_high_scores_args_t args)
-.. cpp:function:: template <class Agent> \
+.. cpp:function:: template <class Agent, class F> \
                   void get_game_high_scores(Agent&& agent, get_game_high_scores_args_t args, F&& callback)
 
    ``agent`` is any object satisfying :ref:`agent concept <banana-api-banana-agents>`.

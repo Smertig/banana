@@ -6,7 +6,7 @@ get_file
 .. cpp:namespace:: banana::api
 .. cpp:function:: template <class Agent> \
                   api_result<file_t, Agent&&> get_file(Agent&& agent, get_file_args_t args)
-.. cpp:function:: template <class Agent> \
+.. cpp:function:: template <class Agent, class F> \
                   void get_file(Agent&& agent, get_file_args_t args, F&& callback)
 
    ``agent`` is any object satisfying :ref:`agent concept <banana-api-banana-agents>`.

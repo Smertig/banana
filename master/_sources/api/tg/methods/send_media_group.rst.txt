@@ -6,7 +6,7 @@ send_media_group
 .. cpp:namespace:: banana::api
 .. cpp:function:: template <class Agent> \
                   api_result<array_t<message_t>, Agent&&> send_media_group(Agent&& agent, send_media_group_args_t args)
-.. cpp:function:: template <class Agent> \
+.. cpp:function:: template <class Agent, class F> \
                   void send_media_group(Agent&& agent, send_media_group_args_t args, F&& callback)
 
    ``agent`` is any object satisfying :ref:`agent concept <banana-api-banana-agents>`.

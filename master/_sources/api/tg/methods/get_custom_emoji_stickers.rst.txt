@@ -6,7 +6,7 @@ get_custom_emoji_stickers
 .. cpp:namespace:: banana::api
 .. cpp:function:: template <class Agent> \
                   api_result<array_t<sticker_t>, Agent&&> get_custom_emoji_stickers(Agent&& agent, get_custom_emoji_stickers_args_t args)
-.. cpp:function:: template <class Agent> \
+.. cpp:function:: template <class Agent, class F> \
                   void get_custom_emoji_stickers(Agent&& agent, get_custom_emoji_stickers_args_t args, F&& callback)
 
    ``agent`` is any object satisfying :ref:`agent concept <banana-api-banana-agents>`.

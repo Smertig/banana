@@ -6,7 +6,7 @@ edit_chat_invite_link
 .. cpp:namespace:: banana::api
 .. cpp:function:: template <class Agent> \
                   api_result<chat_invite_link_t, Agent&&> edit_chat_invite_link(Agent&& agent, edit_chat_invite_link_args_t args)
-.. cpp:function:: template <class Agent> \
+.. cpp:function:: template <class Agent, class F> \
                   void edit_chat_invite_link(Agent&& agent, edit_chat_invite_link_args_t args, F&& callback)
 
    ``agent`` is any object satisfying :ref:`agent concept <banana-api-banana-agents>`.
