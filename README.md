@@ -40,6 +40,8 @@ int main(int argc, char** argv) {
 
 ## Documentation
 
-[![Latest Release](https://img.shields.io/github/v/release/smertig/banana?label=Banana%20Docs)](https://smertig.github.io/banana/v0.2.0)
+[![Previous Release](https://img.shields.io/github/v/release/smertig/banana?label=Banana%20Docs&filter=v0.2.0)](https://smertig.github.io/banana/v0.2.0)
+
+[![Latest Release](https://img.shields.io/github/v/release/smertig/banana?label=Banana%20Docs)](https://smertig.github.io/banana/v0.3.0)
 
 [![Master](https://img.shields.io/badge/Banana%20Docs-master-blue.svg)](https://smertig.github.io/banana/master)
