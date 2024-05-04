@@ -120,3 +120,7 @@ enum class method {
     upload_sticker_file,
 };
 
+struct method_traits {
+  static constexpr auto first_method = method::add_sticker_to_set;
+  static constexpr auto last_method = method::upload_sticker_file;
+};

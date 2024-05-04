@@ -135,6 +135,9 @@ def get_param_type(p):
 deser_types = set()
 ser_types = set()
 
+first_api_enum = None
+last_api_enum = None
+
 out_api_enums.write('enum class method {\n')
 
 for name, method in api_methods.items():
@@ -165,6 +168,8 @@ void {uname}(Agent&& agent{(", " + args_cpp_type.cpp_name + " args") if method['
 
 ''')
     out_api_enums.write(f'    {uname},\n')
+    first_api_enum = first_api_enum or uname
+    last_api_enum = uname
 
     out_api_traits.write(f'''template <>
 struct api_traits<api::method::{uname}> {{
@@ -185,7 +190,14 @@ struct detail::by_request_type_impl<{args_cpp_type.qual_cpp_name}> {{
     deser_types.add(return_type)
     ser_types.add(args_cpp_type.qual_cpp_name)
 
-out_api_enums.write("};\n\n")
+out_api_enums.write("};\n")
+
+out_api_enums.write(f'''
+struct method_traits {{
+  static constexpr auto first_method = method::{first_api_enum};
+  static constexpr auto last_method = method::{last_api_enum};
+}};
+''')
 
 for type_name in sorted(ser_types):
     out_ser_impl.write(f'template serialized_args_t<{type_name}> serialize_args<{type_name}>({type_name} value);\n')
