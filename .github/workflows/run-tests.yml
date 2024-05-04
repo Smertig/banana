@@ -1,0 +1,81 @@
+name: Run unit tests
+
+on:
+  push:
+  pull_request:
+  schedule:
+    - cron: '0 0 * * 0'
+
+jobs:
+  build:
+    runs-on: ${{matrix.os}}
+    name: "${{matrix.title}} (${{matrix.cc}})"
+
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          # gcc
+          - { title: "Linux", os: "ubuntu-20.04", cc: "gcc-7" }
+          - { title: "Linux", os: "ubuntu-20.04", cc: "gcc-8" }
+          - { title: "Linux", os: "ubuntu-20.04", cc: "gcc-9" }
+          - { title: "Linux", os: "ubuntu-20.04", cc: "gcc-10" }
+          - { title: "Linux", os: "ubuntu-20.04", cc: "gcc-11" }
+          - { title: "Linux", os: "ubuntu-22.04", cc: "gcc-12" }
+          - { title: "Linux", os: "ubuntu-22.04", cc: "gcc-13" }
+
+          # clang
+          - { title: "Linux", os: "ubuntu-20.04", cc: "clang-7" }
+          - { title: "Linux", os: "ubuntu-20.04", cc: "clang-8" }
+          - { title: "Linux", os: "ubuntu-20.04", cc: "clang-9" }
+          - { title: "Linux", os: "ubuntu-20.04", cc: "clang-10" }
+          - { title: "Linux", os: "ubuntu-22.04", cc: "clang-11" }
+          - { title: "Linux", os: "ubuntu-22.04", cc: "clang-12" }
+          - { title: "Linux", os: "ubuntu-22.04", cc: "clang-13" }
+          - { title: "Linux", os: "ubuntu-22.04", cc: "clang-14" }
+          - { title: "Linux", os: "ubuntu-22.04", cc: "clang-15" }
+          - { title: "Linux", os: "ubuntu-22.04", cc: "clang-16" }
+          - { title: "Linux", os: "ubuntu-22.04", cc: "clang-17" }
+          - { title: "Linux", os: "ubuntu-22.04", cc: "clang-18" }
+
+          # msvc
+          - { title: "Windows", os: "windows-2019", cc: "vs2019" }
+          - { title: "Windows", os: "windows-2022", cc: "vs2022" }
+
+          # macOS
+          - { title: "macOS", os: "macos-14", cc: "clang"  }
+          - { title: "macOS", os: "macos-14", cc: "gcc-11" }
+          - { title: "macOS", os: "macos-14", cc: "gcc-12" }
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: "Checkout build-actions"
+        uses: actions/checkout@v4
+        with:
+          repository: build-actions/build-actions
+          path: "build-actions"
+          ref: "16a2f094d084ab72fe3d68586b2e8ba395bb6712"
+
+      - name: "[Debug] Tests (Prepare & Configure & Build & Run)"
+        run: python build-actions/action.py
+          --step=all
+          --compiler=${{matrix.cc}}
+          --architecture=x64
+          --config=.github/workflows/tests-config.json
+          --source-dir=.
+          --build-type=Debug
+
+      - name: "[Release] Tests (Prepare & Configure & Build & Run)"
+        run: python build-actions/action.py
+          --step=all
+          --compiler=${{matrix.cc}}
+          --architecture=x64
+          --config=.github/workflows/tests-config.json
+          --source-dir=.
+          --build-type=Release
