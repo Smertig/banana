@@ -71,7 +71,7 @@ jobs:
       - name: Install vcpkg dependencies
         uses: lukka/run-vcpkg@v11
         with:
-          vcpkgJsonGlob: 'example/vcpkg.json'
+          vcpkgJsonGlob: 'examples/vcpkg.json'
 
       - name: Create Build Environment
         run: cmake -E make_directory ${{github.workspace}}/build
@@ -79,7 +79,7 @@ jobs:
       - name: Configure CMake
         shell: bash
         run: |
-          cmake -S "${{github.workspace}}/example" -B "${{github.workspace}}/build" -DCMAKE_BUILD_TYPE=Debug -DCMAKE_TOOLCHAIN_FILE=$VCPKG_ROOT/scripts/buildsystems/vcpkg.cmake ${{matrix.cmake_flags}}
+          cmake -S "${{github.workspace}}/examples" -B "${{github.workspace}}/build" -DCMAKE_BUILD_TYPE=Debug -DCMAKE_TOOLCHAIN_FILE=$VCPKG_ROOT/scripts/buildsystems/vcpkg.cmake ${{matrix.cmake_flags}}
 
       - name: Build and run banana examples
         working-directory: ${{github.workspace}}/build

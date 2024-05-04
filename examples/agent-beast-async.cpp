@@ -58,7 +58,7 @@ int main(int argc, const char** argv) {
             std::cout << "bot name: " << user->username.value() << "\n";
         });
         banana::api::send_message(agent, { .chat_id = target, .text = message_text + " (callback)"}, [] (banana::expected<banana::api::message_t> msg) {
-            std::cout << "message sent: " << msg->message_id << "\n";
+            std::cout << "message sent: " << msg.value().message_id << "\n";
         });
     }
     catch (std::exception& e) {
