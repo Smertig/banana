@@ -270,6 +270,30 @@ public:
         return &**this;
     }
 
+    friend bool operator==(const dynamic_optional& left, const dynamic_optional& right) {
+        return left.has_value() == right.has_value() && (!left || *left == *right);
+    }
+
+    friend bool operator==(const dynamic_optional& left, const T& right) {
+        return left.has_value() && *left == right;
+    }
+
+    friend bool operator==(const T& left, const dynamic_optional& right) {
+        return right == left;
+    }
+
+    friend bool operator!=(const dynamic_optional& left, const dynamic_optional& right) {
+        return !(left == right);
+    }
+
+    friend bool operator!=(const dynamic_optional& left, const T& right) {
+        return !(left == right);
+    }
+
+    friend bool operator!=(const T& left, const dynamic_optional& right) {
+        return !(left == right);
+    }
+
 private:
     std::unique_ptr<T> m_storage;
 };
