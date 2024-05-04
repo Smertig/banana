@@ -234,8 +234,29 @@ struct serializer<T, std::enable_if_t<meta::is_reflectable_v<T>>> {
     static constexpr bool nullable = false;
 
     static std::optional<std::string> try_parse(const nlohmann::json& j, T& out) {
+        parser_t parser{ out, j };
+        reflector_t::for_each_field(parser);
+        return parser.res;
+    }
+
+    static nlohmann::json dump(T in) {
+        dumper_t dumper{ std::move(in) };
+        reflector_t::for_each_field(dumper);
+        return dumper.j;
+    }
+
+    static std::string get_name() {
+        return std::string(meta::name_of<T>);
+    }
+
+private:
+    struct parser_t {
+        T& out;
+        const nlohmann::json& j;
         std::optional<std::string> res;
-        reflector_t::for_each_field([&](std::string_view field_name, auto field_ptr) {
+
+        template <class U>
+        void operator()(std::string_view field_name, U T::*field_ptr) {
             if (res) return;
 
             if (auto err = try_parse_field(j, field_name, out.*field_ptr)) {
@@ -243,22 +264,18 @@ struct serializer<T, std::enable_if_t<meta::is_reflectable_v<T>>> {
                 os << *err << " while parsing '" << field_name << "' of '" << get_name() << "'";
                 res = std::move(os).str();
             }
-        });
+        }
+    };
 
-        return res;
-    }
-
-    static nlohmann::json dump(T in) {
+    struct dumper_t {
+        T in;
         nlohmann::json j;
-        reflector_t::for_each_field([&](std::string_view field_name, auto field_ptr) {
-            try_set_field(j, field_name, std::move(in.*field_ptr));
-        });
-        return j;
-    }
 
-    static std::string get_name() {
-        return std::string(meta::name_of<T>);
-    }
+        template <class U>
+        void operator()(std::string_view field_name, U T::*field_ptr) {
+            try_set_field(j, field_name, std::move(in.*field_ptr));
+        }
+    };
 };
 
 template <class T>
