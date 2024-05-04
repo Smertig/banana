@@ -96,6 +96,18 @@ for component in networkx.weakly_connected_components(G):
             dump_type(out_types, cpp_type)
 
 
+def default_to_cpp(value):
+    if isinstance(value, str):
+        return f"\"{value}\""
+
+    if isinstance(value, bool):
+        return 'true' if value else 'false'
+
+    if isinstance(value, int):
+        return value
+
+    assert False, f"unknown default value type: {type(value)}"
+
 def dump_type_reflection(cpp_type: CppType):
     out_meta.write('template <>\n')
     out_meta.write(f'struct reflector<api::{cpp_type.cpp_name}> {{\n')
@@ -104,7 +116,11 @@ def dump_type_reflection(cpp_type: CppType):
     out_meta.write('        using namespace std::literals;\n')
     for field in cpp_type.fields:
         name = field['name']
-        out_meta.write(f'        f("{name}"sv, &api::{cpp_type.cpp_name}::{name});\n')
+        maybe_default = field.get('default')
+        if maybe_default is not None:
+            out_meta.write(f'        f("{name}"sv, &api::{cpp_type.cpp_name}::{name}, {default_to_cpp(maybe_default)});\n')
+        else:
+            out_meta.write(f'        f("{name}"sv, &api::{cpp_type.cpp_name}::{name});\n')
     out_meta.write('    }\n')
     out_meta.write('};\n')
     out_meta.write('\n')

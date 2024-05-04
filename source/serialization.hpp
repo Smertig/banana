@@ -265,6 +265,22 @@ private:
                 res = std::move(os).str();
             }
         }
+
+        template <class U, class D>
+        void operator()(std::string_view field_name, U T::*field_ptr, D default_value) {
+            (*this)(field_name, field_ptr);
+
+            if (res) return;
+
+            // Non-optional fields with default values should be considered as "must be" values.
+            // They are used to distinguish between type with equivalent layout, see for example
+            // `chat_boost_source_gift_code_t` and `chat_boost_source_premium_t`
+            if constexpr (!is_optional<U>::value) {
+                if (out.*field_ptr != default_value) {
+                    res = "<MISMATCH>";
+                }
+            }
+        }
     };
 
     struct dumper_t {
@@ -274,6 +290,11 @@ private:
         template <class U>
         void operator()(std::string_view field_name, U T::*field_ptr) {
             try_set_field(j, field_name, std::move(in.*field_ptr));
+        }
+
+        template <class U, class D>
+        void operator()(std::string_view field_name, U T::*field_ptr, [[maybe_unused]] D default_value) {
+            (*this)(field_name, field_ptr);
         }
     };
 };

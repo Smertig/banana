@@ -206,7 +206,7 @@ struct reflector<api::bot_command_scope_all_chat_administrators_t> {
     template <class F>
     static void for_each_field(F&& f) {
         using namespace std::literals;
-        f("type"sv, &api::bot_command_scope_all_chat_administrators_t::type);
+        f("type"sv, &api::bot_command_scope_all_chat_administrators_t::type, "all_chat_administrators");
     }
 };
 
@@ -221,7 +221,7 @@ struct reflector<api::bot_command_scope_all_group_chats_t> {
     template <class F>
     static void for_each_field(F&& f) {
         using namespace std::literals;
-        f("type"sv, &api::bot_command_scope_all_group_chats_t::type);
+        f("type"sv, &api::bot_command_scope_all_group_chats_t::type, "all_group_chats");
     }
 };
 
@@ -236,7 +236,7 @@ struct reflector<api::bot_command_scope_all_private_chats_t> {
     template <class F>
     static void for_each_field(F&& f) {
         using namespace std::literals;
-        f("type"sv, &api::bot_command_scope_all_private_chats_t::type);
+        f("type"sv, &api::bot_command_scope_all_private_chats_t::type, "all_private_chats");
     }
 };
 
@@ -251,7 +251,7 @@ struct reflector<api::bot_command_scope_chat_administrators_t> {
     template <class F>
     static void for_each_field(F&& f) {
         using namespace std::literals;
-        f("type"sv, &api::bot_command_scope_chat_administrators_t::type);
+        f("type"sv, &api::bot_command_scope_chat_administrators_t::type, "chat_administrators");
         f("chat_id"sv, &api::bot_command_scope_chat_administrators_t::chat_id);
     }
 };
@@ -267,7 +267,7 @@ struct reflector<api::bot_command_scope_chat_member_t> {
     template <class F>
     static void for_each_field(F&& f) {
         using namespace std::literals;
-        f("type"sv, &api::bot_command_scope_chat_member_t::type);
+        f("type"sv, &api::bot_command_scope_chat_member_t::type, "chat_member");
         f("chat_id"sv, &api::bot_command_scope_chat_member_t::chat_id);
         f("user_id"sv, &api::bot_command_scope_chat_member_t::user_id);
     }
@@ -284,7 +284,7 @@ struct reflector<api::bot_command_scope_chat_t> {
     template <class F>
     static void for_each_field(F&& f) {
         using namespace std::literals;
-        f("type"sv, &api::bot_command_scope_chat_t::type);
+        f("type"sv, &api::bot_command_scope_chat_t::type, "chat");
         f("chat_id"sv, &api::bot_command_scope_chat_t::chat_id);
     }
 };
@@ -300,7 +300,7 @@ struct reflector<api::bot_command_scope_default_t> {
     template <class F>
     static void for_each_field(F&& f) {
         using namespace std::literals;
-        f("type"sv, &api::bot_command_scope_default_t::type);
+        f("type"sv, &api::bot_command_scope_default_t::type, "default");
     }
 };
 
@@ -473,7 +473,7 @@ struct reflector<api::chat_boost_source_gift_code_t> {
     template <class F>
     static void for_each_field(F&& f) {
         using namespace std::literals;
-        f("source"sv, &api::chat_boost_source_gift_code_t::source);
+        f("source"sv, &api::chat_boost_source_gift_code_t::source, "gift_code");
         f("user"sv, &api::chat_boost_source_gift_code_t::user);
     }
 };
@@ -489,10 +489,10 @@ struct reflector<api::chat_boost_source_giveaway_t> {
     template <class F>
     static void for_each_field(F&& f) {
         using namespace std::literals;
-        f("source"sv, &api::chat_boost_source_giveaway_t::source);
+        f("source"sv, &api::chat_boost_source_giveaway_t::source, "giveaway");
         f("giveaway_message_id"sv, &api::chat_boost_source_giveaway_t::giveaway_message_id);
         f("user"sv, &api::chat_boost_source_giveaway_t::user);
-        f("is_unclaimed"sv, &api::chat_boost_source_giveaway_t::is_unclaimed);
+        f("is_unclaimed"sv, &api::chat_boost_source_giveaway_t::is_unclaimed, true);
     }
 };
 
@@ -507,7 +507,7 @@ struct reflector<api::chat_boost_source_premium_t> {
     template <class F>
     static void for_each_field(F&& f) {
         using namespace std::literals;
-        f("source"sv, &api::chat_boost_source_premium_t::source);
+        f("source"sv, &api::chat_boost_source_premium_t::source, "premium");
         f("user"sv, &api::chat_boost_source_premium_t::user);
     }
 };
@@ -616,7 +616,7 @@ struct reflector<api::chat_member_administrator_t> {
     template <class F>
     static void for_each_field(F&& f) {
         using namespace std::literals;
-        f("status"sv, &api::chat_member_administrator_t::status);
+        f("status"sv, &api::chat_member_administrator_t::status, "administrator");
         f("user"sv, &api::chat_member_administrator_t::user);
         f("can_be_edited"sv, &api::chat_member_administrator_t::can_be_edited);
         f("is_anonymous"sv, &api::chat_member_administrator_t::is_anonymous);
@@ -649,7 +649,7 @@ struct reflector<api::chat_member_banned_t> {
     template <class F>
     static void for_each_field(F&& f) {
         using namespace std::literals;
-        f("status"sv, &api::chat_member_banned_t::status);
+        f("status"sv, &api::chat_member_banned_t::status, "kicked");
         f("user"sv, &api::chat_member_banned_t::user);
         f("until_date"sv, &api::chat_member_banned_t::until_date);
     }
@@ -666,7 +666,7 @@ struct reflector<api::chat_member_left_t> {
     template <class F>
     static void for_each_field(F&& f) {
         using namespace std::literals;
-        f("status"sv, &api::chat_member_left_t::status);
+        f("status"sv, &api::chat_member_left_t::status, "left");
         f("user"sv, &api::chat_member_left_t::user);
     }
 };
@@ -682,7 +682,7 @@ struct reflector<api::chat_member_member_t> {
     template <class F>
     static void for_each_field(F&& f) {
         using namespace std::literals;
-        f("status"sv, &api::chat_member_member_t::status);
+        f("status"sv, &api::chat_member_member_t::status, "member");
         f("user"sv, &api::chat_member_member_t::user);
     }
 };
@@ -698,7 +698,7 @@ struct reflector<api::chat_member_owner_t> {
     template <class F>
     static void for_each_field(F&& f) {
         using namespace std::literals;
-        f("status"sv, &api::chat_member_owner_t::status);
+        f("status"sv, &api::chat_member_owner_t::status, "creator");
         f("user"sv, &api::chat_member_owner_t::user);
         f("is_anonymous"sv, &api::chat_member_owner_t::is_anonymous);
         f("custom_title"sv, &api::chat_member_owner_t::custom_title);
@@ -716,7 +716,7 @@ struct reflector<api::chat_member_restricted_t> {
     template <class F>
     static void for_each_field(F&& f) {
         using namespace std::literals;
-        f("status"sv, &api::chat_member_restricted_t::status);
+        f("status"sv, &api::chat_member_restricted_t::status, "restricted");
         f("user"sv, &api::chat_member_restricted_t::user);
         f("is_member"sv, &api::chat_member_restricted_t::is_member);
         f("can_send_messages"sv, &api::chat_member_restricted_t::can_send_messages);
@@ -837,7 +837,7 @@ struct reflector<api::chat_t> {
         f("username"sv, &api::chat_t::username);
         f("first_name"sv, &api::chat_t::first_name);
         f("last_name"sv, &api::chat_t::last_name);
-        f("is_forum"sv, &api::chat_t::is_forum);
+        f("is_forum"sv, &api::chat_t::is_forum, true);
         f("photo"sv, &api::chat_t::photo);
         f("active_usernames"sv, &api::chat_t::active_usernames);
         f("available_reactions"sv, &api::chat_t::available_reactions);
@@ -848,10 +848,10 @@ struct reflector<api::chat_t> {
         f("emoji_status_custom_emoji_id"sv, &api::chat_t::emoji_status_custom_emoji_id);
         f("emoji_status_expiration_date"sv, &api::chat_t::emoji_status_expiration_date);
         f("bio"sv, &api::chat_t::bio);
-        f("has_private_forwards"sv, &api::chat_t::has_private_forwards);
-        f("has_restricted_voice_and_video_messages"sv, &api::chat_t::has_restricted_voice_and_video_messages);
-        f("join_to_send_messages"sv, &api::chat_t::join_to_send_messages);
-        f("join_by_request"sv, &api::chat_t::join_by_request);
+        f("has_private_forwards"sv, &api::chat_t::has_private_forwards, true);
+        f("has_restricted_voice_and_video_messages"sv, &api::chat_t::has_restricted_voice_and_video_messages, true);
+        f("join_to_send_messages"sv, &api::chat_t::join_to_send_messages, true);
+        f("join_by_request"sv, &api::chat_t::join_by_request, true);
         f("description"sv, &api::chat_t::description);
         f("invite_link"sv, &api::chat_t::invite_link);
         f("pinned_message"sv, &api::chat_t::pinned_message);
@@ -859,12 +859,12 @@ struct reflector<api::chat_t> {
         f("slow_mode_delay"sv, &api::chat_t::slow_mode_delay);
         f("unrestrict_boost_count"sv, &api::chat_t::unrestrict_boost_count);
         f("message_auto_delete_time"sv, &api::chat_t::message_auto_delete_time);
-        f("has_aggressive_anti_spam_enabled"sv, &api::chat_t::has_aggressive_anti_spam_enabled);
-        f("has_hidden_members"sv, &api::chat_t::has_hidden_members);
-        f("has_protected_content"sv, &api::chat_t::has_protected_content);
-        f("has_visible_history"sv, &api::chat_t::has_visible_history);
+        f("has_aggressive_anti_spam_enabled"sv, &api::chat_t::has_aggressive_anti_spam_enabled, true);
+        f("has_hidden_members"sv, &api::chat_t::has_hidden_members, true);
+        f("has_protected_content"sv, &api::chat_t::has_protected_content, true);
+        f("has_visible_history"sv, &api::chat_t::has_visible_history, true);
         f("sticker_set_name"sv, &api::chat_t::sticker_set_name);
-        f("can_set_sticker_set"sv, &api::chat_t::can_set_sticker_set);
+        f("can_set_sticker_set"sv, &api::chat_t::can_set_sticker_set, true);
         f("custom_emoji_sticker_set_name"sv, &api::chat_t::custom_emoji_sticker_set_name);
         f("linked_chat_id"sv, &api::chat_t::linked_chat_id);
         f("location"sv, &api::chat_t::location);
@@ -1520,7 +1520,7 @@ struct reflector<api::external_reply_info_t> {
         f("video"sv, &api::external_reply_info_t::video);
         f("video_note"sv, &api::external_reply_info_t::video_note);
         f("voice"sv, &api::external_reply_info_t::voice);
-        f("has_media_spoiler"sv, &api::external_reply_info_t::has_media_spoiler);
+        f("has_media_spoiler"sv, &api::external_reply_info_t::has_media_spoiler, true);
         f("contact"sv, &api::external_reply_info_t::contact);
         f("dice"sv, &api::external_reply_info_t::dice);
         f("game"sv, &api::external_reply_info_t::game);
@@ -1562,7 +1562,7 @@ struct reflector<api::force_reply_t> {
     template <class F>
     static void for_each_field(F&& f) {
         using namespace std::literals;
-        f("force_reply"sv, &api::force_reply_t::force_reply);
+        f("force_reply"sv, &api::force_reply_t::force_reply, true);
         f("input_field_placeholder"sv, &api::force_reply_t::input_field_placeholder);
         f("selective"sv, &api::force_reply_t::selective);
     }
@@ -2105,8 +2105,8 @@ struct reflector<api::giveaway_t> {
         f("chats"sv, &api::giveaway_t::chats);
         f("winners_selection_date"sv, &api::giveaway_t::winners_selection_date);
         f("winner_count"sv, &api::giveaway_t::winner_count);
-        f("only_new_members"sv, &api::giveaway_t::only_new_members);
-        f("has_public_winners"sv, &api::giveaway_t::has_public_winners);
+        f("only_new_members"sv, &api::giveaway_t::only_new_members, true);
+        f("has_public_winners"sv, &api::giveaway_t::has_public_winners, true);
         f("prize_description"sv, &api::giveaway_t::prize_description);
         f("country_codes"sv, &api::giveaway_t::country_codes);
         f("premium_subscription_month_count"sv, &api::giveaway_t::premium_subscription_month_count);
@@ -2132,8 +2132,8 @@ struct reflector<api::giveaway_winners_t> {
         f("additional_chat_count"sv, &api::giveaway_winners_t::additional_chat_count);
         f("premium_subscription_month_count"sv, &api::giveaway_winners_t::premium_subscription_month_count);
         f("unclaimed_prize_count"sv, &api::giveaway_winners_t::unclaimed_prize_count);
-        f("only_new_members"sv, &api::giveaway_winners_t::only_new_members);
-        f("was_refunded"sv, &api::giveaway_winners_t::was_refunded);
+        f("only_new_members"sv, &api::giveaway_winners_t::only_new_members, true);
+        f("was_refunded"sv, &api::giveaway_winners_t::was_refunded, true);
         f("prize_description"sv, &api::giveaway_winners_t::prize_description);
     }
 };
@@ -2220,7 +2220,7 @@ struct reflector<api::inline_query_result_article_t> {
     template <class F>
     static void for_each_field(F&& f) {
         using namespace std::literals;
-        f("type"sv, &api::inline_query_result_article_t::type);
+        f("type"sv, &api::inline_query_result_article_t::type, "article");
         f("id"sv, &api::inline_query_result_article_t::id);
         f("title"sv, &api::inline_query_result_article_t::title);
         f("input_message_content"sv, &api::inline_query_result_article_t::input_message_content);
@@ -2245,7 +2245,7 @@ struct reflector<api::inline_query_result_audio_t> {
     template <class F>
     static void for_each_field(F&& f) {
         using namespace std::literals;
-        f("type"sv, &api::inline_query_result_audio_t::type);
+        f("type"sv, &api::inline_query_result_audio_t::type, "audio");
         f("id"sv, &api::inline_query_result_audio_t::id);
         f("audio_url"sv, &api::inline_query_result_audio_t::audio_url);
         f("title"sv, &api::inline_query_result_audio_t::title);
@@ -2270,7 +2270,7 @@ struct reflector<api::inline_query_result_cached_audio_t> {
     template <class F>
     static void for_each_field(F&& f) {
         using namespace std::literals;
-        f("type"sv, &api::inline_query_result_cached_audio_t::type);
+        f("type"sv, &api::inline_query_result_cached_audio_t::type, "audio");
         f("id"sv, &api::inline_query_result_cached_audio_t::id);
         f("audio_file_id"sv, &api::inline_query_result_cached_audio_t::audio_file_id);
         f("caption"sv, &api::inline_query_result_cached_audio_t::caption);
@@ -2292,7 +2292,7 @@ struct reflector<api::inline_query_result_cached_document_t> {
     template <class F>
     static void for_each_field(F&& f) {
         using namespace std::literals;
-        f("type"sv, &api::inline_query_result_cached_document_t::type);
+        f("type"sv, &api::inline_query_result_cached_document_t::type, "document");
         f("id"sv, &api::inline_query_result_cached_document_t::id);
         f("title"sv, &api::inline_query_result_cached_document_t::title);
         f("document_file_id"sv, &api::inline_query_result_cached_document_t::document_file_id);
@@ -2316,7 +2316,7 @@ struct reflector<api::inline_query_result_cached_gif_t> {
     template <class F>
     static void for_each_field(F&& f) {
         using namespace std::literals;
-        f("type"sv, &api::inline_query_result_cached_gif_t::type);
+        f("type"sv, &api::inline_query_result_cached_gif_t::type, "gif");
         f("id"sv, &api::inline_query_result_cached_gif_t::id);
         f("gif_file_id"sv, &api::inline_query_result_cached_gif_t::gif_file_id);
         f("title"sv, &api::inline_query_result_cached_gif_t::title);
@@ -2339,7 +2339,7 @@ struct reflector<api::inline_query_result_cached_mpeg4_gif_t> {
     template <class F>
     static void for_each_field(F&& f) {
         using namespace std::literals;
-        f("type"sv, &api::inline_query_result_cached_mpeg4_gif_t::type);
+        f("type"sv, &api::inline_query_result_cached_mpeg4_gif_t::type, "mpeg4_gif");
         f("id"sv, &api::inline_query_result_cached_mpeg4_gif_t::id);
         f("mpeg4_file_id"sv, &api::inline_query_result_cached_mpeg4_gif_t::mpeg4_file_id);
         f("title"sv, &api::inline_query_result_cached_mpeg4_gif_t::title);
@@ -2362,7 +2362,7 @@ struct reflector<api::inline_query_result_cached_photo_t> {
     template <class F>
     static void for_each_field(F&& f) {
         using namespace std::literals;
-        f("type"sv, &api::inline_query_result_cached_photo_t::type);
+        f("type"sv, &api::inline_query_result_cached_photo_t::type, "photo");
         f("id"sv, &api::inline_query_result_cached_photo_t::id);
         f("photo_file_id"sv, &api::inline_query_result_cached_photo_t::photo_file_id);
         f("title"sv, &api::inline_query_result_cached_photo_t::title);
@@ -2386,7 +2386,7 @@ struct reflector<api::inline_query_result_cached_sticker_t> {
     template <class F>
     static void for_each_field(F&& f) {
         using namespace std::literals;
-        f("type"sv, &api::inline_query_result_cached_sticker_t::type);
+        f("type"sv, &api::inline_query_result_cached_sticker_t::type, "sticker");
         f("id"sv, &api::inline_query_result_cached_sticker_t::id);
         f("sticker_file_id"sv, &api::inline_query_result_cached_sticker_t::sticker_file_id);
         f("reply_markup"sv, &api::inline_query_result_cached_sticker_t::reply_markup);
@@ -2405,7 +2405,7 @@ struct reflector<api::inline_query_result_cached_video_t> {
     template <class F>
     static void for_each_field(F&& f) {
         using namespace std::literals;
-        f("type"sv, &api::inline_query_result_cached_video_t::type);
+        f("type"sv, &api::inline_query_result_cached_video_t::type, "video");
         f("id"sv, &api::inline_query_result_cached_video_t::id);
         f("video_file_id"sv, &api::inline_query_result_cached_video_t::video_file_id);
         f("title"sv, &api::inline_query_result_cached_video_t::title);
@@ -2429,7 +2429,7 @@ struct reflector<api::inline_query_result_cached_voice_t> {
     template <class F>
     static void for_each_field(F&& f) {
         using namespace std::literals;
-        f("type"sv, &api::inline_query_result_cached_voice_t::type);
+        f("type"sv, &api::inline_query_result_cached_voice_t::type, "voice");
         f("id"sv, &api::inline_query_result_cached_voice_t::id);
         f("voice_file_id"sv, &api::inline_query_result_cached_voice_t::voice_file_id);
         f("title"sv, &api::inline_query_result_cached_voice_t::title);
@@ -2452,7 +2452,7 @@ struct reflector<api::inline_query_result_contact_t> {
     template <class F>
     static void for_each_field(F&& f) {
         using namespace std::literals;
-        f("type"sv, &api::inline_query_result_contact_t::type);
+        f("type"sv, &api::inline_query_result_contact_t::type, "contact");
         f("id"sv, &api::inline_query_result_contact_t::id);
         f("phone_number"sv, &api::inline_query_result_contact_t::phone_number);
         f("first_name"sv, &api::inline_query_result_contact_t::first_name);
@@ -2477,7 +2477,7 @@ struct reflector<api::inline_query_result_document_t> {
     template <class F>
     static void for_each_field(F&& f) {
         using namespace std::literals;
-        f("type"sv, &api::inline_query_result_document_t::type);
+        f("type"sv, &api::inline_query_result_document_t::type, "document");
         f("id"sv, &api::inline_query_result_document_t::id);
         f("title"sv, &api::inline_query_result_document_t::title);
         f("caption"sv, &api::inline_query_result_document_t::caption);
@@ -2505,7 +2505,7 @@ struct reflector<api::inline_query_result_game_t> {
     template <class F>
     static void for_each_field(F&& f) {
         using namespace std::literals;
-        f("type"sv, &api::inline_query_result_game_t::type);
+        f("type"sv, &api::inline_query_result_game_t::type, "game");
         f("id"sv, &api::inline_query_result_game_t::id);
         f("game_short_name"sv, &api::inline_query_result_game_t::game_short_name);
         f("reply_markup"sv, &api::inline_query_result_game_t::reply_markup);
@@ -2523,14 +2523,14 @@ struct reflector<api::inline_query_result_gif_t> {
     template <class F>
     static void for_each_field(F&& f) {
         using namespace std::literals;
-        f("type"sv, &api::inline_query_result_gif_t::type);
+        f("type"sv, &api::inline_query_result_gif_t::type, "gif");
         f("id"sv, &api::inline_query_result_gif_t::id);
         f("gif_url"sv, &api::inline_query_result_gif_t::gif_url);
         f("gif_width"sv, &api::inline_query_result_gif_t::gif_width);
         f("gif_height"sv, &api::inline_query_result_gif_t::gif_height);
         f("gif_duration"sv, &api::inline_query_result_gif_t::gif_duration);
         f("thumbnail_url"sv, &api::inline_query_result_gif_t::thumbnail_url);
-        f("thumbnail_mime_type"sv, &api::inline_query_result_gif_t::thumbnail_mime_type);
+        f("thumbnail_mime_type"sv, &api::inline_query_result_gif_t::thumbnail_mime_type, "image/jpeg");
         f("title"sv, &api::inline_query_result_gif_t::title);
         f("caption"sv, &api::inline_query_result_gif_t::caption);
         f("parse_mode"sv, &api::inline_query_result_gif_t::parse_mode);
@@ -2551,7 +2551,7 @@ struct reflector<api::inline_query_result_location_t> {
     template <class F>
     static void for_each_field(F&& f) {
         using namespace std::literals;
-        f("type"sv, &api::inline_query_result_location_t::type);
+        f("type"sv, &api::inline_query_result_location_t::type, "location");
         f("id"sv, &api::inline_query_result_location_t::id);
         f("latitude"sv, &api::inline_query_result_location_t::latitude);
         f("longitude"sv, &api::inline_query_result_location_t::longitude);
@@ -2579,14 +2579,14 @@ struct reflector<api::inline_query_result_mpeg4_gif_t> {
     template <class F>
     static void for_each_field(F&& f) {
         using namespace std::literals;
-        f("type"sv, &api::inline_query_result_mpeg4_gif_t::type);
+        f("type"sv, &api::inline_query_result_mpeg4_gif_t::type, "mpeg4_gif");
         f("id"sv, &api::inline_query_result_mpeg4_gif_t::id);
         f("mpeg4_url"sv, &api::inline_query_result_mpeg4_gif_t::mpeg4_url);
         f("mpeg4_width"sv, &api::inline_query_result_mpeg4_gif_t::mpeg4_width);
         f("mpeg4_height"sv, &api::inline_query_result_mpeg4_gif_t::mpeg4_height);
         f("mpeg4_duration"sv, &api::inline_query_result_mpeg4_gif_t::mpeg4_duration);
         f("thumbnail_url"sv, &api::inline_query_result_mpeg4_gif_t::thumbnail_url);
-        f("thumbnail_mime_type"sv, &api::inline_query_result_mpeg4_gif_t::thumbnail_mime_type);
+        f("thumbnail_mime_type"sv, &api::inline_query_result_mpeg4_gif_t::thumbnail_mime_type, "image/jpeg");
         f("title"sv, &api::inline_query_result_mpeg4_gif_t::title);
         f("caption"sv, &api::inline_query_result_mpeg4_gif_t::caption);
         f("parse_mode"sv, &api::inline_query_result_mpeg4_gif_t::parse_mode);
@@ -2607,7 +2607,7 @@ struct reflector<api::inline_query_result_photo_t> {
     template <class F>
     static void for_each_field(F&& f) {
         using namespace std::literals;
-        f("type"sv, &api::inline_query_result_photo_t::type);
+        f("type"sv, &api::inline_query_result_photo_t::type, "photo");
         f("id"sv, &api::inline_query_result_photo_t::id);
         f("photo_url"sv, &api::inline_query_result_photo_t::photo_url);
         f("thumbnail_url"sv, &api::inline_query_result_photo_t::thumbnail_url);
@@ -2634,7 +2634,7 @@ struct reflector<api::inline_query_result_venue_t> {
     template <class F>
     static void for_each_field(F&& f) {
         using namespace std::literals;
-        f("type"sv, &api::inline_query_result_venue_t::type);
+        f("type"sv, &api::inline_query_result_venue_t::type, "venue");
         f("id"sv, &api::inline_query_result_venue_t::id);
         f("latitude"sv, &api::inline_query_result_venue_t::latitude);
         f("longitude"sv, &api::inline_query_result_venue_t::longitude);
@@ -2663,7 +2663,7 @@ struct reflector<api::inline_query_result_video_t> {
     template <class F>
     static void for_each_field(F&& f) {
         using namespace std::literals;
-        f("type"sv, &api::inline_query_result_video_t::type);
+        f("type"sv, &api::inline_query_result_video_t::type, "video");
         f("id"sv, &api::inline_query_result_video_t::id);
         f("video_url"sv, &api::inline_query_result_video_t::video_url);
         f("mime_type"sv, &api::inline_query_result_video_t::mime_type);
@@ -2692,7 +2692,7 @@ struct reflector<api::inline_query_result_voice_t> {
     template <class F>
     static void for_each_field(F&& f) {
         using namespace std::literals;
-        f("type"sv, &api::inline_query_result_voice_t::type);
+        f("type"sv, &api::inline_query_result_voice_t::type, "voice");
         f("id"sv, &api::inline_query_result_voice_t::id);
         f("voice_url"sv, &api::inline_query_result_voice_t::voice_url);
         f("title"sv, &api::inline_query_result_voice_t::title);
@@ -2791,7 +2791,7 @@ struct reflector<api::input_invoice_message_content_t> {
         f("provider_token"sv, &api::input_invoice_message_content_t::provider_token);
         f("currency"sv, &api::input_invoice_message_content_t::currency);
         f("prices"sv, &api::input_invoice_message_content_t::prices);
-        f("max_tip_amount"sv, &api::input_invoice_message_content_t::max_tip_amount);
+        f("max_tip_amount"sv, &api::input_invoice_message_content_t::max_tip_amount, 0);
         f("suggested_tip_amounts"sv, &api::input_invoice_message_content_t::suggested_tip_amounts);
         f("provider_data"sv, &api::input_invoice_message_content_t::provider_data);
         f("photo_url"sv, &api::input_invoice_message_content_t::photo_url);
@@ -2839,7 +2839,7 @@ struct reflector<api::input_media_animation_t> {
     template <class F>
     static void for_each_field(F&& f) {
         using namespace std::literals;
-        f("type"sv, &api::input_media_animation_t::type);
+        f("type"sv, &api::input_media_animation_t::type, "animation");
         f("media"sv, &api::input_media_animation_t::media);
         f("thumbnail"sv, &api::input_media_animation_t::thumbnail);
         f("caption"sv, &api::input_media_animation_t::caption);
@@ -2863,7 +2863,7 @@ struct reflector<api::input_media_audio_t> {
     template <class F>
     static void for_each_field(F&& f) {
         using namespace std::literals;
-        f("type"sv, &api::input_media_audio_t::type);
+        f("type"sv, &api::input_media_audio_t::type, "audio");
         f("media"sv, &api::input_media_audio_t::media);
         f("thumbnail"sv, &api::input_media_audio_t::thumbnail);
         f("caption"sv, &api::input_media_audio_t::caption);
@@ -2886,7 +2886,7 @@ struct reflector<api::input_media_document_t> {
     template <class F>
     static void for_each_field(F&& f) {
         using namespace std::literals;
-        f("type"sv, &api::input_media_document_t::type);
+        f("type"sv, &api::input_media_document_t::type, "document");
         f("media"sv, &api::input_media_document_t::media);
         f("thumbnail"sv, &api::input_media_document_t::thumbnail);
         f("caption"sv, &api::input_media_document_t::caption);
@@ -2907,7 +2907,7 @@ struct reflector<api::input_media_photo_t> {
     template <class F>
     static void for_each_field(F&& f) {
         using namespace std::literals;
-        f("type"sv, &api::input_media_photo_t::type);
+        f("type"sv, &api::input_media_photo_t::type, "photo");
         f("media"sv, &api::input_media_photo_t::media);
         f("caption"sv, &api::input_media_photo_t::caption);
         f("parse_mode"sv, &api::input_media_photo_t::parse_mode);
@@ -2927,7 +2927,7 @@ struct reflector<api::input_media_video_t> {
     template <class F>
     static void for_each_field(F&& f) {
         using namespace std::literals;
-        f("type"sv, &api::input_media_video_t::type);
+        f("type"sv, &api::input_media_video_t::type, "video");
         f("media"sv, &api::input_media_video_t::media);
         f("thumbnail"sv, &api::input_media_video_t::thumbnail);
         f("caption"sv, &api::input_media_video_t::caption);
@@ -3069,7 +3069,7 @@ struct reflector<api::keyboard_button_request_users_t> {
         f("request_id"sv, &api::keyboard_button_request_users_t::request_id);
         f("user_is_bot"sv, &api::keyboard_button_request_users_t::user_is_bot);
         f("user_is_premium"sv, &api::keyboard_button_request_users_t::user_is_premium);
-        f("max_quantity"sv, &api::keyboard_button_request_users_t::max_quantity);
+        f("max_quantity"sv, &api::keyboard_button_request_users_t::max_quantity, 1);
     }
 };
 
@@ -3225,7 +3225,7 @@ struct reflector<api::menu_button_commands_t> {
     template <class F>
     static void for_each_field(F&& f) {
         using namespace std::literals;
-        f("type"sv, &api::menu_button_commands_t::type);
+        f("type"sv, &api::menu_button_commands_t::type, "commands");
     }
 };
 
@@ -3240,7 +3240,7 @@ struct reflector<api::menu_button_default_t> {
     template <class F>
     static void for_each_field(F&& f) {
         using namespace std::literals;
-        f("type"sv, &api::menu_button_default_t::type);
+        f("type"sv, &api::menu_button_default_t::type, "default");
     }
 };
 
@@ -3255,7 +3255,7 @@ struct reflector<api::menu_button_web_app_t> {
     template <class F>
     static void for_each_field(F&& f) {
         using namespace std::literals;
-        f("type"sv, &api::menu_button_web_app_t::type);
+        f("type"sv, &api::menu_button_web_app_t::type, "web_app");
         f("text"sv, &api::menu_button_web_app_t::text);
         f("web_app"sv, &api::menu_button_web_app_t::web_app);
     }
@@ -3323,7 +3323,7 @@ struct reflector<api::message_origin_channel_t> {
     template <class F>
     static void for_each_field(F&& f) {
         using namespace std::literals;
-        f("type"sv, &api::message_origin_channel_t::type);
+        f("type"sv, &api::message_origin_channel_t::type, "channel");
         f("date"sv, &api::message_origin_channel_t::date);
         f("chat"sv, &api::message_origin_channel_t::chat);
         f("message_id"sv, &api::message_origin_channel_t::message_id);
@@ -3342,7 +3342,7 @@ struct reflector<api::message_origin_chat_t> {
     template <class F>
     static void for_each_field(F&& f) {
         using namespace std::literals;
-        f("type"sv, &api::message_origin_chat_t::type);
+        f("type"sv, &api::message_origin_chat_t::type, "chat");
         f("date"sv, &api::message_origin_chat_t::date);
         f("sender_chat"sv, &api::message_origin_chat_t::sender_chat);
         f("author_signature"sv, &api::message_origin_chat_t::author_signature);
@@ -3360,7 +3360,7 @@ struct reflector<api::message_origin_hidden_user_t> {
     template <class F>
     static void for_each_field(F&& f) {
         using namespace std::literals;
-        f("type"sv, &api::message_origin_hidden_user_t::type);
+        f("type"sv, &api::message_origin_hidden_user_t::type, "hidden_user");
         f("date"sv, &api::message_origin_hidden_user_t::date);
         f("sender_user_name"sv, &api::message_origin_hidden_user_t::sender_user_name);
     }
@@ -3377,7 +3377,7 @@ struct reflector<api::message_origin_user_t> {
     template <class F>
     static void for_each_field(F&& f) {
         using namespace std::literals;
-        f("type"sv, &api::message_origin_user_t::type);
+        f("type"sv, &api::message_origin_user_t::type, "user");
         f("date"sv, &api::message_origin_user_t::date);
         f("sender_user"sv, &api::message_origin_user_t::sender_user);
     }
@@ -3441,15 +3441,15 @@ struct reflector<api::message_t> {
         f("date"sv, &api::message_t::date);
         f("chat"sv, &api::message_t::chat);
         f("forward_origin"sv, &api::message_t::forward_origin);
-        f("is_topic_message"sv, &api::message_t::is_topic_message);
-        f("is_automatic_forward"sv, &api::message_t::is_automatic_forward);
+        f("is_topic_message"sv, &api::message_t::is_topic_message, true);
+        f("is_automatic_forward"sv, &api::message_t::is_automatic_forward, true);
         f("reply_to_message"sv, &api::message_t::reply_to_message);
         f("external_reply"sv, &api::message_t::external_reply);
         f("quote"sv, &api::message_t::quote);
         f("reply_to_story"sv, &api::message_t::reply_to_story);
         f("via_bot"sv, &api::message_t::via_bot);
         f("edit_date"sv, &api::message_t::edit_date);
-        f("has_protected_content"sv, &api::message_t::has_protected_content);
+        f("has_protected_content"sv, &api::message_t::has_protected_content, true);
         f("media_group_id"sv, &api::message_t::media_group_id);
         f("author_signature"sv, &api::message_t::author_signature);
         f("text"sv, &api::message_t::text);
@@ -3466,7 +3466,7 @@ struct reflector<api::message_t> {
         f("voice"sv, &api::message_t::voice);
         f("caption"sv, &api::message_t::caption);
         f("caption_entities"sv, &api::message_t::caption_entities);
-        f("has_media_spoiler"sv, &api::message_t::has_media_spoiler);
+        f("has_media_spoiler"sv, &api::message_t::has_media_spoiler, true);
         f("contact"sv, &api::message_t::contact);
         f("dice"sv, &api::message_t::dice);
         f("game"sv, &api::message_t::game);
@@ -3477,10 +3477,10 @@ struct reflector<api::message_t> {
         f("left_chat_member"sv, &api::message_t::left_chat_member);
         f("new_chat_title"sv, &api::message_t::new_chat_title);
         f("new_chat_photo"sv, &api::message_t::new_chat_photo);
-        f("delete_chat_photo"sv, &api::message_t::delete_chat_photo);
-        f("group_chat_created"sv, &api::message_t::group_chat_created);
-        f("supergroup_chat_created"sv, &api::message_t::supergroup_chat_created);
-        f("channel_chat_created"sv, &api::message_t::channel_chat_created);
+        f("delete_chat_photo"sv, &api::message_t::delete_chat_photo, true);
+        f("group_chat_created"sv, &api::message_t::group_chat_created, true);
+        f("supergroup_chat_created"sv, &api::message_t::supergroup_chat_created, true);
+        f("channel_chat_created"sv, &api::message_t::channel_chat_created, true);
         f("message_auto_delete_timer_changed"sv, &api::message_t::message_auto_delete_timer_changed);
         f("migrate_to_chat_id"sv, &api::message_t::migrate_to_chat_id);
         f("migrate_from_chat_id"sv, &api::message_t::migrate_from_chat_id);
@@ -3558,7 +3558,7 @@ struct reflector<api::passport_element_error_data_field_t> {
     template <class F>
     static void for_each_field(F&& f) {
         using namespace std::literals;
-        f("source"sv, &api::passport_element_error_data_field_t::source);
+        f("source"sv, &api::passport_element_error_data_field_t::source, "data");
         f("type"sv, &api::passport_element_error_data_field_t::type);
         f("field_name"sv, &api::passport_element_error_data_field_t::field_name);
         f("data_hash"sv, &api::passport_element_error_data_field_t::data_hash);
@@ -3577,7 +3577,7 @@ struct reflector<api::passport_element_error_file_t> {
     template <class F>
     static void for_each_field(F&& f) {
         using namespace std::literals;
-        f("source"sv, &api::passport_element_error_file_t::source);
+        f("source"sv, &api::passport_element_error_file_t::source, "file");
         f("type"sv, &api::passport_element_error_file_t::type);
         f("file_hash"sv, &api::passport_element_error_file_t::file_hash);
         f("message"sv, &api::passport_element_error_file_t::message);
@@ -3595,7 +3595,7 @@ struct reflector<api::passport_element_error_files_t> {
     template <class F>
     static void for_each_field(F&& f) {
         using namespace std::literals;
-        f("source"sv, &api::passport_element_error_files_t::source);
+        f("source"sv, &api::passport_element_error_files_t::source, "files");
         f("type"sv, &api::passport_element_error_files_t::type);
         f("file_hashes"sv, &api::passport_element_error_files_t::file_hashes);
         f("message"sv, &api::passport_element_error_files_t::message);
@@ -3613,7 +3613,7 @@ struct reflector<api::passport_element_error_front_side_t> {
     template <class F>
     static void for_each_field(F&& f) {
         using namespace std::literals;
-        f("source"sv, &api::passport_element_error_front_side_t::source);
+        f("source"sv, &api::passport_element_error_front_side_t::source, "front_side");
         f("type"sv, &api::passport_element_error_front_side_t::type);
         f("file_hash"sv, &api::passport_element_error_front_side_t::file_hash);
         f("message"sv, &api::passport_element_error_front_side_t::message);
@@ -3631,7 +3631,7 @@ struct reflector<api::passport_element_error_reverse_side_t> {
     template <class F>
     static void for_each_field(F&& f) {
         using namespace std::literals;
-        f("source"sv, &api::passport_element_error_reverse_side_t::source);
+        f("source"sv, &api::passport_element_error_reverse_side_t::source, "reverse_side");
         f("type"sv, &api::passport_element_error_reverse_side_t::type);
         f("file_hash"sv, &api::passport_element_error_reverse_side_t::file_hash);
         f("message"sv, &api::passport_element_error_reverse_side_t::message);
@@ -3649,7 +3649,7 @@ struct reflector<api::passport_element_error_selfie_t> {
     template <class F>
     static void for_each_field(F&& f) {
         using namespace std::literals;
-        f("source"sv, &api::passport_element_error_selfie_t::source);
+        f("source"sv, &api::passport_element_error_selfie_t::source, "selfie");
         f("type"sv, &api::passport_element_error_selfie_t::type);
         f("file_hash"sv, &api::passport_element_error_selfie_t::file_hash);
         f("message"sv, &api::passport_element_error_selfie_t::message);
@@ -3667,7 +3667,7 @@ struct reflector<api::passport_element_error_translation_file_t> {
     template <class F>
     static void for_each_field(F&& f) {
         using namespace std::literals;
-        f("source"sv, &api::passport_element_error_translation_file_t::source);
+        f("source"sv, &api::passport_element_error_translation_file_t::source, "translation_file");
         f("type"sv, &api::passport_element_error_translation_file_t::type);
         f("file_hash"sv, &api::passport_element_error_translation_file_t::file_hash);
         f("message"sv, &api::passport_element_error_translation_file_t::message);
@@ -3685,7 +3685,7 @@ struct reflector<api::passport_element_error_translation_files_t> {
     template <class F>
     static void for_each_field(F&& f) {
         using namespace std::literals;
-        f("source"sv, &api::passport_element_error_translation_files_t::source);
+        f("source"sv, &api::passport_element_error_translation_files_t::source, "translation_files");
         f("type"sv, &api::passport_element_error_translation_files_t::type);
         f("file_hashes"sv, &api::passport_element_error_translation_files_t::file_hashes);
         f("message"sv, &api::passport_element_error_translation_files_t::message);
@@ -3703,7 +3703,7 @@ struct reflector<api::passport_element_error_unspecified_t> {
     template <class F>
     static void for_each_field(F&& f) {
         using namespace std::literals;
-        f("source"sv, &api::passport_element_error_unspecified_t::source);
+        f("source"sv, &api::passport_element_error_unspecified_t::source, "unspecified");
         f("type"sv, &api::passport_element_error_unspecified_t::type);
         f("element_hash"sv, &api::passport_element_error_unspecified_t::element_hash);
         f("message"sv, &api::passport_element_error_unspecified_t::message);
@@ -3921,7 +3921,7 @@ struct reflector<api::reaction_type_custom_emoji_t> {
     template <class F>
     static void for_each_field(F&& f) {
         using namespace std::literals;
-        f("type"sv, &api::reaction_type_custom_emoji_t::type);
+        f("type"sv, &api::reaction_type_custom_emoji_t::type, "custom_emoji");
         f("custom_emoji_id"sv, &api::reaction_type_custom_emoji_t::custom_emoji_id);
     }
 };
@@ -3937,7 +3937,7 @@ struct reflector<api::reaction_type_emoji_t> {
     template <class F>
     static void for_each_field(F&& f) {
         using namespace std::literals;
-        f("type"sv, &api::reaction_type_emoji_t::type);
+        f("type"sv, &api::reaction_type_emoji_t::type, "emoji");
         f("emoji"sv, &api::reaction_type_emoji_t::emoji);
     }
 };
@@ -3985,9 +3985,9 @@ struct reflector<api::reply_keyboard_markup_t> {
     static void for_each_field(F&& f) {
         using namespace std::literals;
         f("keyboard"sv, &api::reply_keyboard_markup_t::keyboard);
-        f("is_persistent"sv, &api::reply_keyboard_markup_t::is_persistent);
-        f("resize_keyboard"sv, &api::reply_keyboard_markup_t::resize_keyboard);
-        f("one_time_keyboard"sv, &api::reply_keyboard_markup_t::one_time_keyboard);
+        f("is_persistent"sv, &api::reply_keyboard_markup_t::is_persistent, false);
+        f("resize_keyboard"sv, &api::reply_keyboard_markup_t::resize_keyboard, false);
+        f("one_time_keyboard"sv, &api::reply_keyboard_markup_t::one_time_keyboard, false);
         f("input_field_placeholder"sv, &api::reply_keyboard_markup_t::input_field_placeholder);
         f("selective"sv, &api::reply_keyboard_markup_t::selective);
     }
@@ -4004,7 +4004,7 @@ struct reflector<api::reply_keyboard_remove_t> {
     template <class F>
     static void for_each_field(F&& f) {
         using namespace std::literals;
-        f("remove_keyboard"sv, &api::reply_keyboard_remove_t::remove_keyboard);
+        f("remove_keyboard"sv, &api::reply_keyboard_remove_t::remove_keyboard, true);
         f("selective"sv, &api::reply_keyboard_remove_t::selective);
     }
 };
@@ -5043,7 +5043,7 @@ struct reflector<api::sticker_t> {
         f("premium_animation"sv, &api::sticker_t::premium_animation);
         f("mask_position"sv, &api::sticker_t::mask_position);
         f("custom_emoji_id"sv, &api::sticker_t::custom_emoji_id);
-        f("needs_repainting"sv, &api::sticker_t::needs_repainting);
+        f("needs_repainting"sv, &api::sticker_t::needs_repainting, true);
         f("file_size"sv, &api::sticker_t::file_size);
     }
 };
@@ -5153,7 +5153,7 @@ struct reflector<api::text_quote_t> {
         f("text"sv, &api::text_quote_t::text);
         f("entities"sv, &api::text_quote_t::entities);
         f("position"sv, &api::text_quote_t::position);
-        f("is_manual"sv, &api::text_quote_t::is_manual);
+        f("is_manual"sv, &api::text_quote_t::is_manual, true);
     }
 };
 
@@ -5365,8 +5365,8 @@ struct reflector<api::user_t> {
         f("last_name"sv, &api::user_t::last_name);
         f("username"sv, &api::user_t::username);
         f("language_code"sv, &api::user_t::language_code);
-        f("is_premium"sv, &api::user_t::is_premium);
-        f("added_to_attachment_menu"sv, &api::user_t::added_to_attachment_menu);
+        f("is_premium"sv, &api::user_t::is_premium, true);
+        f("added_to_attachment_menu"sv, &api::user_t::added_to_attachment_menu, true);
         f("can_join_groups"sv, &api::user_t::can_join_groups);
         f("can_read_all_group_messages"sv, &api::user_t::can_read_all_group_messages);
         f("supports_inline_queries"sv, &api::user_t::supports_inline_queries);
