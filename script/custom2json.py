@@ -112,12 +112,18 @@ def extract_type(d):
 
 
 def convert_param(param):
-    return {
+    result = {
         'description': convert_text(param['description']),
         'name': param['name'],
         'optional': not param['required'],
         'type': extract_type(param['type_info'])
     }
+
+    default_value = param['type_info'].get('default')
+    if default_value is not None:
+        result['default'] = default_value
+
+    return result
 
 
 for jtype in custom_json['objects']:
