@@ -73,6 +73,11 @@ serialized_args_t<T> serialize_args(T args) {
     return { deser::serialize(std::move(args)) };
 }
 
+template<class T>
+expected<T> deserialize_response(std::string_view response) {
+    return detail::try_parse<T>(nlohmann::json::parse(response));
+}
+
 template <class T>
 expected<T> response_handler<T>::process(expected<std::string> response) const {
     if (!response.has_value()) {

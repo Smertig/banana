@@ -203,4 +203,7 @@ for type_name in sorted(ser_types):
     out_ser_impl.write(f'template serialized_args_t<{type_name}> serialize_args<{type_name}>({type_name} value);\n')
 
 for type_name in sorted(deser_types):
+    out_ser_impl.write(f'template expected<{type_name}> deserialize_response<{type_name}>(std::string_view json_response);\n')
+
+for type_name in sorted(deser_types):
     out_resp_impl.write(f'template struct response_handler<{type_name}>;\n')

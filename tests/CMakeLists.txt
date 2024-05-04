@@ -4,6 +4,7 @@ add_executable(banana-tests
         main.cpp
         test_serialization.cpp
         test_serialization_generated.cpp
+        test_deserialization.cpp
 )
 
 target_link_libraries(banana-tests PRIVATE banana)
