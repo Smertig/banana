@@ -25,6 +25,9 @@ function(add_banana_example name agent)
     set(example banana-example-${name})
     add_executable(${example} ${name}.cpp)
     target_link_libraries(${example} ${agent} Threads::Threads ${ARGN})
+
+    # For CI - get rid of Debug/Release intermediate directories
+    set_target_properties(${example} PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
 endfunction()
 
 add_banana_example(agent-default-blocking banana-default cpr::cpr)

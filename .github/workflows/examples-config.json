@@ -1,0 +1,16 @@
+{
+  "tests": [
+    { "cmd": ["banana-example-agent-default-blocking"] },
+    { "cmd": ["banana-example-agent-default-async"] },
+    { "cmd": ["banana-example-agent-any-blocking"] },
+    { "cmd": ["banana-example-agent-cpr-blocking"] },
+    { "cmd": ["banana-example-agent-cpr-async"] },
+    { "cmd": ["banana-example-agent-winapi-blocking"], "optional": true },
+    { "cmd": ["banana-example-agent-winapi-async"], "optional": true },
+    { "cmd": ["banana-example-agent-beast-blocking"] },
+    { "cmd": ["banana-example-agent-beast-async"] },
+    { "cmd": ["banana-example-agent-beast-coro"], "optional": true },
+    { "cmd": ["banana-example-custom-agent-blocking"], "optional": true },
+    { "cmd": ["banana-example-generic-api-call"] }
+  ]
+}
