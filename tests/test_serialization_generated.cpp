@@ -17,7 +17,7 @@ void test_method() {
 }
 
 TEST_CASE("generated serialization") {
-    for_each_method([]<banana::api::method Method>() {
-        test_method<Method>();
+    for_each_method([](auto method) {
+        test_method<method>();
     });
 }

@@ -9,7 +9,7 @@ add_executable(banana-tests
 )
 
 target_link_libraries(banana-tests PRIVATE banana)
-target_compile_features(banana-tests PUBLIC cxx_std_20)
+target_compile_features(banana-tests PUBLIC cxx_std_17)
 
 if(MSVC)
     target_compile_options(banana-tests PRIVATE /W4 /WX)
