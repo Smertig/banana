@@ -1,9 +1,11 @@
 #pragma once
 
+#include <chrono>
 #include <iostream>
 #include <string>
-#include <utility>
+#include <thread>
 #include <tuple>
+#include <utility>
 
 inline std::tuple<std::string, std::string, std::string, std::string> parse_input_or_fail(int argc, const char** argv) {
     auto token = argc > 1 ? argv[1] : std::getenv("BANANA_BOT_TOKEN");
@@ -30,6 +32,9 @@ inline std::tuple<std::string, std::string, std::string, std::string> parse_inpu
         message_text += context;
     }
     message_text += "!";
+
+    // Hack to make sure each example has 1 second delay before calling telegram API
+    std::this_thread::sleep_for(std::chrono::seconds(1));
 
     return { token, target, std::move(example_name), std::move(message_text) };
 }
