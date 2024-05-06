@@ -31,3 +31,4 @@ The `banana` library provides several bundled agent types with different propert
    WinAPI-based agents <agents/winapi>
    cpr-based agents <agents/cpr>
    boost::beast-based agents <agents/beast>
+   cpp-httplib-based agents <agents/httplib>
