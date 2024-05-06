@@ -10,6 +10,8 @@
     { "cmd": ["banana-example-agent-beast-blocking"] },
     { "cmd": ["banana-example-agent-beast-async"] },
     { "cmd": ["banana-example-agent-beast-coro"], "optional": true },
+    { "cmd": ["banana-example-agent-httplib-blocking"] },
+    { "cmd": ["banana-example-agent-httplib-async"] },
     { "cmd": ["banana-example-custom-agent-blocking"], "optional": true },
     { "cmd": ["banana-example-generic-api-call"] }
   ]
