@@ -5,7 +5,7 @@ keyboard_button_request_chat_t
 
 .. cpp:struct:: banana::api::keyboard_button_request_chat_t
 
-   This object defines the criteria used to request a suitable chat. The identifier of the selected chat will be shared with the bot when the corresponding button is pressed. More about requesting chats »
+   This object defines the criteria used to request a suitable chat. Information about the selected chat will be shared with the bot when the corresponding button is pressed. The bot will be granted requested rights in the chat if appropriate. More about requesting chats ».
 
    .. cpp:member:: integer_t request_id
 
@@ -38,3 +38,15 @@ keyboard_button_request_chat_t
    .. cpp:member:: optional_t<boolean_t> bot_is_member
 
    Optional. Pass True to request a chat with the bot as a member. Otherwise, no additional restrictions are applied.
+
+   .. cpp:member:: optional_t<boolean_t> request_title
+
+   Optional. Pass True to request the chat's title
+
+   .. cpp:member:: optional_t<boolean_t> request_username
+
+   Optional. Pass True to request the chat's username
+
+   .. cpp:member:: optional_t<boolean_t> request_photo
+
+   Optional. Pass True to request the chat's photo

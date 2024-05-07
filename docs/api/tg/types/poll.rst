@@ -39,6 +39,10 @@ poll_t
 
    True, if the poll allows multiple answers
 
+   .. cpp:member:: optional_t<array_t<message_entity_t>> question_entities
+
+   Optional. Special entities that appear in the question. Currently, only custom emoji entities are allowed in poll questions
+
    .. cpp:member:: optional_t<integer_t> correct_option_id
 
    Optional. 0-based identifier of the correct answer option. Available only for polls in the quiz mode, which are closed, or was sent (not forwarded) by the bot or to the private chat with the bot.

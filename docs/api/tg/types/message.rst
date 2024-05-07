@@ -11,6 +11,14 @@ message_t
 
    Unique message identifier inside this chat
 
+   .. cpp:member:: integer_t date
+
+   Date the message was sent in Unix time. It is always a positive number, representing a valid date.
+
+   .. cpp:member:: chat_t chat
+
+   Chat the message belongs to
+
    .. cpp:member:: optional_t<integer_t> message_thread_id
 
    Optional. Unique identifier of a message thread to which the message belongs; for supergroups only
@@ -27,13 +35,13 @@ message_t
 
    Optional. If the sender of the message boosted the chat, the number of boosts added by the user
 
-   .. cpp:member:: integer_t date
+   .. cpp:member:: optional_t<user_t> sender_business_bot
 
-   Date the message was sent in Unix time. It is always a positive number, representing a valid date.
+   Optional. The bot that actually sent the message on behalf of the business account. Available only for outgoing messages sent on behalf of the connected business account.
 
-   .. cpp:member:: chat_t chat
+   .. cpp:member:: optional_t<string_t> business_connection_id
 
-   Chat the message belongs to
+   Optional. Unique identifier of the business connection from which the message was received. If non-empty, the message belongs to a chat of the corresponding business account that is independent from any potential bot chat which might share the same identifier.
 
    .. cpp:member:: optional_t<message_origin_t> forward_origin
 
@@ -74,6 +82,10 @@ message_t
    .. cpp:member:: optional_t<boolean_t> has_protected_content
 
    Optional. True, if the message can't be forwarded
+
+   .. cpp:member:: optional_t<boolean_t> is_from_offline
+
+   Optional. True, if the message was sent by an implicit action, for example, as an away or a greeting business message, or as a scheduled message
 
    .. cpp:member:: optional_t<string_t> media_group_id
 
@@ -250,6 +262,10 @@ message_t
    .. cpp:member:: optional_t<chat_boost_added_t> boost_added
 
    Optional. Service message: user boosted the chat
+
+   .. cpp:member:: optional_t<chat_background_t> chat_background_set
+
+   Optional. Service message: chat background set
 
    .. cpp:member:: optional_t<forum_topic_created_t> forum_topic_created
 

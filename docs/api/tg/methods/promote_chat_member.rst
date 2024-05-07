@@ -66,7 +66,7 @@ promote_chat_member
 
    .. cpp:member:: optional_t<boolean_t> can_edit_stories
 
-   Pass True if the administrator can edit stories posted by other users
+   Pass True if the administrator can edit stories posted by other users, post stories to the chat page, pin chat stories, and access the chat's story archive
 
    .. cpp:member:: optional_t<boolean_t> can_delete_stories
 

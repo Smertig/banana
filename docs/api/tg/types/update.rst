@@ -27,6 +27,22 @@ update_t
 
    Optional. New version of a channel post that is known to the bot and was edited. This update may at times be triggered by changes to message fields that are either unavailable or not actively used by your bot.
 
+   .. cpp:member:: optional_t<business_connection_t> business_connection
+
+   Optional. The bot was connected to or disconnected from a business account, or a user edited an existing connection with the bot
+
+   .. cpp:member:: optional_t<message_t> business_message
+
+   Optional. New non-service message from a connected business account
+
+   .. cpp:member:: optional_t<message_t> edited_business_message
+
+   Optional. New version of a message from a connected business account
+
+   .. cpp:member:: optional_t<business_messages_deleted_t> deleted_business_messages
+
+   Optional. Messages were deleted from a connected business account
+
    .. cpp:member:: optional_t<message_reaction_updated_t> message_reaction
 
    Optional. A reaction to a message was changed by a user. The bot must be an administrator in the chat and must explicitly specify "message_reaction" in the list of allowed_updates to receive these updates. The update isn't received for reactions set by bots.

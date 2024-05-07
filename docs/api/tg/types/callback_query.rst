@@ -15,6 +15,10 @@ callback_query_t
 
    Sender
 
+   .. cpp:member:: string_t chat_instance
+
+   Global identifier, uniquely corresponding to the chat to which the message with the callback button was sent. Useful for high scores in games.
+
    .. cpp:member:: optional_t<maybe_inaccessible_message_t> message
 
    Optional. Message sent by the bot with the callback button that originated the query
@@ -22,10 +26,6 @@ callback_query_t
    .. cpp:member:: optional_t<string_t> inline_message_id
 
    Optional. Identifier of the message sent via the bot in inline mode, that originated the query.
-
-   .. cpp:member:: string_t chat_instance
-
-   Global identifier, uniquely corresponding to the chat to which the message with the callback button was sent. Useful for high scores in games.
 
    .. cpp:member:: optional_t<string_t> data
 

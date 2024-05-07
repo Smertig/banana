@@ -20,7 +20,7 @@ TEST_CASE("basic deserialization") {
     CHECK(result.chat.type == "private");
 
     CHECK(!result.audio.has_value());
-    CHECK(!result.chat.description.has_value());
+    CHECK(!result.chat.title.has_value());
 }
 
 TEST_CASE("variant deserialization") {

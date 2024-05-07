@@ -50,3 +50,7 @@ user_t
    .. cpp:member:: optional_t<boolean_t> supports_inline_queries
 
    Optional. True, if the bot supports inline queries. Returned only in getMe.
+
+   .. cpp:member:: optional_t<boolean_t> can_connect_to_business
+
+   Optional. True, if the bot can be connected to a Telegram Business account to receive its messages. Returned only in getMe.

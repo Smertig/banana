@@ -168,6 +168,128 @@ template <>
 constexpr std::string_view name_of<api::audio_t> = "audio_t";
 
 template <>
+struct reflector<api::background_fill_freeform_gradient_t> {
+    template <class F>
+    static void for_each_field(F&& f) {
+        using namespace std::literals;
+        f("type"sv, &api::background_fill_freeform_gradient_t::type, "freeform_gradient");
+        f("colors"sv, &api::background_fill_freeform_gradient_t::colors);
+    }
+};
+
+template <>
+constexpr bool is_reflectable_v<api::background_fill_freeform_gradient_t> = true;
+
+template <>
+constexpr std::string_view name_of<api::background_fill_freeform_gradient_t> = "background_fill_freeform_gradient_t";
+
+template <>
+struct reflector<api::background_fill_gradient_t> {
+    template <class F>
+    static void for_each_field(F&& f) {
+        using namespace std::literals;
+        f("type"sv, &api::background_fill_gradient_t::type, "gradient");
+        f("top_color"sv, &api::background_fill_gradient_t::top_color);
+        f("bottom_color"sv, &api::background_fill_gradient_t::bottom_color);
+        f("rotation_angle"sv, &api::background_fill_gradient_t::rotation_angle);
+    }
+};
+
+template <>
+constexpr bool is_reflectable_v<api::background_fill_gradient_t> = true;
+
+template <>
+constexpr std::string_view name_of<api::background_fill_gradient_t> = "background_fill_gradient_t";
+
+template <>
+struct reflector<api::background_fill_solid_t> {
+    template <class F>
+    static void for_each_field(F&& f) {
+        using namespace std::literals;
+        f("type"sv, &api::background_fill_solid_t::type, "solid");
+        f("color"sv, &api::background_fill_solid_t::color);
+    }
+};
+
+template <>
+constexpr bool is_reflectable_v<api::background_fill_solid_t> = true;
+
+template <>
+constexpr std::string_view name_of<api::background_fill_solid_t> = "background_fill_solid_t";
+
+template <>
+struct reflector<api::background_type_chat_theme_t> {
+    template <class F>
+    static void for_each_field(F&& f) {
+        using namespace std::literals;
+        f("type"sv, &api::background_type_chat_theme_t::type, "chat_theme");
+        f("theme_name"sv, &api::background_type_chat_theme_t::theme_name);
+    }
+};
+
+template <>
+constexpr bool is_reflectable_v<api::background_type_chat_theme_t> = true;
+
+template <>
+constexpr std::string_view name_of<api::background_type_chat_theme_t> = "background_type_chat_theme_t";
+
+template <>
+struct reflector<api::background_type_fill_t> {
+    template <class F>
+    static void for_each_field(F&& f) {
+        using namespace std::literals;
+        f("type"sv, &api::background_type_fill_t::type, "fill");
+        f("fill"sv, &api::background_type_fill_t::fill);
+        f("dark_theme_dimming"sv, &api::background_type_fill_t::dark_theme_dimming);
+    }
+};
+
+template <>
+constexpr bool is_reflectable_v<api::background_type_fill_t> = true;
+
+template <>
+constexpr std::string_view name_of<api::background_type_fill_t> = "background_type_fill_t";
+
+template <>
+struct reflector<api::background_type_pattern_t> {
+    template <class F>
+    static void for_each_field(F&& f) {
+        using namespace std::literals;
+        f("type"sv, &api::background_type_pattern_t::type, "pattern");
+        f("document"sv, &api::background_type_pattern_t::document);
+        f("fill"sv, &api::background_type_pattern_t::fill);
+        f("intensity"sv, &api::background_type_pattern_t::intensity);
+        f("is_inverted"sv, &api::background_type_pattern_t::is_inverted, true);
+        f("is_moving"sv, &api::background_type_pattern_t::is_moving, true);
+    }
+};
+
+template <>
+constexpr bool is_reflectable_v<api::background_type_pattern_t> = true;
+
+template <>
+constexpr std::string_view name_of<api::background_type_pattern_t> = "background_type_pattern_t";
+
+template <>
+struct reflector<api::background_type_wallpaper_t> {
+    template <class F>
+    static void for_each_field(F&& f) {
+        using namespace std::literals;
+        f("type"sv, &api::background_type_wallpaper_t::type, "wallpaper");
+        f("document"sv, &api::background_type_wallpaper_t::document);
+        f("dark_theme_dimming"sv, &api::background_type_wallpaper_t::dark_theme_dimming);
+        f("is_blurred"sv, &api::background_type_wallpaper_t::is_blurred, true);
+        f("is_moving"sv, &api::background_type_wallpaper_t::is_moving, true);
+    }
+};
+
+template <>
+constexpr bool is_reflectable_v<api::background_type_wallpaper_t> = true;
+
+template <>
+constexpr std::string_view name_of<api::background_type_wallpaper_t> = "background_type_wallpaper_t";
+
+template <>
 struct reflector<api::ban_chat_member_args_t> {
     template <class F>
     static void for_each_field(F&& f) {
@@ -200,6 +322,23 @@ constexpr bool is_reflectable_v<api::ban_chat_sender_chat_args_t> = true;
 
 template <>
 constexpr std::string_view name_of<api::ban_chat_sender_chat_args_t> = "ban_chat_sender_chat_args_t";
+
+template <>
+struct reflector<api::birthdate_t> {
+    template <class F>
+    static void for_each_field(F&& f) {
+        using namespace std::literals;
+        f("day"sv, &api::birthdate_t::day);
+        f("month"sv, &api::birthdate_t::month);
+        f("year"sv, &api::birthdate_t::year);
+    }
+};
+
+template <>
+constexpr bool is_reflectable_v<api::birthdate_t> = true;
+
+template <>
+constexpr std::string_view name_of<api::birthdate_t> = "birthdate_t";
 
 template <>
 struct reflector<api::bot_command_scope_all_chat_administrators_t> {
@@ -372,6 +511,108 @@ template <>
 constexpr std::string_view name_of<api::bot_short_description_t> = "bot_short_description_t";
 
 template <>
+struct reflector<api::business_connection_t> {
+    template <class F>
+    static void for_each_field(F&& f) {
+        using namespace std::literals;
+        f("id"sv, &api::business_connection_t::id);
+        f("user"sv, &api::business_connection_t::user);
+        f("user_chat_id"sv, &api::business_connection_t::user_chat_id);
+        f("date"sv, &api::business_connection_t::date);
+        f("can_reply"sv, &api::business_connection_t::can_reply);
+        f("is_enabled"sv, &api::business_connection_t::is_enabled);
+    }
+};
+
+template <>
+constexpr bool is_reflectable_v<api::business_connection_t> = true;
+
+template <>
+constexpr std::string_view name_of<api::business_connection_t> = "business_connection_t";
+
+template <>
+struct reflector<api::business_intro_t> {
+    template <class F>
+    static void for_each_field(F&& f) {
+        using namespace std::literals;
+        f("title"sv, &api::business_intro_t::title);
+        f("message"sv, &api::business_intro_t::message);
+        f("sticker"sv, &api::business_intro_t::sticker);
+    }
+};
+
+template <>
+constexpr bool is_reflectable_v<api::business_intro_t> = true;
+
+template <>
+constexpr std::string_view name_of<api::business_intro_t> = "business_intro_t";
+
+template <>
+struct reflector<api::business_location_t> {
+    template <class F>
+    static void for_each_field(F&& f) {
+        using namespace std::literals;
+        f("address"sv, &api::business_location_t::address);
+        f("location"sv, &api::business_location_t::location);
+    }
+};
+
+template <>
+constexpr bool is_reflectable_v<api::business_location_t> = true;
+
+template <>
+constexpr std::string_view name_of<api::business_location_t> = "business_location_t";
+
+template <>
+struct reflector<api::business_messages_deleted_t> {
+    template <class F>
+    static void for_each_field(F&& f) {
+        using namespace std::literals;
+        f("business_connection_id"sv, &api::business_messages_deleted_t::business_connection_id);
+        f("chat"sv, &api::business_messages_deleted_t::chat);
+        f("message_ids"sv, &api::business_messages_deleted_t::message_ids);
+    }
+};
+
+template <>
+constexpr bool is_reflectable_v<api::business_messages_deleted_t> = true;
+
+template <>
+constexpr std::string_view name_of<api::business_messages_deleted_t> = "business_messages_deleted_t";
+
+template <>
+struct reflector<api::business_opening_hours_interval_t> {
+    template <class F>
+    static void for_each_field(F&& f) {
+        using namespace std::literals;
+        f("opening_minute"sv, &api::business_opening_hours_interval_t::opening_minute);
+        f("closing_minute"sv, &api::business_opening_hours_interval_t::closing_minute);
+    }
+};
+
+template <>
+constexpr bool is_reflectable_v<api::business_opening_hours_interval_t> = true;
+
+template <>
+constexpr std::string_view name_of<api::business_opening_hours_interval_t> = "business_opening_hours_interval_t";
+
+template <>
+struct reflector<api::business_opening_hours_t> {
+    template <class F>
+    static void for_each_field(F&& f) {
+        using namespace std::literals;
+        f("time_zone_name"sv, &api::business_opening_hours_t::time_zone_name);
+        f("opening_hours"sv, &api::business_opening_hours_t::opening_hours);
+    }
+};
+
+template <>
+constexpr bool is_reflectable_v<api::business_opening_hours_t> = true;
+
+template <>
+constexpr std::string_view name_of<api::business_opening_hours_t> = "business_opening_hours_t";
+
+template <>
 struct reflector<api::callback_game_t> {
     template <class F>
     static void for_each_field(F&& f) {
@@ -434,6 +675,21 @@ constexpr bool is_reflectable_v<api::chat_administrator_rights_t> = true;
 
 template <>
 constexpr std::string_view name_of<api::chat_administrator_rights_t> = "chat_administrator_rights_t";
+
+template <>
+struct reflector<api::chat_background_t> {
+    template <class F>
+    static void for_each_field(F&& f) {
+        using namespace std::literals;
+        f("type"sv, &api::chat_background_t::type);
+    }
+};
+
+template <>
+constexpr bool is_reflectable_v<api::chat_background_t> = true;
+
+template <>
+constexpr std::string_view name_of<api::chat_background_t> = "chat_background_t";
 
 template <>
 struct reflector<api::chat_boost_added_t> {
@@ -551,6 +807,63 @@ constexpr bool is_reflectable_v<api::chat_boost_updated_t> = true;
 
 template <>
 constexpr std::string_view name_of<api::chat_boost_updated_t> = "chat_boost_updated_t";
+
+template <>
+struct reflector<api::chat_full_info_t> {
+    template <class F>
+    static void for_each_field(F&& f) {
+        using namespace std::literals;
+        f("id"sv, &api::chat_full_info_t::id);
+        f("type"sv, &api::chat_full_info_t::type);
+        f("accent_color_id"sv, &api::chat_full_info_t::accent_color_id);
+        f("max_reaction_count"sv, &api::chat_full_info_t::max_reaction_count);
+        f("title"sv, &api::chat_full_info_t::title);
+        f("username"sv, &api::chat_full_info_t::username);
+        f("first_name"sv, &api::chat_full_info_t::first_name);
+        f("last_name"sv, &api::chat_full_info_t::last_name);
+        f("is_forum"sv, &api::chat_full_info_t::is_forum, true);
+        f("photo"sv, &api::chat_full_info_t::photo);
+        f("active_usernames"sv, &api::chat_full_info_t::active_usernames);
+        f("birthdate"sv, &api::chat_full_info_t::birthdate);
+        f("business_intro"sv, &api::chat_full_info_t::business_intro);
+        f("business_location"sv, &api::chat_full_info_t::business_location);
+        f("business_opening_hours"sv, &api::chat_full_info_t::business_opening_hours);
+        f("personal_chat"sv, &api::chat_full_info_t::personal_chat);
+        f("available_reactions"sv, &api::chat_full_info_t::available_reactions);
+        f("background_custom_emoji_id"sv, &api::chat_full_info_t::background_custom_emoji_id);
+        f("profile_accent_color_id"sv, &api::chat_full_info_t::profile_accent_color_id);
+        f("profile_background_custom_emoji_id"sv, &api::chat_full_info_t::profile_background_custom_emoji_id);
+        f("emoji_status_custom_emoji_id"sv, &api::chat_full_info_t::emoji_status_custom_emoji_id);
+        f("emoji_status_expiration_date"sv, &api::chat_full_info_t::emoji_status_expiration_date);
+        f("bio"sv, &api::chat_full_info_t::bio);
+        f("has_private_forwards"sv, &api::chat_full_info_t::has_private_forwards, true);
+        f("has_restricted_voice_and_video_messages"sv, &api::chat_full_info_t::has_restricted_voice_and_video_messages, true);
+        f("join_to_send_messages"sv, &api::chat_full_info_t::join_to_send_messages, true);
+        f("join_by_request"sv, &api::chat_full_info_t::join_by_request, true);
+        f("description"sv, &api::chat_full_info_t::description);
+        f("invite_link"sv, &api::chat_full_info_t::invite_link);
+        f("pinned_message"sv, &api::chat_full_info_t::pinned_message);
+        f("permissions"sv, &api::chat_full_info_t::permissions);
+        f("slow_mode_delay"sv, &api::chat_full_info_t::slow_mode_delay);
+        f("unrestrict_boost_count"sv, &api::chat_full_info_t::unrestrict_boost_count);
+        f("message_auto_delete_time"sv, &api::chat_full_info_t::message_auto_delete_time);
+        f("has_aggressive_anti_spam_enabled"sv, &api::chat_full_info_t::has_aggressive_anti_spam_enabled, true);
+        f("has_hidden_members"sv, &api::chat_full_info_t::has_hidden_members, true);
+        f("has_protected_content"sv, &api::chat_full_info_t::has_protected_content, true);
+        f("has_visible_history"sv, &api::chat_full_info_t::has_visible_history, true);
+        f("sticker_set_name"sv, &api::chat_full_info_t::sticker_set_name);
+        f("can_set_sticker_set"sv, &api::chat_full_info_t::can_set_sticker_set, true);
+        f("custom_emoji_sticker_set_name"sv, &api::chat_full_info_t::custom_emoji_sticker_set_name);
+        f("linked_chat_id"sv, &api::chat_full_info_t::linked_chat_id);
+        f("location"sv, &api::chat_full_info_t::location);
+    }
+};
+
+template <>
+constexpr bool is_reflectable_v<api::chat_full_info_t> = true;
+
+template <>
+constexpr std::string_view name_of<api::chat_full_info_t> = "chat_full_info_t";
 
 template <>
 struct reflector<api::chat_invite_link_t> {
@@ -754,6 +1067,7 @@ struct reflector<api::chat_member_updated_t> {
         f("old_chat_member"sv, &api::chat_member_updated_t::old_chat_member);
         f("new_chat_member"sv, &api::chat_member_updated_t::new_chat_member);
         f("invite_link"sv, &api::chat_member_updated_t::invite_link);
+        f("via_join_request"sv, &api::chat_member_updated_t::via_join_request);
         f("via_chat_folder_invite_link"sv, &api::chat_member_updated_t::via_chat_folder_invite_link);
     }
 };
@@ -817,6 +1131,9 @@ struct reflector<api::chat_shared_t> {
         using namespace std::literals;
         f("request_id"sv, &api::chat_shared_t::request_id);
         f("chat_id"sv, &api::chat_shared_t::chat_id);
+        f("title"sv, &api::chat_shared_t::title);
+        f("username"sv, &api::chat_shared_t::username);
+        f("photo"sv, &api::chat_shared_t::photo);
     }
 };
 
@@ -838,36 +1155,6 @@ struct reflector<api::chat_t> {
         f("first_name"sv, &api::chat_t::first_name);
         f("last_name"sv, &api::chat_t::last_name);
         f("is_forum"sv, &api::chat_t::is_forum, true);
-        f("photo"sv, &api::chat_t::photo);
-        f("active_usernames"sv, &api::chat_t::active_usernames);
-        f("available_reactions"sv, &api::chat_t::available_reactions);
-        f("accent_color_id"sv, &api::chat_t::accent_color_id);
-        f("background_custom_emoji_id"sv, &api::chat_t::background_custom_emoji_id);
-        f("profile_accent_color_id"sv, &api::chat_t::profile_accent_color_id);
-        f("profile_background_custom_emoji_id"sv, &api::chat_t::profile_background_custom_emoji_id);
-        f("emoji_status_custom_emoji_id"sv, &api::chat_t::emoji_status_custom_emoji_id);
-        f("emoji_status_expiration_date"sv, &api::chat_t::emoji_status_expiration_date);
-        f("bio"sv, &api::chat_t::bio);
-        f("has_private_forwards"sv, &api::chat_t::has_private_forwards, true);
-        f("has_restricted_voice_and_video_messages"sv, &api::chat_t::has_restricted_voice_and_video_messages, true);
-        f("join_to_send_messages"sv, &api::chat_t::join_to_send_messages, true);
-        f("join_by_request"sv, &api::chat_t::join_by_request, true);
-        f("description"sv, &api::chat_t::description);
-        f("invite_link"sv, &api::chat_t::invite_link);
-        f("pinned_message"sv, &api::chat_t::pinned_message);
-        f("permissions"sv, &api::chat_t::permissions);
-        f("slow_mode_delay"sv, &api::chat_t::slow_mode_delay);
-        f("unrestrict_boost_count"sv, &api::chat_t::unrestrict_boost_count);
-        f("message_auto_delete_time"sv, &api::chat_t::message_auto_delete_time);
-        f("has_aggressive_anti_spam_enabled"sv, &api::chat_t::has_aggressive_anti_spam_enabled, true);
-        f("has_hidden_members"sv, &api::chat_t::has_hidden_members, true);
-        f("has_protected_content"sv, &api::chat_t::has_protected_content, true);
-        f("has_visible_history"sv, &api::chat_t::has_visible_history, true);
-        f("sticker_set_name"sv, &api::chat_t::sticker_set_name);
-        f("can_set_sticker_set"sv, &api::chat_t::can_set_sticker_set, true);
-        f("custom_emoji_sticker_set_name"sv, &api::chat_t::custom_emoji_sticker_set_name);
-        f("linked_chat_id"sv, &api::chat_t::linked_chat_id);
-        f("location"sv, &api::chat_t::location);
     }
 };
 
@@ -1086,7 +1373,6 @@ struct reflector<api::create_new_sticker_set_args_t> {
         f("name"sv, &api::create_new_sticker_set_args_t::name);
         f("title"sv, &api::create_new_sticker_set_args_t::title);
         f("stickers"sv, &api::create_new_sticker_set_args_t::stickers);
-        f("sticker_format"sv, &api::create_new_sticker_set_args_t::sticker_format);
         f("sticker_type"sv, &api::create_new_sticker_set_args_t::sticker_type);
         f("needs_repainting"sv, &api::create_new_sticker_set_args_t::needs_repainting);
     }
@@ -1374,6 +1660,7 @@ struct reflector<api::edit_message_live_location_args_t> {
         f("chat_id"sv, &api::edit_message_live_location_args_t::chat_id);
         f("message_id"sv, &api::edit_message_live_location_args_t::message_id);
         f("inline_message_id"sv, &api::edit_message_live_location_args_t::inline_message_id);
+        f("live_period"sv, &api::edit_message_live_location_args_t::live_period);
         f("horizontal_accuracy"sv, &api::edit_message_live_location_args_t::horizontal_accuracy);
         f("heading"sv, &api::edit_message_live_location_args_t::heading);
         f("proximity_alert_radius"sv, &api::edit_message_live_location_args_t::proximity_alert_radius);
@@ -1757,6 +2044,21 @@ constexpr bool is_reflectable_v<api::general_forum_topic_unhidden_t> = true;
 
 template <>
 constexpr std::string_view name_of<api::general_forum_topic_unhidden_t> = "general_forum_topic_unhidden_t";
+
+template <>
+struct reflector<api::get_business_connection_args_t> {
+    template <class F>
+    static void for_each_field(F&& f) {
+        using namespace std::literals;
+        f("business_connection_id"sv, &api::get_business_connection_args_t::business_connection_id);
+    }
+};
+
+template <>
+constexpr bool is_reflectable_v<api::get_business_connection_args_t> = true;
+
+template <>
+constexpr std::string_view name_of<api::get_business_connection_args_t> = "get_business_connection_args_t";
 
 template <>
 struct reflector<api::get_chat_administrators_args_t> {
@@ -2948,11 +3250,29 @@ template <>
 constexpr std::string_view name_of<api::input_media_video_t> = "input_media_video_t";
 
 template <>
+struct reflector<api::input_poll_option_t> {
+    template <class F>
+    static void for_each_field(F&& f) {
+        using namespace std::literals;
+        f("text"sv, &api::input_poll_option_t::text);
+        f("text_parse_mode"sv, &api::input_poll_option_t::text_parse_mode);
+        f("text_entities"sv, &api::input_poll_option_t::text_entities);
+    }
+};
+
+template <>
+constexpr bool is_reflectable_v<api::input_poll_option_t> = true;
+
+template <>
+constexpr std::string_view name_of<api::input_poll_option_t> = "input_poll_option_t";
+
+template <>
 struct reflector<api::input_sticker_t> {
     template <class F>
     static void for_each_field(F&& f) {
         using namespace std::literals;
         f("sticker"sv, &api::input_sticker_t::sticker);
+        f("format"sv, &api::input_sticker_t::format);
         f("emoji_list"sv, &api::input_sticker_t::emoji_list);
         f("mask_position"sv, &api::input_sticker_t::mask_position);
         f("keywords"sv, &api::input_sticker_t::keywords);
@@ -3052,6 +3372,9 @@ struct reflector<api::keyboard_button_request_chat_t> {
         f("user_administrator_rights"sv, &api::keyboard_button_request_chat_t::user_administrator_rights);
         f("bot_administrator_rights"sv, &api::keyboard_button_request_chat_t::bot_administrator_rights);
         f("bot_is_member"sv, &api::keyboard_button_request_chat_t::bot_is_member);
+        f("request_title"sv, &api::keyboard_button_request_chat_t::request_title);
+        f("request_username"sv, &api::keyboard_button_request_chat_t::request_username);
+        f("request_photo"sv, &api::keyboard_button_request_chat_t::request_photo);
     }
 };
 
@@ -3070,6 +3393,9 @@ struct reflector<api::keyboard_button_request_users_t> {
         f("user_is_bot"sv, &api::keyboard_button_request_users_t::user_is_bot);
         f("user_is_premium"sv, &api::keyboard_button_request_users_t::user_is_premium);
         f("max_quantity"sv, &api::keyboard_button_request_users_t::max_quantity, 1);
+        f("request_name"sv, &api::keyboard_button_request_users_t::request_name);
+        f("request_username"sv, &api::keyboard_button_request_users_t::request_username);
+        f("request_photo"sv, &api::keyboard_button_request_users_t::request_photo);
     }
 };
 
@@ -3440,6 +3766,8 @@ struct reflector<api::message_t> {
         f("from"sv, &api::message_t::from);
         f("sender_chat"sv, &api::message_t::sender_chat);
         f("sender_boost_count"sv, &api::message_t::sender_boost_count);
+        f("sender_business_bot"sv, &api::message_t::sender_business_bot);
+        f("business_connection_id"sv, &api::message_t::business_connection_id);
         f("forward_origin"sv, &api::message_t::forward_origin);
         f("is_topic_message"sv, &api::message_t::is_topic_message, true);
         f("is_automatic_forward"sv, &api::message_t::is_automatic_forward, true);
@@ -3450,6 +3778,7 @@ struct reflector<api::message_t> {
         f("via_bot"sv, &api::message_t::via_bot);
         f("edit_date"sv, &api::message_t::edit_date);
         f("has_protected_content"sv, &api::message_t::has_protected_content, true);
+        f("is_from_offline"sv, &api::message_t::is_from_offline, true);
         f("media_group_id"sv, &api::message_t::media_group_id);
         f("author_signature"sv, &api::message_t::author_signature);
         f("text"sv, &api::message_t::text);
@@ -3494,6 +3823,7 @@ struct reflector<api::message_t> {
         f("passport_data"sv, &api::message_t::passport_data);
         f("proximity_alert_triggered"sv, &api::message_t::proximity_alert_triggered);
         f("boost_added"sv, &api::message_t::boost_added);
+        f("chat_background_set"sv, &api::message_t::chat_background_set);
         f("forum_topic_created"sv, &api::message_t::forum_topic_created);
         f("forum_topic_edited"sv, &api::message_t::forum_topic_edited);
         f("forum_topic_closed"sv, &api::message_t::forum_topic_closed);
@@ -3795,6 +4125,7 @@ struct reflector<api::poll_option_t> {
         using namespace std::literals;
         f("text"sv, &api::poll_option_t::text);
         f("voter_count"sv, &api::poll_option_t::voter_count);
+        f("text_entities"sv, &api::poll_option_t::text_entities);
     }
 };
 
@@ -3817,6 +4148,7 @@ struct reflector<api::poll_t> {
         f("is_anonymous"sv, &api::poll_t::is_anonymous);
         f("type"sv, &api::poll_t::type);
         f("allows_multiple_answers"sv, &api::poll_t::allows_multiple_answers);
+        f("question_entities"sv, &api::poll_t::question_entities);
         f("correct_option_id"sv, &api::poll_t::correct_option_id);
         f("explanation"sv, &api::poll_t::explanation);
         f("explanation_entities"sv, &api::poll_t::explanation_entities);
@@ -3980,6 +4312,24 @@ template <>
 constexpr std::string_view name_of<api::reopen_general_forum_topic_args_t> = "reopen_general_forum_topic_args_t";
 
 template <>
+struct reflector<api::replace_sticker_in_set_args_t> {
+    template <class F>
+    static void for_each_field(F&& f) {
+        using namespace std::literals;
+        f("user_id"sv, &api::replace_sticker_in_set_args_t::user_id);
+        f("name"sv, &api::replace_sticker_in_set_args_t::name);
+        f("old_sticker"sv, &api::replace_sticker_in_set_args_t::old_sticker);
+        f("sticker"sv, &api::replace_sticker_in_set_args_t::sticker);
+    }
+};
+
+template <>
+constexpr bool is_reflectable_v<api::replace_sticker_in_set_args_t> = true;
+
+template <>
+constexpr std::string_view name_of<api::replace_sticker_in_set_args_t> = "replace_sticker_in_set_args_t";
+
+template <>
 struct reflector<api::reply_keyboard_markup_t> {
     template <class F>
     static void for_each_field(F&& f) {
@@ -4094,6 +4444,7 @@ struct reflector<api::send_animation_args_t> {
         using namespace std::literals;
         f("chat_id"sv, &api::send_animation_args_t::chat_id);
         f("animation"sv, &api::send_animation_args_t::animation);
+        f("business_connection_id"sv, &api::send_animation_args_t::business_connection_id);
         f("message_thread_id"sv, &api::send_animation_args_t::message_thread_id);
         f("duration"sv, &api::send_animation_args_t::duration);
         f("width"sv, &api::send_animation_args_t::width);
@@ -4123,6 +4474,7 @@ struct reflector<api::send_audio_args_t> {
         using namespace std::literals;
         f("chat_id"sv, &api::send_audio_args_t::chat_id);
         f("audio"sv, &api::send_audio_args_t::audio);
+        f("business_connection_id"sv, &api::send_audio_args_t::business_connection_id);
         f("message_thread_id"sv, &api::send_audio_args_t::message_thread_id);
         f("caption"sv, &api::send_audio_args_t::caption);
         f("parse_mode"sv, &api::send_audio_args_t::parse_mode);
@@ -4151,6 +4503,7 @@ struct reflector<api::send_chat_action_args_t> {
         using namespace std::literals;
         f("chat_id"sv, &api::send_chat_action_args_t::chat_id);
         f("action"sv, &api::send_chat_action_args_t::action);
+        f("business_connection_id"sv, &api::send_chat_action_args_t::business_connection_id);
         f("message_thread_id"sv, &api::send_chat_action_args_t::message_thread_id);
     }
 };
@@ -4169,6 +4522,7 @@ struct reflector<api::send_contact_args_t> {
         f("chat_id"sv, &api::send_contact_args_t::chat_id);
         f("phone_number"sv, &api::send_contact_args_t::phone_number);
         f("first_name"sv, &api::send_contact_args_t::first_name);
+        f("business_connection_id"sv, &api::send_contact_args_t::business_connection_id);
         f("message_thread_id"sv, &api::send_contact_args_t::message_thread_id);
         f("last_name"sv, &api::send_contact_args_t::last_name);
         f("vcard"sv, &api::send_contact_args_t::vcard);
@@ -4191,6 +4545,7 @@ struct reflector<api::send_dice_args_t> {
     static void for_each_field(F&& f) {
         using namespace std::literals;
         f("chat_id"sv, &api::send_dice_args_t::chat_id);
+        f("business_connection_id"sv, &api::send_dice_args_t::business_connection_id);
         f("message_thread_id"sv, &api::send_dice_args_t::message_thread_id);
         f("emoji"sv, &api::send_dice_args_t::emoji);
         f("disable_notification"sv, &api::send_dice_args_t::disable_notification);
@@ -4213,6 +4568,7 @@ struct reflector<api::send_document_args_t> {
         using namespace std::literals;
         f("chat_id"sv, &api::send_document_args_t::chat_id);
         f("document"sv, &api::send_document_args_t::document);
+        f("business_connection_id"sv, &api::send_document_args_t::business_connection_id);
         f("message_thread_id"sv, &api::send_document_args_t::message_thread_id);
         f("thumbnail"sv, &api::send_document_args_t::thumbnail);
         f("caption"sv, &api::send_document_args_t::caption);
@@ -4239,6 +4595,7 @@ struct reflector<api::send_game_args_t> {
         using namespace std::literals;
         f("chat_id"sv, &api::send_game_args_t::chat_id);
         f("game_short_name"sv, &api::send_game_args_t::game_short_name);
+        f("business_connection_id"sv, &api::send_game_args_t::business_connection_id);
         f("message_thread_id"sv, &api::send_game_args_t::message_thread_id);
         f("disable_notification"sv, &api::send_game_args_t::disable_notification);
         f("protect_content"sv, &api::send_game_args_t::protect_content);
@@ -4302,6 +4659,7 @@ struct reflector<api::send_location_args_t> {
         f("chat_id"sv, &api::send_location_args_t::chat_id);
         f("latitude"sv, &api::send_location_args_t::latitude);
         f("longitude"sv, &api::send_location_args_t::longitude);
+        f("business_connection_id"sv, &api::send_location_args_t::business_connection_id);
         f("message_thread_id"sv, &api::send_location_args_t::message_thread_id);
         f("horizontal_accuracy"sv, &api::send_location_args_t::horizontal_accuracy);
         f("live_period"sv, &api::send_location_args_t::live_period);
@@ -4327,6 +4685,7 @@ struct reflector<api::send_media_group_args_t> {
         using namespace std::literals;
         f("chat_id"sv, &api::send_media_group_args_t::chat_id);
         f("media"sv, &api::send_media_group_args_t::media);
+        f("business_connection_id"sv, &api::send_media_group_args_t::business_connection_id);
         f("message_thread_id"sv, &api::send_media_group_args_t::message_thread_id);
         f("disable_notification"sv, &api::send_media_group_args_t::disable_notification);
         f("protect_content"sv, &api::send_media_group_args_t::protect_content);
@@ -4347,6 +4706,7 @@ struct reflector<api::send_message_args_t> {
         using namespace std::literals;
         f("chat_id"sv, &api::send_message_args_t::chat_id);
         f("text"sv, &api::send_message_args_t::text);
+        f("business_connection_id"sv, &api::send_message_args_t::business_connection_id);
         f("message_thread_id"sv, &api::send_message_args_t::message_thread_id);
         f("parse_mode"sv, &api::send_message_args_t::parse_mode);
         f("entities"sv, &api::send_message_args_t::entities);
@@ -4371,6 +4731,7 @@ struct reflector<api::send_photo_args_t> {
         using namespace std::literals;
         f("chat_id"sv, &api::send_photo_args_t::chat_id);
         f("photo"sv, &api::send_photo_args_t::photo);
+        f("business_connection_id"sv, &api::send_photo_args_t::business_connection_id);
         f("message_thread_id"sv, &api::send_photo_args_t::message_thread_id);
         f("caption"sv, &api::send_photo_args_t::caption);
         f("parse_mode"sv, &api::send_photo_args_t::parse_mode);
@@ -4397,7 +4758,10 @@ struct reflector<api::send_poll_args_t> {
         f("chat_id"sv, &api::send_poll_args_t::chat_id);
         f("question"sv, &api::send_poll_args_t::question);
         f("options"sv, &api::send_poll_args_t::options);
+        f("business_connection_id"sv, &api::send_poll_args_t::business_connection_id);
         f("message_thread_id"sv, &api::send_poll_args_t::message_thread_id);
+        f("question_parse_mode"sv, &api::send_poll_args_t::question_parse_mode);
+        f("question_entities"sv, &api::send_poll_args_t::question_entities);
         f("is_anonymous"sv, &api::send_poll_args_t::is_anonymous);
         f("type"sv, &api::send_poll_args_t::type);
         f("allows_multiple_answers"sv, &api::send_poll_args_t::allows_multiple_answers);
@@ -4428,6 +4792,7 @@ struct reflector<api::send_sticker_args_t> {
         using namespace std::literals;
         f("chat_id"sv, &api::send_sticker_args_t::chat_id);
         f("sticker"sv, &api::send_sticker_args_t::sticker);
+        f("business_connection_id"sv, &api::send_sticker_args_t::business_connection_id);
         f("message_thread_id"sv, &api::send_sticker_args_t::message_thread_id);
         f("emoji"sv, &api::send_sticker_args_t::emoji);
         f("disable_notification"sv, &api::send_sticker_args_t::disable_notification);
@@ -4453,6 +4818,7 @@ struct reflector<api::send_venue_args_t> {
         f("longitude"sv, &api::send_venue_args_t::longitude);
         f("title"sv, &api::send_venue_args_t::title);
         f("address"sv, &api::send_venue_args_t::address);
+        f("business_connection_id"sv, &api::send_venue_args_t::business_connection_id);
         f("message_thread_id"sv, &api::send_venue_args_t::message_thread_id);
         f("foursquare_id"sv, &api::send_venue_args_t::foursquare_id);
         f("foursquare_type"sv, &api::send_venue_args_t::foursquare_type);
@@ -4478,6 +4844,7 @@ struct reflector<api::send_video_args_t> {
         using namespace std::literals;
         f("chat_id"sv, &api::send_video_args_t::chat_id);
         f("video"sv, &api::send_video_args_t::video);
+        f("business_connection_id"sv, &api::send_video_args_t::business_connection_id);
         f("message_thread_id"sv, &api::send_video_args_t::message_thread_id);
         f("duration"sv, &api::send_video_args_t::duration);
         f("width"sv, &api::send_video_args_t::width);
@@ -4508,6 +4875,7 @@ struct reflector<api::send_video_note_args_t> {
         using namespace std::literals;
         f("chat_id"sv, &api::send_video_note_args_t::chat_id);
         f("video_note"sv, &api::send_video_note_args_t::video_note);
+        f("business_connection_id"sv, &api::send_video_note_args_t::business_connection_id);
         f("message_thread_id"sv, &api::send_video_note_args_t::message_thread_id);
         f("duration"sv, &api::send_video_note_args_t::duration);
         f("length"sv, &api::send_video_note_args_t::length);
@@ -4532,6 +4900,7 @@ struct reflector<api::send_voice_args_t> {
         using namespace std::literals;
         f("chat_id"sv, &api::send_voice_args_t::chat_id);
         f("voice"sv, &api::send_voice_args_t::voice);
+        f("business_connection_id"sv, &api::send_voice_args_t::business_connection_id);
         f("message_thread_id"sv, &api::send_voice_args_t::message_thread_id);
         f("caption"sv, &api::send_voice_args_t::caption);
         f("parse_mode"sv, &api::send_voice_args_t::parse_mode);
@@ -4902,6 +5271,7 @@ struct reflector<api::set_sticker_set_thumbnail_args_t> {
         using namespace std::literals;
         f("name"sv, &api::set_sticker_set_thumbnail_args_t::name);
         f("user_id"sv, &api::set_sticker_set_thumbnail_args_t::user_id);
+        f("format"sv, &api::set_sticker_set_thumbnail_args_t::format);
         f("thumbnail"sv, &api::set_sticker_set_thumbnail_args_t::thumbnail);
     }
 };
@@ -4948,6 +5318,25 @@ constexpr bool is_reflectable_v<api::set_webhook_args_t> = true;
 
 template <>
 constexpr std::string_view name_of<api::set_webhook_args_t> = "set_webhook_args_t";
+
+template <>
+struct reflector<api::shared_user_t> {
+    template <class F>
+    static void for_each_field(F&& f) {
+        using namespace std::literals;
+        f("user_id"sv, &api::shared_user_t::user_id);
+        f("first_name"sv, &api::shared_user_t::first_name);
+        f("last_name"sv, &api::shared_user_t::last_name);
+        f("username"sv, &api::shared_user_t::username);
+        f("photo"sv, &api::shared_user_t::photo);
+    }
+};
+
+template <>
+constexpr bool is_reflectable_v<api::shared_user_t> = true;
+
+template <>
+constexpr std::string_view name_of<api::shared_user_t> = "shared_user_t";
 
 template <>
 struct reflector<api::shipping_address_t> {
@@ -5012,8 +5401,6 @@ struct reflector<api::sticker_set_t> {
         f("name"sv, &api::sticker_set_t::name);
         f("title"sv, &api::sticker_set_t::title);
         f("sticker_type"sv, &api::sticker_set_t::sticker_type);
-        f("is_animated"sv, &api::sticker_set_t::is_animated);
-        f("is_video"sv, &api::sticker_set_t::is_video);
         f("stickers"sv, &api::sticker_set_t::stickers);
         f("thumbnail"sv, &api::sticker_set_t::thumbnail);
     }
@@ -5283,6 +5670,10 @@ struct reflector<api::update_t> {
         f("edited_message"sv, &api::update_t::edited_message);
         f("channel_post"sv, &api::update_t::channel_post);
         f("edited_channel_post"sv, &api::update_t::edited_channel_post);
+        f("business_connection"sv, &api::update_t::business_connection);
+        f("business_message"sv, &api::update_t::business_message);
+        f("edited_business_message"sv, &api::update_t::edited_business_message);
+        f("deleted_business_messages"sv, &api::update_t::deleted_business_messages);
         f("message_reaction"sv, &api::update_t::message_reaction);
         f("message_reaction_count"sv, &api::update_t::message_reaction_count);
         f("inline_query"sv, &api::update_t::inline_query);
@@ -5370,6 +5761,7 @@ struct reflector<api::user_t> {
         f("can_join_groups"sv, &api::user_t::can_join_groups);
         f("can_read_all_group_messages"sv, &api::user_t::can_read_all_group_messages);
         f("supports_inline_queries"sv, &api::user_t::supports_inline_queries);
+        f("can_connect_to_business"sv, &api::user_t::can_connect_to_business);
     }
 };
 
@@ -5385,7 +5777,7 @@ struct reflector<api::users_shared_t> {
     static void for_each_field(F&& f) {
         using namespace std::literals;
         f("request_id"sv, &api::users_shared_t::request_id);
-        f("user_ids"sv, &api::users_shared_t::user_ids);
+        f("users"sv, &api::users_shared_t::users);
     }
 };
 

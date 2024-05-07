@@ -19,6 +19,10 @@ inline_query_result_gif_t
 
    A valid URL for the GIF file. File size must not exceed 1MB
 
+   .. cpp:member:: string_t thumbnail_url
+
+   URL of the static (JPEG or GIF) or animated (MPEG4) thumbnail for the result
+
    .. cpp:member:: optional_t<integer_t> gif_width
 
    Optional. Width of the GIF
@@ -30,10 +34,6 @@ inline_query_result_gif_t
    .. cpp:member:: optional_t<integer_t> gif_duration
 
    Optional. Duration of the GIF in seconds
-
-   .. cpp:member:: string_t thumbnail_url
-
-   URL of the static (JPEG or GIF) or animated (MPEG4) thumbnail for the result
 
    .. cpp:member:: optional_t<string_t> thumbnail_mime_type
 

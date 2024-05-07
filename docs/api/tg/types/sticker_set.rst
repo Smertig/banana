@@ -19,14 +19,6 @@ sticker_set_t
 
    Type of stickers in the set, currently one of “regular”, “mask”, “custom_emoji”
 
-   .. cpp:member:: boolean_t is_animated
-
-   True, if the sticker set contains animated stickers
-
-   .. cpp:member:: boolean_t is_video
-
-   True, if the sticker set contains video stickers
-
    .. cpp:member:: array_t<sticker_t> stickers
 
    List of all set stickers

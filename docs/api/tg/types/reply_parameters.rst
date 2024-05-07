@@ -13,11 +13,11 @@ reply_parameters_t
 
    .. cpp:member:: optional_t<variant_t<integer_t, string_t>> chat_id
 
-   Optional. If the message to be replied to is from a different chat, unique identifier for the chat or username of the channel (in the format @channelusername)
+   Optional. If the message to be replied to is from a different chat, unique identifier for the chat or username of the channel (in the format @channelusername). Not supported for messages sent on behalf of a business account.
 
    .. cpp:member:: optional_t<boolean_t> allow_sending_without_reply
 
-   Optional. Pass True if the message should be sent even if the specified message to be replied to is not found; can be used only for replies in the same chat and forum topic.
+   Optional. Pass True if the message should be sent even if the specified message to be replied to is not found. Always False for replies in another chat or forum topic. Always True for messages sent on behalf of a business account.
 
    .. cpp:member:: optional_t<string_t> quote
 

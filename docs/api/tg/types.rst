@@ -13,6 +13,16 @@ File
 
    animation_t <types/animation>
    audio_t <types/audio>
+   background_fill_freeform_gradient_t <types/background_fill_freeform_gradient>
+   background_fill_gradient_t <types/background_fill_gradient>
+   background_fill_solid_t <types/background_fill_solid>
+   background_fill_t <types/background_fill>
+   background_type_chat_theme_t <types/background_type_chat_theme>
+   background_type_fill_t <types/background_type_fill>
+   background_type_pattern_t <types/background_type_pattern>
+   background_type_t <types/background_type>
+   background_type_wallpaper_t <types/background_type_wallpaper>
+   birthdate_t <types/birthdate>
    bot_command_scope_all_chat_administrators_t <types/bot_command_scope_all_chat_administrators>
    bot_command_scope_all_group_chats_t <types/bot_command_scope_all_group_chats>
    bot_command_scope_all_private_chats_t <types/bot_command_scope_all_private_chats>
@@ -25,9 +35,16 @@ File
    bot_description_t <types/bot_description>
    bot_name_t <types/bot_name>
    bot_short_description_t <types/bot_short_description>
+   business_connection_t <types/business_connection>
+   business_intro_t <types/business_intro>
+   business_location_t <types/business_location>
+   business_messages_deleted_t <types/business_messages_deleted>
+   business_opening_hours_interval_t <types/business_opening_hours_interval>
+   business_opening_hours_t <types/business_opening_hours>
    callback_game_t <types/callback_game>
    callback_query_t <types/callback_query>
    chat_administrator_rights_t <types/chat_administrator_rights>
+   chat_background_t <types/chat_background>
    chat_boost_added_t <types/chat_boost_added>
    chat_boost_removed_t <types/chat_boost_removed>
    chat_boost_source_gift_code_t <types/chat_boost_source_gift_code>
@@ -36,6 +53,7 @@ File
    chat_boost_source_t <types/chat_boost_source>
    chat_boost_t <types/chat_boost>
    chat_boost_updated_t <types/chat_boost_updated>
+   chat_full_info_t <types/chat_full_info>
    chat_invite_link_t <types/chat_invite_link>
    chat_join_request_t <types/chat_join_request>
    chat_location_t <types/chat_location>
@@ -110,6 +128,7 @@ File
    input_media_t <types/input_media>
    input_media_video_t <types/input_media_video>
    input_message_content_t <types/input_message_content>
+   input_poll_option_t <types/input_poll_option>
    input_sticker_t <types/input_sticker>
    input_text_message_content_t <types/input_text_message_content>
    input_venue_message_content_t <types/input_venue_message_content>
@@ -167,6 +186,7 @@ File
    reply_parameters_t <types/reply_parameters>
    response_parameters_t <types/response_parameters>
    sent_web_app_message_t <types/sent_web_app_message>
+   shared_user_t <types/shared_user>
    shipping_address_t <types/shipping_address>
    shipping_option_t <types/shipping_option>
    shipping_query_t <types/shipping_query>

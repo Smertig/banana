@@ -21,7 +21,7 @@ input_location_message_content_t
 
    .. cpp:member:: optional_t<integer_t> live_period
 
-   Optional. Period in seconds for which the location can be updated, should be between 60 and 86400.
+   Optional. Period in seconds during which the location can be updated, should be between 60 and 86400, or 0x7FFFFFFF for live locations that can be edited indefinitely.
 
    .. cpp:member:: optional_t<integer_t> heading
 
