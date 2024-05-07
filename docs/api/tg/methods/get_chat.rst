@@ -5,15 +5,15 @@ get_chat
 
 .. cpp:namespace:: banana::api
 .. cpp:function:: template <class Agent> \
-                  api_result<chat_t, Agent&&> get_chat(Agent&& agent, get_chat_args_t args)
+                  api_result<chat_full_info_t, Agent&&> get_chat(Agent&& agent, get_chat_args_t args)
 .. cpp:function:: template <class Agent, class F> \
                   void get_chat(Agent&& agent, get_chat_args_t args, F&& callback)
 
    ``agent`` is any object satisfying :ref:`agent concept <banana-api-banana-agents>`.
 
-   ``callback`` is any callable object accepting ``expected<chat_t>``.
+   ``callback`` is any callable object accepting ``expected<chat_full_info_t>``.
 
-   Use this method to get up to date information about the chat. Returns a Chat object on success.
+   Use this method to get up-to-date information about the chat. Returns a ChatFullInfo object on success.
 
 .. cpp:struct:: get_chat_args_t
 

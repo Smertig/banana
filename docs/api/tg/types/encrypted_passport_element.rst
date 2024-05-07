@@ -11,6 +11,10 @@ encrypted_passport_element_t
 
    Element type. One of “personal_details”, “passport”, “driver_license”, “identity_card”, “internal_passport”, “address”, “utility_bill”, “bank_statement”, “rental_agreement”, “passport_registration”, “temporary_registration”, “phone_number”, “email”.
 
+   .. cpp:member:: string_t hash
+
+   Base64-encoded element hash for using in PassportElementErrorUnspecified
+
    .. cpp:member:: optional_t<string_t> data
 
    Optional. Base64-encoded encrypted Telegram Passport element data provided by the user; available only for “personal_details”, “passport”, “driver_license”, “identity_card”, “internal_passport” and “address” types. Can be decrypted and verified using the accompanying EncryptedCredentials.
@@ -42,7 +46,3 @@ encrypted_passport_element_t
    .. cpp:member:: optional_t<array_t<passport_file_t>> translation
 
    Optional. Array of encrypted files with translated versions of documents provided by the user; available if requested for “passport”, “driver_license”, “identity_card”, “internal_passport”, “utility_bill”, “bank_statement”, “rental_agreement”, “passport_registration” and “temporary_registration” types. Files can be decrypted and verified using the accompanying EncryptedCredentials.
-
-   .. cpp:member:: string_t hash
-
-   Base64-encoded element hash for using in PassportElementErrorUnspecified

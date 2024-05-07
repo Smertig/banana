@@ -45,7 +45,7 @@ chat_administrator_rights_t
 
    .. cpp:member:: boolean_t can_edit_stories
 
-   True, if the administrator can edit stories posted by other users
+   True, if the administrator can edit stories posted by other users, post stories to the chat page, pin chat stories, and access the chat's story archive
 
    .. cpp:member:: boolean_t can_delete_stories
 

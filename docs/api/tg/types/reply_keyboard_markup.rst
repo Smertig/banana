@@ -5,7 +5,7 @@ reply_keyboard_markup_t
 
 .. cpp:struct:: banana::api::reply_keyboard_markup_t
 
-   This object represents a custom keyboard with reply options (see Introduction to bots for details and examples).
+   This object represents a custom keyboard with reply options (see Introduction to bots for details and examples). Not supported in channels and for messages sent on behalf of a Telegram Business account.
 
    .. cpp:member:: array_t<array_t<keyboard_button_t>> keyboard
 

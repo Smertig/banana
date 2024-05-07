@@ -36,10 +36,6 @@ create_new_sticker_set
 
    A JSON-serialized list of 1-50 initial stickers to be added to the sticker set
 
-   .. cpp:member:: string_t sticker_format
-
-   Format of stickers in the set, must be one of “static”, “animated”, “video”
-
    .. cpp:member:: optional_t<string_t> sticker_type
 
    Type of stickers in the set, pass “regular”, “mask”, or “custom_emoji”. By default, a regular sticker set is created.

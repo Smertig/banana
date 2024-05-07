@@ -1,6 +1,14 @@
 /// Forward declarations
 struct animation_t;
 struct audio_t;
+struct background_fill_freeform_gradient_t;
+struct background_fill_gradient_t;
+struct background_fill_solid_t;
+struct background_type_chat_theme_t;
+struct background_type_fill_t;
+struct background_type_pattern_t;
+struct background_type_wallpaper_t;
+struct birthdate_t;
 struct bot_command_scope_all_chat_administrators_t;
 struct bot_command_scope_all_group_chats_t;
 struct bot_command_scope_all_private_chats_t;
@@ -12,9 +20,16 @@ struct bot_command_t;
 struct bot_description_t;
 struct bot_name_t;
 struct bot_short_description_t;
+struct business_connection_t;
+struct business_intro_t;
+struct business_location_t;
+struct business_messages_deleted_t;
+struct business_opening_hours_interval_t;
+struct business_opening_hours_t;
 struct callback_game_t;
 struct callback_query_t;
 struct chat_administrator_rights_t;
+struct chat_background_t;
 struct chat_boost_added_t;
 struct chat_boost_removed_t;
 struct chat_boost_source_gift_code_t;
@@ -22,6 +37,7 @@ struct chat_boost_source_giveaway_t;
 struct chat_boost_source_premium_t;
 struct chat_boost_t;
 struct chat_boost_updated_t;
+struct chat_full_info_t;
 struct chat_invite_link_t;
 struct chat_join_request_t;
 struct chat_location_t;
@@ -92,6 +108,7 @@ struct input_media_audio_t;
 struct input_media_document_t;
 struct input_media_photo_t;
 struct input_media_video_t;
+struct input_poll_option_t;
 struct input_sticker_t;
 struct input_text_message_content_t;
 struct input_venue_message_content_t;
@@ -144,6 +161,7 @@ struct reply_keyboard_remove_t;
 struct reply_parameters_t;
 struct response_parameters_t;
 struct sent_web_app_message_t;
+struct shared_user_t;
 struct shipping_address_t;
 struct shipping_option_t;
 struct shipping_query_t;
@@ -172,6 +190,12 @@ struct webhook_info_t;
 struct write_access_allowed_t;
 
 /// Type aliases
+
+// This object describes the way a background is filled based on the selected colors. Currently, it can be one of BackgroundFillSolid; BackgroundFillGradient; BackgroundFillFreeformGradient
+using background_fill_t = variant_t<background_fill_solid_t, background_fill_gradient_t, background_fill_freeform_gradient_t>;
+
+// This object describes the type of a background. Currently, it can be one of BackgroundTypeFill; BackgroundTypeWallpaper; BackgroundTypePattern; BackgroundTypeChatTheme
+using background_type_t = variant_t<background_type_fill_t, background_type_wallpaper_t, background_type_pattern_t, background_type_chat_theme_t>;
 
 // This object represents the scope to which bot commands are applied. Currently, the following 7 scopes are supported: BotCommandScopeDefault; BotCommandScopeAllPrivateChats; BotCommandScopeAllGroupChats; BotCommandScopeAllChatAdministrators; BotCommandScopeChat; BotCommandScopeChatAdministrators; BotCommandScopeChatMember
 using bot_command_scope_t = variant_t<bot_command_scope_default_t, bot_command_scope_all_private_chats_t, bot_command_scope_all_group_chats_t, bot_command_scope_all_chat_administrators_t, bot_command_scope_chat_t, bot_command_scope_chat_administrators_t, bot_command_scope_chat_member_t>;

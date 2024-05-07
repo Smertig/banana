@@ -19,6 +19,14 @@ inline_query_result_document_t
 
    Title for the result
 
+   .. cpp:member:: string_t document_url
+
+   A valid URL for the file
+
+   .. cpp:member:: string_t mime_type
+
+   MIME type of the content of the file, either “application/pdf” or “application/zip”
+
    .. cpp:member:: optional_t<string_t> caption
 
    Optional. Caption of the document to be sent, 0-1024 characters after entities parsing
@@ -30,14 +38,6 @@ inline_query_result_document_t
    .. cpp:member:: optional_t<array_t<message_entity_t>> caption_entities
 
    Optional. List of special entities that appear in the caption, which can be specified instead of parse_mode
-
-   .. cpp:member:: string_t document_url
-
-   A valid URL for the file
-
-   .. cpp:member:: string_t mime_type
-
-   MIME type of the content of the file, either “application/pdf” or “application/zip”
 
    .. cpp:member:: optional_t<string_t> description
 

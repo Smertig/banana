@@ -13,7 +13,7 @@ upload_sticker_file
 
    ``callback`` is any callable object accepting ``expected<file_t>``.
 
-   Use this method to upload a file with a sticker for later use in the createNewStickerSet and addStickerToSet methods (the file can be used multiple times). Returns the uploaded File on success.
+   Use this method to upload a file with a sticker for later use in the createNewStickerSet, addStickerToSet, or replaceStickerInSet methods (the file can be used multiple times). Returns the uploaded File on success.
 
 .. cpp:struct:: upload_sticker_file_args_t
 

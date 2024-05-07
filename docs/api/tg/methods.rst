@@ -50,6 +50,7 @@ File
    export_chat_invite_link <methods/export_chat_invite_link>
    forward_message <methods/forward_message>
    forward_messages <methods/forward_messages>
+   get_business_connection <methods/get_business_connection>
    get_chat <methods/get_chat>
    get_chat_administrators <methods/get_chat_administrators>
    get_chat_member <methods/get_chat_member>
@@ -77,6 +78,7 @@ File
    promote_chat_member <methods/promote_chat_member>
    reopen_forum_topic <methods/reopen_forum_topic>
    reopen_general_forum_topic <methods/reopen_general_forum_topic>
+   replace_sticker_in_set <methods/replace_sticker_in_set>
    restrict_chat_member <methods/restrict_chat_member>
    revoke_chat_invite_link <methods/revoke_chat_invite_link>
    send_animation <methods/send_animation>

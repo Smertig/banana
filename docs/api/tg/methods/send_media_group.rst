@@ -28,6 +28,10 @@ send_media_group
 
    A JSON-serialized array describing messages to be sent, must include 2-10 items
 
+   .. cpp:member:: optional_t<string_t> business_connection_id
+
+   Unique identifier of the business connection on behalf of which the message will be sent
+
    .. cpp:member:: optional_t<integer_t> message_thread_id
 
    Unique identifier for the target message thread (topic) of the forum; for forum supergroups only
