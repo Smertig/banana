@@ -392,9 +392,9 @@ struct reflector<api::callback_query_t> {
         using namespace std::literals;
         f("id"sv, &api::callback_query_t::id);
         f("from"sv, &api::callback_query_t::from);
+        f("chat_instance"sv, &api::callback_query_t::chat_instance);
         f("message"sv, &api::callback_query_t::message);
         f("inline_message_id"sv, &api::callback_query_t::inline_message_id);
-        f("chat_instance"sv, &api::callback_query_t::chat_instance);
         f("data"sv, &api::callback_query_t::data);
         f("game_short_name"sv, &api::callback_query_t::game_short_name);
     }
@@ -884,9 +884,9 @@ struct reflector<api::chosen_inline_result_t> {
         using namespace std::literals;
         f("result_id"sv, &api::chosen_inline_result_t::result_id);
         f("from"sv, &api::chosen_inline_result_t::from);
+        f("query"sv, &api::chosen_inline_result_t::query);
         f("location"sv, &api::chosen_inline_result_t::location);
         f("inline_message_id"sv, &api::chosen_inline_result_t::inline_message_id);
-        f("query"sv, &api::chosen_inline_result_t::query);
     }
 };
 
@@ -966,9 +966,9 @@ struct reflector<api::copy_message_args_t> {
     static void for_each_field(F&& f) {
         using namespace std::literals;
         f("chat_id"sv, &api::copy_message_args_t::chat_id);
-        f("message_thread_id"sv, &api::copy_message_args_t::message_thread_id);
         f("from_chat_id"sv, &api::copy_message_args_t::from_chat_id);
         f("message_id"sv, &api::copy_message_args_t::message_id);
+        f("message_thread_id"sv, &api::copy_message_args_t::message_thread_id);
         f("caption"sv, &api::copy_message_args_t::caption);
         f("parse_mode"sv, &api::copy_message_args_t::parse_mode);
         f("caption_entities"sv, &api::copy_message_args_t::caption_entities);
@@ -991,9 +991,9 @@ struct reflector<api::copy_messages_args_t> {
     static void for_each_field(F&& f) {
         using namespace std::literals;
         f("chat_id"sv, &api::copy_messages_args_t::chat_id);
-        f("message_thread_id"sv, &api::copy_messages_args_t::message_thread_id);
         f("from_chat_id"sv, &api::copy_messages_args_t::from_chat_id);
         f("message_ids"sv, &api::copy_messages_args_t::message_ids);
+        f("message_thread_id"sv, &api::copy_messages_args_t::message_thread_id);
         f("disable_notification"sv, &api::copy_messages_args_t::disable_notification);
         f("protect_content"sv, &api::copy_messages_args_t::protect_content);
         f("remove_caption"sv, &api::copy_messages_args_t::remove_caption);
@@ -1369,11 +1369,11 @@ struct reflector<api::edit_message_live_location_args_t> {
     template <class F>
     static void for_each_field(F&& f) {
         using namespace std::literals;
+        f("latitude"sv, &api::edit_message_live_location_args_t::latitude);
+        f("longitude"sv, &api::edit_message_live_location_args_t::longitude);
         f("chat_id"sv, &api::edit_message_live_location_args_t::chat_id);
         f("message_id"sv, &api::edit_message_live_location_args_t::message_id);
         f("inline_message_id"sv, &api::edit_message_live_location_args_t::inline_message_id);
-        f("latitude"sv, &api::edit_message_live_location_args_t::latitude);
-        f("longitude"sv, &api::edit_message_live_location_args_t::longitude);
         f("horizontal_accuracy"sv, &api::edit_message_live_location_args_t::horizontal_accuracy);
         f("heading"sv, &api::edit_message_live_location_args_t::heading);
         f("proximity_alert_radius"sv, &api::edit_message_live_location_args_t::proximity_alert_radius);
@@ -1392,10 +1392,10 @@ struct reflector<api::edit_message_media_args_t> {
     template <class F>
     static void for_each_field(F&& f) {
         using namespace std::literals;
+        f("media"sv, &api::edit_message_media_args_t::media);
         f("chat_id"sv, &api::edit_message_media_args_t::chat_id);
         f("message_id"sv, &api::edit_message_media_args_t::message_id);
         f("inline_message_id"sv, &api::edit_message_media_args_t::inline_message_id);
-        f("media"sv, &api::edit_message_media_args_t::media);
         f("reply_markup"sv, &api::edit_message_media_args_t::reply_markup);
     }
 };
@@ -1429,10 +1429,10 @@ struct reflector<api::edit_message_text_args_t> {
     template <class F>
     static void for_each_field(F&& f) {
         using namespace std::literals;
+        f("text"sv, &api::edit_message_text_args_t::text);
         f("chat_id"sv, &api::edit_message_text_args_t::chat_id);
         f("message_id"sv, &api::edit_message_text_args_t::message_id);
         f("inline_message_id"sv, &api::edit_message_text_args_t::inline_message_id);
-        f("text"sv, &api::edit_message_text_args_t::text);
         f("parse_mode"sv, &api::edit_message_text_args_t::parse_mode);
         f("entities"sv, &api::edit_message_text_args_t::entities);
         f("link_preview_options"sv, &api::edit_message_text_args_t::link_preview_options);
@@ -1469,6 +1469,7 @@ struct reflector<api::encrypted_passport_element_t> {
     static void for_each_field(F&& f) {
         using namespace std::literals;
         f("type"sv, &api::encrypted_passport_element_t::type);
+        f("hash"sv, &api::encrypted_passport_element_t::hash);
         f("data"sv, &api::encrypted_passport_element_t::data);
         f("phone_number"sv, &api::encrypted_passport_element_t::phone_number);
         f("email"sv, &api::encrypted_passport_element_t::email);
@@ -1477,7 +1478,6 @@ struct reflector<api::encrypted_passport_element_t> {
         f("reverse_side"sv, &api::encrypted_passport_element_t::reverse_side);
         f("selfie"sv, &api::encrypted_passport_element_t::selfie);
         f("translation"sv, &api::encrypted_passport_element_t::translation);
-        f("hash"sv, &api::encrypted_passport_element_t::hash);
     }
 };
 
@@ -1659,11 +1659,11 @@ struct reflector<api::forward_message_args_t> {
     static void for_each_field(F&& f) {
         using namespace std::literals;
         f("chat_id"sv, &api::forward_message_args_t::chat_id);
-        f("message_thread_id"sv, &api::forward_message_args_t::message_thread_id);
         f("from_chat_id"sv, &api::forward_message_args_t::from_chat_id);
+        f("message_id"sv, &api::forward_message_args_t::message_id);
+        f("message_thread_id"sv, &api::forward_message_args_t::message_thread_id);
         f("disable_notification"sv, &api::forward_message_args_t::disable_notification);
         f("protect_content"sv, &api::forward_message_args_t::protect_content);
-        f("message_id"sv, &api::forward_message_args_t::message_id);
     }
 };
 
@@ -1679,9 +1679,9 @@ struct reflector<api::forward_messages_args_t> {
     static void for_each_field(F&& f) {
         using namespace std::literals;
         f("chat_id"sv, &api::forward_messages_args_t::chat_id);
-        f("message_thread_id"sv, &api::forward_messages_args_t::message_thread_id);
         f("from_chat_id"sv, &api::forward_messages_args_t::from_chat_id);
         f("message_ids"sv, &api::forward_messages_args_t::message_ids);
+        f("message_thread_id"sv, &api::forward_messages_args_t::message_thread_id);
         f("disable_notification"sv, &api::forward_messages_args_t::disable_notification);
         f("protect_content"sv, &api::forward_messages_args_t::protect_content);
     }
@@ -2480,11 +2480,11 @@ struct reflector<api::inline_query_result_document_t> {
         f("type"sv, &api::inline_query_result_document_t::type, "document");
         f("id"sv, &api::inline_query_result_document_t::id);
         f("title"sv, &api::inline_query_result_document_t::title);
+        f("document_url"sv, &api::inline_query_result_document_t::document_url);
+        f("mime_type"sv, &api::inline_query_result_document_t::mime_type);
         f("caption"sv, &api::inline_query_result_document_t::caption);
         f("parse_mode"sv, &api::inline_query_result_document_t::parse_mode);
         f("caption_entities"sv, &api::inline_query_result_document_t::caption_entities);
-        f("document_url"sv, &api::inline_query_result_document_t::document_url);
-        f("mime_type"sv, &api::inline_query_result_document_t::mime_type);
         f("description"sv, &api::inline_query_result_document_t::description);
         f("reply_markup"sv, &api::inline_query_result_document_t::reply_markup);
         f("input_message_content"sv, &api::inline_query_result_document_t::input_message_content);
@@ -2526,10 +2526,10 @@ struct reflector<api::inline_query_result_gif_t> {
         f("type"sv, &api::inline_query_result_gif_t::type, "gif");
         f("id"sv, &api::inline_query_result_gif_t::id);
         f("gif_url"sv, &api::inline_query_result_gif_t::gif_url);
+        f("thumbnail_url"sv, &api::inline_query_result_gif_t::thumbnail_url);
         f("gif_width"sv, &api::inline_query_result_gif_t::gif_width);
         f("gif_height"sv, &api::inline_query_result_gif_t::gif_height);
         f("gif_duration"sv, &api::inline_query_result_gif_t::gif_duration);
-        f("thumbnail_url"sv, &api::inline_query_result_gif_t::thumbnail_url);
         f("thumbnail_mime_type"sv, &api::inline_query_result_gif_t::thumbnail_mime_type, "image/jpeg");
         f("title"sv, &api::inline_query_result_gif_t::title);
         f("caption"sv, &api::inline_query_result_gif_t::caption);
@@ -2582,10 +2582,10 @@ struct reflector<api::inline_query_result_mpeg4_gif_t> {
         f("type"sv, &api::inline_query_result_mpeg4_gif_t::type, "mpeg4_gif");
         f("id"sv, &api::inline_query_result_mpeg4_gif_t::id);
         f("mpeg4_url"sv, &api::inline_query_result_mpeg4_gif_t::mpeg4_url);
+        f("thumbnail_url"sv, &api::inline_query_result_mpeg4_gif_t::thumbnail_url);
         f("mpeg4_width"sv, &api::inline_query_result_mpeg4_gif_t::mpeg4_width);
         f("mpeg4_height"sv, &api::inline_query_result_mpeg4_gif_t::mpeg4_height);
         f("mpeg4_duration"sv, &api::inline_query_result_mpeg4_gif_t::mpeg4_duration);
-        f("thumbnail_url"sv, &api::inline_query_result_mpeg4_gif_t::thumbnail_url);
         f("thumbnail_mime_type"sv, &api::inline_query_result_mpeg4_gif_t::thumbnail_mime_type, "image/jpeg");
         f("title"sv, &api::inline_query_result_mpeg4_gif_t::title);
         f("caption"sv, &api::inline_query_result_mpeg4_gif_t::caption);
@@ -3414,11 +3414,11 @@ struct reflector<api::message_reaction_updated_t> {
         using namespace std::literals;
         f("chat"sv, &api::message_reaction_updated_t::chat);
         f("message_id"sv, &api::message_reaction_updated_t::message_id);
-        f("user"sv, &api::message_reaction_updated_t::user);
-        f("actor_chat"sv, &api::message_reaction_updated_t::actor_chat);
         f("date"sv, &api::message_reaction_updated_t::date);
         f("old_reaction"sv, &api::message_reaction_updated_t::old_reaction);
         f("new_reaction"sv, &api::message_reaction_updated_t::new_reaction);
+        f("user"sv, &api::message_reaction_updated_t::user);
+        f("actor_chat"sv, &api::message_reaction_updated_t::actor_chat);
     }
 };
 
@@ -3434,12 +3434,12 @@ struct reflector<api::message_t> {
     static void for_each_field(F&& f) {
         using namespace std::literals;
         f("message_id"sv, &api::message_t::message_id);
+        f("date"sv, &api::message_t::date);
+        f("chat"sv, &api::message_t::chat);
         f("message_thread_id"sv, &api::message_t::message_thread_id);
         f("from"sv, &api::message_t::from);
         f("sender_chat"sv, &api::message_t::sender_chat);
         f("sender_boost_count"sv, &api::message_t::sender_boost_count);
-        f("date"sv, &api::message_t::date);
-        f("chat"sv, &api::message_t::chat);
         f("forward_origin"sv, &api::message_t::forward_origin);
         f("is_topic_message"sv, &api::message_t::is_topic_message, true);
         f("is_automatic_forward"sv, &api::message_t::is_automatic_forward, true);
@@ -3776,9 +3776,9 @@ struct reflector<api::poll_answer_t> {
     static void for_each_field(F&& f) {
         using namespace std::literals;
         f("poll_id"sv, &api::poll_answer_t::poll_id);
+        f("option_ids"sv, &api::poll_answer_t::option_ids);
         f("voter_chat"sv, &api::poll_answer_t::voter_chat);
         f("user"sv, &api::poll_answer_t::user);
-        f("option_ids"sv, &api::poll_answer_t::option_ids);
     }
 };
 
@@ -4093,8 +4093,8 @@ struct reflector<api::send_animation_args_t> {
     static void for_each_field(F&& f) {
         using namespace std::literals;
         f("chat_id"sv, &api::send_animation_args_t::chat_id);
-        f("message_thread_id"sv, &api::send_animation_args_t::message_thread_id);
         f("animation"sv, &api::send_animation_args_t::animation);
+        f("message_thread_id"sv, &api::send_animation_args_t::message_thread_id);
         f("duration"sv, &api::send_animation_args_t::duration);
         f("width"sv, &api::send_animation_args_t::width);
         f("height"sv, &api::send_animation_args_t::height);
@@ -4122,8 +4122,8 @@ struct reflector<api::send_audio_args_t> {
     static void for_each_field(F&& f) {
         using namespace std::literals;
         f("chat_id"sv, &api::send_audio_args_t::chat_id);
-        f("message_thread_id"sv, &api::send_audio_args_t::message_thread_id);
         f("audio"sv, &api::send_audio_args_t::audio);
+        f("message_thread_id"sv, &api::send_audio_args_t::message_thread_id);
         f("caption"sv, &api::send_audio_args_t::caption);
         f("parse_mode"sv, &api::send_audio_args_t::parse_mode);
         f("caption_entities"sv, &api::send_audio_args_t::caption_entities);
@@ -4150,8 +4150,8 @@ struct reflector<api::send_chat_action_args_t> {
     static void for_each_field(F&& f) {
         using namespace std::literals;
         f("chat_id"sv, &api::send_chat_action_args_t::chat_id);
-        f("message_thread_id"sv, &api::send_chat_action_args_t::message_thread_id);
         f("action"sv, &api::send_chat_action_args_t::action);
+        f("message_thread_id"sv, &api::send_chat_action_args_t::message_thread_id);
     }
 };
 
@@ -4167,9 +4167,9 @@ struct reflector<api::send_contact_args_t> {
     static void for_each_field(F&& f) {
         using namespace std::literals;
         f("chat_id"sv, &api::send_contact_args_t::chat_id);
-        f("message_thread_id"sv, &api::send_contact_args_t::message_thread_id);
         f("phone_number"sv, &api::send_contact_args_t::phone_number);
         f("first_name"sv, &api::send_contact_args_t::first_name);
+        f("message_thread_id"sv, &api::send_contact_args_t::message_thread_id);
         f("last_name"sv, &api::send_contact_args_t::last_name);
         f("vcard"sv, &api::send_contact_args_t::vcard);
         f("disable_notification"sv, &api::send_contact_args_t::disable_notification);
@@ -4212,8 +4212,8 @@ struct reflector<api::send_document_args_t> {
     static void for_each_field(F&& f) {
         using namespace std::literals;
         f("chat_id"sv, &api::send_document_args_t::chat_id);
-        f("message_thread_id"sv, &api::send_document_args_t::message_thread_id);
         f("document"sv, &api::send_document_args_t::document);
+        f("message_thread_id"sv, &api::send_document_args_t::message_thread_id);
         f("thumbnail"sv, &api::send_document_args_t::thumbnail);
         f("caption"sv, &api::send_document_args_t::caption);
         f("parse_mode"sv, &api::send_document_args_t::parse_mode);
@@ -4238,8 +4238,8 @@ struct reflector<api::send_game_args_t> {
     static void for_each_field(F&& f) {
         using namespace std::literals;
         f("chat_id"sv, &api::send_game_args_t::chat_id);
-        f("message_thread_id"sv, &api::send_game_args_t::message_thread_id);
         f("game_short_name"sv, &api::send_game_args_t::game_short_name);
+        f("message_thread_id"sv, &api::send_game_args_t::message_thread_id);
         f("disable_notification"sv, &api::send_game_args_t::disable_notification);
         f("protect_content"sv, &api::send_game_args_t::protect_content);
         f("reply_parameters"sv, &api::send_game_args_t::reply_parameters);
@@ -4259,13 +4259,13 @@ struct reflector<api::send_invoice_args_t> {
     static void for_each_field(F&& f) {
         using namespace std::literals;
         f("chat_id"sv, &api::send_invoice_args_t::chat_id);
-        f("message_thread_id"sv, &api::send_invoice_args_t::message_thread_id);
         f("title"sv, &api::send_invoice_args_t::title);
         f("description"sv, &api::send_invoice_args_t::description);
         f("payload"sv, &api::send_invoice_args_t::payload);
         f("provider_token"sv, &api::send_invoice_args_t::provider_token);
         f("currency"sv, &api::send_invoice_args_t::currency);
         f("prices"sv, &api::send_invoice_args_t::prices);
+        f("message_thread_id"sv, &api::send_invoice_args_t::message_thread_id);
         f("max_tip_amount"sv, &api::send_invoice_args_t::max_tip_amount);
         f("suggested_tip_amounts"sv, &api::send_invoice_args_t::suggested_tip_amounts);
         f("start_parameter"sv, &api::send_invoice_args_t::start_parameter);
@@ -4300,9 +4300,9 @@ struct reflector<api::send_location_args_t> {
     static void for_each_field(F&& f) {
         using namespace std::literals;
         f("chat_id"sv, &api::send_location_args_t::chat_id);
-        f("message_thread_id"sv, &api::send_location_args_t::message_thread_id);
         f("latitude"sv, &api::send_location_args_t::latitude);
         f("longitude"sv, &api::send_location_args_t::longitude);
+        f("message_thread_id"sv, &api::send_location_args_t::message_thread_id);
         f("horizontal_accuracy"sv, &api::send_location_args_t::horizontal_accuracy);
         f("live_period"sv, &api::send_location_args_t::live_period);
         f("heading"sv, &api::send_location_args_t::heading);
@@ -4326,8 +4326,8 @@ struct reflector<api::send_media_group_args_t> {
     static void for_each_field(F&& f) {
         using namespace std::literals;
         f("chat_id"sv, &api::send_media_group_args_t::chat_id);
-        f("message_thread_id"sv, &api::send_media_group_args_t::message_thread_id);
         f("media"sv, &api::send_media_group_args_t::media);
+        f("message_thread_id"sv, &api::send_media_group_args_t::message_thread_id);
         f("disable_notification"sv, &api::send_media_group_args_t::disable_notification);
         f("protect_content"sv, &api::send_media_group_args_t::protect_content);
         f("reply_parameters"sv, &api::send_media_group_args_t::reply_parameters);
@@ -4346,8 +4346,8 @@ struct reflector<api::send_message_args_t> {
     static void for_each_field(F&& f) {
         using namespace std::literals;
         f("chat_id"sv, &api::send_message_args_t::chat_id);
-        f("message_thread_id"sv, &api::send_message_args_t::message_thread_id);
         f("text"sv, &api::send_message_args_t::text);
+        f("message_thread_id"sv, &api::send_message_args_t::message_thread_id);
         f("parse_mode"sv, &api::send_message_args_t::parse_mode);
         f("entities"sv, &api::send_message_args_t::entities);
         f("link_preview_options"sv, &api::send_message_args_t::link_preview_options);
@@ -4370,8 +4370,8 @@ struct reflector<api::send_photo_args_t> {
     static void for_each_field(F&& f) {
         using namespace std::literals;
         f("chat_id"sv, &api::send_photo_args_t::chat_id);
-        f("message_thread_id"sv, &api::send_photo_args_t::message_thread_id);
         f("photo"sv, &api::send_photo_args_t::photo);
+        f("message_thread_id"sv, &api::send_photo_args_t::message_thread_id);
         f("caption"sv, &api::send_photo_args_t::caption);
         f("parse_mode"sv, &api::send_photo_args_t::parse_mode);
         f("caption_entities"sv, &api::send_photo_args_t::caption_entities);
@@ -4395,9 +4395,9 @@ struct reflector<api::send_poll_args_t> {
     static void for_each_field(F&& f) {
         using namespace std::literals;
         f("chat_id"sv, &api::send_poll_args_t::chat_id);
-        f("message_thread_id"sv, &api::send_poll_args_t::message_thread_id);
         f("question"sv, &api::send_poll_args_t::question);
         f("options"sv, &api::send_poll_args_t::options);
+        f("message_thread_id"sv, &api::send_poll_args_t::message_thread_id);
         f("is_anonymous"sv, &api::send_poll_args_t::is_anonymous);
         f("type"sv, &api::send_poll_args_t::type);
         f("allows_multiple_answers"sv, &api::send_poll_args_t::allows_multiple_answers);
@@ -4427,8 +4427,8 @@ struct reflector<api::send_sticker_args_t> {
     static void for_each_field(F&& f) {
         using namespace std::literals;
         f("chat_id"sv, &api::send_sticker_args_t::chat_id);
-        f("message_thread_id"sv, &api::send_sticker_args_t::message_thread_id);
         f("sticker"sv, &api::send_sticker_args_t::sticker);
+        f("message_thread_id"sv, &api::send_sticker_args_t::message_thread_id);
         f("emoji"sv, &api::send_sticker_args_t::emoji);
         f("disable_notification"sv, &api::send_sticker_args_t::disable_notification);
         f("protect_content"sv, &api::send_sticker_args_t::protect_content);
@@ -4449,11 +4449,11 @@ struct reflector<api::send_venue_args_t> {
     static void for_each_field(F&& f) {
         using namespace std::literals;
         f("chat_id"sv, &api::send_venue_args_t::chat_id);
-        f("message_thread_id"sv, &api::send_venue_args_t::message_thread_id);
         f("latitude"sv, &api::send_venue_args_t::latitude);
         f("longitude"sv, &api::send_venue_args_t::longitude);
         f("title"sv, &api::send_venue_args_t::title);
         f("address"sv, &api::send_venue_args_t::address);
+        f("message_thread_id"sv, &api::send_venue_args_t::message_thread_id);
         f("foursquare_id"sv, &api::send_venue_args_t::foursquare_id);
         f("foursquare_type"sv, &api::send_venue_args_t::foursquare_type);
         f("google_place_id"sv, &api::send_venue_args_t::google_place_id);
@@ -4477,8 +4477,8 @@ struct reflector<api::send_video_args_t> {
     static void for_each_field(F&& f) {
         using namespace std::literals;
         f("chat_id"sv, &api::send_video_args_t::chat_id);
-        f("message_thread_id"sv, &api::send_video_args_t::message_thread_id);
         f("video"sv, &api::send_video_args_t::video);
+        f("message_thread_id"sv, &api::send_video_args_t::message_thread_id);
         f("duration"sv, &api::send_video_args_t::duration);
         f("width"sv, &api::send_video_args_t::width);
         f("height"sv, &api::send_video_args_t::height);
@@ -4507,8 +4507,8 @@ struct reflector<api::send_video_note_args_t> {
     static void for_each_field(F&& f) {
         using namespace std::literals;
         f("chat_id"sv, &api::send_video_note_args_t::chat_id);
-        f("message_thread_id"sv, &api::send_video_note_args_t::message_thread_id);
         f("video_note"sv, &api::send_video_note_args_t::video_note);
+        f("message_thread_id"sv, &api::send_video_note_args_t::message_thread_id);
         f("duration"sv, &api::send_video_note_args_t::duration);
         f("length"sv, &api::send_video_note_args_t::length);
         f("thumbnail"sv, &api::send_video_note_args_t::thumbnail);
@@ -4531,8 +4531,8 @@ struct reflector<api::send_voice_args_t> {
     static void for_each_field(F&& f) {
         using namespace std::literals;
         f("chat_id"sv, &api::send_voice_args_t::chat_id);
-        f("message_thread_id"sv, &api::send_voice_args_t::message_thread_id);
         f("voice"sv, &api::send_voice_args_t::voice);
+        f("message_thread_id"sv, &api::send_voice_args_t::message_thread_id);
         f("caption"sv, &api::send_voice_args_t::caption);
         f("parse_mode"sv, &api::send_voice_args_t::parse_mode);
         f("caption_entities"sv, &api::send_voice_args_t::caption_entities);
@@ -5113,10 +5113,10 @@ struct reflector<api::successful_payment_t> {
         f("currency"sv, &api::successful_payment_t::currency);
         f("total_amount"sv, &api::successful_payment_t::total_amount);
         f("invoice_payload"sv, &api::successful_payment_t::invoice_payload);
-        f("shipping_option_id"sv, &api::successful_payment_t::shipping_option_id);
-        f("order_info"sv, &api::successful_payment_t::order_info);
         f("telegram_payment_charge_id"sv, &api::successful_payment_t::telegram_payment_charge_id);
         f("provider_payment_charge_id"sv, &api::successful_payment_t::provider_payment_charge_id);
+        f("shipping_option_id"sv, &api::successful_payment_t::shipping_option_id);
+        f("order_info"sv, &api::successful_payment_t::order_info);
     }
 };
 
@@ -5151,8 +5151,8 @@ struct reflector<api::text_quote_t> {
     static void for_each_field(F&& f) {
         using namespace std::literals;
         f("text"sv, &api::text_quote_t::text);
-        f("entities"sv, &api::text_quote_t::entities);
         f("position"sv, &api::text_quote_t::position);
+        f("entities"sv, &api::text_quote_t::entities);
         f("is_manual"sv, &api::text_quote_t::is_manual, true);
     }
 };

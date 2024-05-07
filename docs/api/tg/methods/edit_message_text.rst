@@ -20,6 +20,10 @@ edit_message_text
    Arguments that should be passed to :cpp:func:`edit_message_text`.
 
 
+   .. cpp:member:: string_t text
+
+   New text of the message, 1-4096 characters after entities parsing
+
    .. cpp:member:: optional_t<variant_t<integer_t, string_t>> chat_id
 
    Required if inline_message_id is not specified. Unique identifier for the target chat or username of the target channel (in the format @channelusername)
@@ -31,10 +35,6 @@ edit_message_text
    .. cpp:member:: optional_t<string_t> inline_message_id
 
    Required if chat_id and message_id are not specified. Identifier of the inline message
-
-   .. cpp:member:: string_t text
-
-   New text of the message, 1-4096 characters after entities parsing
 
    .. cpp:member:: optional_t<string_t> parse_mode
 

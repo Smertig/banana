@@ -24,13 +24,13 @@ send_message
 
    Unique identifier for the target chat or username of the target channel (in the format @channelusername)
 
-   .. cpp:member:: optional_t<integer_t> message_thread_id
-
-   Unique identifier for the target message thread (topic) of the forum; for forum supergroups only
-
    .. cpp:member:: string_t text
 
    Text of the message to be sent, 1-4096 characters after entities parsing
+
+   .. cpp:member:: optional_t<integer_t> message_thread_id
+
+   Unique identifier for the target message thread (topic) of the forum; for forum supergroups only
 
    .. cpp:member:: optional_t<string_t> parse_mode
 

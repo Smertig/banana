@@ -24,10 +24,6 @@ send_contact
 
    Unique identifier for the target chat or username of the target channel (in the format @channelusername)
 
-   .. cpp:member:: optional_t<integer_t> message_thread_id
-
-   Unique identifier for the target message thread (topic) of the forum; for forum supergroups only
-
    .. cpp:member:: string_t phone_number
 
    Contact's phone number
@@ -35,6 +31,10 @@ send_contact
    .. cpp:member:: string_t first_name
 
    Contact's first name
+
+   .. cpp:member:: optional_t<integer_t> message_thread_id
+
+   Unique identifier for the target message thread (topic) of the forum; for forum supergroups only
 
    .. cpp:member:: optional_t<string_t> last_name
 

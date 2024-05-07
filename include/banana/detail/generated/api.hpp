@@ -297,9 +297,9 @@ void close_general_forum_topic(Agent&& agent, close_general_forum_topic_args_t a
 // Arguments to copy_message method
 struct copy_message_args_t {
     variant_t<integer_t, string_t>                                                                                   chat_id;              // Unique identifier for the target chat or username of the target channel (in the format @channelusername)
-    optional_t<integer_t>                                                                                            message_thread_id;    // Unique identifier for the target message thread (topic) of the forum; for forum supergroups only
     variant_t<integer_t, string_t>                                                                                   from_chat_id;         // Unique identifier for the chat where the original message was sent (or channel username in the format @channelusername)
     integer_t                                                                                                        message_id;           // Message identifier in the chat specified in from_chat_id
+    optional_t<integer_t>                                                                                            message_thread_id;    // Unique identifier for the target message thread (topic) of the forum; for forum supergroups only
     optional_t<string_t>                                                                                             caption;              // New caption for media, 0-1024 characters after entities parsing. If not specified, the original caption is kept
     optional_t<string_t>                                                                                             parse_mode;           // Mode for parsing entities in the new caption. See formatting options for more details.
     optional_t<array_t<message_entity_t>>                                                                            caption_entities;     // A JSON-serialized list of special entities that appear in the new caption, which can be specified instead of parse_mode
@@ -338,9 +338,9 @@ void copy_message(Agent&& agent, copy_message_args_t args, F&& callback) {
 // Arguments to copy_messages method
 struct copy_messages_args_t {
     variant_t<integer_t, string_t> chat_id;              // Unique identifier for the target chat or username of the target channel (in the format @channelusername)
-    optional_t<integer_t>          message_thread_id;    // Unique identifier for the target message thread (topic) of the forum; for forum supergroups only
     variant_t<integer_t, string_t> from_chat_id;         // Unique identifier for the chat where the original messages were sent (or channel username in the format @channelusername)
     array_t<integer_t>             message_ids;          // A JSON-serialized list of 1-100 identifiers of messages in the chat from_chat_id to copy. The identifiers must be specified in a strictly increasing order.
+    optional_t<integer_t>          message_thread_id;    // Unique identifier for the target message thread (topic) of the forum; for forum supergroups only
     optional_t<boolean_t>          disable_notification; // Sends the messages silently. Users will receive a notification with no sound.
     optional_t<boolean_t>          protect_content;      // Protects the contents of the sent messages from forwarding and saving
     optional_t<boolean_t>          remove_caption;       // Pass True to copy the messages without their captions
@@ -852,11 +852,11 @@ void edit_message_caption(Agent&& agent, edit_message_caption_args_t args, F&& c
 
 // Arguments to edit_message_live_location method
 struct edit_message_live_location_args_t {
+    float_t                                    latitude;               // Latitude of new location
+    float_t                                    longitude;              // Longitude of new location
     optional_t<variant_t<integer_t, string_t>> chat_id;                // Required if inline_message_id is not specified. Unique identifier for the target chat or username of the target channel (in the format @channelusername)
     optional_t<integer_t>                      message_id;             // Required if inline_message_id is not specified. Identifier of the message to edit
     optional_t<string_t>                       inline_message_id;      // Required if chat_id and message_id are not specified. Identifier of the inline message
-    float_t                                    latitude;               // Latitude of new location
-    float_t                                    longitude;              // Longitude of new location
     optional_t<float_t>                        horizontal_accuracy;    // The radius of uncertainty for the location, measured in meters; 0-1500
     optional_t<integer_t>                      heading;                // Direction in which the user is moving, in degrees. Must be between 1 and 360 if specified.
     optional_t<integer_t>                      proximity_alert_radius; // The maximum distance for proximity alerts about approaching another chat member, in meters. Must be between 1 and 100000 if specified.
@@ -889,10 +889,10 @@ void edit_message_live_location(Agent&& agent, edit_message_live_location_args_t
 
 // Arguments to edit_message_media method
 struct edit_message_media_args_t {
+    input_media_t                              media;             // A JSON-serialized object for a new media content of the message
     optional_t<variant_t<integer_t, string_t>> chat_id;           // Required if inline_message_id is not specified. Unique identifier for the target chat or username of the target channel (in the format @channelusername)
     optional_t<integer_t>                      message_id;        // Required if inline_message_id is not specified. Identifier of the message to edit
     optional_t<string_t>                       inline_message_id; // Required if chat_id and message_id are not specified. Identifier of the inline message
-    input_media_t                              media;             // A JSON-serialized object for a new media content of the message
     optional_t<inline_keyboard_markup_t>       reply_markup;      // A JSON-serialized object for a new inline keyboard.
 };
 
@@ -945,10 +945,10 @@ void edit_message_reply_markup(Agent&& agent, edit_message_reply_markup_args_t a
 
 // Arguments to edit_message_text method
 struct edit_message_text_args_t {
+    string_t                                   text;                 // New text of the message, 1-4096 characters after entities parsing
     optional_t<variant_t<integer_t, string_t>> chat_id;              // Required if inline_message_id is not specified. Unique identifier for the target chat or username of the target channel (in the format @channelusername)
     optional_t<integer_t>                      message_id;           // Required if inline_message_id is not specified. Identifier of the message to edit
     optional_t<string_t>                       inline_message_id;    // Required if chat_id and message_id are not specified. Identifier of the inline message
-    string_t                                   text;                 // New text of the message, 1-4096 characters after entities parsing
     optional_t<string_t>                       parse_mode;           // Mode for parsing entities in the message text. See formatting options for more details.
     optional_t<array_t<message_entity_t>>      entities;             // A JSON-serialized list of special entities that appear in message text, which can be specified instead of parse_mode
     optional_t<link_preview_options_t>         link_preview_options; // Link preview generation options for the message
@@ -1002,11 +1002,11 @@ void export_chat_invite_link(Agent&& agent, export_chat_invite_link_args_t args,
 // Arguments to forward_message method
 struct forward_message_args_t {
     variant_t<integer_t, string_t> chat_id;              // Unique identifier for the target chat or username of the target channel (in the format @channelusername)
-    optional_t<integer_t>          message_thread_id;    // Unique identifier for the target message thread (topic) of the forum; for forum supergroups only
     variant_t<integer_t, string_t> from_chat_id;         // Unique identifier for the chat where the original message was sent (or channel username in the format @channelusername)
+    integer_t                      message_id;           // Message identifier in the chat specified in from_chat_id
+    optional_t<integer_t>          message_thread_id;    // Unique identifier for the target message thread (topic) of the forum; for forum supergroups only
     optional_t<boolean_t>          disable_notification; // Sends the message silently. Users will receive a notification with no sound.
     optional_t<boolean_t>          protect_content;      // Protects the contents of the forwarded message from forwarding and saving
-    integer_t                      message_id;           // Message identifier in the chat specified in from_chat_id
 };
 
 /**
@@ -1033,9 +1033,9 @@ void forward_message(Agent&& agent, forward_message_args_t args, F&& callback) {
 // Arguments to forward_messages method
 struct forward_messages_args_t {
     variant_t<integer_t, string_t> chat_id;              // Unique identifier for the target chat or username of the target channel (in the format @channelusername)
-    optional_t<integer_t>          message_thread_id;    // Unique identifier for the target message thread (topic) of the forum; for forum supergroups only
     variant_t<integer_t, string_t> from_chat_id;         // Unique identifier for the chat where the original messages were sent (or channel username in the format @channelusername)
     array_t<integer_t>             message_ids;          // A JSON-serialized list of 1-100 identifiers of messages in the chat from_chat_id to forward. The identifiers must be specified in a strictly increasing order.
+    optional_t<integer_t>          message_thread_id;    // Unique identifier for the target message thread (topic) of the forum; for forum supergroups only
     optional_t<boolean_t>          disable_notification; // Sends the messages silently. Users will receive a notification with no sound.
     optional_t<boolean_t>          protect_content;      // Protects the contents of the forwarded messages from forwarding and saving
 };
@@ -1735,8 +1735,8 @@ void revoke_chat_invite_link(Agent&& agent, revoke_chat_invite_link_args_t args,
 // Arguments to send_animation method
 struct send_animation_args_t {
     variant_t<integer_t, string_t>                                                                                   chat_id;              // Unique identifier for the target chat or username of the target channel (in the format @channelusername)
-    optional_t<integer_t>                                                                                            message_thread_id;    // Unique identifier for the target message thread (topic) of the forum; for forum supergroups only
     variant_t<input_file_t, string_t>                                                                                animation;            // Animation to send. Pass a file_id as String to send an animation that exists on the Telegram servers (recommended), pass an HTTP URL as a String for Telegram to get an animation from the Internet, or upload a new animation using multipart/form-data. More information on Sending Files »
+    optional_t<integer_t>                                                                                            message_thread_id;    // Unique identifier for the target message thread (topic) of the forum; for forum supergroups only
     optional_t<integer_t>                                                                                            duration;             // Duration of sent animation in seconds
     optional_t<integer_t>                                                                                            width;                // Animation width
     optional_t<integer_t>                                                                                            height;               // Animation height
@@ -1784,8 +1784,8 @@ void send_animation(Agent&& agent, send_animation_args_t args, F&& callback) {
 // Arguments to send_audio method
 struct send_audio_args_t {
     variant_t<integer_t, string_t>                                                                                   chat_id;              // Unique identifier for the target chat or username of the target channel (in the format @channelusername)
-    optional_t<integer_t>                                                                                            message_thread_id;    // Unique identifier for the target message thread (topic) of the forum; for forum supergroups only
     variant_t<input_file_t, string_t>                                                                                audio;                // Audio file to send. Pass a file_id as String to send an audio file that exists on the Telegram servers (recommended), pass an HTTP URL as a String for Telegram to get an audio file from the Internet, or upload a new one using multipart/form-data. More information on Sending Files »
+    optional_t<integer_t>                                                                                            message_thread_id;    // Unique identifier for the target message thread (topic) of the forum; for forum supergroups only
     optional_t<string_t>                                                                                             caption;              // Audio caption, 0-1024 characters after entities parsing
     optional_t<string_t>                                                                                             parse_mode;           // Mode for parsing entities in the audio caption. See formatting options for more details.
     optional_t<array_t<message_entity_t>>                                                                            caption_entities;     // A JSON-serialized list of special entities that appear in the caption, which can be specified instead of parse_mode
@@ -1831,8 +1831,8 @@ void send_audio(Agent&& agent, send_audio_args_t args, F&& callback) {
 // Arguments to send_chat_action method
 struct send_chat_action_args_t {
     variant_t<integer_t, string_t> chat_id;           // Unique identifier for the target chat or username of the target channel (in the format @channelusername)
-    optional_t<integer_t>          message_thread_id; // Unique identifier for the target message thread; for supergroups only
     string_t                       action;            // Type of action to broadcast. Choose one, depending on what the user is about to receive: typing for text messages, upload_photo for photos, record_video or upload_video for videos, record_voice or upload_voice for voice notes, upload_document for general files, choose_sticker for stickers, find_location for location data, record_video_note or upload_video_note for video notes.
+    optional_t<integer_t>          message_thread_id; // Unique identifier for the target message thread; for supergroups only
 };
 
 /**
@@ -1856,9 +1856,9 @@ void send_chat_action(Agent&& agent, send_chat_action_args_t args, F&& callback)
 // Arguments to send_contact method
 struct send_contact_args_t {
     variant_t<integer_t, string_t>                                                                                   chat_id;              // Unique identifier for the target chat or username of the target channel (in the format @channelusername)
-    optional_t<integer_t>                                                                                            message_thread_id;    // Unique identifier for the target message thread (topic) of the forum; for forum supergroups only
     string_t                                                                                                         phone_number;         // Contact's phone number
     string_t                                                                                                         first_name;           // Contact's first name
+    optional_t<integer_t>                                                                                            message_thread_id;    // Unique identifier for the target message thread (topic) of the forum; for forum supergroups only
     optional_t<string_t>                                                                                             last_name;            // Contact's last name
     optional_t<string_t>                                                                                             vcard;                // Additional data about the contact in the form of a vCard, 0-2048 bytes
     optional_t<boolean_t>                                                                                            disable_notification; // Sends the message silently. Users will receive a notification with no sound.
@@ -1928,8 +1928,8 @@ void send_dice(Agent&& agent, send_dice_args_t args, F&& callback) {
 // Arguments to send_document method
 struct send_document_args_t {
     variant_t<integer_t, string_t>                                                                                   chat_id;                        // Unique identifier for the target chat or username of the target channel (in the format @channelusername)
-    optional_t<integer_t>                                                                                            message_thread_id;              // Unique identifier for the target message thread (topic) of the forum; for forum supergroups only
     variant_t<input_file_t, string_t>                                                                                document;                       // File to send. Pass a file_id as String to send a file that exists on the Telegram servers (recommended), pass an HTTP URL as a String for Telegram to get a file from the Internet, or upload a new one using multipart/form-data. More information on Sending Files »
+    optional_t<integer_t>                                                                                            message_thread_id;              // Unique identifier for the target message thread (topic) of the forum; for forum supergroups only
     optional_t<variant_t<input_file_t, string_t>>                                                                    thumbnail;                      // Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail's width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can't be reused and can be only uploaded as a new file, so you can pass “attach://<file_attach_name>” if the thumbnail was uploaded using multipart/form-data under <file_attach_name>. More information on Sending Files »
     optional_t<string_t>                                                                                             caption;                        // Document caption (may also be used when resending documents by file_id), 0-1024 characters after entities parsing
     optional_t<string_t>                                                                                             parse_mode;                     // Mode for parsing entities in the document caption. See formatting options for more details.
@@ -1971,8 +1971,8 @@ void send_document(Agent&& agent, send_document_args_t args, F&& callback) {
 // Arguments to send_game method
 struct send_game_args_t {
     integer_t                            chat_id;              // Unique identifier for the target chat
-    optional_t<integer_t>                message_thread_id;    // Unique identifier for the target message thread (topic) of the forum; for forum supergroups only
     string_t                             game_short_name;      // Short name of the game, serves as the unique identifier for the game. Set up your games via @BotFather.
+    optional_t<integer_t>                message_thread_id;    // Unique identifier for the target message thread (topic) of the forum; for forum supergroups only
     optional_t<boolean_t>                disable_notification; // Sends the message silently. Users will receive a notification with no sound.
     optional_t<boolean_t>                protect_content;      // Protects the contents of the sent message from forwarding and saving
     optional_t<reply_parameters_t>       reply_parameters;     // Description of the message to reply to
@@ -2004,13 +2004,13 @@ void send_game(Agent&& agent, send_game_args_t args, F&& callback) {
 // Arguments to send_invoice method
 struct send_invoice_args_t {
     variant_t<integer_t, string_t>       chat_id;                       // Unique identifier for the target chat or username of the target channel (in the format @channelusername)
-    optional_t<integer_t>                message_thread_id;             // Unique identifier for the target message thread (topic) of the forum; for forum supergroups only
     string_t                             title;                         // Product name, 1-32 characters
     string_t                             description;                   // Product description, 1-255 characters
     string_t                             payload;                       // Bot-defined invoice payload, 1-128 bytes. This will not be displayed to the user, use for your internal processes.
     string_t                             provider_token;                // Payment provider token, obtained via @BotFather
     string_t                             currency;                      // Three-letter ISO 4217 currency code, see more on currencies
     array_t<labeled_price_t>             prices;                        // Price breakdown, a JSON-serialized list of components (e.g. product price, tax, discount, delivery cost, delivery tax, bonus, etc.)
+    optional_t<integer_t>                message_thread_id;             // Unique identifier for the target message thread (topic) of the forum; for forum supergroups only
     optional_t<integer_t>                max_tip_amount;                // The maximum accepted amount for tips in the smallest units of the currency (integer, not float/double). For example, for a maximum tip of US$ 1.45 pass max_tip_amount = 145. See the exp parameter in currencies.json, it shows the number of digits past the decimal point for each currency (2 for the majority of currencies). Defaults to 0
     optional_t<array_t<integer_t>>       suggested_tip_amounts;         // A JSON-serialized array of suggested amounts of tips in the smallest units of the currency (integer, not float/double). At most 4 suggested tip amounts can be specified. The suggested tip amounts must be positive, passed in a strictly increased order and must not exceed max_tip_amount.
     optional_t<string_t>                 start_parameter;               // Unique deep-linking parameter. If left empty, forwarded copies of the sent message will have a Pay button, allowing multiple users to pay directly from the forwarded message, using the same invoice. If non-empty, forwarded copies of the sent message will have a URL button with a deep link to the bot (instead of a Pay button), with the value used as the start parameter
@@ -2077,9 +2077,9 @@ void send_invoice(Agent&& agent, send_invoice_args_t args, F&& callback) {
 // Arguments to send_location method
 struct send_location_args_t {
     variant_t<integer_t, string_t>                                                                                   chat_id;                // Unique identifier for the target chat or username of the target channel (in the format @channelusername)
-    optional_t<integer_t>                                                                                            message_thread_id;      // Unique identifier for the target message thread (topic) of the forum; for forum supergroups only
     float_t                                                                                                          latitude;               // Latitude of the location
     float_t                                                                                                          longitude;              // Longitude of the location
+    optional_t<integer_t>                                                                                            message_thread_id;      // Unique identifier for the target message thread (topic) of the forum; for forum supergroups only
     optional_t<float_t>                                                                                              horizontal_accuracy;    // The radius of uncertainty for the location, measured in meters; 0-1500
     optional_t<integer_t>                                                                                            live_period;            // Period in seconds for which the location will be updated (see Live Locations, should be between 60 and 86400.
     optional_t<integer_t>                                                                                            heading;                // For live locations, a direction in which the user is moving, in degrees. Must be between 1 and 360 if specified.
@@ -2120,8 +2120,8 @@ void send_location(Agent&& agent, send_location_args_t args, F&& callback) {
 // Arguments to send_media_group method
 struct send_media_group_args_t {
     variant_t<integer_t, string_t>                                                                            chat_id;              // Unique identifier for the target chat or username of the target channel (in the format @channelusername)
-    optional_t<integer_t>                                                                                     message_thread_id;    // Unique identifier for the target message thread (topic) of the forum; for forum supergroups only
     array_t<variant_t<input_media_audio_t, input_media_document_t, input_media_photo_t, input_media_video_t>> media;                // A JSON-serialized array describing messages to be sent, must include 2-10 items
+    optional_t<integer_t>                                                                                     message_thread_id;    // Unique identifier for the target message thread (topic) of the forum; for forum supergroups only
     optional_t<boolean_t>                                                                                     disable_notification; // Sends messages silently. Users will receive a notification with no sound.
     optional_t<boolean_t>                                                                                     protect_content;      // Protects the contents of the sent messages from forwarding and saving
     optional_t<reply_parameters_t>                                                                            reply_parameters;     // Description of the message to reply to
@@ -2151,8 +2151,8 @@ void send_media_group(Agent&& agent, send_media_group_args_t args, F&& callback)
 // Arguments to send_message method
 struct send_message_args_t {
     variant_t<integer_t, string_t>                                                                                   chat_id;              // Unique identifier for the target chat or username of the target channel (in the format @channelusername)
-    optional_t<integer_t>                                                                                            message_thread_id;    // Unique identifier for the target message thread (topic) of the forum; for forum supergroups only
     string_t                                                                                                         text;                 // Text of the message to be sent, 1-4096 characters after entities parsing
+    optional_t<integer_t>                                                                                            message_thread_id;    // Unique identifier for the target message thread (topic) of the forum; for forum supergroups only
     optional_t<string_t>                                                                                             parse_mode;           // Mode for parsing entities in the message text. See formatting options for more details.
     optional_t<array_t<message_entity_t>>                                                                            entities;             // A JSON-serialized list of special entities that appear in message text, which can be specified instead of parse_mode
     optional_t<link_preview_options_t>                                                                               link_preview_options; // Link preview generation options for the message
@@ -2190,8 +2190,8 @@ void send_message(Agent&& agent, send_message_args_t args, F&& callback) {
 // Arguments to send_photo method
 struct send_photo_args_t {
     variant_t<integer_t, string_t>                                                                                   chat_id;              // Unique identifier for the target chat or username of the target channel (in the format @channelusername)
-    optional_t<integer_t>                                                                                            message_thread_id;    // Unique identifier for the target message thread (topic) of the forum; for forum supergroups only
     variant_t<input_file_t, string_t>                                                                                photo;                // Photo to send. Pass a file_id as String to send a photo that exists on the Telegram servers (recommended), pass an HTTP URL as a String for Telegram to get a photo from the Internet, or upload a new photo using multipart/form-data. The photo must be at most 10 MB in size. The photo's width and height must not exceed 10000 in total. Width and height ratio must be at most 20. More information on Sending Files »
+    optional_t<integer_t>                                                                                            message_thread_id;    // Unique identifier for the target message thread (topic) of the forum; for forum supergroups only
     optional_t<string_t>                                                                                             caption;              // Photo caption (may also be used when resending photos by file_id), 0-1024 characters after entities parsing
     optional_t<string_t>                                                                                             parse_mode;           // Mode for parsing entities in the photo caption. See formatting options for more details.
     optional_t<array_t<message_entity_t>>                                                                            caption_entities;     // A JSON-serialized list of special entities that appear in the caption, which can be specified instead of parse_mode
@@ -2231,9 +2231,9 @@ void send_photo(Agent&& agent, send_photo_args_t args, F&& callback) {
 // Arguments to send_poll method
 struct send_poll_args_t {
     variant_t<integer_t, string_t>                                                                                   chat_id;                 // Unique identifier for the target chat or username of the target channel (in the format @channelusername)
-    optional_t<integer_t>                                                                                            message_thread_id;       // Unique identifier for the target message thread (topic) of the forum; for forum supergroups only
     string_t                                                                                                         question;                // Poll question, 1-300 characters
     array_t<string_t>                                                                                                options;                 // A JSON-serialized list of answer options, 2-10 strings 1-100 characters each
+    optional_t<integer_t>                                                                                            message_thread_id;       // Unique identifier for the target message thread (topic) of the forum; for forum supergroups only
     optional_t<boolean_t>                                                                                            is_anonymous;            // True, if the poll needs to be anonymous, defaults to True
     optional_t<string_t>                                                                                             type;                    // Poll type, “quiz” or “regular”, defaults to “regular”
     optional_t<boolean_t>                                                                                            allows_multiple_answers; // True, if the poll allows multiple answers, ignored for polls in quiz mode, defaults to False
@@ -2286,8 +2286,8 @@ void send_poll(Agent&& agent, send_poll_args_t args, F&& callback) {
 // Arguments to send_sticker method
 struct send_sticker_args_t {
     variant_t<integer_t, string_t>                                                                                   chat_id;              // Unique identifier for the target chat or username of the target channel (in the format @channelusername)
-    optional_t<integer_t>                                                                                            message_thread_id;    // Unique identifier for the target message thread (topic) of the forum; for forum supergroups only
     variant_t<input_file_t, string_t>                                                                                sticker;              // Sticker to send. Pass a file_id as String to send a file that exists on the Telegram servers (recommended), pass an HTTP URL as a String for Telegram to get a .WEBP sticker from the Internet, or upload a new .WEBP or .TGS sticker using multipart/form-data. More information on Sending Files ». Video stickers can only be sent by a file_id. Animated stickers can't be sent via an HTTP URL.
+    optional_t<integer_t>                                                                                            message_thread_id;    // Unique identifier for the target message thread (topic) of the forum; for forum supergroups only
     optional_t<string_t>                                                                                             emoji;                // Emoji associated with the sticker; only for just uploaded stickers
     optional_t<boolean_t>                                                                                            disable_notification; // Sends the message silently. Users will receive a notification with no sound.
     optional_t<boolean_t>                                                                                            protect_content;      // Protects the contents of the sent message from forwarding and saving
@@ -2321,11 +2321,11 @@ void send_sticker(Agent&& agent, send_sticker_args_t args, F&& callback) {
 // Arguments to send_venue method
 struct send_venue_args_t {
     variant_t<integer_t, string_t>                                                                                   chat_id;              // Unique identifier for the target chat or username of the target channel (in the format @channelusername)
-    optional_t<integer_t>                                                                                            message_thread_id;    // Unique identifier for the target message thread (topic) of the forum; for forum supergroups only
     float_t                                                                                                          latitude;             // Latitude of the venue
     float_t                                                                                                          longitude;            // Longitude of the venue
     string_t                                                                                                         title;                // Name of the venue
     string_t                                                                                                         address;              // Address of the venue
+    optional_t<integer_t>                                                                                            message_thread_id;    // Unique identifier for the target message thread (topic) of the forum; for forum supergroups only
     optional_t<string_t>                                                                                             foursquare_id;        // Foursquare identifier of the venue
     optional_t<string_t>                                                                                             foursquare_type;      // Foursquare type of the venue, if known. (For example, “arts_entertainment/default”, “arts_entertainment/aquarium” or “food/icecream”.)
     optional_t<string_t>                                                                                             google_place_id;      // Google Places identifier of the venue
@@ -2368,8 +2368,8 @@ void send_venue(Agent&& agent, send_venue_args_t args, F&& callback) {
 // Arguments to send_video method
 struct send_video_args_t {
     variant_t<integer_t, string_t>                                                                                   chat_id;              // Unique identifier for the target chat or username of the target channel (in the format @channelusername)
-    optional_t<integer_t>                                                                                            message_thread_id;    // Unique identifier for the target message thread (topic) of the forum; for forum supergroups only
     variant_t<input_file_t, string_t>                                                                                video;                // Video to send. Pass a file_id as String to send a video that exists on the Telegram servers (recommended), pass an HTTP URL as a String for Telegram to get a video from the Internet, or upload a new video using multipart/form-data. More information on Sending Files »
+    optional_t<integer_t>                                                                                            message_thread_id;    // Unique identifier for the target message thread (topic) of the forum; for forum supergroups only
     optional_t<integer_t>                                                                                            duration;             // Duration of sent video in seconds
     optional_t<integer_t>                                                                                            width;                // Video width
     optional_t<integer_t>                                                                                            height;               // Video height
@@ -2419,8 +2419,8 @@ void send_video(Agent&& agent, send_video_args_t args, F&& callback) {
 // Arguments to send_video_note method
 struct send_video_note_args_t {
     variant_t<integer_t, string_t>                                                                                   chat_id;              // Unique identifier for the target chat or username of the target channel (in the format @channelusername)
-    optional_t<integer_t>                                                                                            message_thread_id;    // Unique identifier for the target message thread (topic) of the forum; for forum supergroups only
     variant_t<input_file_t, string_t>                                                                                video_note;           // Video note to send. Pass a file_id as String to send a video note that exists on the Telegram servers (recommended) or upload a new video using multipart/form-data. More information on Sending Files ». Sending video notes by a URL is currently unsupported
+    optional_t<integer_t>                                                                                            message_thread_id;    // Unique identifier for the target message thread (topic) of the forum; for forum supergroups only
     optional_t<integer_t>                                                                                            duration;             // Duration of sent video in seconds
     optional_t<integer_t>                                                                                            length;               // Video width and height, i.e. diameter of the video message
     optional_t<variant_t<input_file_t, string_t>>                                                                    thumbnail;            // Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail's width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can't be reused and can be only uploaded as a new file, so you can pass “attach://<file_attach_name>” if the thumbnail was uploaded using multipart/form-data under <file_attach_name>. More information on Sending Files »
@@ -2458,8 +2458,8 @@ void send_video_note(Agent&& agent, send_video_note_args_t args, F&& callback) {
 // Arguments to send_voice method
 struct send_voice_args_t {
     variant_t<integer_t, string_t>                                                                                   chat_id;              // Unique identifier for the target chat or username of the target channel (in the format @channelusername)
-    optional_t<integer_t>                                                                                            message_thread_id;    // Unique identifier for the target message thread (topic) of the forum; for forum supergroups only
     variant_t<input_file_t, string_t>                                                                                voice;                // Audio file to send. Pass a file_id as String to send a file that exists on the Telegram servers (recommended), pass an HTTP URL as a String for Telegram to get a file from the Internet, or upload a new one using multipart/form-data. More information on Sending Files »
+    optional_t<integer_t>                                                                                            message_thread_id;    // Unique identifier for the target message thread (topic) of the forum; for forum supergroups only
     optional_t<string_t>                                                                                             caption;              // Voice message caption, 0-1024 characters after entities parsing
     optional_t<string_t>                                                                                             parse_mode;           // Mode for parsing entities in the voice message caption. See formatting options for more details.
     optional_t<array_t<message_entity_t>>                                                                            caption_entities;     // A JSON-serialized list of special entities that appear in the caption, which can be specified instead of parse_mode
