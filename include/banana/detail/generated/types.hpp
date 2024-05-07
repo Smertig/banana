@@ -313,9 +313,9 @@ struct passport_file_t {
 // This object represents an answer of a user in a non-anonymous poll.
 struct poll_answer_t {
     string_t           poll_id;    // Unique poll identifier
+    array_t<integer_t> option_ids; // 0-based identifiers of chosen answer options. May be empty if the vote was retracted.
     optional_t<chat_t> voter_chat; // Optional. The chat that changed the answer to the poll, if the voter is anonymous
     optional_t<user_t> user;       // Optional. The user that changed the answer to the poll, if the voter isn't anonymous
-    array_t<integer_t> option_ids; // 0-based identifiers of chosen answer options. May be empty if the vote was retracted.
 };
 
 // Upon receiving a message with this object, Telegram clients will remove the current custom keyboard and display the default letter-keyboard. By default, custom keyboards are displayed until a new keyboard is sent by a bot. An exception is made for one-time keyboards that are hidden immediately after the user presses a button (see ReplyKeyboardMarkup).
@@ -351,10 +351,10 @@ struct successful_payment_t {
     string_t                 currency;                   // Three-letter ISO 4217 currency code
     integer_t                total_amount;               // Total price in the smallest units of the currency (integer, not float/double). For example, for a price of US$ 1.45 pass amount = 145. See the exp parameter in currencies.json, it shows the number of digits past the decimal point for each currency (2 for the majority of currencies).
     string_t                 invoice_payload;            // Bot specified invoice payload
-    optional_t<string_t>     shipping_option_id;         // Optional. Identifier of the shipping option chosen by the user
-    optional_t<order_info_t> order_info;                 // Optional. Order information provided by the user
     string_t                 telegram_payment_charge_id; // Telegram payment identifier
     string_t                 provider_payment_charge_id; // Provider payment identifier
+    optional_t<string_t>     shipping_option_id;         // Optional. Identifier of the shipping option chosen by the user
+    optional_t<order_info_t> order_info;                 // Optional. Order information provided by the user
 };
 
 // This object represents an inline button that switches the current user to inline mode in a chosen chat, with an optional default inline query.
@@ -369,8 +369,8 @@ struct switch_inline_query_chosen_chat_t {
 // This object contains information about the quoted part of a message that is replied to by the given message.
 struct text_quote_t {
     string_t                              text;      // Text of the quoted part of a message that is replied to by the given message
-    optional_t<array_t<message_entity_t>> entities;  // Optional. Special entities that appear in the quote. Currently, only bold, italic, underline, strikethrough, spoiler, and custom_emoji entities are kept in quotes.
     integer_t                             position;  // Approximate quote position in the original message in UTF-16 code units as specified by the sender
+    optional_t<array_t<message_entity_t>> entities;  // Optional. Special entities that appear in the quote. Currently, only bold, italic, underline, strikethrough, spoiler, and custom_emoji entities are kept in quotes.
     optional_t<boolean_t>                 is_manual; // Optional. True, if the quote was chosen manually by the message sender. Otherwise, the quote was added automatically by the server.
 };
 
@@ -587,12 +587,12 @@ struct inaccessible_message_t {
 // This object represents a message.
 struct message_t {
     integer_t                                       message_id;                        // Unique message identifier inside this chat
+    integer_t                                       date;                              // Date the message was sent in Unix time. It is always a positive number, representing a valid date.
+    chat_t                                          chat;                              // Chat the message belongs to
     optional_t<integer_t>                           message_thread_id;                 // Optional. Unique identifier of a message thread to which the message belongs; for supergroups only
     optional_t<user_t>                              from;                              // Optional. Sender of the message; empty for messages sent to channels. For backward compatibility, the field contains a fake sender user in non-channel chats, if the message was sent on behalf of a chat.
     optional_t<chat_t>                              sender_chat;                       // Optional. Sender of the message, sent on behalf of a chat. For example, the channel itself for channel posts, the supergroup itself for messages from anonymous group administrators, the linked channel for messages automatically forwarded to the discussion group. For backward compatibility, the field from contains a fake sender user in non-channel chats, if the message was sent on behalf of a chat.
     optional_t<integer_t>                           sender_boost_count;                // Optional. If the sender of the message boosted the chat, the number of boosts added by the user
-    integer_t                                       date;                              // Date the message was sent in Unix time. It is always a positive number, representing a valid date.
-    chat_t                                          chat;                              // Chat the message belongs to
     optional_t<message_origin_t>                    forward_origin;                    // Optional. Information about the original message for forwarded messages
     optional_t<boolean_t>                           is_topic_message;                  // Optional. True, if the message is sent to a forum topic
     optional_t<boolean_t>                           is_automatic_forward;              // Optional. True, if the message is a channel post that was automatically forwarded to the connected discussion group
@@ -705,11 +705,11 @@ struct reaction_type_emoji_t {
 struct message_reaction_updated_t {
     chat_t                   chat;         // The chat containing the message the user reacted to
     integer_t                message_id;   // Unique identifier of the message inside the chat
-    optional_t<user_t>       user;         // Optional. The user that changed the reaction, if the user isn't anonymous
-    optional_t<chat_t>       actor_chat;   // Optional. The chat on behalf of which the reaction was changed, if the user is anonymous
     integer_t                date;         // Date of the change in Unix time
     array_t<reaction_type_t> old_reaction; // Previous list of reaction types that were set by the user
     array_t<reaction_type_t> new_reaction; // New list of reaction types that have been set by the user
+    optional_t<user_t>       user;         // Optional. The user that changed the reaction, if the user isn't anonymous
+    optional_t<chat_t>       actor_chat;   // Optional. The chat on behalf of which the reaction was changed, if the user is anonymous
 };
 
 // Represents a reaction added to a message along with the number of times it was added.
@@ -761,9 +761,9 @@ struct user_t {
 struct callback_query_t {
     string_t                                 id;                // Unique identifier for this query
     user_t                                   from;              // Sender
+    string_t                                 chat_instance;     // Global identifier, uniquely corresponding to the chat to which the message with the callback button was sent. Useful for high scores in games.
     optional_t<maybe_inaccessible_message_t> message;           // Optional. Message sent by the bot with the callback button that originated the query
     optional_t<string_t>                     inline_message_id; // Optional. Identifier of the message sent via the bot in inline mode, that originated the query.
-    string_t                                 chat_instance;     // Global identifier, uniquely corresponding to the chat to which the message with the callback button was sent. Useful for high scores in games.
     optional_t<string_t>                     data;              // Optional. Data associated with the callback button. Be aware that the message originated the query can contain no callback buttons with this data.
     optional_t<string_t>                     game_short_name;   // Optional. Short name of a Game to be returned, serves as the unique identifier for the game
 };
@@ -912,9 +912,9 @@ struct chat_member_updated_t {
 struct chosen_inline_result_t {
     string_t               result_id;         // The unique identifier for the result that was chosen
     user_t                 from;              // The user that chose the result
+    string_t               query;             // The query that was used to obtain the result
     optional_t<location_t> location;          // Optional. Sender location, only for bots that require user location
     optional_t<string_t>   inline_message_id; // Optional. Identifier of the sent inline message. Available only if there is an inline keyboard attached to the message. Will be also received in callback queries and can be used to edit the message.
-    string_t               query;             // The query that was used to obtain the result
 };
 
 // This object represents one row of the high scores table for a game.
@@ -1227,11 +1227,11 @@ struct inline_query_result_document_t {
     string_t                              type;                  // Type of the result, must be document
     string_t                              id;                    // Unique identifier for this result, 1-64 bytes
     string_t                              title;                 // Title for the result
+    string_t                              document_url;          // A valid URL for the file
+    string_t                              mime_type;             // MIME type of the content of the file, either “application/pdf” or “application/zip”
     optional_t<string_t>                  caption;               // Optional. Caption of the document to be sent, 0-1024 characters after entities parsing
     optional_t<string_t>                  parse_mode;            // Optional. Mode for parsing entities in the document caption. See formatting options for more details.
     optional_t<array_t<message_entity_t>> caption_entities;      // Optional. List of special entities that appear in the caption, which can be specified instead of parse_mode
-    string_t                              document_url;          // A valid URL for the file
-    string_t                              mime_type;             // MIME type of the content of the file, either “application/pdf” or “application/zip”
     optional_t<string_t>                  description;           // Optional. Short description of the result
     optional_t<inline_keyboard_markup_t>  reply_markup;          // Optional. Inline keyboard attached to the message
     optional_t<input_message_content_t>   input_message_content; // Optional. Content of the message to be sent instead of the file
@@ -1253,10 +1253,10 @@ struct inline_query_result_gif_t {
     string_t                              type;                  // Type of the result, must be gif
     string_t                              id;                    // Unique identifier for this result, 1-64 bytes
     string_t                              gif_url;               // A valid URL for the GIF file. File size must not exceed 1MB
+    string_t                              thumbnail_url;         // URL of the static (JPEG or GIF) or animated (MPEG4) thumbnail for the result
     optional_t<integer_t>                 gif_width;             // Optional. Width of the GIF
     optional_t<integer_t>                 gif_height;            // Optional. Height of the GIF
     optional_t<integer_t>                 gif_duration;          // Optional. Duration of the GIF in seconds
-    string_t                              thumbnail_url;         // URL of the static (JPEG or GIF) or animated (MPEG4) thumbnail for the result
     optional_t<string_t>                  thumbnail_mime_type;   // Optional. MIME type of the thumbnail, must be one of “image/jpeg”, “image/gif”, or “video/mp4”. Defaults to “image/jpeg”
     optional_t<string_t>                  title;                 // Optional. Title for the result
     optional_t<string_t>                  caption;               // Optional. Caption of the GIF file to be sent, 0-1024 characters after entities parsing
@@ -1289,10 +1289,10 @@ struct inline_query_result_mpeg4_gif_t {
     string_t                              type;                  // Type of the result, must be mpeg4_gif
     string_t                              id;                    // Unique identifier for this result, 1-64 bytes
     string_t                              mpeg4_url;             // A valid URL for the MPEG4 file. File size must not exceed 1MB
+    string_t                              thumbnail_url;         // URL of the static (JPEG or GIF) or animated (MPEG4) thumbnail for the result
     optional_t<integer_t>                 mpeg4_width;           // Optional. Video width
     optional_t<integer_t>                 mpeg4_height;          // Optional. Video height
     optional_t<integer_t>                 mpeg4_duration;        // Optional. Video duration in seconds
-    string_t                              thumbnail_url;         // URL of the static (JPEG or GIF) or animated (MPEG4) thumbnail for the result
     optional_t<string_t>                  thumbnail_mime_type;   // Optional. MIME type of the thumbnail, must be one of “image/jpeg”, “image/gif”, or “video/mp4”. Defaults to “image/jpeg”
     optional_t<string_t>                  title;                 // Optional. Title for the result
     optional_t<string_t>                  caption;               // Optional. Caption of the MPEG-4 file to be sent, 0-1024 characters after entities parsing
@@ -1556,6 +1556,7 @@ struct encrypted_credentials_t {
 // Describes documents or other Telegram Passport elements shared with the bot by the user.
 struct encrypted_passport_element_t {
     string_t                             type;         // Element type. One of “personal_details”, “passport”, “driver_license”, “identity_card”, “internal_passport”, “address”, “utility_bill”, “bank_statement”, “rental_agreement”, “passport_registration”, “temporary_registration”, “phone_number”, “email”.
+    string_t                             hash;         // Base64-encoded element hash for using in PassportElementErrorUnspecified
     optional_t<string_t>                 data;         // Optional. Base64-encoded encrypted Telegram Passport element data provided by the user; available only for “personal_details”, “passport”, “driver_license”, “identity_card”, “internal_passport” and “address” types. Can be decrypted and verified using the accompanying EncryptedCredentials.
     optional_t<string_t>                 phone_number; // Optional. User's verified phone number; available only for “phone_number” type
     optional_t<string_t>                 email;        // Optional. User's verified email address; available only for “email” type
@@ -1564,7 +1565,6 @@ struct encrypted_passport_element_t {
     optional_t<passport_file_t>          reverse_side; // Optional. Encrypted file with the reverse side of the document, provided by the user; available only for “driver_license” and “identity_card”. The file can be decrypted and verified using the accompanying EncryptedCredentials.
     optional_t<passport_file_t>          selfie;       // Optional. Encrypted file with the selfie of the user holding a document, provided by the user; available if requested for “passport”, “driver_license”, “identity_card” and “internal_passport”. The file can be decrypted and verified using the accompanying EncryptedCredentials.
     optional_t<array_t<passport_file_t>> translation;  // Optional. Array of encrypted files with translated versions of documents provided by the user; available if requested for “passport”, “driver_license”, “identity_card”, “internal_passport”, “utility_bill”, “bank_statement”, “rental_agreement”, “passport_registration” and “temporary_registration” types. Files can be decrypted and verified using the accompanying EncryptedCredentials.
-    string_t                             hash;         // Base64-encoded element hash for using in PassportElementErrorUnspecified
 };
 
 // Describes Telegram Passport data shared with the bot by the user.

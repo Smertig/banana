@@ -24,10 +24,6 @@ send_invoice
 
    Unique identifier for the target chat or username of the target channel (in the format @channelusername)
 
-   .. cpp:member:: optional_t<integer_t> message_thread_id
-
-   Unique identifier for the target message thread (topic) of the forum; for forum supergroups only
-
    .. cpp:member:: string_t title
 
    Product name, 1-32 characters
@@ -51,6 +47,10 @@ send_invoice
    .. cpp:member:: array_t<labeled_price_t> prices
 
    Price breakdown, a JSON-serialized list of components (e.g. product price, tax, discount, delivery cost, delivery tax, bonus, etc.)
+
+   .. cpp:member:: optional_t<integer_t> message_thread_id
+
+   Unique identifier for the target message thread (topic) of the forum; for forum supergroups only
 
    .. cpp:member:: optional_t<integer_t> max_tip_amount
 

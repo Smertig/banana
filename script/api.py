@@ -1,20 +1,30 @@
 import json
 import inflection
 
+
+def sort_required_first(l):
+    return sorted(l, key=lambda item: item['optional'])
+
+
 JSON_API_PATH = "./api.json"
 db = json.load(open(JSON_API_PATH, 'r', encoding='utf8'))
 
 _types = db['types']
+for _type in _types.values():
+    _type['fields'] = sort_required_first(_type['fields'])
+
+
 _methods = db['methods']
 _cpp_types = dict()
 
 _api_types_names = list(_types.keys())
 
+
 # generate additional helper types 'method_name_args_t'
 for name, method in _methods.items():
     _types[name + 'Args'] = {
         'desc': 'Arguments to ' + inflection.underscore(name) + ' method',
-        'fields': list({
+        'fields': sort_required_first({
             "description": param['description'],
             "name": param['name'],
             "optional": param['optional'],

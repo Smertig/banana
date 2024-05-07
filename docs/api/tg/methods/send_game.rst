@@ -24,13 +24,13 @@ send_game
 
    Unique identifier for the target chat
 
-   .. cpp:member:: optional_t<integer_t> message_thread_id
-
-   Unique identifier for the target message thread (topic) of the forum; for forum supergroups only
-
    .. cpp:member:: string_t game_short_name
 
    Short name of the game, serves as the unique identifier for the game. Set up your games via @BotFather.
+
+   .. cpp:member:: optional_t<integer_t> message_thread_id
+
+   Unique identifier for the target message thread (topic) of the forum; for forum supergroups only
 
    .. cpp:member:: optional_t<boolean_t> disable_notification
 

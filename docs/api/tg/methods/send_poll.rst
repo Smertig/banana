@@ -24,10 +24,6 @@ send_poll
 
    Unique identifier for the target chat or username of the target channel (in the format @channelusername)
 
-   .. cpp:member:: optional_t<integer_t> message_thread_id
-
-   Unique identifier for the target message thread (topic) of the forum; for forum supergroups only
-
    .. cpp:member:: string_t question
 
    Poll question, 1-300 characters
@@ -35,6 +31,10 @@ send_poll
    .. cpp:member:: array_t<string_t> options
 
    A JSON-serialized list of answer options, 2-10 strings 1-100 characters each
+
+   .. cpp:member:: optional_t<integer_t> message_thread_id
+
+   Unique identifier for the target message thread (topic) of the forum; for forum supergroups only
 
    .. cpp:member:: optional_t<boolean_t> is_anonymous
 
