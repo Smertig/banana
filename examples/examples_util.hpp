@@ -33,8 +33,8 @@ inline std::tuple<std::string, std::string, std::string, std::string> parse_inpu
     }
     message_text += "!";
 
-    // Hack to make sure each example has 1 second delay before calling telegram API
-    std::this_thread::sleep_for(std::chrono::seconds(1));
+    // Hack to make sure each example has delay before calling telegram API
+    std::this_thread::sleep_for(std::chrono::milliseconds(2000));
 
     return { token, target, std::move(example_name), std::move(message_text) };
 }
