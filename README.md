@@ -28,13 +28,7 @@ int main(int argc, char** argv) {
     banana::agent::default_blocking agent("<TG_BOT_TOKEN>");
 
     // use API
-    banana::api::send_message(agent, { .chat_id = "@smertig", .text = "Hello, world!" });
-    
-    // or in C++17
-    banana::api::send_message_args_t args;
-    args.chat_id = "@smertig";
-    args.text = "Hello, world!";
-    banana::api::send_message(agent, std::move(args));
+    banana::api::send_message(agent, { /* .chat_id = */ "@smertig", /* .text = */ "Hello, world!" });
 }
 ```
 
