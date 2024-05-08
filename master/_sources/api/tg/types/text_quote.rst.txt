@@ -11,13 +11,13 @@ text_quote_t
 
    Text of the quoted part of a message that is replied to by the given message
 
-   .. cpp:member:: optional_t<array_t<message_entity_t>> entities
-
-   Optional. Special entities that appear in the quote. Currently, only bold, italic, underline, strikethrough, spoiler, and custom_emoji entities are kept in quotes.
-
    .. cpp:member:: integer_t position
 
    Approximate quote position in the original message in UTF-16 code units as specified by the sender
+
+   .. cpp:member:: optional_t<array_t<message_entity_t>> entities
+
+   Optional. Special entities that appear in the quote. Currently, only bold, italic, underline, strikethrough, spoiler, and custom_emoji entities are kept in quotes.
 
    .. cpp:member:: optional_t<boolean_t> is_manual
 

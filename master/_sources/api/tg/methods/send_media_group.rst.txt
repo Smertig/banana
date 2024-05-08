@@ -24,13 +24,17 @@ send_media_group
 
    Unique identifier for the target chat or username of the target channel (in the format @channelusername)
 
-   .. cpp:member:: optional_t<integer_t> message_thread_id
-
-   Unique identifier for the target message thread (topic) of the forum; for forum supergroups only
-
    .. cpp:member:: array_t<variant_t<input_media_audio_t, input_media_document_t, input_media_photo_t, input_media_video_t>> media
 
    A JSON-serialized array describing messages to be sent, must include 2-10 items
+
+   .. cpp:member:: optional_t<string_t> business_connection_id
+
+   Unique identifier of the business connection on behalf of which the message will be sent
+
+   .. cpp:member:: optional_t<integer_t> message_thread_id
+
+   Unique identifier for the target message thread (topic) of the forum; for forum supergroups only
 
    .. cpp:member:: optional_t<boolean_t> disable_notification
 

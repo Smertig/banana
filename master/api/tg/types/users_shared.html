@@ -545,11 +545,11 @@
 
 <p>Identifier of the request</p>
 <dl class="cpp member">
-<dt class="sig sig-object cpp" id="_CPPv4N6banana3api14users_shared_t8user_idsE">
-<span id="_CPPv3N6banana3api14users_shared_t8user_idsE"></span><span id="_CPPv2N6banana3api14users_shared_t8user_idsE"></span><span id="banana::api::users_shared_t::user_ids__array_t:integer_t:"></span><a class="reference internal" href="../../banana/basic_types.html#_CPPv4I0EN6banana7array_tE" title="banana::array_t"><span class="n"><span class="pre">array_t</span></span></a><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="../../banana/basic_types.html#_CPPv4N6banana9integer_tE" title="banana::integer_t"><span class="n"><span class="pre">integer_t</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">user_ids</span></span></span><a class="headerlink" href="#_CPPv4N6banana3api14users_shared_t8user_idsE" title="Link to this definition">¶</a><br /></dt>
+<dt class="sig sig-object cpp" id="_CPPv4N6banana3api14users_shared_t5usersE">
+<span id="_CPPv3N6banana3api14users_shared_t5usersE"></span><span id="_CPPv2N6banana3api14users_shared_t5usersE"></span><span id="banana::api::users_shared_t::users__array_t:shared_user_t:"></span><a class="reference internal" href="../../banana/basic_types.html#_CPPv4I0EN6banana7array_tE" title="banana::array_t"><span class="n"><span class="pre">array_t</span></span></a><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">shared_user_t</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">users</span></span></span><a class="headerlink" href="#_CPPv4N6banana3api14users_shared_t5usersE" title="Link to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
-<p>Identifiers of the shared users. These numbers may have more than 32 significant bits and some programming languages may have difficulty/silent defects in interpreting them. But they have at most 52 significant bits, so 64-bit integers or double-precision float types are safe for storing these identifiers. The bot may not have access to the users and could be unable to use these identifiers, unless the users are already known to the bot by some other means.</p>
+<p>Information about users shared with the bot.</p>
 </dd></dl>
 
 </section>
@@ -612,7 +612,7 @@
 <li><a class="reference internal" href="#">users_shared_t</a><ul>
 <li><a class="reference internal" href="#_CPPv4N6banana3api14users_shared_tE"><code class="docutils literal notranslate"><span class="pre">users_shared_t</span></code></a><ul>
 <li><a class="reference internal" href="#_CPPv4N6banana3api14users_shared_t10request_idE"><code class="docutils literal notranslate"><span class="pre">users_shared_t::request_id</span></code></a></li>
-<li><a class="reference internal" href="#_CPPv4N6banana3api14users_shared_t8user_idsE"><code class="docutils literal notranslate"><span class="pre">users_shared_t::user_ids</span></code></a></li>
+<li><a class="reference internal" href="#_CPPv4N6banana3api14users_shared_t5usersE"><code class="docutils literal notranslate"><span class="pre">users_shared_t::users</span></code></a></li>
 </ul>
 </li>
 </ul>

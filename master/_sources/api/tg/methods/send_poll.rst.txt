@@ -24,17 +24,29 @@ send_poll
 
    Unique identifier for the target chat or username of the target channel (in the format @channelusername)
 
-   .. cpp:member:: optional_t<integer_t> message_thread_id
-
-   Unique identifier for the target message thread (topic) of the forum; for forum supergroups only
-
    .. cpp:member:: string_t question
 
    Poll question, 1-300 characters
 
-   .. cpp:member:: array_t<string_t> options
+   .. cpp:member:: array_t<input_poll_option_t> options
 
-   A JSON-serialized list of answer options, 2-10 strings 1-100 characters each
+   A JSON-serialized list of 2-10 answer options
+
+   .. cpp:member:: optional_t<string_t> business_connection_id
+
+   Unique identifier of the business connection on behalf of which the message will be sent
+
+   .. cpp:member:: optional_t<integer_t> message_thread_id
+
+   Unique identifier for the target message thread (topic) of the forum; for forum supergroups only
+
+   .. cpp:member:: optional_t<string_t> question_parse_mode
+
+   Mode for parsing entities in the question. See formatting options for more details. Currently, only custom emoji entities are allowed
+
+   .. cpp:member:: optional_t<array_t<message_entity_t>> question_entities
+
+   A JSON-serialized list of special entities that appear in the poll question. It can be specified instead of question_parse_mode
 
    .. cpp:member:: optional_t<boolean_t> is_anonymous
 
@@ -62,7 +74,7 @@ send_poll
 
    .. cpp:member:: optional_t<array_t<message_entity_t>> explanation_entities
 
-   A JSON-serialized list of special entities that appear in the poll explanation, which can be specified instead of parse_mode
+   A JSON-serialized list of special entities that appear in the poll explanation. It can be specified instead of explanation_parse_mode
 
    .. cpp:member:: optional_t<integer_t> open_period
 
@@ -90,4 +102,4 @@ send_poll
 
    .. cpp:member:: optional_t<variant_t<inline_keyboard_markup_t, reply_keyboard_markup_t, reply_keyboard_remove_t, force_reply_t>> reply_markup
 
-   Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove reply keyboard or to force a reply from the user.
+   Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove a reply keyboard or to force a reply from the user

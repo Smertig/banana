@@ -545,6 +545,18 @@
 
 <p>Unique message identifier inside this chat</p>
 <dl class="cpp member">
+<dt class="sig sig-object cpp" id="_CPPv4N6banana3api9message_t4dateE">
+<span id="_CPPv3N6banana3api9message_t4dateE"></span><span id="_CPPv2N6banana3api9message_t4dateE"></span><span id="banana::api::message_t::date__integer_t"></span><a class="reference internal" href="../../banana/basic_types.html#_CPPv4N6banana9integer_tE" title="banana::integer_t"><span class="n"><span class="pre">integer_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">date</span></span></span><a class="headerlink" href="#_CPPv4N6banana3api9message_t4dateE" title="Link to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<p>Date the message was sent in Unix time. It is always a positive number, representing a valid date.</p>
+<dl class="cpp member">
+<dt class="sig sig-object cpp" id="_CPPv4N6banana3api9message_t4chatE">
+<span id="_CPPv3N6banana3api9message_t4chatE"></span><span id="_CPPv2N6banana3api9message_t4chatE"></span><span id="banana::api::message_t::chat__chat_t"></span><a class="reference internal" href="chat.html#_CPPv4N6banana3api6chat_tE" title="banana::api::chat_t"><span class="n"><span class="pre">chat_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">chat</span></span></span><a class="headerlink" href="#_CPPv4N6banana3api9message_t4chatE" title="Link to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<p>Chat the message belongs to</p>
+<dl class="cpp member">
 <dt class="sig sig-object cpp" id="_CPPv4N6banana3api9message_t17message_thread_idE">
 <span id="_CPPv3N6banana3api9message_t17message_thread_idE"></span><span id="_CPPv2N6banana3api9message_t17message_thread_idE"></span><span id="banana::api::message_t::message_thread_id__optional_t:integer_t:"></span><a class="reference internal" href="../../banana/basic_types.html#_CPPv4I0EN6banana10optional_tE" title="banana::optional_t"><span class="n"><span class="pre">optional_t</span></span></a><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="../../banana/basic_types.html#_CPPv4N6banana9integer_tE" title="banana::integer_t"><span class="n"><span class="pre">integer_t</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">message_thread_id</span></span></span><a class="headerlink" href="#_CPPv4N6banana3api9message_t17message_thread_idE" title="Link to this definition">¶</a><br /></dt>
 <dd></dd></dl>
@@ -569,17 +581,17 @@
 
 <p>Optional. If the sender of the message boosted the chat, the number of boosts added by the user</p>
 <dl class="cpp member">
-<dt class="sig sig-object cpp" id="_CPPv4N6banana3api9message_t4dateE">
-<span id="_CPPv3N6banana3api9message_t4dateE"></span><span id="_CPPv2N6banana3api9message_t4dateE"></span><span id="banana::api::message_t::date__integer_t"></span><a class="reference internal" href="../../banana/basic_types.html#_CPPv4N6banana9integer_tE" title="banana::integer_t"><span class="n"><span class="pre">integer_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">date</span></span></span><a class="headerlink" href="#_CPPv4N6banana3api9message_t4dateE" title="Link to this definition">¶</a><br /></dt>
+<dt class="sig sig-object cpp" id="_CPPv4N6banana3api9message_t19sender_business_botE">
+<span id="_CPPv3N6banana3api9message_t19sender_business_botE"></span><span id="_CPPv2N6banana3api9message_t19sender_business_botE"></span><span id="banana::api::message_t::sender_business_bot__optional_t:user_t:"></span><a class="reference internal" href="../../banana/basic_types.html#_CPPv4I0EN6banana10optional_tE" title="banana::optional_t"><span class="n"><span class="pre">optional_t</span></span></a><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="user.html#_CPPv4N6banana3api6user_tE" title="banana::api::user_t"><span class="n"><span class="pre">user_t</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">sender_business_bot</span></span></span><a class="headerlink" href="#_CPPv4N6banana3api9message_t19sender_business_botE" title="Link to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
-<p>Date the message was sent in Unix time. It is always a positive number, representing a valid date.</p>
+<p>Optional. The bot that actually sent the message on behalf of the business account. Available only for outgoing messages sent on behalf of the connected business account.</p>
 <dl class="cpp member">
-<dt class="sig sig-object cpp" id="_CPPv4N6banana3api9message_t4chatE">
-<span id="_CPPv3N6banana3api9message_t4chatE"></span><span id="_CPPv2N6banana3api9message_t4chatE"></span><span id="banana::api::message_t::chat__chat_t"></span><a class="reference internal" href="chat.html#_CPPv4N6banana3api6chat_tE" title="banana::api::chat_t"><span class="n"><span class="pre">chat_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">chat</span></span></span><a class="headerlink" href="#_CPPv4N6banana3api9message_t4chatE" title="Link to this definition">¶</a><br /></dt>
+<dt class="sig sig-object cpp" id="_CPPv4N6banana3api9message_t22business_connection_idE">
+<span id="_CPPv3N6banana3api9message_t22business_connection_idE"></span><span id="_CPPv2N6banana3api9message_t22business_connection_idE"></span><span id="banana::api::message_t::business_connection_id__optional_t:string_t:"></span><a class="reference internal" href="../../banana/basic_types.html#_CPPv4I0EN6banana10optional_tE" title="banana::optional_t"><span class="n"><span class="pre">optional_t</span></span></a><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="../../banana/basic_types.html#_CPPv4N6banana8string_tE" title="banana::string_t"><span class="n"><span class="pre">string_t</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">business_connection_id</span></span></span><a class="headerlink" href="#_CPPv4N6banana3api9message_t22business_connection_idE" title="Link to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
-<p>Chat the message belongs to</p>
+<p>Optional. Unique identifier of the business connection from which the message was received. If non-empty, the message belongs to a chat of the corresponding business account that is independent from any potential bot chat which might share the same identifier.</p>
 <dl class="cpp member">
 <dt class="sig sig-object cpp" id="_CPPv4N6banana3api9message_t14forward_originE">
 <span id="_CPPv3N6banana3api9message_t14forward_originE"></span><span id="_CPPv2N6banana3api9message_t14forward_originE"></span><span id="banana::api::message_t::forward_origin__optional_t:message_origin_t:"></span><a class="reference internal" href="../../banana/basic_types.html#_CPPv4I0EN6banana10optional_tE" title="banana::optional_t"><span class="n"><span class="pre">optional_t</span></span></a><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="message_origin.html#_CPPv4N6banana3api16message_origin_tE" title="banana::api::message_origin_t"><span class="n"><span class="pre">message_origin_t</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">forward_origin</span></span></span><a class="headerlink" href="#_CPPv4N6banana3api9message_t14forward_originE" title="Link to this definition">¶</a><br /></dt>
@@ -640,6 +652,12 @@
 <dd></dd></dl>
 
 <p>Optional. True, if the message can’t be forwarded</p>
+<dl class="cpp member">
+<dt class="sig sig-object cpp" id="_CPPv4N6banana3api9message_t15is_from_offlineE">
+<span id="_CPPv3N6banana3api9message_t15is_from_offlineE"></span><span id="_CPPv2N6banana3api9message_t15is_from_offlineE"></span><span id="banana::api::message_t::is_from_offline__optional_t:boolean_t:"></span><a class="reference internal" href="../../banana/basic_types.html#_CPPv4I0EN6banana10optional_tE" title="banana::optional_t"><span class="n"><span class="pre">optional_t</span></span></a><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="../../banana/basic_types.html#_CPPv4N6banana9boolean_tE" title="banana::boolean_t"><span class="n"><span class="pre">boolean_t</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">is_from_offline</span></span></span><a class="headerlink" href="#_CPPv4N6banana3api9message_t15is_from_offlineE" title="Link to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<p>Optional. True, if the message was sent by an implicit action, for example, as an away or a greeting business message, or as a scheduled message</p>
 <dl class="cpp member">
 <dt class="sig sig-object cpp" id="_CPPv4N6banana3api9message_t14media_group_idE">
 <span id="_CPPv3N6banana3api9message_t14media_group_idE"></span><span id="_CPPv2N6banana3api9message_t14media_group_idE"></span><span id="banana::api::message_t::media_group_id__optional_t:string_t:"></span><a class="reference internal" href="../../banana/basic_types.html#_CPPv4I0EN6banana10optional_tE" title="banana::optional_t"><span class="n"><span class="pre">optional_t</span></span></a><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="../../banana/basic_types.html#_CPPv4N6banana8string_tE" title="banana::string_t"><span class="n"><span class="pre">string_t</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">media_group_id</span></span></span><a class="headerlink" href="#_CPPv4N6banana3api9message_t14media_group_idE" title="Link to this definition">¶</a><br /></dt>
@@ -905,6 +923,12 @@
 
 <p>Optional. Service message: user boosted the chat</p>
 <dl class="cpp member">
+<dt class="sig sig-object cpp" id="_CPPv4N6banana3api9message_t19chat_background_setE">
+<span id="_CPPv3N6banana3api9message_t19chat_background_setE"></span><span id="_CPPv2N6banana3api9message_t19chat_background_setE"></span><span id="banana::api::message_t::chat_background_set__optional_t:chat_background_t:"></span><a class="reference internal" href="../../banana/basic_types.html#_CPPv4I0EN6banana10optional_tE" title="banana::optional_t"><span class="n"><span class="pre">optional_t</span></span></a><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">chat_background_t</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">chat_background_set</span></span></span><a class="headerlink" href="#_CPPv4N6banana3api9message_t19chat_background_setE" title="Link to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<p>Optional. Service message: chat background set</p>
+<dl class="cpp member">
 <dt class="sig sig-object cpp" id="_CPPv4N6banana3api9message_t19forum_topic_createdE">
 <span id="_CPPv3N6banana3api9message_t19forum_topic_createdE"></span><span id="_CPPv2N6banana3api9message_t19forum_topic_createdE"></span><span id="banana::api::message_t::forum_topic_created__optional_t:forum_topic_created_t:"></span><a class="reference internal" href="../../banana/basic_types.html#_CPPv4I0EN6banana10optional_tE" title="banana::optional_t"><span class="n"><span class="pre">optional_t</span></span></a><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="forum_topic_created.html#_CPPv4N6banana3api21forum_topic_created_tE" title="banana::api::forum_topic_created_t"><span class="n"><span class="pre">forum_topic_created_t</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">forum_topic_created</span></span></span><a class="headerlink" href="#_CPPv4N6banana3api9message_t19forum_topic_createdE" title="Link to this definition">¶</a><br /></dt>
 <dd></dd></dl>
@@ -1062,12 +1086,14 @@
 <li><a class="reference internal" href="#">message_t</a><ul>
 <li><a class="reference internal" href="#_CPPv4N6banana3api9message_tE"><code class="docutils literal notranslate"><span class="pre">message_t</span></code></a><ul>
 <li><a class="reference internal" href="#_CPPv4N6banana3api9message_t10message_idE"><code class="docutils literal notranslate"><span class="pre">message_t::message_id</span></code></a></li>
+<li><a class="reference internal" href="#_CPPv4N6banana3api9message_t4dateE"><code class="docutils literal notranslate"><span class="pre">message_t::date</span></code></a></li>
+<li><a class="reference internal" href="#_CPPv4N6banana3api9message_t4chatE"><code class="docutils literal notranslate"><span class="pre">message_t::chat</span></code></a></li>
 <li><a class="reference internal" href="#_CPPv4N6banana3api9message_t17message_thread_idE"><code class="docutils literal notranslate"><span class="pre">message_t::message_thread_id</span></code></a></li>
 <li><a class="reference internal" href="#_CPPv4N6banana3api9message_t4fromE"><code class="docutils literal notranslate"><span class="pre">message_t::from</span></code></a></li>
 <li><a class="reference internal" href="#_CPPv4N6banana3api9message_t11sender_chatE"><code class="docutils literal notranslate"><span class="pre">message_t::sender_chat</span></code></a></li>
 <li><a class="reference internal" href="#_CPPv4N6banana3api9message_t18sender_boost_countE"><code class="docutils literal notranslate"><span class="pre">message_t::sender_boost_count</span></code></a></li>
-<li><a class="reference internal" href="#_CPPv4N6banana3api9message_t4dateE"><code class="docutils literal notranslate"><span class="pre">message_t::date</span></code></a></li>
-<li><a class="reference internal" href="#_CPPv4N6banana3api9message_t4chatE"><code class="docutils literal notranslate"><span class="pre">message_t::chat</span></code></a></li>
+<li><a class="reference internal" href="#_CPPv4N6banana3api9message_t19sender_business_botE"><code class="docutils literal notranslate"><span class="pre">message_t::sender_business_bot</span></code></a></li>
+<li><a class="reference internal" href="#_CPPv4N6banana3api9message_t22business_connection_idE"><code class="docutils literal notranslate"><span class="pre">message_t::business_connection_id</span></code></a></li>
 <li><a class="reference internal" href="#_CPPv4N6banana3api9message_t14forward_originE"><code class="docutils literal notranslate"><span class="pre">message_t::forward_origin</span></code></a></li>
 <li><a class="reference internal" href="#_CPPv4N6banana3api9message_t16is_topic_messageE"><code class="docutils literal notranslate"><span class="pre">message_t::is_topic_message</span></code></a></li>
 <li><a class="reference internal" href="#_CPPv4N6banana3api9message_t20is_automatic_forwardE"><code class="docutils literal notranslate"><span class="pre">message_t::is_automatic_forward</span></code></a></li>
@@ -1078,6 +1104,7 @@
 <li><a class="reference internal" href="#_CPPv4N6banana3api9message_t7via_botE"><code class="docutils literal notranslate"><span class="pre">message_t::via_bot</span></code></a></li>
 <li><a class="reference internal" href="#_CPPv4N6banana3api9message_t9edit_dateE"><code class="docutils literal notranslate"><span class="pre">message_t::edit_date</span></code></a></li>
 <li><a class="reference internal" href="#_CPPv4N6banana3api9message_t21has_protected_contentE"><code class="docutils literal notranslate"><span class="pre">message_t::has_protected_content</span></code></a></li>
+<li><a class="reference internal" href="#_CPPv4N6banana3api9message_t15is_from_offlineE"><code class="docutils literal notranslate"><span class="pre">message_t::is_from_offline</span></code></a></li>
 <li><a class="reference internal" href="#_CPPv4N6banana3api9message_t14media_group_idE"><code class="docutils literal notranslate"><span class="pre">message_t::media_group_id</span></code></a></li>
 <li><a class="reference internal" href="#_CPPv4N6banana3api9message_t16author_signatureE"><code class="docutils literal notranslate"><span class="pre">message_t::author_signature</span></code></a></li>
 <li><a class="reference internal" href="#_CPPv4N6banana3api9message_t4textE"><code class="docutils literal notranslate"><span class="pre">message_t::text</span></code></a></li>
@@ -1122,6 +1149,7 @@
 <li><a class="reference internal" href="#_CPPv4N6banana3api9message_t13passport_dataE"><code class="docutils literal notranslate"><span class="pre">message_t::passport_data</span></code></a></li>
 <li><a class="reference internal" href="#_CPPv4N6banana3api9message_t25proximity_alert_triggeredE"><code class="docutils literal notranslate"><span class="pre">message_t::proximity_alert_triggered</span></code></a></li>
 <li><a class="reference internal" href="#_CPPv4N6banana3api9message_t11boost_addedE"><code class="docutils literal notranslate"><span class="pre">message_t::boost_added</span></code></a></li>
+<li><a class="reference internal" href="#_CPPv4N6banana3api9message_t19chat_background_setE"><code class="docutils literal notranslate"><span class="pre">message_t::chat_background_set</span></code></a></li>
 <li><a class="reference internal" href="#_CPPv4N6banana3api9message_t19forum_topic_createdE"><code class="docutils literal notranslate"><span class="pre">message_t::forum_topic_created</span></code></a></li>
 <li><a class="reference internal" href="#_CPPv4N6banana3api9message_t18forum_topic_editedE"><code class="docutils literal notranslate"><span class="pre">message_t::forum_topic_edited</span></code></a></li>
 <li><a class="reference internal" href="#_CPPv4N6banana3api9message_t18forum_topic_closedE"><code class="docutils literal notranslate"><span class="pre">message_t::forum_topic_closed</span></code></a></li>

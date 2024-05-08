@@ -20,6 +20,14 @@ edit_message_live_location
    Arguments that should be passed to :cpp:func:`edit_message_live_location`.
 
 
+   .. cpp:member:: float_t latitude
+
+   Latitude of new location
+
+   .. cpp:member:: float_t longitude
+
+   Longitude of new location
+
    .. cpp:member:: optional_t<variant_t<integer_t, string_t>> chat_id
 
    Required if inline_message_id is not specified. Unique identifier for the target chat or username of the target channel (in the format @channelusername)
@@ -32,13 +40,9 @@ edit_message_live_location
 
    Required if chat_id and message_id are not specified. Identifier of the inline message
 
-   .. cpp:member:: float_t latitude
+   .. cpp:member:: optional_t<integer_t> live_period
 
-   Latitude of new location
-
-   .. cpp:member:: float_t longitude
-
-   Longitude of new location
+   New period in seconds during which the location can be updated, starting from the message send date. If 0x7FFFFFFF is specified, then the location can be updated forever. Otherwise, the new value must not exceed the current live_period by more than a day, and the live location expiration date must remain within the next 90 days. If not specified, then live_period remains unchanged
 
    .. cpp:member:: optional_t<float_t> horizontal_accuracy
 

@@ -545,6 +545,12 @@
 
 <p>Element type. One of “personal_details”, “passport”, “driver_license”, “identity_card”, “internal_passport”, “address”, “utility_bill”, “bank_statement”, “rental_agreement”, “passport_registration”, “temporary_registration”, “phone_number”, “email”.</p>
 <dl class="cpp member">
+<dt class="sig sig-object cpp" id="_CPPv4N6banana3api28encrypted_passport_element_t4hashE">
+<span id="_CPPv3N6banana3api28encrypted_passport_element_t4hashE"></span><span id="_CPPv2N6banana3api28encrypted_passport_element_t4hashE"></span><span id="banana::api::encrypted_passport_element_t::hash__string_t"></span><a class="reference internal" href="../../banana/basic_types.html#_CPPv4N6banana8string_tE" title="banana::string_t"><span class="n"><span class="pre">string_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">hash</span></span></span><a class="headerlink" href="#_CPPv4N6banana3api28encrypted_passport_element_t4hashE" title="Link to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<p>Base64-encoded element hash for using in PassportElementErrorUnspecified</p>
+<dl class="cpp member">
 <dt class="sig sig-object cpp" id="_CPPv4N6banana3api28encrypted_passport_element_t4dataE">
 <span id="_CPPv3N6banana3api28encrypted_passport_element_t4dataE"></span><span id="_CPPv2N6banana3api28encrypted_passport_element_t4dataE"></span><span id="banana::api::encrypted_passport_element_t::data__optional_t:string_t:"></span><a class="reference internal" href="../../banana/basic_types.html#_CPPv4I0EN6banana10optional_tE" title="banana::optional_t"><span class="n"><span class="pre">optional_t</span></span></a><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="../../banana/basic_types.html#_CPPv4N6banana8string_tE" title="banana::string_t"><span class="n"><span class="pre">string_t</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">data</span></span></span><a class="headerlink" href="#_CPPv4N6banana3api28encrypted_passport_element_t4dataE" title="Link to this definition">¶</a><br /></dt>
 <dd></dd></dl>
@@ -592,12 +598,6 @@
 <dd></dd></dl>
 
 <p>Optional. Array of encrypted files with translated versions of documents provided by the user; available if requested for “passport”, “driver_license”, “identity_card”, “internal_passport”, “utility_bill”, “bank_statement”, “rental_agreement”, “passport_registration” and “temporary_registration” types. Files can be decrypted and verified using the accompanying EncryptedCredentials.</p>
-<dl class="cpp member">
-<dt class="sig sig-object cpp" id="_CPPv4N6banana3api28encrypted_passport_element_t4hashE">
-<span id="_CPPv3N6banana3api28encrypted_passport_element_t4hashE"></span><span id="_CPPv2N6banana3api28encrypted_passport_element_t4hashE"></span><span id="banana::api::encrypted_passport_element_t::hash__string_t"></span><a class="reference internal" href="../../banana/basic_types.html#_CPPv4N6banana8string_tE" title="banana::string_t"><span class="n"><span class="pre">string_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">hash</span></span></span><a class="headerlink" href="#_CPPv4N6banana3api28encrypted_passport_element_t4hashE" title="Link to this definition">¶</a><br /></dt>
-<dd></dd></dl>
-
-<p>Base64-encoded element hash for using in PassportElementErrorUnspecified</p>
 </dd></dl>
 
 </section>
@@ -660,6 +660,7 @@
 <li><a class="reference internal" href="#">encrypted_passport_element_t</a><ul>
 <li><a class="reference internal" href="#_CPPv4N6banana3api28encrypted_passport_element_tE"><code class="docutils literal notranslate"><span class="pre">encrypted_passport_element_t</span></code></a><ul>
 <li><a class="reference internal" href="#_CPPv4N6banana3api28encrypted_passport_element_t4typeE"><code class="docutils literal notranslate"><span class="pre">encrypted_passport_element_t::type</span></code></a></li>
+<li><a class="reference internal" href="#_CPPv4N6banana3api28encrypted_passport_element_t4hashE"><code class="docutils literal notranslate"><span class="pre">encrypted_passport_element_t::hash</span></code></a></li>
 <li><a class="reference internal" href="#_CPPv4N6banana3api28encrypted_passport_element_t4dataE"><code class="docutils literal notranslate"><span class="pre">encrypted_passport_element_t::data</span></code></a></li>
 <li><a class="reference internal" href="#_CPPv4N6banana3api28encrypted_passport_element_t12phone_numberE"><code class="docutils literal notranslate"><span class="pre">encrypted_passport_element_t::phone_number</span></code></a></li>
 <li><a class="reference internal" href="#_CPPv4N6banana3api28encrypted_passport_element_t5emailE"><code class="docutils literal notranslate"><span class="pre">encrypted_passport_element_t::email</span></code></a></li>
@@ -668,7 +669,6 @@
 <li><a class="reference internal" href="#_CPPv4N6banana3api28encrypted_passport_element_t12reverse_sideE"><code class="docutils literal notranslate"><span class="pre">encrypted_passport_element_t::reverse_side</span></code></a></li>
 <li><a class="reference internal" href="#_CPPv4N6banana3api28encrypted_passport_element_t6selfieE"><code class="docutils literal notranslate"><span class="pre">encrypted_passport_element_t::selfie</span></code></a></li>
 <li><a class="reference internal" href="#_CPPv4N6banana3api28encrypted_passport_element_t11translationE"><code class="docutils literal notranslate"><span class="pre">encrypted_passport_element_t::translation</span></code></a></li>
-<li><a class="reference internal" href="#_CPPv4N6banana3api28encrypted_passport_element_t4hashE"><code class="docutils literal notranslate"><span class="pre">encrypted_passport_element_t::hash</span></code></a></li>
 </ul>
 </li>
 </ul>

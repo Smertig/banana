@@ -24,10 +24,6 @@ forward_messages
 
    Unique identifier for the target chat or username of the target channel (in the format @channelusername)
 
-   .. cpp:member:: optional_t<integer_t> message_thread_id
-
-   Unique identifier for the target message thread (topic) of the forum; for forum supergroups only
-
    .. cpp:member:: variant_t<integer_t, string_t> from_chat_id
 
    Unique identifier for the chat where the original messages were sent (or channel username in the format @channelusername)
@@ -35,6 +31,10 @@ forward_messages
    .. cpp:member:: array_t<integer_t> message_ids
 
    A JSON-serialized list of 1-100 identifiers of messages in the chat from_chat_id to forward. The identifiers must be specified in a strictly increasing order.
+
+   .. cpp:member:: optional_t<integer_t> message_thread_id
+
+   Unique identifier for the target message thread (topic) of the forum; for forum supergroups only
 
    .. cpp:member:: optional_t<boolean_t> disable_notification
 

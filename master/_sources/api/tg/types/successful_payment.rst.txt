@@ -19,14 +19,6 @@ successful_payment_t
 
    Bot specified invoice payload
 
-   .. cpp:member:: optional_t<string_t> shipping_option_id
-
-   Optional. Identifier of the shipping option chosen by the user
-
-   .. cpp:member:: optional_t<order_info_t> order_info
-
-   Optional. Order information provided by the user
-
    .. cpp:member:: string_t telegram_payment_charge_id
 
    Telegram payment identifier
@@ -34,3 +26,11 @@ successful_payment_t
    .. cpp:member:: string_t provider_payment_charge_id
 
    Provider payment identifier
+
+   .. cpp:member:: optional_t<string_t> shipping_option_id
+
+   Optional. Identifier of the shipping option chosen by the user
+
+   .. cpp:member:: optional_t<order_info_t> order_info
+
+   Optional. Order information provided by the user

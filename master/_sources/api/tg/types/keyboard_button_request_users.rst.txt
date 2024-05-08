@@ -5,7 +5,7 @@ keyboard_button_request_users_t
 
 .. cpp:struct:: banana::api::keyboard_button_request_users_t
 
-   This object defines the criteria used to request suitable users. The identifiers of the selected users will be shared with the bot when the corresponding button is pressed. More about requesting users »
+   This object defines the criteria used to request suitable users. Information about the selected users will be shared with the bot when the corresponding button is pressed. More about requesting users »
 
    .. cpp:member:: integer_t request_id
 
@@ -22,3 +22,15 @@ keyboard_button_request_users_t
    .. cpp:member:: optional_t<integer_t> max_quantity
 
    Optional. The maximum number of users to be selected; 1-10. Defaults to 1.
+
+   .. cpp:member:: optional_t<boolean_t> request_name
+
+   Optional. Pass True to request the users' first and last names
+
+   .. cpp:member:: optional_t<boolean_t> request_username
+
+   Optional. Pass True to request the users' usernames
+
+   .. cpp:member:: optional_t<boolean_t> request_photo
+
+   Optional. Pass True to request the users' photos
