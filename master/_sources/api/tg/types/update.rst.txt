@@ -33,7 +33,7 @@ update_t
 
    .. cpp:member:: optional_t<message_t> business_message
 
-   Optional. New non-service message from a connected business account
+   Optional. New message from a connected business account
 
    .. cpp:member:: optional_t<message_t> edited_business_message
 
