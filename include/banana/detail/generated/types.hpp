@@ -123,7 +123,7 @@ struct chat_full_info_t {
     optional_t<boolean_t>                has_private_forwards;                    // Optional. True, if privacy settings of the other party in the private chat allows to use tg://user?id=<user_id> links only in chats with the user
     optional_t<boolean_t>                has_restricted_voice_and_video_messages; // Optional. True, if the privacy settings of the other party restrict sending voice and video note messages in the private chat
     optional_t<boolean_t>                join_to_send_messages;                   // Optional. True, if users need to join the supergroup before they can send messages
-    optional_t<boolean_t>                join_by_request;                         // Optional. True, if all users directly joining the supergroup need to be approved by supergroup administrators
+    optional_t<boolean_t>                join_by_request;                         // Optional. True, if all users directly joining the supergroup without using an invite link need to be approved by supergroup administrators
     optional_t<string_t>                 description;                             // Optional. Description, for groups, supergroups and channel chats
     optional_t<string_t>                 invite_link;                             // Optional. Primary invite link, for groups, supergroups and channel chats
     optional_t<message_t>                pinned_message;                          // Optional. The most recent pinned message (by sending date)
@@ -456,7 +456,7 @@ struct update_t {
     optional_t<message_t>                        channel_post;              // Optional. New incoming channel post of any kind - text, photo, sticker, etc.
     optional_t<message_t>                        edited_channel_post;       // Optional. New version of a channel post that is known to the bot and was edited. This update may at times be triggered by changes to message fields that are either unavailable or not actively used by your bot.
     optional_t<business_connection_t>            business_connection;       // Optional. The bot was connected to or disconnected from a business account, or a user edited an existing connection with the bot
-    optional_t<message_t>                        business_message;          // Optional. New non-service message from a connected business account
+    optional_t<message_t>                        business_message;          // Optional. New message from a connected business account
     optional_t<message_t>                        edited_business_message;   // Optional. New version of a message from a connected business account
     optional_t<business_messages_deleted_t>      deleted_business_messages; // Optional. Messages were deleted from a connected business account
     optional_t<message_reaction_updated_t>       message_reaction;          // Optional. A reaction to a message was changed by a user. The bot must be an administrator in the chat and must explicitly specify "message_reaction" in the list of allowed_updates to receive these updates. The update isn't received for reactions set by bots.
@@ -1036,7 +1036,7 @@ struct chat_member_updated_t {
     chat_member_t                  old_chat_member;             // Previous information about the chat member
     chat_member_t                  new_chat_member;             // New information about the chat member
     optional_t<chat_invite_link_t> invite_link;                 // Optional. Chat invite link, which was used by the user to join the chat; for joining by invite link events only.
-    optional_t<boolean_t>          via_join_request;            // Optional. True, if the user joined the chat after sending a direct join request and being approved by an administrator
+    optional_t<boolean_t>          via_join_request;            // Optional. True, if the user joined the chat after sending a direct join request without using an invite link and being approved by an administrator
     optional_t<boolean_t>          via_chat_folder_invite_link; // Optional. True, if the user joined the chat via a chat folder invite link
 };
 

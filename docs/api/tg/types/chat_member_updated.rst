@@ -33,7 +33,7 @@ chat_member_updated_t
 
    .. cpp:member:: optional_t<boolean_t> via_join_request
 
-   Optional. True, if the user joined the chat after sending a direct join request and being approved by an administrator
+   Optional. True, if the user joined the chat after sending a direct join request without using an invite link and being approved by an administrator
 
    .. cpp:member:: optional_t<boolean_t> via_chat_folder_invite_link
 
