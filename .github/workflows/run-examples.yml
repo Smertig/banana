@@ -68,6 +68,7 @@ jobs:
           export BANANA_BOT_TOKEN=${{secrets.TG_TEST_BOT_TOKEN}}
           export BANANA_EXAMPLE_TARGET=${{secrets.TG_TEST_USER}}
           export BANANA_EXAMPLE_CONTEXT="${{matrix.title}} (${{matrix.cc}})"
+          export BANANA_EXAMPLE_DELAY=3000
   
           python build-actions/action.py                    \
             --step=all                                      \

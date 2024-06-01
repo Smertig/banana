@@ -34,7 +34,9 @@ inline std::tuple<std::string, std::string, std::string, std::string> parse_inpu
     message_text += "!";
 
     // Hack to make sure each example has delay before calling telegram API
-    std::this_thread::sleep_for(std::chrono::milliseconds(2000));
+    if (const auto delay = std::getenv("BANANA_EXAMPLE_DELAY")) {
+        std::this_thread::sleep_for(std::chrono::milliseconds(std::stol(delay)));
+    }
 
     return { token, target, std::move(example_name), std::move(message_text) };
 }
