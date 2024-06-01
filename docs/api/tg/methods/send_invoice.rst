@@ -36,25 +36,25 @@ send_invoice
 
    Bot-defined invoice payload, 1-128 bytes. This will not be displayed to the user, use for your internal processes.
 
-   .. cpp:member:: string_t provider_token
-
-   Payment provider token, obtained via @BotFather
-
    .. cpp:member:: string_t currency
 
-   Three-letter ISO 4217 currency code, see more on currencies
+   Three-letter ISO 4217 currency code, see more on currencies. Pass “XTR” for payments in Telegram Stars.
 
    .. cpp:member:: array_t<labeled_price_t> prices
 
-   Price breakdown, a JSON-serialized list of components (e.g. product price, tax, discount, delivery cost, delivery tax, bonus, etc.)
+   Price breakdown, a JSON-serialized list of components (e.g. product price, tax, discount, delivery cost, delivery tax, bonus, etc.). Must contain exactly one item for payments in Telegram Stars.
 
    .. cpp:member:: optional_t<integer_t> message_thread_id
 
    Unique identifier for the target message thread (topic) of the forum; for forum supergroups only
 
+   .. cpp:member:: optional_t<string_t> provider_token
+
+   Payment provider token, obtained via @BotFather. Pass an empty string for payments in Telegram Stars.
+
    .. cpp:member:: optional_t<integer_t> max_tip_amount
 
-   The maximum accepted amount for tips in the smallest units of the currency (integer, not float/double). For example, for a maximum tip of US$ 1.45 pass max_tip_amount = 145. See the exp parameter in currencies.json, it shows the number of digits past the decimal point for each currency (2 for the majority of currencies). Defaults to 0
+   The maximum accepted amount for tips in the smallest units of the currency (integer, not float/double). For example, for a maximum tip of US$ 1.45 pass max_tip_amount = 145. See the exp parameter in currencies.json, it shows the number of digits past the decimal point for each currency (2 for the majority of currencies). Defaults to 0. Not supported for payments in Telegram Stars.
 
    .. cpp:member:: optional_t<array_t<integer_t>> suggested_tip_amounts
 
@@ -86,31 +86,31 @@ send_invoice
 
    .. cpp:member:: optional_t<boolean_t> need_name
 
-   Pass True if you require the user's full name to complete the order
+   Pass True if you require the user's full name to complete the order. Ignored for payments in Telegram Stars.
 
    .. cpp:member:: optional_t<boolean_t> need_phone_number
 
-   Pass True if you require the user's phone number to complete the order
+   Pass True if you require the user's phone number to complete the order. Ignored for payments in Telegram Stars.
 
    .. cpp:member:: optional_t<boolean_t> need_email
 
-   Pass True if you require the user's email address to complete the order
+   Pass True if you require the user's email address to complete the order. Ignored for payments in Telegram Stars.
 
    .. cpp:member:: optional_t<boolean_t> need_shipping_address
 
-   Pass True if you require the user's shipping address to complete the order
+   Pass True if you require the user's shipping address to complete the order. Ignored for payments in Telegram Stars.
 
    .. cpp:member:: optional_t<boolean_t> send_phone_number_to_provider
 
-   Pass True if the user's phone number should be sent to provider
+   Pass True if the user's phone number should be sent to the provider. Ignored for payments in Telegram Stars.
 
    .. cpp:member:: optional_t<boolean_t> send_email_to_provider
 
-   Pass True if the user's email address should be sent to provider
+   Pass True if the user's email address should be sent to the provider. Ignored for payments in Telegram Stars.
 
    .. cpp:member:: optional_t<boolean_t> is_flexible
 
-   Pass True if the final price depends on the shipping method
+   Pass True if the final price depends on the shipping method. Ignored for payments in Telegram Stars.
 
    .. cpp:member:: optional_t<boolean_t> disable_notification
 
@@ -119,6 +119,10 @@ send_invoice
    .. cpp:member:: optional_t<boolean_t> protect_content
 
    Protects the contents of the sent message from forwarding and saving
+
+   .. cpp:member:: optional_t<string_t> message_effect_id
+
+   Unique identifier of the message effect to be added to the message; for private chats only
 
    .. cpp:member:: optional_t<reply_parameters_t> reply_parameters
 

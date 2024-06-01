@@ -287,7 +287,7 @@ struct invoice_t {
     string_t  title;           // Product name
     string_t  description;     // Product description
     string_t  start_parameter; // Unique bot deep-linking parameter that can be used to generate this invoice
-    string_t  currency;        // Three-letter ISO 4217 currency code
+    string_t  currency;        // Three-letter ISO 4217 currency code, or “XTR” for payments in Telegram Stars
     integer_t total_amount;    // Total price in the smallest units of the currency (integer, not float/double). For example, for a price of US$ 1.45 pass amount = 145. See the exp parameter in currencies.json, it shows the number of digits past the decimal point for each currency (2 for the majority of currencies).
 };
 
@@ -354,7 +354,7 @@ struct message_auto_delete_timer_changed_t {
 
 // This object represents one special entity in a text message. For example, hashtags, usernames, URLs, etc.
 struct message_entity_t {
-    string_t             type;            // Type of the entity. Currently, can be “mention” (@username), “hashtag” (#hashtag), “cashtag” ($USD), “bot_command” (/start@jobs_bot), “url” (https://telegram.org), “email” (do-not-reply@telegram.org), “phone_number” (+1-212-555-0123), “bold” (bold text), “italic” (italic text), “underline” (underlined text), “strikethrough” (strikethrough text), “spoiler” (spoiler message), “blockquote” (block quotation), “code” (monowidth string), “pre” (monowidth block), “text_link” (for clickable text URLs), “text_mention” (for users without usernames), “custom_emoji” (for inline custom emoji stickers)
+    string_t             type;            // Type of the entity. Currently, can be “mention” (@username), “hashtag” (#hashtag), “cashtag” ($USD), “bot_command” (/start@jobs_bot), “url” (https://telegram.org), “email” (do-not-reply@telegram.org), “phone_number” (+1-212-555-0123), “bold” (bold text), “italic” (italic text), “underline” (underlined text), “strikethrough” (strikethrough text), “spoiler” (spoiler message), “blockquote” (block quotation), “expandable_blockquote” (collapsed-by-default block quotation), “code” (monowidth string), “pre” (monowidth block), “text_link” (for clickable text URLs), “text_mention” (for users without usernames), “custom_emoji” (for inline custom emoji stickers)
     integer_t            offset;          // Offset in UTF-16 code units to the start of the entity
     integer_t            length;          // Length of the entity in UTF-16 code units
     optional_t<string_t> url;             // Optional. For “text_link” only, URL that will be opened after user taps on the text
@@ -422,7 +422,7 @@ struct sent_web_app_message_t {
 
 // This object contains basic information about a successful payment.
 struct successful_payment_t {
-    string_t                 currency;                   // Three-letter ISO 4217 currency code
+    string_t                 currency;                   // Three-letter ISO 4217 currency code, or “XTR” for payments in Telegram Stars
     integer_t                total_amount;               // Total price in the smallest units of the currency (integer, not float/double). For example, for a price of US$ 1.45 pass amount = 145. See the exp parameter in currencies.json, it shows the number of digits past the decimal point for each currency (2 for the majority of currencies).
     string_t                 invoice_payload;            // Bot specified invoice payload
     string_t                 telegram_payment_charge_id; // Telegram payment identifier
@@ -727,6 +727,7 @@ struct message_t {
     optional_t<string_t>                            text;                              // Optional. For text messages, the actual UTF-8 text of the message
     optional_t<array_t<message_entity_t>>           entities;                          // Optional. For text messages, special entities like usernames, URLs, bot commands, etc. that appear in the text
     optional_t<link_preview_options_t>              link_preview_options;              // Optional. Options used for link preview generation for the message, if it is a text message and link preview options were changed
+    optional_t<string_t>                            effect_id;                         // Optional. Unique identifier of the message effect added to the message
     optional_t<animation_t>                         animation;                         // Optional. Message is an animation, information about the animation. For backward compatibility, when this field is set, the document field will also be set
     optional_t<audio_t>                             audio;                             // Optional. Message is an audio file, information about the file
     optional_t<document_t>                          document;                          // Optional. Message is a general file, information about the file
@@ -738,6 +739,7 @@ struct message_t {
     optional_t<voice_t>                             voice;                             // Optional. Message is a voice message, information about the file
     optional_t<string_t>                            caption;                           // Optional. Caption for the animation, audio, document, photo, video or voice
     optional_t<array_t<message_entity_t>>           caption_entities;                  // Optional. For messages with a caption, special entities like usernames, URLs, bot commands, etc. that appear in the caption
+    optional_t<boolean_t>                           show_caption_above_media;          // Optional. True, if the caption must be shown above the message media
     optional_t<boolean_t>                           has_media_spoiler;                 // Optional. True, if the message media is covered by a spoiler animation
     optional_t<contact_t>                           contact;                           // Optional. Message is a shared contact, information about the contact
     optional_t<dice_t>                              dice;                              // Optional. Message is a dice with random value
@@ -1119,7 +1121,7 @@ struct external_reply_info_t {
 struct pre_checkout_query_t {
     string_t                 id;                 // Unique query identifier
     user_t                   from;               // User who sent the query
-    string_t                 currency;           // Three-letter ISO 4217 currency code
+    string_t                 currency;           // Three-letter ISO 4217 currency code, or “XTR” for payments in Telegram Stars
     integer_t                total_amount;       // Total price in the smallest units of the currency (integer, not float/double). For example, for a price of US$ 1.45 pass amount = 145. See the exp parameter in currencies.json, it shows the number of digits past the decimal point for each currency (2 for the majority of currencies).
     string_t                 invoice_payload;    // Bot specified invoice payload
     optional_t<string_t>     shipping_option_id; // Optional. Identifier of the shipping option chosen by the user
@@ -1215,7 +1217,7 @@ struct user_profile_photos_t {
     array_t<array_t<photo_size_t>> photos;      // Requested profile pictures (in up to 4 sizes each)
 };
 
-// This object represents one button of an inline keyboard. You must use exactly one of the optional fields.
+// This object represents one button of an inline keyboard. Exactly one of the optional fields must be used to specify type of the button.
 struct inline_keyboard_button_t {
     string_t                                      text;                             // Label text on the button
     optional_t<string_t>                          url;                              // Optional. HTTP or tg:// URL to be opened when the button is pressed. Links tg://user?id=<user_id> can be used to mention a user by their identifier without using a username, if this is allowed by their privacy settings.
@@ -1226,7 +1228,7 @@ struct inline_keyboard_button_t {
     optional_t<string_t>                          switch_inline_query_current_chat; // Optional. If set, pressing the button will insert the bot's username and the specified inline query in the current chat's input field. May be empty, in which case only the bot's username will be inserted.   This offers a quick way for the user to open your bot in inline mode in the same chat - good for selecting something from multiple options. Not supported in channels and for messages sent on behalf of a Telegram Business account.
     optional_t<switch_inline_query_chosen_chat_t> switch_inline_query_chosen_chat;  // Optional. If set, pressing the button will prompt the user to select one of their chats of the specified type, open that chat and insert the bot's username and the specified inline query in the input field. Not supported for messages sent on behalf of a Telegram Business account.
     optional_t<callback_game_t>                   callback_game;                    // Optional. Description of the game that will be launched when the user presses the button.   NOTE: This type of button must always be the first button in the first row.
-    optional_t<boolean_t>                         pay;                              // Optional. Specify True, to send a Pay button.   NOTE: This type of button must always be the first button in the first row and can only be used in invoice messages.
+    optional_t<boolean_t>                         pay;                              // Optional. Specify True, to send a Pay button. Substrings “⭐” and “XTR” in the buttons's text will be replaced with a Telegram Star icon.   NOTE: This type of button must always be the first button in the first row and can only be used in invoice messages.
 };
 
 // This object represents an inline keyboard that appears right next to the message it belongs to.
@@ -1277,42 +1279,45 @@ struct inline_query_result_cached_document_t {
 
 // Represents a link to an animated GIF file stored on the Telegram servers. By default, this animated GIF file will be sent by the user with an optional caption. Alternatively, you can use input_message_content to send a message with specified content instead of the animation.
 struct inline_query_result_cached_gif_t {
-    string_t                              type;                  // Type of the result, must be gif
-    string_t                              id;                    // Unique identifier for this result, 1-64 bytes
-    string_t                              gif_file_id;           // A valid file identifier for the GIF file
-    optional_t<string_t>                  title;                 // Optional. Title for the result
-    optional_t<string_t>                  caption;               // Optional. Caption of the GIF file to be sent, 0-1024 characters after entities parsing
-    optional_t<string_t>                  parse_mode;            // Optional. Mode for parsing entities in the caption. See formatting options for more details.
-    optional_t<array_t<message_entity_t>> caption_entities;      // Optional. List of special entities that appear in the caption, which can be specified instead of parse_mode
-    optional_t<inline_keyboard_markup_t>  reply_markup;          // Optional. Inline keyboard attached to the message
-    optional_t<input_message_content_t>   input_message_content; // Optional. Content of the message to be sent instead of the GIF animation
+    string_t                              type;                     // Type of the result, must be gif
+    string_t                              id;                       // Unique identifier for this result, 1-64 bytes
+    string_t                              gif_file_id;              // A valid file identifier for the GIF file
+    optional_t<string_t>                  title;                    // Optional. Title for the result
+    optional_t<string_t>                  caption;                  // Optional. Caption of the GIF file to be sent, 0-1024 characters after entities parsing
+    optional_t<string_t>                  parse_mode;               // Optional. Mode for parsing entities in the caption. See formatting options for more details.
+    optional_t<array_t<message_entity_t>> caption_entities;         // Optional. List of special entities that appear in the caption, which can be specified instead of parse_mode
+    optional_t<boolean_t>                 show_caption_above_media; // Optional. Pass True, if the caption must be shown above the message media
+    optional_t<inline_keyboard_markup_t>  reply_markup;             // Optional. Inline keyboard attached to the message
+    optional_t<input_message_content_t>   input_message_content;    // Optional. Content of the message to be sent instead of the GIF animation
 };
 
 // Represents a link to a video animation (H.264/MPEG-4 AVC video without sound) stored on the Telegram servers. By default, this animated MPEG-4 file will be sent by the user with an optional caption. Alternatively, you can use input_message_content to send a message with the specified content instead of the animation.
 struct inline_query_result_cached_mpeg4_gif_t {
-    string_t                              type;                  // Type of the result, must be mpeg4_gif
-    string_t                              id;                    // Unique identifier for this result, 1-64 bytes
-    string_t                              mpeg4_file_id;         // A valid file identifier for the MPEG4 file
-    optional_t<string_t>                  title;                 // Optional. Title for the result
-    optional_t<string_t>                  caption;               // Optional. Caption of the MPEG-4 file to be sent, 0-1024 characters after entities parsing
-    optional_t<string_t>                  parse_mode;            // Optional. Mode for parsing entities in the caption. See formatting options for more details.
-    optional_t<array_t<message_entity_t>> caption_entities;      // Optional. List of special entities that appear in the caption, which can be specified instead of parse_mode
-    optional_t<inline_keyboard_markup_t>  reply_markup;          // Optional. Inline keyboard attached to the message
-    optional_t<input_message_content_t>   input_message_content; // Optional. Content of the message to be sent instead of the video animation
+    string_t                              type;                     // Type of the result, must be mpeg4_gif
+    string_t                              id;                       // Unique identifier for this result, 1-64 bytes
+    string_t                              mpeg4_file_id;            // A valid file identifier for the MPEG4 file
+    optional_t<string_t>                  title;                    // Optional. Title for the result
+    optional_t<string_t>                  caption;                  // Optional. Caption of the MPEG-4 file to be sent, 0-1024 characters after entities parsing
+    optional_t<string_t>                  parse_mode;               // Optional. Mode for parsing entities in the caption. See formatting options for more details.
+    optional_t<array_t<message_entity_t>> caption_entities;         // Optional. List of special entities that appear in the caption, which can be specified instead of parse_mode
+    optional_t<boolean_t>                 show_caption_above_media; // Optional. Pass True, if the caption must be shown above the message media
+    optional_t<inline_keyboard_markup_t>  reply_markup;             // Optional. Inline keyboard attached to the message
+    optional_t<input_message_content_t>   input_message_content;    // Optional. Content of the message to be sent instead of the video animation
 };
 
 // Represents a link to a photo stored on the Telegram servers. By default, this photo will be sent by the user with an optional caption. Alternatively, you can use input_message_content to send a message with the specified content instead of the photo.
 struct inline_query_result_cached_photo_t {
-    string_t                              type;                  // Type of the result, must be photo
-    string_t                              id;                    // Unique identifier for this result, 1-64 bytes
-    string_t                              photo_file_id;         // A valid file identifier of the photo
-    optional_t<string_t>                  title;                 // Optional. Title for the result
-    optional_t<string_t>                  description;           // Optional. Short description of the result
-    optional_t<string_t>                  caption;               // Optional. Caption of the photo to be sent, 0-1024 characters after entities parsing
-    optional_t<string_t>                  parse_mode;            // Optional. Mode for parsing entities in the photo caption. See formatting options for more details.
-    optional_t<array_t<message_entity_t>> caption_entities;      // Optional. List of special entities that appear in the caption, which can be specified instead of parse_mode
-    optional_t<inline_keyboard_markup_t>  reply_markup;          // Optional. Inline keyboard attached to the message
-    optional_t<input_message_content_t>   input_message_content; // Optional. Content of the message to be sent instead of the photo
+    string_t                              type;                     // Type of the result, must be photo
+    string_t                              id;                       // Unique identifier for this result, 1-64 bytes
+    string_t                              photo_file_id;            // A valid file identifier of the photo
+    optional_t<string_t>                  title;                    // Optional. Title for the result
+    optional_t<string_t>                  description;              // Optional. Short description of the result
+    optional_t<string_t>                  caption;                  // Optional. Caption of the photo to be sent, 0-1024 characters after entities parsing
+    optional_t<string_t>                  parse_mode;               // Optional. Mode for parsing entities in the photo caption. See formatting options for more details.
+    optional_t<array_t<message_entity_t>> caption_entities;         // Optional. List of special entities that appear in the caption, which can be specified instead of parse_mode
+    optional_t<boolean_t>                 show_caption_above_media; // Optional. Pass True, if the caption must be shown above the message media
+    optional_t<inline_keyboard_markup_t>  reply_markup;             // Optional. Inline keyboard attached to the message
+    optional_t<input_message_content_t>   input_message_content;    // Optional. Content of the message to be sent instead of the photo
 };
 
 // Represents a link to a sticker stored on the Telegram servers. By default, this sticker will be sent by the user. Alternatively, you can use input_message_content to send a message with the specified content instead of the sticker.
@@ -1326,16 +1331,17 @@ struct inline_query_result_cached_sticker_t {
 
 // Represents a link to a video file stored on the Telegram servers. By default, this video file will be sent by the user with an optional caption. Alternatively, you can use input_message_content to send a message with the specified content instead of the video.
 struct inline_query_result_cached_video_t {
-    string_t                              type;                  // Type of the result, must be video
-    string_t                              id;                    // Unique identifier for this result, 1-64 bytes
-    string_t                              video_file_id;         // A valid file identifier for the video file
-    string_t                              title;                 // Title for the result
-    optional_t<string_t>                  description;           // Optional. Short description of the result
-    optional_t<string_t>                  caption;               // Optional. Caption of the video to be sent, 0-1024 characters after entities parsing
-    optional_t<string_t>                  parse_mode;            // Optional. Mode for parsing entities in the video caption. See formatting options for more details.
-    optional_t<array_t<message_entity_t>> caption_entities;      // Optional. List of special entities that appear in the caption, which can be specified instead of parse_mode
-    optional_t<inline_keyboard_markup_t>  reply_markup;          // Optional. Inline keyboard attached to the message
-    optional_t<input_message_content_t>   input_message_content; // Optional. Content of the message to be sent instead of the video
+    string_t                              type;                     // Type of the result, must be video
+    string_t                              id;                       // Unique identifier for this result, 1-64 bytes
+    string_t                              video_file_id;            // A valid file identifier for the video file
+    string_t                              title;                    // Title for the result
+    optional_t<string_t>                  description;              // Optional. Short description of the result
+    optional_t<string_t>                  caption;                  // Optional. Caption of the video to be sent, 0-1024 characters after entities parsing
+    optional_t<string_t>                  parse_mode;               // Optional. Mode for parsing entities in the video caption. See formatting options for more details.
+    optional_t<array_t<message_entity_t>> caption_entities;         // Optional. List of special entities that appear in the caption, which can be specified instead of parse_mode
+    optional_t<boolean_t>                 show_caption_above_media; // Optional. Pass True, if the caption must be shown above the message media
+    optional_t<inline_keyboard_markup_t>  reply_markup;             // Optional. Inline keyboard attached to the message
+    optional_t<input_message_content_t>   input_message_content;    // Optional. Content of the message to be sent instead of the video
 };
 
 // Represents a link to a voice message stored on the Telegram servers. By default, this voice message will be sent by the user. Alternatively, you can use input_message_content to send a message with the specified content instead of the voice message.
@@ -1394,20 +1400,21 @@ struct inline_query_result_game_t {
 
 // Represents a link to an animated GIF file. By default, this animated GIF file will be sent by the user with optional caption. Alternatively, you can use input_message_content to send a message with the specified content instead of the animation.
 struct inline_query_result_gif_t {
-    string_t                              type;                  // Type of the result, must be gif
-    string_t                              id;                    // Unique identifier for this result, 1-64 bytes
-    string_t                              gif_url;               // A valid URL for the GIF file. File size must not exceed 1MB
-    string_t                              thumbnail_url;         // URL of the static (JPEG or GIF) or animated (MPEG4) thumbnail for the result
-    optional_t<integer_t>                 gif_width;             // Optional. Width of the GIF
-    optional_t<integer_t>                 gif_height;            // Optional. Height of the GIF
-    optional_t<integer_t>                 gif_duration;          // Optional. Duration of the GIF in seconds
-    optional_t<string_t>                  thumbnail_mime_type;   // Optional. MIME type of the thumbnail, must be one of “image/jpeg”, “image/gif”, or “video/mp4”. Defaults to “image/jpeg”
-    optional_t<string_t>                  title;                 // Optional. Title for the result
-    optional_t<string_t>                  caption;               // Optional. Caption of the GIF file to be sent, 0-1024 characters after entities parsing
-    optional_t<string_t>                  parse_mode;            // Optional. Mode for parsing entities in the caption. See formatting options for more details.
-    optional_t<array_t<message_entity_t>> caption_entities;      // Optional. List of special entities that appear in the caption, which can be specified instead of parse_mode
-    optional_t<inline_keyboard_markup_t>  reply_markup;          // Optional. Inline keyboard attached to the message
-    optional_t<input_message_content_t>   input_message_content; // Optional. Content of the message to be sent instead of the GIF animation
+    string_t                              type;                     // Type of the result, must be gif
+    string_t                              id;                       // Unique identifier for this result, 1-64 bytes
+    string_t                              gif_url;                  // A valid URL for the GIF file. File size must not exceed 1MB
+    string_t                              thumbnail_url;            // URL of the static (JPEG or GIF) or animated (MPEG4) thumbnail for the result
+    optional_t<integer_t>                 gif_width;                // Optional. Width of the GIF
+    optional_t<integer_t>                 gif_height;               // Optional. Height of the GIF
+    optional_t<integer_t>                 gif_duration;             // Optional. Duration of the GIF in seconds
+    optional_t<string_t>                  thumbnail_mime_type;      // Optional. MIME type of the thumbnail, must be one of “image/jpeg”, “image/gif”, or “video/mp4”. Defaults to “image/jpeg”
+    optional_t<string_t>                  title;                    // Optional. Title for the result
+    optional_t<string_t>                  caption;                  // Optional. Caption of the GIF file to be sent, 0-1024 characters after entities parsing
+    optional_t<string_t>                  parse_mode;               // Optional. Mode for parsing entities in the caption. See formatting options for more details.
+    optional_t<array_t<message_entity_t>> caption_entities;         // Optional. List of special entities that appear in the caption, which can be specified instead of parse_mode
+    optional_t<boolean_t>                 show_caption_above_media; // Optional. Pass True, if the caption must be shown above the message media
+    optional_t<inline_keyboard_markup_t>  reply_markup;             // Optional. Inline keyboard attached to the message
+    optional_t<input_message_content_t>   input_message_content;    // Optional. Content of the message to be sent instead of the GIF animation
 };
 
 // Represents a location on a map. By default, the location will be sent by the user. Alternatively, you can use input_message_content to send a message with the specified content instead of the location.
@@ -1430,37 +1437,39 @@ struct inline_query_result_location_t {
 
 // Represents a link to a video animation (H.264/MPEG-4 AVC video without sound). By default, this animated MPEG-4 file will be sent by the user with optional caption. Alternatively, you can use input_message_content to send a message with the specified content instead of the animation.
 struct inline_query_result_mpeg4_gif_t {
-    string_t                              type;                  // Type of the result, must be mpeg4_gif
-    string_t                              id;                    // Unique identifier for this result, 1-64 bytes
-    string_t                              mpeg4_url;             // A valid URL for the MPEG4 file. File size must not exceed 1MB
-    string_t                              thumbnail_url;         // URL of the static (JPEG or GIF) or animated (MPEG4) thumbnail for the result
-    optional_t<integer_t>                 mpeg4_width;           // Optional. Video width
-    optional_t<integer_t>                 mpeg4_height;          // Optional. Video height
-    optional_t<integer_t>                 mpeg4_duration;        // Optional. Video duration in seconds
-    optional_t<string_t>                  thumbnail_mime_type;   // Optional. MIME type of the thumbnail, must be one of “image/jpeg”, “image/gif”, or “video/mp4”. Defaults to “image/jpeg”
-    optional_t<string_t>                  title;                 // Optional. Title for the result
-    optional_t<string_t>                  caption;               // Optional. Caption of the MPEG-4 file to be sent, 0-1024 characters after entities parsing
-    optional_t<string_t>                  parse_mode;            // Optional. Mode for parsing entities in the caption. See formatting options for more details.
-    optional_t<array_t<message_entity_t>> caption_entities;      // Optional. List of special entities that appear in the caption, which can be specified instead of parse_mode
-    optional_t<inline_keyboard_markup_t>  reply_markup;          // Optional. Inline keyboard attached to the message
-    optional_t<input_message_content_t>   input_message_content; // Optional. Content of the message to be sent instead of the video animation
+    string_t                              type;                     // Type of the result, must be mpeg4_gif
+    string_t                              id;                       // Unique identifier for this result, 1-64 bytes
+    string_t                              mpeg4_url;                // A valid URL for the MPEG4 file. File size must not exceed 1MB
+    string_t                              thumbnail_url;            // URL of the static (JPEG or GIF) or animated (MPEG4) thumbnail for the result
+    optional_t<integer_t>                 mpeg4_width;              // Optional. Video width
+    optional_t<integer_t>                 mpeg4_height;             // Optional. Video height
+    optional_t<integer_t>                 mpeg4_duration;           // Optional. Video duration in seconds
+    optional_t<string_t>                  thumbnail_mime_type;      // Optional. MIME type of the thumbnail, must be one of “image/jpeg”, “image/gif”, or “video/mp4”. Defaults to “image/jpeg”
+    optional_t<string_t>                  title;                    // Optional. Title for the result
+    optional_t<string_t>                  caption;                  // Optional. Caption of the MPEG-4 file to be sent, 0-1024 characters after entities parsing
+    optional_t<string_t>                  parse_mode;               // Optional. Mode for parsing entities in the caption. See formatting options for more details.
+    optional_t<array_t<message_entity_t>> caption_entities;         // Optional. List of special entities that appear in the caption, which can be specified instead of parse_mode
+    optional_t<boolean_t>                 show_caption_above_media; // Optional. Pass True, if the caption must be shown above the message media
+    optional_t<inline_keyboard_markup_t>  reply_markup;             // Optional. Inline keyboard attached to the message
+    optional_t<input_message_content_t>   input_message_content;    // Optional. Content of the message to be sent instead of the video animation
 };
 
 // Represents a link to a photo. By default, this photo will be sent by the user with optional caption. Alternatively, you can use input_message_content to send a message with the specified content instead of the photo.
 struct inline_query_result_photo_t {
-    string_t                              type;                  // Type of the result, must be photo
-    string_t                              id;                    // Unique identifier for this result, 1-64 bytes
-    string_t                              photo_url;             // A valid URL of the photo. Photo must be in JPEG format. Photo size must not exceed 5MB
-    string_t                              thumbnail_url;         // URL of the thumbnail for the photo
-    optional_t<integer_t>                 photo_width;           // Optional. Width of the photo
-    optional_t<integer_t>                 photo_height;          // Optional. Height of the photo
-    optional_t<string_t>                  title;                 // Optional. Title for the result
-    optional_t<string_t>                  description;           // Optional. Short description of the result
-    optional_t<string_t>                  caption;               // Optional. Caption of the photo to be sent, 0-1024 characters after entities parsing
-    optional_t<string_t>                  parse_mode;            // Optional. Mode for parsing entities in the photo caption. See formatting options for more details.
-    optional_t<array_t<message_entity_t>> caption_entities;      // Optional. List of special entities that appear in the caption, which can be specified instead of parse_mode
-    optional_t<inline_keyboard_markup_t>  reply_markup;          // Optional. Inline keyboard attached to the message
-    optional_t<input_message_content_t>   input_message_content; // Optional. Content of the message to be sent instead of the photo
+    string_t                              type;                     // Type of the result, must be photo
+    string_t                              id;                       // Unique identifier for this result, 1-64 bytes
+    string_t                              photo_url;                // A valid URL of the photo. Photo must be in JPEG format. Photo size must not exceed 5MB
+    string_t                              thumbnail_url;            // URL of the thumbnail for the photo
+    optional_t<integer_t>                 photo_width;              // Optional. Width of the photo
+    optional_t<integer_t>                 photo_height;             // Optional. Height of the photo
+    optional_t<string_t>                  title;                    // Optional. Title for the result
+    optional_t<string_t>                  description;              // Optional. Short description of the result
+    optional_t<string_t>                  caption;                  // Optional. Caption of the photo to be sent, 0-1024 characters after entities parsing
+    optional_t<string_t>                  parse_mode;               // Optional. Mode for parsing entities in the photo caption. See formatting options for more details.
+    optional_t<array_t<message_entity_t>> caption_entities;         // Optional. List of special entities that appear in the caption, which can be specified instead of parse_mode
+    optional_t<boolean_t>                 show_caption_above_media; // Optional. Pass True, if the caption must be shown above the message media
+    optional_t<inline_keyboard_markup_t>  reply_markup;             // Optional. Inline keyboard attached to the message
+    optional_t<input_message_content_t>   input_message_content;    // Optional. Content of the message to be sent instead of the photo
 };
 
 // Represents a venue. By default, the venue will be sent by the user. Alternatively, you can use input_message_content to send a message with the specified content instead of the venue.
@@ -1484,21 +1493,22 @@ struct inline_query_result_venue_t {
 
 // Represents a link to a page containing an embedded video player or a video file. By default, this video file will be sent by the user with an optional caption. Alternatively, you can use input_message_content to send a message with the specified content instead of the video. If an InlineQueryResultVideo message contains an embedded video (e.g., YouTube), you must replace its content using input_message_content.
 struct inline_query_result_video_t {
-    string_t                              type;                  // Type of the result, must be video
-    string_t                              id;                    // Unique identifier for this result, 1-64 bytes
-    string_t                              video_url;             // A valid URL for the embedded video player or video file
-    string_t                              mime_type;             // MIME type of the content of the video URL, “text/html” or “video/mp4”
-    string_t                              thumbnail_url;         // URL of the thumbnail (JPEG only) for the video
-    string_t                              title;                 // Title for the result
-    optional_t<string_t>                  caption;               // Optional. Caption of the video to be sent, 0-1024 characters after entities parsing
-    optional_t<string_t>                  parse_mode;            // Optional. Mode for parsing entities in the video caption. See formatting options for more details.
-    optional_t<array_t<message_entity_t>> caption_entities;      // Optional. List of special entities that appear in the caption, which can be specified instead of parse_mode
-    optional_t<integer_t>                 video_width;           // Optional. Video width
-    optional_t<integer_t>                 video_height;          // Optional. Video height
-    optional_t<integer_t>                 video_duration;        // Optional. Video duration in seconds
-    optional_t<string_t>                  description;           // Optional. Short description of the result
-    optional_t<inline_keyboard_markup_t>  reply_markup;          // Optional. Inline keyboard attached to the message
-    optional_t<input_message_content_t>   input_message_content; // Optional. Content of the message to be sent instead of the video. This field is required if InlineQueryResultVideo is used to send an HTML-page as a result (e.g., a YouTube video).
+    string_t                              type;                     // Type of the result, must be video
+    string_t                              id;                       // Unique identifier for this result, 1-64 bytes
+    string_t                              video_url;                // A valid URL for the embedded video player or video file
+    string_t                              mime_type;                // MIME type of the content of the video URL, “text/html” or “video/mp4”
+    string_t                              thumbnail_url;            // URL of the thumbnail (JPEG only) for the video
+    string_t                              title;                    // Title for the result
+    optional_t<string_t>                  caption;                  // Optional. Caption of the video to be sent, 0-1024 characters after entities parsing
+    optional_t<string_t>                  parse_mode;               // Optional. Mode for parsing entities in the video caption. See formatting options for more details.
+    optional_t<array_t<message_entity_t>> caption_entities;         // Optional. List of special entities that appear in the caption, which can be specified instead of parse_mode
+    optional_t<boolean_t>                 show_caption_above_media; // Optional. Pass True, if the caption must be shown above the message media
+    optional_t<integer_t>                 video_width;              // Optional. Video width
+    optional_t<integer_t>                 video_height;             // Optional. Video height
+    optional_t<integer_t>                 video_duration;           // Optional. Video duration in seconds
+    optional_t<string_t>                  description;              // Optional. Short description of the result
+    optional_t<inline_keyboard_markup_t>  reply_markup;             // Optional. Inline keyboard attached to the message
+    optional_t<input_message_content_t>   input_message_content;    // Optional. Content of the message to be sent instead of the video. This field is required if InlineQueryResultVideo is used to send an HTML-page as a result (e.g., a YouTube video).
 };
 
 // Represents a link to a voice recording in an .OGG container encoded with OPUS. By default, this voice recording will be sent by the user. Alternatively, you can use input_message_content to send a message with the specified content instead of the the voice message.
@@ -1564,23 +1574,23 @@ struct input_invoice_message_content_t {
     string_t                       title;                         // Product name, 1-32 characters
     string_t                       description;                   // Product description, 1-255 characters
     string_t                       payload;                       // Bot-defined invoice payload, 1-128 bytes. This will not be displayed to the user, use for your internal processes.
-    string_t                       provider_token;                // Payment provider token, obtained via @BotFather
-    string_t                       currency;                      // Three-letter ISO 4217 currency code, see more on currencies
-    array_t<labeled_price_t>       prices;                        // Price breakdown, a JSON-serialized list of components (e.g. product price, tax, discount, delivery cost, delivery tax, bonus, etc.)
-    optional_t<integer_t>          max_tip_amount;                // Optional. The maximum accepted amount for tips in the smallest units of the currency (integer, not float/double). For example, for a maximum tip of US$ 1.45 pass max_tip_amount = 145. See the exp parameter in currencies.json, it shows the number of digits past the decimal point for each currency (2 for the majority of currencies). Defaults to 0
+    string_t                       currency;                      // Three-letter ISO 4217 currency code, see more on currencies. Pass “XTR” for payments in Telegram Stars.
+    array_t<labeled_price_t>       prices;                        // Price breakdown, a JSON-serialized list of components (e.g. product price, tax, discount, delivery cost, delivery tax, bonus, etc.). Must contain exactly one item for payments in Telegram Stars.
+    optional_t<string_t>           provider_token;                // Optional. Payment provider token, obtained via @BotFather. Pass an empty string for payments in Telegram Stars.
+    optional_t<integer_t>          max_tip_amount;                // Optional. The maximum accepted amount for tips in the smallest units of the currency (integer, not float/double). For example, for a maximum tip of US$ 1.45 pass max_tip_amount = 145. See the exp parameter in currencies.json, it shows the number of digits past the decimal point for each currency (2 for the majority of currencies). Defaults to 0. Not supported for payments in Telegram Stars.
     optional_t<array_t<integer_t>> suggested_tip_amounts;         // Optional. A JSON-serialized array of suggested amounts of tip in the smallest units of the currency (integer, not float/double). At most 4 suggested tip amounts can be specified. The suggested tip amounts must be positive, passed in a strictly increased order and must not exceed max_tip_amount.
     optional_t<string_t>           provider_data;                 // Optional. A JSON-serialized object for data about the invoice, which will be shared with the payment provider. A detailed description of the required fields should be provided by the payment provider.
     optional_t<string_t>           photo_url;                     // Optional. URL of the product photo for the invoice. Can be a photo of the goods or a marketing image for a service.
     optional_t<integer_t>          photo_size;                    // Optional. Photo size in bytes
     optional_t<integer_t>          photo_width;                   // Optional. Photo width
     optional_t<integer_t>          photo_height;                  // Optional. Photo height
-    optional_t<boolean_t>          need_name;                     // Optional. Pass True if you require the user's full name to complete the order
-    optional_t<boolean_t>          need_phone_number;             // Optional. Pass True if you require the user's phone number to complete the order
-    optional_t<boolean_t>          need_email;                    // Optional. Pass True if you require the user's email address to complete the order
-    optional_t<boolean_t>          need_shipping_address;         // Optional. Pass True if you require the user's shipping address to complete the order
-    optional_t<boolean_t>          send_phone_number_to_provider; // Optional. Pass True if the user's phone number should be sent to provider
-    optional_t<boolean_t>          send_email_to_provider;        // Optional. Pass True if the user's email address should be sent to provider
-    optional_t<boolean_t>          is_flexible;                   // Optional. Pass True if the final price depends on the shipping method
+    optional_t<boolean_t>          need_name;                     // Optional. Pass True if you require the user's full name to complete the order. Ignored for payments in Telegram Stars.
+    optional_t<boolean_t>          need_phone_number;             // Optional. Pass True if you require the user's phone number to complete the order. Ignored for payments in Telegram Stars.
+    optional_t<boolean_t>          need_email;                    // Optional. Pass True if you require the user's email address to complete the order. Ignored for payments in Telegram Stars.
+    optional_t<boolean_t>          need_shipping_address;         // Optional. Pass True if you require the user's shipping address to complete the order. Ignored for payments in Telegram Stars.
+    optional_t<boolean_t>          send_phone_number_to_provider; // Optional. Pass True if the user's phone number should be sent to the provider. Ignored for payments in Telegram Stars.
+    optional_t<boolean_t>          send_email_to_provider;        // Optional. Pass True if the user's email address should be sent to the provider. Ignored for payments in Telegram Stars.
+    optional_t<boolean_t>          is_flexible;                   // Optional. Pass True if the final price depends on the shipping method. Ignored for payments in Telegram Stars.
 };
 
 // Represents a link to an article or web page.
@@ -1607,16 +1617,17 @@ struct shipping_option_t {
 
 // Represents an animation file (GIF or H.264/MPEG-4 AVC video without sound) to be sent.
 struct input_media_animation_t {
-    string_t                                      type;             // Type of the result, must be animation
-    string_t                                      media;            // File to send. Pass a file_id to send a file that exists on the Telegram servers (recommended), pass an HTTP URL for Telegram to get a file from the Internet, or pass “attach://<file_attach_name>” to upload a new one using multipart/form-data under <file_attach_name> name. More information on Sending Files »
-    optional_t<variant_t<input_file_t, string_t>> thumbnail;        // Optional. Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail's width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can't be reused and can be only uploaded as a new file, so you can pass “attach://<file_attach_name>” if the thumbnail was uploaded using multipart/form-data under <file_attach_name>. More information on Sending Files »
-    optional_t<string_t>                          caption;          // Optional. Caption of the animation to be sent, 0-1024 characters after entities parsing
-    optional_t<string_t>                          parse_mode;       // Optional. Mode for parsing entities in the animation caption. See formatting options for more details.
-    optional_t<array_t<message_entity_t>>         caption_entities; // Optional. List of special entities that appear in the caption, which can be specified instead of parse_mode
-    optional_t<integer_t>                         width;            // Optional. Animation width
-    optional_t<integer_t>                         height;           // Optional. Animation height
-    optional_t<integer_t>                         duration;         // Optional. Animation duration in seconds
-    optional_t<boolean_t>                         has_spoiler;      // Optional. Pass True if the animation needs to be covered with a spoiler animation
+    string_t                                      type;                     // Type of the result, must be animation
+    string_t                                      media;                    // File to send. Pass a file_id to send a file that exists on the Telegram servers (recommended), pass an HTTP URL for Telegram to get a file from the Internet, or pass “attach://<file_attach_name>” to upload a new one using multipart/form-data under <file_attach_name> name. More information on Sending Files »
+    optional_t<variant_t<input_file_t, string_t>> thumbnail;                // Optional. Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail's width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can't be reused and can be only uploaded as a new file, so you can pass “attach://<file_attach_name>” if the thumbnail was uploaded using multipart/form-data under <file_attach_name>. More information on Sending Files »
+    optional_t<string_t>                          caption;                  // Optional. Caption of the animation to be sent, 0-1024 characters after entities parsing
+    optional_t<string_t>                          parse_mode;               // Optional. Mode for parsing entities in the animation caption. See formatting options for more details.
+    optional_t<array_t<message_entity_t>>         caption_entities;         // Optional. List of special entities that appear in the caption, which can be specified instead of parse_mode
+    optional_t<boolean_t>                         show_caption_above_media; // Optional. Pass True, if the caption must be shown above the message media
+    optional_t<integer_t>                         width;                    // Optional. Animation width
+    optional_t<integer_t>                         height;                   // Optional. Animation height
+    optional_t<integer_t>                         duration;                 // Optional. Animation duration in seconds
+    optional_t<boolean_t>                         has_spoiler;              // Optional. Pass True if the animation needs to be covered with a spoiler animation
 };
 
 // Represents an audio file to be treated as music to be sent.
@@ -1645,27 +1656,29 @@ struct input_media_document_t {
 
 // Represents a photo to be sent.
 struct input_media_photo_t {
-    string_t                              type;             // Type of the result, must be photo
-    string_t                              media;            // File to send. Pass a file_id to send a file that exists on the Telegram servers (recommended), pass an HTTP URL for Telegram to get a file from the Internet, or pass “attach://<file_attach_name>” to upload a new one using multipart/form-data under <file_attach_name> name. More information on Sending Files »
-    optional_t<string_t>                  caption;          // Optional. Caption of the photo to be sent, 0-1024 characters after entities parsing
-    optional_t<string_t>                  parse_mode;       // Optional. Mode for parsing entities in the photo caption. See formatting options for more details.
-    optional_t<array_t<message_entity_t>> caption_entities; // Optional. List of special entities that appear in the caption, which can be specified instead of parse_mode
-    optional_t<boolean_t>                 has_spoiler;      // Optional. Pass True if the photo needs to be covered with a spoiler animation
+    string_t                              type;                     // Type of the result, must be photo
+    string_t                              media;                    // File to send. Pass a file_id to send a file that exists on the Telegram servers (recommended), pass an HTTP URL for Telegram to get a file from the Internet, or pass “attach://<file_attach_name>” to upload a new one using multipart/form-data under <file_attach_name> name. More information on Sending Files »
+    optional_t<string_t>                  caption;                  // Optional. Caption of the photo to be sent, 0-1024 characters after entities parsing
+    optional_t<string_t>                  parse_mode;               // Optional. Mode for parsing entities in the photo caption. See formatting options for more details.
+    optional_t<array_t<message_entity_t>> caption_entities;         // Optional. List of special entities that appear in the caption, which can be specified instead of parse_mode
+    optional_t<boolean_t>                 show_caption_above_media; // Optional. Pass True, if the caption must be shown above the message media
+    optional_t<boolean_t>                 has_spoiler;              // Optional. Pass True if the photo needs to be covered with a spoiler animation
 };
 
 // Represents a video to be sent.
 struct input_media_video_t {
-    string_t                                      type;               // Type of the result, must be video
-    string_t                                      media;              // File to send. Pass a file_id to send a file that exists on the Telegram servers (recommended), pass an HTTP URL for Telegram to get a file from the Internet, or pass “attach://<file_attach_name>” to upload a new one using multipart/form-data under <file_attach_name> name. More information on Sending Files »
-    optional_t<variant_t<input_file_t, string_t>> thumbnail;          // Optional. Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail's width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can't be reused and can be only uploaded as a new file, so you can pass “attach://<file_attach_name>” if the thumbnail was uploaded using multipart/form-data under <file_attach_name>. More information on Sending Files »
-    optional_t<string_t>                          caption;            // Optional. Caption of the video to be sent, 0-1024 characters after entities parsing
-    optional_t<string_t>                          parse_mode;         // Optional. Mode for parsing entities in the video caption. See formatting options for more details.
-    optional_t<array_t<message_entity_t>>         caption_entities;   // Optional. List of special entities that appear in the caption, which can be specified instead of parse_mode
-    optional_t<integer_t>                         width;              // Optional. Video width
-    optional_t<integer_t>                         height;             // Optional. Video height
-    optional_t<integer_t>                         duration;           // Optional. Video duration in seconds
-    optional_t<boolean_t>                         supports_streaming; // Optional. Pass True if the uploaded video is suitable for streaming
-    optional_t<boolean_t>                         has_spoiler;        // Optional. Pass True if the video needs to be covered with a spoiler animation
+    string_t                                      type;                     // Type of the result, must be video
+    string_t                                      media;                    // File to send. Pass a file_id to send a file that exists on the Telegram servers (recommended), pass an HTTP URL for Telegram to get a file from the Internet, or pass “attach://<file_attach_name>” to upload a new one using multipart/form-data under <file_attach_name> name. More information on Sending Files »
+    optional_t<variant_t<input_file_t, string_t>> thumbnail;                // Optional. Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail's width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can't be reused and can be only uploaded as a new file, so you can pass “attach://<file_attach_name>” if the thumbnail was uploaded using multipart/form-data under <file_attach_name>. More information on Sending Files »
+    optional_t<string_t>                          caption;                  // Optional. Caption of the video to be sent, 0-1024 characters after entities parsing
+    optional_t<string_t>                          parse_mode;               // Optional. Mode for parsing entities in the video caption. See formatting options for more details.
+    optional_t<array_t<message_entity_t>>         caption_entities;         // Optional. List of special entities that appear in the caption, which can be specified instead of parse_mode
+    optional_t<boolean_t>                         show_caption_above_media; // Optional. Pass True, if the caption must be shown above the message media
+    optional_t<integer_t>                         width;                    // Optional. Video width
+    optional_t<integer_t>                         height;                   // Optional. Video height
+    optional_t<integer_t>                         duration;                 // Optional. Video duration in seconds
+    optional_t<boolean_t>                         supports_streaming;       // Optional. Pass True if the uploaded video is suitable for streaming
+    optional_t<boolean_t>                         has_spoiler;              // Optional. Pass True if the video needs to be covered with a spoiler animation
 };
 
 // Represents a menu button, which opens the bot's list of commands.
@@ -1815,7 +1828,7 @@ struct poll_t {
     optional_t<integer_t>                 close_date;              // Optional. Point in time (Unix timestamp) when the poll will be automatically closed
 };
 
-// This object represents one button of the reply keyboard. For simple text buttons, String can be used instead of this object to specify the button text. The optional fields web_app, request_users, request_chat, request_contact, request_location, and request_poll are mutually exclusive.
+// This object represents one button of the reply keyboard. At most one of the optional fields must be used to specify type of the button. For simple text buttons, String can be used instead of this object to specify the button text.
 struct keyboard_button_t {
     string_t                                    text;             // Text of the button. If none of the optional fields are used, it will be sent as a message when the button is pressed
     optional_t<keyboard_button_request_users_t> request_users;    // Optional. If specified, pressing the button will open a list of suitable users. Identifiers of selected users will be sent to the bot in a “users_shared” service message. Available in private chats only.

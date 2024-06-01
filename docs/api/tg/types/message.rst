@@ -107,6 +107,10 @@ message_t
 
    Optional. Options used for link preview generation for the message, if it is a text message and link preview options were changed
 
+   .. cpp:member:: optional_t<string_t> effect_id
+
+   Optional. Unique identifier of the message effect added to the message
+
    .. cpp:member:: optional_t<animation_t> animation
 
    Optional. Message is an animation, information about the animation. For backward compatibility, when this field is set, the document field will also be set
@@ -150,6 +154,10 @@ message_t
    .. cpp:member:: optional_t<array_t<message_entity_t>> caption_entities
 
    Optional. For messages with a caption, special entities like usernames, URLs, bot commands, etc. that appear in the caption
+
+   .. cpp:member:: optional_t<boolean_t> show_caption_above_media
+
+   Optional. True, if the caption must be shown above the message media
 
    .. cpp:member:: optional_t<boolean_t> has_media_spoiler
 

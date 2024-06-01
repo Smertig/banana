@@ -324,6 +324,12 @@
                     "type": "Array of MessageEntity"
                 },
                 {
+                    "description": "Pass True, if the caption must be shown above the message media. Ignored if a new caption isn't specified.",
+                    "name": "show_caption_above_media",
+                    "optional": true,
+                    "type": "Boolean"
+                },
+                {
                     "description": "Sends the message silently. Users will receive a notification with no sound.",
                     "name": "disable_notification",
                     "optional": true,
@@ -486,26 +492,26 @@
                     "type": "String"
                 },
                 {
-                    "description": "Payment provider token, obtained via BotFather",
+                    "description": "Payment provider token, obtained via @BotFather. Pass an empty string for payments in Telegram Stars.",
                     "name": "provider_token",
-                    "optional": false,
+                    "optional": true,
                     "type": "String"
                 },
                 {
-                    "description": "Three-letter ISO 4217 currency code, see more on currencies",
+                    "description": "Three-letter ISO 4217 currency code, see more on currencies. Pass “XTR” for payments in Telegram Stars.",
                     "name": "currency",
                     "optional": false,
                     "type": "String"
                 },
                 {
-                    "description": "Price breakdown, a JSON-serialized list of components (e.g. product price, tax, discount, delivery cost, delivery tax, bonus, etc.)",
+                    "description": "Price breakdown, a JSON-serialized list of components (e.g. product price, tax, discount, delivery cost, delivery tax, bonus, etc.). Must contain exactly one item for payments in Telegram Stars.",
                     "name": "prices",
                     "optional": false,
                     "type": "Array of LabeledPrice"
                 },
                 {
                     "default": 0,
-                    "description": "The maximum accepted amount for tips in the smallest units of the currency (integer, not float/double). For example, for a maximum tip of US$ 1.45 pass max_tip_amount = 145. See the exp parameter in currencies.json, it shows the number of digits past the decimal point for each currency (2 for the majority of currencies). Defaults to 0",
+                    "description": "The maximum accepted amount for tips in the smallest units of the currency (integer, not float/double). For example, for a maximum tip of US$ 1.45 pass max_tip_amount = 145. See the exp parameter in currencies.json, it shows the number of digits past the decimal point for each currency (2 for the majority of currencies). Defaults to 0. Not supported for payments in Telegram Stars.",
                     "name": "max_tip_amount",
                     "optional": true,
                     "type": "Integer"
@@ -547,43 +553,43 @@
                     "type": "Integer"
                 },
                 {
-                    "description": "Pass True if you require the user's full name to complete the order",
+                    "description": "Pass True if you require the user's full name to complete the order. Ignored for payments in Telegram Stars.",
                     "name": "need_name",
                     "optional": true,
                     "type": "Boolean"
                 },
                 {
-                    "description": "Pass True if you require the user's phone number to complete the order",
+                    "description": "Pass True if you require the user's phone number to complete the order. Ignored for payments in Telegram Stars.",
                     "name": "need_phone_number",
                     "optional": true,
                     "type": "Boolean"
                 },
                 {
-                    "description": "Pass True if you require the user's email address to complete the order",
+                    "description": "Pass True if you require the user's email address to complete the order. Ignored for payments in Telegram Stars.",
                     "name": "need_email",
                     "optional": true,
                     "type": "Boolean"
                 },
                 {
-                    "description": "Pass True if you require the user's shipping address to complete the order",
+                    "description": "Pass True if you require the user's shipping address to complete the order. Ignored for payments in Telegram Stars.",
                     "name": "need_shipping_address",
                     "optional": true,
                     "type": "Boolean"
                 },
                 {
-                    "description": "Pass True if the user's phone number should be sent to the provider",
+                    "description": "Pass True if the user's phone number should be sent to the provider. Ignored for payments in Telegram Stars.",
                     "name": "send_phone_number_to_provider",
                     "optional": true,
                     "type": "Boolean"
                 },
                 {
-                    "description": "Pass True if the user's email address should be sent to the provider",
+                    "description": "Pass True if the user's email address should be sent to the provider. Ignored for payments in Telegram Stars.",
                     "name": "send_email_to_provider",
                     "optional": true,
                     "type": "Boolean"
                 },
                 {
-                    "description": "Pass True if the final price depends on the shipping method",
+                    "description": "Pass True if the final price depends on the shipping method. Ignored for payments in Telegram Stars.",
                     "name": "is_flexible",
                     "optional": true,
                     "type": "Boolean"
@@ -911,6 +917,12 @@
                     "name": "caption_entities",
                     "optional": true,
                     "type": "Array of MessageEntity"
+                },
+                {
+                    "description": "Pass True, if the caption must be shown above the message media. Supported only for animation, photo and video messages.",
+                    "name": "show_caption_above_media",
+                    "optional": true,
+                    "type": "Boolean"
                 },
                 {
                     "description": "A JSON-serialized object for an inline keyboard.",
@@ -1664,6 +1676,24 @@
             ],
             "return_type": "Boolean"
         },
+        "refundStarPayment": {
+            "desc": "Refunds a successful payment in Telegram Stars. Returns True on success.",
+            "params": [
+                {
+                    "description": "Identifier of the user whose payment will be refunded",
+                    "name": "user_id",
+                    "optional": false,
+                    "type": "Integer"
+                },
+                {
+                    "description": "Telegram payment identifier",
+                    "name": "telegram_payment_charge_id",
+                    "optional": false,
+                    "type": "String"
+                }
+            ],
+            "return_type": "Boolean"
+        },
         "reopenForumTopic": {
             "desc": "Use this method to reopen a closed topic in a forum supergroup chat. The bot must be an administrator in the chat for this to work and must have the can_manage_topics administrator rights, unless it is the creator of the topic. Returns True on success.",
             "params": [
@@ -1848,6 +1878,12 @@
                     "type": "Array of MessageEntity"
                 },
                 {
+                    "description": "Pass True, if the caption must be shown above the message media",
+                    "name": "show_caption_above_media",
+                    "optional": true,
+                    "type": "Boolean"
+                },
+                {
                     "description": "Pass True if the animation needs to be covered with a spoiler animation",
                     "name": "has_spoiler",
                     "optional": true,
@@ -1864,6 +1900,12 @@
                     "name": "protect_content",
                     "optional": true,
                     "type": "Boolean"
+                },
+                {
+                    "description": "Unique identifier of the message effect to be added to the message; for private chats only",
+                    "name": "message_effect_id",
+                    "optional": true,
+                    "type": "String"
                 },
                 {
                     "description": "Description of the message to reply to",
@@ -1960,6 +2002,12 @@
                     "name": "protect_content",
                     "optional": true,
                     "type": "Boolean"
+                },
+                {
+                    "description": "Unique identifier of the message effect to be added to the message; for private chats only",
+                    "name": "message_effect_id",
+                    "optional": true,
+                    "type": "String"
                 },
                 {
                     "description": "Description of the message to reply to",
@@ -2064,6 +2112,12 @@
                     "type": "Boolean"
                 },
                 {
+                    "description": "Unique identifier of the message effect to be added to the message; for private chats only",
+                    "name": "message_effect_id",
+                    "optional": true,
+                    "type": "String"
+                },
+                {
                     "description": "Description of the message to reply to",
                     "name": "reply_parameters",
                     "optional": true,
@@ -2117,6 +2171,12 @@
                     "name": "protect_content",
                     "optional": true,
                     "type": "Boolean"
+                },
+                {
+                    "description": "Unique identifier of the message effect to be added to the message; for private chats only",
+                    "name": "message_effect_id",
+                    "optional": true,
+                    "type": "String"
                 },
                 {
                     "description": "Description of the message to reply to",
@@ -2203,6 +2263,12 @@
                     "type": "Boolean"
                 },
                 {
+                    "description": "Unique identifier of the message effect to be added to the message; for private chats only",
+                    "name": "message_effect_id",
+                    "optional": true,
+                    "type": "String"
+                },
+                {
                     "description": "Description of the message to reply to",
                     "name": "reply_parameters",
                     "optional": true,
@@ -2257,6 +2323,12 @@
                     "type": "Boolean"
                 },
                 {
+                    "description": "Unique identifier of the message effect to be added to the message; for private chats only",
+                    "name": "message_effect_id",
+                    "optional": true,
+                    "type": "String"
+                },
+                {
                     "description": "Description of the message to reply to",
                     "name": "reply_parameters",
                     "optional": true,
@@ -2305,26 +2377,26 @@
                     "type": "String"
                 },
                 {
-                    "description": "Payment provider token, obtained via @BotFather",
+                    "description": "Payment provider token, obtained via @BotFather. Pass an empty string for payments in Telegram Stars.",
                     "name": "provider_token",
-                    "optional": false,
+                    "optional": true,
                     "type": "String"
                 },
                 {
-                    "description": "Three-letter ISO 4217 currency code, see more on currencies",
+                    "description": "Three-letter ISO 4217 currency code, see more on currencies. Pass “XTR” for payments in Telegram Stars.",
                     "name": "currency",
                     "optional": false,
                     "type": "String"
                 },
                 {
-                    "description": "Price breakdown, a JSON-serialized list of components (e.g. product price, tax, discount, delivery cost, delivery tax, bonus, etc.)",
+                    "description": "Price breakdown, a JSON-serialized list of components (e.g. product price, tax, discount, delivery cost, delivery tax, bonus, etc.). Must contain exactly one item for payments in Telegram Stars.",
                     "name": "prices",
                     "optional": false,
                     "type": "Array of LabeledPrice"
                 },
                 {
                     "default": 0,
-                    "description": "The maximum accepted amount for tips in the smallest units of the currency (integer, not float/double). For example, for a maximum tip of US$ 1.45 pass max_tip_amount = 145. See the exp parameter in currencies.json, it shows the number of digits past the decimal point for each currency (2 for the majority of currencies). Defaults to 0",
+                    "description": "The maximum accepted amount for tips in the smallest units of the currency (integer, not float/double). For example, for a maximum tip of US$ 1.45 pass max_tip_amount = 145. See the exp parameter in currencies.json, it shows the number of digits past the decimal point for each currency (2 for the majority of currencies). Defaults to 0. Not supported for payments in Telegram Stars.",
                     "name": "max_tip_amount",
                     "optional": true,
                     "type": "Integer"
@@ -2372,43 +2444,43 @@
                     "type": "Integer"
                 },
                 {
-                    "description": "Pass True if you require the user's full name to complete the order",
+                    "description": "Pass True if you require the user's full name to complete the order. Ignored for payments in Telegram Stars.",
                     "name": "need_name",
                     "optional": true,
                     "type": "Boolean"
                 },
                 {
-                    "description": "Pass True if you require the user's phone number to complete the order",
+                    "description": "Pass True if you require the user's phone number to complete the order. Ignored for payments in Telegram Stars.",
                     "name": "need_phone_number",
                     "optional": true,
                     "type": "Boolean"
                 },
                 {
-                    "description": "Pass True if you require the user's email address to complete the order",
+                    "description": "Pass True if you require the user's email address to complete the order. Ignored for payments in Telegram Stars.",
                     "name": "need_email",
                     "optional": true,
                     "type": "Boolean"
                 },
                 {
-                    "description": "Pass True if you require the user's shipping address to complete the order",
+                    "description": "Pass True if you require the user's shipping address to complete the order. Ignored for payments in Telegram Stars.",
                     "name": "need_shipping_address",
                     "optional": true,
                     "type": "Boolean"
                 },
                 {
-                    "description": "Pass True if the user's phone number should be sent to provider",
+                    "description": "Pass True if the user's phone number should be sent to the provider. Ignored for payments in Telegram Stars.",
                     "name": "send_phone_number_to_provider",
                     "optional": true,
                     "type": "Boolean"
                 },
                 {
-                    "description": "Pass True if the user's email address should be sent to provider",
+                    "description": "Pass True if the user's email address should be sent to the provider. Ignored for payments in Telegram Stars.",
                     "name": "send_email_to_provider",
                     "optional": true,
                     "type": "Boolean"
                 },
                 {
-                    "description": "Pass True if the final price depends on the shipping method",
+                    "description": "Pass True if the final price depends on the shipping method. Ignored for payments in Telegram Stars.",
                     "name": "is_flexible",
                     "optional": true,
                     "type": "Boolean"
@@ -2424,6 +2496,12 @@
                     "name": "protect_content",
                     "optional": true,
                     "type": "Boolean"
+                },
+                {
+                    "description": "Unique identifier of the message effect to be added to the message; for private chats only",
+                    "name": "message_effect_id",
+                    "optional": true,
+                    "type": "String"
                 },
                 {
                     "description": "Description of the message to reply to",
@@ -2510,6 +2588,12 @@
                     "type": "Boolean"
                 },
                 {
+                    "description": "Unique identifier of the message effect to be added to the message; for private chats only",
+                    "name": "message_effect_id",
+                    "optional": true,
+                    "type": "String"
+                },
+                {
                     "description": "Description of the message to reply to",
                     "name": "reply_parameters",
                     "optional": true,
@@ -2562,6 +2646,12 @@
                     "name": "protect_content",
                     "optional": true,
                     "type": "Boolean"
+                },
+                {
+                    "description": "Unique identifier of the message effect to be added to the message; for private chats only",
+                    "name": "message_effect_id",
+                    "optional": true,
+                    "type": "String"
                 },
                 {
                     "description": "Description of the message to reply to",
@@ -2630,6 +2720,12 @@
                     "type": "Boolean"
                 },
                 {
+                    "description": "Unique identifier of the message effect to be added to the message; for private chats only",
+                    "name": "message_effect_id",
+                    "optional": true,
+                    "type": "String"
+                },
+                {
                     "description": "Description of the message to reply to",
                     "name": "reply_parameters",
                     "optional": true,
@@ -2690,6 +2786,12 @@
                     "type": "Array of MessageEntity"
                 },
                 {
+                    "description": "Pass True, if the caption must be shown above the message media",
+                    "name": "show_caption_above_media",
+                    "optional": true,
+                    "type": "Boolean"
+                },
+                {
                     "description": "Pass True if the photo needs to be covered with a spoiler animation",
                     "name": "has_spoiler",
                     "optional": true,
@@ -2706,6 +2808,12 @@
                     "name": "protect_content",
                     "optional": true,
                     "type": "Boolean"
+                },
+                {
+                    "description": "Unique identifier of the message effect to be added to the message; for private chats only",
+                    "name": "message_effect_id",
+                    "optional": true,
+                    "type": "String"
                 },
                 {
                     "description": "Description of the message to reply to",
@@ -2840,6 +2948,12 @@
                     "type": "Boolean"
                 },
                 {
+                    "description": "Unique identifier of the message effect to be added to the message; for private chats only",
+                    "name": "message_effect_id",
+                    "optional": true,
+                    "type": "String"
+                },
+                {
                     "description": "Description of the message to reply to",
                     "name": "reply_parameters",
                     "optional": true,
@@ -2898,6 +3012,12 @@
                     "name": "protect_content",
                     "optional": true,
                     "type": "Boolean"
+                },
+                {
+                    "description": "Unique identifier of the message effect to be added to the message; for private chats only",
+                    "name": "message_effect_id",
+                    "optional": true,
+                    "type": "String"
                 },
                 {
                     "description": "Description of the message to reply to",
@@ -2996,6 +3116,12 @@
                     "type": "Boolean"
                 },
                 {
+                    "description": "Unique identifier of the message effect to be added to the message; for private chats only",
+                    "name": "message_effect_id",
+                    "optional": true,
+                    "type": "String"
+                },
+                {
                     "description": "Description of the message to reply to",
                     "name": "reply_parameters",
                     "optional": true,
@@ -3080,6 +3206,12 @@
                     "type": "Array of MessageEntity"
                 },
                 {
+                    "description": "Pass True, if the caption must be shown above the message media",
+                    "name": "show_caption_above_media",
+                    "optional": true,
+                    "type": "Boolean"
+                },
+                {
                     "description": "Pass True if the video needs to be covered with a spoiler animation",
                     "name": "has_spoiler",
                     "optional": true,
@@ -3102,6 +3234,12 @@
                     "name": "protect_content",
                     "optional": true,
                     "type": "Boolean"
+                },
+                {
+                    "description": "Unique identifier of the message effect to be added to the message; for private chats only",
+                    "name": "message_effect_id",
+                    "optional": true,
+                    "type": "String"
                 },
                 {
                     "description": "Description of the message to reply to",
@@ -3174,6 +3312,12 @@
                     "name": "protect_content",
                     "optional": true,
                     "type": "Boolean"
+                },
+                {
+                    "description": "Unique identifier of the message effect to be added to the message; for private chats only",
+                    "name": "message_effect_id",
+                    "optional": true,
+                    "type": "String"
                 },
                 {
                     "description": "Description of the message to reply to",
@@ -3252,6 +3396,12 @@
                     "name": "protect_content",
                     "optional": true,
                     "type": "Boolean"
+                },
+                {
+                    "description": "Unique identifier of the message effect to be added to the message; for private chats only",
+                    "name": "message_effect_id",
+                    "optional": true,
+                    "type": "String"
                 },
                 {
                     "description": "Description of the message to reply to",
@@ -6680,7 +6830,7 @@
             ]
         },
         "InlineKeyboardButton": {
-            "desc": "This object represents one button of an inline keyboard. You must use exactly one of the optional fields.",
+            "desc": "This object represents one button of an inline keyboard. Exactly one of the optional fields must be used to specify type of the button.",
             "fields": [
                 {
                     "description": "Label text on the button",
@@ -6737,7 +6887,7 @@
                     "type": "CallbackGame"
                 },
                 {
-                    "description": "Optional. Specify True, to send a Pay button.   NOTE: This type of button must always be the first button in the first row and can only be used in invoice messages.",
+                    "description": "Optional. Specify True, to send a Pay button. Substrings “⭐” and “XTR” in the buttons's text will be replaced with a Telegram Star icon.   NOTE: This type of button must always be the first button in the first row and can only be used in invoice messages.",
                     "name": "pay",
                     "optional": true,
                     "type": "Boolean"
@@ -7118,6 +7268,12 @@
                     "type": "Array of MessageEntity"
                 },
                 {
+                    "description": "Optional. Pass True, if the caption must be shown above the message media",
+                    "name": "show_caption_above_media",
+                    "optional": true,
+                    "type": "Boolean"
+                },
+                {
                     "description": "Optional. Inline keyboard attached to the message",
                     "name": "reply_markup",
                     "optional": true,
@@ -7176,6 +7332,12 @@
                     "name": "caption_entities",
                     "optional": true,
                     "type": "Array of MessageEntity"
+                },
+                {
+                    "description": "Optional. Pass True, if the caption must be shown above the message media",
+                    "name": "show_caption_above_media",
+                    "optional": true,
+                    "type": "Boolean"
                 },
                 {
                     "description": "Optional. Inline keyboard attached to the message",
@@ -7242,6 +7404,12 @@
                     "name": "caption_entities",
                     "optional": true,
                     "type": "Array of MessageEntity"
+                },
+                {
+                    "description": "Optional. Pass True, if the caption must be shown above the message media",
+                    "name": "show_caption_above_media",
+                    "optional": true,
+                    "type": "Boolean"
                 },
                 {
                     "description": "Optional. Inline keyboard attached to the message",
@@ -7344,6 +7512,12 @@
                     "name": "caption_entities",
                     "optional": true,
                     "type": "Array of MessageEntity"
+                },
+                {
+                    "description": "Optional. Pass True, if the caption must be shown above the message media",
+                    "name": "show_caption_above_media",
+                    "optional": true,
+                    "type": "Boolean"
                 },
                 {
                     "description": "Optional. Inline keyboard attached to the message",
@@ -7689,6 +7863,12 @@
                     "type": "Array of MessageEntity"
                 },
                 {
+                    "description": "Optional. Pass True, if the caption must be shown above the message media",
+                    "name": "show_caption_above_media",
+                    "optional": true,
+                    "type": "Boolean"
+                },
+                {
                     "description": "Optional. Inline keyboard attached to the message",
                     "name": "reply_markup",
                     "optional": true,
@@ -7870,6 +8050,12 @@
                     "type": "Array of MessageEntity"
                 },
                 {
+                    "description": "Optional. Pass True, if the caption must be shown above the message media",
+                    "name": "show_caption_above_media",
+                    "optional": true,
+                    "type": "Boolean"
+                },
+                {
                     "description": "Optional. Inline keyboard attached to the message",
                     "name": "reply_markup",
                     "optional": true,
@@ -7952,6 +8138,12 @@
                     "name": "caption_entities",
                     "optional": true,
                     "type": "Array of MessageEntity"
+                },
+                {
+                    "description": "Optional. Pass True, if the caption must be shown above the message media",
+                    "name": "show_caption_above_media",
+                    "optional": true,
+                    "type": "Boolean"
                 },
                 {
                     "description": "Optional. Inline keyboard attached to the message",
@@ -8120,6 +8312,12 @@
                     "name": "caption_entities",
                     "optional": true,
                     "type": "Array of MessageEntity"
+                },
+                {
+                    "description": "Optional. Pass True, if the caption must be shown above the message media",
+                    "name": "show_caption_above_media",
+                    "optional": true,
+                    "type": "Boolean"
                 },
                 {
                     "description": "Optional. Video width",
@@ -8303,26 +8501,26 @@
                     "type": "String"
                 },
                 {
-                    "description": "Payment provider token, obtained via @BotFather",
+                    "description": "Optional. Payment provider token, obtained via @BotFather. Pass an empty string for payments in Telegram Stars.",
                     "name": "provider_token",
-                    "optional": false,
+                    "optional": true,
                     "type": "String"
                 },
                 {
-                    "description": "Three-letter ISO 4217 currency code, see more on currencies",
+                    "description": "Three-letter ISO 4217 currency code, see more on currencies. Pass “XTR” for payments in Telegram Stars.",
                     "name": "currency",
                     "optional": false,
                     "type": "String"
                 },
                 {
-                    "description": "Price breakdown, a JSON-serialized list of components (e.g. product price, tax, discount, delivery cost, delivery tax, bonus, etc.)",
+                    "description": "Price breakdown, a JSON-serialized list of components (e.g. product price, tax, discount, delivery cost, delivery tax, bonus, etc.). Must contain exactly one item for payments in Telegram Stars.",
                     "name": "prices",
                     "optional": false,
                     "type": "Array of LabeledPrice"
                 },
                 {
                     "default": 0,
-                    "description": "Optional. The maximum accepted amount for tips in the smallest units of the currency (integer, not float/double). For example, for a maximum tip of US$ 1.45 pass max_tip_amount = 145. See the exp parameter in currencies.json, it shows the number of digits past the decimal point for each currency (2 for the majority of currencies). Defaults to 0",
+                    "description": "Optional. The maximum accepted amount for tips in the smallest units of the currency (integer, not float/double). For example, for a maximum tip of US$ 1.45 pass max_tip_amount = 145. See the exp parameter in currencies.json, it shows the number of digits past the decimal point for each currency (2 for the majority of currencies). Defaults to 0. Not supported for payments in Telegram Stars.",
                     "name": "max_tip_amount",
                     "optional": true,
                     "type": "Integer"
@@ -8364,43 +8562,43 @@
                     "type": "Integer"
                 },
                 {
-                    "description": "Optional. Pass True if you require the user's full name to complete the order",
+                    "description": "Optional. Pass True if you require the user's full name to complete the order. Ignored for payments in Telegram Stars.",
                     "name": "need_name",
                     "optional": true,
                     "type": "Boolean"
                 },
                 {
-                    "description": "Optional. Pass True if you require the user's phone number to complete the order",
+                    "description": "Optional. Pass True if you require the user's phone number to complete the order. Ignored for payments in Telegram Stars.",
                     "name": "need_phone_number",
                     "optional": true,
                     "type": "Boolean"
                 },
                 {
-                    "description": "Optional. Pass True if you require the user's email address to complete the order",
+                    "description": "Optional. Pass True if you require the user's email address to complete the order. Ignored for payments in Telegram Stars.",
                     "name": "need_email",
                     "optional": true,
                     "type": "Boolean"
                 },
                 {
-                    "description": "Optional. Pass True if you require the user's shipping address to complete the order",
+                    "description": "Optional. Pass True if you require the user's shipping address to complete the order. Ignored for payments in Telegram Stars.",
                     "name": "need_shipping_address",
                     "optional": true,
                     "type": "Boolean"
                 },
                 {
-                    "description": "Optional. Pass True if the user's phone number should be sent to provider",
+                    "description": "Optional. Pass True if the user's phone number should be sent to the provider. Ignored for payments in Telegram Stars.",
                     "name": "send_phone_number_to_provider",
                     "optional": true,
                     "type": "Boolean"
                 },
                 {
-                    "description": "Optional. Pass True if the user's email address should be sent to provider",
+                    "description": "Optional. Pass True if the user's email address should be sent to the provider. Ignored for payments in Telegram Stars.",
                     "name": "send_email_to_provider",
                     "optional": true,
                     "type": "Boolean"
                 },
                 {
-                    "description": "Optional. Pass True if the final price depends on the shipping method",
+                    "description": "Optional. Pass True if the final price depends on the shipping method. Ignored for payments in Telegram Stars.",
                     "name": "is_flexible",
                     "optional": true,
                     "type": "Boolean"
@@ -8498,6 +8696,12 @@
                     "name": "caption_entities",
                     "optional": true,
                     "type": "Array of MessageEntity"
+                },
+                {
+                    "description": "Optional. Pass True, if the caption must be shown above the message media",
+                    "name": "show_caption_above_media",
+                    "optional": true,
+                    "type": "Boolean"
                 },
                 {
                     "description": "Optional. Animation width",
@@ -8668,6 +8872,12 @@
                     "type": "Array of MessageEntity"
                 },
                 {
+                    "description": "Optional. Pass True, if the caption must be shown above the message media",
+                    "name": "show_caption_above_media",
+                    "optional": true,
+                    "type": "Boolean"
+                },
+                {
                     "description": "Optional. Pass True if the photo needs to be covered with a spoiler animation",
                     "name": "has_spoiler",
                     "optional": true,
@@ -8714,6 +8924,12 @@
                     "name": "caption_entities",
                     "optional": true,
                     "type": "Array of MessageEntity"
+                },
+                {
+                    "description": "Optional. Pass True, if the caption must be shown above the message media",
+                    "name": "show_caption_above_media",
+                    "optional": true,
+                    "type": "Boolean"
                 },
                 {
                     "description": "Optional. Video width",
@@ -8920,7 +9136,7 @@
                     "type": "String"
                 },
                 {
-                    "description": "Three-letter ISO 4217 currency code",
+                    "description": "Three-letter ISO 4217 currency code, or “XTR” for payments in Telegram Stars",
                     "name": "currency",
                     "optional": false,
                     "type": "String"
@@ -8934,7 +9150,7 @@
             ]
         },
         "KeyboardButton": {
-            "desc": "This object represents one button of the reply keyboard. For simple text buttons, String can be used instead of this object to specify the button text. The optional fields web_app, request_users, request_chat, request_contact, request_location, and request_poll are mutually exclusive.",
+            "desc": "This object represents one button of the reply keyboard. At most one of the optional fields must be used to specify type of the button. For simple text buttons, String can be used instead of this object to specify the button text.",
             "fields": [
                 {
                     "description": "Text of the button. If none of the optional fields are used, it will be sent as a message when the button is pressed",
@@ -9489,6 +9705,12 @@
                     "type": "LinkPreviewOptions"
                 },
                 {
+                    "description": "Optional. Unique identifier of the message effect added to the message",
+                    "name": "effect_id",
+                    "optional": true,
+                    "type": "String"
+                },
+                {
                     "description": "Optional. Message is an animation, information about the animation. For backward compatibility, when this field is set, the document field will also be set",
                     "name": "animation",
                     "optional": true,
@@ -9553,6 +9775,13 @@
                     "name": "caption_entities",
                     "optional": true,
                     "type": "Array of MessageEntity"
+                },
+                {
+                    "default": true,
+                    "description": "Optional. True, if the caption must be shown above the message media",
+                    "name": "show_caption_above_media",
+                    "optional": true,
+                    "type": "Boolean"
                 },
                 {
                     "default": true,
@@ -9846,7 +10075,7 @@
             "desc": "This object represents one special entity in a text message. For example, hashtags, usernames, URLs, etc.",
             "fields": [
                 {
-                    "description": "Type of the entity. Currently, can be “mention” (@username), “hashtag” (#hashtag), “cashtag” ($USD), “bot_command” (/start@jobs_bot), “url” (https://telegram.org), “email” (do-not-reply@telegram.org), “phone_number” (+1-212-555-0123), “bold” (bold text), “italic” (italic text), “underline” (underlined text), “strikethrough” (strikethrough text), “spoiler” (spoiler message), “blockquote” (block quotation), “code” (monowidth string), “pre” (monowidth block), “text_link” (for clickable text URLs), “text_mention” (for users without usernames), “custom_emoji” (for inline custom emoji stickers)",
+                    "description": "Type of the entity. Currently, can be “mention” (@username), “hashtag” (#hashtag), “cashtag” ($USD), “bot_command” (/start@jobs_bot), “url” (https://telegram.org), “email” (do-not-reply@telegram.org), “phone_number” (+1-212-555-0123), “bold” (bold text), “italic” (italic text), “underline” (underlined text), “strikethrough” (strikethrough text), “spoiler” (spoiler message), “blockquote” (block quotation), “expandable_blockquote” (collapsed-by-default block quotation), “code” (monowidth string), “pre” (monowidth block), “text_link” (for clickable text URLs), “text_mention” (for users without usernames), “custom_emoji” (for inline custom emoji stickers)",
                     "name": "type",
                     "optional": false,
                     "type": "String"
@@ -10655,7 +10884,7 @@
                     "type": "User"
                 },
                 {
-                    "description": "Three-letter ISO 4217 currency code",
+                    "description": "Three-letter ISO 4217 currency code, or “XTR” for payments in Telegram Stars",
                     "name": "currency",
                     "optional": false,
                     "type": "String"
@@ -11190,7 +11419,7 @@
             "desc": "This object contains basic information about a successful payment.",
             "fields": [
                 {
-                    "description": "Three-letter ISO 4217 currency code",
+                    "description": "Three-letter ISO 4217 currency code, or “XTR” for payments in Telegram Stars",
                     "name": "currency",
                     "optional": false,
                     "type": "String"

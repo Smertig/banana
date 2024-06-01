@@ -9,7 +9,7 @@ successful_payment_t
 
    .. cpp:member:: string_t currency
 
-   Three-letter ISO 4217 currency code
+   Three-letter ISO 4217 currency code, or “XTR” for payments in Telegram Stars
 
    .. cpp:member:: integer_t total_amount
 

@@ -63,6 +63,7 @@ struct leave_chat_args_t;
 struct log_out_args_t;
 struct pin_chat_message_args_t;
 struct promote_chat_member_args_t;
+struct refund_star_payment_args_t;
 struct reopen_forum_topic_args_t;
 struct reopen_general_forum_topic_args_t;
 struct replace_sticker_in_set_args_t;

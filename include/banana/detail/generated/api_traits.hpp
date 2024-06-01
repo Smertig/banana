@@ -909,6 +909,20 @@ struct detail::by_request_type_impl<api::promote_chat_member_args_t> {
 };
 
 template <>
+struct api_traits<api::method::refund_star_payment> {
+    static inline constexpr std::string_view native_name = "refundStarPayment";
+    static inline constexpr std::string_view pretty_name = "refund_star_payment";
+
+    using request_type  = api::refund_star_payment_args_t;
+    using response_type = boolean_t;
+};
+
+template <>
+struct detail::by_request_type_impl<api::refund_star_payment_args_t> {
+    using type = api_traits<api::method::refund_star_payment>;
+};
+
+template <>
 struct api_traits<api::method::reopen_forum_topic> {
     static inline constexpr std::string_view native_name = "reopenForumTopic";
     static inline constexpr std::string_view pretty_name = "reopen_forum_topic";

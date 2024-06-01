@@ -1259,6 +1259,7 @@ struct reflector<api::copy_message_args_t> {
         f("caption"sv, &api::copy_message_args_t::caption);
         f("parse_mode"sv, &api::copy_message_args_t::parse_mode);
         f("caption_entities"sv, &api::copy_message_args_t::caption_entities);
+        f("show_caption_above_media"sv, &api::copy_message_args_t::show_caption_above_media);
         f("disable_notification"sv, &api::copy_message_args_t::disable_notification);
         f("protect_content"sv, &api::copy_message_args_t::protect_content);
         f("reply_parameters"sv, &api::copy_message_args_t::reply_parameters);
@@ -1338,9 +1339,9 @@ struct reflector<api::create_invoice_link_args_t> {
         f("title"sv, &api::create_invoice_link_args_t::title);
         f("description"sv, &api::create_invoice_link_args_t::description);
         f("payload"sv, &api::create_invoice_link_args_t::payload);
-        f("provider_token"sv, &api::create_invoice_link_args_t::provider_token);
         f("currency"sv, &api::create_invoice_link_args_t::currency);
         f("prices"sv, &api::create_invoice_link_args_t::prices);
+        f("provider_token"sv, &api::create_invoice_link_args_t::provider_token);
         f("max_tip_amount"sv, &api::create_invoice_link_args_t::max_tip_amount);
         f("suggested_tip_amounts"sv, &api::create_invoice_link_args_t::suggested_tip_amounts);
         f("provider_data"sv, &api::create_invoice_link_args_t::provider_data);
@@ -1640,6 +1641,7 @@ struct reflector<api::edit_message_caption_args_t> {
         f("caption"sv, &api::edit_message_caption_args_t::caption);
         f("parse_mode"sv, &api::edit_message_caption_args_t::parse_mode);
         f("caption_entities"sv, &api::edit_message_caption_args_t::caption_entities);
+        f("show_caption_above_media"sv, &api::edit_message_caption_args_t::show_caption_above_media);
         f("reply_markup"sv, &api::edit_message_caption_args_t::reply_markup);
     }
 };
@@ -2625,6 +2627,7 @@ struct reflector<api::inline_query_result_cached_gif_t> {
         f("caption"sv, &api::inline_query_result_cached_gif_t::caption);
         f("parse_mode"sv, &api::inline_query_result_cached_gif_t::parse_mode);
         f("caption_entities"sv, &api::inline_query_result_cached_gif_t::caption_entities);
+        f("show_caption_above_media"sv, &api::inline_query_result_cached_gif_t::show_caption_above_media);
         f("reply_markup"sv, &api::inline_query_result_cached_gif_t::reply_markup);
         f("input_message_content"sv, &api::inline_query_result_cached_gif_t::input_message_content);
     }
@@ -2648,6 +2651,7 @@ struct reflector<api::inline_query_result_cached_mpeg4_gif_t> {
         f("caption"sv, &api::inline_query_result_cached_mpeg4_gif_t::caption);
         f("parse_mode"sv, &api::inline_query_result_cached_mpeg4_gif_t::parse_mode);
         f("caption_entities"sv, &api::inline_query_result_cached_mpeg4_gif_t::caption_entities);
+        f("show_caption_above_media"sv, &api::inline_query_result_cached_mpeg4_gif_t::show_caption_above_media);
         f("reply_markup"sv, &api::inline_query_result_cached_mpeg4_gif_t::reply_markup);
         f("input_message_content"sv, &api::inline_query_result_cached_mpeg4_gif_t::input_message_content);
     }
@@ -2672,6 +2676,7 @@ struct reflector<api::inline_query_result_cached_photo_t> {
         f("caption"sv, &api::inline_query_result_cached_photo_t::caption);
         f("parse_mode"sv, &api::inline_query_result_cached_photo_t::parse_mode);
         f("caption_entities"sv, &api::inline_query_result_cached_photo_t::caption_entities);
+        f("show_caption_above_media"sv, &api::inline_query_result_cached_photo_t::show_caption_above_media);
         f("reply_markup"sv, &api::inline_query_result_cached_photo_t::reply_markup);
         f("input_message_content"sv, &api::inline_query_result_cached_photo_t::input_message_content);
     }
@@ -2715,6 +2720,7 @@ struct reflector<api::inline_query_result_cached_video_t> {
         f("caption"sv, &api::inline_query_result_cached_video_t::caption);
         f("parse_mode"sv, &api::inline_query_result_cached_video_t::parse_mode);
         f("caption_entities"sv, &api::inline_query_result_cached_video_t::caption_entities);
+        f("show_caption_above_media"sv, &api::inline_query_result_cached_video_t::show_caption_above_media);
         f("reply_markup"sv, &api::inline_query_result_cached_video_t::reply_markup);
         f("input_message_content"sv, &api::inline_query_result_cached_video_t::input_message_content);
     }
@@ -2837,6 +2843,7 @@ struct reflector<api::inline_query_result_gif_t> {
         f("caption"sv, &api::inline_query_result_gif_t::caption);
         f("parse_mode"sv, &api::inline_query_result_gif_t::parse_mode);
         f("caption_entities"sv, &api::inline_query_result_gif_t::caption_entities);
+        f("show_caption_above_media"sv, &api::inline_query_result_gif_t::show_caption_above_media);
         f("reply_markup"sv, &api::inline_query_result_gif_t::reply_markup);
         f("input_message_content"sv, &api::inline_query_result_gif_t::input_message_content);
     }
@@ -2893,6 +2900,7 @@ struct reflector<api::inline_query_result_mpeg4_gif_t> {
         f("caption"sv, &api::inline_query_result_mpeg4_gif_t::caption);
         f("parse_mode"sv, &api::inline_query_result_mpeg4_gif_t::parse_mode);
         f("caption_entities"sv, &api::inline_query_result_mpeg4_gif_t::caption_entities);
+        f("show_caption_above_media"sv, &api::inline_query_result_mpeg4_gif_t::show_caption_above_media);
         f("reply_markup"sv, &api::inline_query_result_mpeg4_gif_t::reply_markup);
         f("input_message_content"sv, &api::inline_query_result_mpeg4_gif_t::input_message_content);
     }
@@ -2920,6 +2928,7 @@ struct reflector<api::inline_query_result_photo_t> {
         f("caption"sv, &api::inline_query_result_photo_t::caption);
         f("parse_mode"sv, &api::inline_query_result_photo_t::parse_mode);
         f("caption_entities"sv, &api::inline_query_result_photo_t::caption_entities);
+        f("show_caption_above_media"sv, &api::inline_query_result_photo_t::show_caption_above_media);
         f("reply_markup"sv, &api::inline_query_result_photo_t::reply_markup);
         f("input_message_content"sv, &api::inline_query_result_photo_t::input_message_content);
     }
@@ -2974,6 +2983,7 @@ struct reflector<api::inline_query_result_video_t> {
         f("caption"sv, &api::inline_query_result_video_t::caption);
         f("parse_mode"sv, &api::inline_query_result_video_t::parse_mode);
         f("caption_entities"sv, &api::inline_query_result_video_t::caption_entities);
+        f("show_caption_above_media"sv, &api::inline_query_result_video_t::show_caption_above_media);
         f("video_width"sv, &api::inline_query_result_video_t::video_width);
         f("video_height"sv, &api::inline_query_result_video_t::video_height);
         f("video_duration"sv, &api::inline_query_result_video_t::video_duration);
@@ -3090,9 +3100,9 @@ struct reflector<api::input_invoice_message_content_t> {
         f("title"sv, &api::input_invoice_message_content_t::title);
         f("description"sv, &api::input_invoice_message_content_t::description);
         f("payload"sv, &api::input_invoice_message_content_t::payload);
-        f("provider_token"sv, &api::input_invoice_message_content_t::provider_token);
         f("currency"sv, &api::input_invoice_message_content_t::currency);
         f("prices"sv, &api::input_invoice_message_content_t::prices);
+        f("provider_token"sv, &api::input_invoice_message_content_t::provider_token);
         f("max_tip_amount"sv, &api::input_invoice_message_content_t::max_tip_amount, 0);
         f("suggested_tip_amounts"sv, &api::input_invoice_message_content_t::suggested_tip_amounts);
         f("provider_data"sv, &api::input_invoice_message_content_t::provider_data);
@@ -3147,6 +3157,7 @@ struct reflector<api::input_media_animation_t> {
         f("caption"sv, &api::input_media_animation_t::caption);
         f("parse_mode"sv, &api::input_media_animation_t::parse_mode);
         f("caption_entities"sv, &api::input_media_animation_t::caption_entities);
+        f("show_caption_above_media"sv, &api::input_media_animation_t::show_caption_above_media);
         f("width"sv, &api::input_media_animation_t::width);
         f("height"sv, &api::input_media_animation_t::height);
         f("duration"sv, &api::input_media_animation_t::duration);
@@ -3214,6 +3225,7 @@ struct reflector<api::input_media_photo_t> {
         f("caption"sv, &api::input_media_photo_t::caption);
         f("parse_mode"sv, &api::input_media_photo_t::parse_mode);
         f("caption_entities"sv, &api::input_media_photo_t::caption_entities);
+        f("show_caption_above_media"sv, &api::input_media_photo_t::show_caption_above_media);
         f("has_spoiler"sv, &api::input_media_photo_t::has_spoiler);
     }
 };
@@ -3235,6 +3247,7 @@ struct reflector<api::input_media_video_t> {
         f("caption"sv, &api::input_media_video_t::caption);
         f("parse_mode"sv, &api::input_media_video_t::parse_mode);
         f("caption_entities"sv, &api::input_media_video_t::caption_entities);
+        f("show_caption_above_media"sv, &api::input_media_video_t::show_caption_above_media);
         f("width"sv, &api::input_media_video_t::width);
         f("height"sv, &api::input_media_video_t::height);
         f("duration"sv, &api::input_media_video_t::duration);
@@ -3784,6 +3797,7 @@ struct reflector<api::message_t> {
         f("text"sv, &api::message_t::text);
         f("entities"sv, &api::message_t::entities);
         f("link_preview_options"sv, &api::message_t::link_preview_options);
+        f("effect_id"sv, &api::message_t::effect_id);
         f("animation"sv, &api::message_t::animation);
         f("audio"sv, &api::message_t::audio);
         f("document"sv, &api::message_t::document);
@@ -3795,6 +3809,7 @@ struct reflector<api::message_t> {
         f("voice"sv, &api::message_t::voice);
         f("caption"sv, &api::message_t::caption);
         f("caption_entities"sv, &api::message_t::caption_entities);
+        f("show_caption_above_media"sv, &api::message_t::show_caption_above_media, true);
         f("has_media_spoiler"sv, &api::message_t::has_media_spoiler, true);
         f("contact"sv, &api::message_t::contact);
         f("dice"sv, &api::message_t::dice);
@@ -4281,6 +4296,22 @@ template <>
 constexpr std::string_view name_of<api::reaction_type_emoji_t> = "reaction_type_emoji_t";
 
 template <>
+struct reflector<api::refund_star_payment_args_t> {
+    template <class F>
+    static void for_each_field(F&& f) {
+        using namespace std::literals;
+        f("user_id"sv, &api::refund_star_payment_args_t::user_id);
+        f("telegram_payment_charge_id"sv, &api::refund_star_payment_args_t::telegram_payment_charge_id);
+    }
+};
+
+template <>
+constexpr bool is_reflectable_v<api::refund_star_payment_args_t> = true;
+
+template <>
+constexpr std::string_view name_of<api::refund_star_payment_args_t> = "refund_star_payment_args_t";
+
+template <>
 struct reflector<api::reopen_forum_topic_args_t> {
     template <class F>
     static void for_each_field(F&& f) {
@@ -4453,9 +4484,11 @@ struct reflector<api::send_animation_args_t> {
         f("caption"sv, &api::send_animation_args_t::caption);
         f("parse_mode"sv, &api::send_animation_args_t::parse_mode);
         f("caption_entities"sv, &api::send_animation_args_t::caption_entities);
+        f("show_caption_above_media"sv, &api::send_animation_args_t::show_caption_above_media);
         f("has_spoiler"sv, &api::send_animation_args_t::has_spoiler);
         f("disable_notification"sv, &api::send_animation_args_t::disable_notification);
         f("protect_content"sv, &api::send_animation_args_t::protect_content);
+        f("message_effect_id"sv, &api::send_animation_args_t::message_effect_id);
         f("reply_parameters"sv, &api::send_animation_args_t::reply_parameters);
         f("reply_markup"sv, &api::send_animation_args_t::reply_markup);
     }
@@ -4485,6 +4518,7 @@ struct reflector<api::send_audio_args_t> {
         f("thumbnail"sv, &api::send_audio_args_t::thumbnail);
         f("disable_notification"sv, &api::send_audio_args_t::disable_notification);
         f("protect_content"sv, &api::send_audio_args_t::protect_content);
+        f("message_effect_id"sv, &api::send_audio_args_t::message_effect_id);
         f("reply_parameters"sv, &api::send_audio_args_t::reply_parameters);
         f("reply_markup"sv, &api::send_audio_args_t::reply_markup);
     }
@@ -4528,6 +4562,7 @@ struct reflector<api::send_contact_args_t> {
         f("vcard"sv, &api::send_contact_args_t::vcard);
         f("disable_notification"sv, &api::send_contact_args_t::disable_notification);
         f("protect_content"sv, &api::send_contact_args_t::protect_content);
+        f("message_effect_id"sv, &api::send_contact_args_t::message_effect_id);
         f("reply_parameters"sv, &api::send_contact_args_t::reply_parameters);
         f("reply_markup"sv, &api::send_contact_args_t::reply_markup);
     }
@@ -4550,6 +4585,7 @@ struct reflector<api::send_dice_args_t> {
         f("emoji"sv, &api::send_dice_args_t::emoji);
         f("disable_notification"sv, &api::send_dice_args_t::disable_notification);
         f("protect_content"sv, &api::send_dice_args_t::protect_content);
+        f("message_effect_id"sv, &api::send_dice_args_t::message_effect_id);
         f("reply_parameters"sv, &api::send_dice_args_t::reply_parameters);
         f("reply_markup"sv, &api::send_dice_args_t::reply_markup);
     }
@@ -4577,6 +4613,7 @@ struct reflector<api::send_document_args_t> {
         f("disable_content_type_detection"sv, &api::send_document_args_t::disable_content_type_detection);
         f("disable_notification"sv, &api::send_document_args_t::disable_notification);
         f("protect_content"sv, &api::send_document_args_t::protect_content);
+        f("message_effect_id"sv, &api::send_document_args_t::message_effect_id);
         f("reply_parameters"sv, &api::send_document_args_t::reply_parameters);
         f("reply_markup"sv, &api::send_document_args_t::reply_markup);
     }
@@ -4599,6 +4636,7 @@ struct reflector<api::send_game_args_t> {
         f("message_thread_id"sv, &api::send_game_args_t::message_thread_id);
         f("disable_notification"sv, &api::send_game_args_t::disable_notification);
         f("protect_content"sv, &api::send_game_args_t::protect_content);
+        f("message_effect_id"sv, &api::send_game_args_t::message_effect_id);
         f("reply_parameters"sv, &api::send_game_args_t::reply_parameters);
         f("reply_markup"sv, &api::send_game_args_t::reply_markup);
     }
@@ -4619,10 +4657,10 @@ struct reflector<api::send_invoice_args_t> {
         f("title"sv, &api::send_invoice_args_t::title);
         f("description"sv, &api::send_invoice_args_t::description);
         f("payload"sv, &api::send_invoice_args_t::payload);
-        f("provider_token"sv, &api::send_invoice_args_t::provider_token);
         f("currency"sv, &api::send_invoice_args_t::currency);
         f("prices"sv, &api::send_invoice_args_t::prices);
         f("message_thread_id"sv, &api::send_invoice_args_t::message_thread_id);
+        f("provider_token"sv, &api::send_invoice_args_t::provider_token);
         f("max_tip_amount"sv, &api::send_invoice_args_t::max_tip_amount);
         f("suggested_tip_amounts"sv, &api::send_invoice_args_t::suggested_tip_amounts);
         f("start_parameter"sv, &api::send_invoice_args_t::start_parameter);
@@ -4640,6 +4678,7 @@ struct reflector<api::send_invoice_args_t> {
         f("is_flexible"sv, &api::send_invoice_args_t::is_flexible);
         f("disable_notification"sv, &api::send_invoice_args_t::disable_notification);
         f("protect_content"sv, &api::send_invoice_args_t::protect_content);
+        f("message_effect_id"sv, &api::send_invoice_args_t::message_effect_id);
         f("reply_parameters"sv, &api::send_invoice_args_t::reply_parameters);
         f("reply_markup"sv, &api::send_invoice_args_t::reply_markup);
     }
@@ -4667,6 +4706,7 @@ struct reflector<api::send_location_args_t> {
         f("proximity_alert_radius"sv, &api::send_location_args_t::proximity_alert_radius);
         f("disable_notification"sv, &api::send_location_args_t::disable_notification);
         f("protect_content"sv, &api::send_location_args_t::protect_content);
+        f("message_effect_id"sv, &api::send_location_args_t::message_effect_id);
         f("reply_parameters"sv, &api::send_location_args_t::reply_parameters);
         f("reply_markup"sv, &api::send_location_args_t::reply_markup);
     }
@@ -4689,6 +4729,7 @@ struct reflector<api::send_media_group_args_t> {
         f("message_thread_id"sv, &api::send_media_group_args_t::message_thread_id);
         f("disable_notification"sv, &api::send_media_group_args_t::disable_notification);
         f("protect_content"sv, &api::send_media_group_args_t::protect_content);
+        f("message_effect_id"sv, &api::send_media_group_args_t::message_effect_id);
         f("reply_parameters"sv, &api::send_media_group_args_t::reply_parameters);
     }
 };
@@ -4713,6 +4754,7 @@ struct reflector<api::send_message_args_t> {
         f("link_preview_options"sv, &api::send_message_args_t::link_preview_options);
         f("disable_notification"sv, &api::send_message_args_t::disable_notification);
         f("protect_content"sv, &api::send_message_args_t::protect_content);
+        f("message_effect_id"sv, &api::send_message_args_t::message_effect_id);
         f("reply_parameters"sv, &api::send_message_args_t::reply_parameters);
         f("reply_markup"sv, &api::send_message_args_t::reply_markup);
     }
@@ -4736,9 +4778,11 @@ struct reflector<api::send_photo_args_t> {
         f("caption"sv, &api::send_photo_args_t::caption);
         f("parse_mode"sv, &api::send_photo_args_t::parse_mode);
         f("caption_entities"sv, &api::send_photo_args_t::caption_entities);
+        f("show_caption_above_media"sv, &api::send_photo_args_t::show_caption_above_media);
         f("has_spoiler"sv, &api::send_photo_args_t::has_spoiler);
         f("disable_notification"sv, &api::send_photo_args_t::disable_notification);
         f("protect_content"sv, &api::send_photo_args_t::protect_content);
+        f("message_effect_id"sv, &api::send_photo_args_t::message_effect_id);
         f("reply_parameters"sv, &api::send_photo_args_t::reply_parameters);
         f("reply_markup"sv, &api::send_photo_args_t::reply_markup);
     }
@@ -4774,6 +4818,7 @@ struct reflector<api::send_poll_args_t> {
         f("is_closed"sv, &api::send_poll_args_t::is_closed);
         f("disable_notification"sv, &api::send_poll_args_t::disable_notification);
         f("protect_content"sv, &api::send_poll_args_t::protect_content);
+        f("message_effect_id"sv, &api::send_poll_args_t::message_effect_id);
         f("reply_parameters"sv, &api::send_poll_args_t::reply_parameters);
         f("reply_markup"sv, &api::send_poll_args_t::reply_markup);
     }
@@ -4797,6 +4842,7 @@ struct reflector<api::send_sticker_args_t> {
         f("emoji"sv, &api::send_sticker_args_t::emoji);
         f("disable_notification"sv, &api::send_sticker_args_t::disable_notification);
         f("protect_content"sv, &api::send_sticker_args_t::protect_content);
+        f("message_effect_id"sv, &api::send_sticker_args_t::message_effect_id);
         f("reply_parameters"sv, &api::send_sticker_args_t::reply_parameters);
         f("reply_markup"sv, &api::send_sticker_args_t::reply_markup);
     }
@@ -4826,6 +4872,7 @@ struct reflector<api::send_venue_args_t> {
         f("google_place_type"sv, &api::send_venue_args_t::google_place_type);
         f("disable_notification"sv, &api::send_venue_args_t::disable_notification);
         f("protect_content"sv, &api::send_venue_args_t::protect_content);
+        f("message_effect_id"sv, &api::send_venue_args_t::message_effect_id);
         f("reply_parameters"sv, &api::send_venue_args_t::reply_parameters);
         f("reply_markup"sv, &api::send_venue_args_t::reply_markup);
     }
@@ -4853,10 +4900,12 @@ struct reflector<api::send_video_args_t> {
         f("caption"sv, &api::send_video_args_t::caption);
         f("parse_mode"sv, &api::send_video_args_t::parse_mode);
         f("caption_entities"sv, &api::send_video_args_t::caption_entities);
+        f("show_caption_above_media"sv, &api::send_video_args_t::show_caption_above_media);
         f("has_spoiler"sv, &api::send_video_args_t::has_spoiler);
         f("supports_streaming"sv, &api::send_video_args_t::supports_streaming);
         f("disable_notification"sv, &api::send_video_args_t::disable_notification);
         f("protect_content"sv, &api::send_video_args_t::protect_content);
+        f("message_effect_id"sv, &api::send_video_args_t::message_effect_id);
         f("reply_parameters"sv, &api::send_video_args_t::reply_parameters);
         f("reply_markup"sv, &api::send_video_args_t::reply_markup);
     }
@@ -4882,6 +4931,7 @@ struct reflector<api::send_video_note_args_t> {
         f("thumbnail"sv, &api::send_video_note_args_t::thumbnail);
         f("disable_notification"sv, &api::send_video_note_args_t::disable_notification);
         f("protect_content"sv, &api::send_video_note_args_t::protect_content);
+        f("message_effect_id"sv, &api::send_video_note_args_t::message_effect_id);
         f("reply_parameters"sv, &api::send_video_note_args_t::reply_parameters);
         f("reply_markup"sv, &api::send_video_note_args_t::reply_markup);
     }
@@ -4908,6 +4958,7 @@ struct reflector<api::send_voice_args_t> {
         f("duration"sv, &api::send_voice_args_t::duration);
         f("disable_notification"sv, &api::send_voice_args_t::disable_notification);
         f("protect_content"sv, &api::send_voice_args_t::protect_content);
+        f("message_effect_id"sv, &api::send_voice_args_t::message_effect_id);
         f("reply_parameters"sv, &api::send_voice_args_t::reply_parameters);
         f("reply_markup"sv, &api::send_voice_args_t::reply_markup);
     }

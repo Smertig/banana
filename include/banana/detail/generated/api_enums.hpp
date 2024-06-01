@@ -64,6 +64,7 @@ enum class method {
     log_out,
     pin_chat_message,
     promote_chat_member,
+    refund_star_payment,
     reopen_forum_topic,
     reopen_general_forum_topic,
     replace_sticker_in_set,

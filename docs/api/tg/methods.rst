@@ -76,6 +76,7 @@ File
    log_out <methods/log_out>
    pin_chat_message <methods/pin_chat_message>
    promote_chat_member <methods/promote_chat_member>
+   refund_star_payment <methods/refund_star_payment>
    reopen_forum_topic <methods/reopen_forum_topic>
    reopen_general_forum_topic <methods/reopen_general_forum_topic>
    replace_sticker_in_set <methods/replace_sticker_in_set>

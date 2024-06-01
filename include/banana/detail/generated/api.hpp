@@ -296,17 +296,18 @@ void close_general_forum_topic(Agent&& agent, close_general_forum_topic_args_t a
 
 // Arguments to copy_message method
 struct copy_message_args_t {
-    variant_t<integer_t, string_t>                                                                                   chat_id;              // Unique identifier for the target chat or username of the target channel (in the format @channelusername)
-    variant_t<integer_t, string_t>                                                                                   from_chat_id;         // Unique identifier for the chat where the original message was sent (or channel username in the format @channelusername)
-    integer_t                                                                                                        message_id;           // Message identifier in the chat specified in from_chat_id
-    optional_t<integer_t>                                                                                            message_thread_id;    // Unique identifier for the target message thread (topic) of the forum; for forum supergroups only
-    optional_t<string_t>                                                                                             caption;              // New caption for media, 0-1024 characters after entities parsing. If not specified, the original caption is kept
-    optional_t<string_t>                                                                                             parse_mode;           // Mode for parsing entities in the new caption. See formatting options for more details.
-    optional_t<array_t<message_entity_t>>                                                                            caption_entities;     // A JSON-serialized list of special entities that appear in the new caption, which can be specified instead of parse_mode
-    optional_t<boolean_t>                                                                                            disable_notification; // Sends the message silently. Users will receive a notification with no sound.
-    optional_t<boolean_t>                                                                                            protect_content;      // Protects the contents of the sent message from forwarding and saving
-    optional_t<reply_parameters_t>                                                                                   reply_parameters;     // Description of the message to reply to
-    optional_t<variant_t<inline_keyboard_markup_t, reply_keyboard_markup_t, reply_keyboard_remove_t, force_reply_t>> reply_markup;         // Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove a reply keyboard or to force a reply from the user
+    variant_t<integer_t, string_t>                                                                                   chat_id;                  // Unique identifier for the target chat or username of the target channel (in the format @channelusername)
+    variant_t<integer_t, string_t>                                                                                   from_chat_id;             // Unique identifier for the chat where the original message was sent (or channel username in the format @channelusername)
+    integer_t                                                                                                        message_id;               // Message identifier in the chat specified in from_chat_id
+    optional_t<integer_t>                                                                                            message_thread_id;        // Unique identifier for the target message thread (topic) of the forum; for forum supergroups only
+    optional_t<string_t>                                                                                             caption;                  // New caption for media, 0-1024 characters after entities parsing. If not specified, the original caption is kept
+    optional_t<string_t>                                                                                             parse_mode;               // Mode for parsing entities in the new caption. See formatting options for more details.
+    optional_t<array_t<message_entity_t>>                                                                            caption_entities;         // A JSON-serialized list of special entities that appear in the new caption, which can be specified instead of parse_mode
+    optional_t<boolean_t>                                                                                            show_caption_above_media; // Pass True, if the caption must be shown above the message media. Ignored if a new caption isn't specified.
+    optional_t<boolean_t>                                                                                            disable_notification;     // Sends the message silently. Users will receive a notification with no sound.
+    optional_t<boolean_t>                                                                                            protect_content;          // Protects the contents of the sent message from forwarding and saving
+    optional_t<reply_parameters_t>                                                                                   reply_parameters;         // Description of the message to reply to
+    optional_t<variant_t<inline_keyboard_markup_t, reply_keyboard_markup_t, reply_keyboard_remove_t, force_reply_t>> reply_markup;             // Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove a reply keyboard or to force a reply from the user
 };
 
 /**
@@ -320,6 +321,7 @@ struct copy_message_args_t {
  * @param args__caption New caption for media, 0-1024 characters after entities parsing. If not specified, the original caption is kept
  * @param args__parse_mode Mode for parsing entities in the new caption. See formatting options for more details.
  * @param args__caption_entities A JSON-serialized list of special entities that appear in the new caption, which can be specified instead of parse_mode
+ * @param args__show_caption_above_media Pass True, if the caption must be shown above the message media. Ignored if a new caption isn't specified.
  * @param args__disable_notification Sends the message silently. Users will receive a notification with no sound.
  * @param args__protect_content Protects the contents of the sent message from forwarding and saving
  * @param args__reply_parameters Description of the message to reply to
@@ -429,23 +431,23 @@ struct create_invoice_link_args_t {
     string_t                       title;                         // Product name, 1-32 characters
     string_t                       description;                   // Product description, 1-255 characters
     string_t                       payload;                       // Bot-defined invoice payload, 1-128 bytes. This will not be displayed to the user, use for your internal processes.
-    string_t                       provider_token;                // Payment provider token, obtained via BotFather
-    string_t                       currency;                      // Three-letter ISO 4217 currency code, see more on currencies
-    array_t<labeled_price_t>       prices;                        // Price breakdown, a JSON-serialized list of components (e.g. product price, tax, discount, delivery cost, delivery tax, bonus, etc.)
-    optional_t<integer_t>          max_tip_amount;                // The maximum accepted amount for tips in the smallest units of the currency (integer, not float/double). For example, for a maximum tip of US$ 1.45 pass max_tip_amount = 145. See the exp parameter in currencies.json, it shows the number of digits past the decimal point for each currency (2 for the majority of currencies). Defaults to 0
+    string_t                       currency;                      // Three-letter ISO 4217 currency code, see more on currencies. Pass “XTR” for payments in Telegram Stars.
+    array_t<labeled_price_t>       prices;                        // Price breakdown, a JSON-serialized list of components (e.g. product price, tax, discount, delivery cost, delivery tax, bonus, etc.). Must contain exactly one item for payments in Telegram Stars.
+    optional_t<string_t>           provider_token;                // Payment provider token, obtained via @BotFather. Pass an empty string for payments in Telegram Stars.
+    optional_t<integer_t>          max_tip_amount;                // The maximum accepted amount for tips in the smallest units of the currency (integer, not float/double). For example, for a maximum tip of US$ 1.45 pass max_tip_amount = 145. See the exp parameter in currencies.json, it shows the number of digits past the decimal point for each currency (2 for the majority of currencies). Defaults to 0. Not supported for payments in Telegram Stars.
     optional_t<array_t<integer_t>> suggested_tip_amounts;         // A JSON-serialized array of suggested amounts of tips in the smallest units of the currency (integer, not float/double). At most 4 suggested tip amounts can be specified. The suggested tip amounts must be positive, passed in a strictly increased order and must not exceed max_tip_amount.
     optional_t<string_t>           provider_data;                 // JSON-serialized data about the invoice, which will be shared with the payment provider. A detailed description of required fields should be provided by the payment provider.
     optional_t<string_t>           photo_url;                     // URL of the product photo for the invoice. Can be a photo of the goods or a marketing image for a service.
     optional_t<integer_t>          photo_size;                    // Photo size in bytes
     optional_t<integer_t>          photo_width;                   // Photo width
     optional_t<integer_t>          photo_height;                  // Photo height
-    optional_t<boolean_t>          need_name;                     // Pass True if you require the user's full name to complete the order
-    optional_t<boolean_t>          need_phone_number;             // Pass True if you require the user's phone number to complete the order
-    optional_t<boolean_t>          need_email;                    // Pass True if you require the user's email address to complete the order
-    optional_t<boolean_t>          need_shipping_address;         // Pass True if you require the user's shipping address to complete the order
-    optional_t<boolean_t>          send_phone_number_to_provider; // Pass True if the user's phone number should be sent to the provider
-    optional_t<boolean_t>          send_email_to_provider;        // Pass True if the user's email address should be sent to the provider
-    optional_t<boolean_t>          is_flexible;                   // Pass True if the final price depends on the shipping method
+    optional_t<boolean_t>          need_name;                     // Pass True if you require the user's full name to complete the order. Ignored for payments in Telegram Stars.
+    optional_t<boolean_t>          need_phone_number;             // Pass True if you require the user's phone number to complete the order. Ignored for payments in Telegram Stars.
+    optional_t<boolean_t>          need_email;                    // Pass True if you require the user's email address to complete the order. Ignored for payments in Telegram Stars.
+    optional_t<boolean_t>          need_shipping_address;         // Pass True if you require the user's shipping address to complete the order. Ignored for payments in Telegram Stars.
+    optional_t<boolean_t>          send_phone_number_to_provider; // Pass True if the user's phone number should be sent to the provider. Ignored for payments in Telegram Stars.
+    optional_t<boolean_t>          send_email_to_provider;        // Pass True if the user's email address should be sent to the provider. Ignored for payments in Telegram Stars.
+    optional_t<boolean_t>          is_flexible;                   // Pass True if the final price depends on the shipping method. Ignored for payments in Telegram Stars.
 };
 
 /**
@@ -455,23 +457,23 @@ struct create_invoice_link_args_t {
  * @param args__title Product name, 1-32 characters
  * @param args__description Product description, 1-255 characters
  * @param args__payload Bot-defined invoice payload, 1-128 bytes. This will not be displayed to the user, use for your internal processes.
- * @param args__provider_token Payment provider token, obtained via BotFather
- * @param args__currency Three-letter ISO 4217 currency code, see more on currencies
- * @param args__prices Price breakdown, a JSON-serialized list of components (e.g. product price, tax, discount, delivery cost, delivery tax, bonus, etc.)
- * @param args__max_tip_amount The maximum accepted amount for tips in the smallest units of the currency (integer, not float/double). For example, for a maximum tip of US$ 1.45 pass max_tip_amount = 145. See the exp parameter in currencies.json, it shows the number of digits past the decimal point for each currency (2 for the majority of currencies). Defaults to 0
+ * @param args__provider_token Payment provider token, obtained via @BotFather. Pass an empty string for payments in Telegram Stars.
+ * @param args__currency Three-letter ISO 4217 currency code, see more on currencies. Pass “XTR” for payments in Telegram Stars.
+ * @param args__prices Price breakdown, a JSON-serialized list of components (e.g. product price, tax, discount, delivery cost, delivery tax, bonus, etc.). Must contain exactly one item for payments in Telegram Stars.
+ * @param args__max_tip_amount The maximum accepted amount for tips in the smallest units of the currency (integer, not float/double). For example, for a maximum tip of US$ 1.45 pass max_tip_amount = 145. See the exp parameter in currencies.json, it shows the number of digits past the decimal point for each currency (2 for the majority of currencies). Defaults to 0. Not supported for payments in Telegram Stars.
  * @param args__suggested_tip_amounts A JSON-serialized array of suggested amounts of tips in the smallest units of the currency (integer, not float/double). At most 4 suggested tip amounts can be specified. The suggested tip amounts must be positive, passed in a strictly increased order and must not exceed max_tip_amount.
  * @param args__provider_data JSON-serialized data about the invoice, which will be shared with the payment provider. A detailed description of required fields should be provided by the payment provider.
  * @param args__photo_url URL of the product photo for the invoice. Can be a photo of the goods or a marketing image for a service.
  * @param args__photo_size Photo size in bytes
  * @param args__photo_width Photo width
  * @param args__photo_height Photo height
- * @param args__need_name Pass True if you require the user's full name to complete the order
- * @param args__need_phone_number Pass True if you require the user's phone number to complete the order
- * @param args__need_email Pass True if you require the user's email address to complete the order
- * @param args__need_shipping_address Pass True if you require the user's shipping address to complete the order
- * @param args__send_phone_number_to_provider Pass True if the user's phone number should be sent to the provider
- * @param args__send_email_to_provider Pass True if the user's email address should be sent to the provider
- * @param args__is_flexible Pass True if the final price depends on the shipping method
+ * @param args__need_name Pass True if you require the user's full name to complete the order. Ignored for payments in Telegram Stars.
+ * @param args__need_phone_number Pass True if you require the user's phone number to complete the order. Ignored for payments in Telegram Stars.
+ * @param args__need_email Pass True if you require the user's email address to complete the order. Ignored for payments in Telegram Stars.
+ * @param args__need_shipping_address Pass True if you require the user's shipping address to complete the order. Ignored for payments in Telegram Stars.
+ * @param args__send_phone_number_to_provider Pass True if the user's phone number should be sent to the provider. Ignored for payments in Telegram Stars.
+ * @param args__send_email_to_provider Pass True if the user's email address should be sent to the provider. Ignored for payments in Telegram Stars.
+ * @param args__is_flexible Pass True if the final price depends on the shipping method. Ignored for payments in Telegram Stars.
  */
 template <class Agent>
 api_result<string_t, Agent&&> create_invoice_link(Agent&& agent, create_invoice_link_args_t args) {
@@ -817,13 +819,14 @@ void edit_general_forum_topic(Agent&& agent, edit_general_forum_topic_args_t arg
 
 // Arguments to edit_message_caption method
 struct edit_message_caption_args_t {
-    optional_t<variant_t<integer_t, string_t>> chat_id;           // Required if inline_message_id is not specified. Unique identifier for the target chat or username of the target channel (in the format @channelusername)
-    optional_t<integer_t>                      message_id;        // Required if inline_message_id is not specified. Identifier of the message to edit
-    optional_t<string_t>                       inline_message_id; // Required if chat_id and message_id are not specified. Identifier of the inline message
-    optional_t<string_t>                       caption;           // New caption of the message, 0-1024 characters after entities parsing
-    optional_t<string_t>                       parse_mode;        // Mode for parsing entities in the message caption. See formatting options for more details.
-    optional_t<array_t<message_entity_t>>      caption_entities;  // A JSON-serialized list of special entities that appear in the caption, which can be specified instead of parse_mode
-    optional_t<inline_keyboard_markup_t>       reply_markup;      // A JSON-serialized object for an inline keyboard.
+    optional_t<variant_t<integer_t, string_t>> chat_id;                  // Required if inline_message_id is not specified. Unique identifier for the target chat or username of the target channel (in the format @channelusername)
+    optional_t<integer_t>                      message_id;               // Required if inline_message_id is not specified. Identifier of the message to edit
+    optional_t<string_t>                       inline_message_id;        // Required if chat_id and message_id are not specified. Identifier of the inline message
+    optional_t<string_t>                       caption;                  // New caption of the message, 0-1024 characters after entities parsing
+    optional_t<string_t>                       parse_mode;               // Mode for parsing entities in the message caption. See formatting options for more details.
+    optional_t<array_t<message_entity_t>>      caption_entities;         // A JSON-serialized list of special entities that appear in the caption, which can be specified instead of parse_mode
+    optional_t<boolean_t>                      show_caption_above_media; // Pass True, if the caption must be shown above the message media. Supported only for animation, photo and video messages.
+    optional_t<inline_keyboard_markup_t>       reply_markup;             // A JSON-serialized object for an inline keyboard.
 };
 
 /**
@@ -836,6 +839,7 @@ struct edit_message_caption_args_t {
  * @param args__caption New caption of the message, 0-1024 characters after entities parsing
  * @param args__parse_mode Mode for parsing entities in the message caption. See formatting options for more details.
  * @param args__caption_entities A JSON-serialized list of special entities that appear in the caption, which can be specified instead of parse_mode
+ * @param args__show_caption_above_media Pass True, if the caption must be shown above the message media. Supported only for animation, photo and video messages.
  * @param args__reply_markup A JSON-serialized object for an inline keyboard.
  */
 template <class Agent>
@@ -1657,6 +1661,29 @@ void promote_chat_member(Agent&& agent, promote_chat_member_args_t args, F&& cal
     call(static_cast<Agent&&>(agent), std::move(args), std::forward<F>(callback));
 }
 
+// Arguments to refund_star_payment method
+struct refund_star_payment_args_t {
+    integer_t user_id;                    // Identifier of the user whose payment will be refunded
+    string_t  telegram_payment_charge_id; // Telegram payment identifier
+};
+
+/**
+ * Refunds a successful payment in Telegram Stars. Returns True on success.
+ * 
+ * @param agent Any object satisfying agent concept (see `banana::agent` namespace)
+ * @param args__user_id Identifier of the user whose payment will be refunded
+ * @param args__telegram_payment_charge_id Telegram payment identifier
+ */
+template <class Agent>
+api_result<boolean_t, Agent&&> refund_star_payment(Agent&& agent, refund_star_payment_args_t args) {
+    return call(static_cast<Agent&&>(agent), std::move(args));
+}
+
+template <class Agent, class F>
+void refund_star_payment(Agent&& agent, refund_star_payment_args_t args, F&& callback) {
+    call(static_cast<Agent&&>(agent), std::move(args), std::forward<F>(callback));
+}
+
 // Arguments to reopen_forum_topic method
 struct reopen_forum_topic_args_t {
     variant_t<integer_t, string_t> chat_id;           // Unique identifier for the target chat or username of the target supergroup (in the format @supergroupusername)
@@ -1782,22 +1809,24 @@ void revoke_chat_invite_link(Agent&& agent, revoke_chat_invite_link_args_t args,
 
 // Arguments to send_animation method
 struct send_animation_args_t {
-    variant_t<integer_t, string_t>                                                                                   chat_id;                // Unique identifier for the target chat or username of the target channel (in the format @channelusername)
-    variant_t<input_file_t, string_t>                                                                                animation;              // Animation to send. Pass a file_id as String to send an animation that exists on the Telegram servers (recommended), pass an HTTP URL as a String for Telegram to get an animation from the Internet, or upload a new animation using multipart/form-data. More information on Sending Files »
-    optional_t<string_t>                                                                                             business_connection_id; // Unique identifier of the business connection on behalf of which the message will be sent
-    optional_t<integer_t>                                                                                            message_thread_id;      // Unique identifier for the target message thread (topic) of the forum; for forum supergroups only
-    optional_t<integer_t>                                                                                            duration;               // Duration of sent animation in seconds
-    optional_t<integer_t>                                                                                            width;                  // Animation width
-    optional_t<integer_t>                                                                                            height;                 // Animation height
-    optional_t<variant_t<input_file_t, string_t>>                                                                    thumbnail;              // Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail's width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can't be reused and can be only uploaded as a new file, so you can pass “attach://<file_attach_name>” if the thumbnail was uploaded using multipart/form-data under <file_attach_name>. More information on Sending Files »
-    optional_t<string_t>                                                                                             caption;                // Animation caption (may also be used when resending animation by file_id), 0-1024 characters after entities parsing
-    optional_t<string_t>                                                                                             parse_mode;             // Mode for parsing entities in the animation caption. See formatting options for more details.
-    optional_t<array_t<message_entity_t>>                                                                            caption_entities;       // A JSON-serialized list of special entities that appear in the caption, which can be specified instead of parse_mode
-    optional_t<boolean_t>                                                                                            has_spoiler;            // Pass True if the animation needs to be covered with a spoiler animation
-    optional_t<boolean_t>                                                                                            disable_notification;   // Sends the message silently. Users will receive a notification with no sound.
-    optional_t<boolean_t>                                                                                            protect_content;        // Protects the contents of the sent message from forwarding and saving
-    optional_t<reply_parameters_t>                                                                                   reply_parameters;       // Description of the message to reply to
-    optional_t<variant_t<inline_keyboard_markup_t, reply_keyboard_markup_t, reply_keyboard_remove_t, force_reply_t>> reply_markup;           // Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove a reply keyboard or to force a reply from the user
+    variant_t<integer_t, string_t>                                                                                   chat_id;                  // Unique identifier for the target chat or username of the target channel (in the format @channelusername)
+    variant_t<input_file_t, string_t>                                                                                animation;                // Animation to send. Pass a file_id as String to send an animation that exists on the Telegram servers (recommended), pass an HTTP URL as a String for Telegram to get an animation from the Internet, or upload a new animation using multipart/form-data. More information on Sending Files »
+    optional_t<string_t>                                                                                             business_connection_id;   // Unique identifier of the business connection on behalf of which the message will be sent
+    optional_t<integer_t>                                                                                            message_thread_id;        // Unique identifier for the target message thread (topic) of the forum; for forum supergroups only
+    optional_t<integer_t>                                                                                            duration;                 // Duration of sent animation in seconds
+    optional_t<integer_t>                                                                                            width;                    // Animation width
+    optional_t<integer_t>                                                                                            height;                   // Animation height
+    optional_t<variant_t<input_file_t, string_t>>                                                                    thumbnail;                // Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail's width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can't be reused and can be only uploaded as a new file, so you can pass “attach://<file_attach_name>” if the thumbnail was uploaded using multipart/form-data under <file_attach_name>. More information on Sending Files »
+    optional_t<string_t>                                                                                             caption;                  // Animation caption (may also be used when resending animation by file_id), 0-1024 characters after entities parsing
+    optional_t<string_t>                                                                                             parse_mode;               // Mode for parsing entities in the animation caption. See formatting options for more details.
+    optional_t<array_t<message_entity_t>>                                                                            caption_entities;         // A JSON-serialized list of special entities that appear in the caption, which can be specified instead of parse_mode
+    optional_t<boolean_t>                                                                                            show_caption_above_media; // Pass True, if the caption must be shown above the message media
+    optional_t<boolean_t>                                                                                            has_spoiler;              // Pass True if the animation needs to be covered with a spoiler animation
+    optional_t<boolean_t>                                                                                            disable_notification;     // Sends the message silently. Users will receive a notification with no sound.
+    optional_t<boolean_t>                                                                                            protect_content;          // Protects the contents of the sent message from forwarding and saving
+    optional_t<string_t>                                                                                             message_effect_id;        // Unique identifier of the message effect to be added to the message; for private chats only
+    optional_t<reply_parameters_t>                                                                                   reply_parameters;         // Description of the message to reply to
+    optional_t<variant_t<inline_keyboard_markup_t, reply_keyboard_markup_t, reply_keyboard_remove_t, force_reply_t>> reply_markup;             // Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove a reply keyboard or to force a reply from the user
 };
 
 /**
@@ -1815,9 +1844,11 @@ struct send_animation_args_t {
  * @param args__caption Animation caption (may also be used when resending animation by file_id), 0-1024 characters after entities parsing
  * @param args__parse_mode Mode for parsing entities in the animation caption. See formatting options for more details.
  * @param args__caption_entities A JSON-serialized list of special entities that appear in the caption, which can be specified instead of parse_mode
+ * @param args__show_caption_above_media Pass True, if the caption must be shown above the message media
  * @param args__has_spoiler Pass True if the animation needs to be covered with a spoiler animation
  * @param args__disable_notification Sends the message silently. Users will receive a notification with no sound.
  * @param args__protect_content Protects the contents of the sent message from forwarding and saving
+ * @param args__message_effect_id Unique identifier of the message effect to be added to the message; for private chats only
  * @param args__reply_parameters Description of the message to reply to
  * @param args__reply_markup Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove a reply keyboard or to force a reply from the user
  */
@@ -1846,6 +1877,7 @@ struct send_audio_args_t {
     optional_t<variant_t<input_file_t, string_t>>                                                                    thumbnail;              // Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail's width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can't be reused and can be only uploaded as a new file, so you can pass “attach://<file_attach_name>” if the thumbnail was uploaded using multipart/form-data under <file_attach_name>. More information on Sending Files »
     optional_t<boolean_t>                                                                                            disable_notification;   // Sends the message silently. Users will receive a notification with no sound.
     optional_t<boolean_t>                                                                                            protect_content;        // Protects the contents of the sent message from forwarding and saving
+    optional_t<string_t>                                                                                             message_effect_id;      // Unique identifier of the message effect to be added to the message; for private chats only
     optional_t<reply_parameters_t>                                                                                   reply_parameters;       // Description of the message to reply to
     optional_t<variant_t<inline_keyboard_markup_t, reply_keyboard_markup_t, reply_keyboard_remove_t, force_reply_t>> reply_markup;           // Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove a reply keyboard or to force a reply from the user
 };
@@ -1867,6 +1899,7 @@ struct send_audio_args_t {
  * @param args__thumbnail Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail's width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can't be reused and can be only uploaded as a new file, so you can pass “attach://<file_attach_name>” if the thumbnail was uploaded using multipart/form-data under <file_attach_name>. More information on Sending Files »
  * @param args__disable_notification Sends the message silently. Users will receive a notification with no sound.
  * @param args__protect_content Protects the contents of the sent message from forwarding and saving
+ * @param args__message_effect_id Unique identifier of the message effect to be added to the message; for private chats only
  * @param args__reply_parameters Description of the message to reply to
  * @param args__reply_markup Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove a reply keyboard or to force a reply from the user
  */
@@ -1918,6 +1951,7 @@ struct send_contact_args_t {
     optional_t<string_t>                                                                                             vcard;                  // Additional data about the contact in the form of a vCard, 0-2048 bytes
     optional_t<boolean_t>                                                                                            disable_notification;   // Sends the message silently. Users will receive a notification with no sound.
     optional_t<boolean_t>                                                                                            protect_content;        // Protects the contents of the sent message from forwarding and saving
+    optional_t<string_t>                                                                                             message_effect_id;      // Unique identifier of the message effect to be added to the message; for private chats only
     optional_t<reply_parameters_t>                                                                                   reply_parameters;       // Description of the message to reply to
     optional_t<variant_t<inline_keyboard_markup_t, reply_keyboard_markup_t, reply_keyboard_remove_t, force_reply_t>> reply_markup;           // Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove a reply keyboard or to force a reply from the user
 };
@@ -1935,6 +1969,7 @@ struct send_contact_args_t {
  * @param args__vcard Additional data about the contact in the form of a vCard, 0-2048 bytes
  * @param args__disable_notification Sends the message silently. Users will receive a notification with no sound.
  * @param args__protect_content Protects the contents of the sent message from forwarding and saving
+ * @param args__message_effect_id Unique identifier of the message effect to be added to the message; for private chats only
  * @param args__reply_parameters Description of the message to reply to
  * @param args__reply_markup Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove a reply keyboard or to force a reply from the user
  */
@@ -1956,6 +1991,7 @@ struct send_dice_args_t {
     optional_t<string_t>                                                                                             emoji;                  // Emoji on which the dice throw animation is based. Currently, must be one of “🎲”, “🎯”, “🏀”, “⚽”, “🎳”, or “🎰”. Dice can have values 1-6 for “🎲”, “🎯” and “🎳”, values 1-5 for “🏀” and “⚽”, and values 1-64 for “🎰”. Defaults to “🎲”
     optional_t<boolean_t>                                                                                            disable_notification;   // Sends the message silently. Users will receive a notification with no sound.
     optional_t<boolean_t>                                                                                            protect_content;        // Protects the contents of the sent message from forwarding
+    optional_t<string_t>                                                                                             message_effect_id;      // Unique identifier of the message effect to be added to the message; for private chats only
     optional_t<reply_parameters_t>                                                                                   reply_parameters;       // Description of the message to reply to
     optional_t<variant_t<inline_keyboard_markup_t, reply_keyboard_markup_t, reply_keyboard_remove_t, force_reply_t>> reply_markup;           // Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove a reply keyboard or to force a reply from the user
 };
@@ -1970,6 +2006,7 @@ struct send_dice_args_t {
  * @param args__emoji Emoji on which the dice throw animation is based. Currently, must be one of “🎲”, “🎯”, “🏀”, “⚽”, “🎳”, or “🎰”. Dice can have values 1-6 for “🎲”, “🎯” and “🎳”, values 1-5 for “🏀” and “⚽”, and values 1-64 for “🎰”. Defaults to “🎲”
  * @param args__disable_notification Sends the message silently. Users will receive a notification with no sound.
  * @param args__protect_content Protects the contents of the sent message from forwarding
+ * @param args__message_effect_id Unique identifier of the message effect to be added to the message; for private chats only
  * @param args__reply_parameters Description of the message to reply to
  * @param args__reply_markup Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove a reply keyboard or to force a reply from the user
  */
@@ -1996,6 +2033,7 @@ struct send_document_args_t {
     optional_t<boolean_t>                                                                                            disable_content_type_detection; // Disables automatic server-side content type detection for files uploaded using multipart/form-data
     optional_t<boolean_t>                                                                                            disable_notification;           // Sends the message silently. Users will receive a notification with no sound.
     optional_t<boolean_t>                                                                                            protect_content;                // Protects the contents of the sent message from forwarding and saving
+    optional_t<string_t>                                                                                             message_effect_id;              // Unique identifier of the message effect to be added to the message; for private chats only
     optional_t<reply_parameters_t>                                                                                   reply_parameters;               // Description of the message to reply to
     optional_t<variant_t<inline_keyboard_markup_t, reply_keyboard_markup_t, reply_keyboard_remove_t, force_reply_t>> reply_markup;                   // Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove a reply keyboard or to force a reply from the user
 };
@@ -2015,6 +2053,7 @@ struct send_document_args_t {
  * @param args__disable_content_type_detection Disables automatic server-side content type detection for files uploaded using multipart/form-data
  * @param args__disable_notification Sends the message silently. Users will receive a notification with no sound.
  * @param args__protect_content Protects the contents of the sent message from forwarding and saving
+ * @param args__message_effect_id Unique identifier of the message effect to be added to the message; for private chats only
  * @param args__reply_parameters Description of the message to reply to
  * @param args__reply_markup Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove a reply keyboard or to force a reply from the user
  */
@@ -2036,6 +2075,7 @@ struct send_game_args_t {
     optional_t<integer_t>                message_thread_id;      // Unique identifier for the target message thread (topic) of the forum; for forum supergroups only
     optional_t<boolean_t>                disable_notification;   // Sends the message silently. Users will receive a notification with no sound.
     optional_t<boolean_t>                protect_content;        // Protects the contents of the sent message from forwarding and saving
+    optional_t<string_t>                 message_effect_id;      // Unique identifier of the message effect to be added to the message; for private chats only
     optional_t<reply_parameters_t>       reply_parameters;       // Description of the message to reply to
     optional_t<inline_keyboard_markup_t> reply_markup;           // A JSON-serialized object for an inline keyboard. If empty, one 'Play game_title' button will be shown. If not empty, the first button must launch the game.
 };
@@ -2050,6 +2090,7 @@ struct send_game_args_t {
  * @param args__game_short_name Short name of the game, serves as the unique identifier for the game. Set up your games via @BotFather.
  * @param args__disable_notification Sends the message silently. Users will receive a notification with no sound.
  * @param args__protect_content Protects the contents of the sent message from forwarding and saving
+ * @param args__message_effect_id Unique identifier of the message effect to be added to the message; for private chats only
  * @param args__reply_parameters Description of the message to reply to
  * @param args__reply_markup A JSON-serialized object for an inline keyboard. If empty, one 'Play game_title' button will be shown. If not empty, the first button must launch the game.
  */
@@ -2069,11 +2110,11 @@ struct send_invoice_args_t {
     string_t                             title;                         // Product name, 1-32 characters
     string_t                             description;                   // Product description, 1-255 characters
     string_t                             payload;                       // Bot-defined invoice payload, 1-128 bytes. This will not be displayed to the user, use for your internal processes.
-    string_t                             provider_token;                // Payment provider token, obtained via @BotFather
-    string_t                             currency;                      // Three-letter ISO 4217 currency code, see more on currencies
-    array_t<labeled_price_t>             prices;                        // Price breakdown, a JSON-serialized list of components (e.g. product price, tax, discount, delivery cost, delivery tax, bonus, etc.)
+    string_t                             currency;                      // Three-letter ISO 4217 currency code, see more on currencies. Pass “XTR” for payments in Telegram Stars.
+    array_t<labeled_price_t>             prices;                        // Price breakdown, a JSON-serialized list of components (e.g. product price, tax, discount, delivery cost, delivery tax, bonus, etc.). Must contain exactly one item for payments in Telegram Stars.
     optional_t<integer_t>                message_thread_id;             // Unique identifier for the target message thread (topic) of the forum; for forum supergroups only
-    optional_t<integer_t>                max_tip_amount;                // The maximum accepted amount for tips in the smallest units of the currency (integer, not float/double). For example, for a maximum tip of US$ 1.45 pass max_tip_amount = 145. See the exp parameter in currencies.json, it shows the number of digits past the decimal point for each currency (2 for the majority of currencies). Defaults to 0
+    optional_t<string_t>                 provider_token;                // Payment provider token, obtained via @BotFather. Pass an empty string for payments in Telegram Stars.
+    optional_t<integer_t>                max_tip_amount;                // The maximum accepted amount for tips in the smallest units of the currency (integer, not float/double). For example, for a maximum tip of US$ 1.45 pass max_tip_amount = 145. See the exp parameter in currencies.json, it shows the number of digits past the decimal point for each currency (2 for the majority of currencies). Defaults to 0. Not supported for payments in Telegram Stars.
     optional_t<array_t<integer_t>>       suggested_tip_amounts;         // A JSON-serialized array of suggested amounts of tips in the smallest units of the currency (integer, not float/double). At most 4 suggested tip amounts can be specified. The suggested tip amounts must be positive, passed in a strictly increased order and must not exceed max_tip_amount.
     optional_t<string_t>                 start_parameter;               // Unique deep-linking parameter. If left empty, forwarded copies of the sent message will have a Pay button, allowing multiple users to pay directly from the forwarded message, using the same invoice. If non-empty, forwarded copies of the sent message will have a URL button with a deep link to the bot (instead of a Pay button), with the value used as the start parameter
     optional_t<string_t>                 provider_data;                 // JSON-serialized data about the invoice, which will be shared with the payment provider. A detailed description of required fields should be provided by the payment provider.
@@ -2081,15 +2122,16 @@ struct send_invoice_args_t {
     optional_t<integer_t>                photo_size;                    // Photo size in bytes
     optional_t<integer_t>                photo_width;                   // Photo width
     optional_t<integer_t>                photo_height;                  // Photo height
-    optional_t<boolean_t>                need_name;                     // Pass True if you require the user's full name to complete the order
-    optional_t<boolean_t>                need_phone_number;             // Pass True if you require the user's phone number to complete the order
-    optional_t<boolean_t>                need_email;                    // Pass True if you require the user's email address to complete the order
-    optional_t<boolean_t>                need_shipping_address;         // Pass True if you require the user's shipping address to complete the order
-    optional_t<boolean_t>                send_phone_number_to_provider; // Pass True if the user's phone number should be sent to provider
-    optional_t<boolean_t>                send_email_to_provider;        // Pass True if the user's email address should be sent to provider
-    optional_t<boolean_t>                is_flexible;                   // Pass True if the final price depends on the shipping method
+    optional_t<boolean_t>                need_name;                     // Pass True if you require the user's full name to complete the order. Ignored for payments in Telegram Stars.
+    optional_t<boolean_t>                need_phone_number;             // Pass True if you require the user's phone number to complete the order. Ignored for payments in Telegram Stars.
+    optional_t<boolean_t>                need_email;                    // Pass True if you require the user's email address to complete the order. Ignored for payments in Telegram Stars.
+    optional_t<boolean_t>                need_shipping_address;         // Pass True if you require the user's shipping address to complete the order. Ignored for payments in Telegram Stars.
+    optional_t<boolean_t>                send_phone_number_to_provider; // Pass True if the user's phone number should be sent to the provider. Ignored for payments in Telegram Stars.
+    optional_t<boolean_t>                send_email_to_provider;        // Pass True if the user's email address should be sent to the provider. Ignored for payments in Telegram Stars.
+    optional_t<boolean_t>                is_flexible;                   // Pass True if the final price depends on the shipping method. Ignored for payments in Telegram Stars.
     optional_t<boolean_t>                disable_notification;          // Sends the message silently. Users will receive a notification with no sound.
     optional_t<boolean_t>                protect_content;               // Protects the contents of the sent message from forwarding and saving
+    optional_t<string_t>                 message_effect_id;             // Unique identifier of the message effect to be added to the message; for private chats only
     optional_t<reply_parameters_t>       reply_parameters;              // Description of the message to reply to
     optional_t<inline_keyboard_markup_t> reply_markup;                  // A JSON-serialized object for an inline keyboard. If empty, one 'Pay total price' button will be shown. If not empty, the first button must be a Pay button.
 };
@@ -2103,10 +2145,10 @@ struct send_invoice_args_t {
  * @param args__title Product name, 1-32 characters
  * @param args__description Product description, 1-255 characters
  * @param args__payload Bot-defined invoice payload, 1-128 bytes. This will not be displayed to the user, use for your internal processes.
- * @param args__provider_token Payment provider token, obtained via @BotFather
- * @param args__currency Three-letter ISO 4217 currency code, see more on currencies
- * @param args__prices Price breakdown, a JSON-serialized list of components (e.g. product price, tax, discount, delivery cost, delivery tax, bonus, etc.)
- * @param args__max_tip_amount The maximum accepted amount for tips in the smallest units of the currency (integer, not float/double). For example, for a maximum tip of US$ 1.45 pass max_tip_amount = 145. See the exp parameter in currencies.json, it shows the number of digits past the decimal point for each currency (2 for the majority of currencies). Defaults to 0
+ * @param args__provider_token Payment provider token, obtained via @BotFather. Pass an empty string for payments in Telegram Stars.
+ * @param args__currency Three-letter ISO 4217 currency code, see more on currencies. Pass “XTR” for payments in Telegram Stars.
+ * @param args__prices Price breakdown, a JSON-serialized list of components (e.g. product price, tax, discount, delivery cost, delivery tax, bonus, etc.). Must contain exactly one item for payments in Telegram Stars.
+ * @param args__max_tip_amount The maximum accepted amount for tips in the smallest units of the currency (integer, not float/double). For example, for a maximum tip of US$ 1.45 pass max_tip_amount = 145. See the exp parameter in currencies.json, it shows the number of digits past the decimal point for each currency (2 for the majority of currencies). Defaults to 0. Not supported for payments in Telegram Stars.
  * @param args__suggested_tip_amounts A JSON-serialized array of suggested amounts of tips in the smallest units of the currency (integer, not float/double). At most 4 suggested tip amounts can be specified. The suggested tip amounts must be positive, passed in a strictly increased order and must not exceed max_tip_amount.
  * @param args__start_parameter Unique deep-linking parameter. If left empty, forwarded copies of the sent message will have a Pay button, allowing multiple users to pay directly from the forwarded message, using the same invoice. If non-empty, forwarded copies of the sent message will have a URL button with a deep link to the bot (instead of a Pay button), with the value used as the start parameter
  * @param args__provider_data JSON-serialized data about the invoice, which will be shared with the payment provider. A detailed description of required fields should be provided by the payment provider.
@@ -2114,15 +2156,16 @@ struct send_invoice_args_t {
  * @param args__photo_size Photo size in bytes
  * @param args__photo_width Photo width
  * @param args__photo_height Photo height
- * @param args__need_name Pass True if you require the user's full name to complete the order
- * @param args__need_phone_number Pass True if you require the user's phone number to complete the order
- * @param args__need_email Pass True if you require the user's email address to complete the order
- * @param args__need_shipping_address Pass True if you require the user's shipping address to complete the order
- * @param args__send_phone_number_to_provider Pass True if the user's phone number should be sent to provider
- * @param args__send_email_to_provider Pass True if the user's email address should be sent to provider
- * @param args__is_flexible Pass True if the final price depends on the shipping method
+ * @param args__need_name Pass True if you require the user's full name to complete the order. Ignored for payments in Telegram Stars.
+ * @param args__need_phone_number Pass True if you require the user's phone number to complete the order. Ignored for payments in Telegram Stars.
+ * @param args__need_email Pass True if you require the user's email address to complete the order. Ignored for payments in Telegram Stars.
+ * @param args__need_shipping_address Pass True if you require the user's shipping address to complete the order. Ignored for payments in Telegram Stars.
+ * @param args__send_phone_number_to_provider Pass True if the user's phone number should be sent to the provider. Ignored for payments in Telegram Stars.
+ * @param args__send_email_to_provider Pass True if the user's email address should be sent to the provider. Ignored for payments in Telegram Stars.
+ * @param args__is_flexible Pass True if the final price depends on the shipping method. Ignored for payments in Telegram Stars.
  * @param args__disable_notification Sends the message silently. Users will receive a notification with no sound.
  * @param args__protect_content Protects the contents of the sent message from forwarding and saving
+ * @param args__message_effect_id Unique identifier of the message effect to be added to the message; for private chats only
  * @param args__reply_parameters Description of the message to reply to
  * @param args__reply_markup A JSON-serialized object for an inline keyboard. If empty, one 'Pay total price' button will be shown. If not empty, the first button must be a Pay button.
  */
@@ -2149,6 +2192,7 @@ struct send_location_args_t {
     optional_t<integer_t>                                                                                            proximity_alert_radius; // For live locations, a maximum distance for proximity alerts about approaching another chat member, in meters. Must be between 1 and 100000 if specified.
     optional_t<boolean_t>                                                                                            disable_notification;   // Sends the message silently. Users will receive a notification with no sound.
     optional_t<boolean_t>                                                                                            protect_content;        // Protects the contents of the sent message from forwarding and saving
+    optional_t<string_t>                                                                                             message_effect_id;      // Unique identifier of the message effect to be added to the message; for private chats only
     optional_t<reply_parameters_t>                                                                                   reply_parameters;       // Description of the message to reply to
     optional_t<variant_t<inline_keyboard_markup_t, reply_keyboard_markup_t, reply_keyboard_remove_t, force_reply_t>> reply_markup;           // Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove a reply keyboard or to force a reply from the user
 };
@@ -2168,6 +2212,7 @@ struct send_location_args_t {
  * @param args__proximity_alert_radius For live locations, a maximum distance for proximity alerts about approaching another chat member, in meters. Must be between 1 and 100000 if specified.
  * @param args__disable_notification Sends the message silently. Users will receive a notification with no sound.
  * @param args__protect_content Protects the contents of the sent message from forwarding and saving
+ * @param args__message_effect_id Unique identifier of the message effect to be added to the message; for private chats only
  * @param args__reply_parameters Description of the message to reply to
  * @param args__reply_markup Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove a reply keyboard or to force a reply from the user
  */
@@ -2189,6 +2234,7 @@ struct send_media_group_args_t {
     optional_t<integer_t>                                                                                     message_thread_id;      // Unique identifier for the target message thread (topic) of the forum; for forum supergroups only
     optional_t<boolean_t>                                                                                     disable_notification;   // Sends messages silently. Users will receive a notification with no sound.
     optional_t<boolean_t>                                                                                     protect_content;        // Protects the contents of the sent messages from forwarding and saving
+    optional_t<string_t>                                                                                      message_effect_id;      // Unique identifier of the message effect to be added to the message; for private chats only
     optional_t<reply_parameters_t>                                                                            reply_parameters;       // Description of the message to reply to
 };
 
@@ -2202,6 +2248,7 @@ struct send_media_group_args_t {
  * @param args__media A JSON-serialized array describing messages to be sent, must include 2-10 items
  * @param args__disable_notification Sends messages silently. Users will receive a notification with no sound.
  * @param args__protect_content Protects the contents of the sent messages from forwarding and saving
+ * @param args__message_effect_id Unique identifier of the message effect to be added to the message; for private chats only
  * @param args__reply_parameters Description of the message to reply to
  */
 template <class Agent>
@@ -2225,6 +2272,7 @@ struct send_message_args_t {
     optional_t<link_preview_options_t>                                                                               link_preview_options;   // Link preview generation options for the message
     optional_t<boolean_t>                                                                                            disable_notification;   // Sends the message silently. Users will receive a notification with no sound.
     optional_t<boolean_t>                                                                                            protect_content;        // Protects the contents of the sent message from forwarding and saving
+    optional_t<string_t>                                                                                             message_effect_id;      // Unique identifier of the message effect to be added to the message; for private chats only
     optional_t<reply_parameters_t>                                                                                   reply_parameters;       // Description of the message to reply to
     optional_t<variant_t<inline_keyboard_markup_t, reply_keyboard_markup_t, reply_keyboard_remove_t, force_reply_t>> reply_markup;           // Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove a reply keyboard or to force a reply from the user
 };
@@ -2242,6 +2290,7 @@ struct send_message_args_t {
  * @param args__link_preview_options Link preview generation options for the message
  * @param args__disable_notification Sends the message silently. Users will receive a notification with no sound.
  * @param args__protect_content Protects the contents of the sent message from forwarding and saving
+ * @param args__message_effect_id Unique identifier of the message effect to be added to the message; for private chats only
  * @param args__reply_parameters Description of the message to reply to
  * @param args__reply_markup Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove a reply keyboard or to force a reply from the user
  */
@@ -2257,18 +2306,20 @@ void send_message(Agent&& agent, send_message_args_t args, F&& callback) {
 
 // Arguments to send_photo method
 struct send_photo_args_t {
-    variant_t<integer_t, string_t>                                                                                   chat_id;                // Unique identifier for the target chat or username of the target channel (in the format @channelusername)
-    variant_t<input_file_t, string_t>                                                                                photo;                  // Photo to send. Pass a file_id as String to send a photo that exists on the Telegram servers (recommended), pass an HTTP URL as a String for Telegram to get a photo from the Internet, or upload a new photo using multipart/form-data. The photo must be at most 10 MB in size. The photo's width and height must not exceed 10000 in total. Width and height ratio must be at most 20. More information on Sending Files »
-    optional_t<string_t>                                                                                             business_connection_id; // Unique identifier of the business connection on behalf of which the message will be sent
-    optional_t<integer_t>                                                                                            message_thread_id;      // Unique identifier for the target message thread (topic) of the forum; for forum supergroups only
-    optional_t<string_t>                                                                                             caption;                // Photo caption (may also be used when resending photos by file_id), 0-1024 characters after entities parsing
-    optional_t<string_t>                                                                                             parse_mode;             // Mode for parsing entities in the photo caption. See formatting options for more details.
-    optional_t<array_t<message_entity_t>>                                                                            caption_entities;       // A JSON-serialized list of special entities that appear in the caption, which can be specified instead of parse_mode
-    optional_t<boolean_t>                                                                                            has_spoiler;            // Pass True if the photo needs to be covered with a spoiler animation
-    optional_t<boolean_t>                                                                                            disable_notification;   // Sends the message silently. Users will receive a notification with no sound.
-    optional_t<boolean_t>                                                                                            protect_content;        // Protects the contents of the sent message from forwarding and saving
-    optional_t<reply_parameters_t>                                                                                   reply_parameters;       // Description of the message to reply to
-    optional_t<variant_t<inline_keyboard_markup_t, reply_keyboard_markup_t, reply_keyboard_remove_t, force_reply_t>> reply_markup;           // Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove a reply keyboard or to force a reply from the user
+    variant_t<integer_t, string_t>                                                                                   chat_id;                  // Unique identifier for the target chat or username of the target channel (in the format @channelusername)
+    variant_t<input_file_t, string_t>                                                                                photo;                    // Photo to send. Pass a file_id as String to send a photo that exists on the Telegram servers (recommended), pass an HTTP URL as a String for Telegram to get a photo from the Internet, or upload a new photo using multipart/form-data. The photo must be at most 10 MB in size. The photo's width and height must not exceed 10000 in total. Width and height ratio must be at most 20. More information on Sending Files »
+    optional_t<string_t>                                                                                             business_connection_id;   // Unique identifier of the business connection on behalf of which the message will be sent
+    optional_t<integer_t>                                                                                            message_thread_id;        // Unique identifier for the target message thread (topic) of the forum; for forum supergroups only
+    optional_t<string_t>                                                                                             caption;                  // Photo caption (may also be used when resending photos by file_id), 0-1024 characters after entities parsing
+    optional_t<string_t>                                                                                             parse_mode;               // Mode for parsing entities in the photo caption. See formatting options for more details.
+    optional_t<array_t<message_entity_t>>                                                                            caption_entities;         // A JSON-serialized list of special entities that appear in the caption, which can be specified instead of parse_mode
+    optional_t<boolean_t>                                                                                            show_caption_above_media; // Pass True, if the caption must be shown above the message media
+    optional_t<boolean_t>                                                                                            has_spoiler;              // Pass True if the photo needs to be covered with a spoiler animation
+    optional_t<boolean_t>                                                                                            disable_notification;     // Sends the message silently. Users will receive a notification with no sound.
+    optional_t<boolean_t>                                                                                            protect_content;          // Protects the contents of the sent message from forwarding and saving
+    optional_t<string_t>                                                                                             message_effect_id;        // Unique identifier of the message effect to be added to the message; for private chats only
+    optional_t<reply_parameters_t>                                                                                   reply_parameters;         // Description of the message to reply to
+    optional_t<variant_t<inline_keyboard_markup_t, reply_keyboard_markup_t, reply_keyboard_remove_t, force_reply_t>> reply_markup;             // Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove a reply keyboard or to force a reply from the user
 };
 
 /**
@@ -2282,9 +2333,11 @@ struct send_photo_args_t {
  * @param args__caption Photo caption (may also be used when resending photos by file_id), 0-1024 characters after entities parsing
  * @param args__parse_mode Mode for parsing entities in the photo caption. See formatting options for more details.
  * @param args__caption_entities A JSON-serialized list of special entities that appear in the caption, which can be specified instead of parse_mode
+ * @param args__show_caption_above_media Pass True, if the caption must be shown above the message media
  * @param args__has_spoiler Pass True if the photo needs to be covered with a spoiler animation
  * @param args__disable_notification Sends the message silently. Users will receive a notification with no sound.
  * @param args__protect_content Protects the contents of the sent message from forwarding and saving
+ * @param args__message_effect_id Unique identifier of the message effect to be added to the message; for private chats only
  * @param args__reply_parameters Description of the message to reply to
  * @param args__reply_markup Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove a reply keyboard or to force a reply from the user
  */
@@ -2319,6 +2372,7 @@ struct send_poll_args_t {
     optional_t<boolean_t>                                                                                            is_closed;               // Pass True if the poll needs to be immediately closed. This can be useful for poll preview.
     optional_t<boolean_t>                                                                                            disable_notification;    // Sends the message silently. Users will receive a notification with no sound.
     optional_t<boolean_t>                                                                                            protect_content;         // Protects the contents of the sent message from forwarding and saving
+    optional_t<string_t>                                                                                             message_effect_id;       // Unique identifier of the message effect to be added to the message; for private chats only
     optional_t<reply_parameters_t>                                                                                   reply_parameters;        // Description of the message to reply to
     optional_t<variant_t<inline_keyboard_markup_t, reply_keyboard_markup_t, reply_keyboard_remove_t, force_reply_t>> reply_markup;            // Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove a reply keyboard or to force a reply from the user
 };
@@ -2346,6 +2400,7 @@ struct send_poll_args_t {
  * @param args__is_closed Pass True if the poll needs to be immediately closed. This can be useful for poll preview.
  * @param args__disable_notification Sends the message silently. Users will receive a notification with no sound.
  * @param args__protect_content Protects the contents of the sent message from forwarding and saving
+ * @param args__message_effect_id Unique identifier of the message effect to be added to the message; for private chats only
  * @param args__reply_parameters Description of the message to reply to
  * @param args__reply_markup Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove a reply keyboard or to force a reply from the user
  */
@@ -2368,6 +2423,7 @@ struct send_sticker_args_t {
     optional_t<string_t>                                                                                             emoji;                  // Emoji associated with the sticker; only for just uploaded stickers
     optional_t<boolean_t>                                                                                            disable_notification;   // Sends the message silently. Users will receive a notification with no sound.
     optional_t<boolean_t>                                                                                            protect_content;        // Protects the contents of the sent message from forwarding and saving
+    optional_t<string_t>                                                                                             message_effect_id;      // Unique identifier of the message effect to be added to the message; for private chats only
     optional_t<reply_parameters_t>                                                                                   reply_parameters;       // Description of the message to reply to
     optional_t<variant_t<inline_keyboard_markup_t, reply_keyboard_markup_t, reply_keyboard_remove_t, force_reply_t>> reply_markup;           // Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove a reply keyboard or to force a reply from the user
 };
@@ -2383,6 +2439,7 @@ struct send_sticker_args_t {
  * @param args__emoji Emoji associated with the sticker; only for just uploaded stickers
  * @param args__disable_notification Sends the message silently. Users will receive a notification with no sound.
  * @param args__protect_content Protects the contents of the sent message from forwarding and saving
+ * @param args__message_effect_id Unique identifier of the message effect to be added to the message; for private chats only
  * @param args__reply_parameters Description of the message to reply to
  * @param args__reply_markup Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove a reply keyboard or to force a reply from the user
  */
@@ -2411,6 +2468,7 @@ struct send_venue_args_t {
     optional_t<string_t>                                                                                             google_place_type;      // Google Places type of the venue. (See supported types.)
     optional_t<boolean_t>                                                                                            disable_notification;   // Sends the message silently. Users will receive a notification with no sound.
     optional_t<boolean_t>                                                                                            protect_content;        // Protects the contents of the sent message from forwarding and saving
+    optional_t<string_t>                                                                                             message_effect_id;      // Unique identifier of the message effect to be added to the message; for private chats only
     optional_t<reply_parameters_t>                                                                                   reply_parameters;       // Description of the message to reply to
     optional_t<variant_t<inline_keyboard_markup_t, reply_keyboard_markup_t, reply_keyboard_remove_t, force_reply_t>> reply_markup;           // Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove a reply keyboard or to force a reply from the user
 };
@@ -2432,6 +2490,7 @@ struct send_venue_args_t {
  * @param args__google_place_type Google Places type of the venue. (See supported types.)
  * @param args__disable_notification Sends the message silently. Users will receive a notification with no sound.
  * @param args__protect_content Protects the contents of the sent message from forwarding and saving
+ * @param args__message_effect_id Unique identifier of the message effect to be added to the message; for private chats only
  * @param args__reply_parameters Description of the message to reply to
  * @param args__reply_markup Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove a reply keyboard or to force a reply from the user
  */
@@ -2447,23 +2506,25 @@ void send_venue(Agent&& agent, send_venue_args_t args, F&& callback) {
 
 // Arguments to send_video method
 struct send_video_args_t {
-    variant_t<integer_t, string_t>                                                                                   chat_id;                // Unique identifier for the target chat or username of the target channel (in the format @channelusername)
-    variant_t<input_file_t, string_t>                                                                                video;                  // Video to send. Pass a file_id as String to send a video that exists on the Telegram servers (recommended), pass an HTTP URL as a String for Telegram to get a video from the Internet, or upload a new video using multipart/form-data. More information on Sending Files »
-    optional_t<string_t>                                                                                             business_connection_id; // Unique identifier of the business connection on behalf of which the message will be sent
-    optional_t<integer_t>                                                                                            message_thread_id;      // Unique identifier for the target message thread (topic) of the forum; for forum supergroups only
-    optional_t<integer_t>                                                                                            duration;               // Duration of sent video in seconds
-    optional_t<integer_t>                                                                                            width;                  // Video width
-    optional_t<integer_t>                                                                                            height;                 // Video height
-    optional_t<variant_t<input_file_t, string_t>>                                                                    thumbnail;              // Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail's width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can't be reused and can be only uploaded as a new file, so you can pass “attach://<file_attach_name>” if the thumbnail was uploaded using multipart/form-data under <file_attach_name>. More information on Sending Files »
-    optional_t<string_t>                                                                                             caption;                // Video caption (may also be used when resending videos by file_id), 0-1024 characters after entities parsing
-    optional_t<string_t>                                                                                             parse_mode;             // Mode for parsing entities in the video caption. See formatting options for more details.
-    optional_t<array_t<message_entity_t>>                                                                            caption_entities;       // A JSON-serialized list of special entities that appear in the caption, which can be specified instead of parse_mode
-    optional_t<boolean_t>                                                                                            has_spoiler;            // Pass True if the video needs to be covered with a spoiler animation
-    optional_t<boolean_t>                                                                                            supports_streaming;     // Pass True if the uploaded video is suitable for streaming
-    optional_t<boolean_t>                                                                                            disable_notification;   // Sends the message silently. Users will receive a notification with no sound.
-    optional_t<boolean_t>                                                                                            protect_content;        // Protects the contents of the sent message from forwarding and saving
-    optional_t<reply_parameters_t>                                                                                   reply_parameters;       // Description of the message to reply to
-    optional_t<variant_t<inline_keyboard_markup_t, reply_keyboard_markup_t, reply_keyboard_remove_t, force_reply_t>> reply_markup;           // Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove a reply keyboard or to force a reply from the user
+    variant_t<integer_t, string_t>                                                                                   chat_id;                  // Unique identifier for the target chat or username of the target channel (in the format @channelusername)
+    variant_t<input_file_t, string_t>                                                                                video;                    // Video to send. Pass a file_id as String to send a video that exists on the Telegram servers (recommended), pass an HTTP URL as a String for Telegram to get a video from the Internet, or upload a new video using multipart/form-data. More information on Sending Files »
+    optional_t<string_t>                                                                                             business_connection_id;   // Unique identifier of the business connection on behalf of which the message will be sent
+    optional_t<integer_t>                                                                                            message_thread_id;        // Unique identifier for the target message thread (topic) of the forum; for forum supergroups only
+    optional_t<integer_t>                                                                                            duration;                 // Duration of sent video in seconds
+    optional_t<integer_t>                                                                                            width;                    // Video width
+    optional_t<integer_t>                                                                                            height;                   // Video height
+    optional_t<variant_t<input_file_t, string_t>>                                                                    thumbnail;                // Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail's width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can't be reused and can be only uploaded as a new file, so you can pass “attach://<file_attach_name>” if the thumbnail was uploaded using multipart/form-data under <file_attach_name>. More information on Sending Files »
+    optional_t<string_t>                                                                                             caption;                  // Video caption (may also be used when resending videos by file_id), 0-1024 characters after entities parsing
+    optional_t<string_t>                                                                                             parse_mode;               // Mode for parsing entities in the video caption. See formatting options for more details.
+    optional_t<array_t<message_entity_t>>                                                                            caption_entities;         // A JSON-serialized list of special entities that appear in the caption, which can be specified instead of parse_mode
+    optional_t<boolean_t>                                                                                            show_caption_above_media; // Pass True, if the caption must be shown above the message media
+    optional_t<boolean_t>                                                                                            has_spoiler;              // Pass True if the video needs to be covered with a spoiler animation
+    optional_t<boolean_t>                                                                                            supports_streaming;       // Pass True if the uploaded video is suitable for streaming
+    optional_t<boolean_t>                                                                                            disable_notification;     // Sends the message silently. Users will receive a notification with no sound.
+    optional_t<boolean_t>                                                                                            protect_content;          // Protects the contents of the sent message from forwarding and saving
+    optional_t<string_t>                                                                                             message_effect_id;        // Unique identifier of the message effect to be added to the message; for private chats only
+    optional_t<reply_parameters_t>                                                                                   reply_parameters;         // Description of the message to reply to
+    optional_t<variant_t<inline_keyboard_markup_t, reply_keyboard_markup_t, reply_keyboard_remove_t, force_reply_t>> reply_markup;             // Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove a reply keyboard or to force a reply from the user
 };
 
 /**
@@ -2481,10 +2542,12 @@ struct send_video_args_t {
  * @param args__caption Video caption (may also be used when resending videos by file_id), 0-1024 characters after entities parsing
  * @param args__parse_mode Mode for parsing entities in the video caption. See formatting options for more details.
  * @param args__caption_entities A JSON-serialized list of special entities that appear in the caption, which can be specified instead of parse_mode
+ * @param args__show_caption_above_media Pass True, if the caption must be shown above the message media
  * @param args__has_spoiler Pass True if the video needs to be covered with a spoiler animation
  * @param args__supports_streaming Pass True if the uploaded video is suitable for streaming
  * @param args__disable_notification Sends the message silently. Users will receive a notification with no sound.
  * @param args__protect_content Protects the contents of the sent message from forwarding and saving
+ * @param args__message_effect_id Unique identifier of the message effect to be added to the message; for private chats only
  * @param args__reply_parameters Description of the message to reply to
  * @param args__reply_markup Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove a reply keyboard or to force a reply from the user
  */
@@ -2509,6 +2572,7 @@ struct send_video_note_args_t {
     optional_t<variant_t<input_file_t, string_t>>                                                                    thumbnail;              // Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail's width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can't be reused and can be only uploaded as a new file, so you can pass “attach://<file_attach_name>” if the thumbnail was uploaded using multipart/form-data under <file_attach_name>. More information on Sending Files »
     optional_t<boolean_t>                                                                                            disable_notification;   // Sends the message silently. Users will receive a notification with no sound.
     optional_t<boolean_t>                                                                                            protect_content;        // Protects the contents of the sent message from forwarding and saving
+    optional_t<string_t>                                                                                             message_effect_id;      // Unique identifier of the message effect to be added to the message; for private chats only
     optional_t<reply_parameters_t>                                                                                   reply_parameters;       // Description of the message to reply to
     optional_t<variant_t<inline_keyboard_markup_t, reply_keyboard_markup_t, reply_keyboard_remove_t, force_reply_t>> reply_markup;           // Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove a reply keyboard or to force a reply from the user
 };
@@ -2526,6 +2590,7 @@ struct send_video_note_args_t {
  * @param args__thumbnail Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail's width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can't be reused and can be only uploaded as a new file, so you can pass “attach://<file_attach_name>” if the thumbnail was uploaded using multipart/form-data under <file_attach_name>. More information on Sending Files »
  * @param args__disable_notification Sends the message silently. Users will receive a notification with no sound.
  * @param args__protect_content Protects the contents of the sent message from forwarding and saving
+ * @param args__message_effect_id Unique identifier of the message effect to be added to the message; for private chats only
  * @param args__reply_parameters Description of the message to reply to
  * @param args__reply_markup Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove a reply keyboard or to force a reply from the user
  */
@@ -2551,6 +2616,7 @@ struct send_voice_args_t {
     optional_t<integer_t>                                                                                            duration;               // Duration of the voice message in seconds
     optional_t<boolean_t>                                                                                            disable_notification;   // Sends the message silently. Users will receive a notification with no sound.
     optional_t<boolean_t>                                                                                            protect_content;        // Protects the contents of the sent message from forwarding and saving
+    optional_t<string_t>                                                                                             message_effect_id;      // Unique identifier of the message effect to be added to the message; for private chats only
     optional_t<reply_parameters_t>                                                                                   reply_parameters;       // Description of the message to reply to
     optional_t<variant_t<inline_keyboard_markup_t, reply_keyboard_markup_t, reply_keyboard_remove_t, force_reply_t>> reply_markup;           // Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove a reply keyboard or to force a reply from the user
 };
@@ -2569,6 +2635,7 @@ struct send_voice_args_t {
  * @param args__duration Duration of the voice message in seconds
  * @param args__disable_notification Sends the message silently. Users will receive a notification with no sound.
  * @param args__protect_content Protects the contents of the sent message from forwarding and saving
+ * @param args__message_effect_id Unique identifier of the message effect to be added to the message; for private chats only
  * @param args__reply_parameters Description of the message to reply to
  * @param args__reply_markup Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove a reply keyboard or to force a reply from the user
  */

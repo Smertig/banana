@@ -5,7 +5,7 @@ inline_keyboard_button_t
 
 .. cpp:struct:: banana::api::inline_keyboard_button_t
 
-   This object represents one button of an inline keyboard. You must use exactly one of the optional fields.
+   This object represents one button of an inline keyboard. Exactly one of the optional fields must be used to specify type of the button.
 
    .. cpp:member:: string_t text
 
@@ -45,4 +45,4 @@ inline_keyboard_button_t
 
    .. cpp:member:: optional_t<boolean_t> pay
 
-   Optional. Specify True, to send a Pay button.   NOTE: This type of button must always be the first button in the first row and can only be used in invoice messages.
+   Optional. Specify True, to send a Pay button. Substrings “⭐” and “XTR” in the buttons's text will be replaced with a Telegram Star icon.   NOTE: This type of button must always be the first button in the first row and can only be used in invoice messages.

@@ -44,6 +44,10 @@ edit_message_caption
 
    A JSON-serialized list of special entities that appear in the caption, which can be specified instead of parse_mode
 
+   .. cpp:member:: optional_t<boolean_t> show_caption_above_media
+
+   Pass True, if the caption must be shown above the message media. Supported only for animation, photo and video messages.
+
    .. cpp:member:: optional_t<inline_keyboard_markup_t> reply_markup
 
    A JSON-serialized object for an inline keyboard.
