@@ -577,23 +577,17 @@
 
 <p>Bot-defined invoice payload, 1-128 bytes. This will not be displayed to the user, use for your internal processes.</p>
 <dl class="cpp member">
-<dt class="sig sig-object cpp" id="_CPPv4N6banana3api19send_invoice_args_t14provider_tokenE">
-<span id="_CPPv3N6banana3api19send_invoice_args_t14provider_tokenE"></span><span id="_CPPv2N6banana3api19send_invoice_args_t14provider_tokenE"></span><span id="banana::api::send_invoice_args_t::provider_token__string_t"></span><a class="reference internal" href="../../banana/basic_types.html#_CPPv4N6banana8string_tE" title="banana::string_t"><span class="n"><span class="pre">string_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">provider_token</span></span></span><a class="headerlink" href="#_CPPv4N6banana3api19send_invoice_args_t14provider_tokenE" title="Link to this definition">¶</a><br /></dt>
-<dd></dd></dl>
-
-<p>Payment provider token, obtained via &#64;BotFather</p>
-<dl class="cpp member">
 <dt class="sig sig-object cpp" id="_CPPv4N6banana3api19send_invoice_args_t8currencyE">
 <span id="_CPPv3N6banana3api19send_invoice_args_t8currencyE"></span><span id="_CPPv2N6banana3api19send_invoice_args_t8currencyE"></span><span id="banana::api::send_invoice_args_t::currency__string_t"></span><a class="reference internal" href="../../banana/basic_types.html#_CPPv4N6banana8string_tE" title="banana::string_t"><span class="n"><span class="pre">string_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">currency</span></span></span><a class="headerlink" href="#_CPPv4N6banana3api19send_invoice_args_t8currencyE" title="Link to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
-<p>Three-letter ISO 4217 currency code, see more on currencies</p>
+<p>Three-letter ISO 4217 currency code, see more on currencies. Pass “XTR” for payments in Telegram Stars.</p>
 <dl class="cpp member">
 <dt class="sig sig-object cpp" id="_CPPv4N6banana3api19send_invoice_args_t6pricesE">
 <span id="_CPPv3N6banana3api19send_invoice_args_t6pricesE"></span><span id="_CPPv2N6banana3api19send_invoice_args_t6pricesE"></span><span id="banana::api::send_invoice_args_t::prices__array_t:labeled_price_t:"></span><a class="reference internal" href="../../banana/basic_types.html#_CPPv4I0EN6banana7array_tE" title="banana::array_t"><span class="n"><span class="pre">array_t</span></span></a><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="../types/labeled_price.html#_CPPv4N6banana3api15labeled_price_tE" title="banana::api::labeled_price_t"><span class="n"><span class="pre">labeled_price_t</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">prices</span></span></span><a class="headerlink" href="#_CPPv4N6banana3api19send_invoice_args_t6pricesE" title="Link to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
-<p>Price breakdown, a JSON-serialized list of components (e.g. product price, tax, discount, delivery cost, delivery tax, bonus, etc.)</p>
+<p>Price breakdown, a JSON-serialized list of components (e.g. product price, tax, discount, delivery cost, delivery tax, bonus, etc.). Must contain exactly one item for payments in Telegram Stars.</p>
 <dl class="cpp member">
 <dt class="sig sig-object cpp" id="_CPPv4N6banana3api19send_invoice_args_t17message_thread_idE">
 <span id="_CPPv3N6banana3api19send_invoice_args_t17message_thread_idE"></span><span id="_CPPv2N6banana3api19send_invoice_args_t17message_thread_idE"></span><span id="banana::api::send_invoice_args_t::message_thread_id__optional_t:integer_t:"></span><a class="reference internal" href="../../banana/basic_types.html#_CPPv4I0EN6banana10optional_tE" title="banana::optional_t"><span class="n"><span class="pre">optional_t</span></span></a><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="../../banana/basic_types.html#_CPPv4N6banana9integer_tE" title="banana::integer_t"><span class="n"><span class="pre">integer_t</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">message_thread_id</span></span></span><a class="headerlink" href="#_CPPv4N6banana3api19send_invoice_args_t17message_thread_idE" title="Link to this definition">¶</a><br /></dt>
@@ -601,11 +595,17 @@
 
 <p>Unique identifier for the target message thread (topic) of the forum; for forum supergroups only</p>
 <dl class="cpp member">
+<dt class="sig sig-object cpp" id="_CPPv4N6banana3api19send_invoice_args_t14provider_tokenE">
+<span id="_CPPv3N6banana3api19send_invoice_args_t14provider_tokenE"></span><span id="_CPPv2N6banana3api19send_invoice_args_t14provider_tokenE"></span><span id="banana::api::send_invoice_args_t::provider_token__optional_t:string_t:"></span><a class="reference internal" href="../../banana/basic_types.html#_CPPv4I0EN6banana10optional_tE" title="banana::optional_t"><span class="n"><span class="pre">optional_t</span></span></a><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="../../banana/basic_types.html#_CPPv4N6banana8string_tE" title="banana::string_t"><span class="n"><span class="pre">string_t</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">provider_token</span></span></span><a class="headerlink" href="#_CPPv4N6banana3api19send_invoice_args_t14provider_tokenE" title="Link to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<p>Payment provider token, obtained via &#64;BotFather. Pass an empty string for payments in Telegram Stars.</p>
+<dl class="cpp member">
 <dt class="sig sig-object cpp" id="_CPPv4N6banana3api19send_invoice_args_t14max_tip_amountE">
 <span id="_CPPv3N6banana3api19send_invoice_args_t14max_tip_amountE"></span><span id="_CPPv2N6banana3api19send_invoice_args_t14max_tip_amountE"></span><span id="banana::api::send_invoice_args_t::max_tip_amount__optional_t:integer_t:"></span><a class="reference internal" href="../../banana/basic_types.html#_CPPv4I0EN6banana10optional_tE" title="banana::optional_t"><span class="n"><span class="pre">optional_t</span></span></a><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="../../banana/basic_types.html#_CPPv4N6banana9integer_tE" title="banana::integer_t"><span class="n"><span class="pre">integer_t</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">max_tip_amount</span></span></span><a class="headerlink" href="#_CPPv4N6banana3api19send_invoice_args_t14max_tip_amountE" title="Link to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
-<p>The maximum accepted amount for tips in the smallest units of the currency (integer, not float/double). For example, for a maximum tip of US$ 1.45 pass max_tip_amount = 145. See the exp parameter in currencies.json, it shows the number of digits past the decimal point for each currency (2 for the majority of currencies). Defaults to 0</p>
+<p>The maximum accepted amount for tips in the smallest units of the currency (integer, not float/double). For example, for a maximum tip of US$ 1.45 pass max_tip_amount = 145. See the exp parameter in currencies.json, it shows the number of digits past the decimal point for each currency (2 for the majority of currencies). Defaults to 0. Not supported for payments in Telegram Stars.</p>
 <dl class="cpp member">
 <dt class="sig sig-object cpp" id="_CPPv4N6banana3api19send_invoice_args_t21suggested_tip_amountsE">
 <span id="_CPPv3N6banana3api19send_invoice_args_t21suggested_tip_amountsE"></span><span id="_CPPv2N6banana3api19send_invoice_args_t21suggested_tip_amountsE"></span><span id="banana::api::send_invoice_args_t::suggested_tip_amounts__optional_t:array_t:integer_t::"></span><a class="reference internal" href="../../banana/basic_types.html#_CPPv4I0EN6banana10optional_tE" title="banana::optional_t"><span class="n"><span class="pre">optional_t</span></span></a><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="../../banana/basic_types.html#_CPPv4I0EN6banana7array_tE" title="banana::array_t"><span class="n"><span class="pre">array_t</span></span></a><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="../../banana/basic_types.html#_CPPv4N6banana9integer_tE" title="banana::integer_t"><span class="n"><span class="pre">integer_t</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">suggested_tip_amounts</span></span></span><a class="headerlink" href="#_CPPv4N6banana3api19send_invoice_args_t21suggested_tip_amountsE" title="Link to this definition">¶</a><br /></dt>
@@ -653,43 +653,43 @@
 <span id="_CPPv3N6banana3api19send_invoice_args_t9need_nameE"></span><span id="_CPPv2N6banana3api19send_invoice_args_t9need_nameE"></span><span id="banana::api::send_invoice_args_t::need_name__optional_t:boolean_t:"></span><a class="reference internal" href="../../banana/basic_types.html#_CPPv4I0EN6banana10optional_tE" title="banana::optional_t"><span class="n"><span class="pre">optional_t</span></span></a><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="../../banana/basic_types.html#_CPPv4N6banana9boolean_tE" title="banana::boolean_t"><span class="n"><span class="pre">boolean_t</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">need_name</span></span></span><a class="headerlink" href="#_CPPv4N6banana3api19send_invoice_args_t9need_nameE" title="Link to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
-<p>Pass True if you require the user’s full name to complete the order</p>
+<p>Pass True if you require the user’s full name to complete the order. Ignored for payments in Telegram Stars.</p>
 <dl class="cpp member">
 <dt class="sig sig-object cpp" id="_CPPv4N6banana3api19send_invoice_args_t17need_phone_numberE">
 <span id="_CPPv3N6banana3api19send_invoice_args_t17need_phone_numberE"></span><span id="_CPPv2N6banana3api19send_invoice_args_t17need_phone_numberE"></span><span id="banana::api::send_invoice_args_t::need_phone_number__optional_t:boolean_t:"></span><a class="reference internal" href="../../banana/basic_types.html#_CPPv4I0EN6banana10optional_tE" title="banana::optional_t"><span class="n"><span class="pre">optional_t</span></span></a><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="../../banana/basic_types.html#_CPPv4N6banana9boolean_tE" title="banana::boolean_t"><span class="n"><span class="pre">boolean_t</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">need_phone_number</span></span></span><a class="headerlink" href="#_CPPv4N6banana3api19send_invoice_args_t17need_phone_numberE" title="Link to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
-<p>Pass True if you require the user’s phone number to complete the order</p>
+<p>Pass True if you require the user’s phone number to complete the order. Ignored for payments in Telegram Stars.</p>
 <dl class="cpp member">
 <dt class="sig sig-object cpp" id="_CPPv4N6banana3api19send_invoice_args_t10need_emailE">
 <span id="_CPPv3N6banana3api19send_invoice_args_t10need_emailE"></span><span id="_CPPv2N6banana3api19send_invoice_args_t10need_emailE"></span><span id="banana::api::send_invoice_args_t::need_email__optional_t:boolean_t:"></span><a class="reference internal" href="../../banana/basic_types.html#_CPPv4I0EN6banana10optional_tE" title="banana::optional_t"><span class="n"><span class="pre">optional_t</span></span></a><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="../../banana/basic_types.html#_CPPv4N6banana9boolean_tE" title="banana::boolean_t"><span class="n"><span class="pre">boolean_t</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">need_email</span></span></span><a class="headerlink" href="#_CPPv4N6banana3api19send_invoice_args_t10need_emailE" title="Link to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
-<p>Pass True if you require the user’s email address to complete the order</p>
+<p>Pass True if you require the user’s email address to complete the order. Ignored for payments in Telegram Stars.</p>
 <dl class="cpp member">
 <dt class="sig sig-object cpp" id="_CPPv4N6banana3api19send_invoice_args_t21need_shipping_addressE">
 <span id="_CPPv3N6banana3api19send_invoice_args_t21need_shipping_addressE"></span><span id="_CPPv2N6banana3api19send_invoice_args_t21need_shipping_addressE"></span><span id="banana::api::send_invoice_args_t::need_shipping_address__optional_t:boolean_t:"></span><a class="reference internal" href="../../banana/basic_types.html#_CPPv4I0EN6banana10optional_tE" title="banana::optional_t"><span class="n"><span class="pre">optional_t</span></span></a><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="../../banana/basic_types.html#_CPPv4N6banana9boolean_tE" title="banana::boolean_t"><span class="n"><span class="pre">boolean_t</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">need_shipping_address</span></span></span><a class="headerlink" href="#_CPPv4N6banana3api19send_invoice_args_t21need_shipping_addressE" title="Link to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
-<p>Pass True if you require the user’s shipping address to complete the order</p>
+<p>Pass True if you require the user’s shipping address to complete the order. Ignored for payments in Telegram Stars.</p>
 <dl class="cpp member">
 <dt class="sig sig-object cpp" id="_CPPv4N6banana3api19send_invoice_args_t29send_phone_number_to_providerE">
 <span id="_CPPv3N6banana3api19send_invoice_args_t29send_phone_number_to_providerE"></span><span id="_CPPv2N6banana3api19send_invoice_args_t29send_phone_number_to_providerE"></span><span id="banana::api::send_invoice_args_t::send_phone_number_to_provider__optional_t:boolean_t:"></span><a class="reference internal" href="../../banana/basic_types.html#_CPPv4I0EN6banana10optional_tE" title="banana::optional_t"><span class="n"><span class="pre">optional_t</span></span></a><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="../../banana/basic_types.html#_CPPv4N6banana9boolean_tE" title="banana::boolean_t"><span class="n"><span class="pre">boolean_t</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">send_phone_number_to_provider</span></span></span><a class="headerlink" href="#_CPPv4N6banana3api19send_invoice_args_t29send_phone_number_to_providerE" title="Link to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
-<p>Pass True if the user’s phone number should be sent to provider</p>
+<p>Pass True if the user’s phone number should be sent to the provider. Ignored for payments in Telegram Stars.</p>
 <dl class="cpp member">
 <dt class="sig sig-object cpp" id="_CPPv4N6banana3api19send_invoice_args_t22send_email_to_providerE">
 <span id="_CPPv3N6banana3api19send_invoice_args_t22send_email_to_providerE"></span><span id="_CPPv2N6banana3api19send_invoice_args_t22send_email_to_providerE"></span><span id="banana::api::send_invoice_args_t::send_email_to_provider__optional_t:boolean_t:"></span><a class="reference internal" href="../../banana/basic_types.html#_CPPv4I0EN6banana10optional_tE" title="banana::optional_t"><span class="n"><span class="pre">optional_t</span></span></a><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="../../banana/basic_types.html#_CPPv4N6banana9boolean_tE" title="banana::boolean_t"><span class="n"><span class="pre">boolean_t</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">send_email_to_provider</span></span></span><a class="headerlink" href="#_CPPv4N6banana3api19send_invoice_args_t22send_email_to_providerE" title="Link to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
-<p>Pass True if the user’s email address should be sent to provider</p>
+<p>Pass True if the user’s email address should be sent to the provider. Ignored for payments in Telegram Stars.</p>
 <dl class="cpp member">
 <dt class="sig sig-object cpp" id="_CPPv4N6banana3api19send_invoice_args_t11is_flexibleE">
 <span id="_CPPv3N6banana3api19send_invoice_args_t11is_flexibleE"></span><span id="_CPPv2N6banana3api19send_invoice_args_t11is_flexibleE"></span><span id="banana::api::send_invoice_args_t::is_flexible__optional_t:boolean_t:"></span><a class="reference internal" href="../../banana/basic_types.html#_CPPv4I0EN6banana10optional_tE" title="banana::optional_t"><span class="n"><span class="pre">optional_t</span></span></a><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="../../banana/basic_types.html#_CPPv4N6banana9boolean_tE" title="banana::boolean_t"><span class="n"><span class="pre">boolean_t</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">is_flexible</span></span></span><a class="headerlink" href="#_CPPv4N6banana3api19send_invoice_args_t11is_flexibleE" title="Link to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
-<p>Pass True if the final price depends on the shipping method</p>
+<p>Pass True if the final price depends on the shipping method. Ignored for payments in Telegram Stars.</p>
 <dl class="cpp member">
 <dt class="sig sig-object cpp" id="_CPPv4N6banana3api19send_invoice_args_t20disable_notificationE">
 <span id="_CPPv3N6banana3api19send_invoice_args_t20disable_notificationE"></span><span id="_CPPv2N6banana3api19send_invoice_args_t20disable_notificationE"></span><span id="banana::api::send_invoice_args_t::disable_notification__optional_t:boolean_t:"></span><a class="reference internal" href="../../banana/basic_types.html#_CPPv4I0EN6banana10optional_tE" title="banana::optional_t"><span class="n"><span class="pre">optional_t</span></span></a><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="../../banana/basic_types.html#_CPPv4N6banana9boolean_tE" title="banana::boolean_t"><span class="n"><span class="pre">boolean_t</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">disable_notification</span></span></span><a class="headerlink" href="#_CPPv4N6banana3api19send_invoice_args_t20disable_notificationE" title="Link to this definition">¶</a><br /></dt>
@@ -702,6 +702,12 @@
 <dd></dd></dl>
 
 <p>Protects the contents of the sent message from forwarding and saving</p>
+<dl class="cpp member">
+<dt class="sig sig-object cpp" id="_CPPv4N6banana3api19send_invoice_args_t17message_effect_idE">
+<span id="_CPPv3N6banana3api19send_invoice_args_t17message_effect_idE"></span><span id="_CPPv2N6banana3api19send_invoice_args_t17message_effect_idE"></span><span id="banana::api::send_invoice_args_t::message_effect_id__optional_t:string_t:"></span><a class="reference internal" href="../../banana/basic_types.html#_CPPv4I0EN6banana10optional_tE" title="banana::optional_t"><span class="n"><span class="pre">optional_t</span></span></a><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="../../banana/basic_types.html#_CPPv4N6banana8string_tE" title="banana::string_t"><span class="n"><span class="pre">string_t</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">message_effect_id</span></span></span><a class="headerlink" href="#_CPPv4N6banana3api19send_invoice_args_t17message_effect_idE" title="Link to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<p>Unique identifier of the message effect to be added to the message; for private chats only</p>
 <dl class="cpp member">
 <dt class="sig sig-object cpp" id="_CPPv4N6banana3api19send_invoice_args_t16reply_parametersE">
 <span id="_CPPv3N6banana3api19send_invoice_args_t16reply_parametersE"></span><span id="_CPPv2N6banana3api19send_invoice_args_t16reply_parametersE"></span><span id="banana::api::send_invoice_args_t::reply_parameters__optional_t:reply_parameters_t:"></span><a class="reference internal" href="../../banana/basic_types.html#_CPPv4I0EN6banana10optional_tE" title="banana::optional_t"><span class="n"><span class="pre">optional_t</span></span></a><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="../types/reply_parameters.html#_CPPv4N6banana3api18reply_parameters_tE" title="banana::api::reply_parameters_t"><span class="n"><span class="pre">reply_parameters_t</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">reply_parameters</span></span></span><a class="headerlink" href="#_CPPv4N6banana3api19send_invoice_args_t16reply_parametersE" title="Link to this definition">¶</a><br /></dt>
@@ -781,10 +787,10 @@
 <li><a class="reference internal" href="#_CPPv4N6banana3api19send_invoice_args_t5titleE"><code class="docutils literal notranslate"><span class="pre">send_invoice_args_t::title</span></code></a></li>
 <li><a class="reference internal" href="#_CPPv4N6banana3api19send_invoice_args_t11descriptionE"><code class="docutils literal notranslate"><span class="pre">send_invoice_args_t::description</span></code></a></li>
 <li><a class="reference internal" href="#_CPPv4N6banana3api19send_invoice_args_t7payloadE"><code class="docutils literal notranslate"><span class="pre">send_invoice_args_t::payload</span></code></a></li>
-<li><a class="reference internal" href="#_CPPv4N6banana3api19send_invoice_args_t14provider_tokenE"><code class="docutils literal notranslate"><span class="pre">send_invoice_args_t::provider_token</span></code></a></li>
 <li><a class="reference internal" href="#_CPPv4N6banana3api19send_invoice_args_t8currencyE"><code class="docutils literal notranslate"><span class="pre">send_invoice_args_t::currency</span></code></a></li>
 <li><a class="reference internal" href="#_CPPv4N6banana3api19send_invoice_args_t6pricesE"><code class="docutils literal notranslate"><span class="pre">send_invoice_args_t::prices</span></code></a></li>
 <li><a class="reference internal" href="#_CPPv4N6banana3api19send_invoice_args_t17message_thread_idE"><code class="docutils literal notranslate"><span class="pre">send_invoice_args_t::message_thread_id</span></code></a></li>
+<li><a class="reference internal" href="#_CPPv4N6banana3api19send_invoice_args_t14provider_tokenE"><code class="docutils literal notranslate"><span class="pre">send_invoice_args_t::provider_token</span></code></a></li>
 <li><a class="reference internal" href="#_CPPv4N6banana3api19send_invoice_args_t14max_tip_amountE"><code class="docutils literal notranslate"><span class="pre">send_invoice_args_t::max_tip_amount</span></code></a></li>
 <li><a class="reference internal" href="#_CPPv4N6banana3api19send_invoice_args_t21suggested_tip_amountsE"><code class="docutils literal notranslate"><span class="pre">send_invoice_args_t::suggested_tip_amounts</span></code></a></li>
 <li><a class="reference internal" href="#_CPPv4N6banana3api19send_invoice_args_t15start_parameterE"><code class="docutils literal notranslate"><span class="pre">send_invoice_args_t::start_parameter</span></code></a></li>
@@ -802,6 +808,7 @@
 <li><a class="reference internal" href="#_CPPv4N6banana3api19send_invoice_args_t11is_flexibleE"><code class="docutils literal notranslate"><span class="pre">send_invoice_args_t::is_flexible</span></code></a></li>
 <li><a class="reference internal" href="#_CPPv4N6banana3api19send_invoice_args_t20disable_notificationE"><code class="docutils literal notranslate"><span class="pre">send_invoice_args_t::disable_notification</span></code></a></li>
 <li><a class="reference internal" href="#_CPPv4N6banana3api19send_invoice_args_t15protect_contentE"><code class="docutils literal notranslate"><span class="pre">send_invoice_args_t::protect_content</span></code></a></li>
+<li><a class="reference internal" href="#_CPPv4N6banana3api19send_invoice_args_t17message_effect_idE"><code class="docutils literal notranslate"><span class="pre">send_invoice_args_t::message_effect_id</span></code></a></li>
 <li><a class="reference internal" href="#_CPPv4N6banana3api19send_invoice_args_t16reply_parametersE"><code class="docutils literal notranslate"><span class="pre">send_invoice_args_t::reply_parameters</span></code></a></li>
 <li><a class="reference internal" href="#_CPPv4N6banana3api19send_invoice_args_t12reply_markupE"><code class="docutils literal notranslate"><span class="pre">send_invoice_args_t::reply_markup</span></code></a></li>
 </ul>

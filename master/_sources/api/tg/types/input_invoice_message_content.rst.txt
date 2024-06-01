@@ -19,21 +19,21 @@ input_invoice_message_content_t
 
    Bot-defined invoice payload, 1-128 bytes. This will not be displayed to the user, use for your internal processes.
 
-   .. cpp:member:: string_t provider_token
-
-   Payment provider token, obtained via @BotFather
-
    .. cpp:member:: string_t currency
 
-   Three-letter ISO 4217 currency code, see more on currencies
+   Three-letter ISO 4217 currency code, see more on currencies. Pass “XTR” for payments in Telegram Stars.
 
    .. cpp:member:: array_t<labeled_price_t> prices
 
-   Price breakdown, a JSON-serialized list of components (e.g. product price, tax, discount, delivery cost, delivery tax, bonus, etc.)
+   Price breakdown, a JSON-serialized list of components (e.g. product price, tax, discount, delivery cost, delivery tax, bonus, etc.). Must contain exactly one item for payments in Telegram Stars.
+
+   .. cpp:member:: optional_t<string_t> provider_token
+
+   Optional. Payment provider token, obtained via @BotFather. Pass an empty string for payments in Telegram Stars.
 
    .. cpp:member:: optional_t<integer_t> max_tip_amount
 
-   Optional. The maximum accepted amount for tips in the smallest units of the currency (integer, not float/double). For example, for a maximum tip of US$ 1.45 pass max_tip_amount = 145. See the exp parameter in currencies.json, it shows the number of digits past the decimal point for each currency (2 for the majority of currencies). Defaults to 0
+   Optional. The maximum accepted amount for tips in the smallest units of the currency (integer, not float/double). For example, for a maximum tip of US$ 1.45 pass max_tip_amount = 145. See the exp parameter in currencies.json, it shows the number of digits past the decimal point for each currency (2 for the majority of currencies). Defaults to 0. Not supported for payments in Telegram Stars.
 
    .. cpp:member:: optional_t<array_t<integer_t>> suggested_tip_amounts
 
@@ -61,28 +61,28 @@ input_invoice_message_content_t
 
    .. cpp:member:: optional_t<boolean_t> need_name
 
-   Optional. Pass True if you require the user's full name to complete the order
+   Optional. Pass True if you require the user's full name to complete the order. Ignored for payments in Telegram Stars.
 
    .. cpp:member:: optional_t<boolean_t> need_phone_number
 
-   Optional. Pass True if you require the user's phone number to complete the order
+   Optional. Pass True if you require the user's phone number to complete the order. Ignored for payments in Telegram Stars.
 
    .. cpp:member:: optional_t<boolean_t> need_email
 
-   Optional. Pass True if you require the user's email address to complete the order
+   Optional. Pass True if you require the user's email address to complete the order. Ignored for payments in Telegram Stars.
 
    .. cpp:member:: optional_t<boolean_t> need_shipping_address
 
-   Optional. Pass True if you require the user's shipping address to complete the order
+   Optional. Pass True if you require the user's shipping address to complete the order. Ignored for payments in Telegram Stars.
 
    .. cpp:member:: optional_t<boolean_t> send_phone_number_to_provider
 
-   Optional. Pass True if the user's phone number should be sent to provider
+   Optional. Pass True if the user's phone number should be sent to the provider. Ignored for payments in Telegram Stars.
 
    .. cpp:member:: optional_t<boolean_t> send_email_to_provider
 
-   Optional. Pass True if the user's email address should be sent to provider
+   Optional. Pass True if the user's email address should be sent to the provider. Ignored for payments in Telegram Stars.
 
    .. cpp:member:: optional_t<boolean_t> is_flexible
 
-   Optional. Pass True if the final price depends on the shipping method
+   Optional. Pass True if the final price depends on the shipping method. Ignored for payments in Telegram Stars.

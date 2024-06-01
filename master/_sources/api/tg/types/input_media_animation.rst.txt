@@ -31,6 +31,10 @@ input_media_animation_t
 
    Optional. List of special entities that appear in the caption, which can be specified instead of parse_mode
 
+   .. cpp:member:: optional_t<boolean_t> show_caption_above_media
+
+   Optional. Pass True, if the caption must be shown above the message media
+
    .. cpp:member:: optional_t<integer_t> width
 
    Optional. Animation width

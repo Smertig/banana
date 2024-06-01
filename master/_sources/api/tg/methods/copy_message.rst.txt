@@ -48,6 +48,10 @@ copy_message
 
    A JSON-serialized list of special entities that appear in the new caption, which can be specified instead of parse_mode
 
+   .. cpp:member:: optional_t<boolean_t> show_caption_above_media
+
+   Pass True, if the caption must be shown above the message media. Ignored if a new caption isn't specified.
+
    .. cpp:member:: optional_t<boolean_t> disable_notification
 
    Sends the message silently. Users will receive a notification with no sound.

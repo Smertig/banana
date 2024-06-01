@@ -56,6 +56,10 @@ send_contact
 
    Protects the contents of the sent message from forwarding and saving
 
+   .. cpp:member:: optional_t<string_t> message_effect_id
+
+   Unique identifier of the message effect to be added to the message; for private chats only
+
    .. cpp:member:: optional_t<reply_parameters_t> reply_parameters
 
    Description of the message to reply to
