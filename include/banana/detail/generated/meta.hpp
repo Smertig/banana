@@ -3780,7 +3780,6 @@ struct reflector<api::message_t> {
         f("sender_chat"sv, &api::message_t::sender_chat);
         f("sender_boost_count"sv, &api::message_t::sender_boost_count);
         f("sender_business_bot"sv, &api::message_t::sender_business_bot);
-        f("business_connection_id"sv, &api::message_t::business_connection_id);
         f("forward_origin"sv, &api::message_t::forward_origin);
         f("is_topic_message"sv, &api::message_t::is_topic_message, true);
         f("is_automatic_forward"sv, &api::message_t::is_automatic_forward, true);
@@ -3855,6 +3854,7 @@ struct reflector<api::message_t> {
         f("video_chat_participants_invited"sv, &api::message_t::video_chat_participants_invited);
         f("web_app_data"sv, &api::message_t::web_app_data);
         f("reply_markup"sv, &api::message_t::reply_markup);
+        f("business_connection_id"sv, &api::message_t::business_connection_id);
     }
 };
 
@@ -4475,7 +4475,6 @@ struct reflector<api::send_animation_args_t> {
         using namespace std::literals;
         f("chat_id"sv, &api::send_animation_args_t::chat_id);
         f("animation"sv, &api::send_animation_args_t::animation);
-        f("business_connection_id"sv, &api::send_animation_args_t::business_connection_id);
         f("message_thread_id"sv, &api::send_animation_args_t::message_thread_id);
         f("duration"sv, &api::send_animation_args_t::duration);
         f("width"sv, &api::send_animation_args_t::width);
@@ -4491,6 +4490,7 @@ struct reflector<api::send_animation_args_t> {
         f("message_effect_id"sv, &api::send_animation_args_t::message_effect_id);
         f("reply_parameters"sv, &api::send_animation_args_t::reply_parameters);
         f("reply_markup"sv, &api::send_animation_args_t::reply_markup);
+        f("business_connection_id"sv, &api::send_animation_args_t::business_connection_id);
     }
 };
 
@@ -4507,7 +4507,6 @@ struct reflector<api::send_audio_args_t> {
         using namespace std::literals;
         f("chat_id"sv, &api::send_audio_args_t::chat_id);
         f("audio"sv, &api::send_audio_args_t::audio);
-        f("business_connection_id"sv, &api::send_audio_args_t::business_connection_id);
         f("message_thread_id"sv, &api::send_audio_args_t::message_thread_id);
         f("caption"sv, &api::send_audio_args_t::caption);
         f("parse_mode"sv, &api::send_audio_args_t::parse_mode);
@@ -4521,6 +4520,7 @@ struct reflector<api::send_audio_args_t> {
         f("message_effect_id"sv, &api::send_audio_args_t::message_effect_id);
         f("reply_parameters"sv, &api::send_audio_args_t::reply_parameters);
         f("reply_markup"sv, &api::send_audio_args_t::reply_markup);
+        f("business_connection_id"sv, &api::send_audio_args_t::business_connection_id);
     }
 };
 
@@ -4537,8 +4537,8 @@ struct reflector<api::send_chat_action_args_t> {
         using namespace std::literals;
         f("chat_id"sv, &api::send_chat_action_args_t::chat_id);
         f("action"sv, &api::send_chat_action_args_t::action);
-        f("business_connection_id"sv, &api::send_chat_action_args_t::business_connection_id);
         f("message_thread_id"sv, &api::send_chat_action_args_t::message_thread_id);
+        f("business_connection_id"sv, &api::send_chat_action_args_t::business_connection_id);
     }
 };
 
@@ -4556,7 +4556,6 @@ struct reflector<api::send_contact_args_t> {
         f("chat_id"sv, &api::send_contact_args_t::chat_id);
         f("phone_number"sv, &api::send_contact_args_t::phone_number);
         f("first_name"sv, &api::send_contact_args_t::first_name);
-        f("business_connection_id"sv, &api::send_contact_args_t::business_connection_id);
         f("message_thread_id"sv, &api::send_contact_args_t::message_thread_id);
         f("last_name"sv, &api::send_contact_args_t::last_name);
         f("vcard"sv, &api::send_contact_args_t::vcard);
@@ -4565,6 +4564,7 @@ struct reflector<api::send_contact_args_t> {
         f("message_effect_id"sv, &api::send_contact_args_t::message_effect_id);
         f("reply_parameters"sv, &api::send_contact_args_t::reply_parameters);
         f("reply_markup"sv, &api::send_contact_args_t::reply_markup);
+        f("business_connection_id"sv, &api::send_contact_args_t::business_connection_id);
     }
 };
 
@@ -4580,7 +4580,6 @@ struct reflector<api::send_dice_args_t> {
     static void for_each_field(F&& f) {
         using namespace std::literals;
         f("chat_id"sv, &api::send_dice_args_t::chat_id);
-        f("business_connection_id"sv, &api::send_dice_args_t::business_connection_id);
         f("message_thread_id"sv, &api::send_dice_args_t::message_thread_id);
         f("emoji"sv, &api::send_dice_args_t::emoji);
         f("disable_notification"sv, &api::send_dice_args_t::disable_notification);
@@ -4588,6 +4587,7 @@ struct reflector<api::send_dice_args_t> {
         f("message_effect_id"sv, &api::send_dice_args_t::message_effect_id);
         f("reply_parameters"sv, &api::send_dice_args_t::reply_parameters);
         f("reply_markup"sv, &api::send_dice_args_t::reply_markup);
+        f("business_connection_id"sv, &api::send_dice_args_t::business_connection_id);
     }
 };
 
@@ -4604,7 +4604,6 @@ struct reflector<api::send_document_args_t> {
         using namespace std::literals;
         f("chat_id"sv, &api::send_document_args_t::chat_id);
         f("document"sv, &api::send_document_args_t::document);
-        f("business_connection_id"sv, &api::send_document_args_t::business_connection_id);
         f("message_thread_id"sv, &api::send_document_args_t::message_thread_id);
         f("thumbnail"sv, &api::send_document_args_t::thumbnail);
         f("caption"sv, &api::send_document_args_t::caption);
@@ -4616,6 +4615,7 @@ struct reflector<api::send_document_args_t> {
         f("message_effect_id"sv, &api::send_document_args_t::message_effect_id);
         f("reply_parameters"sv, &api::send_document_args_t::reply_parameters);
         f("reply_markup"sv, &api::send_document_args_t::reply_markup);
+        f("business_connection_id"sv, &api::send_document_args_t::business_connection_id);
     }
 };
 
@@ -4632,13 +4632,13 @@ struct reflector<api::send_game_args_t> {
         using namespace std::literals;
         f("chat_id"sv, &api::send_game_args_t::chat_id);
         f("game_short_name"sv, &api::send_game_args_t::game_short_name);
-        f("business_connection_id"sv, &api::send_game_args_t::business_connection_id);
         f("message_thread_id"sv, &api::send_game_args_t::message_thread_id);
         f("disable_notification"sv, &api::send_game_args_t::disable_notification);
         f("protect_content"sv, &api::send_game_args_t::protect_content);
         f("message_effect_id"sv, &api::send_game_args_t::message_effect_id);
         f("reply_parameters"sv, &api::send_game_args_t::reply_parameters);
         f("reply_markup"sv, &api::send_game_args_t::reply_markup);
+        f("business_connection_id"sv, &api::send_game_args_t::business_connection_id);
     }
 };
 
@@ -4698,7 +4698,6 @@ struct reflector<api::send_location_args_t> {
         f("chat_id"sv, &api::send_location_args_t::chat_id);
         f("latitude"sv, &api::send_location_args_t::latitude);
         f("longitude"sv, &api::send_location_args_t::longitude);
-        f("business_connection_id"sv, &api::send_location_args_t::business_connection_id);
         f("message_thread_id"sv, &api::send_location_args_t::message_thread_id);
         f("horizontal_accuracy"sv, &api::send_location_args_t::horizontal_accuracy);
         f("live_period"sv, &api::send_location_args_t::live_period);
@@ -4709,6 +4708,7 @@ struct reflector<api::send_location_args_t> {
         f("message_effect_id"sv, &api::send_location_args_t::message_effect_id);
         f("reply_parameters"sv, &api::send_location_args_t::reply_parameters);
         f("reply_markup"sv, &api::send_location_args_t::reply_markup);
+        f("business_connection_id"sv, &api::send_location_args_t::business_connection_id);
     }
 };
 
@@ -4725,12 +4725,12 @@ struct reflector<api::send_media_group_args_t> {
         using namespace std::literals;
         f("chat_id"sv, &api::send_media_group_args_t::chat_id);
         f("media"sv, &api::send_media_group_args_t::media);
-        f("business_connection_id"sv, &api::send_media_group_args_t::business_connection_id);
         f("message_thread_id"sv, &api::send_media_group_args_t::message_thread_id);
         f("disable_notification"sv, &api::send_media_group_args_t::disable_notification);
         f("protect_content"sv, &api::send_media_group_args_t::protect_content);
         f("message_effect_id"sv, &api::send_media_group_args_t::message_effect_id);
         f("reply_parameters"sv, &api::send_media_group_args_t::reply_parameters);
+        f("business_connection_id"sv, &api::send_media_group_args_t::business_connection_id);
     }
 };
 
@@ -4747,7 +4747,6 @@ struct reflector<api::send_message_args_t> {
         using namespace std::literals;
         f("chat_id"sv, &api::send_message_args_t::chat_id);
         f("text"sv, &api::send_message_args_t::text);
-        f("business_connection_id"sv, &api::send_message_args_t::business_connection_id);
         f("message_thread_id"sv, &api::send_message_args_t::message_thread_id);
         f("parse_mode"sv, &api::send_message_args_t::parse_mode);
         f("entities"sv, &api::send_message_args_t::entities);
@@ -4757,6 +4756,7 @@ struct reflector<api::send_message_args_t> {
         f("message_effect_id"sv, &api::send_message_args_t::message_effect_id);
         f("reply_parameters"sv, &api::send_message_args_t::reply_parameters);
         f("reply_markup"sv, &api::send_message_args_t::reply_markup);
+        f("business_connection_id"sv, &api::send_message_args_t::business_connection_id);
     }
 };
 
@@ -4773,7 +4773,6 @@ struct reflector<api::send_photo_args_t> {
         using namespace std::literals;
         f("chat_id"sv, &api::send_photo_args_t::chat_id);
         f("photo"sv, &api::send_photo_args_t::photo);
-        f("business_connection_id"sv, &api::send_photo_args_t::business_connection_id);
         f("message_thread_id"sv, &api::send_photo_args_t::message_thread_id);
         f("caption"sv, &api::send_photo_args_t::caption);
         f("parse_mode"sv, &api::send_photo_args_t::parse_mode);
@@ -4785,6 +4784,7 @@ struct reflector<api::send_photo_args_t> {
         f("message_effect_id"sv, &api::send_photo_args_t::message_effect_id);
         f("reply_parameters"sv, &api::send_photo_args_t::reply_parameters);
         f("reply_markup"sv, &api::send_photo_args_t::reply_markup);
+        f("business_connection_id"sv, &api::send_photo_args_t::business_connection_id);
     }
 };
 
@@ -4802,7 +4802,6 @@ struct reflector<api::send_poll_args_t> {
         f("chat_id"sv, &api::send_poll_args_t::chat_id);
         f("question"sv, &api::send_poll_args_t::question);
         f("options"sv, &api::send_poll_args_t::options);
-        f("business_connection_id"sv, &api::send_poll_args_t::business_connection_id);
         f("message_thread_id"sv, &api::send_poll_args_t::message_thread_id);
         f("question_parse_mode"sv, &api::send_poll_args_t::question_parse_mode);
         f("question_entities"sv, &api::send_poll_args_t::question_entities);
@@ -4821,6 +4820,7 @@ struct reflector<api::send_poll_args_t> {
         f("message_effect_id"sv, &api::send_poll_args_t::message_effect_id);
         f("reply_parameters"sv, &api::send_poll_args_t::reply_parameters);
         f("reply_markup"sv, &api::send_poll_args_t::reply_markup);
+        f("business_connection_id"sv, &api::send_poll_args_t::business_connection_id);
     }
 };
 
@@ -4837,7 +4837,6 @@ struct reflector<api::send_sticker_args_t> {
         using namespace std::literals;
         f("chat_id"sv, &api::send_sticker_args_t::chat_id);
         f("sticker"sv, &api::send_sticker_args_t::sticker);
-        f("business_connection_id"sv, &api::send_sticker_args_t::business_connection_id);
         f("message_thread_id"sv, &api::send_sticker_args_t::message_thread_id);
         f("emoji"sv, &api::send_sticker_args_t::emoji);
         f("disable_notification"sv, &api::send_sticker_args_t::disable_notification);
@@ -4845,6 +4844,7 @@ struct reflector<api::send_sticker_args_t> {
         f("message_effect_id"sv, &api::send_sticker_args_t::message_effect_id);
         f("reply_parameters"sv, &api::send_sticker_args_t::reply_parameters);
         f("reply_markup"sv, &api::send_sticker_args_t::reply_markup);
+        f("business_connection_id"sv, &api::send_sticker_args_t::business_connection_id);
     }
 };
 
@@ -4864,7 +4864,6 @@ struct reflector<api::send_venue_args_t> {
         f("longitude"sv, &api::send_venue_args_t::longitude);
         f("title"sv, &api::send_venue_args_t::title);
         f("address"sv, &api::send_venue_args_t::address);
-        f("business_connection_id"sv, &api::send_venue_args_t::business_connection_id);
         f("message_thread_id"sv, &api::send_venue_args_t::message_thread_id);
         f("foursquare_id"sv, &api::send_venue_args_t::foursquare_id);
         f("foursquare_type"sv, &api::send_venue_args_t::foursquare_type);
@@ -4875,6 +4874,7 @@ struct reflector<api::send_venue_args_t> {
         f("message_effect_id"sv, &api::send_venue_args_t::message_effect_id);
         f("reply_parameters"sv, &api::send_venue_args_t::reply_parameters);
         f("reply_markup"sv, &api::send_venue_args_t::reply_markup);
+        f("business_connection_id"sv, &api::send_venue_args_t::business_connection_id);
     }
 };
 
@@ -4891,7 +4891,6 @@ struct reflector<api::send_video_args_t> {
         using namespace std::literals;
         f("chat_id"sv, &api::send_video_args_t::chat_id);
         f("video"sv, &api::send_video_args_t::video);
-        f("business_connection_id"sv, &api::send_video_args_t::business_connection_id);
         f("message_thread_id"sv, &api::send_video_args_t::message_thread_id);
         f("duration"sv, &api::send_video_args_t::duration);
         f("width"sv, &api::send_video_args_t::width);
@@ -4908,6 +4907,7 @@ struct reflector<api::send_video_args_t> {
         f("message_effect_id"sv, &api::send_video_args_t::message_effect_id);
         f("reply_parameters"sv, &api::send_video_args_t::reply_parameters);
         f("reply_markup"sv, &api::send_video_args_t::reply_markup);
+        f("business_connection_id"sv, &api::send_video_args_t::business_connection_id);
     }
 };
 
@@ -4924,7 +4924,6 @@ struct reflector<api::send_video_note_args_t> {
         using namespace std::literals;
         f("chat_id"sv, &api::send_video_note_args_t::chat_id);
         f("video_note"sv, &api::send_video_note_args_t::video_note);
-        f("business_connection_id"sv, &api::send_video_note_args_t::business_connection_id);
         f("message_thread_id"sv, &api::send_video_note_args_t::message_thread_id);
         f("duration"sv, &api::send_video_note_args_t::duration);
         f("length"sv, &api::send_video_note_args_t::length);
@@ -4934,6 +4933,7 @@ struct reflector<api::send_video_note_args_t> {
         f("message_effect_id"sv, &api::send_video_note_args_t::message_effect_id);
         f("reply_parameters"sv, &api::send_video_note_args_t::reply_parameters);
         f("reply_markup"sv, &api::send_video_note_args_t::reply_markup);
+        f("business_connection_id"sv, &api::send_video_note_args_t::business_connection_id);
     }
 };
 
@@ -4950,7 +4950,6 @@ struct reflector<api::send_voice_args_t> {
         using namespace std::literals;
         f("chat_id"sv, &api::send_voice_args_t::chat_id);
         f("voice"sv, &api::send_voice_args_t::voice);
-        f("business_connection_id"sv, &api::send_voice_args_t::business_connection_id);
         f("message_thread_id"sv, &api::send_voice_args_t::message_thread_id);
         f("caption"sv, &api::send_voice_args_t::caption);
         f("parse_mode"sv, &api::send_voice_args_t::parse_mode);
@@ -4961,6 +4960,7 @@ struct reflector<api::send_voice_args_t> {
         f("message_effect_id"sv, &api::send_voice_args_t::message_effect_id);
         f("reply_parameters"sv, &api::send_voice_args_t::reply_parameters);
         f("reply_markup"sv, &api::send_voice_args_t::reply_markup);
+        f("business_connection_id"sv, &api::send_voice_args_t::business_connection_id);
     }
 };
 

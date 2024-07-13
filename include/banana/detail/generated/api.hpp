@@ -1811,7 +1811,6 @@ void revoke_chat_invite_link(Agent&& agent, revoke_chat_invite_link_args_t args,
 struct send_animation_args_t {
     variant_t<integer_t, string_t>                                                                                   chat_id;                  // Unique identifier for the target chat or username of the target channel (in the format @channelusername)
     variant_t<input_file_t, string_t>                                                                                animation;                // Animation to send. Pass a file_id as String to send an animation that exists on the Telegram servers (recommended), pass an HTTP URL as a String for Telegram to get an animation from the Internet, or upload a new animation using multipart/form-data. More information on Sending Files »
-    optional_t<string_t>                                                                                             business_connection_id;   // Unique identifier of the business connection on behalf of which the message will be sent
     optional_t<integer_t>                                                                                            message_thread_id;        // Unique identifier for the target message thread (topic) of the forum; for forum supergroups only
     optional_t<integer_t>                                                                                            duration;                 // Duration of sent animation in seconds
     optional_t<integer_t>                                                                                            width;                    // Animation width
@@ -1827,6 +1826,7 @@ struct send_animation_args_t {
     optional_t<string_t>                                                                                             message_effect_id;        // Unique identifier of the message effect to be added to the message; for private chats only
     optional_t<reply_parameters_t>                                                                                   reply_parameters;         // Description of the message to reply to
     optional_t<variant_t<inline_keyboard_markup_t, reply_keyboard_markup_t, reply_keyboard_remove_t, force_reply_t>> reply_markup;             // Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove a reply keyboard or to force a reply from the user
+    optional_t<string_t>                                                                                             business_connection_id;   // Unique identifier of the business connection on behalf of which the message will be sent
 };
 
 /**
@@ -1866,7 +1866,6 @@ void send_animation(Agent&& agent, send_animation_args_t args, F&& callback) {
 struct send_audio_args_t {
     variant_t<integer_t, string_t>                                                                                   chat_id;                // Unique identifier for the target chat or username of the target channel (in the format @channelusername)
     variant_t<input_file_t, string_t>                                                                                audio;                  // Audio file to send. Pass a file_id as String to send an audio file that exists on the Telegram servers (recommended), pass an HTTP URL as a String for Telegram to get an audio file from the Internet, or upload a new one using multipart/form-data. More information on Sending Files »
-    optional_t<string_t>                                                                                             business_connection_id; // Unique identifier of the business connection on behalf of which the message will be sent
     optional_t<integer_t>                                                                                            message_thread_id;      // Unique identifier for the target message thread (topic) of the forum; for forum supergroups only
     optional_t<string_t>                                                                                             caption;                // Audio caption, 0-1024 characters after entities parsing
     optional_t<string_t>                                                                                             parse_mode;             // Mode for parsing entities in the audio caption. See formatting options for more details.
@@ -1880,6 +1879,7 @@ struct send_audio_args_t {
     optional_t<string_t>                                                                                             message_effect_id;      // Unique identifier of the message effect to be added to the message; for private chats only
     optional_t<reply_parameters_t>                                                                                   reply_parameters;       // Description of the message to reply to
     optional_t<variant_t<inline_keyboard_markup_t, reply_keyboard_markup_t, reply_keyboard_remove_t, force_reply_t>> reply_markup;           // Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove a reply keyboard or to force a reply from the user
+    optional_t<string_t>                                                                                             business_connection_id; // Unique identifier of the business connection on behalf of which the message will be sent
 };
 
 /**
@@ -1917,8 +1917,8 @@ void send_audio(Agent&& agent, send_audio_args_t args, F&& callback) {
 struct send_chat_action_args_t {
     variant_t<integer_t, string_t> chat_id;                // Unique identifier for the target chat or username of the target channel (in the format @channelusername)
     string_t                       action;                 // Type of action to broadcast. Choose one, depending on what the user is about to receive: typing for text messages, upload_photo for photos, record_video or upload_video for videos, record_voice or upload_voice for voice notes, upload_document for general files, choose_sticker for stickers, find_location for location data, record_video_note or upload_video_note for video notes.
-    optional_t<string_t>           business_connection_id; // Unique identifier of the business connection on behalf of which the action will be sent
     optional_t<integer_t>          message_thread_id;      // Unique identifier for the target message thread; for supergroups only
+    optional_t<string_t>           business_connection_id; // Unique identifier of the business connection on behalf of which the action will be sent
 };
 
 /**
@@ -1945,7 +1945,6 @@ struct send_contact_args_t {
     variant_t<integer_t, string_t>                                                                                   chat_id;                // Unique identifier for the target chat or username of the target channel (in the format @channelusername)
     string_t                                                                                                         phone_number;           // Contact's phone number
     string_t                                                                                                         first_name;             // Contact's first name
-    optional_t<string_t>                                                                                             business_connection_id; // Unique identifier of the business connection on behalf of which the message will be sent
     optional_t<integer_t>                                                                                            message_thread_id;      // Unique identifier for the target message thread (topic) of the forum; for forum supergroups only
     optional_t<string_t>                                                                                             last_name;              // Contact's last name
     optional_t<string_t>                                                                                             vcard;                  // Additional data about the contact in the form of a vCard, 0-2048 bytes
@@ -1954,6 +1953,7 @@ struct send_contact_args_t {
     optional_t<string_t>                                                                                             message_effect_id;      // Unique identifier of the message effect to be added to the message; for private chats only
     optional_t<reply_parameters_t>                                                                                   reply_parameters;       // Description of the message to reply to
     optional_t<variant_t<inline_keyboard_markup_t, reply_keyboard_markup_t, reply_keyboard_remove_t, force_reply_t>> reply_markup;           // Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove a reply keyboard or to force a reply from the user
+    optional_t<string_t>                                                                                             business_connection_id; // Unique identifier of the business connection on behalf of which the message will be sent
 };
 
 /**
@@ -1986,7 +1986,6 @@ void send_contact(Agent&& agent, send_contact_args_t args, F&& callback) {
 // Arguments to send_dice method
 struct send_dice_args_t {
     variant_t<integer_t, string_t>                                                                                   chat_id;                // Unique identifier for the target chat or username of the target channel (in the format @channelusername)
-    optional_t<string_t>                                                                                             business_connection_id; // Unique identifier of the business connection on behalf of which the message will be sent
     optional_t<integer_t>                                                                                            message_thread_id;      // Unique identifier for the target message thread (topic) of the forum; for forum supergroups only
     optional_t<string_t>                                                                                             emoji;                  // Emoji on which the dice throw animation is based. Currently, must be one of “🎲”, “🎯”, “🏀”, “⚽”, “🎳”, or “🎰”. Dice can have values 1-6 for “🎲”, “🎯” and “🎳”, values 1-5 for “🏀” and “⚽”, and values 1-64 for “🎰”. Defaults to “🎲”
     optional_t<boolean_t>                                                                                            disable_notification;   // Sends the message silently. Users will receive a notification with no sound.
@@ -1994,6 +1993,7 @@ struct send_dice_args_t {
     optional_t<string_t>                                                                                             message_effect_id;      // Unique identifier of the message effect to be added to the message; for private chats only
     optional_t<reply_parameters_t>                                                                                   reply_parameters;       // Description of the message to reply to
     optional_t<variant_t<inline_keyboard_markup_t, reply_keyboard_markup_t, reply_keyboard_remove_t, force_reply_t>> reply_markup;           // Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove a reply keyboard or to force a reply from the user
+    optional_t<string_t>                                                                                             business_connection_id; // Unique identifier of the business connection on behalf of which the message will be sent
 };
 
 /**
@@ -2024,7 +2024,6 @@ void send_dice(Agent&& agent, send_dice_args_t args, F&& callback) {
 struct send_document_args_t {
     variant_t<integer_t, string_t>                                                                                   chat_id;                        // Unique identifier for the target chat or username of the target channel (in the format @channelusername)
     variant_t<input_file_t, string_t>                                                                                document;                       // File to send. Pass a file_id as String to send a file that exists on the Telegram servers (recommended), pass an HTTP URL as a String for Telegram to get a file from the Internet, or upload a new one using multipart/form-data. More information on Sending Files »
-    optional_t<string_t>                                                                                             business_connection_id;         // Unique identifier of the business connection on behalf of which the message will be sent
     optional_t<integer_t>                                                                                            message_thread_id;              // Unique identifier for the target message thread (topic) of the forum; for forum supergroups only
     optional_t<variant_t<input_file_t, string_t>>                                                                    thumbnail;                      // Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail's width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can't be reused and can be only uploaded as a new file, so you can pass “attach://<file_attach_name>” if the thumbnail was uploaded using multipart/form-data under <file_attach_name>. More information on Sending Files »
     optional_t<string_t>                                                                                             caption;                        // Document caption (may also be used when resending documents by file_id), 0-1024 characters after entities parsing
@@ -2036,6 +2035,7 @@ struct send_document_args_t {
     optional_t<string_t>                                                                                             message_effect_id;              // Unique identifier of the message effect to be added to the message; for private chats only
     optional_t<reply_parameters_t>                                                                                   reply_parameters;               // Description of the message to reply to
     optional_t<variant_t<inline_keyboard_markup_t, reply_keyboard_markup_t, reply_keyboard_remove_t, force_reply_t>> reply_markup;                   // Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove a reply keyboard or to force a reply from the user
+    optional_t<string_t>                                                                                             business_connection_id;         // Unique identifier of the business connection on behalf of which the message will be sent
 };
 
 /**
@@ -2071,13 +2071,13 @@ void send_document(Agent&& agent, send_document_args_t args, F&& callback) {
 struct send_game_args_t {
     integer_t                            chat_id;                // Unique identifier for the target chat
     string_t                             game_short_name;        // Short name of the game, serves as the unique identifier for the game. Set up your games via @BotFather.
-    optional_t<string_t>                 business_connection_id; // Unique identifier of the business connection on behalf of which the message will be sent
     optional_t<integer_t>                message_thread_id;      // Unique identifier for the target message thread (topic) of the forum; for forum supergroups only
     optional_t<boolean_t>                disable_notification;   // Sends the message silently. Users will receive a notification with no sound.
     optional_t<boolean_t>                protect_content;        // Protects the contents of the sent message from forwarding and saving
     optional_t<string_t>                 message_effect_id;      // Unique identifier of the message effect to be added to the message; for private chats only
     optional_t<reply_parameters_t>       reply_parameters;       // Description of the message to reply to
     optional_t<inline_keyboard_markup_t> reply_markup;           // A JSON-serialized object for an inline keyboard. If empty, one 'Play game_title' button will be shown. If not empty, the first button must launch the game.
+    optional_t<string_t>                 business_connection_id; // Unique identifier of the business connection on behalf of which the message will be sent
 };
 
 /**
@@ -2184,7 +2184,6 @@ struct send_location_args_t {
     variant_t<integer_t, string_t>                                                                                   chat_id;                // Unique identifier for the target chat or username of the target channel (in the format @channelusername)
     float_t                                                                                                          latitude;               // Latitude of the location
     float_t                                                                                                          longitude;              // Longitude of the location
-    optional_t<string_t>                                                                                             business_connection_id; // Unique identifier of the business connection on behalf of which the message will be sent
     optional_t<integer_t>                                                                                            message_thread_id;      // Unique identifier for the target message thread (topic) of the forum; for forum supergroups only
     optional_t<float_t>                                                                                              horizontal_accuracy;    // The radius of uncertainty for the location, measured in meters; 0-1500
     optional_t<integer_t>                                                                                            live_period;            // Period in seconds during which the location will be updated (see Live Locations, should be between 60 and 86400, or 0x7FFFFFFF for live locations that can be edited indefinitely.
@@ -2195,6 +2194,7 @@ struct send_location_args_t {
     optional_t<string_t>                                                                                             message_effect_id;      // Unique identifier of the message effect to be added to the message; for private chats only
     optional_t<reply_parameters_t>                                                                                   reply_parameters;       // Description of the message to reply to
     optional_t<variant_t<inline_keyboard_markup_t, reply_keyboard_markup_t, reply_keyboard_remove_t, force_reply_t>> reply_markup;           // Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove a reply keyboard or to force a reply from the user
+    optional_t<string_t>                                                                                             business_connection_id; // Unique identifier of the business connection on behalf of which the message will be sent
 };
 
 /**
@@ -2230,12 +2230,12 @@ void send_location(Agent&& agent, send_location_args_t args, F&& callback) {
 struct send_media_group_args_t {
     variant_t<integer_t, string_t>                                                                            chat_id;                // Unique identifier for the target chat or username of the target channel (in the format @channelusername)
     array_t<variant_t<input_media_audio_t, input_media_document_t, input_media_photo_t, input_media_video_t>> media;                  // A JSON-serialized array describing messages to be sent, must include 2-10 items
-    optional_t<string_t>                                                                                      business_connection_id; // Unique identifier of the business connection on behalf of which the message will be sent
     optional_t<integer_t>                                                                                     message_thread_id;      // Unique identifier for the target message thread (topic) of the forum; for forum supergroups only
     optional_t<boolean_t>                                                                                     disable_notification;   // Sends messages silently. Users will receive a notification with no sound.
     optional_t<boolean_t>                                                                                     protect_content;        // Protects the contents of the sent messages from forwarding and saving
     optional_t<string_t>                                                                                      message_effect_id;      // Unique identifier of the message effect to be added to the message; for private chats only
     optional_t<reply_parameters_t>                                                                            reply_parameters;       // Description of the message to reply to
+    optional_t<string_t>                                                                                      business_connection_id; // Unique identifier of the business connection on behalf of which the message will be sent
 };
 
 /**
@@ -2265,7 +2265,6 @@ void send_media_group(Agent&& agent, send_media_group_args_t args, F&& callback)
 struct send_message_args_t {
     variant_t<integer_t, string_t>                                                                                   chat_id;                // Unique identifier for the target chat or username of the target channel (in the format @channelusername)
     string_t                                                                                                         text;                   // Text of the message to be sent, 1-4096 characters after entities parsing
-    optional_t<string_t>                                                                                             business_connection_id; // Unique identifier of the business connection on behalf of which the message will be sent
     optional_t<integer_t>                                                                                            message_thread_id;      // Unique identifier for the target message thread (topic) of the forum; for forum supergroups only
     optional_t<string_t>                                                                                             parse_mode;             // Mode for parsing entities in the message text. See formatting options for more details.
     optional_t<array_t<message_entity_t>>                                                                            entities;               // A JSON-serialized list of special entities that appear in message text, which can be specified instead of parse_mode
@@ -2275,6 +2274,7 @@ struct send_message_args_t {
     optional_t<string_t>                                                                                             message_effect_id;      // Unique identifier of the message effect to be added to the message; for private chats only
     optional_t<reply_parameters_t>                                                                                   reply_parameters;       // Description of the message to reply to
     optional_t<variant_t<inline_keyboard_markup_t, reply_keyboard_markup_t, reply_keyboard_remove_t, force_reply_t>> reply_markup;           // Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove a reply keyboard or to force a reply from the user
+    optional_t<string_t>                                                                                             business_connection_id; // Unique identifier of the business connection on behalf of which the message will be sent
 };
 
 /**
@@ -2308,7 +2308,6 @@ void send_message(Agent&& agent, send_message_args_t args, F&& callback) {
 struct send_photo_args_t {
     variant_t<integer_t, string_t>                                                                                   chat_id;                  // Unique identifier for the target chat or username of the target channel (in the format @channelusername)
     variant_t<input_file_t, string_t>                                                                                photo;                    // Photo to send. Pass a file_id as String to send a photo that exists on the Telegram servers (recommended), pass an HTTP URL as a String for Telegram to get a photo from the Internet, or upload a new photo using multipart/form-data. The photo must be at most 10 MB in size. The photo's width and height must not exceed 10000 in total. Width and height ratio must be at most 20. More information on Sending Files »
-    optional_t<string_t>                                                                                             business_connection_id;   // Unique identifier of the business connection on behalf of which the message will be sent
     optional_t<integer_t>                                                                                            message_thread_id;        // Unique identifier for the target message thread (topic) of the forum; for forum supergroups only
     optional_t<string_t>                                                                                             caption;                  // Photo caption (may also be used when resending photos by file_id), 0-1024 characters after entities parsing
     optional_t<string_t>                                                                                             parse_mode;               // Mode for parsing entities in the photo caption. See formatting options for more details.
@@ -2320,6 +2319,7 @@ struct send_photo_args_t {
     optional_t<string_t>                                                                                             message_effect_id;        // Unique identifier of the message effect to be added to the message; for private chats only
     optional_t<reply_parameters_t>                                                                                   reply_parameters;         // Description of the message to reply to
     optional_t<variant_t<inline_keyboard_markup_t, reply_keyboard_markup_t, reply_keyboard_remove_t, force_reply_t>> reply_markup;             // Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove a reply keyboard or to force a reply from the user
+    optional_t<string_t>                                                                                             business_connection_id;   // Unique identifier of the business connection on behalf of which the message will be sent
 };
 
 /**
@@ -2356,7 +2356,6 @@ struct send_poll_args_t {
     variant_t<integer_t, string_t>                                                                                   chat_id;                 // Unique identifier for the target chat or username of the target channel (in the format @channelusername)
     string_t                                                                                                         question;                // Poll question, 1-300 characters
     array_t<input_poll_option_t>                                                                                     options;                 // A JSON-serialized list of 2-10 answer options
-    optional_t<string_t>                                                                                             business_connection_id;  // Unique identifier of the business connection on behalf of which the message will be sent
     optional_t<integer_t>                                                                                            message_thread_id;       // Unique identifier for the target message thread (topic) of the forum; for forum supergroups only
     optional_t<string_t>                                                                                             question_parse_mode;     // Mode for parsing entities in the question. See formatting options for more details. Currently, only custom emoji entities are allowed
     optional_t<array_t<message_entity_t>>                                                                            question_entities;       // A JSON-serialized list of special entities that appear in the poll question. It can be specified instead of question_parse_mode
@@ -2375,6 +2374,7 @@ struct send_poll_args_t {
     optional_t<string_t>                                                                                             message_effect_id;       // Unique identifier of the message effect to be added to the message; for private chats only
     optional_t<reply_parameters_t>                                                                                   reply_parameters;        // Description of the message to reply to
     optional_t<variant_t<inline_keyboard_markup_t, reply_keyboard_markup_t, reply_keyboard_remove_t, force_reply_t>> reply_markup;            // Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove a reply keyboard or to force a reply from the user
+    optional_t<string_t>                                                                                             business_connection_id;  // Unique identifier of the business connection on behalf of which the message will be sent
 };
 
 /**
@@ -2418,7 +2418,6 @@ void send_poll(Agent&& agent, send_poll_args_t args, F&& callback) {
 struct send_sticker_args_t {
     variant_t<integer_t, string_t>                                                                                   chat_id;                // Unique identifier for the target chat or username of the target channel (in the format @channelusername)
     variant_t<input_file_t, string_t>                                                                                sticker;                // Sticker to send. Pass a file_id as String to send a file that exists on the Telegram servers (recommended), pass an HTTP URL as a String for Telegram to get a .WEBP sticker from the Internet, or upload a new .WEBP, .TGS, or .WEBM sticker using multipart/form-data. More information on Sending Files ». Video and animated stickers can't be sent via an HTTP URL.
-    optional_t<string_t>                                                                                             business_connection_id; // Unique identifier of the business connection on behalf of which the message will be sent
     optional_t<integer_t>                                                                                            message_thread_id;      // Unique identifier for the target message thread (topic) of the forum; for forum supergroups only
     optional_t<string_t>                                                                                             emoji;                  // Emoji associated with the sticker; only for just uploaded stickers
     optional_t<boolean_t>                                                                                            disable_notification;   // Sends the message silently. Users will receive a notification with no sound.
@@ -2426,6 +2425,7 @@ struct send_sticker_args_t {
     optional_t<string_t>                                                                                             message_effect_id;      // Unique identifier of the message effect to be added to the message; for private chats only
     optional_t<reply_parameters_t>                                                                                   reply_parameters;       // Description of the message to reply to
     optional_t<variant_t<inline_keyboard_markup_t, reply_keyboard_markup_t, reply_keyboard_remove_t, force_reply_t>> reply_markup;           // Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove a reply keyboard or to force a reply from the user
+    optional_t<string_t>                                                                                             business_connection_id; // Unique identifier of the business connection on behalf of which the message will be sent
 };
 
 /**
@@ -2460,7 +2460,6 @@ struct send_venue_args_t {
     float_t                                                                                                          longitude;              // Longitude of the venue
     string_t                                                                                                         title;                  // Name of the venue
     string_t                                                                                                         address;                // Address of the venue
-    optional_t<string_t>                                                                                             business_connection_id; // Unique identifier of the business connection on behalf of which the message will be sent
     optional_t<integer_t>                                                                                            message_thread_id;      // Unique identifier for the target message thread (topic) of the forum; for forum supergroups only
     optional_t<string_t>                                                                                             foursquare_id;          // Foursquare identifier of the venue
     optional_t<string_t>                                                                                             foursquare_type;        // Foursquare type of the venue, if known. (For example, “arts_entertainment/default”, “arts_entertainment/aquarium” or “food/icecream”.)
@@ -2471,6 +2470,7 @@ struct send_venue_args_t {
     optional_t<string_t>                                                                                             message_effect_id;      // Unique identifier of the message effect to be added to the message; for private chats only
     optional_t<reply_parameters_t>                                                                                   reply_parameters;       // Description of the message to reply to
     optional_t<variant_t<inline_keyboard_markup_t, reply_keyboard_markup_t, reply_keyboard_remove_t, force_reply_t>> reply_markup;           // Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove a reply keyboard or to force a reply from the user
+    optional_t<string_t>                                                                                             business_connection_id; // Unique identifier of the business connection on behalf of which the message will be sent
 };
 
 /**
@@ -2508,7 +2508,6 @@ void send_venue(Agent&& agent, send_venue_args_t args, F&& callback) {
 struct send_video_args_t {
     variant_t<integer_t, string_t>                                                                                   chat_id;                  // Unique identifier for the target chat or username of the target channel (in the format @channelusername)
     variant_t<input_file_t, string_t>                                                                                video;                    // Video to send. Pass a file_id as String to send a video that exists on the Telegram servers (recommended), pass an HTTP URL as a String for Telegram to get a video from the Internet, or upload a new video using multipart/form-data. More information on Sending Files »
-    optional_t<string_t>                                                                                             business_connection_id;   // Unique identifier of the business connection on behalf of which the message will be sent
     optional_t<integer_t>                                                                                            message_thread_id;        // Unique identifier for the target message thread (topic) of the forum; for forum supergroups only
     optional_t<integer_t>                                                                                            duration;                 // Duration of sent video in seconds
     optional_t<integer_t>                                                                                            width;                    // Video width
@@ -2525,6 +2524,7 @@ struct send_video_args_t {
     optional_t<string_t>                                                                                             message_effect_id;        // Unique identifier of the message effect to be added to the message; for private chats only
     optional_t<reply_parameters_t>                                                                                   reply_parameters;         // Description of the message to reply to
     optional_t<variant_t<inline_keyboard_markup_t, reply_keyboard_markup_t, reply_keyboard_remove_t, force_reply_t>> reply_markup;             // Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove a reply keyboard or to force a reply from the user
+    optional_t<string_t>                                                                                             business_connection_id;   // Unique identifier of the business connection on behalf of which the message will be sent
 };
 
 /**
@@ -2565,7 +2565,6 @@ void send_video(Agent&& agent, send_video_args_t args, F&& callback) {
 struct send_video_note_args_t {
     variant_t<integer_t, string_t>                                                                                   chat_id;                // Unique identifier for the target chat or username of the target channel (in the format @channelusername)
     variant_t<input_file_t, string_t>                                                                                video_note;             // Video note to send. Pass a file_id as String to send a video note that exists on the Telegram servers (recommended) or upload a new video using multipart/form-data. More information on Sending Files ». Sending video notes by a URL is currently unsupported
-    optional_t<string_t>                                                                                             business_connection_id; // Unique identifier of the business connection on behalf of which the message will be sent
     optional_t<integer_t>                                                                                            message_thread_id;      // Unique identifier for the target message thread (topic) of the forum; for forum supergroups only
     optional_t<integer_t>                                                                                            duration;               // Duration of sent video in seconds
     optional_t<integer_t>                                                                                            length;                 // Video width and height, i.e. diameter of the video message
@@ -2575,6 +2574,7 @@ struct send_video_note_args_t {
     optional_t<string_t>                                                                                             message_effect_id;      // Unique identifier of the message effect to be added to the message; for private chats only
     optional_t<reply_parameters_t>                                                                                   reply_parameters;       // Description of the message to reply to
     optional_t<variant_t<inline_keyboard_markup_t, reply_keyboard_markup_t, reply_keyboard_remove_t, force_reply_t>> reply_markup;           // Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove a reply keyboard or to force a reply from the user
+    optional_t<string_t>                                                                                             business_connection_id; // Unique identifier of the business connection on behalf of which the message will be sent
 };
 
 /**
@@ -2608,7 +2608,6 @@ void send_video_note(Agent&& agent, send_video_note_args_t args, F&& callback) {
 struct send_voice_args_t {
     variant_t<integer_t, string_t>                                                                                   chat_id;                // Unique identifier for the target chat or username of the target channel (in the format @channelusername)
     variant_t<input_file_t, string_t>                                                                                voice;                  // Audio file to send. Pass a file_id as String to send a file that exists on the Telegram servers (recommended), pass an HTTP URL as a String for Telegram to get a file from the Internet, or upload a new one using multipart/form-data. More information on Sending Files »
-    optional_t<string_t>                                                                                             business_connection_id; // Unique identifier of the business connection on behalf of which the message will be sent
     optional_t<integer_t>                                                                                            message_thread_id;      // Unique identifier for the target message thread (topic) of the forum; for forum supergroups only
     optional_t<string_t>                                                                                             caption;                // Voice message caption, 0-1024 characters after entities parsing
     optional_t<string_t>                                                                                             parse_mode;             // Mode for parsing entities in the voice message caption. See formatting options for more details.
@@ -2619,6 +2618,7 @@ struct send_voice_args_t {
     optional_t<string_t>                                                                                             message_effect_id;      // Unique identifier of the message effect to be added to the message; for private chats only
     optional_t<reply_parameters_t>                                                                                   reply_parameters;       // Description of the message to reply to
     optional_t<variant_t<inline_keyboard_markup_t, reply_keyboard_markup_t, reply_keyboard_remove_t, force_reply_t>> reply_markup;           // Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove a reply keyboard or to force a reply from the user
+    optional_t<string_t>                                                                                             business_connection_id; // Unique identifier of the business connection on behalf of which the message will be sent
 };
 
 /**

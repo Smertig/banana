@@ -39,10 +39,6 @@ message_t
 
    Optional. The bot that actually sent the message on behalf of the business account. Available only for outgoing messages sent on behalf of the connected business account.
 
-   .. cpp:member:: optional_t<string_t> business_connection_id
-
-   Optional. Unique identifier of the business connection from which the message was received. If non-empty, the message belongs to a chat of the corresponding business account that is independent from any potential bot chat which might share the same identifier.
-
    .. cpp:member:: optional_t<message_origin_t> forward_origin
 
    Optional. Information about the original message for forwarded messages
@@ -338,3 +334,7 @@ message_t
    .. cpp:member:: optional_t<inline_keyboard_markup_t> reply_markup
 
    Optional. Inline keyboard attached to the message. login_url buttons are represented as ordinary url buttons.
+
+   .. cpp:member:: optional_t<string_t> business_connection_id
+
+   Optional. Unique identifier of the business connection from which the message was received. If non-empty, the message belongs to a chat of the corresponding business account that is independent from any potential bot chat which might share the same identifier.

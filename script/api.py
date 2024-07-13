@@ -2,8 +2,17 @@ import json
 import inflection
 
 
+def _get_order(item) -> int:
+    if not item['optional']:
+        return 0
+    elif item['name'] == 'business_connection_id':
+        return 2
+    else:
+        return 1
+
+
 def sort_required_first(l):
-    return sorted(l, key=lambda item: item['optional'])
+    return sorted(l, key=_get_order)
 
 
 JSON_API_PATH = "./api.json"

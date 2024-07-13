@@ -28,10 +28,6 @@ send_sticker
 
    Sticker to send. Pass a file_id as String to send a file that exists on the Telegram servers (recommended), pass an HTTP URL as a String for Telegram to get a .WEBP sticker from the Internet, or upload a new .WEBP, .TGS, or .WEBM sticker using multipart/form-data. More information on Sending Files ». Video and animated stickers can't be sent via an HTTP URL.
 
-   .. cpp:member:: optional_t<string_t> business_connection_id
-
-   Unique identifier of the business connection on behalf of which the message will be sent
-
    .. cpp:member:: optional_t<integer_t> message_thread_id
 
    Unique identifier for the target message thread (topic) of the forum; for forum supergroups only
@@ -59,3 +55,7 @@ send_sticker
    .. cpp:member:: optional_t<variant_t<inline_keyboard_markup_t, reply_keyboard_markup_t, reply_keyboard_remove_t, force_reply_t>> reply_markup
 
    Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove a reply keyboard or to force a reply from the user
+
+   .. cpp:member:: optional_t<string_t> business_connection_id
+
+   Unique identifier of the business connection on behalf of which the message will be sent

@@ -710,7 +710,6 @@ struct message_t {
     optional_t<chat_t>                              sender_chat;                       // Optional. Sender of the message, sent on behalf of a chat. For example, the channel itself for channel posts, the supergroup itself for messages from anonymous group administrators, the linked channel for messages automatically forwarded to the discussion group. For backward compatibility, the field from contains a fake sender user in non-channel chats, if the message was sent on behalf of a chat.
     optional_t<integer_t>                           sender_boost_count;                // Optional. If the sender of the message boosted the chat, the number of boosts added by the user
     optional_t<user_t>                              sender_business_bot;               // Optional. The bot that actually sent the message on behalf of the business account. Available only for outgoing messages sent on behalf of the connected business account.
-    optional_t<string_t>                            business_connection_id;            // Optional. Unique identifier of the business connection from which the message was received. If non-empty, the message belongs to a chat of the corresponding business account that is independent from any potential bot chat which might share the same identifier.
     optional_t<message_origin_t>                    forward_origin;                    // Optional. Information about the original message for forwarded messages
     optional_t<boolean_t>                           is_topic_message;                  // Optional. True, if the message is sent to a forum topic
     optional_t<boolean_t>                           is_automatic_forward;              // Optional. True, if the message is a channel post that was automatically forwarded to the connected discussion group
@@ -785,6 +784,7 @@ struct message_t {
     optional_t<video_chat_participants_invited_t>   video_chat_participants_invited;   // Optional. Service message: new participants invited to a video chat
     optional_t<web_app_data_t>                      web_app_data;                      // Optional. Service message: data sent by a Web App
     optional_t<inline_keyboard_markup_t>            reply_markup;                      // Optional. Inline keyboard attached to the message. login_url buttons are represented as ordinary url buttons.
+    optional_t<string_t>                            business_connection_id;            // Optional. Unique identifier of the business connection from which the message was received. If non-empty, the message belongs to a chat of the corresponding business account that is independent from any potential bot chat which might share the same identifier.
 };
 
 // The message was originally sent to a channel chat.
