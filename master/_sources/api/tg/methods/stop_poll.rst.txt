@@ -31,3 +31,7 @@ stop_poll
    .. cpp:member:: optional_t<inline_keyboard_markup_t> reply_markup
 
    A JSON-serialized object for a new message inline keyboard.
+
+   .. cpp:member:: optional_t<string_t> business_connection_id
+
+   Unique identifier of the business connection on behalf of which the message to be edited was sent

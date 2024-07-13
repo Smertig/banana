@@ -32,10 +32,6 @@ send_location
 
    Longitude of the location
 
-   .. cpp:member:: optional_t<string_t> business_connection_id
-
-   Unique identifier of the business connection on behalf of which the message will be sent
-
    .. cpp:member:: optional_t<integer_t> message_thread_id
 
    Unique identifier for the target message thread (topic) of the forum; for forum supergroups only
@@ -75,3 +71,7 @@ send_location
    .. cpp:member:: optional_t<variant_t<inline_keyboard_markup_t, reply_keyboard_markup_t, reply_keyboard_remove_t, force_reply_t>> reply_markup
 
    Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove a reply keyboard or to force a reply from the user
+
+   .. cpp:member:: optional_t<string_t> business_connection_id
+
+   Unique identifier of the business connection on behalf of which the message will be sent

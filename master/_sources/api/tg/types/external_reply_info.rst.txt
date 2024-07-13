@@ -35,6 +35,10 @@ external_reply_info_t
 
    Optional. Message is a general file, information about the file
 
+   .. cpp:member:: optional_t<paid_media_info_t> paid_media
+
+   Optional. Message contains paid media; information about the paid media
+
    .. cpp:member:: optional_t<array_t<photo_size_t>> photo
 
    Optional. Message is a photo, available sizes of the photo

@@ -39,10 +39,6 @@ message_t
 
    Optional. The bot that actually sent the message on behalf of the business account. Available only for outgoing messages sent on behalf of the connected business account.
 
-   .. cpp:member:: optional_t<string_t> business_connection_id
-
-   Optional. Unique identifier of the business connection from which the message was received. If non-empty, the message belongs to a chat of the corresponding business account that is independent from any potential bot chat which might share the same identifier.
-
    .. cpp:member:: optional_t<message_origin_t> forward_origin
 
    Optional. Information about the original message for forwarded messages
@@ -123,6 +119,10 @@ message_t
 
    Optional. Message is a general file, information about the file
 
+   .. cpp:member:: optional_t<paid_media_info_t> paid_media
+
+   Optional. Message contains paid media; information about the paid media
+
    .. cpp:member:: optional_t<array_t<photo_size_t>> photo
 
    Optional. Message is a photo, available sizes of the photo
@@ -149,7 +149,7 @@ message_t
 
    .. cpp:member:: optional_t<string_t> caption
 
-   Optional. Caption for the animation, audio, document, photo, video or voice
+   Optional. Caption for the animation, audio, document, paid media, photo, video or voice
 
    .. cpp:member:: optional_t<array_t<message_entity_t>> caption_entities
 
@@ -242,6 +242,10 @@ message_t
    .. cpp:member:: optional_t<successful_payment_t> successful_payment
 
    Optional. Message is a service message about a successful payment, information about the payment. More about payments »
+
+   .. cpp:member:: optional_t<refunded_payment_t> refunded_payment
+
+   Optional. Message is a service message about a refunded payment, information about the payment. More about payments »
 
    .. cpp:member:: optional_t<users_shared_t> users_shared
 
@@ -338,3 +342,7 @@ message_t
    .. cpp:member:: optional_t<inline_keyboard_markup_t> reply_markup
 
    Optional. Inline keyboard attached to the message. login_url buttons are represented as ordinary url buttons.
+
+   .. cpp:member:: optional_t<string_t> business_connection_id
+
+   Optional. Unique identifier of the business connection from which the message was received. If non-empty, the message belongs to a chat of the corresponding business account that is independent from any potential bot chat which might share the same identifier.

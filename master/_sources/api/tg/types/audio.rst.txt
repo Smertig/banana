@@ -17,23 +17,23 @@ audio_t
 
    .. cpp:member:: integer_t duration
 
-   Duration of the audio in seconds as defined by sender
+   Duration of the audio in seconds as defined by the sender
 
    .. cpp:member:: optional_t<string_t> performer
 
-   Optional. Performer of the audio as defined by sender or by audio tags
+   Optional. Performer of the audio as defined by the sender or by audio tags
 
    .. cpp:member:: optional_t<string_t> title
 
-   Optional. Title of the audio as defined by sender or by audio tags
+   Optional. Title of the audio as defined by the sender or by audio tags
 
    .. cpp:member:: optional_t<string_t> file_name
 
-   Optional. Original filename as defined by sender
+   Optional. Original filename as defined by the sender
 
    .. cpp:member:: optional_t<string_t> mime_type
 
-   Optional. MIME type of the file as defined by sender
+   Optional. MIME type of the file as defined by the sender
 
    .. cpp:member:: optional_t<integer_t> file_size
 

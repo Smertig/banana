@@ -28,10 +28,6 @@ send_game
 
    Short name of the game, serves as the unique identifier for the game. Set up your games via @BotFather.
 
-   .. cpp:member:: optional_t<string_t> business_connection_id
-
-   Unique identifier of the business connection on behalf of which the message will be sent
-
    .. cpp:member:: optional_t<integer_t> message_thread_id
 
    Unique identifier for the target message thread (topic) of the forum; for forum supergroups only
@@ -55,3 +51,7 @@ send_game
    .. cpp:member:: optional_t<inline_keyboard_markup_t> reply_markup
 
    A JSON-serialized object for an inline keyboard. If empty, one 'Play game_title' button will be shown. If not empty, the first button must launch the game.
+
+   .. cpp:member:: optional_t<string_t> business_connection_id
+
+   Unique identifier of the business connection on behalf of which the message will be sent

@@ -17,11 +17,11 @@ voice_t
 
    .. cpp:member:: integer_t duration
 
-   Duration of the audio in seconds as defined by sender
+   Duration of the audio in seconds as defined by the sender
 
    .. cpp:member:: optional_t<string_t> mime_type
 
-   Optional. MIME type of the file as defined by sender
+   Optional. MIME type of the file as defined by the sender
 
    .. cpp:member:: optional_t<integer_t> file_size
 

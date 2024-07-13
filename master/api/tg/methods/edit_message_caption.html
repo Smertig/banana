@@ -546,7 +546,7 @@
 <span id="_CPPv3I00EN6banana3api20edit_message_captionERR5Agent27edit_message_caption_args_tRR1F"></span><span id="_CPPv2I00EN6banana3api20edit_message_captionERR5Agent27edit_message_caption_args_tRR1F"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Agent</span></span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">F</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">edit_message_caption</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4I00EN6banana3api20edit_message_captionEvRR5Agent27edit_message_caption_args_tRR1F" title="banana::api::edit_message_caption::Agent"><span class="n"><span class="pre">Agent</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">agent</span></span>, <a class="reference internal" href="#_CPPv4N6banana3api27edit_message_caption_args_tE" title="banana::api::edit_message_caption_args_t"><span class="n"><span class="pre">edit_message_caption_args_t</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">args</span></span>, <a class="reference internal" href="#_CPPv4I00EN6banana3api20edit_message_captionEvRR5Agent27edit_message_caption_args_tRR1F" title="banana::api::edit_message_caption::F"><span class="n"><span class="pre">F</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">callback</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4I00EN6banana3api20edit_message_captionEvRR5Agent27edit_message_caption_args_tRR1F" title="Link to this definition">¶</a><br /></dt>
 <dd><p><code class="docutils literal notranslate"><span class="pre">agent</span></code> is any object satisfying <a class="reference internal" href="../../banana/agents.html#banana-api-banana-agents"><span class="std std-ref">agent concept</span></a>.</p>
 <p><code class="docutils literal notranslate"><span class="pre">callback</span></code> is any callable object accepting <code class="docutils literal notranslate"><span class="pre">expected&lt;variant_t&lt;message_t,</span> <span class="pre">boolean_t&gt;&gt;</span></code>.</p>
-<p>Use this method to edit captions of messages. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned.</p>
+<p>Use this method to edit captions of messages. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.</p>
 </dd></dl>
 
 <dl class="cpp struct">
@@ -601,6 +601,12 @@
 <dd></dd></dl>
 
 <p>A JSON-serialized object for an inline keyboard.</p>
+<dl class="cpp member">
+<dt class="sig sig-object cpp" id="_CPPv4N6banana3api27edit_message_caption_args_t22business_connection_idE">
+<span id="_CPPv3N6banana3api27edit_message_caption_args_t22business_connection_idE"></span><span id="_CPPv2N6banana3api27edit_message_caption_args_t22business_connection_idE"></span><span id="banana::api::edit_message_caption_args_t::business_connection_id__optional_t:string_t:"></span><a class="reference internal" href="../../banana/basic_types.html#_CPPv4I0EN6banana10optional_tE" title="banana::optional_t"><span class="n"><span class="pre">optional_t</span></span></a><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="../../banana/basic_types.html#_CPPv4N6banana8string_tE" title="banana::string_t"><span class="n"><span class="pre">string_t</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">business_connection_id</span></span></span><a class="headerlink" href="#_CPPv4N6banana3api27edit_message_caption_args_t22business_connection_idE" title="Link to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<p>Unique identifier of the business connection on behalf of which the message to be edited was sent</p>
 </dd></dl>
 
 </section>
@@ -672,6 +678,7 @@
 <li><a class="reference internal" href="#_CPPv4N6banana3api27edit_message_caption_args_t16caption_entitiesE"><code class="docutils literal notranslate"><span class="pre">edit_message_caption_args_t::caption_entities</span></code></a></li>
 <li><a class="reference internal" href="#_CPPv4N6banana3api27edit_message_caption_args_t24show_caption_above_mediaE"><code class="docutils literal notranslate"><span class="pre">edit_message_caption_args_t::show_caption_above_media</span></code></a></li>
 <li><a class="reference internal" href="#_CPPv4N6banana3api27edit_message_caption_args_t12reply_markupE"><code class="docutils literal notranslate"><span class="pre">edit_message_caption_args_t::reply_markup</span></code></a></li>
+<li><a class="reference internal" href="#_CPPv4N6banana3api27edit_message_caption_args_t22business_connection_idE"><code class="docutils literal notranslate"><span class="pre">edit_message_caption_args_t::business_connection_id</span></code></a></li>
 </ul>
 </li>
 </ul>

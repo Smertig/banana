@@ -17,15 +17,15 @@ video_t
 
    .. cpp:member:: integer_t width
 
-   Video width as defined by sender
+   Video width as defined by the sender
 
    .. cpp:member:: integer_t height
 
-   Video height as defined by sender
+   Video height as defined by the sender
 
    .. cpp:member:: integer_t duration
 
-   Duration of the video in seconds as defined by sender
+   Duration of the video in seconds as defined by the sender
 
    .. cpp:member:: optional_t<photo_size_t> thumbnail
 
@@ -33,11 +33,11 @@ video_t
 
    .. cpp:member:: optional_t<string_t> file_name
 
-   Optional. Original filename as defined by sender
+   Optional. Original filename as defined by the sender
 
    .. cpp:member:: optional_t<string_t> mime_type
 
-   Optional. MIME type of the file as defined by sender
+   Optional. MIME type of the file as defined by the sender
 
    .. cpp:member:: optional_t<integer_t> file_size
 

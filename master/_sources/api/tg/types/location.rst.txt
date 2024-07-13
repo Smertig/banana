@@ -9,11 +9,11 @@ location_t
 
    .. cpp:member:: float_t latitude
 
-   Latitude as defined by sender
+   Latitude as defined by the sender
 
    .. cpp:member:: float_t longitude
 
-   Longitude as defined by sender
+   Longitude as defined by the sender
 
    .. cpp:member:: optional_t<float_t> horizontal_accuracy
 

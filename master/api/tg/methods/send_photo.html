@@ -566,12 +566,6 @@
 
 <p>Photo to send. Pass a file_id as String to send a photo that exists on the Telegram servers (recommended), pass an HTTP URL as a String for Telegram to get a photo from the Internet, or upload a new photo using multipart/form-data. The photo must be at most 10 MB in size. The photo’s width and height must not exceed 10000 in total. Width and height ratio must be at most 20. More information on Sending Files »</p>
 <dl class="cpp member">
-<dt class="sig sig-object cpp" id="_CPPv4N6banana3api17send_photo_args_t22business_connection_idE">
-<span id="_CPPv3N6banana3api17send_photo_args_t22business_connection_idE"></span><span id="_CPPv2N6banana3api17send_photo_args_t22business_connection_idE"></span><span id="banana::api::send_photo_args_t::business_connection_id__optional_t:string_t:"></span><a class="reference internal" href="../../banana/basic_types.html#_CPPv4I0EN6banana10optional_tE" title="banana::optional_t"><span class="n"><span class="pre">optional_t</span></span></a><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="../../banana/basic_types.html#_CPPv4N6banana8string_tE" title="banana::string_t"><span class="n"><span class="pre">string_t</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">business_connection_id</span></span></span><a class="headerlink" href="#_CPPv4N6banana3api17send_photo_args_t22business_connection_idE" title="Link to this definition">¶</a><br /></dt>
-<dd></dd></dl>
-
-<p>Unique identifier of the business connection on behalf of which the message will be sent</p>
-<dl class="cpp member">
 <dt class="sig sig-object cpp" id="_CPPv4N6banana3api17send_photo_args_t17message_thread_idE">
 <span id="_CPPv3N6banana3api17send_photo_args_t17message_thread_idE"></span><span id="_CPPv2N6banana3api17send_photo_args_t17message_thread_idE"></span><span id="banana::api::send_photo_args_t::message_thread_id__optional_t:integer_t:"></span><a class="reference internal" href="../../banana/basic_types.html#_CPPv4I0EN6banana10optional_tE" title="banana::optional_t"><span class="n"><span class="pre">optional_t</span></span></a><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="../../banana/basic_types.html#_CPPv4N6banana9integer_tE" title="banana::integer_t"><span class="n"><span class="pre">integer_t</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">message_thread_id</span></span></span><a class="headerlink" href="#_CPPv4N6banana3api17send_photo_args_t17message_thread_idE" title="Link to this definition">¶</a><br /></dt>
 <dd></dd></dl>
@@ -637,6 +631,12 @@
 <dd></dd></dl>
 
 <p>Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove a reply keyboard or to force a reply from the user</p>
+<dl class="cpp member">
+<dt class="sig sig-object cpp" id="_CPPv4N6banana3api17send_photo_args_t22business_connection_idE">
+<span id="_CPPv3N6banana3api17send_photo_args_t22business_connection_idE"></span><span id="_CPPv2N6banana3api17send_photo_args_t22business_connection_idE"></span><span id="banana::api::send_photo_args_t::business_connection_id__optional_t:string_t:"></span><a class="reference internal" href="../../banana/basic_types.html#_CPPv4I0EN6banana10optional_tE" title="banana::optional_t"><span class="n"><span class="pre">optional_t</span></span></a><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="../../banana/basic_types.html#_CPPv4N6banana8string_tE" title="banana::string_t"><span class="n"><span class="pre">string_t</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">business_connection_id</span></span></span><a class="headerlink" href="#_CPPv4N6banana3api17send_photo_args_t22business_connection_idE" title="Link to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<p>Unique identifier of the business connection on behalf of which the message will be sent</p>
 </dd></dl>
 
 </section>
@@ -702,7 +702,6 @@
 <li><a class="reference internal" href="#_CPPv4N6banana3api17send_photo_args_tE"><code class="docutils literal notranslate"><span class="pre">send_photo_args_t</span></code></a><ul>
 <li><a class="reference internal" href="#_CPPv4N6banana3api17send_photo_args_t7chat_idE"><code class="docutils literal notranslate"><span class="pre">send_photo_args_t::chat_id</span></code></a></li>
 <li><a class="reference internal" href="#_CPPv4N6banana3api17send_photo_args_t5photoE"><code class="docutils literal notranslate"><span class="pre">send_photo_args_t::photo</span></code></a></li>
-<li><a class="reference internal" href="#_CPPv4N6banana3api17send_photo_args_t22business_connection_idE"><code class="docutils literal notranslate"><span class="pre">send_photo_args_t::business_connection_id</span></code></a></li>
 <li><a class="reference internal" href="#_CPPv4N6banana3api17send_photo_args_t17message_thread_idE"><code class="docutils literal notranslate"><span class="pre">send_photo_args_t::message_thread_id</span></code></a></li>
 <li><a class="reference internal" href="#_CPPv4N6banana3api17send_photo_args_t7captionE"><code class="docutils literal notranslate"><span class="pre">send_photo_args_t::caption</span></code></a></li>
 <li><a class="reference internal" href="#_CPPv4N6banana3api17send_photo_args_t10parse_modeE"><code class="docutils literal notranslate"><span class="pre">send_photo_args_t::parse_mode</span></code></a></li>
@@ -714,6 +713,7 @@
 <li><a class="reference internal" href="#_CPPv4N6banana3api17send_photo_args_t17message_effect_idE"><code class="docutils literal notranslate"><span class="pre">send_photo_args_t::message_effect_id</span></code></a></li>
 <li><a class="reference internal" href="#_CPPv4N6banana3api17send_photo_args_t16reply_parametersE"><code class="docutils literal notranslate"><span class="pre">send_photo_args_t::reply_parameters</span></code></a></li>
 <li><a class="reference internal" href="#_CPPv4N6banana3api17send_photo_args_t12reply_markupE"><code class="docutils literal notranslate"><span class="pre">send_photo_args_t::reply_markup</span></code></a></li>
+<li><a class="reference internal" href="#_CPPv4N6banana3api17send_photo_args_t22business_connection_idE"><code class="docutils literal notranslate"><span class="pre">send_photo_args_t::business_connection_id</span></code></a></li>
 </ul>
 </li>
 </ul>
