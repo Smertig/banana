@@ -66,6 +66,7 @@ File
    get_my_description <methods/get_my_description>
    get_my_name <methods/get_my_name>
    get_my_short_description <methods/get_my_short_description>
+   get_star_transactions <methods/get_star_transactions>
    get_sticker_set <methods/get_sticker_set>
    get_updates <methods/get_updates>
    get_user_chat_boosts <methods/get_user_chat_boosts>
@@ -93,6 +94,7 @@ File
    send_location <methods/send_location>
    send_media_group <methods/send_media_group>
    send_message <methods/send_message>
+   send_paid_media <methods/send_paid_media>
    send_photo <methods/send_photo>
    send_poll <methods/send_poll>
    send_sticker <methods/send_sticker>

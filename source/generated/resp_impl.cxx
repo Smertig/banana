@@ -13,6 +13,7 @@ template struct response_handler<api::message_id_t>;
 template struct response_handler<api::message_t>;
 template struct response_handler<api::poll_t>;
 template struct response_handler<api::sent_web_app_message_t>;
+template struct response_handler<api::star_transaction_t>;
 template struct response_handler<api::sticker_set_t>;
 template struct response_handler<api::user_chat_boosts_t>;
 template struct response_handler<api::user_profile_photos_t>;

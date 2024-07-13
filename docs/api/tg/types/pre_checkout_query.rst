@@ -25,7 +25,7 @@ pre_checkout_query_t
 
    .. cpp:member:: string_t invoice_payload
 
-   Bot specified invoice payload
+   Bot-specified invoice payload
 
    .. cpp:member:: optional_t<string_t> shipping_option_id
 

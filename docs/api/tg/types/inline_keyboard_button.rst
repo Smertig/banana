@@ -17,7 +17,7 @@ inline_keyboard_button_t
 
    .. cpp:member:: optional_t<string_t> callback_data
 
-   Optional. Data to be sent in a callback query to the bot when button is pressed, 1-64 bytes. Not supported for messages sent on behalf of a Telegram Business account.
+   Optional. Data to be sent in a callback query to the bot when the button is pressed, 1-64 bytes
 
    .. cpp:member:: optional_t<web_app_info_t> web_app
 

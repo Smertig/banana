@@ -844,6 +844,7 @@ struct reflector<api::chat_full_info_t> {
         f("invite_link"sv, &api::chat_full_info_t::invite_link);
         f("pinned_message"sv, &api::chat_full_info_t::pinned_message);
         f("permissions"sv, &api::chat_full_info_t::permissions);
+        f("can_send_paid_media"sv, &api::chat_full_info_t::can_send_paid_media, true);
         f("slow_mode_delay"sv, &api::chat_full_info_t::slow_mode_delay);
         f("unrestrict_boost_count"sv, &api::chat_full_info_t::unrestrict_boost_count);
         f("message_auto_delete_time"sv, &api::chat_full_info_t::message_auto_delete_time);
@@ -1643,6 +1644,7 @@ struct reflector<api::edit_message_caption_args_t> {
         f("caption_entities"sv, &api::edit_message_caption_args_t::caption_entities);
         f("show_caption_above_media"sv, &api::edit_message_caption_args_t::show_caption_above_media);
         f("reply_markup"sv, &api::edit_message_caption_args_t::reply_markup);
+        f("business_connection_id"sv, &api::edit_message_caption_args_t::business_connection_id);
     }
 };
 
@@ -1667,6 +1669,7 @@ struct reflector<api::edit_message_live_location_args_t> {
         f("heading"sv, &api::edit_message_live_location_args_t::heading);
         f("proximity_alert_radius"sv, &api::edit_message_live_location_args_t::proximity_alert_radius);
         f("reply_markup"sv, &api::edit_message_live_location_args_t::reply_markup);
+        f("business_connection_id"sv, &api::edit_message_live_location_args_t::business_connection_id);
     }
 };
 
@@ -1686,6 +1689,7 @@ struct reflector<api::edit_message_media_args_t> {
         f("message_id"sv, &api::edit_message_media_args_t::message_id);
         f("inline_message_id"sv, &api::edit_message_media_args_t::inline_message_id);
         f("reply_markup"sv, &api::edit_message_media_args_t::reply_markup);
+        f("business_connection_id"sv, &api::edit_message_media_args_t::business_connection_id);
     }
 };
 
@@ -1704,6 +1708,7 @@ struct reflector<api::edit_message_reply_markup_args_t> {
         f("message_id"sv, &api::edit_message_reply_markup_args_t::message_id);
         f("inline_message_id"sv, &api::edit_message_reply_markup_args_t::inline_message_id);
         f("reply_markup"sv, &api::edit_message_reply_markup_args_t::reply_markup);
+        f("business_connection_id"sv, &api::edit_message_reply_markup_args_t::business_connection_id);
     }
 };
 
@@ -1726,6 +1731,7 @@ struct reflector<api::edit_message_text_args_t> {
         f("entities"sv, &api::edit_message_text_args_t::entities);
         f("link_preview_options"sv, &api::edit_message_text_args_t::link_preview_options);
         f("reply_markup"sv, &api::edit_message_text_args_t::reply_markup);
+        f("business_connection_id"sv, &api::edit_message_text_args_t::business_connection_id);
     }
 };
 
@@ -1803,6 +1809,7 @@ struct reflector<api::external_reply_info_t> {
         f("animation"sv, &api::external_reply_info_t::animation);
         f("audio"sv, &api::external_reply_info_t::audio);
         f("document"sv, &api::external_reply_info_t::document);
+        f("paid_media"sv, &api::external_reply_info_t::paid_media);
         f("photo"sv, &api::external_reply_info_t::photo);
         f("sticker"sv, &api::external_reply_info_t::sticker);
         f("story"sv, &api::external_reply_info_t::story);
@@ -2289,6 +2296,22 @@ constexpr bool is_reflectable_v<api::get_my_short_description_args_t> = true;
 
 template <>
 constexpr std::string_view name_of<api::get_my_short_description_args_t> = "get_my_short_description_args_t";
+
+template <>
+struct reflector<api::get_star_transactions_args_t> {
+    template <class F>
+    static void for_each_field(F&& f) {
+        using namespace std::literals;
+        f("offset"sv, &api::get_star_transactions_args_t::offset);
+        f("limit"sv, &api::get_star_transactions_args_t::limit);
+    }
+};
+
+template <>
+constexpr bool is_reflectable_v<api::get_star_transactions_args_t> = true;
+
+template <>
+constexpr std::string_view name_of<api::get_star_transactions_args_t> = "get_star_transactions_args_t";
 
 template <>
 struct reflector<api::get_sticker_set_args_t> {
@@ -3263,6 +3286,43 @@ template <>
 constexpr std::string_view name_of<api::input_media_video_t> = "input_media_video_t";
 
 template <>
+struct reflector<api::input_paid_media_photo_t> {
+    template <class F>
+    static void for_each_field(F&& f) {
+        using namespace std::literals;
+        f("type"sv, &api::input_paid_media_photo_t::type, "photo");
+        f("media"sv, &api::input_paid_media_photo_t::media);
+    }
+};
+
+template <>
+constexpr bool is_reflectable_v<api::input_paid_media_photo_t> = true;
+
+template <>
+constexpr std::string_view name_of<api::input_paid_media_photo_t> = "input_paid_media_photo_t";
+
+template <>
+struct reflector<api::input_paid_media_video_t> {
+    template <class F>
+    static void for_each_field(F&& f) {
+        using namespace std::literals;
+        f("type"sv, &api::input_paid_media_video_t::type, "video");
+        f("media"sv, &api::input_paid_media_video_t::media);
+        f("thumbnail"sv, &api::input_paid_media_video_t::thumbnail);
+        f("width"sv, &api::input_paid_media_video_t::width);
+        f("height"sv, &api::input_paid_media_video_t::height);
+        f("duration"sv, &api::input_paid_media_video_t::duration);
+        f("supports_streaming"sv, &api::input_paid_media_video_t::supports_streaming);
+    }
+};
+
+template <>
+constexpr bool is_reflectable_v<api::input_paid_media_video_t> = true;
+
+template <>
+constexpr std::string_view name_of<api::input_paid_media_video_t> = "input_paid_media_video_t";
+
+template <>
 struct reflector<api::input_poll_option_t> {
     template <class F>
     static void for_each_field(F&& f) {
@@ -3800,6 +3860,7 @@ struct reflector<api::message_t> {
         f("animation"sv, &api::message_t::animation);
         f("audio"sv, &api::message_t::audio);
         f("document"sv, &api::message_t::document);
+        f("paid_media"sv, &api::message_t::paid_media);
         f("photo"sv, &api::message_t::photo);
         f("sticker"sv, &api::message_t::sticker);
         f("story"sv, &api::message_t::story);
@@ -3830,6 +3891,7 @@ struct reflector<api::message_t> {
         f("pinned_message"sv, &api::message_t::pinned_message);
         f("invoice"sv, &api::message_t::invoice);
         f("successful_payment"sv, &api::message_t::successful_payment);
+        f("refunded_payment"sv, &api::message_t::refunded_payment);
         f("users_shared"sv, &api::message_t::users_shared);
         f("chat_shared"sv, &api::message_t::chat_shared);
         f("connected_website"sv, &api::message_t::connected_website);
@@ -3881,6 +3943,72 @@ constexpr bool is_reflectable_v<api::order_info_t> = true;
 
 template <>
 constexpr std::string_view name_of<api::order_info_t> = "order_info_t";
+
+template <>
+struct reflector<api::paid_media_info_t> {
+    template <class F>
+    static void for_each_field(F&& f) {
+        using namespace std::literals;
+        f("star_count"sv, &api::paid_media_info_t::star_count);
+        f("paid_media"sv, &api::paid_media_info_t::paid_media);
+    }
+};
+
+template <>
+constexpr bool is_reflectable_v<api::paid_media_info_t> = true;
+
+template <>
+constexpr std::string_view name_of<api::paid_media_info_t> = "paid_media_info_t";
+
+template <>
+struct reflector<api::paid_media_photo_t> {
+    template <class F>
+    static void for_each_field(F&& f) {
+        using namespace std::literals;
+        f("type"sv, &api::paid_media_photo_t::type, "photo");
+        f("photo"sv, &api::paid_media_photo_t::photo);
+    }
+};
+
+template <>
+constexpr bool is_reflectable_v<api::paid_media_photo_t> = true;
+
+template <>
+constexpr std::string_view name_of<api::paid_media_photo_t> = "paid_media_photo_t";
+
+template <>
+struct reflector<api::paid_media_preview_t> {
+    template <class F>
+    static void for_each_field(F&& f) {
+        using namespace std::literals;
+        f("type"sv, &api::paid_media_preview_t::type, "preview");
+        f("width"sv, &api::paid_media_preview_t::width);
+        f("height"sv, &api::paid_media_preview_t::height);
+        f("duration"sv, &api::paid_media_preview_t::duration);
+    }
+};
+
+template <>
+constexpr bool is_reflectable_v<api::paid_media_preview_t> = true;
+
+template <>
+constexpr std::string_view name_of<api::paid_media_preview_t> = "paid_media_preview_t";
+
+template <>
+struct reflector<api::paid_media_video_t> {
+    template <class F>
+    static void for_each_field(F&& f) {
+        using namespace std::literals;
+        f("type"sv, &api::paid_media_video_t::type, "video");
+        f("video"sv, &api::paid_media_video_t::video);
+    }
+};
+
+template <>
+constexpr bool is_reflectable_v<api::paid_media_video_t> = true;
+
+template <>
+constexpr std::string_view name_of<api::paid_media_video_t> = "paid_media_video_t";
 
 template <>
 struct reflector<api::passport_data_t> {
@@ -4312,6 +4440,25 @@ template <>
 constexpr std::string_view name_of<api::refund_star_payment_args_t> = "refund_star_payment_args_t";
 
 template <>
+struct reflector<api::refunded_payment_t> {
+    template <class F>
+    static void for_each_field(F&& f) {
+        using namespace std::literals;
+        f("currency"sv, &api::refunded_payment_t::currency, "XTR");
+        f("total_amount"sv, &api::refunded_payment_t::total_amount);
+        f("invoice_payload"sv, &api::refunded_payment_t::invoice_payload);
+        f("telegram_payment_charge_id"sv, &api::refunded_payment_t::telegram_payment_charge_id);
+        f("provider_payment_charge_id"sv, &api::refunded_payment_t::provider_payment_charge_id);
+    }
+};
+
+template <>
+constexpr bool is_reflectable_v<api::refunded_payment_t> = true;
+
+template <>
+constexpr std::string_view name_of<api::refunded_payment_t> = "refunded_payment_t";
+
+template <>
 struct reflector<api::reopen_forum_topic_args_t> {
     template <class F>
     static void for_each_field(F&& f) {
@@ -4451,6 +4598,53 @@ constexpr bool is_reflectable_v<api::restrict_chat_member_args_t> = true;
 
 template <>
 constexpr std::string_view name_of<api::restrict_chat_member_args_t> = "restrict_chat_member_args_t";
+
+template <>
+struct reflector<api::revenue_withdrawal_state_failed_t> {
+    template <class F>
+    static void for_each_field(F&& f) {
+        using namespace std::literals;
+        f("type"sv, &api::revenue_withdrawal_state_failed_t::type, "failed");
+    }
+};
+
+template <>
+constexpr bool is_reflectable_v<api::revenue_withdrawal_state_failed_t> = true;
+
+template <>
+constexpr std::string_view name_of<api::revenue_withdrawal_state_failed_t> = "revenue_withdrawal_state_failed_t";
+
+template <>
+struct reflector<api::revenue_withdrawal_state_pending_t> {
+    template <class F>
+    static void for_each_field(F&& f) {
+        using namespace std::literals;
+        f("type"sv, &api::revenue_withdrawal_state_pending_t::type, "pending");
+    }
+};
+
+template <>
+constexpr bool is_reflectable_v<api::revenue_withdrawal_state_pending_t> = true;
+
+template <>
+constexpr std::string_view name_of<api::revenue_withdrawal_state_pending_t> = "revenue_withdrawal_state_pending_t";
+
+template <>
+struct reflector<api::revenue_withdrawal_state_succeeded_t> {
+    template <class F>
+    static void for_each_field(F&& f) {
+        using namespace std::literals;
+        f("type"sv, &api::revenue_withdrawal_state_succeeded_t::type, "succeeded");
+        f("date"sv, &api::revenue_withdrawal_state_succeeded_t::date);
+        f("url"sv, &api::revenue_withdrawal_state_succeeded_t::url);
+    }
+};
+
+template <>
+constexpr bool is_reflectable_v<api::revenue_withdrawal_state_succeeded_t> = true;
+
+template <>
+constexpr std::string_view name_of<api::revenue_withdrawal_state_succeeded_t> = "revenue_withdrawal_state_succeeded_t";
 
 template <>
 struct reflector<api::revoke_chat_invite_link_args_t> {
@@ -4765,6 +4959,31 @@ constexpr bool is_reflectable_v<api::send_message_args_t> = true;
 
 template <>
 constexpr std::string_view name_of<api::send_message_args_t> = "send_message_args_t";
+
+template <>
+struct reflector<api::send_paid_media_args_t> {
+    template <class F>
+    static void for_each_field(F&& f) {
+        using namespace std::literals;
+        f("chat_id"sv, &api::send_paid_media_args_t::chat_id);
+        f("star_count"sv, &api::send_paid_media_args_t::star_count);
+        f("media"sv, &api::send_paid_media_args_t::media);
+        f("caption"sv, &api::send_paid_media_args_t::caption);
+        f("parse_mode"sv, &api::send_paid_media_args_t::parse_mode);
+        f("caption_entities"sv, &api::send_paid_media_args_t::caption_entities);
+        f("show_caption_above_media"sv, &api::send_paid_media_args_t::show_caption_above_media);
+        f("disable_notification"sv, &api::send_paid_media_args_t::disable_notification);
+        f("protect_content"sv, &api::send_paid_media_args_t::protect_content);
+        f("reply_parameters"sv, &api::send_paid_media_args_t::reply_parameters);
+        f("reply_markup"sv, &api::send_paid_media_args_t::reply_markup);
+    }
+};
+
+template <>
+constexpr bool is_reflectable_v<api::send_paid_media_args_t> = true;
+
+template <>
+constexpr std::string_view name_of<api::send_paid_media_args_t> = "send_paid_media_args_t";
 
 template <>
 struct reflector<api::send_photo_args_t> {
@@ -5445,6 +5664,40 @@ template <>
 constexpr std::string_view name_of<api::shipping_query_t> = "shipping_query_t";
 
 template <>
+struct reflector<api::star_transaction_t> {
+    template <class F>
+    static void for_each_field(F&& f) {
+        using namespace std::literals;
+        f("id"sv, &api::star_transaction_t::id);
+        f("amount"sv, &api::star_transaction_t::amount);
+        f("date"sv, &api::star_transaction_t::date);
+        f("source"sv, &api::star_transaction_t::source);
+        f("receiver"sv, &api::star_transaction_t::receiver);
+    }
+};
+
+template <>
+constexpr bool is_reflectable_v<api::star_transaction_t> = true;
+
+template <>
+constexpr std::string_view name_of<api::star_transaction_t> = "star_transaction_t";
+
+template <>
+struct reflector<api::star_transactions_t> {
+    template <class F>
+    static void for_each_field(F&& f) {
+        using namespace std::literals;
+        f("transactions"sv, &api::star_transactions_t::transactions);
+    }
+};
+
+template <>
+constexpr bool is_reflectable_v<api::star_transactions_t> = true;
+
+template <>
+constexpr std::string_view name_of<api::star_transactions_t> = "star_transactions_t";
+
+template <>
 struct reflector<api::sticker_set_t> {
     template <class F>
     static void for_each_field(F&& f) {
@@ -5501,6 +5754,7 @@ struct reflector<api::stop_message_live_location_args_t> {
         f("message_id"sv, &api::stop_message_live_location_args_t::message_id);
         f("inline_message_id"sv, &api::stop_message_live_location_args_t::inline_message_id);
         f("reply_markup"sv, &api::stop_message_live_location_args_t::reply_markup);
+        f("business_connection_id"sv, &api::stop_message_live_location_args_t::business_connection_id);
     }
 };
 
@@ -5518,6 +5772,7 @@ struct reflector<api::stop_poll_args_t> {
         f("chat_id"sv, &api::stop_poll_args_t::chat_id);
         f("message_id"sv, &api::stop_poll_args_t::message_id);
         f("reply_markup"sv, &api::stop_poll_args_t::reply_markup);
+        f("business_connection_id"sv, &api::stop_poll_args_t::business_connection_id);
     }
 };
 
@@ -5600,6 +5855,69 @@ constexpr bool is_reflectable_v<api::text_quote_t> = true;
 
 template <>
 constexpr std::string_view name_of<api::text_quote_t> = "text_quote_t";
+
+template <>
+struct reflector<api::transaction_partner_fragment_t> {
+    template <class F>
+    static void for_each_field(F&& f) {
+        using namespace std::literals;
+        f("type"sv, &api::transaction_partner_fragment_t::type, "fragment");
+        f("withdrawal_state"sv, &api::transaction_partner_fragment_t::withdrawal_state);
+    }
+};
+
+template <>
+constexpr bool is_reflectable_v<api::transaction_partner_fragment_t> = true;
+
+template <>
+constexpr std::string_view name_of<api::transaction_partner_fragment_t> = "transaction_partner_fragment_t";
+
+template <>
+struct reflector<api::transaction_partner_other_t> {
+    template <class F>
+    static void for_each_field(F&& f) {
+        using namespace std::literals;
+        f("type"sv, &api::transaction_partner_other_t::type, "other");
+    }
+};
+
+template <>
+constexpr bool is_reflectable_v<api::transaction_partner_other_t> = true;
+
+template <>
+constexpr std::string_view name_of<api::transaction_partner_other_t> = "transaction_partner_other_t";
+
+template <>
+struct reflector<api::transaction_partner_telegram_ads_t> {
+    template <class F>
+    static void for_each_field(F&& f) {
+        using namespace std::literals;
+        f("type"sv, &api::transaction_partner_telegram_ads_t::type, "telegram_ads");
+    }
+};
+
+template <>
+constexpr bool is_reflectable_v<api::transaction_partner_telegram_ads_t> = true;
+
+template <>
+constexpr std::string_view name_of<api::transaction_partner_telegram_ads_t> = "transaction_partner_telegram_ads_t";
+
+template <>
+struct reflector<api::transaction_partner_user_t> {
+    template <class F>
+    static void for_each_field(F&& f) {
+        using namespace std::literals;
+        f("type"sv, &api::transaction_partner_user_t::type, "user");
+        f("user"sv, &api::transaction_partner_user_t::user);
+        f("invoice_payload"sv, &api::transaction_partner_user_t::invoice_payload);
+    }
+};
+
+template <>
+constexpr bool is_reflectable_v<api::transaction_partner_user_t> = true;
+
+template <>
+constexpr std::string_view name_of<api::transaction_partner_user_t> = "transaction_partner_user_t";
 
 template <>
 struct reflector<api::unban_chat_member_args_t> {

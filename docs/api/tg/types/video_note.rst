@@ -17,11 +17,11 @@ video_note_t
 
    .. cpp:member:: integer_t length
 
-   Video width and height (diameter of the video message) as defined by sender
+   Video width and height (diameter of the video message) as defined by the sender
 
    .. cpp:member:: integer_t duration
 
-   Duration of the video in seconds as defined by sender
+   Duration of the video in seconds as defined by the sender
 
    .. cpp:member:: optional_t<photo_size_t> thumbnail
 

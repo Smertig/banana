@@ -769,6 +769,20 @@ struct detail::by_request_type_impl<api::get_my_short_description_args_t> {
 };
 
 template <>
+struct api_traits<api::method::get_star_transactions> {
+    static inline constexpr std::string_view native_name = "getStarTransactions";
+    static inline constexpr std::string_view pretty_name = "get_star_transactions";
+
+    using request_type  = api::get_star_transactions_args_t;
+    using response_type = api::star_transaction_t;
+};
+
+template <>
+struct detail::by_request_type_impl<api::get_star_transactions_args_t> {
+    using type = api_traits<api::method::get_star_transactions>;
+};
+
+template <>
 struct api_traits<api::method::get_sticker_set> {
     static inline constexpr std::string_view native_name = "getStickerSet";
     static inline constexpr std::string_view pretty_name = "get_sticker_set";
@@ -1144,6 +1158,20 @@ struct api_traits<api::method::send_message> {
 template <>
 struct detail::by_request_type_impl<api::send_message_args_t> {
     using type = api_traits<api::method::send_message>;
+};
+
+template <>
+struct api_traits<api::method::send_paid_media> {
+    static inline constexpr std::string_view native_name = "sendPaidMedia";
+    static inline constexpr std::string_view pretty_name = "send_paid_media";
+
+    using request_type  = api::send_paid_media_args_t;
+    using response_type = api::message_t;
+};
+
+template <>
+struct detail::by_request_type_impl<api::send_paid_media_args_t> {
+    using type = api_traits<api::method::send_paid_media>;
 };
 
 template <>

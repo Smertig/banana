@@ -95,6 +95,10 @@ def convert_text(s: str) -> str:
 
 def extract_type(d):
     if isinstance(d, str):
+        # Hack for buggy scheme
+        if d == 'Telegram':
+            return 'StarTransaction'
+
         return d
 
     type_name = d['type']

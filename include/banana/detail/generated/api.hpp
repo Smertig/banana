@@ -311,7 +311,7 @@ struct copy_message_args_t {
 };
 
 /**
- * Use this method to copy messages of any kind. Service messages, giveaway messages, giveaway winners messages, and invoice messages can't be copied. A quiz poll can be copied only if the value of the field correct_option_id is known to the bot. The method is analogous to the method forwardMessage, but the copied message doesn't have a link to the original message. Returns the MessageId of the sent message on success.
+ * Use this method to copy messages of any kind. Service messages, paid media messages, giveaway messages, giveaway winners messages, and invoice messages can't be copied. A quiz poll can be copied only if the value of the field correct_option_id is known to the bot. The method is analogous to the method forwardMessage, but the copied message doesn't have a link to the original message. Returns the MessageId of the sent message on success.
  * 
  * @param agent Any object satisfying agent concept (see `banana::agent` namespace)
  * @param args__chat_id Unique identifier for the target chat or username of the target channel (in the format @channelusername)
@@ -349,7 +349,7 @@ struct copy_messages_args_t {
 };
 
 /**
- * Use this method to copy messages of any kind. If some of the specified messages can't be found or copied, they are skipped. Service messages, giveaway messages, giveaway winners messages, and invoice messages can't be copied. A quiz poll can be copied only if the value of the field correct_option_id is known to the bot. The method is analogous to the method forwardMessages, but the copied messages don't have a link to the original message. Album grouping is kept for copied messages. On success, an array of MessageId of the sent messages is returned.
+ * Use this method to copy messages of any kind. If some of the specified messages can't be found or copied, they are skipped. Service messages, paid media messages, giveaway messages, giveaway winners messages, and invoice messages can't be copied. A quiz poll can be copied only if the value of the field correct_option_id is known to the bot. The method is analogous to the method forwardMessages, but the copied messages don't have a link to the original message. Album grouping is kept for copied messages. On success, an array of MessageId of the sent messages is returned.
  * 
  * @param agent Any object satisfying agent concept (see `banana::agent` namespace)
  * @param args__chat_id Unique identifier for the target chat or username of the target channel (in the format @channelusername)
@@ -827,12 +827,14 @@ struct edit_message_caption_args_t {
     optional_t<array_t<message_entity_t>>      caption_entities;         // A JSON-serialized list of special entities that appear in the caption, which can be specified instead of parse_mode
     optional_t<boolean_t>                      show_caption_above_media; // Pass True, if the caption must be shown above the message media. Supported only for animation, photo and video messages.
     optional_t<inline_keyboard_markup_t>       reply_markup;             // A JSON-serialized object for an inline keyboard.
+    optional_t<string_t>                       business_connection_id;   // Unique identifier of the business connection on behalf of which the message to be edited was sent
 };
 
 /**
- * Use this method to edit captions of messages. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned.
+ * Use this method to edit captions of messages. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
  * 
  * @param agent Any object satisfying agent concept (see `banana::agent` namespace)
+ * @param args__business_connection_id Unique identifier of the business connection on behalf of which the message to be edited was sent
  * @param args__chat_id Required if inline_message_id is not specified. Unique identifier for the target chat or username of the target channel (in the format @channelusername)
  * @param args__message_id Required if inline_message_id is not specified. Identifier of the message to edit
  * @param args__inline_message_id Required if chat_id and message_id are not specified. Identifier of the inline message
@@ -864,12 +866,14 @@ struct edit_message_live_location_args_t {
     optional_t<integer_t>                      heading;                // Direction in which the user is moving, in degrees. Must be between 1 and 360 if specified.
     optional_t<integer_t>                      proximity_alert_radius; // The maximum distance for proximity alerts about approaching another chat member, in meters. Must be between 1 and 100000 if specified.
     optional_t<inline_keyboard_markup_t>       reply_markup;           // A JSON-serialized object for a new inline keyboard.
+    optional_t<string_t>                       business_connection_id; // Unique identifier of the business connection on behalf of which the message to be edited was sent
 };
 
 /**
  * Use this method to edit live location messages. A location can be edited until its live_period expires or editing is explicitly disabled by a call to stopMessageLiveLocation. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned.
  * 
  * @param agent Any object satisfying agent concept (see `banana::agent` namespace)
+ * @param args__business_connection_id Unique identifier of the business connection on behalf of which the message to be edited was sent
  * @param args__chat_id Required if inline_message_id is not specified. Unique identifier for the target chat or username of the target channel (in the format @channelusername)
  * @param args__message_id Required if inline_message_id is not specified. Identifier of the message to edit
  * @param args__inline_message_id Required if chat_id and message_id are not specified. Identifier of the inline message
@@ -893,17 +897,19 @@ void edit_message_live_location(Agent&& agent, edit_message_live_location_args_t
 
 // Arguments to edit_message_media method
 struct edit_message_media_args_t {
-    input_media_t                              media;             // A JSON-serialized object for a new media content of the message
-    optional_t<variant_t<integer_t, string_t>> chat_id;           // Required if inline_message_id is not specified. Unique identifier for the target chat or username of the target channel (in the format @channelusername)
-    optional_t<integer_t>                      message_id;        // Required if inline_message_id is not specified. Identifier of the message to edit
-    optional_t<string_t>                       inline_message_id; // Required if chat_id and message_id are not specified. Identifier of the inline message
-    optional_t<inline_keyboard_markup_t>       reply_markup;      // A JSON-serialized object for a new inline keyboard.
+    input_media_t                              media;                  // A JSON-serialized object for a new media content of the message
+    optional_t<variant_t<integer_t, string_t>> chat_id;                // Required if inline_message_id is not specified. Unique identifier for the target chat or username of the target channel (in the format @channelusername)
+    optional_t<integer_t>                      message_id;             // Required if inline_message_id is not specified. Identifier of the message to edit
+    optional_t<string_t>                       inline_message_id;      // Required if chat_id and message_id are not specified. Identifier of the inline message
+    optional_t<inline_keyboard_markup_t>       reply_markup;           // A JSON-serialized object for a new inline keyboard.
+    optional_t<string_t>                       business_connection_id; // Unique identifier of the business connection on behalf of which the message to be edited was sent
 };
 
 /**
- * Use this method to edit animation, audio, document, photo, or video messages. If a message is part of a message album, then it can be edited only to an audio for audio albums, only to a document for document albums and to a photo or a video otherwise. When an inline message is edited, a new file can't be uploaded; use a previously uploaded file via its file_id or specify a URL. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned.
+ * Use this method to edit animation, audio, document, photo, or video messages. If a message is part of a message album, then it can be edited only to an audio for audio albums, only to a document for document albums and to a photo or a video otherwise. When an inline message is edited, a new file can't be uploaded; use a previously uploaded file via its file_id or specify a URL. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
  * 
  * @param agent Any object satisfying agent concept (see `banana::agent` namespace)
+ * @param args__business_connection_id Unique identifier of the business connection on behalf of which the message to be edited was sent
  * @param args__chat_id Required if inline_message_id is not specified. Unique identifier for the target chat or username of the target channel (in the format @channelusername)
  * @param args__message_id Required if inline_message_id is not specified. Identifier of the message to edit
  * @param args__inline_message_id Required if chat_id and message_id are not specified. Identifier of the inline message
@@ -922,16 +928,18 @@ void edit_message_media(Agent&& agent, edit_message_media_args_t args, F&& callb
 
 // Arguments to edit_message_reply_markup method
 struct edit_message_reply_markup_args_t {
-    optional_t<variant_t<integer_t, string_t>> chat_id;           // Required if inline_message_id is not specified. Unique identifier for the target chat or username of the target channel (in the format @channelusername)
-    optional_t<integer_t>                      message_id;        // Required if inline_message_id is not specified. Identifier of the message to edit
-    optional_t<string_t>                       inline_message_id; // Required if chat_id and message_id are not specified. Identifier of the inline message
-    optional_t<inline_keyboard_markup_t>       reply_markup;      // A JSON-serialized object for an inline keyboard.
+    optional_t<variant_t<integer_t, string_t>> chat_id;                // Required if inline_message_id is not specified. Unique identifier for the target chat or username of the target channel (in the format @channelusername)
+    optional_t<integer_t>                      message_id;             // Required if inline_message_id is not specified. Identifier of the message to edit
+    optional_t<string_t>                       inline_message_id;      // Required if chat_id and message_id are not specified. Identifier of the inline message
+    optional_t<inline_keyboard_markup_t>       reply_markup;           // A JSON-serialized object for an inline keyboard.
+    optional_t<string_t>                       business_connection_id; // Unique identifier of the business connection on behalf of which the message to be edited was sent
 };
 
 /**
- * Use this method to edit only the reply markup of messages. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned.
+ * Use this method to edit only the reply markup of messages. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
  * 
  * @param agent Any object satisfying agent concept (see `banana::agent` namespace)
+ * @param args__business_connection_id Unique identifier of the business connection on behalf of which the message to be edited was sent
  * @param args__chat_id Required if inline_message_id is not specified. Unique identifier for the target chat or username of the target channel (in the format @channelusername)
  * @param args__message_id Required if inline_message_id is not specified. Identifier of the message to edit
  * @param args__inline_message_id Required if chat_id and message_id are not specified. Identifier of the inline message
@@ -949,20 +957,22 @@ void edit_message_reply_markup(Agent&& agent, edit_message_reply_markup_args_t a
 
 // Arguments to edit_message_text method
 struct edit_message_text_args_t {
-    string_t                                   text;                 // New text of the message, 1-4096 characters after entities parsing
-    optional_t<variant_t<integer_t, string_t>> chat_id;              // Required if inline_message_id is not specified. Unique identifier for the target chat or username of the target channel (in the format @channelusername)
-    optional_t<integer_t>                      message_id;           // Required if inline_message_id is not specified. Identifier of the message to edit
-    optional_t<string_t>                       inline_message_id;    // Required if chat_id and message_id are not specified. Identifier of the inline message
-    optional_t<string_t>                       parse_mode;           // Mode for parsing entities in the message text. See formatting options for more details.
-    optional_t<array_t<message_entity_t>>      entities;             // A JSON-serialized list of special entities that appear in message text, which can be specified instead of parse_mode
-    optional_t<link_preview_options_t>         link_preview_options; // Link preview generation options for the message
-    optional_t<inline_keyboard_markup_t>       reply_markup;         // A JSON-serialized object for an inline keyboard.
+    string_t                                   text;                   // New text of the message, 1-4096 characters after entities parsing
+    optional_t<variant_t<integer_t, string_t>> chat_id;                // Required if inline_message_id is not specified. Unique identifier for the target chat or username of the target channel (in the format @channelusername)
+    optional_t<integer_t>                      message_id;             // Required if inline_message_id is not specified. Identifier of the message to edit
+    optional_t<string_t>                       inline_message_id;      // Required if chat_id and message_id are not specified. Identifier of the inline message
+    optional_t<string_t>                       parse_mode;             // Mode for parsing entities in the message text. See formatting options for more details.
+    optional_t<array_t<message_entity_t>>      entities;               // A JSON-serialized list of special entities that appear in message text, which can be specified instead of parse_mode
+    optional_t<link_preview_options_t>         link_preview_options;   // Link preview generation options for the message
+    optional_t<inline_keyboard_markup_t>       reply_markup;           // A JSON-serialized object for an inline keyboard.
+    optional_t<string_t>                       business_connection_id; // Unique identifier of the business connection on behalf of which the message to be edited was sent
 };
 
 /**
- * Use this method to edit text and game messages. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned.
+ * Use this method to edit text and game messages. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
  * 
  * @param agent Any object satisfying agent concept (see `banana::agent` namespace)
+ * @param args__business_connection_id Unique identifier of the business connection on behalf of which the message to be edited was sent
  * @param args__chat_id Required if inline_message_id is not specified. Unique identifier for the target chat or username of the target channel (in the format @channelusername)
  * @param args__message_id Required if inline_message_id is not specified. Identifier of the message to edit
  * @param args__inline_message_id Required if chat_id and message_id are not specified. Identifier of the inline message
@@ -1404,6 +1414,29 @@ api_result<api::bot_short_description_t, Agent&&> get_my_short_description(Agent
 
 template <class Agent, class F>
 void get_my_short_description(Agent&& agent, get_my_short_description_args_t args, F&& callback) {
+    call(static_cast<Agent&&>(agent), std::move(args), std::forward<F>(callback));
+}
+
+// Arguments to get_star_transactions method
+struct get_star_transactions_args_t {
+    optional_t<integer_t> offset; // Number of transactions to skip in the response
+    optional_t<integer_t> limit;  // The maximum number of transactions to be retrieved. Values between 1-100 are accepted. Defaults to 100.
+};
+
+/**
+ * Returns the bot's Telegram Star transactions in chronological order. On success, returns a StarTransactions object.
+ * 
+ * @param agent Any object satisfying agent concept (see `banana::agent` namespace)
+ * @param args__offset Number of transactions to skip in the response
+ * @param args__limit The maximum number of transactions to be retrieved. Values between 1-100 are accepted. Defaults to 100.
+ */
+template <class Agent>
+api_result<api::star_transaction_t, Agent&&> get_star_transactions(Agent&& agent, get_star_transactions_args_t args) {
+    return call(static_cast<Agent&&>(agent), std::move(args));
+}
+
+template <class Agent, class F>
+void get_star_transactions(Agent&& agent, get_star_transactions_args_t args, F&& callback) {
     call(static_cast<Agent&&>(agent), std::move(args), std::forward<F>(callback));
 }
 
@@ -2301,6 +2334,47 @@ api_result<api::message_t, Agent&&> send_message(Agent&& agent, send_message_arg
 
 template <class Agent, class F>
 void send_message(Agent&& agent, send_message_args_t args, F&& callback) {
+    call(static_cast<Agent&&>(agent), std::move(args), std::forward<F>(callback));
+}
+
+// Arguments to send_paid_media method
+struct send_paid_media_args_t {
+    variant_t<integer_t, string_t>                                                                                   chat_id;                  // Unique identifier for the target chat or username of the target channel (in the format @channelusername)
+    integer_t                                                                                                        star_count;               // The number of Telegram Stars that must be paid to buy access to the media
+    array_t<input_paid_media_t>                                                                                      media;                    // A JSON-serialized array describing the media to be sent; up to 10 items
+    optional_t<string_t>                                                                                             caption;                  // Media caption, 0-1024 characters after entities parsing
+    optional_t<string_t>                                                                                             parse_mode;               // Mode for parsing entities in the media caption. See formatting options for more details.
+    optional_t<array_t<message_entity_t>>                                                                            caption_entities;         // A JSON-serialized list of special entities that appear in the caption, which can be specified instead of parse_mode
+    optional_t<boolean_t>                                                                                            show_caption_above_media; // Pass True, if the caption must be shown above the message media
+    optional_t<boolean_t>                                                                                            disable_notification;     // Sends the message silently. Users will receive a notification with no sound.
+    optional_t<boolean_t>                                                                                            protect_content;          // Protects the contents of the sent message from forwarding and saving
+    optional_t<reply_parameters_t>                                                                                   reply_parameters;         // Description of the message to reply to
+    optional_t<variant_t<inline_keyboard_markup_t, reply_keyboard_markup_t, reply_keyboard_remove_t, force_reply_t>> reply_markup;             // Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove a reply keyboard or to force a reply from the user
+};
+
+/**
+ * Use this method to send paid media to channel chats. On success, the sent Message is returned.
+ * 
+ * @param agent Any object satisfying agent concept (see `banana::agent` namespace)
+ * @param args__chat_id Unique identifier for the target chat or username of the target channel (in the format @channelusername)
+ * @param args__star_count The number of Telegram Stars that must be paid to buy access to the media
+ * @param args__media A JSON-serialized array describing the media to be sent; up to 10 items
+ * @param args__caption Media caption, 0-1024 characters after entities parsing
+ * @param args__parse_mode Mode for parsing entities in the media caption. See formatting options for more details.
+ * @param args__caption_entities A JSON-serialized list of special entities that appear in the caption, which can be specified instead of parse_mode
+ * @param args__show_caption_above_media Pass True, if the caption must be shown above the message media
+ * @param args__disable_notification Sends the message silently. Users will receive a notification with no sound.
+ * @param args__protect_content Protects the contents of the sent message from forwarding and saving
+ * @param args__reply_parameters Description of the message to reply to
+ * @param args__reply_markup Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove a reply keyboard or to force a reply from the user
+ */
+template <class Agent>
+api_result<api::message_t, Agent&&> send_paid_media(Agent&& agent, send_paid_media_args_t args) {
+    return call(static_cast<Agent&&>(agent), std::move(args));
+}
+
+template <class Agent, class F>
+void send_paid_media(Agent&& agent, send_paid_media_args_t args, F&& callback) {
     call(static_cast<Agent&&>(agent), std::move(args), std::forward<F>(callback));
 }
 
@@ -3214,16 +3288,18 @@ void set_webhook(Agent&& agent, set_webhook_args_t args, F&& callback) {
 
 // Arguments to stop_message_live_location method
 struct stop_message_live_location_args_t {
-    optional_t<variant_t<integer_t, string_t>> chat_id;           // Required if inline_message_id is not specified. Unique identifier for the target chat or username of the target channel (in the format @channelusername)
-    optional_t<integer_t>                      message_id;        // Required if inline_message_id is not specified. Identifier of the message with live location to stop
-    optional_t<string_t>                       inline_message_id; // Required if chat_id and message_id are not specified. Identifier of the inline message
-    optional_t<inline_keyboard_markup_t>       reply_markup;      // A JSON-serialized object for a new inline keyboard.
+    optional_t<variant_t<integer_t, string_t>> chat_id;                // Required if inline_message_id is not specified. Unique identifier for the target chat or username of the target channel (in the format @channelusername)
+    optional_t<integer_t>                      message_id;             // Required if inline_message_id is not specified. Identifier of the message with live location to stop
+    optional_t<string_t>                       inline_message_id;      // Required if chat_id and message_id are not specified. Identifier of the inline message
+    optional_t<inline_keyboard_markup_t>       reply_markup;           // A JSON-serialized object for a new inline keyboard.
+    optional_t<string_t>                       business_connection_id; // Unique identifier of the business connection on behalf of which the message to be edited was sent
 };
 
 /**
  * Use this method to stop updating a live location message before live_period expires. On success, if the message is not an inline message, the edited Message is returned, otherwise True is returned.
  * 
  * @param agent Any object satisfying agent concept (see `banana::agent` namespace)
+ * @param args__business_connection_id Unique identifier of the business connection on behalf of which the message to be edited was sent
  * @param args__chat_id Required if inline_message_id is not specified. Unique identifier for the target chat or username of the target channel (in the format @channelusername)
  * @param args__message_id Required if inline_message_id is not specified. Identifier of the message with live location to stop
  * @param args__inline_message_id Required if chat_id and message_id are not specified. Identifier of the inline message
@@ -3241,15 +3317,17 @@ void stop_message_live_location(Agent&& agent, stop_message_live_location_args_t
 
 // Arguments to stop_poll method
 struct stop_poll_args_t {
-    variant_t<integer_t, string_t>       chat_id;      // Unique identifier for the target chat or username of the target channel (in the format @channelusername)
-    integer_t                            message_id;   // Identifier of the original message with the poll
-    optional_t<inline_keyboard_markup_t> reply_markup; // A JSON-serialized object for a new message inline keyboard.
+    variant_t<integer_t, string_t>       chat_id;                // Unique identifier for the target chat or username of the target channel (in the format @channelusername)
+    integer_t                            message_id;             // Identifier of the original message with the poll
+    optional_t<inline_keyboard_markup_t> reply_markup;           // A JSON-serialized object for a new message inline keyboard.
+    optional_t<string_t>                 business_connection_id; // Unique identifier of the business connection on behalf of which the message to be edited was sent
 };
 
 /**
  * Use this method to stop a poll which was sent by the bot. On success, the stopped Poll is returned.
  * 
  * @param agent Any object satisfying agent concept (see `banana::agent` namespace)
+ * @param args__business_connection_id Unique identifier of the business connection on behalf of which the message to be edited was sent
  * @param args__chat_id Unique identifier for the target chat or username of the target channel (in the format @channelusername)
  * @param args__message_id Identifier of the original message with the poll
  * @param args__reply_markup A JSON-serialized object for a new message inline keyboard.

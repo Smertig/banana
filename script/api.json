@@ -279,7 +279,7 @@
             "return_type": "Boolean"
         },
         "copyMessage": {
-            "desc": "Use this method to copy messages of any kind. Service messages, giveaway messages, giveaway winners messages, and invoice messages can't be copied. A quiz poll can be copied only if the value of the field correct_option_id is known to the bot. The method is analogous to the method forwardMessage, but the copied message doesn't have a link to the original message. Returns the MessageId of the sent message on success.",
+            "desc": "Use this method to copy messages of any kind. Service messages, paid media messages, giveaway messages, giveaway winners messages, and invoice messages can't be copied. A quiz poll can be copied only if the value of the field correct_option_id is known to the bot. The method is analogous to the method forwardMessage, but the copied message doesn't have a link to the original message. Returns the MessageId of the sent message on success.",
             "params": [
                 {
                     "description": "Unique identifier for the target chat or username of the target channel (in the format @channelusername)",
@@ -357,7 +357,7 @@
             "return_type": "MessageId"
         },
         "copyMessages": {
-            "desc": "Use this method to copy messages of any kind. If some of the specified messages can't be found or copied, they are skipped. Service messages, giveaway messages, giveaway winners messages, and invoice messages can't be copied. A quiz poll can be copied only if the value of the field correct_option_id is known to the bot. The method is analogous to the method forwardMessages, but the copied messages don't have a link to the original message. Album grouping is kept for copied messages. On success, an array of MessageId of the sent messages is returned.",
+            "desc": "Use this method to copy messages of any kind. If some of the specified messages can't be found or copied, they are skipped. Service messages, paid media messages, giveaway messages, giveaway winners messages, and invoice messages can't be copied. A quiz poll can be copied only if the value of the field correct_option_id is known to the bot. The method is analogous to the method forwardMessages, but the copied messages don't have a link to the original message. Album grouping is kept for copied messages. On success, an array of MessageId of the sent messages is returned.",
             "params": [
                 {
                     "description": "Unique identifier for the target chat or username of the target channel (in the format @channelusername)",
@@ -880,8 +880,14 @@
             "return_type": "Boolean"
         },
         "editMessageCaption": {
-            "desc": "Use this method to edit captions of messages. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned.",
+            "desc": "Use this method to edit captions of messages. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.",
             "params": [
+                {
+                    "description": "Unique identifier of the business connection on behalf of which the message to be edited was sent",
+                    "name": "business_connection_id",
+                    "optional": true,
+                    "type": "String"
+                },
                 {
                     "description": "Required if inline_message_id is not specified. Unique identifier for the target chat or username of the target channel (in the format @channelusername)",
                     "name": "chat_id",
@@ -936,6 +942,12 @@
         "editMessageLiveLocation": {
             "desc": "Use this method to edit live location messages. A location can be edited until its live_period expires or editing is explicitly disabled by a call to stopMessageLiveLocation. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned.",
             "params": [
+                {
+                    "description": "Unique identifier of the business connection on behalf of which the message to be edited was sent",
+                    "name": "business_connection_id",
+                    "optional": true,
+                    "type": "String"
+                },
                 {
                     "description": "Required if inline_message_id is not specified. Unique identifier for the target chat or username of the target channel (in the format @channelusername)",
                     "name": "chat_id",
@@ -1000,8 +1012,14 @@
             "return_type": "Message or Boolean"
         },
         "editMessageMedia": {
-            "desc": "Use this method to edit animation, audio, document, photo, or video messages. If a message is part of a message album, then it can be edited only to an audio for audio albums, only to a document for document albums and to a photo or a video otherwise. When an inline message is edited, a new file can't be uploaded; use a previously uploaded file via its file_id or specify a URL. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned.",
+            "desc": "Use this method to edit animation, audio, document, photo, or video messages. If a message is part of a message album, then it can be edited only to an audio for audio albums, only to a document for document albums and to a photo or a video otherwise. When an inline message is edited, a new file can't be uploaded; use a previously uploaded file via its file_id or specify a URL. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.",
             "params": [
+                {
+                    "description": "Unique identifier of the business connection on behalf of which the message to be edited was sent",
+                    "name": "business_connection_id",
+                    "optional": true,
+                    "type": "String"
+                },
                 {
                     "description": "Required if inline_message_id is not specified. Unique identifier for the target chat or username of the target channel (in the format @channelusername)",
                     "name": "chat_id",
@@ -1036,8 +1054,14 @@
             "return_type": "Message or Boolean"
         },
         "editMessageReplyMarkup": {
-            "desc": "Use this method to edit only the reply markup of messages. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned.",
+            "desc": "Use this method to edit only the reply markup of messages. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.",
             "params": [
+                {
+                    "description": "Unique identifier of the business connection on behalf of which the message to be edited was sent",
+                    "name": "business_connection_id",
+                    "optional": true,
+                    "type": "String"
+                },
                 {
                     "description": "Required if inline_message_id is not specified. Unique identifier for the target chat or username of the target channel (in the format @channelusername)",
                     "name": "chat_id",
@@ -1066,8 +1090,14 @@
             "return_type": "Message or Boolean"
         },
         "editMessageText": {
-            "desc": "Use this method to edit text and game messages. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned.",
+            "desc": "Use this method to edit text and game messages. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.",
             "params": [
+                {
+                    "description": "Unique identifier of the business connection on behalf of which the message to be edited was sent",
+                    "name": "business_connection_id",
+                    "optional": true,
+                    "type": "String"
+                },
                 {
                     "description": "Required if inline_message_id is not specified. Unique identifier for the target chat or username of the target channel (in the format @channelusername)",
                     "name": "chat_id",
@@ -1422,6 +1452,25 @@
                 }
             ],
             "return_type": "BotShortDescription"
+        },
+        "getStarTransactions": {
+            "desc": "Returns the bot's Telegram Star transactions in chronological order. On success, returns a StarTransactions object.",
+            "params": [
+                {
+                    "description": "Number of transactions to skip in the response",
+                    "name": "offset",
+                    "optional": true,
+                    "type": "Integer"
+                },
+                {
+                    "default": 100,
+                    "description": "The maximum number of transactions to be retrieved. Values between 1-100 are accepted. Defaults to 100.",
+                    "name": "limit",
+                    "optional": true,
+                    "type": "Integer"
+                }
+            ],
+            "return_type": "StarTransaction"
         },
         "getStickerSet": {
             "desc": "Use this method to get a sticker set. On success, a StickerSet object is returned.",
@@ -2740,6 +2789,78 @@
             ],
             "return_type": "Message"
         },
+        "sendPaidMedia": {
+            "desc": "Use this method to send paid media to channel chats. On success, the sent Message is returned.",
+            "params": [
+                {
+                    "description": "Unique identifier for the target chat or username of the target channel (in the format @channelusername)",
+                    "name": "chat_id",
+                    "optional": false,
+                    "type": "Integer or String"
+                },
+                {
+                    "description": "The number of Telegram Stars that must be paid to buy access to the media",
+                    "name": "star_count",
+                    "optional": false,
+                    "type": "Integer"
+                },
+                {
+                    "description": "A JSON-serialized array describing the media to be sent; up to 10 items",
+                    "name": "media",
+                    "optional": false,
+                    "type": "Array of InputPaidMedia"
+                },
+                {
+                    "description": "Media caption, 0-1024 characters after entities parsing",
+                    "name": "caption",
+                    "optional": true,
+                    "type": "String"
+                },
+                {
+                    "description": "Mode for parsing entities in the media caption. See formatting options for more details.",
+                    "name": "parse_mode",
+                    "optional": true,
+                    "type": "String"
+                },
+                {
+                    "description": "A JSON-serialized list of special entities that appear in the caption, which can be specified instead of parse_mode",
+                    "name": "caption_entities",
+                    "optional": true,
+                    "type": "Array of MessageEntity"
+                },
+                {
+                    "description": "Pass True, if the caption must be shown above the message media",
+                    "name": "show_caption_above_media",
+                    "optional": true,
+                    "type": "Boolean"
+                },
+                {
+                    "description": "Sends the message silently. Users will receive a notification with no sound.",
+                    "name": "disable_notification",
+                    "optional": true,
+                    "type": "Boolean"
+                },
+                {
+                    "description": "Protects the contents of the sent message from forwarding and saving",
+                    "name": "protect_content",
+                    "optional": true,
+                    "type": "Boolean"
+                },
+                {
+                    "description": "Description of the message to reply to",
+                    "name": "reply_parameters",
+                    "optional": true,
+                    "type": "ReplyParameters"
+                },
+                {
+                    "description": "Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove a reply keyboard or to force a reply from the user",
+                    "name": "reply_markup",
+                    "optional": true,
+                    "type": "InlineKeyboardMarkup or ReplyKeyboardMarkup or ReplyKeyboardRemove or ForceReply"
+                }
+            ],
+            "return_type": "Message"
+        },
         "sendPhoto": {
             "desc": "Use this method to send photos. On success, the sent Message is returned.",
             "params": [
@@ -3939,6 +4060,12 @@
             "desc": "Use this method to stop updating a live location message before live_period expires. On success, if the message is not an inline message, the edited Message is returned, otherwise True is returned.",
             "params": [
                 {
+                    "description": "Unique identifier of the business connection on behalf of which the message to be edited was sent",
+                    "name": "business_connection_id",
+                    "optional": true,
+                    "type": "String"
+                },
+                {
                     "description": "Required if inline_message_id is not specified. Unique identifier for the target chat or username of the target channel (in the format @channelusername)",
                     "name": "chat_id",
                     "optional": true,
@@ -3968,6 +4095,12 @@
         "stopPoll": {
             "desc": "Use this method to stop a poll which was sent by the bot. On success, the stopped Poll is returned.",
             "params": [
+                {
+                    "description": "Unique identifier of the business connection on behalf of which the message to be edited was sent",
+                    "name": "business_connection_id",
+                    "optional": true,
+                    "type": "String"
+                },
                 {
                     "description": "Unique identifier for the target chat or username of the target channel (in the format @channelusername)",
                     "name": "chat_id",
@@ -4145,37 +4278,37 @@
                     "type": "String"
                 },
                 {
-                    "description": "Video width as defined by sender",
+                    "description": "Video width as defined by the sender",
                     "name": "width",
                     "optional": false,
                     "type": "Integer"
                 },
                 {
-                    "description": "Video height as defined by sender",
+                    "description": "Video height as defined by the sender",
                     "name": "height",
                     "optional": false,
                     "type": "Integer"
                 },
                 {
-                    "description": "Duration of the video in seconds as defined by sender",
+                    "description": "Duration of the video in seconds as defined by the sender",
                     "name": "duration",
                     "optional": false,
                     "type": "Integer"
                 },
                 {
-                    "description": "Optional. Animation thumbnail as defined by sender",
+                    "description": "Optional. Animation thumbnail as defined by the sender",
                     "name": "thumbnail",
                     "optional": true,
                     "type": "PhotoSize"
                 },
                 {
-                    "description": "Optional. Original animation filename as defined by sender",
+                    "description": "Optional. Original animation filename as defined by the sender",
                     "name": "file_name",
                     "optional": true,
                     "type": "String"
                 },
                 {
-                    "description": "Optional. MIME type of the file as defined by sender",
+                    "description": "Optional. MIME type of the file as defined by the sender",
                     "name": "mime_type",
                     "optional": true,
                     "type": "String"
@@ -4204,31 +4337,31 @@
                     "type": "String"
                 },
                 {
-                    "description": "Duration of the audio in seconds as defined by sender",
+                    "description": "Duration of the audio in seconds as defined by the sender",
                     "name": "duration",
                     "optional": false,
                     "type": "Integer"
                 },
                 {
-                    "description": "Optional. Performer of the audio as defined by sender or by audio tags",
+                    "description": "Optional. Performer of the audio as defined by the sender or by audio tags",
                     "name": "performer",
                     "optional": true,
                     "type": "String"
                 },
                 {
-                    "description": "Optional. Title of the audio as defined by sender or by audio tags",
+                    "description": "Optional. Title of the audio as defined by the sender or by audio tags",
                     "name": "title",
                     "optional": true,
                     "type": "String"
                 },
                 {
-                    "description": "Optional. Original filename as defined by sender",
+                    "description": "Optional. Original filename as defined by the sender",
                     "name": "file_name",
                     "optional": true,
                     "type": "String"
                 },
                 {
-                    "description": "Optional. MIME type of the file as defined by sender",
+                    "description": "Optional. MIME type of the file as defined by the sender",
                     "name": "mime_type",
                     "optional": true,
                     "type": "String"
@@ -5353,6 +5486,13 @@
                     "type": "ChatPermissions"
                 },
                 {
+                    "default": true,
+                    "description": "Optional. True, if paid media messages can be sent or forwarded to the channel chat. The field is available only for channel chats.",
+                    "name": "can_send_paid_media",
+                    "optional": true,
+                    "type": "Boolean"
+                },
+                {
                     "description": "Optional. For supergroups, the minimum allowed delay between consecutive messages sent by each unprivileged user; in seconds",
                     "name": "slow_mode_delay",
                     "optional": true,
@@ -6192,19 +6332,19 @@
                     "type": "String"
                 },
                 {
-                    "description": "Optional. Document thumbnail as defined by sender",
+                    "description": "Optional. Document thumbnail as defined by the sender",
                     "name": "thumbnail",
                     "optional": true,
                     "type": "PhotoSize"
                 },
                 {
-                    "description": "Optional. Original filename as defined by sender",
+                    "description": "Optional. Original filename as defined by the sender",
                     "name": "file_name",
                     "optional": true,
                     "type": "String"
                 },
                 {
-                    "description": "Optional. MIME type of the file as defined by sender",
+                    "description": "Optional. MIME type of the file as defined by the sender",
                     "name": "mime_type",
                     "optional": true,
                     "type": "String"
@@ -6349,6 +6489,12 @@
                     "name": "document",
                     "optional": true,
                     "type": "Document"
+                },
+                {
+                    "description": "Optional. Message contains paid media; information about the paid media",
+                    "name": "paid_media",
+                    "optional": true,
+                    "type": "PaidMediaInfo"
                 },
                 {
                     "description": "Optional. Message is a photo, available sizes of the photo",
@@ -6845,7 +6991,7 @@
                     "type": "String"
                 },
                 {
-                    "description": "Optional. Data to be sent in a callback query to the bot when button is pressed, 1-64 bytes. Not supported for messages sent on behalf of a Telegram Business account.",
+                    "description": "Optional. Data to be sent in a callback query to the bot when the button is pressed, 1-64 bytes",
                     "name": "callback_data",
                     "optional": true,
                     "type": "String"
@@ -8974,8 +9120,85 @@
                 }
             ]
         },
+        "InputPaidMedia": {
+            "desc": "This object describes the paid media to be sent. Currently, it can be one of InputPaidMediaPhoto; InputPaidMediaVideo",
+            "fields": [
+                {
+                    "description": "",
+                    "name": "__alias__",
+                    "optional": false,
+                    "type": "InputPaidMediaPhoto or InputPaidMediaVideo"
+                }
+            ]
+        },
+        "InputPaidMediaPhoto": {
+            "desc": "The paid media to send is a photo.",
+            "fields": [
+                {
+                    "default": "photo",
+                    "description": "Type of the media, must be photo",
+                    "name": "type",
+                    "optional": false,
+                    "type": "String"
+                },
+                {
+                    "description": "File to send. Pass a file_id to send a file that exists on the Telegram servers (recommended), pass an HTTP URL for Telegram to get a file from the Internet, or pass “attach://<file_attach_name>” to upload a new one using multipart/form-data under <file_attach_name> name. More information on Sending Files »",
+                    "name": "media",
+                    "optional": false,
+                    "type": "String"
+                }
+            ]
+        },
+        "InputPaidMediaVideo": {
+            "desc": "The paid media to send is a video.",
+            "fields": [
+                {
+                    "default": "video",
+                    "description": "Type of the media, must be video",
+                    "name": "type",
+                    "optional": false,
+                    "type": "String"
+                },
+                {
+                    "description": "File to send. Pass a file_id to send a file that exists on the Telegram servers (recommended), pass an HTTP URL for Telegram to get a file from the Internet, or pass “attach://<file_attach_name>” to upload a new one using multipart/form-data under <file_attach_name> name. More information on Sending Files »",
+                    "name": "media",
+                    "optional": false,
+                    "type": "String"
+                },
+                {
+                    "description": "Optional. Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail's width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can't be reused and can be only uploaded as a new file, so you can pass “attach://<file_attach_name>” if the thumbnail was uploaded using multipart/form-data under <file_attach_name>. More information on Sending Files »",
+                    "name": "thumbnail",
+                    "optional": true,
+                    "type": "InputFile or String"
+                },
+                {
+                    "description": "Optional. Video width",
+                    "name": "width",
+                    "optional": true,
+                    "type": "Integer"
+                },
+                {
+                    "description": "Optional. Video height",
+                    "name": "height",
+                    "optional": true,
+                    "type": "Integer"
+                },
+                {
+                    "description": "Optional. Video duration in seconds",
+                    "name": "duration",
+                    "optional": true,
+                    "type": "Integer"
+                },
+                {
+                    "description": "Optional. Pass True if the uploaded video is suitable for streaming",
+                    "name": "supports_streaming",
+                    "optional": true,
+                    "type": "Boolean"
+                }
+            ]
+        },
         "InputPollOption": {
-            "desc": "This object contains information about one answer option in a poll to send.",
+            "desc": "This object contains information about one answer option in a poll to be sent.",
             "fields": [
                 {
                     "description": "Option text, 1-100 characters",
@@ -9382,13 +9605,13 @@
             "desc": "This object represents a point on the map.",
             "fields": [
                 {
-                    "description": "Latitude as defined by sender",
+                    "description": "Latitude as defined by the sender",
                     "name": "latitude",
                     "optional": false,
                     "type": "Float"
                 },
                 {
-                    "description": "Longitude as defined by sender",
+                    "description": "Longitude as defined by the sender",
                     "name": "longitude",
                     "optional": false,
                     "type": "Float"
@@ -9540,7 +9763,7 @@
                     "type": "String"
                 },
                 {
-                    "description": "Description of the Web App that will be launched when the user presses the button. The Web App will be able to send an arbitrary message on behalf of the user using the method answerWebAppQuery.",
+                    "description": "Description of the Web App that will be launched when the user presses the button. The Web App will be able to send an arbitrary message on behalf of the user using the method answerWebAppQuery. Alternatively, a t.me link to a Web App of the bot can be specified in the object instead of the Web App's URL, in which case the Web App will be opened as if the user pressed the link.",
                     "name": "web_app",
                     "optional": false,
                     "type": "WebAppInfo"
@@ -9729,6 +9952,12 @@
                     "type": "Document"
                 },
                 {
+                    "description": "Optional. Message contains paid media; information about the paid media",
+                    "name": "paid_media",
+                    "optional": true,
+                    "type": "PaidMediaInfo"
+                },
+                {
                     "description": "Optional. Message is a photo, available sizes of the photo",
                     "name": "photo",
                     "optional": true,
@@ -9765,7 +9994,7 @@
                     "type": "Voice"
                 },
                 {
-                    "description": "Optional. Caption for the animation, audio, document, photo, video or voice",
+                    "description": "Optional. Caption for the animation, audio, document, paid media, photo, video or voice",
                     "name": "caption",
                     "optional": true,
                     "type": "String"
@@ -9913,6 +10142,12 @@
                     "name": "successful_payment",
                     "optional": true,
                     "type": "SuccessfulPayment"
+                },
+                {
+                    "description": "Optional. Message is a service message about a refunded payment, information about the payment. More about payments »",
+                    "name": "refunded_payment",
+                    "optional": true,
+                    "type": "RefundedPayment"
                 },
                 {
                     "description": "Optional. Service message: users were shared with the bot",
@@ -10356,6 +10591,100 @@
                     "name": "shipping_address",
                     "optional": true,
                     "type": "ShippingAddress"
+                }
+            ]
+        },
+        "PaidMedia": {
+            "desc": "This object describes paid media. Currently, it can be one of PaidMediaPreview; PaidMediaPhoto; PaidMediaVideo",
+            "fields": [
+                {
+                    "description": "",
+                    "name": "__alias__",
+                    "optional": false,
+                    "type": "PaidMediaPreview or PaidMediaPhoto or PaidMediaVideo"
+                }
+            ]
+        },
+        "PaidMediaInfo": {
+            "desc": "Describes the paid media added to a message.",
+            "fields": [
+                {
+                    "description": "The number of Telegram Stars that must be paid to buy access to the media",
+                    "name": "star_count",
+                    "optional": false,
+                    "type": "Integer"
+                },
+                {
+                    "description": "Information about the paid media",
+                    "name": "paid_media",
+                    "optional": false,
+                    "type": "Array of PaidMedia"
+                }
+            ]
+        },
+        "PaidMediaPhoto": {
+            "desc": "The paid media is a photo.",
+            "fields": [
+                {
+                    "default": "photo",
+                    "description": "Type of the paid media, always “photo”",
+                    "name": "type",
+                    "optional": false,
+                    "type": "String"
+                },
+                {
+                    "description": "The photo",
+                    "name": "photo",
+                    "optional": false,
+                    "type": "Array of PhotoSize"
+                }
+            ]
+        },
+        "PaidMediaPreview": {
+            "desc": "The paid media isn't available before the payment.",
+            "fields": [
+                {
+                    "default": "preview",
+                    "description": "Type of the paid media, always “preview”",
+                    "name": "type",
+                    "optional": false,
+                    "type": "String"
+                },
+                {
+                    "description": "Optional. Media width as defined by the sender",
+                    "name": "width",
+                    "optional": true,
+                    "type": "Integer"
+                },
+                {
+                    "description": "Optional. Media height as defined by the sender",
+                    "name": "height",
+                    "optional": true,
+                    "type": "Integer"
+                },
+                {
+                    "description": "Optional. Duration of the media in seconds as defined by the sender",
+                    "name": "duration",
+                    "optional": true,
+                    "type": "Integer"
+                }
+            ]
+        },
+        "PaidMediaVideo": {
+            "desc": "The paid media is a video.",
+            "fields": [
+                {
+                    "default": "video",
+                    "description": "Type of the paid media, always “video”",
+                    "name": "type",
+                    "optional": false,
+                    "type": "String"
+                },
+                {
+                    "description": "The video",
+                    "name": "video",
+                    "optional": false,
+                    "type": "Video"
                 }
             ]
         },
@@ -10896,7 +11225,7 @@
                     "type": "Integer"
                 },
                 {
-                    "description": "Bot specified invoice payload",
+                    "description": "Bot-specified invoice payload",
                     "name": "invoice_payload",
                     "optional": false,
                     "type": "String"
@@ -10998,6 +11327,42 @@
                     "description": "Reaction emoji. Currently, it can be one of \"👍\", \"👎\", \"❤\", \"🔥\", \"🥰\", \"👏\", \"😁\", \"🤔\", \"🤯\", \"😱\", \"🤬\", \"😢\", \"🎉\", \"🤩\", \"🤮\", \"💩\", \"🙏\", \"👌\", \"🕊\", \"🤡\", \"🥱\", \"🥴\", \"😍\", \"🐳\", \"❤‍🔥\", \"🌚\", \"🌭\", \"💯\", \"🤣\", \"⚡\", \"🍌\", \"🏆\", \"💔\", \"🤨\", \"😐\", \"🍓\", \"🍾\", \"💋\", \"🖕\", \"😈\", \"😴\", \"😭\", \"🤓\", \"👻\", \"👨‍💻\", \"👀\", \"🎃\", \"🙈\", \"😇\", \"😨\", \"🤝\", \"✍\", \"🤗\", \"🫡\", \"🎅\", \"🎄\", \"☃\", \"💅\", \"🤪\", \"🗿\", \"🆒\", \"💘\", \"🙉\", \"🦄\", \"😘\", \"💊\", \"🙊\", \"😎\", \"👾\", \"🤷‍♂\", \"🤷\", \"🤷‍♀\", \"😡\"",
                     "name": "emoji",
                     "optional": false,
+                    "type": "String"
+                }
+            ]
+        },
+        "RefundedPayment": {
+            "desc": "This object contains basic information about a refunded payment.",
+            "fields": [
+                {
+                    "default": "XTR",
+                    "description": "Three-letter ISO 4217 currency code, or “XTR” for payments in Telegram Stars. Currently, always “XTR”",
+                    "name": "currency",
+                    "optional": false,
+                    "type": "String"
+                },
+                {
+                    "description": "Total refunded price in the smallest units of the currency (integer, not float/double). For example, for a price of US$ 1.45, total_amount = 145. See the exp parameter in currencies.json, it shows the number of digits past the decimal point for each currency (2 for the majority of currencies).",
+                    "name": "total_amount",
+                    "optional": false,
+                    "type": "Integer"
+                },
+                {
+                    "description": "Bot-specified invoice payload",
+                    "name": "invoice_payload",
+                    "optional": false,
+                    "type": "String"
+                },
+                {
+                    "description": "Telegram payment identifier",
+                    "name": "telegram_payment_charge_id",
+                    "optional": false,
+                    "type": "String"
+                },
+                {
+                    "description": "Optional. Provider payment identifier",
+                    "name": "provider_payment_charge_id",
+                    "optional": true,
                     "type": "String"
                 }
             ]
@@ -11128,6 +11493,65 @@
                 }
             ]
         },
+        "RevenueWithdrawalState": {
+            "desc": "This object describes the state of a revenue withdrawal operation. Currently, it can be one of RevenueWithdrawalStatePending; RevenueWithdrawalStateSucceeded; RevenueWithdrawalStateFailed",
+            "fields": [
+                {
+                    "description": "",
+                    "name": "__alias__",
+                    "optional": false,
+                    "type": "RevenueWithdrawalStatePending or RevenueWithdrawalStateSucceeded or RevenueWithdrawalStateFailed"
+                }
+            ]
+        },
+        "RevenueWithdrawalStateFailed": {
+            "desc": "The withdrawal failed and the transaction was refunded.",
+            "fields": [
+                {
+                    "default": "failed",
+                    "description": "Type of the state, always “failed”",
+                    "name": "type",
+                    "optional": false,
+                    "type": "String"
+                }
+            ]
+        },
+        "RevenueWithdrawalStatePending": {
+            "desc": "The withdrawal is in progress.",
+            "fields": [
+                {
+                    "default": "pending",
+                    "description": "Type of the state, always “pending”",
+                    "name": "type",
+                    "optional": false,
+                    "type": "String"
+                }
+            ]
+        },
+        "RevenueWithdrawalStateSucceeded": {
+            "desc": "The withdrawal succeeded.",
+            "fields": [
+                {
+                    "default": "succeeded",
+                    "description": "Type of the state, always “succeeded”",
+                    "name": "type",
+                    "optional": false,
+                    "type": "String"
+                },
+                {
+                    "description": "Date the withdrawal was completed in Unix time",
+                    "name": "date",
+                    "optional": false,
+                    "type": "Integer"
+                },
+                {
+                    "description": "An HTTPS URL that can be used to see transaction details",
+                    "name": "url",
+                    "optional": false,
+                    "type": "String"
+                }
+            ]
+        },
         "SentWebAppMessage": {
             "desc": "Describes an inline message sent by a Web App on behalf of a user.",
             "fields": [
@@ -11254,7 +11678,7 @@
                     "type": "User"
                 },
                 {
-                    "description": "Bot specified invoice payload",
+                    "description": "Bot-specified invoice payload",
                     "name": "invoice_payload",
                     "optional": false,
                     "type": "String"
@@ -11264,6 +11688,52 @@
                     "name": "shipping_address",
                     "optional": false,
                     "type": "ShippingAddress"
+                }
+            ]
+        },
+        "StarTransaction": {
+            "desc": "Describes a Telegram Star transaction.",
+            "fields": [
+                {
+                    "description": "Unique identifier of the transaction. Coincides with the identifer of the original transaction for refund transactions. Coincides with SuccessfulPayment.telegram_payment_charge_id for successful incoming payments from users.",
+                    "name": "id",
+                    "optional": false,
+                    "type": "String"
+                },
+                {
+                    "description": "Number of Telegram Stars transferred by the transaction",
+                    "name": "amount",
+                    "optional": false,
+                    "type": "Integer"
+                },
+                {
+                    "description": "Date the transaction was created in Unix time",
+                    "name": "date",
+                    "optional": false,
+                    "type": "Integer"
+                },
+                {
+                    "description": "Optional. Source of an incoming transaction (e.g., a user purchasing goods or services, Fragment refunding a failed withdrawal). Only for incoming transactions",
+                    "name": "source",
+                    "optional": true,
+                    "type": "TransactionPartner"
+                },
+                {
+                    "description": "Optional. Receiver of an outgoing transaction (e.g., a user for a purchase refund, Fragment for a withdrawal). Only for outgoing transactions",
+                    "name": "receiver",
+                    "optional": true,
+                    "type": "TransactionPartner"
+                }
+            ]
+        },
+        "StarTransactions": {
+            "desc": "Contains a list of Telegram Star transactions.",
+            "fields": [
+                {
+                    "description": "The list of transactions",
+                    "name": "transactions",
+                    "optional": false,
+                    "type": "Array of StarTransaction"
                 }
             ]
         },
@@ -11431,7 +11901,7 @@
                     "type": "Integer"
                 },
                 {
-                    "description": "Bot specified invoice payload",
+                    "description": "Bot-specified invoice payload",
                     "name": "invoice_payload",
                     "optional": false,
                     "type": "String"
@@ -11524,6 +11994,83 @@
                     "name": "is_manual",
                     "optional": true,
                     "type": "Boolean"
+                }
+            ]
+        },
+        "TransactionPartner": {
+            "desc": "This object describes the source of a transaction, or its recipient for outgoing transactions. Currently, it can be one of TransactionPartnerUser; TransactionPartnerFragment; TransactionPartnerTelegramAds; TransactionPartnerOther",
+            "fields": [
+                {
+                    "description": "",
+                    "name": "__alias__",
+                    "optional": false,
+                    "type": "TransactionPartnerUser or TransactionPartnerFragment or TransactionPartnerTelegramAds or TransactionPartnerOther"
+                }
+            ]
+        },
+        "TransactionPartnerFragment": {
+            "desc": "Describes a withdrawal transaction with Fragment.",
+            "fields": [
+                {
+                    "default": "fragment",
+                    "description": "Type of the transaction partner, always “fragment”",
+                    "name": "type",
+                    "optional": false,
+                    "type": "String"
+                },
+                {
+                    "description": "Optional. State of the transaction if the transaction is outgoing",
+                    "name": "withdrawal_state",
+                    "optional": true,
+                    "type": "RevenueWithdrawalState"
+                }
+            ]
+        },
+        "TransactionPartnerOther": {
+            "desc": "Describes a transaction with an unknown source or recipient.",
+            "fields": [
+                {
+                    "default": "other",
+                    "description": "Type of the transaction partner, always “other”",
+                    "name": "type",
+                    "optional": false,
+                    "type": "String"
+                }
+            ]
+        },
+        "TransactionPartnerTelegramAds": {
+            "desc": "Describes a withdrawal transaction to the Telegram Ads platform.",
+            "fields": [
+                {
+                    "default": "telegram_ads",
+                    "description": "Type of the transaction partner, always “telegram_ads”",
+                    "name": "type",
+                    "optional": false,
+                    "type": "String"
+                }
+            ]
+        },
+        "TransactionPartnerUser": {
+            "desc": "Describes a transaction with a user.",
+            "fields": [
+                {
+                    "default": "user",
+                    "description": "Type of the transaction partner, always “user”",
+                    "name": "type",
+                    "optional": false,
+                    "type": "String"
+                },
+                {
+                    "description": "Information about the user",
+                    "name": "user",
+                    "optional": false,
+                    "type": "User"
+                },
+                {
+                    "description": "Optional. Bot-specified invoice payload",
+                    "name": "invoice_payload",
+                    "optional": true,
+                    "type": "String"
                 }
             ]
         },
@@ -11857,19 +12404,19 @@
                     "type": "String"
                 },
                 {
-                    "description": "Video width as defined by sender",
+                    "description": "Video width as defined by the sender",
                     "name": "width",
                     "optional": false,
                     "type": "Integer"
                 },
                 {
-                    "description": "Video height as defined by sender",
+                    "description": "Video height as defined by the sender",
                     "name": "height",
                     "optional": false,
                     "type": "Integer"
                 },
                 {
-                    "description": "Duration of the video in seconds as defined by sender",
+                    "description": "Duration of the video in seconds as defined by the sender",
                     "name": "duration",
                     "optional": false,
                     "type": "Integer"
@@ -11881,13 +12428,13 @@
                     "type": "PhotoSize"
                 },
                 {
-                    "description": "Optional. Original filename as defined by sender",
+                    "description": "Optional. Original filename as defined by the sender",
                     "name": "file_name",
                     "optional": true,
                     "type": "String"
                 },
                 {
-                    "description": "Optional. MIME type of the file as defined by sender",
+                    "description": "Optional. MIME type of the file as defined by the sender",
                     "name": "mime_type",
                     "optional": true,
                     "type": "String"
@@ -11953,13 +12500,13 @@
                     "type": "String"
                 },
                 {
-                    "description": "Video width and height (diameter of the video message) as defined by sender",
+                    "description": "Video width and height (diameter of the video message) as defined by the sender",
                     "name": "length",
                     "optional": false,
                     "type": "Integer"
                 },
                 {
-                    "description": "Duration of the video in seconds as defined by sender",
+                    "description": "Duration of the video in seconds as defined by the sender",
                     "name": "duration",
                     "optional": false,
                     "type": "Integer"
@@ -11994,13 +12541,13 @@
                     "type": "String"
                 },
                 {
-                    "description": "Duration of the audio in seconds as defined by sender",
+                    "description": "Duration of the audio in seconds as defined by the sender",
                     "name": "duration",
                     "optional": false,
                     "type": "Integer"
                 },
                 {
-                    "description": "Optional. MIME type of the file as defined by sender",
+                    "description": "Optional. MIME type of the file as defined by the sender",
                     "name": "mime_type",
                     "optional": true,
                     "type": "String"

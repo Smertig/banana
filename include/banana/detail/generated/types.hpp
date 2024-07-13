@@ -4,12 +4,12 @@
 struct animation_t {
     string_t                 file_id;        // Identifier for this file, which can be used to download or reuse the file
     string_t                 file_unique_id; // Unique identifier for this file, which is supposed to be the same over time and for different bots. Can't be used to download or reuse the file.
-    integer_t                width;          // Video width as defined by sender
-    integer_t                height;         // Video height as defined by sender
-    integer_t                duration;       // Duration of the video in seconds as defined by sender
-    optional_t<photo_size_t> thumbnail;      // Optional. Animation thumbnail as defined by sender
-    optional_t<string_t>     file_name;      // Optional. Original animation filename as defined by sender
-    optional_t<string_t>     mime_type;      // Optional. MIME type of the file as defined by sender
+    integer_t                width;          // Video width as defined by the sender
+    integer_t                height;         // Video height as defined by the sender
+    integer_t                duration;       // Duration of the video in seconds as defined by the sender
+    optional_t<photo_size_t> thumbnail;      // Optional. Animation thumbnail as defined by the sender
+    optional_t<string_t>     file_name;      // Optional. Original animation filename as defined by the sender
+    optional_t<string_t>     mime_type;      // Optional. MIME type of the file as defined by the sender
     optional_t<integer_t>    file_size;      // Optional. File size in bytes. It can be bigger than 2^31 and some programming languages may have difficulty/silent defects in interpreting it. But it has at most 52 significant bits, so a signed 64-bit integer or double-precision float type are safe for storing this value.
 };
 
@@ -17,11 +17,11 @@ struct animation_t {
 struct audio_t {
     string_t                 file_id;        // Identifier for this file, which can be used to download or reuse the file
     string_t                 file_unique_id; // Unique identifier for this file, which is supposed to be the same over time and for different bots. Can't be used to download or reuse the file.
-    integer_t                duration;       // Duration of the audio in seconds as defined by sender
-    optional_t<string_t>     performer;      // Optional. Performer of the audio as defined by sender or by audio tags
-    optional_t<string_t>     title;          // Optional. Title of the audio as defined by sender or by audio tags
-    optional_t<string_t>     file_name;      // Optional. Original filename as defined by sender
-    optional_t<string_t>     mime_type;      // Optional. MIME type of the file as defined by sender
+    integer_t                duration;       // Duration of the audio in seconds as defined by the sender
+    optional_t<string_t>     performer;      // Optional. Performer of the audio as defined by the sender or by audio tags
+    optional_t<string_t>     title;          // Optional. Title of the audio as defined by the sender or by audio tags
+    optional_t<string_t>     file_name;      // Optional. Original filename as defined by the sender
+    optional_t<string_t>     mime_type;      // Optional. MIME type of the file as defined by the sender
     optional_t<integer_t>    file_size;      // Optional. File size in bytes. It can be bigger than 2^31 and some programming languages may have difficulty/silent defects in interpreting it. But it has at most 52 significant bits, so a signed 64-bit integer or double-precision float type are safe for storing this value.
     optional_t<photo_size_t> thumbnail;      // Optional. Thumbnail of the album cover to which the music file belongs
 };
@@ -128,6 +128,7 @@ struct chat_full_info_t {
     optional_t<string_t>                 invite_link;                             // Optional. Primary invite link, for groups, supergroups and channel chats
     optional_t<message_t>                pinned_message;                          // Optional. The most recent pinned message (by sending date)
     optional_t<chat_permissions_t>       permissions;                             // Optional. Default chat member permissions, for groups and supergroups
+    optional_t<boolean_t>                can_send_paid_media;                     // Optional. True, if paid media messages can be sent or forwarded to the channel chat. The field is available only for channel chats.
     optional_t<integer_t>                slow_mode_delay;                         // Optional. For supergroups, the minimum allowed delay between consecutive messages sent by each unprivileged user; in seconds
     optional_t<integer_t>                unrestrict_boost_count;                  // Optional. For supergroups, the minimum number of boosts that a non-administrator user needs to add in order to ignore slow mode and chat permissions
     optional_t<integer_t>                message_auto_delete_time;                // Optional. The time after which all messages sent to the chat will be automatically deleted; in seconds
@@ -266,7 +267,7 @@ struct inline_query_results_button_t {
 struct input_file_t {
 };
 
-// This object contains information about one answer option in a poll to send.
+// This object contains information about one answer option in a poll to be sent.
 struct input_poll_option_t {
     string_t                              text;            // Option text, 1-100 characters
     optional_t<string_t>                  text_parse_mode; // Optional. Mode for parsing entities in the text. See formatting options for more details. Currently, only custom emoji entities are allowed
@@ -392,6 +393,15 @@ struct poll_answer_t {
     optional_t<user_t> user;       // Optional. The user that changed the answer to the poll, if the voter isn't anonymous
 };
 
+// This object contains basic information about a refunded payment.
+struct refunded_payment_t {
+    string_t             currency;                   // Three-letter ISO 4217 currency code, or “XTR” for payments in Telegram Stars. Currently, always “XTR”
+    integer_t            total_amount;               // Total refunded price in the smallest units of the currency (integer, not float/double). For example, for a price of US$ 1.45, total_amount = 145. See the exp parameter in currencies.json, it shows the number of digits past the decimal point for each currency (2 for the majority of currencies).
+    string_t             invoice_payload;            // Bot-specified invoice payload
+    string_t             telegram_payment_charge_id; // Telegram payment identifier
+    optional_t<string_t> provider_payment_charge_id; // Optional. Provider payment identifier
+};
+
 // Upon receiving a message with this object, Telegram clients will remove the current custom keyboard and display the default letter-keyboard. By default, custom keyboards are displayed until a new keyboard is sent by a bot. An exception is made for one-time keyboards that are hidden immediately after the user presses a button (see ReplyKeyboardMarkup). Not supported in channels and for messages sent on behalf of a Telegram Business account.
 struct reply_keyboard_remove_t {
     boolean_t             remove_keyboard; // Requests clients to remove the custom keyboard (user will not be able to summon this keyboard; if you want to hide the keyboard from sight but keep it accessible, use one_time_keyboard in ReplyKeyboardMarkup)
@@ -424,7 +434,7 @@ struct sent_web_app_message_t {
 struct successful_payment_t {
     string_t                 currency;                   // Three-letter ISO 4217 currency code, or “XTR” for payments in Telegram Stars
     integer_t                total_amount;               // Total price in the smallest units of the currency (integer, not float/double). For example, for a price of US$ 1.45 pass amount = 145. See the exp parameter in currencies.json, it shows the number of digits past the decimal point for each currency (2 for the majority of currencies).
-    string_t                 invoice_payload;            // Bot specified invoice payload
+    string_t                 invoice_payload;            // Bot-specified invoice payload
     string_t                 telegram_payment_charge_id; // Telegram payment identifier
     string_t                 provider_payment_charge_id; // Provider payment identifier
     optional_t<string_t>     shipping_option_id;         // Optional. Identifier of the shipping option chosen by the user
@@ -493,31 +503,18 @@ struct video_chat_started_t {
 struct video_note_t {
     string_t                 file_id;        // Identifier for this file, which can be used to download or reuse the file
     string_t                 file_unique_id; // Unique identifier for this file, which is supposed to be the same over time and for different bots. Can't be used to download or reuse the file.
-    integer_t                length;         // Video width and height (diameter of the video message) as defined by sender
-    integer_t                duration;       // Duration of the video in seconds as defined by sender
+    integer_t                length;         // Video width and height (diameter of the video message) as defined by the sender
+    integer_t                duration;       // Duration of the video in seconds as defined by the sender
     optional_t<photo_size_t> thumbnail;      // Optional. Video thumbnail
     optional_t<integer_t>    file_size;      // Optional. File size in bytes
-};
-
-// This object represents a video file.
-struct video_t {
-    string_t                 file_id;        // Identifier for this file, which can be used to download or reuse the file
-    string_t                 file_unique_id; // Unique identifier for this file, which is supposed to be the same over time and for different bots. Can't be used to download or reuse the file.
-    integer_t                width;          // Video width as defined by sender
-    integer_t                height;         // Video height as defined by sender
-    integer_t                duration;       // Duration of the video in seconds as defined by sender
-    optional_t<photo_size_t> thumbnail;      // Optional. Video thumbnail
-    optional_t<string_t>     file_name;      // Optional. Original filename as defined by sender
-    optional_t<string_t>     mime_type;      // Optional. MIME type of the file as defined by sender
-    optional_t<integer_t>    file_size;      // Optional. File size in bytes. It can be bigger than 2^31 and some programming languages may have difficulty/silent defects in interpreting it. But it has at most 52 significant bits, so a signed 64-bit integer or double-precision float type are safe for storing this value.
 };
 
 // This object represents a voice note.
 struct voice_t {
     string_t              file_id;        // Identifier for this file, which can be used to download or reuse the file
     string_t              file_unique_id; // Unique identifier for this file, which is supposed to be the same over time and for different bots. Can't be used to download or reuse the file.
-    integer_t             duration;       // Duration of the audio in seconds as defined by sender
-    optional_t<string_t>  mime_type;      // Optional. MIME type of the file as defined by sender
+    integer_t             duration;       // Duration of the audio in seconds as defined by the sender
+    optional_t<string_t>  mime_type;      // Optional. MIME type of the file as defined by the sender
     optional_t<integer_t> file_size;      // Optional. File size in bytes. It can be bigger than 2^31 and some programming languages may have difficulty/silent defects in interpreting it. But it has at most 52 significant bits, so a signed 64-bit integer or double-precision float type are safe for storing this value.
 };
 
@@ -586,9 +583,9 @@ struct background_type_fill_t {
 struct document_t {
     string_t                 file_id;        // Identifier for this file, which can be used to download or reuse the file
     string_t                 file_unique_id; // Unique identifier for this file, which is supposed to be the same over time and for different bots. Can't be used to download or reuse the file.
-    optional_t<photo_size_t> thumbnail;      // Optional. Document thumbnail as defined by sender
-    optional_t<string_t>     file_name;      // Optional. Original filename as defined by sender
-    optional_t<string_t>     mime_type;      // Optional. MIME type of the file as defined by sender
+    optional_t<photo_size_t> thumbnail;      // Optional. Document thumbnail as defined by the sender
+    optional_t<string_t>     file_name;      // Optional. Original filename as defined by the sender
+    optional_t<string_t>     mime_type;      // Optional. MIME type of the file as defined by the sender
     optional_t<integer_t>    file_size;      // Optional. File size in bytes. It can be bigger than 2^31 and some programming languages may have difficulty/silent defects in interpreting it. But it has at most 52 significant bits, so a signed 64-bit integer or double-precision float type are safe for storing this value.
 };
 
@@ -730,13 +727,14 @@ struct message_t {
     optional_t<animation_t>                         animation;                         // Optional. Message is an animation, information about the animation. For backward compatibility, when this field is set, the document field will also be set
     optional_t<audio_t>                             audio;                             // Optional. Message is an audio file, information about the file
     optional_t<document_t>                          document;                          // Optional. Message is a general file, information about the file
+    optional_t<paid_media_info_t>                   paid_media;                        // Optional. Message contains paid media; information about the paid media
     optional_t<array_t<photo_size_t>>               photo;                             // Optional. Message is a photo, available sizes of the photo
     optional_t<sticker_t>                           sticker;                           // Optional. Message is a sticker, information about the sticker
     optional_t<story_t>                             story;                             // Optional. Message is a forwarded story
     optional_t<video_t>                             video;                             // Optional. Message is a video, information about the video
     optional_t<video_note_t>                        video_note;                        // Optional. Message is a video note, information about the video message
     optional_t<voice_t>                             voice;                             // Optional. Message is a voice message, information about the file
-    optional_t<string_t>                            caption;                           // Optional. Caption for the animation, audio, document, photo, video or voice
+    optional_t<string_t>                            caption;                           // Optional. Caption for the animation, audio, document, paid media, photo, video or voice
     optional_t<array_t<message_entity_t>>           caption_entities;                  // Optional. For messages with a caption, special entities like usernames, URLs, bot commands, etc. that appear in the caption
     optional_t<boolean_t>                           show_caption_above_media;          // Optional. True, if the caption must be shown above the message media
     optional_t<boolean_t>                           has_media_spoiler;                 // Optional. True, if the message media is covered by a spoiler animation
@@ -760,6 +758,7 @@ struct message_t {
     optional_t<maybe_inaccessible_message_t>        pinned_message;                    // Optional. Specified message was pinned. Note that the Message object in this field will not contain further reply_to_message fields even if it itself is a reply.
     optional_t<invoice_t>                           invoice;                           // Optional. Message is an invoice for a payment, information about the invoice. More about payments »
     optional_t<successful_payment_t>                successful_payment;                // Optional. Message is a service message about a successful payment, information about the payment. More about payments »
+    optional_t<refunded_payment_t>                  refunded_payment;                  // Optional. Message is a service message about a refunded payment, information about the payment. More about payments »
     optional_t<users_shared_t>                      users_shared;                      // Optional. Service message: users were shared with the bot
     optional_t<chat_shared_t>                       chat_shared;                       // Optional. Service message: a chat was shared with the bot
     optional_t<string_t>                            connected_website;                 // Optional. The domain name of the website on which the user has logged in. More about Telegram Login »
@@ -862,6 +861,22 @@ struct shipping_address_t {
 struct story_t {
     chat_t    chat; // Chat that posted the story
     integer_t id;   // Unique identifier for the story in the chat
+};
+
+// Describes a withdrawal transaction with Fragment.
+struct transaction_partner_fragment_t {
+    string_t                               type;             // Type of the transaction partner, always “fragment”
+    optional_t<revenue_withdrawal_state_t> withdrawal_state; // Optional. State of the transaction if the transaction is outgoing
+};
+
+// Describes a transaction with an unknown source or recipient.
+struct transaction_partner_other_t {
+    string_t type; // Type of the transaction partner, always “other”
+};
+
+// Describes a withdrawal transaction to the Telegram Ads platform.
+struct transaction_partner_telegram_ads_t {
+    string_t type; // Type of the transaction partner, always “telegram_ads”
 };
 
 // This object represents a Telegram user or bot.
@@ -1099,6 +1114,7 @@ struct external_reply_info_t {
     optional_t<animation_t>            animation;            // Optional. Message is an animation, information about the animation
     optional_t<audio_t>                audio;                // Optional. Message is an audio file, information about the file
     optional_t<document_t>             document;             // Optional. Message is a general file, information about the file
+    optional_t<paid_media_info_t>      paid_media;           // Optional. Message contains paid media; information about the paid media
     optional_t<array_t<photo_size_t>>  photo;                // Optional. Message is a photo, available sizes of the photo
     optional_t<sticker_t>              sticker;              // Optional. Message is a sticker, information about the sticker
     optional_t<story_t>                story;                // Optional. Message is a forwarded story
@@ -1123,7 +1139,7 @@ struct pre_checkout_query_t {
     user_t                   from;               // User who sent the query
     string_t                 currency;           // Three-letter ISO 4217 currency code, or “XTR” for payments in Telegram Stars
     integer_t                total_amount;       // Total price in the smallest units of the currency (integer, not float/double). For example, for a price of US$ 1.45 pass amount = 145. See the exp parameter in currencies.json, it shows the number of digits past the decimal point for each currency (2 for the majority of currencies).
-    string_t                 invoice_payload;    // Bot specified invoice payload
+    string_t                 invoice_payload;    // Bot-specified invoice payload
     optional_t<string_t>     shipping_option_id; // Optional. Identifier of the shipping option chosen by the user
     optional_t<order_info_t> order_info;         // Optional. Order information provided by the user
 };
@@ -1139,8 +1155,15 @@ struct proximity_alert_triggered_t {
 struct shipping_query_t {
     string_t           id;               // Unique query identifier
     user_t             from;             // User who sent the query
-    string_t           invoice_payload;  // Bot specified invoice payload
+    string_t           invoice_payload;  // Bot-specified invoice payload
     shipping_address_t shipping_address; // User specified shipping address
+};
+
+// Describes a transaction with a user.
+struct transaction_partner_user_t {
+    string_t             type;            // Type of the transaction partner, always “user”
+    user_t               user;            // Information about the user
+    optional_t<string_t> invoice_payload; // Optional. Bot-specified invoice payload
 };
 
 // This object represents a list of boosts added to a chat by a user.
@@ -1167,8 +1190,8 @@ struct business_opening_hours_t {
 
 // This object represents a point on the map.
 struct location_t {
-    float_t               latitude;               // Latitude as defined by sender
-    float_t               longitude;              // Longitude as defined by sender
+    float_t               latitude;               // Latitude as defined by the sender
+    float_t               longitude;              // Longitude as defined by the sender
     optional_t<float_t>   horizontal_accuracy;    // Optional. The radius of uncertainty for the location, measured in meters; 0-1500
     optional_t<integer_t> live_period;            // Optional. Time relative to the message sending date, during which the location can be updated; in seconds. For active live locations only.
     optional_t<integer_t> heading;                // Optional. The direction in which user is moving, in degrees; 1-360. For active live locations only.
@@ -1192,6 +1215,14 @@ struct venue_t {
     optional_t<string_t> google_place_type; // Optional. Google Places type of the venue. (See supported types.)
 };
 
+// The paid media isn't available before the payment.
+struct paid_media_preview_t {
+    string_t              type;     // Type of the paid media, always “preview”
+    optional_t<integer_t> width;    // Optional. Media width as defined by the sender
+    optional_t<integer_t> height;   // Optional. Media height as defined by the sender
+    optional_t<integer_t> duration; // Optional. Duration of the media in seconds as defined by the sender
+};
+
 // This object represents one size of a photo or a file / sticker thumbnail.
 struct photo_size_t {
     string_t              file_id;        // Identifier for this file, which can be used to download or reuse the file
@@ -1211,17 +1242,48 @@ struct game_t {
     optional_t<animation_t>               animation;     // Optional. Animation that will be displayed in the game message in chats. Upload via BotFather
 };
 
+// The paid media is a photo.
+struct paid_media_photo_t {
+    string_t              type;  // Type of the paid media, always “photo”
+    array_t<photo_size_t> photo; // The photo
+};
+
 // This object represent a user's profile pictures.
 struct user_profile_photos_t {
     integer_t                      total_count; // Total number of profile pictures the target user has
     array_t<array_t<photo_size_t>> photos;      // Requested profile pictures (in up to 4 sizes each)
 };
 
+// This object represents a video file.
+struct video_t {
+    string_t                 file_id;        // Identifier for this file, which can be used to download or reuse the file
+    string_t                 file_unique_id; // Unique identifier for this file, which is supposed to be the same over time and for different bots. Can't be used to download or reuse the file.
+    integer_t                width;          // Video width as defined by the sender
+    integer_t                height;         // Video height as defined by the sender
+    integer_t                duration;       // Duration of the video in seconds as defined by the sender
+    optional_t<photo_size_t> thumbnail;      // Optional. Video thumbnail
+    optional_t<string_t>     file_name;      // Optional. Original filename as defined by the sender
+    optional_t<string_t>     mime_type;      // Optional. MIME type of the file as defined by the sender
+    optional_t<integer_t>    file_size;      // Optional. File size in bytes. It can be bigger than 2^31 and some programming languages may have difficulty/silent defects in interpreting it. But it has at most 52 significant bits, so a signed 64-bit integer or double-precision float type are safe for storing this value.
+};
+
+// The paid media is a video.
+struct paid_media_video_t {
+    string_t type;  // Type of the paid media, always “video”
+    video_t  video; // The video
+};
+
+// Describes the paid media added to a message.
+struct paid_media_info_t {
+    integer_t             star_count; // The number of Telegram Stars that must be paid to buy access to the media
+    array_t<paid_media_t> paid_media; // Information about the paid media
+};
+
 // This object represents one button of an inline keyboard. Exactly one of the optional fields must be used to specify type of the button.
 struct inline_keyboard_button_t {
     string_t                                      text;                             // Label text on the button
     optional_t<string_t>                          url;                              // Optional. HTTP or tg:// URL to be opened when the button is pressed. Links tg://user?id=<user_id> can be used to mention a user by their identifier without using a username, if this is allowed by their privacy settings.
-    optional_t<string_t>                          callback_data;                    // Optional. Data to be sent in a callback query to the bot when button is pressed, 1-64 bytes. Not supported for messages sent on behalf of a Telegram Business account.
+    optional_t<string_t>                          callback_data;                    // Optional. Data to be sent in a callback query to the bot when the button is pressed, 1-64 bytes
     optional_t<web_app_info_t>                    web_app;                          // Optional. Description of the Web App that will be launched when the user presses the button. The Web App will be able to send an arbitrary message on behalf of the user using the method answerWebAppQuery. Available only in private chats between a user and the bot. Not supported for messages sent on behalf of a Telegram Business account.
     optional_t<login_url_t>                       login_url;                        // Optional. An HTTPS URL used to automatically authorize the user. Can be used as a replacement for the Telegram Login Widget.
     optional_t<string_t>                          switch_inline_query;              // Optional. If set, pressing the button will prompt the user to select one of their chats, open that chat and insert the bot's username and the specified inline query in the input field. May be empty, in which case just the bot's username will be inserted. Not supported for messages sent on behalf of a Telegram Business account.
@@ -1681,6 +1743,23 @@ struct input_media_video_t {
     optional_t<boolean_t>                         has_spoiler;              // Optional. Pass True if the video needs to be covered with a spoiler animation
 };
 
+// The paid media to send is a photo.
+struct input_paid_media_photo_t {
+    string_t type;  // Type of the media, must be photo
+    string_t media; // File to send. Pass a file_id to send a file that exists on the Telegram servers (recommended), pass an HTTP URL for Telegram to get a file from the Internet, or pass “attach://<file_attach_name>” to upload a new one using multipart/form-data under <file_attach_name> name. More information on Sending Files »
+};
+
+// The paid media to send is a video.
+struct input_paid_media_video_t {
+    string_t                                      type;               // Type of the media, must be video
+    string_t                                      media;              // File to send. Pass a file_id to send a file that exists on the Telegram servers (recommended), pass an HTTP URL for Telegram to get a file from the Internet, or pass “attach://<file_attach_name>” to upload a new one using multipart/form-data under <file_attach_name> name. More information on Sending Files »
+    optional_t<variant_t<input_file_t, string_t>> thumbnail;          // Optional. Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail's width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can't be reused and can be only uploaded as a new file, so you can pass “attach://<file_attach_name>” if the thumbnail was uploaded using multipart/form-data under <file_attach_name>. More information on Sending Files »
+    optional_t<integer_t>                         width;              // Optional. Video width
+    optional_t<integer_t>                         height;             // Optional. Video height
+    optional_t<integer_t>                         duration;           // Optional. Video duration in seconds
+    optional_t<boolean_t>                         supports_streaming; // Optional. Pass True if the uploaded video is suitable for streaming
+};
+
 // Represents a menu button, which opens the bot's list of commands.
 struct menu_button_commands_t {
     string_t type; // Type of the button, must be commands
@@ -1700,7 +1779,7 @@ struct web_app_info_t {
 struct menu_button_web_app_t {
     string_t       type;    // Type of the button, must be web_app
     string_t       text;    // Text on the button
-    web_app_info_t web_app; // Description of the Web App that will be launched when the user presses the button. The Web App will be able to send an arbitrary message on behalf of the user using the method answerWebAppQuery.
+    web_app_info_t web_app; // Description of the Web App that will be launched when the user presses the button. The Web App will be able to send an arbitrary message on behalf of the user using the method answerWebAppQuery. Alternatively, a t.me link to a Web App of the bot can be specified in the object instead of the Web App's URL, in which case the Web App will be opened as if the user pressed the link.
 };
 
 // Describes data required for decrypting and authenticating EncryptedPassportElement. See the Telegram Passport Documentation for a complete description of the data decryption and authentication processes.
@@ -1847,6 +1926,37 @@ struct reply_keyboard_markup_t {
     optional_t<boolean_t>               one_time_keyboard;       // Optional. Requests clients to hide the keyboard as soon as it's been used. The keyboard will still be available, but clients will automatically display the usual letter-keyboard in the chat - the user can press a special button in the input field to see the custom keyboard again. Defaults to false.
     optional_t<string_t>                input_field_placeholder; // Optional. The placeholder to be shown in the input field when the keyboard is active; 1-64 characters
     optional_t<boolean_t>               selective;               // Optional. Use this parameter if you want to show the keyboard to specific users only. Targets: 1) users that are @mentioned in the text of the Message object; 2) if the bot's message is a reply to a message in the same chat and forum topic, sender of the original message.   Example: A user requests to change the bot's language, bot replies to the request with a keyboard to select the new language. Other users in the group don't see the keyboard.
+};
+
+// The withdrawal failed and the transaction was refunded.
+struct revenue_withdrawal_state_failed_t {
+    string_t type; // Type of the state, always “failed”
+};
+
+// The withdrawal is in progress.
+struct revenue_withdrawal_state_pending_t {
+    string_t type; // Type of the state, always “pending”
+};
+
+// The withdrawal succeeded.
+struct revenue_withdrawal_state_succeeded_t {
+    string_t  type; // Type of the state, always “succeeded”
+    integer_t date; // Date the withdrawal was completed in Unix time
+    string_t  url;  // An HTTPS URL that can be used to see transaction details
+};
+
+// Describes a Telegram Star transaction.
+struct star_transaction_t {
+    string_t                          id;       // Unique identifier of the transaction. Coincides with the identifer of the original transaction for refund transactions. Coincides with SuccessfulPayment.telegram_payment_charge_id for successful incoming payments from users.
+    integer_t                         amount;   // Number of Telegram Stars transferred by the transaction
+    integer_t                         date;     // Date the transaction was created in Unix time
+    optional_t<transaction_partner_t> source;   // Optional. Source of an incoming transaction (e.g., a user purchasing goods or services, Fragment refunding a failed withdrawal). Only for incoming transactions
+    optional_t<transaction_partner_t> receiver; // Optional. Receiver of an outgoing transaction (e.g., a user for a purchase refund, Fragment for a withdrawal). Only for outgoing transactions
+};
+
+// Contains a list of Telegram Star transactions.
+struct star_transactions_t {
+    array_t<star_transaction_t> transactions; // The list of transactions
 };
 
 // This object represents a sticker.

@@ -17,7 +17,7 @@ shipping_query_t
 
    .. cpp:member:: string_t invoice_payload
 
-   Bot specified invoice payload
+   Bot-specified invoice payload
 
    .. cpp:member:: shipping_address_t shipping_address
 

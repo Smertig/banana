@@ -108,6 +108,8 @@ struct input_media_audio_t;
 struct input_media_document_t;
 struct input_media_photo_t;
 struct input_media_video_t;
+struct input_paid_media_photo_t;
+struct input_paid_media_video_t;
 struct input_poll_option_t;
 struct input_sticker_t;
 struct input_text_message_content_t;
@@ -136,6 +138,10 @@ struct message_reaction_count_updated_t;
 struct message_reaction_updated_t;
 struct message_t;
 struct order_info_t;
+struct paid_media_info_t;
+struct paid_media_photo_t;
+struct paid_media_preview_t;
+struct paid_media_video_t;
 struct passport_data_t;
 struct passport_element_error_data_field_t;
 struct passport_element_error_file_t;
@@ -156,21 +162,31 @@ struct proximity_alert_triggered_t;
 struct reaction_count_t;
 struct reaction_type_custom_emoji_t;
 struct reaction_type_emoji_t;
+struct refunded_payment_t;
 struct reply_keyboard_markup_t;
 struct reply_keyboard_remove_t;
 struct reply_parameters_t;
 struct response_parameters_t;
+struct revenue_withdrawal_state_failed_t;
+struct revenue_withdrawal_state_pending_t;
+struct revenue_withdrawal_state_succeeded_t;
 struct sent_web_app_message_t;
 struct shared_user_t;
 struct shipping_address_t;
 struct shipping_option_t;
 struct shipping_query_t;
+struct star_transaction_t;
+struct star_transactions_t;
 struct sticker_set_t;
 struct sticker_t;
 struct story_t;
 struct successful_payment_t;
 struct switch_inline_query_chosen_chat_t;
 struct text_quote_t;
+struct transaction_partner_fragment_t;
+struct transaction_partner_other_t;
+struct transaction_partner_telegram_ads_t;
+struct transaction_partner_user_t;
 struct update_t;
 struct user_chat_boosts_t;
 struct user_profile_photos_t;
@@ -215,6 +231,9 @@ using input_media_t = variant_t<input_media_animation_t, input_media_document_t,
 // This object represents the content of a message to be sent as a result of an inline query. Telegram clients currently support the following 5 types: InputTextMessageContent; InputLocationMessageContent; InputVenueMessageContent; InputContactMessageContent; InputInvoiceMessageContent
 using input_message_content_t = variant_t<input_text_message_content_t, input_location_message_content_t, input_venue_message_content_t, input_contact_message_content_t, input_invoice_message_content_t>;
 
+// This object describes the paid media to be sent. Currently, it can be one of InputPaidMediaPhoto; InputPaidMediaVideo
+using input_paid_media_t = variant_t<input_paid_media_photo_t, input_paid_media_video_t>;
+
 // This object describes a message that can be inaccessible to the bot. It can be one of Message; InaccessibleMessage
 using maybe_inaccessible_message_t = variant_t<message_t, inaccessible_message_t>;
 
@@ -224,8 +243,17 @@ using menu_button_t = variant_t<menu_button_commands_t, menu_button_web_app_t, m
 // This object describes the origin of a message. It can be one of MessageOriginUser; MessageOriginHiddenUser; MessageOriginChat; MessageOriginChannel
 using message_origin_t = variant_t<message_origin_user_t, message_origin_hidden_user_t, message_origin_chat_t, message_origin_channel_t>;
 
+// This object describes paid media. Currently, it can be one of PaidMediaPreview; PaidMediaPhoto; PaidMediaVideo
+using paid_media_t = variant_t<paid_media_preview_t, paid_media_photo_t, paid_media_video_t>;
+
 // This object represents an error in the Telegram Passport element which was submitted that should be resolved by the user. It should be one of: PassportElementErrorDataField; PassportElementErrorFrontSide; PassportElementErrorReverseSide; PassportElementErrorSelfie; PassportElementErrorFile; PassportElementErrorFiles; PassportElementErrorTranslationFile; PassportElementErrorTranslationFiles; PassportElementErrorUnspecified
 using passport_element_error_t = variant_t<passport_element_error_data_field_t, passport_element_error_front_side_t, passport_element_error_reverse_side_t, passport_element_error_selfie_t, passport_element_error_file_t, passport_element_error_files_t, passport_element_error_translation_file_t, passport_element_error_translation_files_t, passport_element_error_unspecified_t>;
 
 // This object describes the type of a reaction. Currently, it can be one of ReactionTypeEmoji; ReactionTypeCustomEmoji
 using reaction_type_t = variant_t<reaction_type_emoji_t, reaction_type_custom_emoji_t>;
+
+// This object describes the state of a revenue withdrawal operation. Currently, it can be one of RevenueWithdrawalStatePending; RevenueWithdrawalStateSucceeded; RevenueWithdrawalStateFailed
+using revenue_withdrawal_state_t = variant_t<revenue_withdrawal_state_pending_t, revenue_withdrawal_state_succeeded_t, revenue_withdrawal_state_failed_t>;
+
+// This object describes the source of a transaction, or its recipient for outgoing transactions. Currently, it can be one of TransactionPartnerUser; TransactionPartnerFragment; TransactionPartnerTelegramAds; TransactionPartnerOther
+using transaction_partner_t = variant_t<transaction_partner_user_t, transaction_partner_fragment_t, transaction_partner_telegram_ads_t, transaction_partner_other_t>;

@@ -128,6 +128,9 @@ File
    input_media_t <types/input_media>
    input_media_video_t <types/input_media_video>
    input_message_content_t <types/input_message_content>
+   input_paid_media_photo_t <types/input_paid_media_photo>
+   input_paid_media_t <types/input_paid_media>
+   input_paid_media_video_t <types/input_paid_media_video>
    input_poll_option_t <types/input_poll_option>
    input_sticker_t <types/input_sticker>
    input_text_message_content_t <types/input_text_message_content>
@@ -159,6 +162,11 @@ File
    message_reaction_updated_t <types/message_reaction_updated>
    message_t <types/message>
    order_info_t <types/order_info>
+   paid_media_info_t <types/paid_media_info>
+   paid_media_photo_t <types/paid_media_photo>
+   paid_media_preview_t <types/paid_media_preview>
+   paid_media_t <types/paid_media>
+   paid_media_video_t <types/paid_media_video>
    passport_data_t <types/passport_data>
    passport_element_error_data_field_t <types/passport_element_error_data_field>
    passport_element_error_file_t <types/passport_element_error_file>
@@ -181,21 +189,33 @@ File
    reaction_type_custom_emoji_t <types/reaction_type_custom_emoji>
    reaction_type_emoji_t <types/reaction_type_emoji>
    reaction_type_t <types/reaction_type>
+   refunded_payment_t <types/refunded_payment>
    reply_keyboard_markup_t <types/reply_keyboard_markup>
    reply_keyboard_remove_t <types/reply_keyboard_remove>
    reply_parameters_t <types/reply_parameters>
    response_parameters_t <types/response_parameters>
+   revenue_withdrawal_state_failed_t <types/revenue_withdrawal_state_failed>
+   revenue_withdrawal_state_pending_t <types/revenue_withdrawal_state_pending>
+   revenue_withdrawal_state_succeeded_t <types/revenue_withdrawal_state_succeeded>
+   revenue_withdrawal_state_t <types/revenue_withdrawal_state>
    sent_web_app_message_t <types/sent_web_app_message>
    shared_user_t <types/shared_user>
    shipping_address_t <types/shipping_address>
    shipping_option_t <types/shipping_option>
    shipping_query_t <types/shipping_query>
+   star_transaction_t <types/star_transaction>
+   star_transactions_t <types/star_transactions>
    sticker_set_t <types/sticker_set>
    sticker_t <types/sticker>
    story_t <types/story>
    successful_payment_t <types/successful_payment>
    switch_inline_query_chosen_chat_t <types/switch_inline_query_chosen_chat>
    text_quote_t <types/text_quote>
+   transaction_partner_fragment_t <types/transaction_partner_fragment>
+   transaction_partner_other_t <types/transaction_partner_other>
+   transaction_partner_t <types/transaction_partner>
+   transaction_partner_telegram_ads_t <types/transaction_partner_telegram_ads>
+   transaction_partner_user_t <types/transaction_partner_user>
    update_t <types/update>
    user_chat_boosts_t <types/user_chat_boosts>
    user_profile_photos_t <types/user_profile_photos>

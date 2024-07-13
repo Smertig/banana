@@ -17,7 +17,7 @@ successful_payment_t
 
    .. cpp:member:: string_t invoice_payload
 
-   Bot specified invoice payload
+   Bot-specified invoice payload
 
    .. cpp:member:: string_t telegram_payment_charge_id
 

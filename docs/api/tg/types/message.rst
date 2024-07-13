@@ -119,6 +119,10 @@ message_t
 
    Optional. Message is a general file, information about the file
 
+   .. cpp:member:: optional_t<paid_media_info_t> paid_media
+
+   Optional. Message contains paid media; information about the paid media
+
    .. cpp:member:: optional_t<array_t<photo_size_t>> photo
 
    Optional. Message is a photo, available sizes of the photo
@@ -145,7 +149,7 @@ message_t
 
    .. cpp:member:: optional_t<string_t> caption
 
-   Optional. Caption for the animation, audio, document, photo, video or voice
+   Optional. Caption for the animation, audio, document, paid media, photo, video or voice
 
    .. cpp:member:: optional_t<array_t<message_entity_t>> caption_entities
 
@@ -238,6 +242,10 @@ message_t
    .. cpp:member:: optional_t<successful_payment_t> successful_payment
 
    Optional. Message is a service message about a successful payment, information about the payment. More about payments »
+
+   .. cpp:member:: optional_t<refunded_payment_t> refunded_payment
+
+   Optional. Message is a service message about a refunded payment, information about the payment. More about payments »
 
    .. cpp:member:: optional_t<users_shared_t> users_shared
 
