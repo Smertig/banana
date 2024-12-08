@@ -30,7 +30,7 @@ create_invoice_link
 
    .. cpp:member:: string_t payload
 
-   Bot-defined invoice payload, 1-128 bytes. This will not be displayed to the user, use for your internal processes.
+   Bot-defined invoice payload, 1-128 bytes. This will not be displayed to the user, use it for your internal processes.
 
    .. cpp:member:: string_t currency
 
@@ -43,6 +43,10 @@ create_invoice_link
    .. cpp:member:: optional_t<string_t> provider_token
 
    Payment provider token, obtained via @BotFather. Pass an empty string for payments in Telegram Stars.
+
+   .. cpp:member:: optional_t<integer_t> subscription_period
+
+   The number of seconds the subscription will be active for before the next payment. The currency must be set to “XTR” (Telegram Stars) if the parameter is used. Currently, it must always be 2592000 (30 days) if specified. Any number of subscriptions can be active for a given bot at the same time, including multiple concurrent subscriptions from the same user. Subscription price must no exceed 2500 Telegram Stars.
 
    .. cpp:member:: optional_t<integer_t> max_tip_amount
 
@@ -99,3 +103,7 @@ create_invoice_link
    .. cpp:member:: optional_t<boolean_t> is_flexible
 
    Pass True if the final price depends on the shipping method. Ignored for payments in Telegram Stars.
+
+   .. cpp:member:: optional_t<string_t> business_connection_id
+
+   Unique identifier of the business connection on behalf of which the link will be created. For payments in Telegram Stars only.

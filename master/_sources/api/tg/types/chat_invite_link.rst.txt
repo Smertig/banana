@@ -42,3 +42,11 @@ chat_invite_link_t
    .. cpp:member:: optional_t<integer_t> pending_join_request_count
 
    Optional. Number of pending join requests created using this link
+
+   .. cpp:member:: optional_t<integer_t> subscription_period
+
+   Optional. The number of seconds the subscription will be active for before the next payment
+
+   .. cpp:member:: optional_t<integer_t> subscription_price
+
+   Optional. The amount of Telegram Stars a user must pay initially and after each subsequent subscription period to be a member of the chat using the link

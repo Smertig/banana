@@ -34,7 +34,7 @@ send_invoice
 
    .. cpp:member:: string_t payload
 
-   Bot-defined invoice payload, 1-128 bytes. This will not be displayed to the user, use for your internal processes.
+   Bot-defined invoice payload, 1-128 bytes. This will not be displayed to the user, use it for your internal processes.
 
    .. cpp:member:: string_t currency
 
@@ -119,6 +119,10 @@ send_invoice
    .. cpp:member:: optional_t<boolean_t> protect_content
 
    Protects the contents of the sent message from forwarding and saving
+
+   .. cpp:member:: optional_t<boolean_t> allow_paid_broadcast
+
+   Pass True to allow up to 1000 messages per second, ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance
 
    .. cpp:member:: optional_t<string_t> message_effect_id
 

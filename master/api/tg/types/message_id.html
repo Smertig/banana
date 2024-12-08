@@ -545,7 +545,7 @@
 <span id="_CPPv3N6banana3api12message_id_t10message_idE"></span><span id="_CPPv2N6banana3api12message_id_t10message_idE"></span><span id="banana::api::message_id_t::message_id__integer_t"></span><a class="reference internal" href="../../banana/basic_types.html#_CPPv4N6banana9integer_tE" title="banana::integer_t"><span class="n"><span class="pre">integer_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">message_id</span></span></span><a class="headerlink" href="#_CPPv4N6banana3api12message_id_t10message_idE" title="Link to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
-<p>Unique message identifier</p>
+<p>Unique message identifier. In specific instances (e.g., message containing a video sent to a big chat), the server might automatically schedule a message instead of sending it immediately. In such cases, this field will be 0 and the relevant message will be unusable until it is actually sent</p>
 </dd></dl>
 
 </section>

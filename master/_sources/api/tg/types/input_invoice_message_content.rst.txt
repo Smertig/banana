@@ -17,7 +17,7 @@ input_invoice_message_content_t
 
    .. cpp:member:: string_t payload
 
-   Bot-defined invoice payload, 1-128 bytes. This will not be displayed to the user, use for your internal processes.
+   Bot-defined invoice payload, 1-128 bytes. This will not be displayed to the user, use it for your internal processes.
 
    .. cpp:member:: string_t currency
 

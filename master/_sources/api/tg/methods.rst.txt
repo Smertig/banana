@@ -26,6 +26,7 @@ File
    copy_message <methods/copy_message>
    copy_messages <methods/copy_messages>
    create_chat_invite_link <methods/create_chat_invite_link>
+   create_chat_subscription_invite_link <methods/create_chat_subscription_invite_link>
    create_forum_topic <methods/create_forum_topic>
    create_invoice_link <methods/create_invoice_link>
    create_new_sticker_set <methods/create_new_sticker_set>
@@ -40,6 +41,7 @@ File
    delete_sticker_set <methods/delete_sticker_set>
    delete_webhook <methods/delete_webhook>
    edit_chat_invite_link <methods/edit_chat_invite_link>
+   edit_chat_subscription_invite_link <methods/edit_chat_subscription_invite_link>
    edit_forum_topic <methods/edit_forum_topic>
    edit_general_forum_topic <methods/edit_general_forum_topic>
    edit_message_caption <methods/edit_message_caption>
@@ -47,9 +49,11 @@ File
    edit_message_media <methods/edit_message_media>
    edit_message_reply_markup <methods/edit_message_reply_markup>
    edit_message_text <methods/edit_message_text>
+   edit_user_star_subscription <methods/edit_user_star_subscription>
    export_chat_invite_link <methods/export_chat_invite_link>
    forward_message <methods/forward_message>
    forward_messages <methods/forward_messages>
+   get_available_gifts <methods/get_available_gifts>
    get_business_connection <methods/get_business_connection>
    get_chat <methods/get_chat>
    get_chat_administrators <methods/get_chat_administrators>
@@ -83,6 +87,7 @@ File
    replace_sticker_in_set <methods/replace_sticker_in_set>
    restrict_chat_member <methods/restrict_chat_member>
    revoke_chat_invite_link <methods/revoke_chat_invite_link>
+   save_prepared_inline_message <methods/save_prepared_inline_message>
    send_animation <methods/send_animation>
    send_audio <methods/send_audio>
    send_chat_action <methods/send_chat_action>
@@ -90,6 +95,7 @@ File
    send_dice <methods/send_dice>
    send_document <methods/send_document>
    send_game <methods/send_game>
+   send_gift <methods/send_gift>
    send_invoice <methods/send_invoice>
    send_location <methods/send_location>
    send_media_group <methods/send_media_group>
@@ -124,6 +130,7 @@ File
    set_sticker_position_in_set <methods/set_sticker_position_in_set>
    set_sticker_set_thumbnail <methods/set_sticker_set_thumbnail>
    set_sticker_set_title <methods/set_sticker_set_title>
+   set_user_emoji_status <methods/set_user_emoji_status>
    set_webhook <methods/set_webhook>
    stop_message_live_location <methods/stop_message_live_location>
    stop_poll <methods/stop_poll>

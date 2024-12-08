@@ -570,7 +570,7 @@
 <span id="_CPPv3N6banana3api26create_invoice_link_args_t7payloadE"></span><span id="_CPPv2N6banana3api26create_invoice_link_args_t7payloadE"></span><span id="banana::api::create_invoice_link_args_t::payload__string_t"></span><a class="reference internal" href="../../banana/basic_types.html#_CPPv4N6banana8string_tE" title="banana::string_t"><span class="n"><span class="pre">string_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">payload</span></span></span><a class="headerlink" href="#_CPPv4N6banana3api26create_invoice_link_args_t7payloadE" title="Link to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
-<p>Bot-defined invoice payload, 1-128 bytes. This will not be displayed to the user, use for your internal processes.</p>
+<p>Bot-defined invoice payload, 1-128 bytes. This will not be displayed to the user, use it for your internal processes.</p>
 <dl class="cpp member">
 <dt class="sig sig-object cpp" id="_CPPv4N6banana3api26create_invoice_link_args_t8currencyE">
 <span id="_CPPv3N6banana3api26create_invoice_link_args_t8currencyE"></span><span id="_CPPv2N6banana3api26create_invoice_link_args_t8currencyE"></span><span id="banana::api::create_invoice_link_args_t::currency__string_t"></span><a class="reference internal" href="../../banana/basic_types.html#_CPPv4N6banana8string_tE" title="banana::string_t"><span class="n"><span class="pre">string_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">currency</span></span></span><a class="headerlink" href="#_CPPv4N6banana3api26create_invoice_link_args_t8currencyE" title="Link to this definition">¶</a><br /></dt>
@@ -589,6 +589,12 @@
 <dd></dd></dl>
 
 <p>Payment provider token, obtained via &#64;BotFather. Pass an empty string for payments in Telegram Stars.</p>
+<dl class="cpp member">
+<dt class="sig sig-object cpp" id="_CPPv4N6banana3api26create_invoice_link_args_t19subscription_periodE">
+<span id="_CPPv3N6banana3api26create_invoice_link_args_t19subscription_periodE"></span><span id="_CPPv2N6banana3api26create_invoice_link_args_t19subscription_periodE"></span><span id="banana::api::create_invoice_link_args_t::subscription_period__optional_t:integer_t:"></span><a class="reference internal" href="../../banana/basic_types.html#_CPPv4I0EN6banana10optional_tE" title="banana::optional_t"><span class="n"><span class="pre">optional_t</span></span></a><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="../../banana/basic_types.html#_CPPv4N6banana9integer_tE" title="banana::integer_t"><span class="n"><span class="pre">integer_t</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">subscription_period</span></span></span><a class="headerlink" href="#_CPPv4N6banana3api26create_invoice_link_args_t19subscription_periodE" title="Link to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<p>The number of seconds the subscription will be active for before the next payment. The currency must be set to “XTR” (Telegram Stars) if the parameter is used. Currently, it must always be 2592000 (30 days) if specified. Any number of subscriptions can be active for a given bot at the same time, including multiple concurrent subscriptions from the same user. Subscription price must no exceed 2500 Telegram Stars.</p>
 <dl class="cpp member">
 <dt class="sig sig-object cpp" id="_CPPv4N6banana3api26create_invoice_link_args_t14max_tip_amountE">
 <span id="_CPPv3N6banana3api26create_invoice_link_args_t14max_tip_amountE"></span><span id="_CPPv2N6banana3api26create_invoice_link_args_t14max_tip_amountE"></span><span id="banana::api::create_invoice_link_args_t::max_tip_amount__optional_t:integer_t:"></span><a class="reference internal" href="../../banana/basic_types.html#_CPPv4I0EN6banana10optional_tE" title="banana::optional_t"><span class="n"><span class="pre">optional_t</span></span></a><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="../../banana/basic_types.html#_CPPv4N6banana9integer_tE" title="banana::integer_t"><span class="n"><span class="pre">integer_t</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">max_tip_amount</span></span></span><a class="headerlink" href="#_CPPv4N6banana3api26create_invoice_link_args_t14max_tip_amountE" title="Link to this definition">¶</a><br /></dt>
@@ -673,6 +679,12 @@
 <dd></dd></dl>
 
 <p>Pass True if the final price depends on the shipping method. Ignored for payments in Telegram Stars.</p>
+<dl class="cpp member">
+<dt class="sig sig-object cpp" id="_CPPv4N6banana3api26create_invoice_link_args_t22business_connection_idE">
+<span id="_CPPv3N6banana3api26create_invoice_link_args_t22business_connection_idE"></span><span id="_CPPv2N6banana3api26create_invoice_link_args_t22business_connection_idE"></span><span id="banana::api::create_invoice_link_args_t::business_connection_id__optional_t:string_t:"></span><a class="reference internal" href="../../banana/basic_types.html#_CPPv4I0EN6banana10optional_tE" title="banana::optional_t"><span class="n"><span class="pre">optional_t</span></span></a><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="../../banana/basic_types.html#_CPPv4N6banana8string_tE" title="banana::string_t"><span class="n"><span class="pre">string_t</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">business_connection_id</span></span></span><a class="headerlink" href="#_CPPv4N6banana3api26create_invoice_link_args_t22business_connection_idE" title="Link to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<p>Unique identifier of the business connection on behalf of which the link will be created. For payments in Telegram Stars only.</p>
 </dd></dl>
 
 </section>
@@ -742,6 +754,7 @@
 <li><a class="reference internal" href="#_CPPv4N6banana3api26create_invoice_link_args_t8currencyE"><code class="docutils literal notranslate"><span class="pre">create_invoice_link_args_t::currency</span></code></a></li>
 <li><a class="reference internal" href="#_CPPv4N6banana3api26create_invoice_link_args_t6pricesE"><code class="docutils literal notranslate"><span class="pre">create_invoice_link_args_t::prices</span></code></a></li>
 <li><a class="reference internal" href="#_CPPv4N6banana3api26create_invoice_link_args_t14provider_tokenE"><code class="docutils literal notranslate"><span class="pre">create_invoice_link_args_t::provider_token</span></code></a></li>
+<li><a class="reference internal" href="#_CPPv4N6banana3api26create_invoice_link_args_t19subscription_periodE"><code class="docutils literal notranslate"><span class="pre">create_invoice_link_args_t::subscription_period</span></code></a></li>
 <li><a class="reference internal" href="#_CPPv4N6banana3api26create_invoice_link_args_t14max_tip_amountE"><code class="docutils literal notranslate"><span class="pre">create_invoice_link_args_t::max_tip_amount</span></code></a></li>
 <li><a class="reference internal" href="#_CPPv4N6banana3api26create_invoice_link_args_t21suggested_tip_amountsE"><code class="docutils literal notranslate"><span class="pre">create_invoice_link_args_t::suggested_tip_amounts</span></code></a></li>
 <li><a class="reference internal" href="#_CPPv4N6banana3api26create_invoice_link_args_t13provider_dataE"><code class="docutils literal notranslate"><span class="pre">create_invoice_link_args_t::provider_data</span></code></a></li>
@@ -756,6 +769,7 @@
 <li><a class="reference internal" href="#_CPPv4N6banana3api26create_invoice_link_args_t29send_phone_number_to_providerE"><code class="docutils literal notranslate"><span class="pre">create_invoice_link_args_t::send_phone_number_to_provider</span></code></a></li>
 <li><a class="reference internal" href="#_CPPv4N6banana3api26create_invoice_link_args_t22send_email_to_providerE"><code class="docutils literal notranslate"><span class="pre">create_invoice_link_args_t::send_email_to_provider</span></code></a></li>
 <li><a class="reference internal" href="#_CPPv4N6banana3api26create_invoice_link_args_t11is_flexibleE"><code class="docutils literal notranslate"><span class="pre">create_invoice_link_args_t::is_flexible</span></code></a></li>
+<li><a class="reference internal" href="#_CPPv4N6banana3api26create_invoice_link_args_t22business_connection_idE"><code class="docutils literal notranslate"><span class="pre">create_invoice_link_args_t::business_connection_id</span></code></a></li>
 </ul>
 </li>
 </ul>
