@@ -60,6 +60,10 @@ copy_message
 
    Protects the contents of the sent message from forwarding and saving
 
+   .. cpp:member:: optional_t<boolean_t> allow_paid_broadcast
+
+   Pass True to allow up to 1000 messages per second, ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance
+
    .. cpp:member:: optional_t<reply_parameters_t> reply_parameters
 
    Description of the message to reply to

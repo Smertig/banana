@@ -31,3 +31,7 @@ pin_chat_message
    .. cpp:member:: optional_t<boolean_t> disable_notification
 
    Pass True if it is not necessary to send a notification to all chat members about the new pinned message. Notifications are always disabled in channels and private chats.
+
+   .. cpp:member:: optional_t<string_t> business_connection_id
+
+   Unique identifier of the business connection on behalf of which the message will be pinned

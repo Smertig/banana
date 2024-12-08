@@ -27,6 +27,18 @@ successful_payment_t
 
    Provider payment identifier
 
+   .. cpp:member:: optional_t<integer_t> subscription_expiration_date
+
+   Optional. Expiration date of the subscription, in Unix time; for recurring payments only
+
+   .. cpp:member:: optional_t<boolean_t> is_recurring
+
+   Optional. True, if the payment is a recurring payment for a subscription
+
+   .. cpp:member:: optional_t<boolean_t> is_first_recurring
+
+   Optional. True, if the payment is the first payment for a subscription
+
    .. cpp:member:: optional_t<string_t> shipping_option_id
 
    Optional. Identifier of the shipping option chosen by the user

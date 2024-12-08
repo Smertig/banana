@@ -71,6 +71,10 @@ update_t
 
    Optional. New incoming pre-checkout query. Contains full information about checkout
 
+   .. cpp:member:: optional_t<paid_media_purchased_t> purchased_paid_media
+
+   Optional. A user purchased paid media with a non-empty payload sent by the bot in a non-channel chat
+
    .. cpp:member:: optional_t<poll_t> poll
 
    Optional. New poll state. Bots receive only updates about manually stopped polls and polls, which are sent by the bot

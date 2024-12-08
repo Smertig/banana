@@ -13,7 +13,7 @@ edit_forum_topic
 
    ``callback`` is any callable object accepting ``expected<boolean_t>``.
 
-   Use this method to edit name and icon of a topic in a forum supergroup chat. The bot must be an administrator in the chat for this to work and must have can_manage_topics administrator rights, unless it is the creator of the topic. Returns True on success.
+   Use this method to edit name and icon of a topic in a forum supergroup chat. The bot must be an administrator in the chat for this to work and must have the can_manage_topics administrator rights, unless it is the creator of the topic. Returns True on success.
 
 .. cpp:struct:: edit_forum_topic_args_t
 

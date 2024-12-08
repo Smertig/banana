@@ -306,6 +306,7 @@ struct copy_message_args_t {
     optional_t<boolean_t>                                                                                            show_caption_above_media; // Pass True, if the caption must be shown above the message media. Ignored if a new caption isn't specified.
     optional_t<boolean_t>                                                                                            disable_notification;     // Sends the message silently. Users will receive a notification with no sound.
     optional_t<boolean_t>                                                                                            protect_content;          // Protects the contents of the sent message from forwarding and saving
+    optional_t<boolean_t>                                                                                            allow_paid_broadcast;     // Pass True to allow up to 1000 messages per second, ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance
     optional_t<reply_parameters_t>                                                                                   reply_parameters;         // Description of the message to reply to
     optional_t<variant_t<inline_keyboard_markup_t, reply_keyboard_markup_t, reply_keyboard_remove_t, force_reply_t>> reply_markup;             // Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove a reply keyboard or to force a reply from the user
 };
@@ -324,6 +325,7 @@ struct copy_message_args_t {
  * @param args__show_caption_above_media Pass True, if the caption must be shown above the message media. Ignored if a new caption isn't specified.
  * @param args__disable_notification Sends the message silently. Users will receive a notification with no sound.
  * @param args__protect_content Protects the contents of the sent message from forwarding and saving
+ * @param args__allow_paid_broadcast Pass True to allow up to 1000 messages per second, ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance
  * @param args__reply_parameters Description of the message to reply to
  * @param args__reply_markup Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove a reply keyboard or to force a reply from the user
  */
@@ -399,6 +401,33 @@ void create_chat_invite_link(Agent&& agent, create_chat_invite_link_args_t args,
     call(static_cast<Agent&&>(agent), std::move(args), std::forward<F>(callback));
 }
 
+// Arguments to create_chat_subscription_invite_link method
+struct create_chat_subscription_invite_link_args_t {
+    variant_t<integer_t, string_t> chat_id;             // Unique identifier for the target channel chat or username of the target channel (in the format @channelusername)
+    integer_t                      subscription_period; // The number of seconds the subscription will be active for before the next payment. Currently, it must always be 2592000 (30 days).
+    integer_t                      subscription_price;  // The amount of Telegram Stars a user must pay initially and after each subsequent subscription period to be a member of the chat; 1-2500
+    optional_t<string_t>           name;                // Invite link name; 0-32 characters
+};
+
+/**
+ * Use this method to create a subscription invite link for a channel chat. The bot must have the can_invite_users administrator rights. The link can be edited using the method editChatSubscriptionInviteLink or revoked using the method revokeChatInviteLink. Returns the new invite link as a ChatInviteLink object.
+ * 
+ * @param agent Any object satisfying agent concept (see `banana::agent` namespace)
+ * @param args__chat_id Unique identifier for the target channel chat or username of the target channel (in the format @channelusername)
+ * @param args__name Invite link name; 0-32 characters
+ * @param args__subscription_period The number of seconds the subscription will be active for before the next payment. Currently, it must always be 2592000 (30 days).
+ * @param args__subscription_price The amount of Telegram Stars a user must pay initially and after each subsequent subscription period to be a member of the chat; 1-2500
+ */
+template <class Agent>
+api_result<api::chat_invite_link_t, Agent&&> create_chat_subscription_invite_link(Agent&& agent, create_chat_subscription_invite_link_args_t args) {
+    return call(static_cast<Agent&&>(agent), std::move(args));
+}
+
+template <class Agent, class F>
+void create_chat_subscription_invite_link(Agent&& agent, create_chat_subscription_invite_link_args_t args, F&& callback) {
+    call(static_cast<Agent&&>(agent), std::move(args), std::forward<F>(callback));
+}
+
 // Arguments to create_forum_topic method
 struct create_forum_topic_args_t {
     variant_t<integer_t, string_t> chat_id;              // Unique identifier for the target chat or username of the target supergroup (in the format @supergroupusername)
@@ -430,10 +459,11 @@ void create_forum_topic(Agent&& agent, create_forum_topic_args_t args, F&& callb
 struct create_invoice_link_args_t {
     string_t                       title;                         // Product name, 1-32 characters
     string_t                       description;                   // Product description, 1-255 characters
-    string_t                       payload;                       // Bot-defined invoice payload, 1-128 bytes. This will not be displayed to the user, use for your internal processes.
+    string_t                       payload;                       // Bot-defined invoice payload, 1-128 bytes. This will not be displayed to the user, use it for your internal processes.
     string_t                       currency;                      // Three-letter ISO 4217 currency code, see more on currencies. Pass “XTR” for payments in Telegram Stars.
     array_t<labeled_price_t>       prices;                        // Price breakdown, a JSON-serialized list of components (e.g. product price, tax, discount, delivery cost, delivery tax, bonus, etc.). Must contain exactly one item for payments in Telegram Stars.
     optional_t<string_t>           provider_token;                // Payment provider token, obtained via @BotFather. Pass an empty string for payments in Telegram Stars.
+    optional_t<integer_t>          subscription_period;           // The number of seconds the subscription will be active for before the next payment. The currency must be set to “XTR” (Telegram Stars) if the parameter is used. Currently, it must always be 2592000 (30 days) if specified. Any number of subscriptions can be active for a given bot at the same time, including multiple concurrent subscriptions from the same user. Subscription price must no exceed 2500 Telegram Stars.
     optional_t<integer_t>          max_tip_amount;                // The maximum accepted amount for tips in the smallest units of the currency (integer, not float/double). For example, for a maximum tip of US$ 1.45 pass max_tip_amount = 145. See the exp parameter in currencies.json, it shows the number of digits past the decimal point for each currency (2 for the majority of currencies). Defaults to 0. Not supported for payments in Telegram Stars.
     optional_t<array_t<integer_t>> suggested_tip_amounts;         // A JSON-serialized array of suggested amounts of tips in the smallest units of the currency (integer, not float/double). At most 4 suggested tip amounts can be specified. The suggested tip amounts must be positive, passed in a strictly increased order and must not exceed max_tip_amount.
     optional_t<string_t>           provider_data;                 // JSON-serialized data about the invoice, which will be shared with the payment provider. A detailed description of required fields should be provided by the payment provider.
@@ -448,18 +478,21 @@ struct create_invoice_link_args_t {
     optional_t<boolean_t>          send_phone_number_to_provider; // Pass True if the user's phone number should be sent to the provider. Ignored for payments in Telegram Stars.
     optional_t<boolean_t>          send_email_to_provider;        // Pass True if the user's email address should be sent to the provider. Ignored for payments in Telegram Stars.
     optional_t<boolean_t>          is_flexible;                   // Pass True if the final price depends on the shipping method. Ignored for payments in Telegram Stars.
+    optional_t<string_t>           business_connection_id;        // Unique identifier of the business connection on behalf of which the link will be created. For payments in Telegram Stars only.
 };
 
 /**
  * Use this method to create a link for an invoice. Returns the created invoice link as String on success.
  * 
  * @param agent Any object satisfying agent concept (see `banana::agent` namespace)
+ * @param args__business_connection_id Unique identifier of the business connection on behalf of which the link will be created. For payments in Telegram Stars only.
  * @param args__title Product name, 1-32 characters
  * @param args__description Product description, 1-255 characters
- * @param args__payload Bot-defined invoice payload, 1-128 bytes. This will not be displayed to the user, use for your internal processes.
+ * @param args__payload Bot-defined invoice payload, 1-128 bytes. This will not be displayed to the user, use it for your internal processes.
  * @param args__provider_token Payment provider token, obtained via @BotFather. Pass an empty string for payments in Telegram Stars.
  * @param args__currency Three-letter ISO 4217 currency code, see more on currencies. Pass “XTR” for payments in Telegram Stars.
  * @param args__prices Price breakdown, a JSON-serialized list of components (e.g. product price, tax, discount, delivery cost, delivery tax, bonus, etc.). Must contain exactly one item for payments in Telegram Stars.
+ * @param args__subscription_period The number of seconds the subscription will be active for before the next payment. The currency must be set to “XTR” (Telegram Stars) if the parameter is used. Currently, it must always be 2592000 (30 days) if specified. Any number of subscriptions can be active for a given bot at the same time, including multiple concurrent subscriptions from the same user. Subscription price must no exceed 2500 Telegram Stars.
  * @param args__max_tip_amount The maximum accepted amount for tips in the smallest units of the currency (integer, not float/double). For example, for a maximum tip of US$ 1.45 pass max_tip_amount = 145. See the exp parameter in currencies.json, it shows the number of digits past the decimal point for each currency (2 for the majority of currencies). Defaults to 0. Not supported for payments in Telegram Stars.
  * @param args__suggested_tip_amounts A JSON-serialized array of suggested amounts of tips in the smallest units of the currency (integer, not float/double). At most 4 suggested tip amounts can be specified. The suggested tip amounts must be positive, passed in a strictly increased order and must not exceed max_tip_amount.
  * @param args__provider_data JSON-serialized data about the invoice, which will be shared with the payment provider. A detailed description of required fields should be provided by the payment provider.
@@ -767,6 +800,31 @@ void edit_chat_invite_link(Agent&& agent, edit_chat_invite_link_args_t args, F&&
     call(static_cast<Agent&&>(agent), std::move(args), std::forward<F>(callback));
 }
 
+// Arguments to edit_chat_subscription_invite_link method
+struct edit_chat_subscription_invite_link_args_t {
+    variant_t<integer_t, string_t> chat_id;     // Unique identifier for the target chat or username of the target channel (in the format @channelusername)
+    string_t                       invite_link; // The invite link to edit
+    optional_t<string_t>           name;        // Invite link name; 0-32 characters
+};
+
+/**
+ * Use this method to edit a subscription invite link created by the bot. The bot must have the can_invite_users administrator rights. Returns the edited invite link as a ChatInviteLink object.
+ * 
+ * @param agent Any object satisfying agent concept (see `banana::agent` namespace)
+ * @param args__chat_id Unique identifier for the target chat or username of the target channel (in the format @channelusername)
+ * @param args__invite_link The invite link to edit
+ * @param args__name Invite link name; 0-32 characters
+ */
+template <class Agent>
+api_result<api::chat_invite_link_t, Agent&&> edit_chat_subscription_invite_link(Agent&& agent, edit_chat_subscription_invite_link_args_t args) {
+    return call(static_cast<Agent&&>(agent), std::move(args));
+}
+
+template <class Agent, class F>
+void edit_chat_subscription_invite_link(Agent&& agent, edit_chat_subscription_invite_link_args_t args, F&& callback) {
+    call(static_cast<Agent&&>(agent), std::move(args), std::forward<F>(callback));
+}
+
 // Arguments to edit_forum_topic method
 struct edit_forum_topic_args_t {
     variant_t<integer_t, string_t> chat_id;              // Unique identifier for the target chat or username of the target supergroup (in the format @supergroupusername)
@@ -776,7 +834,7 @@ struct edit_forum_topic_args_t {
 };
 
 /**
- * Use this method to edit name and icon of a topic in a forum supergroup chat. The bot must be an administrator in the chat for this to work and must have can_manage_topics administrator rights, unless it is the creator of the topic. Returns True on success.
+ * Use this method to edit name and icon of a topic in a forum supergroup chat. The bot must be an administrator in the chat for this to work and must have the can_manage_topics administrator rights, unless it is the creator of the topic. Returns True on success.
  * 
  * @param agent Any object satisfying agent concept (see `banana::agent` namespace)
  * @param args__chat_id Unique identifier for the target chat or username of the target supergroup (in the format @supergroupusername)
@@ -801,7 +859,7 @@ struct edit_general_forum_topic_args_t {
 };
 
 /**
- * Use this method to edit the name of the 'General' topic in a forum supergroup chat. The bot must be an administrator in the chat for this to work and must have can_manage_topics administrator rights. Returns True on success.
+ * Use this method to edit the name of the 'General' topic in a forum supergroup chat. The bot must be an administrator in the chat for this to work and must have the can_manage_topics administrator rights. Returns True on success.
  * 
  * @param agent Any object satisfying agent concept (see `banana::agent` namespace)
  * @param args__chat_id Unique identifier for the target chat or username of the target supergroup (in the format @supergroupusername)
@@ -906,7 +964,7 @@ struct edit_message_media_args_t {
 };
 
 /**
- * Use this method to edit animation, audio, document, photo, or video messages. If a message is part of a message album, then it can be edited only to an audio for audio albums, only to a document for document albums and to a photo or a video otherwise. When an inline message is edited, a new file can't be uploaded; use a previously uploaded file via its file_id or specify a URL. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
+ * Use this method to edit animation, audio, document, photo, or video messages, or to add media to text messages. If a message is part of a message album, then it can be edited only to an audio for audio albums, only to a document for document albums and to a photo or a video otherwise. When an inline message is edited, a new file can't be uploaded; use a previously uploaded file via its file_id or specify a URL. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
  * 
  * @param agent Any object satisfying agent concept (see `banana::agent` namespace)
  * @param args__business_connection_id Unique identifier of the business connection on behalf of which the message to be edited was sent
@@ -992,6 +1050,31 @@ void edit_message_text(Agent&& agent, edit_message_text_args_t args, F&& callbac
     call(static_cast<Agent&&>(agent), std::move(args), std::forward<F>(callback));
 }
 
+// Arguments to edit_user_star_subscription method
+struct edit_user_star_subscription_args_t {
+    integer_t user_id;                    // Identifier of the user whose subscription will be edited
+    string_t  telegram_payment_charge_id; // Telegram payment identifier for the subscription
+    boolean_t is_canceled;                // Pass True to cancel extension of the user subscription; the subscription must be active up to the end of the current subscription period. Pass False to allow the user to re-enable a subscription that was previously canceled by the bot.
+};
+
+/**
+ * Allows the bot to cancel or re-enable extension of a subscription paid in Telegram Stars. Returns True on success.
+ * 
+ * @param agent Any object satisfying agent concept (see `banana::agent` namespace)
+ * @param args__user_id Identifier of the user whose subscription will be edited
+ * @param args__telegram_payment_charge_id Telegram payment identifier for the subscription
+ * @param args__is_canceled Pass True to cancel extension of the user subscription; the subscription must be active up to the end of the current subscription period. Pass False to allow the user to re-enable a subscription that was previously canceled by the bot.
+ */
+template <class Agent>
+api_result<boolean_t, Agent&&> edit_user_star_subscription(Agent&& agent, edit_user_star_subscription_args_t args) {
+    return call(static_cast<Agent&&>(agent), std::move(args));
+}
+
+template <class Agent, class F>
+void edit_user_star_subscription(Agent&& agent, edit_user_star_subscription_args_t args, F&& callback) {
+    call(static_cast<Agent&&>(agent), std::move(args), std::forward<F>(callback));
+}
+
 // Arguments to export_chat_invite_link method
 struct export_chat_invite_link_args_t {
     variant_t<integer_t, string_t> chat_id; // Unique identifier for the target chat or username of the target channel (in the format @channelusername)
@@ -1073,6 +1156,25 @@ api_result<array_t<api::message_id_t>, Agent&&> forward_messages(Agent&& agent, 
 template <class Agent, class F>
 void forward_messages(Agent&& agent, forward_messages_args_t args, F&& callback) {
     call(static_cast<Agent&&>(agent), std::move(args), std::forward<F>(callback));
+}
+
+// Arguments to get_available_gifts method
+struct get_available_gifts_args_t {
+};
+
+/**
+ * Returns the list of gifts that can be sent by the bot to users. Requires no parameters. Returns a Gifts object.
+ * 
+ * @param agent Any object satisfying agent concept (see `banana::agent` namespace)
+ */
+template <class Agent>
+api_result<api::gifts_t, Agent&&> get_available_gifts(Agent&& agent) {
+    return call(static_cast<Agent&&>(agent), get_available_gifts_args_t{});
+}
+
+template <class Agent, class F>
+void get_available_gifts(Agent&& agent, F&& callback) {
+    call(static_cast<Agent&&>(agent), get_available_gifts_args_t{}, std::forward<F>(callback));
 }
 
 // Arguments to get_business_connection method
@@ -1431,7 +1533,7 @@ struct get_star_transactions_args_t {
  * @param args__limit The maximum number of transactions to be retrieved. Values between 1-100 are accepted. Defaults to 100.
  */
 template <class Agent>
-api_result<api::star_transaction_t, Agent&&> get_star_transactions(Agent&& agent, get_star_transactions_args_t args) {
+api_result<api::star_transactions_t, Agent&&> get_star_transactions(Agent&& agent, get_star_transactions_args_t args) {
     return call(static_cast<Agent&&>(agent), std::move(args));
 }
 
@@ -1618,15 +1720,17 @@ void log_out(Agent&& agent, F&& callback) {
 
 // Arguments to pin_chat_message method
 struct pin_chat_message_args_t {
-    variant_t<integer_t, string_t> chat_id;              // Unique identifier for the target chat or username of the target channel (in the format @channelusername)
-    integer_t                      message_id;           // Identifier of a message to pin
-    optional_t<boolean_t>          disable_notification; // Pass True if it is not necessary to send a notification to all chat members about the new pinned message. Notifications are always disabled in channels and private chats.
+    variant_t<integer_t, string_t> chat_id;                // Unique identifier for the target chat or username of the target channel (in the format @channelusername)
+    integer_t                      message_id;             // Identifier of a message to pin
+    optional_t<boolean_t>          disable_notification;   // Pass True if it is not necessary to send a notification to all chat members about the new pinned message. Notifications are always disabled in channels and private chats.
+    optional_t<string_t>           business_connection_id; // Unique identifier of the business connection on behalf of which the message will be pinned
 };
 
 /**
  * Use this method to add a message to the list of pinned messages in a chat. If the chat is not a private chat, the bot must be an administrator in the chat for this to work and must have the 'can_pin_messages' administrator right in a supergroup or 'can_edit_messages' administrator right in a channel. Returns True on success.
  * 
  * @param agent Any object satisfying agent concept (see `banana::agent` namespace)
+ * @param args__business_connection_id Unique identifier of the business connection on behalf of which the message will be pinned
  * @param args__chat_id Unique identifier for the target chat or username of the target channel (in the format @channelusername)
  * @param args__message_id Identifier of a message to pin
  * @param args__disable_notification Pass True if it is not necessary to send a notification to all chat members about the new pinned message. Notifications are always disabled in channels and private chats.
@@ -1840,6 +1944,37 @@ void revoke_chat_invite_link(Agent&& agent, revoke_chat_invite_link_args_t args,
     call(static_cast<Agent&&>(agent), std::move(args), std::forward<F>(callback));
 }
 
+// Arguments to save_prepared_inline_message method
+struct save_prepared_inline_message_args_t {
+    integer_t             user_id;             // Unique identifier of the target user that can use the prepared message
+    inline_query_result_t result;              // A JSON-serialized object describing the message to be sent
+    optional_t<boolean_t> allow_user_chats;    // Pass True if the message can be sent to private chats with users
+    optional_t<boolean_t> allow_bot_chats;     // Pass True if the message can be sent to private chats with bots
+    optional_t<boolean_t> allow_group_chats;   // Pass True if the message can be sent to group and supergroup chats
+    optional_t<boolean_t> allow_channel_chats; // Pass True if the message can be sent to channel chats
+};
+
+/**
+ * Stores a message that can be sent by a user of a Mini App. Returns a PreparedInlineMessage object.
+ * 
+ * @param agent Any object satisfying agent concept (see `banana::agent` namespace)
+ * @param args__user_id Unique identifier of the target user that can use the prepared message
+ * @param args__result A JSON-serialized object describing the message to be sent
+ * @param args__allow_user_chats Pass True if the message can be sent to private chats with users
+ * @param args__allow_bot_chats Pass True if the message can be sent to private chats with bots
+ * @param args__allow_group_chats Pass True if the message can be sent to group and supergroup chats
+ * @param args__allow_channel_chats Pass True if the message can be sent to channel chats
+ */
+template <class Agent>
+api_result<api::prepared_inline_message_t, Agent&&> save_prepared_inline_message(Agent&& agent, save_prepared_inline_message_args_t args) {
+    return call(static_cast<Agent&&>(agent), std::move(args));
+}
+
+template <class Agent, class F>
+void save_prepared_inline_message(Agent&& agent, save_prepared_inline_message_args_t args, F&& callback) {
+    call(static_cast<Agent&&>(agent), std::move(args), std::forward<F>(callback));
+}
+
 // Arguments to send_animation method
 struct send_animation_args_t {
     variant_t<integer_t, string_t>                                                                                   chat_id;                  // Unique identifier for the target chat or username of the target channel (in the format @channelusername)
@@ -1856,6 +1991,7 @@ struct send_animation_args_t {
     optional_t<boolean_t>                                                                                            has_spoiler;              // Pass True if the animation needs to be covered with a spoiler animation
     optional_t<boolean_t>                                                                                            disable_notification;     // Sends the message silently. Users will receive a notification with no sound.
     optional_t<boolean_t>                                                                                            protect_content;          // Protects the contents of the sent message from forwarding and saving
+    optional_t<boolean_t>                                                                                            allow_paid_broadcast;     // Pass True to allow up to 1000 messages per second, ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance
     optional_t<string_t>                                                                                             message_effect_id;        // Unique identifier of the message effect to be added to the message; for private chats only
     optional_t<reply_parameters_t>                                                                                   reply_parameters;         // Description of the message to reply to
     optional_t<variant_t<inline_keyboard_markup_t, reply_keyboard_markup_t, reply_keyboard_remove_t, force_reply_t>> reply_markup;             // Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove a reply keyboard or to force a reply from the user
@@ -1881,6 +2017,7 @@ struct send_animation_args_t {
  * @param args__has_spoiler Pass True if the animation needs to be covered with a spoiler animation
  * @param args__disable_notification Sends the message silently. Users will receive a notification with no sound.
  * @param args__protect_content Protects the contents of the sent message from forwarding and saving
+ * @param args__allow_paid_broadcast Pass True to allow up to 1000 messages per second, ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance
  * @param args__message_effect_id Unique identifier of the message effect to be added to the message; for private chats only
  * @param args__reply_parameters Description of the message to reply to
  * @param args__reply_markup Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove a reply keyboard or to force a reply from the user
@@ -1909,6 +2046,7 @@ struct send_audio_args_t {
     optional_t<variant_t<input_file_t, string_t>>                                                                    thumbnail;              // Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail's width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can't be reused and can be only uploaded as a new file, so you can pass “attach://<file_attach_name>” if the thumbnail was uploaded using multipart/form-data under <file_attach_name>. More information on Sending Files »
     optional_t<boolean_t>                                                                                            disable_notification;   // Sends the message silently. Users will receive a notification with no sound.
     optional_t<boolean_t>                                                                                            protect_content;        // Protects the contents of the sent message from forwarding and saving
+    optional_t<boolean_t>                                                                                            allow_paid_broadcast;   // Pass True to allow up to 1000 messages per second, ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance
     optional_t<string_t>                                                                                             message_effect_id;      // Unique identifier of the message effect to be added to the message; for private chats only
     optional_t<reply_parameters_t>                                                                                   reply_parameters;       // Description of the message to reply to
     optional_t<variant_t<inline_keyboard_markup_t, reply_keyboard_markup_t, reply_keyboard_remove_t, force_reply_t>> reply_markup;           // Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove a reply keyboard or to force a reply from the user
@@ -1932,6 +2070,7 @@ struct send_audio_args_t {
  * @param args__thumbnail Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail's width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can't be reused and can be only uploaded as a new file, so you can pass “attach://<file_attach_name>” if the thumbnail was uploaded using multipart/form-data under <file_attach_name>. More information on Sending Files »
  * @param args__disable_notification Sends the message silently. Users will receive a notification with no sound.
  * @param args__protect_content Protects the contents of the sent message from forwarding and saving
+ * @param args__allow_paid_broadcast Pass True to allow up to 1000 messages per second, ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance
  * @param args__message_effect_id Unique identifier of the message effect to be added to the message; for private chats only
  * @param args__reply_parameters Description of the message to reply to
  * @param args__reply_markup Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove a reply keyboard or to force a reply from the user
@@ -1983,6 +2122,7 @@ struct send_contact_args_t {
     optional_t<string_t>                                                                                             vcard;                  // Additional data about the contact in the form of a vCard, 0-2048 bytes
     optional_t<boolean_t>                                                                                            disable_notification;   // Sends the message silently. Users will receive a notification with no sound.
     optional_t<boolean_t>                                                                                            protect_content;        // Protects the contents of the sent message from forwarding and saving
+    optional_t<boolean_t>                                                                                            allow_paid_broadcast;   // Pass True to allow up to 1000 messages per second, ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance
     optional_t<string_t>                                                                                             message_effect_id;      // Unique identifier of the message effect to be added to the message; for private chats only
     optional_t<reply_parameters_t>                                                                                   reply_parameters;       // Description of the message to reply to
     optional_t<variant_t<inline_keyboard_markup_t, reply_keyboard_markup_t, reply_keyboard_remove_t, force_reply_t>> reply_markup;           // Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove a reply keyboard or to force a reply from the user
@@ -2002,6 +2142,7 @@ struct send_contact_args_t {
  * @param args__vcard Additional data about the contact in the form of a vCard, 0-2048 bytes
  * @param args__disable_notification Sends the message silently. Users will receive a notification with no sound.
  * @param args__protect_content Protects the contents of the sent message from forwarding and saving
+ * @param args__allow_paid_broadcast Pass True to allow up to 1000 messages per second, ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance
  * @param args__message_effect_id Unique identifier of the message effect to be added to the message; for private chats only
  * @param args__reply_parameters Description of the message to reply to
  * @param args__reply_markup Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove a reply keyboard or to force a reply from the user
@@ -2023,6 +2164,7 @@ struct send_dice_args_t {
     optional_t<string_t>                                                                                             emoji;                  // Emoji on which the dice throw animation is based. Currently, must be one of “🎲”, “🎯”, “🏀”, “⚽”, “🎳”, or “🎰”. Dice can have values 1-6 for “🎲”, “🎯” and “🎳”, values 1-5 for “🏀” and “⚽”, and values 1-64 for “🎰”. Defaults to “🎲”
     optional_t<boolean_t>                                                                                            disable_notification;   // Sends the message silently. Users will receive a notification with no sound.
     optional_t<boolean_t>                                                                                            protect_content;        // Protects the contents of the sent message from forwarding
+    optional_t<boolean_t>                                                                                            allow_paid_broadcast;   // Pass True to allow up to 1000 messages per second, ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance
     optional_t<string_t>                                                                                             message_effect_id;      // Unique identifier of the message effect to be added to the message; for private chats only
     optional_t<reply_parameters_t>                                                                                   reply_parameters;       // Description of the message to reply to
     optional_t<variant_t<inline_keyboard_markup_t, reply_keyboard_markup_t, reply_keyboard_remove_t, force_reply_t>> reply_markup;           // Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove a reply keyboard or to force a reply from the user
@@ -2039,6 +2181,7 @@ struct send_dice_args_t {
  * @param args__emoji Emoji on which the dice throw animation is based. Currently, must be one of “🎲”, “🎯”, “🏀”, “⚽”, “🎳”, or “🎰”. Dice can have values 1-6 for “🎲”, “🎯” and “🎳”, values 1-5 for “🏀” and “⚽”, and values 1-64 for “🎰”. Defaults to “🎲”
  * @param args__disable_notification Sends the message silently. Users will receive a notification with no sound.
  * @param args__protect_content Protects the contents of the sent message from forwarding
+ * @param args__allow_paid_broadcast Pass True to allow up to 1000 messages per second, ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance
  * @param args__message_effect_id Unique identifier of the message effect to be added to the message; for private chats only
  * @param args__reply_parameters Description of the message to reply to
  * @param args__reply_markup Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove a reply keyboard or to force a reply from the user
@@ -2065,6 +2208,7 @@ struct send_document_args_t {
     optional_t<boolean_t>                                                                                            disable_content_type_detection; // Disables automatic server-side content type detection for files uploaded using multipart/form-data
     optional_t<boolean_t>                                                                                            disable_notification;           // Sends the message silently. Users will receive a notification with no sound.
     optional_t<boolean_t>                                                                                            protect_content;                // Protects the contents of the sent message from forwarding and saving
+    optional_t<boolean_t>                                                                                            allow_paid_broadcast;           // Pass True to allow up to 1000 messages per second, ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance
     optional_t<string_t>                                                                                             message_effect_id;              // Unique identifier of the message effect to be added to the message; for private chats only
     optional_t<reply_parameters_t>                                                                                   reply_parameters;               // Description of the message to reply to
     optional_t<variant_t<inline_keyboard_markup_t, reply_keyboard_markup_t, reply_keyboard_remove_t, force_reply_t>> reply_markup;                   // Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove a reply keyboard or to force a reply from the user
@@ -2086,6 +2230,7 @@ struct send_document_args_t {
  * @param args__disable_content_type_detection Disables automatic server-side content type detection for files uploaded using multipart/form-data
  * @param args__disable_notification Sends the message silently. Users will receive a notification with no sound.
  * @param args__protect_content Protects the contents of the sent message from forwarding and saving
+ * @param args__allow_paid_broadcast Pass True to allow up to 1000 messages per second, ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance
  * @param args__message_effect_id Unique identifier of the message effect to be added to the message; for private chats only
  * @param args__reply_parameters Description of the message to reply to
  * @param args__reply_markup Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove a reply keyboard or to force a reply from the user
@@ -2107,6 +2252,7 @@ struct send_game_args_t {
     optional_t<integer_t>                message_thread_id;      // Unique identifier for the target message thread (topic) of the forum; for forum supergroups only
     optional_t<boolean_t>                disable_notification;   // Sends the message silently. Users will receive a notification with no sound.
     optional_t<boolean_t>                protect_content;        // Protects the contents of the sent message from forwarding and saving
+    optional_t<boolean_t>                allow_paid_broadcast;   // Pass True to allow up to 1000 messages per second, ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance
     optional_t<string_t>                 message_effect_id;      // Unique identifier of the message effect to be added to the message; for private chats only
     optional_t<reply_parameters_t>       reply_parameters;       // Description of the message to reply to
     optional_t<inline_keyboard_markup_t> reply_markup;           // A JSON-serialized object for an inline keyboard. If empty, one 'Play game_title' button will be shown. If not empty, the first button must launch the game.
@@ -2123,6 +2269,7 @@ struct send_game_args_t {
  * @param args__game_short_name Short name of the game, serves as the unique identifier for the game. Set up your games via @BotFather.
  * @param args__disable_notification Sends the message silently. Users will receive a notification with no sound.
  * @param args__protect_content Protects the contents of the sent message from forwarding and saving
+ * @param args__allow_paid_broadcast Pass True to allow up to 1000 messages per second, ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance
  * @param args__message_effect_id Unique identifier of the message effect to be added to the message; for private chats only
  * @param args__reply_parameters Description of the message to reply to
  * @param args__reply_markup A JSON-serialized object for an inline keyboard. If empty, one 'Play game_title' button will be shown. If not empty, the first button must launch the game.
@@ -2137,12 +2284,41 @@ void send_game(Agent&& agent, send_game_args_t args, F&& callback) {
     call(static_cast<Agent&&>(agent), std::move(args), std::forward<F>(callback));
 }
 
+// Arguments to send_gift method
+struct send_gift_args_t {
+    integer_t                             user_id;         // Unique identifier of the target user that will receive the gift
+    string_t                              gift_id;         // Identifier of the gift
+    optional_t<string_t>                  text;            // Text that will be shown along with the gift; 0-255 characters
+    optional_t<string_t>                  text_parse_mode; // Mode for parsing entities in the text. See formatting options for more details. Entities other than “bold”, “italic”, “underline”, “strikethrough”, “spoiler”, and “custom_emoji” are ignored.
+    optional_t<array_t<message_entity_t>> text_entities;   // A JSON-serialized list of special entities that appear in the gift text. It can be specified instead of text_parse_mode. Entities other than “bold”, “italic”, “underline”, “strikethrough”, “spoiler”, and “custom_emoji” are ignored.
+};
+
+/**
+ * Sends a gift to the given user. The gift can't be converted to Telegram Stars by the user. Returns True on success.
+ * 
+ * @param agent Any object satisfying agent concept (see `banana::agent` namespace)
+ * @param args__user_id Unique identifier of the target user that will receive the gift
+ * @param args__gift_id Identifier of the gift
+ * @param args__text Text that will be shown along with the gift; 0-255 characters
+ * @param args__text_parse_mode Mode for parsing entities in the text. See formatting options for more details. Entities other than “bold”, “italic”, “underline”, “strikethrough”, “spoiler”, and “custom_emoji” are ignored.
+ * @param args__text_entities A JSON-serialized list of special entities that appear in the gift text. It can be specified instead of text_parse_mode. Entities other than “bold”, “italic”, “underline”, “strikethrough”, “spoiler”, and “custom_emoji” are ignored.
+ */
+template <class Agent>
+api_result<boolean_t, Agent&&> send_gift(Agent&& agent, send_gift_args_t args) {
+    return call(static_cast<Agent&&>(agent), std::move(args));
+}
+
+template <class Agent, class F>
+void send_gift(Agent&& agent, send_gift_args_t args, F&& callback) {
+    call(static_cast<Agent&&>(agent), std::move(args), std::forward<F>(callback));
+}
+
 // Arguments to send_invoice method
 struct send_invoice_args_t {
     variant_t<integer_t, string_t>       chat_id;                       // Unique identifier for the target chat or username of the target channel (in the format @channelusername)
     string_t                             title;                         // Product name, 1-32 characters
     string_t                             description;                   // Product description, 1-255 characters
-    string_t                             payload;                       // Bot-defined invoice payload, 1-128 bytes. This will not be displayed to the user, use for your internal processes.
+    string_t                             payload;                       // Bot-defined invoice payload, 1-128 bytes. This will not be displayed to the user, use it for your internal processes.
     string_t                             currency;                      // Three-letter ISO 4217 currency code, see more on currencies. Pass “XTR” for payments in Telegram Stars.
     array_t<labeled_price_t>             prices;                        // Price breakdown, a JSON-serialized list of components (e.g. product price, tax, discount, delivery cost, delivery tax, bonus, etc.). Must contain exactly one item for payments in Telegram Stars.
     optional_t<integer_t>                message_thread_id;             // Unique identifier for the target message thread (topic) of the forum; for forum supergroups only
@@ -2164,6 +2340,7 @@ struct send_invoice_args_t {
     optional_t<boolean_t>                is_flexible;                   // Pass True if the final price depends on the shipping method. Ignored for payments in Telegram Stars.
     optional_t<boolean_t>                disable_notification;          // Sends the message silently. Users will receive a notification with no sound.
     optional_t<boolean_t>                protect_content;               // Protects the contents of the sent message from forwarding and saving
+    optional_t<boolean_t>                allow_paid_broadcast;          // Pass True to allow up to 1000 messages per second, ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance
     optional_t<string_t>                 message_effect_id;             // Unique identifier of the message effect to be added to the message; for private chats only
     optional_t<reply_parameters_t>       reply_parameters;              // Description of the message to reply to
     optional_t<inline_keyboard_markup_t> reply_markup;                  // A JSON-serialized object for an inline keyboard. If empty, one 'Pay total price' button will be shown. If not empty, the first button must be a Pay button.
@@ -2177,7 +2354,7 @@ struct send_invoice_args_t {
  * @param args__message_thread_id Unique identifier for the target message thread (topic) of the forum; for forum supergroups only
  * @param args__title Product name, 1-32 characters
  * @param args__description Product description, 1-255 characters
- * @param args__payload Bot-defined invoice payload, 1-128 bytes. This will not be displayed to the user, use for your internal processes.
+ * @param args__payload Bot-defined invoice payload, 1-128 bytes. This will not be displayed to the user, use it for your internal processes.
  * @param args__provider_token Payment provider token, obtained via @BotFather. Pass an empty string for payments in Telegram Stars.
  * @param args__currency Three-letter ISO 4217 currency code, see more on currencies. Pass “XTR” for payments in Telegram Stars.
  * @param args__prices Price breakdown, a JSON-serialized list of components (e.g. product price, tax, discount, delivery cost, delivery tax, bonus, etc.). Must contain exactly one item for payments in Telegram Stars.
@@ -2198,6 +2375,7 @@ struct send_invoice_args_t {
  * @param args__is_flexible Pass True if the final price depends on the shipping method. Ignored for payments in Telegram Stars.
  * @param args__disable_notification Sends the message silently. Users will receive a notification with no sound.
  * @param args__protect_content Protects the contents of the sent message from forwarding and saving
+ * @param args__allow_paid_broadcast Pass True to allow up to 1000 messages per second, ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance
  * @param args__message_effect_id Unique identifier of the message effect to be added to the message; for private chats only
  * @param args__reply_parameters Description of the message to reply to
  * @param args__reply_markup A JSON-serialized object for an inline keyboard. If empty, one 'Pay total price' button will be shown. If not empty, the first button must be a Pay button.
@@ -2224,6 +2402,7 @@ struct send_location_args_t {
     optional_t<integer_t>                                                                                            proximity_alert_radius; // For live locations, a maximum distance for proximity alerts about approaching another chat member, in meters. Must be between 1 and 100000 if specified.
     optional_t<boolean_t>                                                                                            disable_notification;   // Sends the message silently. Users will receive a notification with no sound.
     optional_t<boolean_t>                                                                                            protect_content;        // Protects the contents of the sent message from forwarding and saving
+    optional_t<boolean_t>                                                                                            allow_paid_broadcast;   // Pass True to allow up to 1000 messages per second, ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance
     optional_t<string_t>                                                                                             message_effect_id;      // Unique identifier of the message effect to be added to the message; for private chats only
     optional_t<reply_parameters_t>                                                                                   reply_parameters;       // Description of the message to reply to
     optional_t<variant_t<inline_keyboard_markup_t, reply_keyboard_markup_t, reply_keyboard_remove_t, force_reply_t>> reply_markup;           // Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove a reply keyboard or to force a reply from the user
@@ -2245,6 +2424,7 @@ struct send_location_args_t {
  * @param args__proximity_alert_radius For live locations, a maximum distance for proximity alerts about approaching another chat member, in meters. Must be between 1 and 100000 if specified.
  * @param args__disable_notification Sends the message silently. Users will receive a notification with no sound.
  * @param args__protect_content Protects the contents of the sent message from forwarding and saving
+ * @param args__allow_paid_broadcast Pass True to allow up to 1000 messages per second, ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance
  * @param args__message_effect_id Unique identifier of the message effect to be added to the message; for private chats only
  * @param args__reply_parameters Description of the message to reply to
  * @param args__reply_markup Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove a reply keyboard or to force a reply from the user
@@ -2266,6 +2446,7 @@ struct send_media_group_args_t {
     optional_t<integer_t>                                                                                     message_thread_id;      // Unique identifier for the target message thread (topic) of the forum; for forum supergroups only
     optional_t<boolean_t>                                                                                     disable_notification;   // Sends messages silently. Users will receive a notification with no sound.
     optional_t<boolean_t>                                                                                     protect_content;        // Protects the contents of the sent messages from forwarding and saving
+    optional_t<boolean_t>                                                                                     allow_paid_broadcast;   // Pass True to allow up to 1000 messages per second, ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance
     optional_t<string_t>                                                                                      message_effect_id;      // Unique identifier of the message effect to be added to the message; for private chats only
     optional_t<reply_parameters_t>                                                                            reply_parameters;       // Description of the message to reply to
     optional_t<string_t>                                                                                      business_connection_id; // Unique identifier of the business connection on behalf of which the message will be sent
@@ -2281,6 +2462,7 @@ struct send_media_group_args_t {
  * @param args__media A JSON-serialized array describing messages to be sent, must include 2-10 items
  * @param args__disable_notification Sends messages silently. Users will receive a notification with no sound.
  * @param args__protect_content Protects the contents of the sent messages from forwarding and saving
+ * @param args__allow_paid_broadcast Pass True to allow up to 1000 messages per second, ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance
  * @param args__message_effect_id Unique identifier of the message effect to be added to the message; for private chats only
  * @param args__reply_parameters Description of the message to reply to
  */
@@ -2304,6 +2486,7 @@ struct send_message_args_t {
     optional_t<link_preview_options_t>                                                                               link_preview_options;   // Link preview generation options for the message
     optional_t<boolean_t>                                                                                            disable_notification;   // Sends the message silently. Users will receive a notification with no sound.
     optional_t<boolean_t>                                                                                            protect_content;        // Protects the contents of the sent message from forwarding and saving
+    optional_t<boolean_t>                                                                                            allow_paid_broadcast;   // Pass True to allow up to 1000 messages per second, ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance
     optional_t<string_t>                                                                                             message_effect_id;      // Unique identifier of the message effect to be added to the message; for private chats only
     optional_t<reply_parameters_t>                                                                                   reply_parameters;       // Description of the message to reply to
     optional_t<variant_t<inline_keyboard_markup_t, reply_keyboard_markup_t, reply_keyboard_remove_t, force_reply_t>> reply_markup;           // Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove a reply keyboard or to force a reply from the user
@@ -2323,6 +2506,7 @@ struct send_message_args_t {
  * @param args__link_preview_options Link preview generation options for the message
  * @param args__disable_notification Sends the message silently. Users will receive a notification with no sound.
  * @param args__protect_content Protects the contents of the sent message from forwarding and saving
+ * @param args__allow_paid_broadcast Pass True to allow up to 1000 messages per second, ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance
  * @param args__message_effect_id Unique identifier of the message effect to be added to the message; for private chats only
  * @param args__reply_parameters Description of the message to reply to
  * @param args__reply_markup Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove a reply keyboard or to force a reply from the user
@@ -2339,32 +2523,38 @@ void send_message(Agent&& agent, send_message_args_t args, F&& callback) {
 
 // Arguments to send_paid_media method
 struct send_paid_media_args_t {
-    variant_t<integer_t, string_t>                                                                                   chat_id;                  // Unique identifier for the target chat or username of the target channel (in the format @channelusername)
-    integer_t                                                                                                        star_count;               // The number of Telegram Stars that must be paid to buy access to the media
+    variant_t<integer_t, string_t>                                                                                   chat_id;                  // Unique identifier for the target chat or username of the target channel (in the format @channelusername). If the chat is a channel, all Telegram Star proceeds from this media will be credited to the chat's balance. Otherwise, they will be credited to the bot's balance.
+    integer_t                                                                                                        star_count;               // The number of Telegram Stars that must be paid to buy access to the media; 1-2500
     array_t<input_paid_media_t>                                                                                      media;                    // A JSON-serialized array describing the media to be sent; up to 10 items
+    optional_t<string_t>                                                                                             payload;                  // Bot-defined paid media payload, 0-128 bytes. This will not be displayed to the user, use it for your internal processes.
     optional_t<string_t>                                                                                             caption;                  // Media caption, 0-1024 characters after entities parsing
     optional_t<string_t>                                                                                             parse_mode;               // Mode for parsing entities in the media caption. See formatting options for more details.
     optional_t<array_t<message_entity_t>>                                                                            caption_entities;         // A JSON-serialized list of special entities that appear in the caption, which can be specified instead of parse_mode
     optional_t<boolean_t>                                                                                            show_caption_above_media; // Pass True, if the caption must be shown above the message media
     optional_t<boolean_t>                                                                                            disable_notification;     // Sends the message silently. Users will receive a notification with no sound.
     optional_t<boolean_t>                                                                                            protect_content;          // Protects the contents of the sent message from forwarding and saving
+    optional_t<boolean_t>                                                                                            allow_paid_broadcast;     // Pass True to allow up to 1000 messages per second, ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance
     optional_t<reply_parameters_t>                                                                                   reply_parameters;         // Description of the message to reply to
     optional_t<variant_t<inline_keyboard_markup_t, reply_keyboard_markup_t, reply_keyboard_remove_t, force_reply_t>> reply_markup;             // Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove a reply keyboard or to force a reply from the user
+    optional_t<string_t>                                                                                             business_connection_id;   // Unique identifier of the business connection on behalf of which the message will be sent
 };
 
 /**
- * Use this method to send paid media to channel chats. On success, the sent Message is returned.
+ * Use this method to send paid media. On success, the sent Message is returned.
  * 
  * @param agent Any object satisfying agent concept (see `banana::agent` namespace)
- * @param args__chat_id Unique identifier for the target chat or username of the target channel (in the format @channelusername)
- * @param args__star_count The number of Telegram Stars that must be paid to buy access to the media
+ * @param args__business_connection_id Unique identifier of the business connection on behalf of which the message will be sent
+ * @param args__chat_id Unique identifier for the target chat or username of the target channel (in the format @channelusername). If the chat is a channel, all Telegram Star proceeds from this media will be credited to the chat's balance. Otherwise, they will be credited to the bot's balance.
+ * @param args__star_count The number of Telegram Stars that must be paid to buy access to the media; 1-2500
  * @param args__media A JSON-serialized array describing the media to be sent; up to 10 items
+ * @param args__payload Bot-defined paid media payload, 0-128 bytes. This will not be displayed to the user, use it for your internal processes.
  * @param args__caption Media caption, 0-1024 characters after entities parsing
  * @param args__parse_mode Mode for parsing entities in the media caption. See formatting options for more details.
  * @param args__caption_entities A JSON-serialized list of special entities that appear in the caption, which can be specified instead of parse_mode
  * @param args__show_caption_above_media Pass True, if the caption must be shown above the message media
  * @param args__disable_notification Sends the message silently. Users will receive a notification with no sound.
  * @param args__protect_content Protects the contents of the sent message from forwarding and saving
+ * @param args__allow_paid_broadcast Pass True to allow up to 1000 messages per second, ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance
  * @param args__reply_parameters Description of the message to reply to
  * @param args__reply_markup Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove a reply keyboard or to force a reply from the user
  */
@@ -2390,6 +2580,7 @@ struct send_photo_args_t {
     optional_t<boolean_t>                                                                                            has_spoiler;              // Pass True if the photo needs to be covered with a spoiler animation
     optional_t<boolean_t>                                                                                            disable_notification;     // Sends the message silently. Users will receive a notification with no sound.
     optional_t<boolean_t>                                                                                            protect_content;          // Protects the contents of the sent message from forwarding and saving
+    optional_t<boolean_t>                                                                                            allow_paid_broadcast;     // Pass True to allow up to 1000 messages per second, ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance
     optional_t<string_t>                                                                                             message_effect_id;        // Unique identifier of the message effect to be added to the message; for private chats only
     optional_t<reply_parameters_t>                                                                                   reply_parameters;         // Description of the message to reply to
     optional_t<variant_t<inline_keyboard_markup_t, reply_keyboard_markup_t, reply_keyboard_remove_t, force_reply_t>> reply_markup;             // Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove a reply keyboard or to force a reply from the user
@@ -2411,6 +2602,7 @@ struct send_photo_args_t {
  * @param args__has_spoiler Pass True if the photo needs to be covered with a spoiler animation
  * @param args__disable_notification Sends the message silently. Users will receive a notification with no sound.
  * @param args__protect_content Protects the contents of the sent message from forwarding and saving
+ * @param args__allow_paid_broadcast Pass True to allow up to 1000 messages per second, ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance
  * @param args__message_effect_id Unique identifier of the message effect to be added to the message; for private chats only
  * @param args__reply_parameters Description of the message to reply to
  * @param args__reply_markup Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove a reply keyboard or to force a reply from the user
@@ -2445,6 +2637,7 @@ struct send_poll_args_t {
     optional_t<boolean_t>                                                                                            is_closed;               // Pass True if the poll needs to be immediately closed. This can be useful for poll preview.
     optional_t<boolean_t>                                                                                            disable_notification;    // Sends the message silently. Users will receive a notification with no sound.
     optional_t<boolean_t>                                                                                            protect_content;         // Protects the contents of the sent message from forwarding and saving
+    optional_t<boolean_t>                                                                                            allow_paid_broadcast;    // Pass True to allow up to 1000 messages per second, ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance
     optional_t<string_t>                                                                                             message_effect_id;       // Unique identifier of the message effect to be added to the message; for private chats only
     optional_t<reply_parameters_t>                                                                                   reply_parameters;        // Description of the message to reply to
     optional_t<variant_t<inline_keyboard_markup_t, reply_keyboard_markup_t, reply_keyboard_remove_t, force_reply_t>> reply_markup;            // Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove a reply keyboard or to force a reply from the user
@@ -2474,6 +2667,7 @@ struct send_poll_args_t {
  * @param args__is_closed Pass True if the poll needs to be immediately closed. This can be useful for poll preview.
  * @param args__disable_notification Sends the message silently. Users will receive a notification with no sound.
  * @param args__protect_content Protects the contents of the sent message from forwarding and saving
+ * @param args__allow_paid_broadcast Pass True to allow up to 1000 messages per second, ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance
  * @param args__message_effect_id Unique identifier of the message effect to be added to the message; for private chats only
  * @param args__reply_parameters Description of the message to reply to
  * @param args__reply_markup Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove a reply keyboard or to force a reply from the user
@@ -2496,6 +2690,7 @@ struct send_sticker_args_t {
     optional_t<string_t>                                                                                             emoji;                  // Emoji associated with the sticker; only for just uploaded stickers
     optional_t<boolean_t>                                                                                            disable_notification;   // Sends the message silently. Users will receive a notification with no sound.
     optional_t<boolean_t>                                                                                            protect_content;        // Protects the contents of the sent message from forwarding and saving
+    optional_t<boolean_t>                                                                                            allow_paid_broadcast;   // Pass True to allow up to 1000 messages per second, ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance
     optional_t<string_t>                                                                                             message_effect_id;      // Unique identifier of the message effect to be added to the message; for private chats only
     optional_t<reply_parameters_t>                                                                                   reply_parameters;       // Description of the message to reply to
     optional_t<variant_t<inline_keyboard_markup_t, reply_keyboard_markup_t, reply_keyboard_remove_t, force_reply_t>> reply_markup;           // Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove a reply keyboard or to force a reply from the user
@@ -2513,6 +2708,7 @@ struct send_sticker_args_t {
  * @param args__emoji Emoji associated with the sticker; only for just uploaded stickers
  * @param args__disable_notification Sends the message silently. Users will receive a notification with no sound.
  * @param args__protect_content Protects the contents of the sent message from forwarding and saving
+ * @param args__allow_paid_broadcast Pass True to allow up to 1000 messages per second, ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance
  * @param args__message_effect_id Unique identifier of the message effect to be added to the message; for private chats only
  * @param args__reply_parameters Description of the message to reply to
  * @param args__reply_markup Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove a reply keyboard or to force a reply from the user
@@ -2541,6 +2737,7 @@ struct send_venue_args_t {
     optional_t<string_t>                                                                                             google_place_type;      // Google Places type of the venue. (See supported types.)
     optional_t<boolean_t>                                                                                            disable_notification;   // Sends the message silently. Users will receive a notification with no sound.
     optional_t<boolean_t>                                                                                            protect_content;        // Protects the contents of the sent message from forwarding and saving
+    optional_t<boolean_t>                                                                                            allow_paid_broadcast;   // Pass True to allow up to 1000 messages per second, ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance
     optional_t<string_t>                                                                                             message_effect_id;      // Unique identifier of the message effect to be added to the message; for private chats only
     optional_t<reply_parameters_t>                                                                                   reply_parameters;       // Description of the message to reply to
     optional_t<variant_t<inline_keyboard_markup_t, reply_keyboard_markup_t, reply_keyboard_remove_t, force_reply_t>> reply_markup;           // Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove a reply keyboard or to force a reply from the user
@@ -2564,6 +2761,7 @@ struct send_venue_args_t {
  * @param args__google_place_type Google Places type of the venue. (See supported types.)
  * @param args__disable_notification Sends the message silently. Users will receive a notification with no sound.
  * @param args__protect_content Protects the contents of the sent message from forwarding and saving
+ * @param args__allow_paid_broadcast Pass True to allow up to 1000 messages per second, ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance
  * @param args__message_effect_id Unique identifier of the message effect to be added to the message; for private chats only
  * @param args__reply_parameters Description of the message to reply to
  * @param args__reply_markup Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove a reply keyboard or to force a reply from the user
@@ -2595,6 +2793,7 @@ struct send_video_args_t {
     optional_t<boolean_t>                                                                                            supports_streaming;       // Pass True if the uploaded video is suitable for streaming
     optional_t<boolean_t>                                                                                            disable_notification;     // Sends the message silently. Users will receive a notification with no sound.
     optional_t<boolean_t>                                                                                            protect_content;          // Protects the contents of the sent message from forwarding and saving
+    optional_t<boolean_t>                                                                                            allow_paid_broadcast;     // Pass True to allow up to 1000 messages per second, ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance
     optional_t<string_t>                                                                                             message_effect_id;        // Unique identifier of the message effect to be added to the message; for private chats only
     optional_t<reply_parameters_t>                                                                                   reply_parameters;         // Description of the message to reply to
     optional_t<variant_t<inline_keyboard_markup_t, reply_keyboard_markup_t, reply_keyboard_remove_t, force_reply_t>> reply_markup;             // Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove a reply keyboard or to force a reply from the user
@@ -2621,6 +2820,7 @@ struct send_video_args_t {
  * @param args__supports_streaming Pass True if the uploaded video is suitable for streaming
  * @param args__disable_notification Sends the message silently. Users will receive a notification with no sound.
  * @param args__protect_content Protects the contents of the sent message from forwarding and saving
+ * @param args__allow_paid_broadcast Pass True to allow up to 1000 messages per second, ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance
  * @param args__message_effect_id Unique identifier of the message effect to be added to the message; for private chats only
  * @param args__reply_parameters Description of the message to reply to
  * @param args__reply_markup Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove a reply keyboard or to force a reply from the user
@@ -2645,6 +2845,7 @@ struct send_video_note_args_t {
     optional_t<variant_t<input_file_t, string_t>>                                                                    thumbnail;              // Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail's width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can't be reused and can be only uploaded as a new file, so you can pass “attach://<file_attach_name>” if the thumbnail was uploaded using multipart/form-data under <file_attach_name>. More information on Sending Files »
     optional_t<boolean_t>                                                                                            disable_notification;   // Sends the message silently. Users will receive a notification with no sound.
     optional_t<boolean_t>                                                                                            protect_content;        // Protects the contents of the sent message from forwarding and saving
+    optional_t<boolean_t>                                                                                            allow_paid_broadcast;   // Pass True to allow up to 1000 messages per second, ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance
     optional_t<string_t>                                                                                             message_effect_id;      // Unique identifier of the message effect to be added to the message; for private chats only
     optional_t<reply_parameters_t>                                                                                   reply_parameters;       // Description of the message to reply to
     optional_t<variant_t<inline_keyboard_markup_t, reply_keyboard_markup_t, reply_keyboard_remove_t, force_reply_t>> reply_markup;           // Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove a reply keyboard or to force a reply from the user
@@ -2664,6 +2865,7 @@ struct send_video_note_args_t {
  * @param args__thumbnail Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail's width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can't be reused and can be only uploaded as a new file, so you can pass “attach://<file_attach_name>” if the thumbnail was uploaded using multipart/form-data under <file_attach_name>. More information on Sending Files »
  * @param args__disable_notification Sends the message silently. Users will receive a notification with no sound.
  * @param args__protect_content Protects the contents of the sent message from forwarding and saving
+ * @param args__allow_paid_broadcast Pass True to allow up to 1000 messages per second, ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance
  * @param args__message_effect_id Unique identifier of the message effect to be added to the message; for private chats only
  * @param args__reply_parameters Description of the message to reply to
  * @param args__reply_markup Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove a reply keyboard or to force a reply from the user
@@ -2689,6 +2891,7 @@ struct send_voice_args_t {
     optional_t<integer_t>                                                                                            duration;               // Duration of the voice message in seconds
     optional_t<boolean_t>                                                                                            disable_notification;   // Sends the message silently. Users will receive a notification with no sound.
     optional_t<boolean_t>                                                                                            protect_content;        // Protects the contents of the sent message from forwarding and saving
+    optional_t<boolean_t>                                                                                            allow_paid_broadcast;   // Pass True to allow up to 1000 messages per second, ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance
     optional_t<string_t>                                                                                             message_effect_id;      // Unique identifier of the message effect to be added to the message; for private chats only
     optional_t<reply_parameters_t>                                                                                   reply_parameters;       // Description of the message to reply to
     optional_t<variant_t<inline_keyboard_markup_t, reply_keyboard_markup_t, reply_keyboard_remove_t, force_reply_t>> reply_markup;           // Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove a reply keyboard or to force a reply from the user
@@ -2709,6 +2912,7 @@ struct send_voice_args_t {
  * @param args__duration Duration of the voice message in seconds
  * @param args__disable_notification Sends the message silently. Users will receive a notification with no sound.
  * @param args__protect_content Protects the contents of the sent message from forwarding and saving
+ * @param args__allow_paid_broadcast Pass True to allow up to 1000 messages per second, ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance
  * @param args__message_effect_id Unique identifier of the message effect to be added to the message; for private chats only
  * @param args__reply_parameters Description of the message to reply to
  * @param args__reply_markup Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove a reply keyboard or to force a reply from the user
@@ -2948,17 +3152,17 @@ void set_game_score(Agent&& agent, set_game_score_args_t args, F&& callback) {
 struct set_message_reaction_args_t {
     variant_t<integer_t, string_t>       chat_id;    // Unique identifier for the target chat or username of the target channel (in the format @channelusername)
     integer_t                            message_id; // Identifier of the target message. If the message belongs to a media group, the reaction is set to the first non-deleted message in the group instead.
-    optional_t<array_t<reaction_type_t>> reaction;   // A JSON-serialized list of reaction types to set on the message. Currently, as non-premium users, bots can set up to one reaction per message. A custom emoji reaction can be used if it is either already present on the message or explicitly allowed by chat administrators.
+    optional_t<array_t<reaction_type_t>> reaction;   // A JSON-serialized list of reaction types to set on the message. Currently, as non-premium users, bots can set up to one reaction per message. A custom emoji reaction can be used if it is either already present on the message or explicitly allowed by chat administrators. Paid reactions can't be used by bots.
     optional_t<boolean_t>                is_big;     // Pass True to set the reaction with a big animation
 };
 
 /**
- * Use this method to change the chosen reactions on a message. Service messages can't be reacted to. Automatically forwarded messages from a channel to its discussion group have the same available reactions as messages in the channel. Returns True on success.
+ * Use this method to change the chosen reactions on a message. Service messages can't be reacted to. Automatically forwarded messages from a channel to its discussion group have the same available reactions as messages in the channel. Bots can't use paid reactions. Returns True on success.
  * 
  * @param agent Any object satisfying agent concept (see `banana::agent` namespace)
  * @param args__chat_id Unique identifier for the target chat or username of the target channel (in the format @channelusername)
  * @param args__message_id Identifier of the target message. If the message belongs to a media group, the reaction is set to the first non-deleted message in the group instead.
- * @param args__reaction A JSON-serialized list of reaction types to set on the message. Currently, as non-premium users, bots can set up to one reaction per message. A custom emoji reaction can be used if it is either already present on the message or explicitly allowed by chat administrators.
+ * @param args__reaction A JSON-serialized list of reaction types to set on the message. Currently, as non-premium users, bots can set up to one reaction per message. A custom emoji reaction can be used if it is either already present on the message or explicitly allowed by chat administrators. Paid reactions can't be used by bots.
  * @param args__is_big Pass True to set the reaction with a big animation
  */
 template <class Agent>
@@ -3208,7 +3412,7 @@ struct set_sticker_set_thumbnail_args_t {
     string_t                                      name;      // Sticker set name
     integer_t                                     user_id;   // User identifier of the sticker set owner
     string_t                                      format;    // Format of the thumbnail, must be one of “static” for a .WEBP or .PNG image, “animated” for a .TGS animation, or “video” for a WEBM video
-    optional_t<variant_t<input_file_t, string_t>> thumbnail; // A .WEBP or .PNG image with the thumbnail, must be up to 128 kilobytes in size and have a width and height of exactly 100px, or a .TGS animation with a thumbnail up to 32 kilobytes in size (see https://core.telegram.org/stickers#animated-sticker-requirements for animated sticker technical requirements), or a WEBM video with the thumbnail up to 32 kilobytes in size; see https://core.telegram.org/stickers#video-sticker-requirements for video sticker technical requirements. Pass a file_id as a String to send a file that already exists on the Telegram servers, pass an HTTP URL as a String for Telegram to get a file from the Internet, or upload a new one using multipart/form-data. More information on Sending Files ». Animated and video sticker set thumbnails can't be uploaded via HTTP URL. If omitted, then the thumbnail is dropped and the first sticker is used as the thumbnail.
+    optional_t<variant_t<input_file_t, string_t>> thumbnail; // A .WEBP or .PNG image with the thumbnail, must be up to 128 kilobytes in size and have a width and height of exactly 100px, or a .TGS animation with a thumbnail up to 32 kilobytes in size (see https://core.telegram.org/stickers#animation-requirements for animated sticker technical requirements), or a WEBM video with the thumbnail up to 32 kilobytes in size; see https://core.telegram.org/stickers#video-requirements for video sticker technical requirements. Pass a file_id as a String to send a file that already exists on the Telegram servers, pass an HTTP URL as a String for Telegram to get a file from the Internet, or upload a new one using multipart/form-data. More information on Sending Files ». Animated and video sticker set thumbnails can't be uploaded via HTTP URL. If omitted, then the thumbnail is dropped and the first sticker is used as the thumbnail.
 };
 
 /**
@@ -3217,7 +3421,7 @@ struct set_sticker_set_thumbnail_args_t {
  * @param agent Any object satisfying agent concept (see `banana::agent` namespace)
  * @param args__name Sticker set name
  * @param args__user_id User identifier of the sticker set owner
- * @param args__thumbnail A .WEBP or .PNG image with the thumbnail, must be up to 128 kilobytes in size and have a width and height of exactly 100px, or a .TGS animation with a thumbnail up to 32 kilobytes in size (see https://core.telegram.org/stickers#animated-sticker-requirements for animated sticker technical requirements), or a WEBM video with the thumbnail up to 32 kilobytes in size; see https://core.telegram.org/stickers#video-sticker-requirements for video sticker technical requirements. Pass a file_id as a String to send a file that already exists on the Telegram servers, pass an HTTP URL as a String for Telegram to get a file from the Internet, or upload a new one using multipart/form-data. More information on Sending Files ». Animated and video sticker set thumbnails can't be uploaded via HTTP URL. If omitted, then the thumbnail is dropped and the first sticker is used as the thumbnail.
+ * @param args__thumbnail A .WEBP or .PNG image with the thumbnail, must be up to 128 kilobytes in size and have a width and height of exactly 100px, or a .TGS animation with a thumbnail up to 32 kilobytes in size (see https://core.telegram.org/stickers#animation-requirements for animated sticker technical requirements), or a WEBM video with the thumbnail up to 32 kilobytes in size; see https://core.telegram.org/stickers#video-requirements for video sticker technical requirements. Pass a file_id as a String to send a file that already exists on the Telegram servers, pass an HTTP URL as a String for Telegram to get a file from the Internet, or upload a new one using multipart/form-data. More information on Sending Files ». Animated and video sticker set thumbnails can't be uploaded via HTTP URL. If omitted, then the thumbnail is dropped and the first sticker is used as the thumbnail.
  * @param args__format Format of the thumbnail, must be one of “static” for a .WEBP or .PNG image, “animated” for a .TGS animation, or “video” for a WEBM video
  */
 template <class Agent>
@@ -3250,6 +3454,31 @@ api_result<boolean_t, Agent&&> set_sticker_set_title(Agent&& agent, set_sticker_
 
 template <class Agent, class F>
 void set_sticker_set_title(Agent&& agent, set_sticker_set_title_args_t args, F&& callback) {
+    call(static_cast<Agent&&>(agent), std::move(args), std::forward<F>(callback));
+}
+
+// Arguments to set_user_emoji_status method
+struct set_user_emoji_status_args_t {
+    integer_t             user_id;                      // Unique identifier of the target user
+    optional_t<string_t>  emoji_status_custom_emoji_id; // Custom emoji identifier of the emoji status to set. Pass an empty string to remove the status.
+    optional_t<integer_t> emoji_status_expiration_date; // Expiration date of the emoji status, if any
+};
+
+/**
+ * Changes the emoji status for a given user that previously allowed the bot to manage their emoji status via the Mini App method requestEmojiStatusAccess. Returns True on success.
+ * 
+ * @param agent Any object satisfying agent concept (see `banana::agent` namespace)
+ * @param args__user_id Unique identifier of the target user
+ * @param args__emoji_status_custom_emoji_id Custom emoji identifier of the emoji status to set. Pass an empty string to remove the status.
+ * @param args__emoji_status_expiration_date Expiration date of the emoji status, if any
+ */
+template <class Agent>
+api_result<boolean_t, Agent&&> set_user_emoji_status(Agent&& agent, set_user_emoji_status_args_t args) {
+    return call(static_cast<Agent&&>(agent), std::move(args));
+}
+
+template <class Agent, class F>
+void set_user_emoji_status(Agent&& agent, set_user_emoji_status_args_t args, F&& callback) {
     call(static_cast<Agent&&>(agent), std::move(args), std::forward<F>(callback));
 }
 
@@ -3478,16 +3707,18 @@ void unpin_all_general_forum_topic_messages(Agent&& agent, unpin_all_general_for
 
 // Arguments to unpin_chat_message method
 struct unpin_chat_message_args_t {
-    variant_t<integer_t, string_t> chat_id;    // Unique identifier for the target chat or username of the target channel (in the format @channelusername)
-    optional_t<integer_t>          message_id; // Identifier of a message to unpin. If not specified, the most recent pinned message (by sending date) will be unpinned.
+    variant_t<integer_t, string_t> chat_id;                // Unique identifier for the target chat or username of the target channel (in the format @channelusername)
+    optional_t<integer_t>          message_id;             // Identifier of the message to unpin. Required if business_connection_id is specified. If not specified, the most recent pinned message (by sending date) will be unpinned.
+    optional_t<string_t>           business_connection_id; // Unique identifier of the business connection on behalf of which the message will be unpinned
 };
 
 /**
  * Use this method to remove a message from the list of pinned messages in a chat. If the chat is not a private chat, the bot must be an administrator in the chat for this to work and must have the 'can_pin_messages' administrator right in a supergroup or 'can_edit_messages' administrator right in a channel. Returns True on success.
  * 
  * @param agent Any object satisfying agent concept (see `banana::agent` namespace)
+ * @param args__business_connection_id Unique identifier of the business connection on behalf of which the message will be unpinned
  * @param args__chat_id Unique identifier for the target chat or username of the target channel (in the format @channelusername)
- * @param args__message_id Identifier of a message to unpin. If not specified, the most recent pinned message (by sending date) will be unpinned.
+ * @param args__message_id Identifier of the message to unpin. Required if business_connection_id is specified. If not specified, the most recent pinned message (by sending date) will be unpinned.
  */
 template <class Agent>
 api_result<boolean_t, Agent&&> unpin_chat_message(Agent&& agent, unpin_chat_message_args_t args) {

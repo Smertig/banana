@@ -13,7 +13,7 @@ set_message_reaction
 
    ``callback`` is any callable object accepting ``expected<boolean_t>``.
 
-   Use this method to change the chosen reactions on a message. Service messages can't be reacted to. Automatically forwarded messages from a channel to its discussion group have the same available reactions as messages in the channel. Returns True on success.
+   Use this method to change the chosen reactions on a message. Service messages can't be reacted to. Automatically forwarded messages from a channel to its discussion group have the same available reactions as messages in the channel. Bots can't use paid reactions. Returns True on success.
 
 .. cpp:struct:: set_message_reaction_args_t
 
@@ -30,7 +30,7 @@ set_message_reaction
 
    .. cpp:member:: optional_t<array_t<reaction_type_t>> reaction
 
-   A JSON-serialized list of reaction types to set on the message. Currently, as non-premium users, bots can set up to one reaction per message. A custom emoji reaction can be used if it is either already present on the message or explicitly allowed by chat administrators.
+   A JSON-serialized list of reaction types to set on the message. Currently, as non-premium users, bots can set up to one reaction per message. A custom emoji reaction can be used if it is either already present on the message or explicitly allowed by chat administrators. Paid reactions can't be used by bots.
 
    .. cpp:member:: optional_t<boolean_t> is_big
 

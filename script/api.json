@@ -342,6 +342,12 @@
                     "type": "Boolean"
                 },
                 {
+                    "description": "Pass True to allow up to 1000 messages per second, ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance",
+                    "name": "allow_paid_broadcast",
+                    "optional": true,
+                    "type": "Boolean"
+                },
+                {
                     "description": "Description of the message to reply to",
                     "name": "reply_parameters",
                     "optional": true,
@@ -440,6 +446,36 @@
             ],
             "return_type": "ChatInviteLink"
         },
+        "createChatSubscriptionInviteLink": {
+            "desc": "Use this method to create a subscription invite link for a channel chat. The bot must have the can_invite_users administrator rights. The link can be edited using the method editChatSubscriptionInviteLink or revoked using the method revokeChatInviteLink. Returns the new invite link as a ChatInviteLink object.",
+            "params": [
+                {
+                    "description": "Unique identifier for the target channel chat or username of the target channel (in the format @channelusername)",
+                    "name": "chat_id",
+                    "optional": false,
+                    "type": "Integer or String"
+                },
+                {
+                    "description": "Invite link name; 0-32 characters",
+                    "name": "name",
+                    "optional": true,
+                    "type": "String"
+                },
+                {
+                    "description": "The number of seconds the subscription will be active for before the next payment. Currently, it must always be 2592000 (30 days).",
+                    "name": "subscription_period",
+                    "optional": false,
+                    "type": "Integer"
+                },
+                {
+                    "description": "The amount of Telegram Stars a user must pay initially and after each subsequent subscription period to be a member of the chat; 1-2500",
+                    "name": "subscription_price",
+                    "optional": false,
+                    "type": "Integer"
+                }
+            ],
+            "return_type": "ChatInviteLink"
+        },
         "createForumTopic": {
             "desc": "Use this method to create a topic in a forum supergroup chat. The bot must be an administrator in the chat for this to work and must have the can_manage_topics administrator rights. Returns information about the created topic as a ForumTopic object.",
             "params": [
@@ -474,6 +510,12 @@
             "desc": "Use this method to create a link for an invoice. Returns the created invoice link as String on success.",
             "params": [
                 {
+                    "description": "Unique identifier of the business connection on behalf of which the link will be created. For payments in Telegram Stars only.",
+                    "name": "business_connection_id",
+                    "optional": true,
+                    "type": "String"
+                },
+                {
                     "description": "Product name, 1-32 characters",
                     "name": "title",
                     "optional": false,
@@ -486,7 +528,7 @@
                     "type": "String"
                 },
                 {
-                    "description": "Bot-defined invoice payload, 1-128 bytes. This will not be displayed to the user, use for your internal processes.",
+                    "description": "Bot-defined invoice payload, 1-128 bytes. This will not be displayed to the user, use it for your internal processes.",
                     "name": "payload",
                     "optional": false,
                     "type": "String"
@@ -508,6 +550,12 @@
                     "name": "prices",
                     "optional": false,
                     "type": "Array of LabeledPrice"
+                },
+                {
+                    "description": "The number of seconds the subscription will be active for before the next payment. The currency must be set to “XTR” (Telegram Stars) if the parameter is used. Currently, it must always be 2592000 (30 days) if specified. Any number of subscriptions can be active for a given bot at the same time, including multiple concurrent subscriptions from the same user. Subscription price must no exceed 2500 Telegram Stars.",
+                    "name": "subscription_period",
+                    "optional": true,
+                    "type": "Integer"
                 },
                 {
                     "default": 0,
@@ -831,8 +879,32 @@
             ],
             "return_type": "ChatInviteLink"
         },
+        "editChatSubscriptionInviteLink": {
+            "desc": "Use this method to edit a subscription invite link created by the bot. The bot must have the can_invite_users administrator rights. Returns the edited invite link as a ChatInviteLink object.",
+            "params": [
+                {
+                    "description": "Unique identifier for the target chat or username of the target channel (in the format @channelusername)",
+                    "name": "chat_id",
+                    "optional": false,
+                    "type": "Integer or String"
+                },
+                {
+                    "description": "The invite link to edit",
+                    "name": "invite_link",
+                    "optional": false,
+                    "type": "String"
+                },
+                {
+                    "description": "Invite link name; 0-32 characters",
+                    "name": "name",
+                    "optional": true,
+                    "type": "String"
+                }
+            ],
+            "return_type": "ChatInviteLink"
+        },
         "editForumTopic": {
-            "desc": "Use this method to edit name and icon of a topic in a forum supergroup chat. The bot must be an administrator in the chat for this to work and must have can_manage_topics administrator rights, unless it is the creator of the topic. Returns True on success.",
+            "desc": "Use this method to edit name and icon of a topic in a forum supergroup chat. The bot must be an administrator in the chat for this to work and must have the can_manage_topics administrator rights, unless it is the creator of the topic. Returns True on success.",
             "params": [
                 {
                     "description": "Unique identifier for the target chat or username of the target supergroup (in the format @supergroupusername)",
@@ -862,7 +934,7 @@
             "return_type": "Boolean"
         },
         "editGeneralForumTopic": {
-            "desc": "Use this method to edit the name of the 'General' topic in a forum supergroup chat. The bot must be an administrator in the chat for this to work and must have can_manage_topics administrator rights. Returns True on success.",
+            "desc": "Use this method to edit the name of the 'General' topic in a forum supergroup chat. The bot must be an administrator in the chat for this to work and must have the can_manage_topics administrator rights. Returns True on success.",
             "params": [
                 {
                     "description": "Unique identifier for the target chat or username of the target supergroup (in the format @supergroupusername)",
@@ -1012,7 +1084,7 @@
             "return_type": "Message or Boolean"
         },
         "editMessageMedia": {
-            "desc": "Use this method to edit animation, audio, document, photo, or video messages. If a message is part of a message album, then it can be edited only to an audio for audio albums, only to a document for document albums and to a photo or a video otherwise. When an inline message is edited, a new file can't be uploaded; use a previously uploaded file via its file_id or specify a URL. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.",
+            "desc": "Use this method to edit animation, audio, document, photo, or video messages, or to add media to text messages. If a message is part of a message album, then it can be edited only to an audio for audio albums, only to a document for document albums and to a photo or a video otherwise. When an inline message is edited, a new file can't be uploaded; use a previously uploaded file via its file_id or specify a URL. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.",
             "params": [
                 {
                     "description": "Unique identifier of the business connection on behalf of which the message to be edited was sent",
@@ -1149,6 +1221,30 @@
             ],
             "return_type": "Message or Boolean"
         },
+        "editUserStarSubscription": {
+            "desc": "Allows the bot to cancel or re-enable extension of a subscription paid in Telegram Stars. Returns True on success.",
+            "params": [
+                {
+                    "description": "Identifier of the user whose subscription will be edited",
+                    "name": "user_id",
+                    "optional": false,
+                    "type": "Integer"
+                },
+                {
+                    "description": "Telegram payment identifier for the subscription",
+                    "name": "telegram_payment_charge_id",
+                    "optional": false,
+                    "type": "String"
+                },
+                {
+                    "description": "Pass True to cancel extension of the user subscription; the subscription must be active up to the end of the current subscription period. Pass False to allow the user to re-enable a subscription that was previously canceled by the bot.",
+                    "name": "is_canceled",
+                    "optional": false,
+                    "type": "Boolean"
+                }
+            ],
+            "return_type": "Boolean"
+        },
         "exportChatInviteLink": {
             "desc": "Use this method to generate a new primary invite link for a chat; any previously generated primary link is revoked. The bot must be an administrator in the chat for this to work and must have the appropriate administrator rights. Returns the new invite link as String on success.",
             "params": [
@@ -1244,6 +1340,11 @@
                 }
             ],
             "return_type": "Array of MessageId"
+        },
+        "getAvailableGifts": {
+            "desc": "Returns the list of gifts that can be sent by the bot to users. Requires no parameters. Returns a Gifts object.",
+            "params": [],
+            "return_type": "Gifts"
         },
         "getBusinessConnection": {
             "desc": "Use this method to get information about the connection of the bot with a business account. Returns a BusinessConnection object on success.",
@@ -1470,7 +1571,7 @@
                     "type": "Integer"
                 }
             ],
-            "return_type": "StarTransaction"
+            "return_type": "StarTransactions"
         },
         "getStickerSet": {
             "desc": "Use this method to get a sticker set. On success, a StickerSet object is returned.",
@@ -1596,6 +1697,12 @@
         "pinChatMessage": {
             "desc": "Use this method to add a message to the list of pinned messages in a chat. If the chat is not a private chat, the bot must be an administrator in the chat for this to work and must have the 'can_pin_messages' administrator right in a supergroup or 'can_edit_messages' administrator right in a channel. Returns True on success.",
             "params": [
+                {
+                    "description": "Unique identifier of the business connection on behalf of which the message will be pinned",
+                    "name": "business_connection_id",
+                    "optional": true,
+                    "type": "String"
+                },
                 {
                     "description": "Unique identifier for the target chat or username of the target channel (in the format @channelusername)",
                     "name": "chat_id",
@@ -1857,6 +1964,48 @@
             ],
             "return_type": "ChatInviteLink"
         },
+        "savePreparedInlineMessage": {
+            "desc": "Stores a message that can be sent by a user of a Mini App. Returns a PreparedInlineMessage object.",
+            "params": [
+                {
+                    "description": "Unique identifier of the target user that can use the prepared message",
+                    "name": "user_id",
+                    "optional": false,
+                    "type": "Integer"
+                },
+                {
+                    "description": "A JSON-serialized object describing the message to be sent",
+                    "name": "result",
+                    "optional": false,
+                    "type": "InlineQueryResult"
+                },
+                {
+                    "description": "Pass True if the message can be sent to private chats with users",
+                    "name": "allow_user_chats",
+                    "optional": true,
+                    "type": "Boolean"
+                },
+                {
+                    "description": "Pass True if the message can be sent to private chats with bots",
+                    "name": "allow_bot_chats",
+                    "optional": true,
+                    "type": "Boolean"
+                },
+                {
+                    "description": "Pass True if the message can be sent to group and supergroup chats",
+                    "name": "allow_group_chats",
+                    "optional": true,
+                    "type": "Boolean"
+                },
+                {
+                    "description": "Pass True if the message can be sent to channel chats",
+                    "name": "allow_channel_chats",
+                    "optional": true,
+                    "type": "Boolean"
+                }
+            ],
+            "return_type": "PreparedInlineMessage"
+        },
         "sendAnimation": {
             "desc": "Use this method to send animation files (GIF or H.264/MPEG-4 AVC video without sound). On success, the sent Message is returned. Bots can currently send animation files of up to 50 MB in size, this limit may be changed in the future.",
             "params": [
@@ -1947,6 +2096,12 @@
                 {
                     "description": "Protects the contents of the sent message from forwarding and saving",
                     "name": "protect_content",
+                    "optional": true,
+                    "type": "Boolean"
+                },
+                {
+                    "description": "Pass True to allow up to 1000 messages per second, ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance",
+                    "name": "allow_paid_broadcast",
                     "optional": true,
                     "type": "Boolean"
                 },
@@ -2049,6 +2204,12 @@
                 {
                     "description": "Protects the contents of the sent message from forwarding and saving",
                     "name": "protect_content",
+                    "optional": true,
+                    "type": "Boolean"
+                },
+                {
+                    "description": "Pass True to allow up to 1000 messages per second, ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance",
+                    "name": "allow_paid_broadcast",
                     "optional": true,
                     "type": "Boolean"
                 },
@@ -2161,6 +2322,12 @@
                     "type": "Boolean"
                 },
                 {
+                    "description": "Pass True to allow up to 1000 messages per second, ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance",
+                    "name": "allow_paid_broadcast",
+                    "optional": true,
+                    "type": "Boolean"
+                },
+                {
                     "description": "Unique identifier of the message effect to be added to the message; for private chats only",
                     "name": "message_effect_id",
                     "optional": true,
@@ -2218,6 +2385,12 @@
                 {
                     "description": "Protects the contents of the sent message from forwarding",
                     "name": "protect_content",
+                    "optional": true,
+                    "type": "Boolean"
+                },
+                {
+                    "description": "Pass True to allow up to 1000 messages per second, ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance",
+                    "name": "allow_paid_broadcast",
                     "optional": true,
                     "type": "Boolean"
                 },
@@ -2312,6 +2485,12 @@
                     "type": "Boolean"
                 },
                 {
+                    "description": "Pass True to allow up to 1000 messages per second, ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance",
+                    "name": "allow_paid_broadcast",
+                    "optional": true,
+                    "type": "Boolean"
+                },
+                {
                     "description": "Unique identifier of the message effect to be added to the message; for private chats only",
                     "name": "message_effect_id",
                     "optional": true,
@@ -2372,6 +2551,12 @@
                     "type": "Boolean"
                 },
                 {
+                    "description": "Pass True to allow up to 1000 messages per second, ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance",
+                    "name": "allow_paid_broadcast",
+                    "optional": true,
+                    "type": "Boolean"
+                },
+                {
                     "description": "Unique identifier of the message effect to be added to the message; for private chats only",
                     "name": "message_effect_id",
                     "optional": true,
@@ -2391,6 +2576,42 @@
                 }
             ],
             "return_type": "Message"
+        },
+        "sendGift": {
+            "desc": "Sends a gift to the given user. The gift can't be converted to Telegram Stars by the user. Returns True on success.",
+            "params": [
+                {
+                    "description": "Unique identifier of the target user that will receive the gift",
+                    "name": "user_id",
+                    "optional": false,
+                    "type": "Integer"
+                },
+                {
+                    "description": "Identifier of the gift",
+                    "name": "gift_id",
+                    "optional": false,
+                    "type": "String"
+                },
+                {
+                    "description": "Text that will be shown along with the gift; 0-255 characters",
+                    "name": "text",
+                    "optional": true,
+                    "type": "String"
+                },
+                {
+                    "description": "Mode for parsing entities in the text. See formatting options for more details. Entities other than “bold”, “italic”, “underline”, “strikethrough”, “spoiler”, and “custom_emoji” are ignored.",
+                    "name": "text_parse_mode",
+                    "optional": true,
+                    "type": "String"
+                },
+                {
+                    "description": "A JSON-serialized list of special entities that appear in the gift text. It can be specified instead of text_parse_mode. Entities other than “bold”, “italic”, “underline”, “strikethrough”, “spoiler”, and “custom_emoji” are ignored.",
+                    "name": "text_entities",
+                    "optional": true,
+                    "type": "Array of MessageEntity"
+                }
+            ],
+            "return_type": "Boolean"
         },
         "sendInvoice": {
             "desc": "Use this method to send invoices. On success, the sent Message is returned.",
@@ -2420,7 +2641,7 @@
                     "type": "String"
                 },
                 {
-                    "description": "Bot-defined invoice payload, 1-128 bytes. This will not be displayed to the user, use for your internal processes.",
+                    "description": "Bot-defined invoice payload, 1-128 bytes. This will not be displayed to the user, use it for your internal processes.",
                     "name": "payload",
                     "optional": false,
                     "type": "String"
@@ -2547,6 +2768,12 @@
                     "type": "Boolean"
                 },
                 {
+                    "description": "Pass True to allow up to 1000 messages per second, ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance",
+                    "name": "allow_paid_broadcast",
+                    "optional": true,
+                    "type": "Boolean"
+                },
+                {
                     "description": "Unique identifier of the message effect to be added to the message; for private chats only",
                     "name": "message_effect_id",
                     "optional": true,
@@ -2637,6 +2864,12 @@
                     "type": "Boolean"
                 },
                 {
+                    "description": "Pass True to allow up to 1000 messages per second, ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance",
+                    "name": "allow_paid_broadcast",
+                    "optional": true,
+                    "type": "Boolean"
+                },
+                {
                     "description": "Unique identifier of the message effect to be added to the message; for private chats only",
                     "name": "message_effect_id",
                     "optional": true,
@@ -2693,6 +2926,12 @@
                 {
                     "description": "Protects the contents of the sent messages from forwarding and saving",
                     "name": "protect_content",
+                    "optional": true,
+                    "type": "Boolean"
+                },
+                {
+                    "description": "Pass True to allow up to 1000 messages per second, ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance",
+                    "name": "allow_paid_broadcast",
                     "optional": true,
                     "type": "Boolean"
                 },
@@ -2769,6 +3008,12 @@
                     "type": "Boolean"
                 },
                 {
+                    "description": "Pass True to allow up to 1000 messages per second, ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance",
+                    "name": "allow_paid_broadcast",
+                    "optional": true,
+                    "type": "Boolean"
+                },
+                {
                     "description": "Unique identifier of the message effect to be added to the message; for private chats only",
                     "name": "message_effect_id",
                     "optional": true,
@@ -2790,16 +3035,22 @@
             "return_type": "Message"
         },
         "sendPaidMedia": {
-            "desc": "Use this method to send paid media to channel chats. On success, the sent Message is returned.",
+            "desc": "Use this method to send paid media. On success, the sent Message is returned.",
             "params": [
                 {
-                    "description": "Unique identifier for the target chat or username of the target channel (in the format @channelusername)",
+                    "description": "Unique identifier of the business connection on behalf of which the message will be sent",
+                    "name": "business_connection_id",
+                    "optional": true,
+                    "type": "String"
+                },
+                {
+                    "description": "Unique identifier for the target chat or username of the target channel (in the format @channelusername). If the chat is a channel, all Telegram Star proceeds from this media will be credited to the chat's balance. Otherwise, they will be credited to the bot's balance.",
                     "name": "chat_id",
                     "optional": false,
                     "type": "Integer or String"
                 },
                 {
-                    "description": "The number of Telegram Stars that must be paid to buy access to the media",
+                    "description": "The number of Telegram Stars that must be paid to buy access to the media; 1-2500",
                     "name": "star_count",
                     "optional": false,
                     "type": "Integer"
@@ -2809,6 +3060,12 @@
                     "name": "media",
                     "optional": false,
                     "type": "Array of InputPaidMedia"
+                },
+                {
+                    "description": "Bot-defined paid media payload, 0-128 bytes. This will not be displayed to the user, use it for your internal processes.",
+                    "name": "payload",
+                    "optional": true,
+                    "type": "String"
                 },
                 {
                     "description": "Media caption, 0-1024 characters after entities parsing",
@@ -2843,6 +3100,12 @@
                 {
                     "description": "Protects the contents of the sent message from forwarding and saving",
                     "name": "protect_content",
+                    "optional": true,
+                    "type": "Boolean"
+                },
+                {
+                    "description": "Pass True to allow up to 1000 messages per second, ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance",
+                    "name": "allow_paid_broadcast",
                     "optional": true,
                     "type": "Boolean"
                 },
@@ -2927,6 +3190,12 @@
                 {
                     "description": "Protects the contents of the sent message from forwarding and saving",
                     "name": "protect_content",
+                    "optional": true,
+                    "type": "Boolean"
+                },
+                {
+                    "description": "Pass True to allow up to 1000 messages per second, ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance",
+                    "name": "allow_paid_broadcast",
                     "optional": true,
                     "type": "Boolean"
                 },
@@ -3069,6 +3338,12 @@
                     "type": "Boolean"
                 },
                 {
+                    "description": "Pass True to allow up to 1000 messages per second, ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance",
+                    "name": "allow_paid_broadcast",
+                    "optional": true,
+                    "type": "Boolean"
+                },
+                {
                     "description": "Unique identifier of the message effect to be added to the message; for private chats only",
                     "name": "message_effect_id",
                     "optional": true,
@@ -3131,6 +3406,12 @@
                 {
                     "description": "Protects the contents of the sent message from forwarding and saving",
                     "name": "protect_content",
+                    "optional": true,
+                    "type": "Boolean"
+                },
+                {
+                    "description": "Pass True to allow up to 1000 messages per second, ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance",
+                    "name": "allow_paid_broadcast",
                     "optional": true,
                     "type": "Boolean"
                 },
@@ -3233,6 +3514,12 @@
                 {
                     "description": "Protects the contents of the sent message from forwarding and saving",
                     "name": "protect_content",
+                    "optional": true,
+                    "type": "Boolean"
+                },
+                {
+                    "description": "Pass True to allow up to 1000 messages per second, ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance",
+                    "name": "allow_paid_broadcast",
                     "optional": true,
                     "type": "Boolean"
                 },
@@ -3357,6 +3644,12 @@
                     "type": "Boolean"
                 },
                 {
+                    "description": "Pass True to allow up to 1000 messages per second, ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance",
+                    "name": "allow_paid_broadcast",
+                    "optional": true,
+                    "type": "Boolean"
+                },
+                {
                     "description": "Unique identifier of the message effect to be added to the message; for private chats only",
                     "name": "message_effect_id",
                     "optional": true,
@@ -3431,6 +3724,12 @@
                 {
                     "description": "Protects the contents of the sent message from forwarding and saving",
                     "name": "protect_content",
+                    "optional": true,
+                    "type": "Boolean"
+                },
+                {
+                    "description": "Pass True to allow up to 1000 messages per second, ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance",
+                    "name": "allow_paid_broadcast",
                     "optional": true,
                     "type": "Boolean"
                 },
@@ -3515,6 +3814,12 @@
                 {
                     "description": "Protects the contents of the sent message from forwarding and saving",
                     "name": "protect_content",
+                    "optional": true,
+                    "type": "Boolean"
+                },
+                {
+                    "description": "Pass True to allow up to 1000 messages per second, ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance",
+                    "name": "allow_paid_broadcast",
                     "optional": true,
                     "type": "Boolean"
                 },
@@ -3744,7 +4049,7 @@
             "return_type": "Message or Boolean"
         },
         "setMessageReaction": {
-            "desc": "Use this method to change the chosen reactions on a message. Service messages can't be reacted to. Automatically forwarded messages from a channel to its discussion group have the same available reactions as messages in the channel. Returns True on success.",
+            "desc": "Use this method to change the chosen reactions on a message. Service messages can't be reacted to. Automatically forwarded messages from a channel to its discussion group have the same available reactions as messages in the channel. Bots can't use paid reactions. Returns True on success.",
             "params": [
                 {
                     "description": "Unique identifier for the target chat or username of the target channel (in the format @channelusername)",
@@ -3759,7 +4064,7 @@
                     "type": "Integer"
                 },
                 {
-                    "description": "A JSON-serialized list of reaction types to set on the message. Currently, as non-premium users, bots can set up to one reaction per message. A custom emoji reaction can be used if it is either already present on the message or explicitly allowed by chat administrators.",
+                    "description": "A JSON-serialized list of reaction types to set on the message. Currently, as non-premium users, bots can set up to one reaction per message. A custom emoji reaction can be used if it is either already present on the message or explicitly allowed by chat administrators. Paid reactions can't be used by bots.",
                     "name": "reaction",
                     "optional": true,
                     "type": "Array of ReactionType"
@@ -3975,7 +4280,7 @@
                     "type": "Integer"
                 },
                 {
-                    "description": "A .WEBP or .PNG image with the thumbnail, must be up to 128 kilobytes in size and have a width and height of exactly 100px, or a .TGS animation with a thumbnail up to 32 kilobytes in size (see https://core.telegram.org/stickers#animated-sticker-requirements for animated sticker technical requirements), or a WEBM video with the thumbnail up to 32 kilobytes in size; see https://core.telegram.org/stickers#video-sticker-requirements for video sticker technical requirements. Pass a file_id as a String to send a file that already exists on the Telegram servers, pass an HTTP URL as a String for Telegram to get a file from the Internet, or upload a new one using multipart/form-data. More information on Sending Files ». Animated and video sticker set thumbnails can't be uploaded via HTTP URL. If omitted, then the thumbnail is dropped and the first sticker is used as the thumbnail.",
+                    "description": "A .WEBP or .PNG image with the thumbnail, must be up to 128 kilobytes in size and have a width and height of exactly 100px, or a .TGS animation with a thumbnail up to 32 kilobytes in size (see https://core.telegram.org/stickers#animation-requirements for animated sticker technical requirements), or a WEBM video with the thumbnail up to 32 kilobytes in size; see https://core.telegram.org/stickers#video-requirements for video sticker technical requirements. Pass a file_id as a String to send a file that already exists on the Telegram servers, pass an HTTP URL as a String for Telegram to get a file from the Internet, or upload a new one using multipart/form-data. More information on Sending Files ». Animated and video sticker set thumbnails can't be uploaded via HTTP URL. If omitted, then the thumbnail is dropped and the first sticker is used as the thumbnail.",
                     "name": "thumbnail",
                     "optional": true,
                     "type": "InputFile or String"
@@ -4003,6 +4308,30 @@
                     "name": "title",
                     "optional": false,
                     "type": "String"
+                }
+            ],
+            "return_type": "Boolean"
+        },
+        "setUserEmojiStatus": {
+            "desc": "Changes the emoji status for a given user that previously allowed the bot to manage their emoji status via the Mini App method requestEmojiStatusAccess. Returns True on success.",
+            "params": [
+                {
+                    "description": "Unique identifier of the target user",
+                    "name": "user_id",
+                    "optional": false,
+                    "type": "Integer"
+                },
+                {
+                    "description": "Custom emoji identifier of the emoji status to set. Pass an empty string to remove the status.",
+                    "name": "emoji_status_custom_emoji_id",
+                    "optional": true,
+                    "type": "String"
+                },
+                {
+                    "description": "Expiration date of the emoji status, if any",
+                    "name": "emoji_status_expiration_date",
+                    "optional": true,
+                    "type": "Integer"
                 }
             ],
             "return_type": "Boolean"
@@ -4222,13 +4551,19 @@
             "desc": "Use this method to remove a message from the list of pinned messages in a chat. If the chat is not a private chat, the bot must be an administrator in the chat for this to work and must have the 'can_pin_messages' administrator right in a supergroup or 'can_edit_messages' administrator right in a channel. Returns True on success.",
             "params": [
                 {
+                    "description": "Unique identifier of the business connection on behalf of which the message will be unpinned",
+                    "name": "business_connection_id",
+                    "optional": true,
+                    "type": "String"
+                },
+                {
                     "description": "Unique identifier for the target chat or username of the target channel (in the format @channelusername)",
                     "name": "chat_id",
                     "optional": false,
                     "type": "Integer or String"
                 },
                 {
-                    "description": "Identifier of a message to unpin. If not specified, the most recent pinned message (by sending date) will be unpinned.",
+                    "description": "Identifier of the message to unpin. Required if business_connection_id is specified. If not specified, the most recent pinned message (by sending date) will be unpinned.",
                     "name": "message_id",
                     "optional": true,
                     "type": "Integer"
@@ -4262,6 +4597,41 @@
         }
     },
     "types": {
+        "AffiliateInfo": {
+            "desc": "Contains information about the affiliate that received a commission via this transaction.",
+            "fields": [
+                {
+                    "description": "Optional. The bot or the user that received an affiliate commission if it was received by a bot or a user",
+                    "name": "affiliate_user",
+                    "optional": true,
+                    "type": "User"
+                },
+                {
+                    "description": "Optional. The chat that received an affiliate commission if it was received by a chat",
+                    "name": "affiliate_chat",
+                    "optional": true,
+                    "type": "Chat"
+                },
+                {
+                    "description": "The number of Telegram Stars received by the affiliate for each 1000 Telegram Stars received by the bot from referred users",
+                    "name": "commission_per_mille",
+                    "optional": false,
+                    "type": "Integer"
+                },
+                {
+                    "description": "Integer amount of Telegram Stars received by the affiliate from the transaction, rounded to 0; can be negative for refunds",
+                    "name": "amount",
+                    "optional": false,
+                    "type": "Integer"
+                },
+                {
+                    "description": "Optional. The number of 1/1000000000 shares of Telegram Stars received by the affiliate; from -999999999 to 999999999; can be negative for refunds",
+                    "name": "nanostar_amount",
+                    "optional": true,
+                    "type": "Integer"
+                }
+            ]
+        },
         "Animation": {
             "desc": "This object represents an animation file (GIF or H.264/MPEG-4 AVC video without sound).",
             "fields": [
@@ -5226,7 +5596,7 @@
             ]
         },
         "ChatBoostSourceGiveaway": {
-            "desc": "The boost was obtained by the creation of a Telegram Premium giveaway. This boosts the chat 4 times for the duration of the corresponding Telegram Premium subscription.",
+            "desc": "The boost was obtained by the creation of a Telegram Premium or a Telegram Star giveaway. This boosts the chat 4 times for the duration of the corresponding Telegram Premium subscription for Telegram Premium giveaways and prize_star_count / 500 times for one year for Telegram Star giveaways.",
             "fields": [
                 {
                     "default": "giveaway",
@@ -5242,10 +5612,16 @@
                     "type": "Integer"
                 },
                 {
-                    "description": "Optional. User that won the prize in the giveaway if any",
+                    "description": "Optional. User that won the prize in the giveaway if any; for Telegram Premium giveaways only",
                     "name": "user",
                     "optional": true,
                     "type": "User"
+                },
+                {
+                    "description": "Optional. The number of Telegram Stars to be split between giveaway winners; for Telegram Star giveaways only",
+                    "name": "prize_star_count",
+                    "optional": true,
+                    "type": "Integer"
                 },
                 {
                     "default": true,
@@ -5627,6 +6003,18 @@
                     "name": "pending_join_request_count",
                     "optional": true,
                     "type": "Integer"
+                },
+                {
+                    "description": "Optional. The number of seconds the subscription will be active for before the next payment",
+                    "name": "subscription_period",
+                    "optional": true,
+                    "type": "Integer"
+                },
+                {
+                    "description": "Optional. The amount of Telegram Stars a user must pay initially and after each subsequent subscription period to be a member of the chat using the link",
+                    "name": "subscription_price",
+                    "optional": true,
+                    "type": "Integer"
                 }
             ]
         },
@@ -5876,6 +6264,12 @@
                     "name": "user",
                     "optional": false,
                     "type": "User"
+                },
+                {
+                    "description": "Optional. Date when the user's subscription will expire; Unix time",
+                    "name": "until_date",
+                    "optional": true,
+                    "type": "Integer"
                 }
             ]
         },
@@ -6295,6 +6689,17 @@
                     "description": "Optional. Additional data about the contact in the form of a vCard",
                     "name": "vcard",
                     "optional": true,
+                    "type": "String"
+                }
+            ]
+        },
+        "CopyTextButton": {
+            "desc": "This object represents an inline keyboard button that copies specified text to the clipboard.",
+            "fields": [
+                {
+                    "description": "The text to be copied to the clipboard; 1-256 characters",
+                    "name": "text",
+                    "optional": false,
                     "type": "String"
                 }
             ]
@@ -6797,6 +7202,52 @@
             "desc": "This object represents a service message about General forum topic unhidden in the chat. Currently holds no information.",
             "fields": []
         },
+        "Gift": {
+            "desc": "This object represents a gift that can be sent by the bot.",
+            "fields": [
+                {
+                    "description": "Unique identifier of the gift",
+                    "name": "id",
+                    "optional": false,
+                    "type": "String"
+                },
+                {
+                    "description": "The sticker that represents the gift",
+                    "name": "sticker",
+                    "optional": false,
+                    "type": "Sticker"
+                },
+                {
+                    "description": "The number of Telegram Stars that must be paid to send the sticker",
+                    "name": "star_count",
+                    "optional": false,
+                    "type": "Integer"
+                },
+                {
+                    "description": "Optional. The total number of the gifts of this type that can be sent; for limited gifts only",
+                    "name": "total_count",
+                    "optional": true,
+                    "type": "Integer"
+                },
+                {
+                    "description": "Optional. The number of remaining gifts of this type that can be sent; for limited gifts only",
+                    "name": "remaining_count",
+                    "optional": true,
+                    "type": "Integer"
+                }
+            ]
+        },
+        "Gifts": {
+            "desc": "This object represent a list of gifts.",
+            "fields": [
+                {
+                    "description": "The list of gifts",
+                    "name": "gifts",
+                    "optional": false,
+                    "type": "Array of Gift"
+                }
+            ]
+        },
         "Giveaway": {
             "desc": "This object represents a message about a scheduled giveaway.",
             "fields": [
@@ -6845,7 +7296,13 @@
                     "type": "Array of String"
                 },
                 {
-                    "description": "Optional. The number of months the Telegram Premium subscription won from the giveaway will be active for",
+                    "description": "Optional. The number of Telegram Stars to be split between giveaway winners; for Telegram Star giveaways only",
+                    "name": "prize_star_count",
+                    "optional": true,
+                    "type": "Integer"
+                },
+                {
+                    "description": "Optional. The number of months the Telegram Premium subscription won from the giveaway will be active for; for Telegram Premium giveaways only",
                     "name": "premium_subscription_month_count",
                     "optional": true,
                     "type": "Integer"
@@ -6872,12 +7329,26 @@
                     "name": "giveaway_message",
                     "optional": true,
                     "type": "Message"
+                },
+                {
+                    "default": true,
+                    "description": "Optional. True, if the giveaway is a Telegram Star giveaway. Otherwise, currently, the giveaway is a Telegram Premium giveaway.",
+                    "name": "is_star_giveaway",
+                    "optional": true,
+                    "type": "Boolean"
                 }
             ]
         },
         "GiveawayCreated": {
-            "desc": "This object represents a service message about the creation of a scheduled giveaway. Currently holds no information.",
-            "fields": []
+            "desc": "This object represents a service message about the creation of a scheduled giveaway.",
+            "fields": [
+                {
+                    "description": "Optional. The number of Telegram Stars to be split between giveaway winners; for Telegram Star giveaways only",
+                    "name": "prize_star_count",
+                    "optional": true,
+                    "type": "Integer"
+                }
+            ]
         },
         "GiveawayWinners": {
             "desc": "This object represents a message about the completion of a giveaway with public winners.",
@@ -6919,7 +7390,13 @@
                     "type": "Integer"
                 },
                 {
-                    "description": "Optional. The number of months the Telegram Premium subscription won from the giveaway will be active for",
+                    "description": "Optional. The number of Telegram Stars that were split between giveaway winners; for Telegram Star giveaways only",
+                    "name": "prize_star_count",
+                    "optional": true,
+                    "type": "Integer"
+                },
+                {
+                    "description": "Optional. The number of months the Telegram Premium subscription won from the giveaway will be active for; for Telegram Premium giveaways only",
                     "name": "premium_subscription_month_count",
                     "optional": true,
                     "type": "Integer"
@@ -7025,6 +7502,12 @@
                     "name": "switch_inline_query_chosen_chat",
                     "optional": true,
                     "type": "SwitchInlineQueryChosenChat"
+                },
+                {
+                    "description": "Optional. Description of the button that copies the specified text to the clipboard.",
+                    "name": "copy_text",
+                    "optional": true,
+                    "type": "CopyTextButton"
                 },
                 {
                     "description": "Optional. Description of the game that will be launched when the user presses the button.   NOTE: This type of button must always be the first button in the first row.",
@@ -8641,7 +9124,7 @@
                     "type": "String"
                 },
                 {
-                    "description": "Bot-defined invoice payload, 1-128 bytes. This will not be displayed to the user, use for your internal processes.",
+                    "description": "Bot-defined invoice payload, 1-128 bytes. This will not be displayed to the user, use it for your internal processes.",
                     "name": "payload",
                     "optional": false,
                     "type": "String"
@@ -9774,7 +10257,7 @@
             "desc": "This object represents a message.",
             "fields": [
                 {
-                    "description": "Unique message identifier inside this chat",
+                    "description": "Unique message identifier inside this chat. In specific instances (e.g., message containing a video sent to a big chat), the server might automatically schedule a message instead of sending it immediately. In such cases, this field will be 0 and the relevant message will be unusable until it is actually sent",
                     "name": "message_id",
                     "optional": false,
                     "type": "Integer"
@@ -9786,13 +10269,13 @@
                     "type": "Integer"
                 },
                 {
-                    "description": "Optional. Sender of the message; empty for messages sent to channels. For backward compatibility, the field contains a fake sender user in non-channel chats, if the message was sent on behalf of a chat.",
+                    "description": "Optional. Sender of the message; may be empty for messages sent to channels. For backward compatibility, if the message was sent on behalf of a chat, the field contains a fake sender user in non-channel chats",
                     "name": "from",
                     "optional": true,
                     "type": "User"
                 },
                 {
-                    "description": "Optional. Sender of the message, sent on behalf of a chat. For example, the channel itself for channel posts, the supergroup itself for messages from anonymous group administrators, the linked channel for messages automatically forwarded to the discussion group. For backward compatibility, the field from contains a fake sender user in non-channel chats, if the message was sent on behalf of a chat.",
+                    "description": "Optional. Sender of the message when sent on behalf of a chat. For example, the supergroup itself for messages sent by its anonymous administrators or a linked channel for messages automatically forwarded to the channel's discussion group. For backward compatibility, if the message was sent on behalf of a chat, the field from contains a fake sender user in non-channel chats.",
                     "name": "sender_chat",
                     "optional": true,
                     "type": "Chat"
@@ -10310,7 +10793,7 @@
             "desc": "This object represents one special entity in a text message. For example, hashtags, usernames, URLs, etc.",
             "fields": [
                 {
-                    "description": "Type of the entity. Currently, can be “mention” (@username), “hashtag” (#hashtag), “cashtag” ($USD), “bot_command” (/start@jobs_bot), “url” (https://telegram.org), “email” (do-not-reply@telegram.org), “phone_number” (+1-212-555-0123), “bold” (bold text), “italic” (italic text), “underline” (underlined text), “strikethrough” (strikethrough text), “spoiler” (spoiler message), “blockquote” (block quotation), “expandable_blockquote” (collapsed-by-default block quotation), “code” (monowidth string), “pre” (monowidth block), “text_link” (for clickable text URLs), “text_mention” (for users without usernames), “custom_emoji” (for inline custom emoji stickers)",
+                    "description": "Type of the entity. Currently, can be “mention” (@username), “hashtag” (#hashtag or #hashtag@chatusername), “cashtag” ($USD or $USD@chatusername), “bot_command” (/start@jobs_bot), “url” (https://telegram.org), “email” (do-not-reply@telegram.org), “phone_number” (+1-212-555-0123), “bold” (bold text), “italic” (italic text), “underline” (underlined text), “strikethrough” (strikethrough text), “spoiler” (spoiler message), “blockquote” (block quotation), “expandable_blockquote” (collapsed-by-default block quotation), “code” (monowidth string), “pre” (monowidth block), “text_link” (for clickable text URLs), “text_mention” (for users without usernames), “custom_emoji” (for inline custom emoji stickers)",
                     "name": "type",
                     "optional": false,
                     "type": "String"
@@ -10357,7 +10840,7 @@
             "desc": "This object represents a unique message identifier.",
             "fields": [
                 {
-                    "description": "Unique message identifier",
+                    "description": "Unique message identifier. In specific instances (e.g., message containing a video sent to a big chat), the server might automatically schedule a message instead of sending it immediately. In such cases, this field will be 0 and the relevant message will be unusable until it is actually sent",
                     "name": "message_id",
                     "optional": false,
                     "type": "Integer"
@@ -10667,6 +11150,23 @@
                     "name": "duration",
                     "optional": true,
                     "type": "Integer"
+                }
+            ]
+        },
+        "PaidMediaPurchased": {
+            "desc": "This object contains information about a paid media purchase.",
+            "fields": [
+                {
+                    "description": "User who purchased the media",
+                    "name": "from",
+                    "optional": false,
+                    "type": "User"
+                },
+                {
+                    "description": "Bot-specified paid media payload",
+                    "name": "paid_media_payload",
+                    "optional": false,
+                    "type": "String"
                 }
             ]
         },
@@ -11244,6 +11744,23 @@
                 }
             ]
         },
+        "PreparedInlineMessage": {
+            "desc": "Describes an inline message to be sent by a user of a Mini App.",
+            "fields": [
+                {
+                    "description": "Unique identifier of the prepared message",
+                    "name": "id",
+                    "optional": false,
+                    "type": "String"
+                },
+                {
+                    "description": "Expiration date of the prepared message, in Unix time. Expired prepared messages can no longer be used",
+                    "name": "expiration_date",
+                    "optional": false,
+                    "type": "Integer"
+                }
+            ]
+        },
         "ProximityAlertTriggered": {
             "desc": "This object represents the content of a service message, sent whenever a user in the chat triggers a proximity alert set by another user.",
             "fields": [
@@ -11285,13 +11802,13 @@
             ]
         },
         "ReactionType": {
-            "desc": "This object describes the type of a reaction. Currently, it can be one of ReactionTypeEmoji; ReactionTypeCustomEmoji",
+            "desc": "This object describes the type of a reaction. Currently, it can be one of ReactionTypeEmoji; ReactionTypeCustomEmoji; ReactionTypePaid",
             "fields": [
                 {
                     "description": "",
                     "name": "__alias__",
                     "optional": false,
-                    "type": "ReactionTypeEmoji or ReactionTypeCustomEmoji"
+                    "type": "ReactionTypeEmoji or ReactionTypeCustomEmoji or ReactionTypePaid"
                 }
             ]
         },
@@ -11326,6 +11843,18 @@
                 {
                     "description": "Reaction emoji. Currently, it can be one of \"👍\", \"👎\", \"❤\", \"🔥\", \"🥰\", \"👏\", \"😁\", \"🤔\", \"🤯\", \"😱\", \"🤬\", \"😢\", \"🎉\", \"🤩\", \"🤮\", \"💩\", \"🙏\", \"👌\", \"🕊\", \"🤡\", \"🥱\", \"🥴\", \"😍\", \"🐳\", \"❤‍🔥\", \"🌚\", \"🌭\", \"💯\", \"🤣\", \"⚡\", \"🍌\", \"🏆\", \"💔\", \"🤨\", \"😐\", \"🍓\", \"🍾\", \"💋\", \"🖕\", \"😈\", \"😴\", \"😭\", \"🤓\", \"👻\", \"👨‍💻\", \"👀\", \"🎃\", \"🙈\", \"😇\", \"😨\", \"🤝\", \"✍\", \"🤗\", \"🫡\", \"🎅\", \"🎄\", \"☃\", \"💅\", \"🤪\", \"🗿\", \"🆒\", \"💘\", \"🙉\", \"🦄\", \"😘\", \"💊\", \"🙊\", \"😎\", \"👾\", \"🤷‍♂\", \"🤷\", \"🤷‍♀\", \"😡\"",
                     "name": "emoji",
+                    "optional": false,
+                    "type": "String"
+                }
+            ]
+        },
+        "ReactionTypePaid": {
+            "desc": "The reaction is paid.",
+            "fields": [
+                {
+                    "default": "paid",
+                    "description": "Type of the reaction, always “paid”",
+                    "name": "type",
                     "optional": false,
                     "type": "String"
                 }
@@ -11695,15 +12224,21 @@
             "desc": "Describes a Telegram Star transaction.",
             "fields": [
                 {
-                    "description": "Unique identifier of the transaction. Coincides with the identifer of the original transaction for refund transactions. Coincides with SuccessfulPayment.telegram_payment_charge_id for successful incoming payments from users.",
+                    "description": "Unique identifier of the transaction. Coincides with the identifier of the original transaction for refund transactions. Coincides with SuccessfulPayment.telegram_payment_charge_id for successful incoming payments from users.",
                     "name": "id",
                     "optional": false,
                     "type": "String"
                 },
                 {
-                    "description": "Number of Telegram Stars transferred by the transaction",
+                    "description": "Integer amount of Telegram Stars transferred by the transaction",
                     "name": "amount",
                     "optional": false,
+                    "type": "Integer"
+                },
+                {
+                    "description": "Optional. The number of 1/1000000000 shares of Telegram Stars transferred by the transaction; from 0 to 999999999",
+                    "name": "nanostar_amount",
+                    "optional": true,
                     "type": "Integer"
                 },
                 {
@@ -11907,6 +12442,26 @@
                     "type": "String"
                 },
                 {
+                    "description": "Optional. Expiration date of the subscription, in Unix time; for recurring payments only",
+                    "name": "subscription_expiration_date",
+                    "optional": true,
+                    "type": "Integer"
+                },
+                {
+                    "default": true,
+                    "description": "Optional. True, if the payment is a recurring payment for a subscription",
+                    "name": "is_recurring",
+                    "optional": true,
+                    "type": "Boolean"
+                },
+                {
+                    "default": true,
+                    "description": "Optional. True, if the payment is the first payment for a subscription",
+                    "name": "is_first_recurring",
+                    "optional": true,
+                    "type": "Boolean"
+                },
+                {
                     "description": "Optional. Identifier of the shipping option chosen by the user",
                     "name": "shipping_option_id",
                     "optional": true,
@@ -11998,13 +12553,37 @@
             ]
         },
         "TransactionPartner": {
-            "desc": "This object describes the source of a transaction, or its recipient for outgoing transactions. Currently, it can be one of TransactionPartnerUser; TransactionPartnerFragment; TransactionPartnerTelegramAds; TransactionPartnerOther",
+            "desc": "This object describes the source of a transaction, or its recipient for outgoing transactions. Currently, it can be one of TransactionPartnerUser; TransactionPartnerAffiliateProgram; TransactionPartnerFragment; TransactionPartnerTelegramAds; TransactionPartnerTelegramApi; TransactionPartnerOther",
             "fields": [
                 {
                     "description": "",
                     "name": "__alias__",
                     "optional": false,
-                    "type": "TransactionPartnerUser or TransactionPartnerFragment or TransactionPartnerTelegramAds or TransactionPartnerOther"
+                    "type": "TransactionPartnerUser or TransactionPartnerAffiliateProgram or TransactionPartnerFragment or TransactionPartnerTelegramAds or TransactionPartnerTelegramApi or TransactionPartnerOther"
+                }
+            ]
+        },
+        "TransactionPartnerAffiliateProgram": {
+            "desc": "Describes the affiliate program that issued the affiliate commission received via this transaction.",
+            "fields": [
+                {
+                    "default": "affiliate_program",
+                    "description": "Type of the transaction partner, always “affiliate_program”",
+                    "name": "type",
+                    "optional": false,
+                    "type": "String"
+                },
+                {
+                    "description": "Optional. Information about the bot that sponsored the affiliate program",
+                    "name": "sponsor_user",
+                    "optional": true,
+                    "type": "User"
+                },
+                {
+                    "description": "The number of Telegram Stars received by the bot for each 1000 Telegram Stars received by the affiliate program sponsor from referred users",
+                    "name": "commission_per_mille",
+                    "optional": false,
+                    "type": "Integer"
                 }
             ]
         },
@@ -12050,6 +12629,24 @@
                 }
             ]
         },
+        "TransactionPartnerTelegramApi": {
+            "desc": "Describes a transaction with payment for paid broadcasting.",
+            "fields": [
+                {
+                    "default": "telegram_api",
+                    "description": "Type of the transaction partner, always “telegram_api”",
+                    "name": "type",
+                    "optional": false,
+                    "type": "String"
+                },
+                {
+                    "description": "The number of successful requests that exceeded regular limits and were therefore billed",
+                    "name": "request_count",
+                    "optional": false,
+                    "type": "Integer"
+                }
+            ]
+        },
         "TransactionPartnerUser": {
             "desc": "Describes a transaction with a user.",
             "fields": [
@@ -12067,10 +12664,40 @@
                     "type": "User"
                 },
                 {
+                    "description": "Optional. Information about the affiliate that received a commission via this transaction",
+                    "name": "affiliate",
+                    "optional": true,
+                    "type": "AffiliateInfo"
+                },
+                {
                     "description": "Optional. Bot-specified invoice payload",
                     "name": "invoice_payload",
                     "optional": true,
                     "type": "String"
+                },
+                {
+                    "description": "Optional. The duration of the paid subscription",
+                    "name": "subscription_period",
+                    "optional": true,
+                    "type": "Integer"
+                },
+                {
+                    "description": "Optional. Information about the paid media bought by the user",
+                    "name": "paid_media",
+                    "optional": true,
+                    "type": "Array of PaidMedia"
+                },
+                {
+                    "description": "Optional. Bot-specified paid media payload",
+                    "name": "paid_media_payload",
+                    "optional": true,
+                    "type": "String"
+                },
+                {
+                    "description": "Optional. The gift sent to the user by the bot",
+                    "name": "gift",
+                    "optional": true,
+                    "type": "Gift"
                 }
             ]
         },
@@ -12172,6 +12799,12 @@
                     "name": "pre_checkout_query",
                     "optional": true,
                     "type": "PreCheckoutQuery"
+                },
+                {
+                    "description": "Optional. A user purchased paid media with a non-empty payload sent by the bot in a non-channel chat",
+                    "name": "purchased_paid_media",
+                    "optional": true,
+                    "type": "PaidMediaPurchased"
                 },
                 {
                     "description": "Optional. New poll state. Bots receive only updates about manually stopped polls and polls, which are sent by the bot",
@@ -12291,6 +12924,12 @@
                 {
                     "description": "Optional. True, if the bot can be connected to a Telegram Business account to receive its messages. Returned only in getMe.",
                     "name": "can_connect_to_business",
+                    "optional": true,
+                    "type": "Boolean"
+                },
+                {
+                    "description": "Optional. True, if the bot has a main Web App. Returned only in getMe.",
+                    "name": "has_main_web_app",
                     "optional": true,
                     "type": "Boolean"
                 }

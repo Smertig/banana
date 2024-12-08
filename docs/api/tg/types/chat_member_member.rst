@@ -14,3 +14,7 @@ chat_member_member_t
    .. cpp:member:: user_t user
 
    Information about the user
+
+   .. cpp:member:: optional_t<integer_t> until_date
+
+   Optional. Date when the user's subscription will expire; Unix time

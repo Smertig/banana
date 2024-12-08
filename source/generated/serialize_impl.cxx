@@ -13,6 +13,7 @@ template serialized_args_t<api::close_general_forum_topic_args_t> serialize_args
 template serialized_args_t<api::copy_message_args_t> serialize_args<api::copy_message_args_t>(api::copy_message_args_t value);
 template serialized_args_t<api::copy_messages_args_t> serialize_args<api::copy_messages_args_t>(api::copy_messages_args_t value);
 template serialized_args_t<api::create_chat_invite_link_args_t> serialize_args<api::create_chat_invite_link_args_t>(api::create_chat_invite_link_args_t value);
+template serialized_args_t<api::create_chat_subscription_invite_link_args_t> serialize_args<api::create_chat_subscription_invite_link_args_t>(api::create_chat_subscription_invite_link_args_t value);
 template serialized_args_t<api::create_forum_topic_args_t> serialize_args<api::create_forum_topic_args_t>(api::create_forum_topic_args_t value);
 template serialized_args_t<api::create_invoice_link_args_t> serialize_args<api::create_invoice_link_args_t>(api::create_invoice_link_args_t value);
 template serialized_args_t<api::create_new_sticker_set_args_t> serialize_args<api::create_new_sticker_set_args_t>(api::create_new_sticker_set_args_t value);
@@ -27,6 +28,7 @@ template serialized_args_t<api::delete_sticker_from_set_args_t> serialize_args<a
 template serialized_args_t<api::delete_sticker_set_args_t> serialize_args<api::delete_sticker_set_args_t>(api::delete_sticker_set_args_t value);
 template serialized_args_t<api::delete_webhook_args_t> serialize_args<api::delete_webhook_args_t>(api::delete_webhook_args_t value);
 template serialized_args_t<api::edit_chat_invite_link_args_t> serialize_args<api::edit_chat_invite_link_args_t>(api::edit_chat_invite_link_args_t value);
+template serialized_args_t<api::edit_chat_subscription_invite_link_args_t> serialize_args<api::edit_chat_subscription_invite_link_args_t>(api::edit_chat_subscription_invite_link_args_t value);
 template serialized_args_t<api::edit_forum_topic_args_t> serialize_args<api::edit_forum_topic_args_t>(api::edit_forum_topic_args_t value);
 template serialized_args_t<api::edit_general_forum_topic_args_t> serialize_args<api::edit_general_forum_topic_args_t>(api::edit_general_forum_topic_args_t value);
 template serialized_args_t<api::edit_message_caption_args_t> serialize_args<api::edit_message_caption_args_t>(api::edit_message_caption_args_t value);
@@ -34,9 +36,11 @@ template serialized_args_t<api::edit_message_live_location_args_t> serialize_arg
 template serialized_args_t<api::edit_message_media_args_t> serialize_args<api::edit_message_media_args_t>(api::edit_message_media_args_t value);
 template serialized_args_t<api::edit_message_reply_markup_args_t> serialize_args<api::edit_message_reply_markup_args_t>(api::edit_message_reply_markup_args_t value);
 template serialized_args_t<api::edit_message_text_args_t> serialize_args<api::edit_message_text_args_t>(api::edit_message_text_args_t value);
+template serialized_args_t<api::edit_user_star_subscription_args_t> serialize_args<api::edit_user_star_subscription_args_t>(api::edit_user_star_subscription_args_t value);
 template serialized_args_t<api::export_chat_invite_link_args_t> serialize_args<api::export_chat_invite_link_args_t>(api::export_chat_invite_link_args_t value);
 template serialized_args_t<api::forward_message_args_t> serialize_args<api::forward_message_args_t>(api::forward_message_args_t value);
 template serialized_args_t<api::forward_messages_args_t> serialize_args<api::forward_messages_args_t>(api::forward_messages_args_t value);
+template serialized_args_t<api::get_available_gifts_args_t> serialize_args<api::get_available_gifts_args_t>(api::get_available_gifts_args_t value);
 template serialized_args_t<api::get_business_connection_args_t> serialize_args<api::get_business_connection_args_t>(api::get_business_connection_args_t value);
 template serialized_args_t<api::get_chat_administrators_args_t> serialize_args<api::get_chat_administrators_args_t>(api::get_chat_administrators_args_t value);
 template serialized_args_t<api::get_chat_args_t> serialize_args<api::get_chat_args_t>(api::get_chat_args_t value);
@@ -70,6 +74,7 @@ template serialized_args_t<api::reopen_general_forum_topic_args_t> serialize_arg
 template serialized_args_t<api::replace_sticker_in_set_args_t> serialize_args<api::replace_sticker_in_set_args_t>(api::replace_sticker_in_set_args_t value);
 template serialized_args_t<api::restrict_chat_member_args_t> serialize_args<api::restrict_chat_member_args_t>(api::restrict_chat_member_args_t value);
 template serialized_args_t<api::revoke_chat_invite_link_args_t> serialize_args<api::revoke_chat_invite_link_args_t>(api::revoke_chat_invite_link_args_t value);
+template serialized_args_t<api::save_prepared_inline_message_args_t> serialize_args<api::save_prepared_inline_message_args_t>(api::save_prepared_inline_message_args_t value);
 template serialized_args_t<api::send_animation_args_t> serialize_args<api::send_animation_args_t>(api::send_animation_args_t value);
 template serialized_args_t<api::send_audio_args_t> serialize_args<api::send_audio_args_t>(api::send_audio_args_t value);
 template serialized_args_t<api::send_chat_action_args_t> serialize_args<api::send_chat_action_args_t>(api::send_chat_action_args_t value);
@@ -77,6 +82,7 @@ template serialized_args_t<api::send_contact_args_t> serialize_args<api::send_co
 template serialized_args_t<api::send_dice_args_t> serialize_args<api::send_dice_args_t>(api::send_dice_args_t value);
 template serialized_args_t<api::send_document_args_t> serialize_args<api::send_document_args_t>(api::send_document_args_t value);
 template serialized_args_t<api::send_game_args_t> serialize_args<api::send_game_args_t>(api::send_game_args_t value);
+template serialized_args_t<api::send_gift_args_t> serialize_args<api::send_gift_args_t>(api::send_gift_args_t value);
 template serialized_args_t<api::send_invoice_args_t> serialize_args<api::send_invoice_args_t>(api::send_invoice_args_t value);
 template serialized_args_t<api::send_location_args_t> serialize_args<api::send_location_args_t>(api::send_location_args_t value);
 template serialized_args_t<api::send_media_group_args_t> serialize_args<api::send_media_group_args_t>(api::send_media_group_args_t value);
@@ -111,6 +117,7 @@ template serialized_args_t<api::set_sticker_mask_position_args_t> serialize_args
 template serialized_args_t<api::set_sticker_position_in_set_args_t> serialize_args<api::set_sticker_position_in_set_args_t>(api::set_sticker_position_in_set_args_t value);
 template serialized_args_t<api::set_sticker_set_thumbnail_args_t> serialize_args<api::set_sticker_set_thumbnail_args_t>(api::set_sticker_set_thumbnail_args_t value);
 template serialized_args_t<api::set_sticker_set_title_args_t> serialize_args<api::set_sticker_set_title_args_t>(api::set_sticker_set_title_args_t value);
+template serialized_args_t<api::set_user_emoji_status_args_t> serialize_args<api::set_user_emoji_status_args_t>(api::set_user_emoji_status_args_t value);
 template serialized_args_t<api::set_webhook_args_t> serialize_args<api::set_webhook_args_t>(api::set_webhook_args_t value);
 template serialized_args_t<api::stop_message_live_location_args_t> serialize_args<api::stop_message_live_location_args_t>(api::stop_message_live_location_args_t value);
 template serialized_args_t<api::stop_poll_args_t> serialize_args<api::stop_poll_args_t>(api::stop_poll_args_t value);
@@ -132,12 +139,14 @@ template expected<api::chat_invite_link_t> deserialize_response<api::chat_invite
 template expected<api::chat_member_t> deserialize_response<api::chat_member_t>(std::string_view json_response);
 template expected<api::file_t> deserialize_response<api::file_t>(std::string_view json_response);
 template expected<api::forum_topic_t> deserialize_response<api::forum_topic_t>(std::string_view json_response);
+template expected<api::gifts_t> deserialize_response<api::gifts_t>(std::string_view json_response);
 template expected<api::menu_button_t> deserialize_response<api::menu_button_t>(std::string_view json_response);
 template expected<api::message_id_t> deserialize_response<api::message_id_t>(std::string_view json_response);
 template expected<api::message_t> deserialize_response<api::message_t>(std::string_view json_response);
 template expected<api::poll_t> deserialize_response<api::poll_t>(std::string_view json_response);
+template expected<api::prepared_inline_message_t> deserialize_response<api::prepared_inline_message_t>(std::string_view json_response);
 template expected<api::sent_web_app_message_t> deserialize_response<api::sent_web_app_message_t>(std::string_view json_response);
-template expected<api::star_transaction_t> deserialize_response<api::star_transaction_t>(std::string_view json_response);
+template expected<api::star_transactions_t> deserialize_response<api::star_transactions_t>(std::string_view json_response);
 template expected<api::sticker_set_t> deserialize_response<api::sticker_set_t>(std::string_view json_response);
 template expected<api::user_chat_boosts_t> deserialize_response<api::user_chat_boosts_t>(std::string_view json_response);
 template expected<api::user_profile_photos_t> deserialize_response<api::user_profile_photos_t>(std::string_view json_response);

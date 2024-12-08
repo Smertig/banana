@@ -31,9 +31,13 @@ giveaway_winners_t
 
    Optional. The number of other chats the user had to join in order to be eligible for the giveaway
 
+   .. cpp:member:: optional_t<integer_t> prize_star_count
+
+   Optional. The number of Telegram Stars that were split between giveaway winners; for Telegram Star giveaways only
+
    .. cpp:member:: optional_t<integer_t> premium_subscription_month_count
 
-   Optional. The number of months the Telegram Premium subscription won from the giveaway will be active for
+   Optional. The number of months the Telegram Premium subscription won from the giveaway will be active for; for Telegram Premium giveaways only
 
    .. cpp:member:: optional_t<integer_t> unclaimed_prize_count
 

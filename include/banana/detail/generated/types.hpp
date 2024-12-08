@@ -1,5 +1,14 @@
 /// Types without dependencies
 
+// Contains information about the affiliate that received a commission via this transaction.
+struct affiliate_info_t {
+    integer_t             commission_per_mille; // The number of Telegram Stars received by the affiliate for each 1000 Telegram Stars received by the bot from referred users
+    integer_t             amount;               // Integer amount of Telegram Stars received by the affiliate from the transaction, rounded to 0; can be negative for refunds
+    optional_t<user_t>    affiliate_user;       // Optional. The bot or the user that received an affiliate commission if it was received by a bot or a user
+    optional_t<chat_t>    affiliate_chat;       // Optional. The chat that received an affiliate commission if it was received by a chat
+    optional_t<integer_t> nanostar_amount;      // Optional. The number of 1/1000000000 shares of Telegram Stars received by the affiliate; from -999999999 to 999999999; can be negative for refunds
+};
+
 // This object represents an animation file (GIF or H.264/MPEG-4 AVC video without sound).
 struct animation_t {
     string_t                 file_id;        // Identifier for this file, which can be used to download or reuse the file
@@ -187,6 +196,11 @@ struct contact_t {
     optional_t<string_t>  vcard;        // Optional. Additional data about the contact in the form of a vCard
 };
 
+// This object represents an inline keyboard button that copies specified text to the clipboard.
+struct copy_text_button_t {
+    string_t text; // The text to be copied to the clipboard; 1-256 characters
+};
+
 // This object represents an animated emoji that displays a random value.
 struct dice_t {
     string_t  emoji; // Emoji on which the dice throw animation is based
@@ -250,10 +264,12 @@ struct giveaway_completed_t {
     integer_t             winner_count;          // Number of winners in the giveaway
     optional_t<integer_t> unclaimed_prize_count; // Optional. Number of undistributed prizes
     optional_t<message_t> giveaway_message;      // Optional. Message with the giveaway that was completed, if it wasn't deleted
+    optional_t<boolean_t> is_star_giveaway;      // Optional. True, if the giveaway is a Telegram Star giveaway. Otherwise, currently, the giveaway is a Telegram Premium giveaway.
 };
 
-// This object represents a service message about the creation of a scheduled giveaway. Currently holds no information.
+// This object represents a service message about the creation of a scheduled giveaway.
 struct giveaway_created_t {
+    optional_t<integer_t> prize_star_count; // Optional. The number of Telegram Stars to be split between giveaway winners; for Telegram Star giveaways only
 };
 
 // This object represents a button to be shown above inline query results. You must use exactly one of the optional fields.
@@ -355,7 +371,7 @@ struct message_auto_delete_timer_changed_t {
 
 // This object represents one special entity in a text message. For example, hashtags, usernames, URLs, etc.
 struct message_entity_t {
-    string_t             type;            // Type of the entity. Currently, can be “mention” (@username), “hashtag” (#hashtag), “cashtag” ($USD), “bot_command” (/start@jobs_bot), “url” (https://telegram.org), “email” (do-not-reply@telegram.org), “phone_number” (+1-212-555-0123), “bold” (bold text), “italic” (italic text), “underline” (underlined text), “strikethrough” (strikethrough text), “spoiler” (spoiler message), “blockquote” (block quotation), “expandable_blockquote” (collapsed-by-default block quotation), “code” (monowidth string), “pre” (monowidth block), “text_link” (for clickable text URLs), “text_mention” (for users without usernames), “custom_emoji” (for inline custom emoji stickers)
+    string_t             type;            // Type of the entity. Currently, can be “mention” (@username), “hashtag” (#hashtag or #hashtag@chatusername), “cashtag” ($USD or $USD@chatusername), “bot_command” (/start@jobs_bot), “url” (https://telegram.org), “email” (do-not-reply@telegram.org), “phone_number” (+1-212-555-0123), “bold” (bold text), “italic” (italic text), “underline” (underlined text), “strikethrough” (strikethrough text), “spoiler” (spoiler message), “blockquote” (block quotation), “expandable_blockquote” (collapsed-by-default block quotation), “code” (monowidth string), “pre” (monowidth block), “text_link” (for clickable text URLs), “text_mention” (for users without usernames), “custom_emoji” (for inline custom emoji stickers)
     integer_t            offset;          // Offset in UTF-16 code units to the start of the entity
     integer_t            length;          // Length of the entity in UTF-16 code units
     optional_t<string_t> url;             // Optional. For “text_link” only, URL that will be opened after user taps on the text
@@ -366,7 +382,7 @@ struct message_entity_t {
 
 // This object represents a unique message identifier.
 struct message_id_t {
-    integer_t message_id; // Unique message identifier
+    integer_t message_id; // Unique message identifier. In specific instances (e.g., message containing a video sent to a big chat), the server might automatically schedule a message instead of sending it immediately. In such cases, this field will be 0 and the relevant message will be unusable until it is actually sent
 };
 
 // This object represents information about an order.
@@ -391,6 +407,12 @@ struct poll_answer_t {
     array_t<integer_t> option_ids; // 0-based identifiers of chosen answer options. May be empty if the vote was retracted.
     optional_t<chat_t> voter_chat; // Optional. The chat that changed the answer to the poll, if the voter is anonymous
     optional_t<user_t> user;       // Optional. The user that changed the answer to the poll, if the voter isn't anonymous
+};
+
+// Describes an inline message to be sent by a user of a Mini App.
+struct prepared_inline_message_t {
+    string_t  id;              // Unique identifier of the prepared message
+    integer_t expiration_date; // Expiration date of the prepared message, in Unix time. Expired prepared messages can no longer be used
 };
 
 // This object contains basic information about a refunded payment.
@@ -432,13 +454,16 @@ struct sent_web_app_message_t {
 
 // This object contains basic information about a successful payment.
 struct successful_payment_t {
-    string_t                 currency;                   // Three-letter ISO 4217 currency code, or “XTR” for payments in Telegram Stars
-    integer_t                total_amount;               // Total price in the smallest units of the currency (integer, not float/double). For example, for a price of US$ 1.45 pass amount = 145. See the exp parameter in currencies.json, it shows the number of digits past the decimal point for each currency (2 for the majority of currencies).
-    string_t                 invoice_payload;            // Bot-specified invoice payload
-    string_t                 telegram_payment_charge_id; // Telegram payment identifier
-    string_t                 provider_payment_charge_id; // Provider payment identifier
-    optional_t<string_t>     shipping_option_id;         // Optional. Identifier of the shipping option chosen by the user
-    optional_t<order_info_t> order_info;                 // Optional. Order information provided by the user
+    string_t                 currency;                     // Three-letter ISO 4217 currency code, or “XTR” for payments in Telegram Stars
+    integer_t                total_amount;                 // Total price in the smallest units of the currency (integer, not float/double). For example, for a price of US$ 1.45 pass amount = 145. See the exp parameter in currencies.json, it shows the number of digits past the decimal point for each currency (2 for the majority of currencies).
+    string_t                 invoice_payload;              // Bot-specified invoice payload
+    string_t                 telegram_payment_charge_id;   // Telegram payment identifier
+    string_t                 provider_payment_charge_id;   // Provider payment identifier
+    optional_t<integer_t>    subscription_expiration_date; // Optional. Expiration date of the subscription, in Unix time; for recurring payments only
+    optional_t<boolean_t>    is_recurring;                 // Optional. True, if the payment is a recurring payment for a subscription
+    optional_t<boolean_t>    is_first_recurring;           // Optional. True, if the payment is the first payment for a subscription
+    optional_t<string_t>     shipping_option_id;           // Optional. Identifier of the shipping option chosen by the user
+    optional_t<order_info_t> order_info;                   // Optional. Order information provided by the user
 };
 
 // This object represents an inline button that switches the current user to inline mode in a chosen chat, with an optional default inline query.
@@ -476,6 +501,7 @@ struct update_t {
     optional_t<callback_query_t>                 callback_query;            // Optional. New incoming callback query
     optional_t<shipping_query_t>                 shipping_query;            // Optional. New incoming shipping query. Only for invoices with flexible price
     optional_t<pre_checkout_query_t>             pre_checkout_query;        // Optional. New incoming pre-checkout query. Contains full information about checkout
+    optional_t<paid_media_purchased_t>           purchased_paid_media;      // Optional. A user purchased paid media with a non-empty payload sent by the bot in a non-channel chat
     optional_t<poll_t>                           poll;                      // Optional. New poll state. Bots receive only updates about manually stopped polls and polls, which are sent by the bot
     optional_t<poll_answer_t>                    poll_answer;               // Optional. A user changed their answer in a non-anonymous poll. Bots receive new votes only in polls that were sent by the bot itself.
     optional_t<chat_member_updated_t>            my_chat_member;            // Optional. The bot's chat member status was updated in a chat. For private chats, this update is received only when the bot is blocked or unblocked by the user.
@@ -670,11 +696,12 @@ struct business_messages_deleted_t {
     array_t<integer_t> message_ids;            // The list of identifiers of deleted messages in the chat of the business account
 };
 
-// The boost was obtained by the creation of a Telegram Premium giveaway. This boosts the chat 4 times for the duration of the corresponding Telegram Premium subscription.
+// The boost was obtained by the creation of a Telegram Premium or a Telegram Star giveaway. This boosts the chat 4 times for the duration of the corresponding Telegram Premium subscription for Telegram Premium giveaways and prize_star_count / 500 times for one year for Telegram Star giveaways.
 struct chat_boost_source_giveaway_t {
     string_t              source;              // Source of the boost, always “giveaway”
     integer_t             giveaway_message_id; // Identifier of a message in the chat with the giveaway; the message could have been deleted already. May be 0 if the message isn't sent yet.
-    optional_t<user_t>    user;                // Optional. User that won the prize in the giveaway if any
+    optional_t<user_t>    user;                // Optional. User that won the prize in the giveaway if any; for Telegram Premium giveaways only
+    optional_t<integer_t> prize_star_count;    // Optional. The number of Telegram Stars to be split between giveaway winners; for Telegram Star giveaways only
     optional_t<boolean_t> is_unclaimed;        // Optional. True, if the giveaway was completed, but there was no user to win the prize
 };
 
@@ -687,7 +714,8 @@ struct giveaway_t {
     optional_t<boolean_t>         has_public_winners;               // Optional. True, if the list of giveaway winners will be visible to everyone
     optional_t<string_t>          prize_description;                // Optional. Description of additional giveaway prize
     optional_t<array_t<string_t>> country_codes;                    // Optional. A list of two-letter ISO 3166-1 alpha-2 country codes indicating the countries from which eligible users for the giveaway must come. If empty, then all users can participate in the giveaway. Users with a phone number that was bought on Fragment can always participate in giveaways.
-    optional_t<integer_t>         premium_subscription_month_count; // Optional. The number of months the Telegram Premium subscription won from the giveaway will be active for
+    optional_t<integer_t>         prize_star_count;                 // Optional. The number of Telegram Stars to be split between giveaway winners; for Telegram Star giveaways only
+    optional_t<integer_t>         premium_subscription_month_count; // Optional. The number of months the Telegram Premium subscription won from the giveaway will be active for; for Telegram Premium giveaways only
 };
 
 // This object describes a message that was deleted or is otherwise inaccessible to the bot.
@@ -699,12 +727,12 @@ struct inaccessible_message_t {
 
 // This object represents a message.
 struct message_t {
-    integer_t                                       message_id;                        // Unique message identifier inside this chat
+    integer_t                                       message_id;                        // Unique message identifier inside this chat. In specific instances (e.g., message containing a video sent to a big chat), the server might automatically schedule a message instead of sending it immediately. In such cases, this field will be 0 and the relevant message will be unusable until it is actually sent
     integer_t                                       date;                              // Date the message was sent in Unix time. It is always a positive number, representing a valid date.
     chat_t                                          chat;                              // Chat the message belongs to
     optional_t<integer_t>                           message_thread_id;                 // Optional. Unique identifier of a message thread to which the message belongs; for supergroups only
-    optional_t<user_t>                              from;                              // Optional. Sender of the message; empty for messages sent to channels. For backward compatibility, the field contains a fake sender user in non-channel chats, if the message was sent on behalf of a chat.
-    optional_t<chat_t>                              sender_chat;                       // Optional. Sender of the message, sent on behalf of a chat. For example, the channel itself for channel posts, the supergroup itself for messages from anonymous group administrators, the linked channel for messages automatically forwarded to the discussion group. For backward compatibility, the field from contains a fake sender user in non-channel chats, if the message was sent on behalf of a chat.
+    optional_t<user_t>                              from;                              // Optional. Sender of the message; may be empty for messages sent to channels. For backward compatibility, if the message was sent on behalf of a chat, the field contains a fake sender user in non-channel chats
+    optional_t<chat_t>                              sender_chat;                       // Optional. Sender of the message when sent on behalf of a chat. For example, the supergroup itself for messages sent by its anonymous administrators or a linked channel for messages automatically forwarded to the channel's discussion group. For backward compatibility, if the message was sent on behalf of a chat, the field from contains a fake sender user in non-channel chats.
     optional_t<integer_t>                           sender_boost_count;                // Optional. If the sender of the message boosted the chat, the number of boosts added by the user
     optional_t<user_t>                              sender_business_bot;               // Optional. The bot that actually sent the message on behalf of the business account. Available only for outgoing messages sent on behalf of the connected business account.
     optional_t<message_origin_t>                    forward_origin;                    // Optional. Information about the original message for forwarded messages
@@ -822,6 +850,11 @@ struct reaction_type_emoji_t {
     string_t emoji; // Reaction emoji. Currently, it can be one of "👍", "👎", "❤", "🔥", "🥰", "👏", "😁", "🤔", "🤯", "😱", "🤬", "😢", "🎉", "🤩", "🤮", "💩", "🙏", "👌", "🕊", "🤡", "🥱", "🥴", "😍", "🐳", "❤‍🔥", "🌚", "🌭", "💯", "🤣", "⚡", "🍌", "🏆", "💔", "🤨", "😐", "🍓", "🍾", "💋", "🖕", "😈", "😴", "😭", "🤓", "👻", "👨‍💻", "👀", "🎃", "🙈", "😇", "😨", "🤝", "✍", "🤗", "🫡", "🎅", "🎄", "☃", "💅", "🤪", "🗿", "🆒", "💘", "🙉", "🦄", "😘", "💊", "🙊", "😎", "👾", "🤷‍♂", "🤷", "🤷‍♀", "😡"
 };
 
+// The reaction is paid.
+struct reaction_type_paid_t {
+    string_t type; // Type of the reaction, always “paid”
+};
+
 // This object represents a change of a reaction on a message performed by a user.
 struct message_reaction_updated_t {
     chat_t                   chat;         // The chat containing the message the user reacted to
@@ -863,6 +896,13 @@ struct story_t {
     integer_t id;   // Unique identifier for the story in the chat
 };
 
+// Describes the affiliate program that issued the affiliate commission received via this transaction.
+struct transaction_partner_affiliate_program_t {
+    string_t           type;                 // Type of the transaction partner, always “affiliate_program”
+    integer_t          commission_per_mille; // The number of Telegram Stars received by the bot for each 1000 Telegram Stars received by the affiliate program sponsor from referred users
+    optional_t<user_t> sponsor_user;         // Optional. Information about the bot that sponsored the affiliate program
+};
+
 // Describes a withdrawal transaction with Fragment.
 struct transaction_partner_fragment_t {
     string_t                               type;             // Type of the transaction partner, always “fragment”
@@ -879,6 +919,12 @@ struct transaction_partner_telegram_ads_t {
     string_t type; // Type of the transaction partner, always “telegram_ads”
 };
 
+// Describes a transaction with payment for paid broadcasting.
+struct transaction_partner_telegram_api_t {
+    string_t  type;          // Type of the transaction partner, always “telegram_api”
+    integer_t request_count; // The number of successful requests that exceeded regular limits and were therefore billed
+};
+
 // This object represents a Telegram user or bot.
 struct user_t {
     integer_t             id;                          // Unique identifier for this user or bot. This number may have more than 32 significant bits and some programming languages may have difficulty/silent defects in interpreting it. But it has at most 52 significant bits, so a 64-bit integer or double-precision float type are safe for storing this identifier.
@@ -893,6 +939,7 @@ struct user_t {
     optional_t<boolean_t> can_read_all_group_messages; // Optional. True, if privacy mode is disabled for the bot. Returned only in getMe.
     optional_t<boolean_t> supports_inline_queries;     // Optional. True, if the bot supports inline queries. Returned only in getMe.
     optional_t<boolean_t> can_connect_to_business;     // Optional. True, if the bot can be connected to a Telegram Business account to receive its messages. Returned only in getMe.
+    optional_t<boolean_t> has_main_web_app;            // Optional. True, if the bot has a main Web App. Returned only in getMe.
 };
 
 // Describes the connection of the bot with a business account.
@@ -961,6 +1008,8 @@ struct chat_invite_link_t {
     optional_t<integer_t> expire_date;                // Optional. Point in time (Unix timestamp) when the link will expire or has been expired
     optional_t<integer_t> member_limit;               // Optional. The maximum number of users that can be members of the chat simultaneously after joining the chat via this invite link; 1-99999
     optional_t<integer_t> pending_join_request_count; // Optional. Number of pending join requests created using this link
+    optional_t<integer_t> subscription_period;        // Optional. The number of seconds the subscription will be active for before the next payment
+    optional_t<integer_t> subscription_price;         // Optional. The amount of Telegram Stars a user must pay initially and after each subsequent subscription period to be a member of the chat using the link
 };
 
 // Represents a join request sent to a chat.
@@ -1011,8 +1060,9 @@ struct chat_member_left_t {
 
 // Represents a chat member that has no additional privileges or restrictions.
 struct chat_member_member_t {
-    string_t status; // The member's status in the chat, always “member”
-    user_t   user;   // Information about the user
+    string_t              status;     // The member's status in the chat, always “member”
+    user_t                user;       // Information about the user
+    optional_t<integer_t> until_date; // Optional. Date when the user's subscription will expire; Unix time
 };
 
 // Represents a chat member that owns the chat and has all administrator privileges.
@@ -1081,7 +1131,8 @@ struct giveaway_winners_t {
     integer_t             winner_count;                     // Total number of winners in the giveaway
     array_t<user_t>       winners;                          // List of up to 100 winners of the giveaway
     optional_t<integer_t> additional_chat_count;            // Optional. The number of other chats the user had to join in order to be eligible for the giveaway
-    optional_t<integer_t> premium_subscription_month_count; // Optional. The number of months the Telegram Premium subscription won from the giveaway will be active for
+    optional_t<integer_t> prize_star_count;                 // Optional. The number of Telegram Stars that were split between giveaway winners; for Telegram Star giveaways only
+    optional_t<integer_t> premium_subscription_month_count; // Optional. The number of months the Telegram Premium subscription won from the giveaway will be active for; for Telegram Premium giveaways only
     optional_t<integer_t> unclaimed_prize_count;            // Optional. Number of undistributed prizes
     optional_t<boolean_t> only_new_members;                 // Optional. True, if only users who had joined the chats after the giveaway started were eligible to win
     optional_t<boolean_t> was_refunded;                     // Optional. True, if the giveaway was canceled because the payment for it was refunded
@@ -1133,6 +1184,12 @@ struct external_reply_info_t {
     optional_t<venue_t>                venue;                // Optional. Message is a venue, information about the venue
 };
 
+// This object contains information about a paid media purchase.
+struct paid_media_purchased_t {
+    user_t   from;               // User who purchased the media
+    string_t paid_media_payload; // Bot-specified paid media payload
+};
+
 // This object contains information about an incoming pre-checkout query.
 struct pre_checkout_query_t {
     string_t                 id;                 // Unique query identifier
@@ -1161,9 +1218,14 @@ struct shipping_query_t {
 
 // Describes a transaction with a user.
 struct transaction_partner_user_t {
-    string_t             type;            // Type of the transaction partner, always “user”
-    user_t               user;            // Information about the user
-    optional_t<string_t> invoice_payload; // Optional. Bot-specified invoice payload
+    string_t                          type;                // Type of the transaction partner, always “user”
+    user_t                            user;                // Information about the user
+    optional_t<affiliate_info_t>      affiliate;           // Optional. Information about the affiliate that received a commission via this transaction
+    optional_t<string_t>              invoice_payload;     // Optional. Bot-specified invoice payload
+    optional_t<integer_t>             subscription_period; // Optional. The duration of the paid subscription
+    optional_t<array_t<paid_media_t>> paid_media;          // Optional. Information about the paid media bought by the user
+    optional_t<string_t>              paid_media_payload;  // Optional. Bot-specified paid media payload
+    optional_t<gift_t>                gift;                // Optional. The gift sent to the user by the bot
 };
 
 // This object represents a list of boosts added to a chat by a user.
@@ -1279,6 +1341,48 @@ struct paid_media_info_t {
     array_t<paid_media_t> paid_media; // Information about the paid media
 };
 
+// This object represents a sticker.
+struct sticker_t {
+    string_t                    file_id;           // Identifier for this file, which can be used to download or reuse the file
+    string_t                    file_unique_id;    // Unique identifier for this file, which is supposed to be the same over time and for different bots. Can't be used to download or reuse the file.
+    string_t                    type;              // Type of the sticker, currently one of “regular”, “mask”, “custom_emoji”. The type of the sticker is independent from its format, which is determined by the fields is_animated and is_video.
+    integer_t                   width;             // Sticker width
+    integer_t                   height;            // Sticker height
+    boolean_t                   is_animated;       // True, if the sticker is animated
+    boolean_t                   is_video;          // True, if the sticker is a video sticker
+    optional_t<photo_size_t>    thumbnail;         // Optional. Sticker thumbnail in the .WEBP or .JPG format
+    optional_t<string_t>        emoji;             // Optional. Emoji associated with the sticker
+    optional_t<string_t>        set_name;          // Optional. Name of the sticker set to which the sticker belongs
+    optional_t<file_t>          premium_animation; // Optional. For premium regular stickers, premium animation for the sticker
+    optional_t<mask_position_t> mask_position;     // Optional. For mask stickers, the position where the mask should be placed
+    optional_t<string_t>        custom_emoji_id;   // Optional. For custom emoji stickers, unique identifier of the custom emoji
+    optional_t<boolean_t>       needs_repainting;  // Optional. True, if the sticker must be repainted to a text color in messages, the color of the Telegram Premium badge in emoji status, white color on chat photos, or another appropriate color in other places
+    optional_t<integer_t>       file_size;         // Optional. File size in bytes
+};
+
+// This object represents a gift that can be sent by the bot.
+struct gift_t {
+    string_t              id;              // Unique identifier of the gift
+    sticker_t             sticker;         // The sticker that represents the gift
+    integer_t             star_count;      // The number of Telegram Stars that must be paid to send the sticker
+    optional_t<integer_t> total_count;     // Optional. The total number of the gifts of this type that can be sent; for limited gifts only
+    optional_t<integer_t> remaining_count; // Optional. The number of remaining gifts of this type that can be sent; for limited gifts only
+};
+
+// This object represent a list of gifts.
+struct gifts_t {
+    array_t<gift_t> gifts; // The list of gifts
+};
+
+// This object represents a sticker set.
+struct sticker_set_t {
+    string_t                 name;         // Sticker set name
+    string_t                 title;        // Sticker set title
+    string_t                 sticker_type; // Type of stickers in the set, currently one of “regular”, “mask”, “custom_emoji”
+    array_t<sticker_t>       stickers;     // List of all set stickers
+    optional_t<photo_size_t> thumbnail;    // Optional. Sticker set thumbnail in the .WEBP, .TGS, or .WEBM format
+};
+
 // This object represents one button of an inline keyboard. Exactly one of the optional fields must be used to specify type of the button.
 struct inline_keyboard_button_t {
     string_t                                      text;                             // Label text on the button
@@ -1289,6 +1393,7 @@ struct inline_keyboard_button_t {
     optional_t<string_t>                          switch_inline_query;              // Optional. If set, pressing the button will prompt the user to select one of their chats, open that chat and insert the bot's username and the specified inline query in the input field. May be empty, in which case just the bot's username will be inserted. Not supported for messages sent on behalf of a Telegram Business account.
     optional_t<string_t>                          switch_inline_query_current_chat; // Optional. If set, pressing the button will insert the bot's username and the specified inline query in the current chat's input field. May be empty, in which case only the bot's username will be inserted.   This offers a quick way for the user to open your bot in inline mode in the same chat - good for selecting something from multiple options. Not supported in channels and for messages sent on behalf of a Telegram Business account.
     optional_t<switch_inline_query_chosen_chat_t> switch_inline_query_chosen_chat;  // Optional. If set, pressing the button will prompt the user to select one of their chats of the specified type, open that chat and insert the bot's username and the specified inline query in the input field. Not supported for messages sent on behalf of a Telegram Business account.
+    optional_t<copy_text_button_t>                copy_text;                        // Optional. Description of the button that copies the specified text to the clipboard.
     optional_t<callback_game_t>                   callback_game;                    // Optional. Description of the game that will be launched when the user presses the button.   NOTE: This type of button must always be the first button in the first row.
     optional_t<boolean_t>                         pay;                              // Optional. Specify True, to send a Pay button. Substrings “⭐” and “XTR” in the buttons's text will be replaced with a Telegram Star icon.   NOTE: This type of button must always be the first button in the first row and can only be used in invoice messages.
 };
@@ -1635,7 +1740,7 @@ struct labeled_price_t {
 struct input_invoice_message_content_t {
     string_t                       title;                         // Product name, 1-32 characters
     string_t                       description;                   // Product description, 1-255 characters
-    string_t                       payload;                       // Bot-defined invoice payload, 1-128 bytes. This will not be displayed to the user, use for your internal processes.
+    string_t                       payload;                       // Bot-defined invoice payload, 1-128 bytes. This will not be displayed to the user, use it for your internal processes.
     string_t                       currency;                      // Three-letter ISO 4217 currency code, see more on currencies. Pass “XTR” for payments in Telegram Stars.
     array_t<labeled_price_t>       prices;                        // Price breakdown, a JSON-serialized list of components (e.g. product price, tax, discount, delivery cost, delivery tax, bonus, etc.). Must contain exactly one item for payments in Telegram Stars.
     optional_t<string_t>           provider_token;                // Optional. Payment provider token, obtained via @BotFather. Pass an empty string for payments in Telegram Stars.
@@ -1947,44 +2052,17 @@ struct revenue_withdrawal_state_succeeded_t {
 
 // Describes a Telegram Star transaction.
 struct star_transaction_t {
-    string_t                          id;       // Unique identifier of the transaction. Coincides with the identifer of the original transaction for refund transactions. Coincides with SuccessfulPayment.telegram_payment_charge_id for successful incoming payments from users.
-    integer_t                         amount;   // Number of Telegram Stars transferred by the transaction
-    integer_t                         date;     // Date the transaction was created in Unix time
-    optional_t<transaction_partner_t> source;   // Optional. Source of an incoming transaction (e.g., a user purchasing goods or services, Fragment refunding a failed withdrawal). Only for incoming transactions
-    optional_t<transaction_partner_t> receiver; // Optional. Receiver of an outgoing transaction (e.g., a user for a purchase refund, Fragment for a withdrawal). Only for outgoing transactions
+    string_t                          id;              // Unique identifier of the transaction. Coincides with the identifier of the original transaction for refund transactions. Coincides with SuccessfulPayment.telegram_payment_charge_id for successful incoming payments from users.
+    integer_t                         amount;          // Integer amount of Telegram Stars transferred by the transaction
+    integer_t                         date;            // Date the transaction was created in Unix time
+    optional_t<integer_t>             nanostar_amount; // Optional. The number of 1/1000000000 shares of Telegram Stars transferred by the transaction; from 0 to 999999999
+    optional_t<transaction_partner_t> source;          // Optional. Source of an incoming transaction (e.g., a user purchasing goods or services, Fragment refunding a failed withdrawal). Only for incoming transactions
+    optional_t<transaction_partner_t> receiver;        // Optional. Receiver of an outgoing transaction (e.g., a user for a purchase refund, Fragment for a withdrawal). Only for outgoing transactions
 };
 
 // Contains a list of Telegram Star transactions.
 struct star_transactions_t {
     array_t<star_transaction_t> transactions; // The list of transactions
-};
-
-// This object represents a sticker.
-struct sticker_t {
-    string_t                    file_id;           // Identifier for this file, which can be used to download or reuse the file
-    string_t                    file_unique_id;    // Unique identifier for this file, which is supposed to be the same over time and for different bots. Can't be used to download or reuse the file.
-    string_t                    type;              // Type of the sticker, currently one of “regular”, “mask”, “custom_emoji”. The type of the sticker is independent from its format, which is determined by the fields is_animated and is_video.
-    integer_t                   width;             // Sticker width
-    integer_t                   height;            // Sticker height
-    boolean_t                   is_animated;       // True, if the sticker is animated
-    boolean_t                   is_video;          // True, if the sticker is a video sticker
-    optional_t<photo_size_t>    thumbnail;         // Optional. Sticker thumbnail in the .WEBP or .JPG format
-    optional_t<string_t>        emoji;             // Optional. Emoji associated with the sticker
-    optional_t<string_t>        set_name;          // Optional. Name of the sticker set to which the sticker belongs
-    optional_t<file_t>          premium_animation; // Optional. For premium regular stickers, premium animation for the sticker
-    optional_t<mask_position_t> mask_position;     // Optional. For mask stickers, the position where the mask should be placed
-    optional_t<string_t>        custom_emoji_id;   // Optional. For custom emoji stickers, unique identifier of the custom emoji
-    optional_t<boolean_t>       needs_repainting;  // Optional. True, if the sticker must be repainted to a text color in messages, the color of the Telegram Premium badge in emoji status, white color on chat photos, or another appropriate color in other places
-    optional_t<integer_t>       file_size;         // Optional. File size in bytes
-};
-
-// This object represents a sticker set.
-struct sticker_set_t {
-    string_t                 name;         // Sticker set name
-    string_t                 title;        // Sticker set title
-    string_t                 sticker_type; // Type of stickers in the set, currently one of “regular”, “mask”, “custom_emoji”
-    array_t<sticker_t>       stickers;     // List of all set stickers
-    optional_t<photo_size_t> thumbnail;    // Optional. Sticker set thumbnail in the .WEBP, .TGS, or .WEBM format
 };
 
 // This object contains information about a user that was shared with the bot using a KeyboardButtonRequestUsers button.
