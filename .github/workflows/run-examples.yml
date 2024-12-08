@@ -20,6 +20,7 @@ jobs:
           - { title: "Linux", os: "ubuntu-20.04", cc: "gcc-11" }
           - { title: "Linux", os: "ubuntu-22.04", cc: "gcc-12" }
           - { title: "Linux", os: "ubuntu-22.04", cc: "gcc-13" }
+          - { title: "Linux", os: "ubuntu-24.04", cc: "gcc-14" }
 
           - { title: "Linux (bundled cpr)", os: "ubuntu-22.04", cc: "gcc-13", build_defs: "-DBANANA_USE_BUNDLED_CPR=ON" }
 
