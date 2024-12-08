@@ -39,6 +39,10 @@ inline_keyboard_button_t
 
    Optional. If set, pressing the button will prompt the user to select one of their chats of the specified type, open that chat and insert the bot's username and the specified inline query in the input field. Not supported for messages sent on behalf of a Telegram Business account.
 
+   .. cpp:member:: optional_t<copy_text_button_t> copy_text
+
+   Optional. Description of the button that copies the specified text to the clipboard.
+
    .. cpp:member:: optional_t<callback_game_t> callback_game
 
    Optional. Description of the game that will be launched when the user presses the button.   NOTE: This type of button must always be the first button in the first row.

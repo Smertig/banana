@@ -26,4 +26,8 @@ unpin_chat_message
 
    .. cpp:member:: optional_t<integer_t> message_id
 
-   Identifier of a message to unpin. If not specified, the most recent pinned message (by sending date) will be unpinned.
+   Identifier of the message to unpin. Required if business_connection_id is specified. If not specified, the most recent pinned message (by sending date) will be unpinned.
+
+   .. cpp:member:: optional_t<string_t> business_connection_id
+
+   Unique identifier of the business connection on behalf of which the message will be unpinned

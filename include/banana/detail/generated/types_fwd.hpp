@@ -1,4 +1,5 @@
 /// Forward declarations
+struct affiliate_info_t;
 struct animation_t;
 struct audio_t;
 struct background_fill_freeform_gradient_t;
@@ -54,6 +55,7 @@ struct chat_shared_t;
 struct chat_t;
 struct chosen_inline_result_t;
 struct contact_t;
+struct copy_text_button_t;
 struct dice_t;
 struct document_t;
 struct encrypted_credentials_t;
@@ -70,6 +72,8 @@ struct game_high_score_t;
 struct game_t;
 struct general_forum_topic_hidden_t;
 struct general_forum_topic_unhidden_t;
+struct gift_t;
+struct gifts_t;
 struct giveaway_completed_t;
 struct giveaway_created_t;
 struct giveaway_t;
@@ -141,6 +145,7 @@ struct order_info_t;
 struct paid_media_info_t;
 struct paid_media_photo_t;
 struct paid_media_preview_t;
+struct paid_media_purchased_t;
 struct paid_media_video_t;
 struct passport_data_t;
 struct passport_element_error_data_field_t;
@@ -158,10 +163,12 @@ struct poll_answer_t;
 struct poll_option_t;
 struct poll_t;
 struct pre_checkout_query_t;
+struct prepared_inline_message_t;
 struct proximity_alert_triggered_t;
 struct reaction_count_t;
 struct reaction_type_custom_emoji_t;
 struct reaction_type_emoji_t;
+struct reaction_type_paid_t;
 struct refunded_payment_t;
 struct reply_keyboard_markup_t;
 struct reply_keyboard_remove_t;
@@ -183,9 +190,11 @@ struct story_t;
 struct successful_payment_t;
 struct switch_inline_query_chosen_chat_t;
 struct text_quote_t;
+struct transaction_partner_affiliate_program_t;
 struct transaction_partner_fragment_t;
 struct transaction_partner_other_t;
 struct transaction_partner_telegram_ads_t;
+struct transaction_partner_telegram_api_t;
 struct transaction_partner_user_t;
 struct update_t;
 struct user_chat_boosts_t;
@@ -249,11 +258,11 @@ using paid_media_t = variant_t<paid_media_preview_t, paid_media_photo_t, paid_me
 // This object represents an error in the Telegram Passport element which was submitted that should be resolved by the user. It should be one of: PassportElementErrorDataField; PassportElementErrorFrontSide; PassportElementErrorReverseSide; PassportElementErrorSelfie; PassportElementErrorFile; PassportElementErrorFiles; PassportElementErrorTranslationFile; PassportElementErrorTranslationFiles; PassportElementErrorUnspecified
 using passport_element_error_t = variant_t<passport_element_error_data_field_t, passport_element_error_front_side_t, passport_element_error_reverse_side_t, passport_element_error_selfie_t, passport_element_error_file_t, passport_element_error_files_t, passport_element_error_translation_file_t, passport_element_error_translation_files_t, passport_element_error_unspecified_t>;
 
-// This object describes the type of a reaction. Currently, it can be one of ReactionTypeEmoji; ReactionTypeCustomEmoji
-using reaction_type_t = variant_t<reaction_type_emoji_t, reaction_type_custom_emoji_t>;
+// This object describes the type of a reaction. Currently, it can be one of ReactionTypeEmoji; ReactionTypeCustomEmoji; ReactionTypePaid
+using reaction_type_t = variant_t<reaction_type_emoji_t, reaction_type_custom_emoji_t, reaction_type_paid_t>;
 
 // This object describes the state of a revenue withdrawal operation. Currently, it can be one of RevenueWithdrawalStatePending; RevenueWithdrawalStateSucceeded; RevenueWithdrawalStateFailed
 using revenue_withdrawal_state_t = variant_t<revenue_withdrawal_state_pending_t, revenue_withdrawal_state_succeeded_t, revenue_withdrawal_state_failed_t>;
 
-// This object describes the source of a transaction, or its recipient for outgoing transactions. Currently, it can be one of TransactionPartnerUser; TransactionPartnerFragment; TransactionPartnerTelegramAds; TransactionPartnerOther
-using transaction_partner_t = variant_t<transaction_partner_user_t, transaction_partner_fragment_t, transaction_partner_telegram_ads_t, transaction_partner_other_t>;
+// This object describes the source of a transaction, or its recipient for outgoing transactions. Currently, it can be one of TransactionPartnerUser; TransactionPartnerAffiliateProgram; TransactionPartnerFragment; TransactionPartnerTelegramAds; TransactionPartnerTelegramApi; TransactionPartnerOther
+using transaction_partner_t = variant_t<transaction_partner_user_t, transaction_partner_affiliate_program_t, transaction_partner_fragment_t, transaction_partner_telegram_ads_t, transaction_partner_telegram_api_t, transaction_partner_other_t>;

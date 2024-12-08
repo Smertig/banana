@@ -11,6 +11,7 @@ File
 .. toctree::
    :name: api_tg_types
 
+   affiliate_info_t <types/affiliate_info>
    animation_t <types/animation>
    audio_t <types/audio>
    background_fill_freeform_gradient_t <types/background_fill_freeform_gradient>
@@ -71,6 +72,7 @@ File
    chat_t <types/chat>
    chosen_inline_result_t <types/chosen_inline_result>
    contact_t <types/contact>
+   copy_text_button_t <types/copy_text_button>
    dice_t <types/dice>
    document_t <types/document>
    encrypted_credentials_t <types/encrypted_credentials>
@@ -87,6 +89,8 @@ File
    game_t <types/game>
    general_forum_topic_hidden_t <types/general_forum_topic_hidden>
    general_forum_topic_unhidden_t <types/general_forum_topic_unhidden>
+   gift_t <types/gift>
+   gifts_t <types/gifts>
    giveaway_completed_t <types/giveaway_completed>
    giveaway_created_t <types/giveaway_created>
    giveaway_t <types/giveaway>
@@ -165,6 +169,7 @@ File
    paid_media_info_t <types/paid_media_info>
    paid_media_photo_t <types/paid_media_photo>
    paid_media_preview_t <types/paid_media_preview>
+   paid_media_purchased_t <types/paid_media_purchased>
    paid_media_t <types/paid_media>
    paid_media_video_t <types/paid_media_video>
    passport_data_t <types/passport_data>
@@ -184,10 +189,12 @@ File
    poll_option_t <types/poll_option>
    poll_t <types/poll>
    pre_checkout_query_t <types/pre_checkout_query>
+   prepared_inline_message_t <types/prepared_inline_message>
    proximity_alert_triggered_t <types/proximity_alert_triggered>
    reaction_count_t <types/reaction_count>
    reaction_type_custom_emoji_t <types/reaction_type_custom_emoji>
    reaction_type_emoji_t <types/reaction_type_emoji>
+   reaction_type_paid_t <types/reaction_type_paid>
    reaction_type_t <types/reaction_type>
    refunded_payment_t <types/refunded_payment>
    reply_keyboard_markup_t <types/reply_keyboard_markup>
@@ -211,10 +218,12 @@ File
    successful_payment_t <types/successful_payment>
    switch_inline_query_chosen_chat_t <types/switch_inline_query_chosen_chat>
    text_quote_t <types/text_quote>
+   transaction_partner_affiliate_program_t <types/transaction_partner_affiliate_program>
    transaction_partner_fragment_t <types/transaction_partner_fragment>
    transaction_partner_other_t <types/transaction_partner_other>
    transaction_partner_t <types/transaction_partner>
    transaction_partner_telegram_ads_t <types/transaction_partner_telegram_ads>
+   transaction_partner_telegram_api_t <types/transaction_partner_telegram_api>
    transaction_partner_user_t <types/transaction_partner_user>
    update_t <types/update>
    user_chat_boosts_t <types/user_chat_boosts>

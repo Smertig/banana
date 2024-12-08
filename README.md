@@ -125,3 +125,11 @@ args.text = "Hello from banana!";
 ```
 
 However, a compilation error is still much better than a silent change in logic, and also more readable than manual per-field initialization. That's why I recommend switching to C++20 and using designated initialization.
+
+### Dev Guide
+
+#### Updating to fresh API version
+
+```bash
+python load_api.py && python custom2json.py && python json2cpp.py && python json2rst.py
+```

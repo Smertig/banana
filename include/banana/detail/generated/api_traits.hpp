@@ -209,6 +209,20 @@ struct detail::by_request_type_impl<api::create_chat_invite_link_args_t> {
 };
 
 template <>
+struct api_traits<api::method::create_chat_subscription_invite_link> {
+    static inline constexpr std::string_view native_name = "createChatSubscriptionInviteLink";
+    static inline constexpr std::string_view pretty_name = "create_chat_subscription_invite_link";
+
+    using request_type  = api::create_chat_subscription_invite_link_args_t;
+    using response_type = api::chat_invite_link_t;
+};
+
+template <>
+struct detail::by_request_type_impl<api::create_chat_subscription_invite_link_args_t> {
+    using type = api_traits<api::method::create_chat_subscription_invite_link>;
+};
+
+template <>
 struct api_traits<api::method::create_forum_topic> {
     static inline constexpr std::string_view native_name = "createForumTopic";
     static inline constexpr std::string_view pretty_name = "create_forum_topic";
@@ -405,6 +419,20 @@ struct detail::by_request_type_impl<api::edit_chat_invite_link_args_t> {
 };
 
 template <>
+struct api_traits<api::method::edit_chat_subscription_invite_link> {
+    static inline constexpr std::string_view native_name = "editChatSubscriptionInviteLink";
+    static inline constexpr std::string_view pretty_name = "edit_chat_subscription_invite_link";
+
+    using request_type  = api::edit_chat_subscription_invite_link_args_t;
+    using response_type = api::chat_invite_link_t;
+};
+
+template <>
+struct detail::by_request_type_impl<api::edit_chat_subscription_invite_link_args_t> {
+    using type = api_traits<api::method::edit_chat_subscription_invite_link>;
+};
+
+template <>
 struct api_traits<api::method::edit_forum_topic> {
     static inline constexpr std::string_view native_name = "editForumTopic";
     static inline constexpr std::string_view pretty_name = "edit_forum_topic";
@@ -503,6 +531,20 @@ struct detail::by_request_type_impl<api::edit_message_text_args_t> {
 };
 
 template <>
+struct api_traits<api::method::edit_user_star_subscription> {
+    static inline constexpr std::string_view native_name = "editUserStarSubscription";
+    static inline constexpr std::string_view pretty_name = "edit_user_star_subscription";
+
+    using request_type  = api::edit_user_star_subscription_args_t;
+    using response_type = boolean_t;
+};
+
+template <>
+struct detail::by_request_type_impl<api::edit_user_star_subscription_args_t> {
+    using type = api_traits<api::method::edit_user_star_subscription>;
+};
+
+template <>
 struct api_traits<api::method::export_chat_invite_link> {
     static inline constexpr std::string_view native_name = "exportChatInviteLink";
     static inline constexpr std::string_view pretty_name = "export_chat_invite_link";
@@ -542,6 +584,20 @@ struct api_traits<api::method::forward_messages> {
 template <>
 struct detail::by_request_type_impl<api::forward_messages_args_t> {
     using type = api_traits<api::method::forward_messages>;
+};
+
+template <>
+struct api_traits<api::method::get_available_gifts> {
+    static inline constexpr std::string_view native_name = "getAvailableGifts";
+    static inline constexpr std::string_view pretty_name = "get_available_gifts";
+
+    using request_type  = api::get_available_gifts_args_t;
+    using response_type = api::gifts_t;
+};
+
+template <>
+struct detail::by_request_type_impl<api::get_available_gifts_args_t> {
+    using type = api_traits<api::method::get_available_gifts>;
 };
 
 template <>
@@ -774,7 +830,7 @@ struct api_traits<api::method::get_star_transactions> {
     static inline constexpr std::string_view pretty_name = "get_star_transactions";
 
     using request_type  = api::get_star_transactions_args_t;
-    using response_type = api::star_transaction_t;
+    using response_type = api::star_transactions_t;
 };
 
 template <>
@@ -1007,6 +1063,20 @@ struct detail::by_request_type_impl<api::revoke_chat_invite_link_args_t> {
 };
 
 template <>
+struct api_traits<api::method::save_prepared_inline_message> {
+    static inline constexpr std::string_view native_name = "savePreparedInlineMessage";
+    static inline constexpr std::string_view pretty_name = "save_prepared_inline_message";
+
+    using request_type  = api::save_prepared_inline_message_args_t;
+    using response_type = api::prepared_inline_message_t;
+};
+
+template <>
+struct detail::by_request_type_impl<api::save_prepared_inline_message_args_t> {
+    using type = api_traits<api::method::save_prepared_inline_message>;
+};
+
+template <>
 struct api_traits<api::method::send_animation> {
     static inline constexpr std::string_view native_name = "sendAnimation";
     static inline constexpr std::string_view pretty_name = "send_animation";
@@ -1102,6 +1172,20 @@ struct api_traits<api::method::send_game> {
 template <>
 struct detail::by_request_type_impl<api::send_game_args_t> {
     using type = api_traits<api::method::send_game>;
+};
+
+template <>
+struct api_traits<api::method::send_gift> {
+    static inline constexpr std::string_view native_name = "sendGift";
+    static inline constexpr std::string_view pretty_name = "send_gift";
+
+    using request_type  = api::send_gift_args_t;
+    using response_type = boolean_t;
+};
+
+template <>
+struct detail::by_request_type_impl<api::send_gift_args_t> {
+    using type = api_traits<api::method::send_gift>;
 };
 
 template <>
@@ -1578,6 +1662,20 @@ struct api_traits<api::method::set_sticker_set_title> {
 template <>
 struct detail::by_request_type_impl<api::set_sticker_set_title_args_t> {
     using type = api_traits<api::method::set_sticker_set_title>;
+};
+
+template <>
+struct api_traits<api::method::set_user_emoji_status> {
+    static inline constexpr std::string_view native_name = "setUserEmojiStatus";
+    static inline constexpr std::string_view pretty_name = "set_user_emoji_status";
+
+    using request_type  = api::set_user_emoji_status_args_t;
+    using response_type = boolean_t;
+};
+
+template <>
+struct detail::by_request_type_impl<api::set_user_emoji_status_args_t> {
+    using type = api_traits<api::method::set_user_emoji_status>;
 };
 
 template <>

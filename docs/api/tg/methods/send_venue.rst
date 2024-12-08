@@ -68,6 +68,10 @@ send_venue
 
    Protects the contents of the sent message from forwarding and saving
 
+   .. cpp:member:: optional_t<boolean_t> allow_paid_broadcast
+
+   Pass True to allow up to 1000 messages per second, ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance
+
    .. cpp:member:: optional_t<string_t> message_effect_id
 
    Unique identifier of the message effect to be added to the message; for private chats only

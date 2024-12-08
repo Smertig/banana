@@ -5,7 +5,7 @@ chat_boost_source_giveaway_t
 
 .. cpp:struct:: banana::api::chat_boost_source_giveaway_t
 
-   The boost was obtained by the creation of a Telegram Premium giveaway. This boosts the chat 4 times for the duration of the corresponding Telegram Premium subscription.
+   The boost was obtained by the creation of a Telegram Premium or a Telegram Star giveaway. This boosts the chat 4 times for the duration of the corresponding Telegram Premium subscription for Telegram Premium giveaways and prize_star_count / 500 times for one year for Telegram Star giveaways.
 
    .. cpp:member:: string_t source
 
@@ -17,7 +17,11 @@ chat_boost_source_giveaway_t
 
    .. cpp:member:: optional_t<user_t> user
 
-   Optional. User that won the prize in the giveaway if any
+   Optional. User that won the prize in the giveaway if any; for Telegram Premium giveaways only
+
+   .. cpp:member:: optional_t<integer_t> prize_star_count
+
+   Optional. The number of Telegram Stars to be split between giveaway winners; for Telegram Star giveaways only
 
    .. cpp:member:: optional_t<boolean_t> is_unclaimed
 
