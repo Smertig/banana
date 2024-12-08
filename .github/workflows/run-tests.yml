@@ -23,6 +23,7 @@ jobs:
           - { title: "Linux", os: "ubuntu-20.04", cc: "gcc-11" }
           - { title: "Linux", os: "ubuntu-22.04", cc: "gcc-12" }
           - { title: "Linux", os: "ubuntu-22.04", cc: "gcc-13" }
+          - { title: "Linux", os: "ubuntu-24.04", cc: "gcc-14" }
 
           # clang
           - { title: "Linux", os: "ubuntu-20.04", cc: "clang-7" }
@@ -44,8 +45,8 @@ jobs:
 
           # macOS
           - { title: "macOS", os: "macos-14", cc: "clang"  }
-          - { title: "macOS", os: "macos-14", cc: "gcc-11" }
           - { title: "macOS", os: "macos-14", cc: "gcc-12" }
+          - { title: "macOS", os: "macos-14", cc: "gcc-13" }
 
     steps:
       - uses: actions/checkout@v4
