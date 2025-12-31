@@ -15,33 +15,37 @@ jobs:
       matrix:
         include:
           # gcc
-          - { title: "Linux", os: "ubuntu-20.04", cc: "gcc-9" }
-          - { title: "Linux", os: "ubuntu-20.04", cc: "gcc-10" }
-          - { title: "Linux", os: "ubuntu-20.04", cc: "gcc-11" }
           - { title: "Linux", os: "ubuntu-22.04", cc: "gcc-12" }
           - { title: "Linux", os: "ubuntu-22.04", cc: "gcc-13" }
           - { title: "Linux", os: "ubuntu-24.04", cc: "gcc-14" }
+          - { title: "Linux", os: "ubuntu-24.04", cc: "gcc-15" }
 
           - { title: "Linux (bundled cpr)", os: "ubuntu-22.04", cc: "gcc-13", build_defs: "-DBANANA_USE_BUNDLED_CPR=ON" }
 
           # clang
-          - { title: "Linux", os: "ubuntu-20.04", cc: "clang-9" }
-          - { title: "Linux", os: "ubuntu-20.04", cc: "clang-10" }
-          - { title: "Linux", os: "ubuntu-20.04", cc: "clang-11" }
-          - { title: "Linux", os: "ubuntu-20.04", cc: "clang-12" }
-          # - { title: "Linux", os: "ubuntu-22.04", cc: "clang-13" } # libstdc++ issues
-          # - { title: "Linux", os: "ubuntu-22.04", cc: "clang-14" } # libstdc++ issues
+          - { title: "Linux", os: "ubuntu-22.04", cc: "clang-11" }
+          - { title: "Linux", os: "ubuntu-22.04", cc: "clang-12" }
+          - { title: "Linux", os: "ubuntu-22.04", cc: "clang-13" }
+          - { title: "Linux", os: "ubuntu-22.04", cc: "clang-14" }
           - { title: "Linux", os: "ubuntu-22.04", cc: "clang-15" }
           - { title: "Linux", os: "ubuntu-22.04", cc: "clang-16" }
           - { title: "Linux", os: "ubuntu-22.04", cc: "clang-17" }
           - { title: "Linux", os: "ubuntu-22.04", cc: "clang-18" }
+          - { title: "Linux", os: "ubuntu-24.04", cc: "clang-19" }
+          - { title: "Linux", os: "ubuntu-24.04", cc: "clang-20" }
+          - { title: "Linux", os: "ubuntu-24.04", cc: "clang-21" }
 
           # msvc
           # - { title: "Windows", os: "windows-2019", cc: "vs2019" } # CTAD issues
           - { title: "Windows", os: "windows-2022", cc: "vs2022" }
+          - { title: "Windows", os: "windows-2025", cc: "vs2026" }
 
           # macOS
-          - { title: "macOS", os: "macos-13", cc: "clang" }
+          - { title: "macOS", os: "macos-14", cc: "clang" }
+          - { title: "macOS", os: "macos-15", cc: "clang" }
+          - { title: "macOS", os: "macos-14", cc: "gcc-13" }
+          - { title: "macOS", os: "macos-14", cc: "gcc-14" }
+          - { title: "macOS", os: "macos-15", cc: "gcc-15" }
 
     steps:
       - uses: actions/checkout@v4
