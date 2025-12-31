@@ -1,0 +1,4 @@
+/script/.venv
+/.junie/memory
+/.idea
+/cmake-build-*
