@@ -6,13 +6,12 @@
 #include <sstream>
 #include <array>
 #include <type_traits>
+#include <utility>
 
 namespace {
 
 template <class Handle, Handle Invalid, auto Deleter>
 class unique_handle {
-    static_assert(std::is_nothrow_invocable_v<decltype(Deleter), Handle>);
-
     Handle m_handle;
 
 public:
