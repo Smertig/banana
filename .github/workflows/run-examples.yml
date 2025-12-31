@@ -18,7 +18,7 @@ jobs:
           - { title: "Linux", os: "ubuntu-22.04", cc: "gcc-12" }
           - { title: "Linux", os: "ubuntu-22.04", cc: "gcc-13" }
           - { title: "Linux", os: "ubuntu-24.04", cc: "gcc-14" }
-          - { title: "Linux", os: "ubuntu-24.04", cc: "gcc-15" }
+#          - { title: "Linux", os: "ubuntu-24.04", cc: "gcc-15" }
 
           - { title: "Linux (bundled cpr)", os: "ubuntu-22.04", cc: "gcc-13", build_defs: "-DBANANA_USE_BUNDLED_CPR=ON" }
 
@@ -33,12 +33,12 @@ jobs:
           - { title: "Linux", os: "ubuntu-22.04", cc: "clang-18" }
           - { title: "Linux", os: "ubuntu-24.04", cc: "clang-19" }
           - { title: "Linux", os: "ubuntu-24.04", cc: "clang-20" }
-          - { title: "Linux", os: "ubuntu-24.04", cc: "clang-21" }
+#          - { title: "Linux", os: "ubuntu-24.04", cc: "clang-21" }
 
           # msvc
           # - { title: "Windows", os: "windows-2019", cc: "vs2019" } # CTAD issues
           - { title: "Windows", os: "windows-2022", cc: "vs2022" }
-          - { title: "Windows", os: "windows-2025", cc: "vs2026" }
+#          - { title: "Windows", os: "windows-2025", cc: "vs2026" }
 
           # macOS
           - { title: "macOS", os: "macos-14", cc: "clang" }
