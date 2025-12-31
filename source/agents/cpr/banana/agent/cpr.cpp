@@ -7,21 +7,6 @@ namespace cpr {
 std::ostream& operator<<(std::ostream& os, ErrorCode code) {
     switch (code) {
         case ErrorCode::OK: return os << "OK";
-        case ErrorCode::CONNECTION_FAILURE: return os << "CONNECTION_FAILURE";
-        case ErrorCode::EMPTY_RESPONSE: return os << "EMPTY_RESPONSE";
-        case ErrorCode::HOST_RESOLUTION_FAILURE: return os << "HOST_RESOLUTION_FAILURE";
-        case ErrorCode::INTERNAL_ERROR: return os << "INTERNAL_ERROR";
-        case ErrorCode::INVALID_URL_FORMAT: return os << "INVALID_URL_FORMAT";
-        case ErrorCode::NETWORK_RECEIVE_ERROR: return os << "NETWORK_RECEIVE_ERROR";
-        case ErrorCode::NETWORK_SEND_FAILURE: return os << "NETWORK_SEND_FAILURE";
-        case ErrorCode::OPERATION_TIMEDOUT: return os << "OPERATION_TIMEDOUT";
-        case ErrorCode::PROXY_RESOLUTION_FAILURE: return os << "PROXY_RESOLUTION_FAILURE";
-        case ErrorCode::SSL_CONNECT_ERROR: return os << "SSL_CONNECT_ERROR";
-        case ErrorCode::SSL_LOCAL_CERTIFICATE_ERROR: return os << "SSL_LOCAL_CERTIFICATE_ERROR";
-        case ErrorCode::SSL_REMOTE_CERTIFICATE_ERROR: return os << "SSL_REMOTE_CERTIFICATE_ERROR";
-        case ErrorCode::SSL_CACERT_ERROR: return os << "SSL_CACERT_ERROR";
-        case ErrorCode::GENERIC_SSL_ERROR: return os << "GENERIC_SSL_ERROR";
-        case ErrorCode::UNSUPPORTED_PROTOCOL: return os << "UNSUPPORTED_PROTOCOL";
         default: return os << "ErrorCode(" << static_cast<std::underlying_type_t<cpr::ErrorCode>>(code) << ")";
     }
 }
