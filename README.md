@@ -32,6 +32,23 @@ int main(int argc, char** argv) {
 }
 ```
 
+## Building
+
+### Library only
+To build the library without any external dependencies:
+```bash
+cmake -B build
+cmake --build build
+```
+
+### Examples
+To build examples, you'll need `vcpkg`. The examples use manifest mode with an optional `examples` feature.
+
+```bash
+cmake -B build -DBANANA_BUILD_EXAMPLES=ON -DVCPKG_MANIFEST_FEATURES=examples -DCMAKE_TOOLCHAIN_FILE=[path/to/vcpkg]/scripts/buildsystems/vcpkg.cmake
+cmake --build build
+```
+
 ## Documentation
 
 [![Previous Release](https://img.shields.io/github/v/release/smertig/banana?label=Banana%20Docs&filter=v0.4.0)](https://smertig.github.io/banana/v0.4.0)

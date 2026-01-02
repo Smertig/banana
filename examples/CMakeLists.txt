@@ -13,8 +13,6 @@ message(STATUS "[banana] Build examples with coroutines: ${BANANA_EXAMPLES_ENABL
 set(CMAKE_CXX_STANDARD 20)
 set(CXX_STANDARD_REQUIRED ON)
 
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/.. ${CMAKE_CURRENT_BINARY_DIR}/banana-lib)
-
 # TODO: remove this?
 find_package(Threads REQUIRED)
 find_package(cpr CONFIG REQUIRED)

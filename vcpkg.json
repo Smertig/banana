@@ -1,0 +1,28 @@
+{
+  "name" : "banana",
+  "version-string" : "0.5.0",
+  "builtin-baseline" : "2d6a6cf3ac9a7cc93942c3d289a2f9c661a6f4a7",
+  "features": {
+    "examples": {
+      "description": "Dependencies for examples",
+      "dependencies": [
+        {
+          "name": "cpr",
+          "version>=": "1.10.5#2"
+        },
+        {
+          "name": "boost-beast",
+          "version>=": "1.84.0#1"
+        },
+        {
+          "name": "openssl",
+          "version>=": "3.3.0"
+        },
+        {
+          "name": "cpp-httplib",
+          "version>=": "0.15.3"
+        }
+      ]
+    }
+  }
+}
