@@ -31,10 +31,6 @@ inline_query_result_article_t
 
    Optional. URL of the result
 
-   .. cpp:member:: optional_t<boolean_t> hide_url
-
-   Optional. Pass True if you don't want the URL to be shown in the message
-
    .. cpp:member:: optional_t<string_t> description
 
    Optional. Short description of the result

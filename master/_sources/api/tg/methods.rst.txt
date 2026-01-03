@@ -82,6 +82,8 @@ File
    pin_chat_message <methods/pin_chat_message>
    promote_chat_member <methods/promote_chat_member>
    refund_star_payment <methods/refund_star_payment>
+   remove_chat_verification <methods/remove_chat_verification>
+   remove_user_verification <methods/remove_user_verification>
    reopen_forum_topic <methods/reopen_forum_topic>
    reopen_general_forum_topic <methods/reopen_general_forum_topic>
    replace_sticker_in_set <methods/replace_sticker_in_set>
@@ -142,3 +144,5 @@ File
    unpin_all_general_forum_topic_messages <methods/unpin_all_general_forum_topic_messages>
    unpin_chat_message <methods/unpin_chat_message>
    upload_sticker_file <methods/upload_sticker_file>
+   verify_chat <methods/verify_chat>
+   verify_user <methods/verify_user>

@@ -219,6 +219,7 @@ File
    switch_inline_query_chosen_chat_t <types/switch_inline_query_chosen_chat>
    text_quote_t <types/text_quote>
    transaction_partner_affiliate_program_t <types/transaction_partner_affiliate_program>
+   transaction_partner_chat_t <types/transaction_partner_chat>
    transaction_partner_fragment_t <types/transaction_partner_fragment>
    transaction_partner_other_t <types/transaction_partner_other>
    transaction_partner_t <types/transaction_partner>

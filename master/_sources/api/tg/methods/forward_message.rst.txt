@@ -36,6 +36,10 @@ forward_message
 
    Unique identifier for the target message thread (topic) of the forum; for forum supergroups only
 
+   .. cpp:member:: optional_t<integer_t> video_start_timestamp
+
+   New start timestamp for the forwarded video in the message
+
    .. cpp:member:: optional_t<boolean_t> disable_notification
 
    Sends the message silently. Users will receive a notification with no sound.

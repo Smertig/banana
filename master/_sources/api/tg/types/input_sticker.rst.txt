@@ -13,7 +13,7 @@ input_sticker_t
 
    .. cpp:member:: string_t format
 
-   Format of the added sticker, must be one of “static” for a .WEBP or .PNG image, “animated” for a .TGS animation, “video” for a WEBM video
+   Format of the added sticker, must be one of “static” for a .WEBP or .PNG image, “animated” for a .TGS animation, “video” for a .WEBM video
 
    .. cpp:member:: array_t<string_t> emoji_list
 

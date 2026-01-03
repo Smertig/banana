@@ -31,6 +31,14 @@ video_t
 
    Optional. Video thumbnail
 
+   .. cpp:member:: optional_t<array_t<photo_size_t>> cover
+
+   Optional. Available sizes of the cover of the video in the message
+
+   .. cpp:member:: optional_t<integer_t> start_timestamp
+
+   Optional. Timestamp in seconds from which the video will play in the message
+
    .. cpp:member:: optional_t<string_t> file_name
 
    Optional. Original filename as defined by the sender
