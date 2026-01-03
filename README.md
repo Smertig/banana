@@ -147,6 +147,22 @@ However, a compilation error is still much better than a silent change in logic,
 
 #### Updating to fresh API version
 
-```bash
-python load_api.py && python custom2json.py && python json2cpp.py && python json2rst.py
-```
+1.  Navigate to the `script` directory:
+    ```bash
+    cd script
+    ```
+2.  (Optional) Install the required Python packages:
+    ```bash
+    pip install -r requirements.txt
+    ```
+3.  Run the following scripts to download the latest API definition and generate the code/documentation:
+    ```bash
+    python load_api.py && python custom2json.py && python json2cpp.py && python json2rst.py
+    ```
+4.  Check the version in the downloaded `script/custom_v2.json`.
+5.  Update the API version in `README.md` (line 17).
+6.  Commit the changes with a proper commit message (see `git log` for examples):
+    ```bash
+    git commit -m "Update to Bot API X.Y"
+    ```
+    It is recommended to include a list of major changes or breaking changes in the commit description.
