@@ -36,6 +36,10 @@ copy_message
 
    Unique identifier for the target message thread (topic) of the forum; for forum supergroups only
 
+   .. cpp:member:: optional_t<integer_t> video_start_timestamp
+
+   New start timestamp for the copied video in the message
+
    .. cpp:member:: optional_t<string_t> caption
 
    New caption for media, 0-1024 characters after entities parsing. If not specified, the original caption is kept

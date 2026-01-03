@@ -864,6 +864,7 @@ struct reflector<api::chat_full_info_t> {
         f("invite_link"sv, &api::chat_full_info_t::invite_link);
         f("pinned_message"sv, &api::chat_full_info_t::pinned_message);
         f("permissions"sv, &api::chat_full_info_t::permissions);
+        f("can_send_gift"sv, &api::chat_full_info_t::can_send_gift, true);
         f("can_send_paid_media"sv, &api::chat_full_info_t::can_send_paid_media, true);
         f("slow_mode_delay"sv, &api::chat_full_info_t::slow_mode_delay);
         f("unrestrict_boost_count"sv, &api::chat_full_info_t::unrestrict_boost_count);
@@ -1280,6 +1281,7 @@ struct reflector<api::copy_message_args_t> {
         f("from_chat_id"sv, &api::copy_message_args_t::from_chat_id);
         f("message_id"sv, &api::copy_message_args_t::message_id);
         f("message_thread_id"sv, &api::copy_message_args_t::message_thread_id);
+        f("video_start_timestamp"sv, &api::copy_message_args_t::video_start_timestamp);
         f("caption"sv, &api::copy_message_args_t::caption);
         f("parse_mode"sv, &api::copy_message_args_t::parse_mode);
         f("caption_entities"sv, &api::copy_message_args_t::caption_entities);
@@ -2051,6 +2053,7 @@ struct reflector<api::forward_message_args_t> {
         f("from_chat_id"sv, &api::forward_message_args_t::from_chat_id);
         f("message_id"sv, &api::forward_message_args_t::message_id);
         f("message_thread_id"sv, &api::forward_message_args_t::message_thread_id);
+        f("video_start_timestamp"sv, &api::forward_message_args_t::video_start_timestamp);
         f("disable_notification"sv, &api::forward_message_args_t::disable_notification);
         f("protect_content"sv, &api::forward_message_args_t::protect_content);
     }
@@ -2508,6 +2511,7 @@ struct reflector<api::gift_t> {
         f("id"sv, &api::gift_t::id);
         f("sticker"sv, &api::gift_t::sticker);
         f("star_count"sv, &api::gift_t::star_count);
+        f("upgrade_star_count"sv, &api::gift_t::upgrade_star_count);
         f("total_count"sv, &api::gift_t::total_count);
         f("remaining_count"sv, &api::gift_t::remaining_count);
     }
@@ -2699,7 +2703,6 @@ struct reflector<api::inline_query_result_article_t> {
         f("input_message_content"sv, &api::inline_query_result_article_t::input_message_content);
         f("reply_markup"sv, &api::inline_query_result_article_t::reply_markup);
         f("url"sv, &api::inline_query_result_article_t::url);
-        f("hide_url"sv, &api::inline_query_result_article_t::hide_url);
         f("description"sv, &api::inline_query_result_article_t::description);
         f("thumbnail_url"sv, &api::inline_query_result_article_t::thumbnail_url);
         f("thumbnail_width"sv, &api::inline_query_result_article_t::thumbnail_width);
@@ -3413,6 +3416,8 @@ struct reflector<api::input_media_video_t> {
         f("type"sv, &api::input_media_video_t::type, "video");
         f("media"sv, &api::input_media_video_t::media);
         f("thumbnail"sv, &api::input_media_video_t::thumbnail);
+        f("cover"sv, &api::input_media_video_t::cover);
+        f("start_timestamp"sv, &api::input_media_video_t::start_timestamp);
         f("caption"sv, &api::input_media_video_t::caption);
         f("parse_mode"sv, &api::input_media_video_t::parse_mode);
         f("caption_entities"sv, &api::input_media_video_t::caption_entities);
@@ -3455,6 +3460,8 @@ struct reflector<api::input_paid_media_video_t> {
         f("type"sv, &api::input_paid_media_video_t::type, "video");
         f("media"sv, &api::input_paid_media_video_t::media);
         f("thumbnail"sv, &api::input_paid_media_video_t::thumbnail);
+        f("cover"sv, &api::input_paid_media_video_t::cover);
+        f("start_timestamp"sv, &api::input_paid_media_video_t::start_timestamp);
         f("width"sv, &api::input_paid_media_video_t::width);
         f("height"sv, &api::input_paid_media_video_t::height);
         f("duration"sv, &api::input_paid_media_video_t::duration);
@@ -4653,6 +4660,36 @@ template <>
 constexpr std::string_view name_of<api::refunded_payment_t> = "refunded_payment_t";
 
 template <>
+struct reflector<api::remove_chat_verification_args_t> {
+    template <class F>
+    static void for_each_field(F&& f) {
+        using namespace std::literals;
+        f("chat_id"sv, &api::remove_chat_verification_args_t::chat_id);
+    }
+};
+
+template <>
+constexpr bool is_reflectable_v<api::remove_chat_verification_args_t> = true;
+
+template <>
+constexpr std::string_view name_of<api::remove_chat_verification_args_t> = "remove_chat_verification_args_t";
+
+template <>
+struct reflector<api::remove_user_verification_args_t> {
+    template <class F>
+    static void for_each_field(F&& f) {
+        using namespace std::literals;
+        f("user_id"sv, &api::remove_user_verification_args_t::user_id);
+    }
+};
+
+template <>
+constexpr bool is_reflectable_v<api::remove_user_verification_args_t> = true;
+
+template <>
+constexpr std::string_view name_of<api::remove_user_verification_args_t> = "remove_user_verification_args_t";
+
+template <>
 struct reflector<api::reopen_forum_topic_args_t> {
     template <class F>
     static void for_each_field(F&& f) {
@@ -5067,8 +5104,10 @@ struct reflector<api::send_gift_args_t> {
     template <class F>
     static void for_each_field(F&& f) {
         using namespace std::literals;
-        f("user_id"sv, &api::send_gift_args_t::user_id);
         f("gift_id"sv, &api::send_gift_args_t::gift_id);
+        f("user_id"sv, &api::send_gift_args_t::user_id);
+        f("chat_id"sv, &api::send_gift_args_t::chat_id);
+        f("pay_for_upgrade"sv, &api::send_gift_args_t::pay_for_upgrade);
         f("text"sv, &api::send_gift_args_t::text);
         f("text_parse_mode"sv, &api::send_gift_args_t::text_parse_mode);
         f("text_entities"sv, &api::send_gift_args_t::text_entities);
@@ -5365,6 +5404,8 @@ struct reflector<api::send_video_args_t> {
         f("width"sv, &api::send_video_args_t::width);
         f("height"sv, &api::send_video_args_t::height);
         f("thumbnail"sv, &api::send_video_args_t::thumbnail);
+        f("cover"sv, &api::send_video_args_t::cover);
+        f("start_timestamp"sv, &api::send_video_args_t::start_timestamp);
         f("caption"sv, &api::send_video_args_t::caption);
         f("parse_mode"sv, &api::send_video_args_t::parse_mode);
         f("caption_entities"sv, &api::send_video_args_t::caption_entities);
@@ -6148,6 +6189,23 @@ template <>
 constexpr std::string_view name_of<api::transaction_partner_affiliate_program_t> = "transaction_partner_affiliate_program_t";
 
 template <>
+struct reflector<api::transaction_partner_chat_t> {
+    template <class F>
+    static void for_each_field(F&& f) {
+        using namespace std::literals;
+        f("type"sv, &api::transaction_partner_chat_t::type, "chat");
+        f("chat"sv, &api::transaction_partner_chat_t::chat);
+        f("gift"sv, &api::transaction_partner_chat_t::gift);
+    }
+};
+
+template <>
+constexpr bool is_reflectable_v<api::transaction_partner_chat_t> = true;
+
+template <>
+constexpr std::string_view name_of<api::transaction_partner_chat_t> = "transaction_partner_chat_t";
+
+template <>
 struct reflector<api::transaction_partner_fragment_t> {
     template <class F>
     static void for_each_field(F&& f) {
@@ -6493,6 +6551,38 @@ template <>
 constexpr std::string_view name_of<api::venue_t> = "venue_t";
 
 template <>
+struct reflector<api::verify_chat_args_t> {
+    template <class F>
+    static void for_each_field(F&& f) {
+        using namespace std::literals;
+        f("chat_id"sv, &api::verify_chat_args_t::chat_id);
+        f("custom_description"sv, &api::verify_chat_args_t::custom_description);
+    }
+};
+
+template <>
+constexpr bool is_reflectable_v<api::verify_chat_args_t> = true;
+
+template <>
+constexpr std::string_view name_of<api::verify_chat_args_t> = "verify_chat_args_t";
+
+template <>
+struct reflector<api::verify_user_args_t> {
+    template <class F>
+    static void for_each_field(F&& f) {
+        using namespace std::literals;
+        f("user_id"sv, &api::verify_user_args_t::user_id);
+        f("custom_description"sv, &api::verify_user_args_t::custom_description);
+    }
+};
+
+template <>
+constexpr bool is_reflectable_v<api::verify_user_args_t> = true;
+
+template <>
+constexpr std::string_view name_of<api::verify_user_args_t> = "verify_user_args_t";
+
+template <>
 struct reflector<api::video_chat_ended_t> {
     template <class F>
     static void for_each_field(F&& f) {
@@ -6582,6 +6672,8 @@ struct reflector<api::video_t> {
         f("height"sv, &api::video_t::height);
         f("duration"sv, &api::video_t::duration);
         f("thumbnail"sv, &api::video_t::thumbnail);
+        f("cover"sv, &api::video_t::cover);
+        f("start_timestamp"sv, &api::video_t::start_timestamp);
         f("file_name"sv, &api::video_t::file_name);
         f("mime_type"sv, &api::video_t::mime_type);
         f("file_size"sv, &api::video_t::file_size);

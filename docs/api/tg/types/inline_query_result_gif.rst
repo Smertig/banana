@@ -17,7 +17,7 @@ inline_query_result_gif_t
 
    .. cpp:member:: string_t gif_url
 
-   A valid URL for the GIF file. File size must not exceed 1MB
+   A valid URL for the GIF file
 
    .. cpp:member:: string_t thumbnail_url
 

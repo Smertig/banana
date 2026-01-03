@@ -113,7 +113,7 @@ struct answer_shipping_query_args_t {
     string_t                               shipping_query_id; // Unique identifier for the query to be answered
     boolean_t                              ok;                // Pass True if delivery to the specified address is possible and False if there are any problems (for example, if delivery to the specified address is not possible)
     optional_t<array_t<shipping_option_t>> shipping_options;  // Required if ok is True. A JSON-serialized array of available shipping options.
-    optional_t<string_t>                   error_message;     // Required if ok is False. Error message in human readable form that explains why it is impossible to complete the order (e.g. "Sorry, delivery to your desired address is unavailable'). Telegram will display this message to the user.
+    optional_t<string_t>                   error_message;     // Required if ok is False. Error message in human readable form that explains why it is impossible to complete the order (e.g. “Sorry, delivery to your desired address is unavailable”). Telegram will display this message to the user.
 };
 
 /**
@@ -123,7 +123,7 @@ struct answer_shipping_query_args_t {
  * @param args__shipping_query_id Unique identifier for the query to be answered
  * @param args__ok Pass True if delivery to the specified address is possible and False if there are any problems (for example, if delivery to the specified address is not possible)
  * @param args__shipping_options Required if ok is True. A JSON-serialized array of available shipping options.
- * @param args__error_message Required if ok is False. Error message in human readable form that explains why it is impossible to complete the order (e.g. "Sorry, delivery to your desired address is unavailable'). Telegram will display this message to the user.
+ * @param args__error_message Required if ok is False. Error message in human readable form that explains why it is impossible to complete the order (e.g. “Sorry, delivery to your desired address is unavailable”). Telegram will display this message to the user.
  */
 template <class Agent>
 api_result<boolean_t, Agent&&> answer_shipping_query(Agent&& agent, answer_shipping_query_args_t args) {
@@ -300,6 +300,7 @@ struct copy_message_args_t {
     variant_t<integer_t, string_t>                                                                                   from_chat_id;             // Unique identifier for the chat where the original message was sent (or channel username in the format @channelusername)
     integer_t                                                                                                        message_id;               // Message identifier in the chat specified in from_chat_id
     optional_t<integer_t>                                                                                            message_thread_id;        // Unique identifier for the target message thread (topic) of the forum; for forum supergroups only
+    optional_t<integer_t>                                                                                            video_start_timestamp;    // New start timestamp for the copied video in the message
     optional_t<string_t>                                                                                             caption;                  // New caption for media, 0-1024 characters after entities parsing. If not specified, the original caption is kept
     optional_t<string_t>                                                                                             parse_mode;               // Mode for parsing entities in the new caption. See formatting options for more details.
     optional_t<array_t<message_entity_t>>                                                                            caption_entities;         // A JSON-serialized list of special entities that appear in the new caption, which can be specified instead of parse_mode
@@ -319,6 +320,7 @@ struct copy_message_args_t {
  * @param args__message_thread_id Unique identifier for the target message thread (topic) of the forum; for forum supergroups only
  * @param args__from_chat_id Unique identifier for the chat where the original message was sent (or channel username in the format @channelusername)
  * @param args__message_id Message identifier in the chat specified in from_chat_id
+ * @param args__video_start_timestamp New start timestamp for the copied video in the message
  * @param args__caption New caption for media, 0-1024 characters after entities parsing. If not specified, the original caption is kept
  * @param args__parse_mode Mode for parsing entities in the new caption. See formatting options for more details.
  * @param args__caption_entities A JSON-serialized list of special entities that appear in the new caption, which can be specified instead of parse_mode
@@ -1098,12 +1100,13 @@ void export_chat_invite_link(Agent&& agent, export_chat_invite_link_args_t args,
 
 // Arguments to forward_message method
 struct forward_message_args_t {
-    variant_t<integer_t, string_t> chat_id;              // Unique identifier for the target chat or username of the target channel (in the format @channelusername)
-    variant_t<integer_t, string_t> from_chat_id;         // Unique identifier for the chat where the original message was sent (or channel username in the format @channelusername)
-    integer_t                      message_id;           // Message identifier in the chat specified in from_chat_id
-    optional_t<integer_t>          message_thread_id;    // Unique identifier for the target message thread (topic) of the forum; for forum supergroups only
-    optional_t<boolean_t>          disable_notification; // Sends the message silently. Users will receive a notification with no sound.
-    optional_t<boolean_t>          protect_content;      // Protects the contents of the forwarded message from forwarding and saving
+    variant_t<integer_t, string_t> chat_id;               // Unique identifier for the target chat or username of the target channel (in the format @channelusername)
+    variant_t<integer_t, string_t> from_chat_id;          // Unique identifier for the chat where the original message was sent (or channel username in the format @channelusername)
+    integer_t                      message_id;            // Message identifier in the chat specified in from_chat_id
+    optional_t<integer_t>          message_thread_id;     // Unique identifier for the target message thread (topic) of the forum; for forum supergroups only
+    optional_t<integer_t>          video_start_timestamp; // New start timestamp for the forwarded video in the message
+    optional_t<boolean_t>          disable_notification;  // Sends the message silently. Users will receive a notification with no sound.
+    optional_t<boolean_t>          protect_content;       // Protects the contents of the forwarded message from forwarding and saving
 };
 
 /**
@@ -1113,6 +1116,7 @@ struct forward_message_args_t {
  * @param args__chat_id Unique identifier for the target chat or username of the target channel (in the format @channelusername)
  * @param args__message_thread_id Unique identifier for the target message thread (topic) of the forum; for forum supergroups only
  * @param args__from_chat_id Unique identifier for the chat where the original message was sent (or channel username in the format @channelusername)
+ * @param args__video_start_timestamp New start timestamp for the forwarded video in the message
  * @param args__disable_notification Sends the message silently. Users will receive a notification with no sound.
  * @param args__protect_content Protects the contents of the forwarded message from forwarding and saving
  * @param args__message_id Message identifier in the chat specified in from_chat_id
@@ -1163,7 +1167,7 @@ struct get_available_gifts_args_t {
 };
 
 /**
- * Returns the list of gifts that can be sent by the bot to users. Requires no parameters. Returns a Gifts object.
+ * Returns the list of gifts that can be sent by the bot to users and channel chats. Requires no parameters. Returns a Gifts object.
  * 
  * @param agent Any object satisfying agent concept (see `banana::agent` namespace)
  */
@@ -1568,7 +1572,7 @@ struct get_updates_args_t {
     optional_t<integer_t>         offset;          // Identifier of the first update to be returned. Must be greater by one than the highest among the identifiers of previously received updates. By default, updates starting with the earliest unconfirmed update are returned. An update is considered confirmed as soon as getUpdates is called with an offset higher than its update_id. The negative offset can be specified to retrieve updates starting from -offset update from the end of the updates queue. All previous updates will be forgotten.
     optional_t<integer_t>         limit;           // Limits the number of updates to be retrieved. Values between 1-100 are accepted. Defaults to 100.
     optional_t<integer_t>         timeout;         // Timeout in seconds for long polling. Defaults to 0, i.e. usual short polling. Should be positive, short polling should be used for testing purposes only.
-    optional_t<array_t<string_t>> allowed_updates; // A JSON-serialized list of the update types you want your bot to receive. For example, specify ["message", "edited_channel_post", "callback_query"] to only receive updates of these types. See Update for a complete list of available update types. Specify an empty list to receive all update types except chat_member, message_reaction, and message_reaction_count (default). If not specified, the previous setting will be used.   Please note that this parameter doesn't affect updates created before the call to the getUpdates, so unwanted updates may be received for a short period of time.
+    optional_t<array_t<string_t>> allowed_updates; // A JSON-serialized list of the update types you want your bot to receive. For example, specify ["message", "edited_channel_post", "callback_query"] to only receive updates of these types. See Update for a complete list of available update types. Specify an empty list to receive all update types except chat_member, message_reaction, and message_reaction_count (default). If not specified, the previous setting will be used.   Please note that this parameter doesn't affect updates created before the call to getUpdates, so unwanted updates may be received for a short period of time.
 };
 
 /**
@@ -1578,7 +1582,7 @@ struct get_updates_args_t {
  * @param args__offset Identifier of the first update to be returned. Must be greater by one than the highest among the identifiers of previously received updates. By default, updates starting with the earliest unconfirmed update are returned. An update is considered confirmed as soon as getUpdates is called with an offset higher than its update_id. The negative offset can be specified to retrieve updates starting from -offset update from the end of the updates queue. All previous updates will be forgotten.
  * @param args__limit Limits the number of updates to be retrieved. Values between 1-100 are accepted. Defaults to 100.
  * @param args__timeout Timeout in seconds for long polling. Defaults to 0, i.e. usual short polling. Should be positive, short polling should be used for testing purposes only.
- * @param args__allowed_updates A JSON-serialized list of the update types you want your bot to receive. For example, specify ["message", "edited_channel_post", "callback_query"] to only receive updates of these types. See Update for a complete list of available update types. Specify an empty list to receive all update types except chat_member, message_reaction, and message_reaction_count (default). If not specified, the previous setting will be used.   Please note that this parameter doesn't affect updates created before the call to the getUpdates, so unwanted updates may be received for a short period of time.
+ * @param args__allowed_updates A JSON-serialized list of the update types you want your bot to receive. For example, specify ["message", "edited_channel_post", "callback_query"] to only receive updates of these types. See Update for a complete list of available update types. Specify an empty list to receive all update types except chat_member, message_reaction, and message_reaction_count (default). If not specified, the previous setting will be used.   Please note that this parameter doesn't affect updates created before the call to getUpdates, so unwanted updates may be received for a short period of time.
  */
 template <class Agent>
 api_result<array_t<api::update_t>, Agent&&> get_updates(Agent&& agent, get_updates_args_t args) {
@@ -1818,6 +1822,48 @@ api_result<boolean_t, Agent&&> refund_star_payment(Agent&& agent, refund_star_pa
 
 template <class Agent, class F>
 void refund_star_payment(Agent&& agent, refund_star_payment_args_t args, F&& callback) {
+    call(static_cast<Agent&&>(agent), std::move(args), std::forward<F>(callback));
+}
+
+// Arguments to remove_chat_verification method
+struct remove_chat_verification_args_t {
+    variant_t<integer_t, string_t> chat_id; // Unique identifier for the target chat or username of the target channel (in the format @channelusername)
+};
+
+/**
+ * Removes verification from a chat that is currently verified on behalf of the organization represented by the bot. Returns True on success.
+ * 
+ * @param agent Any object satisfying agent concept (see `banana::agent` namespace)
+ * @param args__chat_id Unique identifier for the target chat or username of the target channel (in the format @channelusername)
+ */
+template <class Agent>
+api_result<boolean_t, Agent&&> remove_chat_verification(Agent&& agent, remove_chat_verification_args_t args) {
+    return call(static_cast<Agent&&>(agent), std::move(args));
+}
+
+template <class Agent, class F>
+void remove_chat_verification(Agent&& agent, remove_chat_verification_args_t args, F&& callback) {
+    call(static_cast<Agent&&>(agent), std::move(args), std::forward<F>(callback));
+}
+
+// Arguments to remove_user_verification method
+struct remove_user_verification_args_t {
+    integer_t user_id; // Unique identifier of the target user
+};
+
+/**
+ * Removes verification from a user who is currently verified on behalf of the organization represented by the bot. Returns True on success.
+ * 
+ * @param agent Any object satisfying agent concept (see `banana::agent` namespace)
+ * @param args__user_id Unique identifier of the target user
+ */
+template <class Agent>
+api_result<boolean_t, Agent&&> remove_user_verification(Agent&& agent, remove_user_verification_args_t args) {
+    return call(static_cast<Agent&&>(agent), std::move(args));
+}
+
+template <class Agent, class F>
+void remove_user_verification(Agent&& agent, remove_user_verification_args_t args, F&& callback) {
     call(static_cast<Agent&&>(agent), std::move(args), std::forward<F>(callback));
 }
 
@@ -2286,20 +2332,24 @@ void send_game(Agent&& agent, send_game_args_t args, F&& callback) {
 
 // Arguments to send_gift method
 struct send_gift_args_t {
-    integer_t                             user_id;         // Unique identifier of the target user that will receive the gift
-    string_t                              gift_id;         // Identifier of the gift
-    optional_t<string_t>                  text;            // Text that will be shown along with the gift; 0-255 characters
-    optional_t<string_t>                  text_parse_mode; // Mode for parsing entities in the text. See formatting options for more details. Entities other than “bold”, “italic”, “underline”, “strikethrough”, “spoiler”, and “custom_emoji” are ignored.
-    optional_t<array_t<message_entity_t>> text_entities;   // A JSON-serialized list of special entities that appear in the gift text. It can be specified instead of text_parse_mode. Entities other than “bold”, “italic”, “underline”, “strikethrough”, “spoiler”, and “custom_emoji” are ignored.
+    string_t                                   gift_id;         // Identifier of the gift
+    optional_t<integer_t>                      user_id;         // Required if chat_id is not specified. Unique identifier of the target user who will receive the gift.
+    optional_t<variant_t<integer_t, string_t>> chat_id;         // Required if user_id is not specified. Unique identifier for the chat or username of the channel (in the format @channelusername) that will receive the gift.
+    optional_t<boolean_t>                      pay_for_upgrade; // Pass True to pay for the gift upgrade from the bot's balance, thereby making the upgrade free for the receiver
+    optional_t<string_t>                       text;            // Text that will be shown along with the gift; 0-128 characters
+    optional_t<string_t>                       text_parse_mode; // Mode for parsing entities in the text. See formatting options for more details. Entities other than “bold”, “italic”, “underline”, “strikethrough”, “spoiler”, and “custom_emoji” are ignored.
+    optional_t<array_t<message_entity_t>>      text_entities;   // A JSON-serialized list of special entities that appear in the gift text. It can be specified instead of text_parse_mode. Entities other than “bold”, “italic”, “underline”, “strikethrough”, “spoiler”, and “custom_emoji” are ignored.
 };
 
 /**
- * Sends a gift to the given user. The gift can't be converted to Telegram Stars by the user. Returns True on success.
+ * Sends a gift to the given user or channel chat. The gift can't be converted to Telegram Stars by the receiver. Returns True on success.
  * 
  * @param agent Any object satisfying agent concept (see `banana::agent` namespace)
- * @param args__user_id Unique identifier of the target user that will receive the gift
+ * @param args__user_id Required if chat_id is not specified. Unique identifier of the target user who will receive the gift.
+ * @param args__chat_id Required if user_id is not specified. Unique identifier for the chat or username of the channel (in the format @channelusername) that will receive the gift.
  * @param args__gift_id Identifier of the gift
- * @param args__text Text that will be shown along with the gift; 0-255 characters
+ * @param args__pay_for_upgrade Pass True to pay for the gift upgrade from the bot's balance, thereby making the upgrade free for the receiver
+ * @param args__text Text that will be shown along with the gift; 0-128 characters
  * @param args__text_parse_mode Mode for parsing entities in the text. See formatting options for more details. Entities other than “bold”, “italic”, “underline”, “strikethrough”, “spoiler”, and “custom_emoji” are ignored.
  * @param args__text_entities A JSON-serialized list of special entities that appear in the gift text. It can be specified instead of text_parse_mode. Entities other than “bold”, “italic”, “underline”, “strikethrough”, “spoiler”, and “custom_emoji” are ignored.
  */
@@ -2785,6 +2835,8 @@ struct send_video_args_t {
     optional_t<integer_t>                                                                                            width;                    // Video width
     optional_t<integer_t>                                                                                            height;                   // Video height
     optional_t<variant_t<input_file_t, string_t>>                                                                    thumbnail;                // Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail's width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can't be reused and can be only uploaded as a new file, so you can pass “attach://<file_attach_name>” if the thumbnail was uploaded using multipart/form-data under <file_attach_name>. More information on Sending Files »
+    optional_t<variant_t<input_file_t, string_t>>                                                                    cover;                    // Cover for the video in the message. Pass a file_id to send a file that exists on the Telegram servers (recommended), pass an HTTP URL for Telegram to get a file from the Internet, or pass “attach://<file_attach_name>” to upload a new one using multipart/form-data under <file_attach_name> name. More information on Sending Files »
+    optional_t<integer_t>                                                                                            start_timestamp;          // Start timestamp for the video in the message
     optional_t<string_t>                                                                                             caption;                  // Video caption (may also be used when resending videos by file_id), 0-1024 characters after entities parsing
     optional_t<string_t>                                                                                             parse_mode;               // Mode for parsing entities in the video caption. See formatting options for more details.
     optional_t<array_t<message_entity_t>>                                                                            caption_entities;         // A JSON-serialized list of special entities that appear in the caption, which can be specified instead of parse_mode
@@ -2812,6 +2864,8 @@ struct send_video_args_t {
  * @param args__width Video width
  * @param args__height Video height
  * @param args__thumbnail Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail's width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can't be reused and can be only uploaded as a new file, so you can pass “attach://<file_attach_name>” if the thumbnail was uploaded using multipart/form-data under <file_attach_name>. More information on Sending Files »
+ * @param args__cover Cover for the video in the message. Pass a file_id to send a file that exists on the Telegram servers (recommended), pass an HTTP URL for Telegram to get a file from the Internet, or pass “attach://<file_attach_name>” to upload a new one using multipart/form-data under <file_attach_name> name. More information on Sending Files »
+ * @param args__start_timestamp Start timestamp for the video in the message
  * @param args__caption Video caption (may also be used when resending videos by file_id), 0-1024 characters after entities parsing
  * @param args__parse_mode Mode for parsing entities in the video caption. See formatting options for more details.
  * @param args__caption_entities A JSON-serialized list of special entities that appear in the caption, which can be specified instead of parse_mode
@@ -3157,7 +3211,7 @@ struct set_message_reaction_args_t {
 };
 
 /**
- * Use this method to change the chosen reactions on a message. Service messages can't be reacted to. Automatically forwarded messages from a channel to its discussion group have the same available reactions as messages in the channel. Bots can't use paid reactions. Returns True on success.
+ * Use this method to change the chosen reactions on a message. Service messages of some types can't be reacted to. Automatically forwarded messages from a channel to its discussion group have the same available reactions as messages in the channel. Bots can't use paid reactions. Returns True on success.
  * 
  * @param agent Any object satisfying agent concept (see `banana::agent` namespace)
  * @param args__chat_id Unique identifier for the target chat or username of the target channel (in the format @channelusername)
@@ -3411,8 +3465,8 @@ void set_sticker_position_in_set(Agent&& agent, set_sticker_position_in_set_args
 struct set_sticker_set_thumbnail_args_t {
     string_t                                      name;      // Sticker set name
     integer_t                                     user_id;   // User identifier of the sticker set owner
-    string_t                                      format;    // Format of the thumbnail, must be one of “static” for a .WEBP or .PNG image, “animated” for a .TGS animation, or “video” for a WEBM video
-    optional_t<variant_t<input_file_t, string_t>> thumbnail; // A .WEBP or .PNG image with the thumbnail, must be up to 128 kilobytes in size and have a width and height of exactly 100px, or a .TGS animation with a thumbnail up to 32 kilobytes in size (see https://core.telegram.org/stickers#animation-requirements for animated sticker technical requirements), or a WEBM video with the thumbnail up to 32 kilobytes in size; see https://core.telegram.org/stickers#video-requirements for video sticker technical requirements. Pass a file_id as a String to send a file that already exists on the Telegram servers, pass an HTTP URL as a String for Telegram to get a file from the Internet, or upload a new one using multipart/form-data. More information on Sending Files ». Animated and video sticker set thumbnails can't be uploaded via HTTP URL. If omitted, then the thumbnail is dropped and the first sticker is used as the thumbnail.
+    string_t                                      format;    // Format of the thumbnail, must be one of “static” for a .WEBP or .PNG image, “animated” for a .TGS animation, or “video” for a .WEBM video
+    optional_t<variant_t<input_file_t, string_t>> thumbnail; // A .WEBP or .PNG image with the thumbnail, must be up to 128 kilobytes in size and have a width and height of exactly 100px, or a .TGS animation with a thumbnail up to 32 kilobytes in size (see https://core.telegram.org/stickers#animation-requirements for animated sticker technical requirements), or a .WEBM video with the thumbnail up to 32 kilobytes in size; see https://core.telegram.org/stickers#video-requirements for video sticker technical requirements. Pass a file_id as a String to send a file that already exists on the Telegram servers, pass an HTTP URL as a String for Telegram to get a file from the Internet, or upload a new one using multipart/form-data. More information on Sending Files ». Animated and video sticker set thumbnails can't be uploaded via HTTP URL. If omitted, then the thumbnail is dropped and the first sticker is used as the thumbnail.
 };
 
 /**
@@ -3421,8 +3475,8 @@ struct set_sticker_set_thumbnail_args_t {
  * @param agent Any object satisfying agent concept (see `banana::agent` namespace)
  * @param args__name Sticker set name
  * @param args__user_id User identifier of the sticker set owner
- * @param args__thumbnail A .WEBP or .PNG image with the thumbnail, must be up to 128 kilobytes in size and have a width and height of exactly 100px, or a .TGS animation with a thumbnail up to 32 kilobytes in size (see https://core.telegram.org/stickers#animation-requirements for animated sticker technical requirements), or a WEBM video with the thumbnail up to 32 kilobytes in size; see https://core.telegram.org/stickers#video-requirements for video sticker technical requirements. Pass a file_id as a String to send a file that already exists on the Telegram servers, pass an HTTP URL as a String for Telegram to get a file from the Internet, or upload a new one using multipart/form-data. More information on Sending Files ». Animated and video sticker set thumbnails can't be uploaded via HTTP URL. If omitted, then the thumbnail is dropped and the first sticker is used as the thumbnail.
- * @param args__format Format of the thumbnail, must be one of “static” for a .WEBP or .PNG image, “animated” for a .TGS animation, or “video” for a WEBM video
+ * @param args__thumbnail A .WEBP or .PNG image with the thumbnail, must be up to 128 kilobytes in size and have a width and height of exactly 100px, or a .TGS animation with a thumbnail up to 32 kilobytes in size (see https://core.telegram.org/stickers#animation-requirements for animated sticker technical requirements), or a .WEBM video with the thumbnail up to 32 kilobytes in size; see https://core.telegram.org/stickers#video-requirements for video sticker technical requirements. Pass a file_id as a String to send a file that already exists on the Telegram servers, pass an HTTP URL as a String for Telegram to get a file from the Internet, or upload a new one using multipart/form-data. More information on Sending Files ». Animated and video sticker set thumbnails can't be uploaded via HTTP URL. If omitted, then the thumbnail is dropped and the first sticker is used as the thumbnail.
+ * @param args__format Format of the thumbnail, must be one of “static” for a .WEBP or .PNG image, “animated” for a .TGS animation, or “video” for a .WEBM video
  */
 template <class Agent>
 api_result<boolean_t, Agent&&> set_sticker_set_thumbnail(Agent&& agent, set_sticker_set_thumbnail_args_t args) {
@@ -3494,7 +3548,7 @@ struct set_webhook_args_t {
 };
 
 /**
- * Use this method to specify a URL and receive incoming updates via an outgoing webhook. Whenever there is an update for the bot, we will send an HTTPS POST request to the specified URL, containing a JSON-serialized Update. In case of an unsuccessful request, we will give up after a reasonable amount of attempts. Returns True on success. If you'd like to make sure that the webhook was set by you, you can specify secret data in the parameter secret_token. If specified, the request will contain a header “X-Telegram-Bot-Api-Secret-Token” with the secret token as content.
+ * Use this method to specify a URL and receive incoming updates via an outgoing webhook. Whenever there is an update for the bot, we will send an HTTPS POST request to the specified URL, containing a JSON-serialized Update. In case of an unsuccessful request (a request with response HTTP status code different from 2XY), we will repeat the request and give up after a reasonable amount of attempts. Returns True on success. If you'd like to make sure that the webhook was set by you, you can specify secret data in the parameter secret_token. If specified, the request will contain a header “X-Telegram-Bot-Api-Secret-Token” with the secret token as content.
  * 
  * @param agent Any object satisfying agent concept (see `banana::agent` namespace)
  * @param args__url HTTPS URL to send updates to. Use an empty string to remove webhook integration
@@ -3752,6 +3806,52 @@ api_result<api::file_t, Agent&&> upload_sticker_file(Agent&& agent, upload_stick
 
 template <class Agent, class F>
 void upload_sticker_file(Agent&& agent, upload_sticker_file_args_t args, F&& callback) {
+    call(static_cast<Agent&&>(agent), std::move(args), std::forward<F>(callback));
+}
+
+// Arguments to verify_chat method
+struct verify_chat_args_t {
+    variant_t<integer_t, string_t> chat_id;            // Unique identifier for the target chat or username of the target channel (in the format @channelusername)
+    optional_t<string_t>           custom_description; // Custom description for the verification; 0-70 characters. Must be empty if the organization isn't allowed to provide a custom verification description.
+};
+
+/**
+ * Verifies a chat on behalf of the organization which is represented by the bot. Returns True on success.
+ * 
+ * @param agent Any object satisfying agent concept (see `banana::agent` namespace)
+ * @param args__chat_id Unique identifier for the target chat or username of the target channel (in the format @channelusername)
+ * @param args__custom_description Custom description for the verification; 0-70 characters. Must be empty if the organization isn't allowed to provide a custom verification description.
+ */
+template <class Agent>
+api_result<boolean_t, Agent&&> verify_chat(Agent&& agent, verify_chat_args_t args) {
+    return call(static_cast<Agent&&>(agent), std::move(args));
+}
+
+template <class Agent, class F>
+void verify_chat(Agent&& agent, verify_chat_args_t args, F&& callback) {
+    call(static_cast<Agent&&>(agent), std::move(args), std::forward<F>(callback));
+}
+
+// Arguments to verify_user method
+struct verify_user_args_t {
+    integer_t            user_id;            // Unique identifier of the target user
+    optional_t<string_t> custom_description; // Custom description for the verification; 0-70 characters. Must be empty if the organization isn't allowed to provide a custom verification description.
+};
+
+/**
+ * Verifies a user on behalf of the organization which is represented by the bot. Returns True on success.
+ * 
+ * @param agent Any object satisfying agent concept (see `banana::agent` namespace)
+ * @param args__user_id Unique identifier of the target user
+ * @param args__custom_description Custom description for the verification; 0-70 characters. Must be empty if the organization isn't allowed to provide a custom verification description.
+ */
+template <class Agent>
+api_result<boolean_t, Agent&&> verify_user(Agent&& agent, verify_user_args_t args) {
+    return call(static_cast<Agent&&>(agent), std::move(args));
+}
+
+template <class Agent, class F>
+void verify_user(Agent&& agent, verify_user_args_t args, F&& callback) {
     call(static_cast<Agent&&>(agent), std::move(args), std::forward<F>(callback));
 }
 

@@ -17,7 +17,7 @@ inline_query_result_mpeg4_gif_t
 
    .. cpp:member:: string_t mpeg4_url
 
-   A valid URL for the MPEG4 file. File size must not exceed 1MB
+   A valid URL for the MPEG4 file
 
    .. cpp:member:: string_t thumbnail_url
 

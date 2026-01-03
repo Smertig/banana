@@ -69,6 +69,8 @@ template serialized_args_t<api::log_out_args_t> serialize_args<api::log_out_args
 template serialized_args_t<api::pin_chat_message_args_t> serialize_args<api::pin_chat_message_args_t>(api::pin_chat_message_args_t value);
 template serialized_args_t<api::promote_chat_member_args_t> serialize_args<api::promote_chat_member_args_t>(api::promote_chat_member_args_t value);
 template serialized_args_t<api::refund_star_payment_args_t> serialize_args<api::refund_star_payment_args_t>(api::refund_star_payment_args_t value);
+template serialized_args_t<api::remove_chat_verification_args_t> serialize_args<api::remove_chat_verification_args_t>(api::remove_chat_verification_args_t value);
+template serialized_args_t<api::remove_user_verification_args_t> serialize_args<api::remove_user_verification_args_t>(api::remove_user_verification_args_t value);
 template serialized_args_t<api::reopen_forum_topic_args_t> serialize_args<api::reopen_forum_topic_args_t>(api::reopen_forum_topic_args_t value);
 template serialized_args_t<api::reopen_general_forum_topic_args_t> serialize_args<api::reopen_general_forum_topic_args_t>(api::reopen_general_forum_topic_args_t value);
 template serialized_args_t<api::replace_sticker_in_set_args_t> serialize_args<api::replace_sticker_in_set_args_t>(api::replace_sticker_in_set_args_t value);
@@ -129,6 +131,8 @@ template serialized_args_t<api::unpin_all_forum_topic_messages_args_t> serialize
 template serialized_args_t<api::unpin_all_general_forum_topic_messages_args_t> serialize_args<api::unpin_all_general_forum_topic_messages_args_t>(api::unpin_all_general_forum_topic_messages_args_t value);
 template serialized_args_t<api::unpin_chat_message_args_t> serialize_args<api::unpin_chat_message_args_t>(api::unpin_chat_message_args_t value);
 template serialized_args_t<api::upload_sticker_file_args_t> serialize_args<api::upload_sticker_file_args_t>(api::upload_sticker_file_args_t value);
+template serialized_args_t<api::verify_chat_args_t> serialize_args<api::verify_chat_args_t>(api::verify_chat_args_t value);
+template serialized_args_t<api::verify_user_args_t> serialize_args<api::verify_user_args_t>(api::verify_user_args_t value);
 template expected<api::bot_description_t> deserialize_response<api::bot_description_t>(std::string_view json_response);
 template expected<api::bot_name_t> deserialize_response<api::bot_name_t>(std::string_view json_response);
 template expected<api::bot_short_description_t> deserialize_response<api::bot_short_description_t>(std::string_view json_response);

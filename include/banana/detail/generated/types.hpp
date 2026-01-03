@@ -137,6 +137,7 @@ struct chat_full_info_t {
     optional_t<string_t>                 invite_link;                             // Optional. Primary invite link, for groups, supergroups and channel chats
     optional_t<message_t>                pinned_message;                          // Optional. The most recent pinned message (by sending date)
     optional_t<chat_permissions_t>       permissions;                             // Optional. Default chat member permissions, for groups and supergroups
+    optional_t<boolean_t>                can_send_gift;                           // Optional. True, if gifts can be sent to the chat
     optional_t<boolean_t>                can_send_paid_media;                     // Optional. True, if paid media messages can be sent or forwarded to the channel chat. The field is available only for channel chats.
     optional_t<integer_t>                slow_mode_delay;                         // Optional. For supergroups, the minimum allowed delay between consecutive messages sent by each unprivileged user; in seconds
     optional_t<integer_t>                unrestrict_boost_count;                  // Optional. For supergroups, the minimum number of boosts that a non-administrator user needs to add in order to ignore slow mode and chat permissions
@@ -293,7 +294,7 @@ struct input_poll_option_t {
 // This object describes a sticker to be added to a sticker set.
 struct input_sticker_t {
     variant_t<input_file_t, string_t> sticker;       // The added sticker. Pass a file_id as a String to send a file that already exists on the Telegram servers, pass an HTTP URL as a String for Telegram to get a file from the Internet, upload a new one using multipart/form-data, or pass “attach://<file_attach_name>” to upload a new one using multipart/form-data under <file_attach_name> name. Animated and video stickers can't be uploaded via HTTP URL. More information on Sending Files »
-    string_t                          format;        // Format of the added sticker, must be one of “static” for a .WEBP or .PNG image, “animated” for a .TGS animation, “video” for a WEBM video
+    string_t                          format;        // Format of the added sticker, must be one of “static” for a .WEBP or .PNG image, “animated” for a .TGS animation, “video” for a .WEBM video
     array_t<string_t>                 emoji_list;    // List of 1-20 emoji associated with the sticker
     optional_t<mask_position_t>       mask_position; // Optional. Position where the mask should be placed on faces. For “mask” stickers only.
     optional_t<array_t<string_t>>     keywords;      // Optional. List of 0-20 search keywords for the sticker with total length of up to 64 characters. For “regular” and “custom_emoji” stickers only.
@@ -452,7 +453,7 @@ struct sent_web_app_message_t {
     optional_t<string_t> inline_message_id; // Optional. Identifier of the sent inline message. Available only if there is an inline keyboard attached to the message.
 };
 
-// This object contains basic information about a successful payment.
+// This object contains basic information about a successful payment. Note that if the buyer initiates a chargeback with the relevant payment provider following this transaction, the funds may be debited from your balance. This is outside of Telegram's control.
 struct successful_payment_t {
     string_t                 currency;                     // Three-letter ISO 4217 currency code, or “XTR” for payments in Telegram Stars
     integer_t                total_amount;                 // Total price in the smallest units of the currency (integer, not float/double). For example, for a price of US$ 1.45 pass amount = 145. See the exp parameter in currencies.json, it shows the number of digits past the decimal point for each currency (2 for the majority of currencies).
@@ -615,7 +616,7 @@ struct document_t {
     optional_t<integer_t>    file_size;      // Optional. File size in bytes. It can be bigger than 2^31 and some programming languages may have difficulty/silent defects in interpreting it. But it has at most 52 significant bits, so a signed 64-bit integer or double-precision float type are safe for storing this value.
 };
 
-// The background is a PNG or TGV (gzipped subset of SVG with MIME type “application/x-tgwallpattern”) pattern to be combined with the background fill chosen by the user.
+// The background is a .PNG or .TGV (gzipped subset of SVG with MIME type “application/x-tgwallpattern”) pattern to be combined with the background fill chosen by the user.
 struct background_type_pattern_t {
     string_t              type;        // Type of the background, always “pattern”
     document_t            document;    // Document with the pattern
@@ -901,6 +902,13 @@ struct transaction_partner_affiliate_program_t {
     string_t           type;                 // Type of the transaction partner, always “affiliate_program”
     integer_t          commission_per_mille; // The number of Telegram Stars received by the bot for each 1000 Telegram Stars received by the affiliate program sponsor from referred users
     optional_t<user_t> sponsor_user;         // Optional. Information about the bot that sponsored the affiliate program
+};
+
+// Describes a transaction with a chat.
+struct transaction_partner_chat_t {
+    string_t           type; // Type of the transaction partner, always “chat”
+    chat_t             chat; // Information about the chat
+    optional_t<gift_t> gift; // Optional. The gift sent to the chat by the bot
 };
 
 // Describes a withdrawal transaction with Fragment.
@@ -1318,15 +1326,17 @@ struct user_profile_photos_t {
 
 // This object represents a video file.
 struct video_t {
-    string_t                 file_id;        // Identifier for this file, which can be used to download or reuse the file
-    string_t                 file_unique_id; // Unique identifier for this file, which is supposed to be the same over time and for different bots. Can't be used to download or reuse the file.
-    integer_t                width;          // Video width as defined by the sender
-    integer_t                height;         // Video height as defined by the sender
-    integer_t                duration;       // Duration of the video in seconds as defined by the sender
-    optional_t<photo_size_t> thumbnail;      // Optional. Video thumbnail
-    optional_t<string_t>     file_name;      // Optional. Original filename as defined by the sender
-    optional_t<string_t>     mime_type;      // Optional. MIME type of the file as defined by the sender
-    optional_t<integer_t>    file_size;      // Optional. File size in bytes. It can be bigger than 2^31 and some programming languages may have difficulty/silent defects in interpreting it. But it has at most 52 significant bits, so a signed 64-bit integer or double-precision float type are safe for storing this value.
+    string_t                          file_id;         // Identifier for this file, which can be used to download or reuse the file
+    string_t                          file_unique_id;  // Unique identifier for this file, which is supposed to be the same over time and for different bots. Can't be used to download or reuse the file.
+    integer_t                         width;           // Video width as defined by the sender
+    integer_t                         height;          // Video height as defined by the sender
+    integer_t                         duration;        // Duration of the video in seconds as defined by the sender
+    optional_t<photo_size_t>          thumbnail;       // Optional. Video thumbnail
+    optional_t<array_t<photo_size_t>> cover;           // Optional. Available sizes of the cover of the video in the message
+    optional_t<integer_t>             start_timestamp; // Optional. Timestamp in seconds from which the video will play in the message
+    optional_t<string_t>              file_name;       // Optional. Original filename as defined by the sender
+    optional_t<string_t>              mime_type;       // Optional. MIME type of the file as defined by the sender
+    optional_t<integer_t>             file_size;       // Optional. File size in bytes. It can be bigger than 2^31 and some programming languages may have difficulty/silent defects in interpreting it. But it has at most 52 significant bits, so a signed 64-bit integer or double-precision float type are safe for storing this value.
 };
 
 // The paid media is a video.
@@ -1362,11 +1372,12 @@ struct sticker_t {
 
 // This object represents a gift that can be sent by the bot.
 struct gift_t {
-    string_t              id;              // Unique identifier of the gift
-    sticker_t             sticker;         // The sticker that represents the gift
-    integer_t             star_count;      // The number of Telegram Stars that must be paid to send the sticker
-    optional_t<integer_t> total_count;     // Optional. The total number of the gifts of this type that can be sent; for limited gifts only
-    optional_t<integer_t> remaining_count; // Optional. The number of remaining gifts of this type that can be sent; for limited gifts only
+    string_t              id;                 // Unique identifier of the gift
+    sticker_t             sticker;            // The sticker that represents the gift
+    integer_t             star_count;         // The number of Telegram Stars that must be paid to send the sticker
+    optional_t<integer_t> upgrade_star_count; // Optional. The number of Telegram Stars that must be paid to upgrade the gift to a unique one
+    optional_t<integer_t> total_count;        // Optional. The total number of the gifts of this type that can be sent; for limited gifts only
+    optional_t<integer_t> remaining_count;    // Optional. The number of remaining gifts of this type that can be sent; for limited gifts only
 };
 
 // This object represent a list of gifts.
@@ -1569,7 +1580,7 @@ struct inline_query_result_game_t {
 struct inline_query_result_gif_t {
     string_t                              type;                     // Type of the result, must be gif
     string_t                              id;                       // Unique identifier for this result, 1-64 bytes
-    string_t                              gif_url;                  // A valid URL for the GIF file. File size must not exceed 1MB
+    string_t                              gif_url;                  // A valid URL for the GIF file
     string_t                              thumbnail_url;            // URL of the static (JPEG or GIF) or animated (MPEG4) thumbnail for the result
     optional_t<integer_t>                 gif_width;                // Optional. Width of the GIF
     optional_t<integer_t>                 gif_height;               // Optional. Height of the GIF
@@ -1606,7 +1617,7 @@ struct inline_query_result_location_t {
 struct inline_query_result_mpeg4_gif_t {
     string_t                              type;                     // Type of the result, must be mpeg4_gif
     string_t                              id;                       // Unique identifier for this result, 1-64 bytes
-    string_t                              mpeg4_url;                // A valid URL for the MPEG4 file. File size must not exceed 1MB
+    string_t                              mpeg4_url;                // A valid URL for the MPEG4 file
     string_t                              thumbnail_url;            // URL of the static (JPEG or GIF) or animated (MPEG4) thumbnail for the result
     optional_t<integer_t>                 mpeg4_width;              // Optional. Video width
     optional_t<integer_t>                 mpeg4_height;             // Optional. Video height
@@ -1768,7 +1779,6 @@ struct inline_query_result_article_t {
     input_message_content_t              input_message_content; // Content of the message to be sent
     optional_t<inline_keyboard_markup_t> reply_markup;          // Optional. Inline keyboard attached to the message
     optional_t<string_t>                 url;                   // Optional. URL of the result
-    optional_t<boolean_t>                hide_url;              // Optional. Pass True if you don't want the URL to be shown in the message
     optional_t<string_t>                 description;           // Optional. Short description of the result
     optional_t<string_t>                 thumbnail_url;         // Optional. Url of the thumbnail for the result
     optional_t<integer_t>                thumbnail_width;       // Optional. Thumbnail width
@@ -1784,41 +1794,41 @@ struct shipping_option_t {
 
 // Represents an animation file (GIF or H.264/MPEG-4 AVC video without sound) to be sent.
 struct input_media_animation_t {
-    string_t                                      type;                     // Type of the result, must be animation
-    string_t                                      media;                    // File to send. Pass a file_id to send a file that exists on the Telegram servers (recommended), pass an HTTP URL for Telegram to get a file from the Internet, or pass “attach://<file_attach_name>” to upload a new one using multipart/form-data under <file_attach_name> name. More information on Sending Files »
-    optional_t<variant_t<input_file_t, string_t>> thumbnail;                // Optional. Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail's width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can't be reused and can be only uploaded as a new file, so you can pass “attach://<file_attach_name>” if the thumbnail was uploaded using multipart/form-data under <file_attach_name>. More information on Sending Files »
-    optional_t<string_t>                          caption;                  // Optional. Caption of the animation to be sent, 0-1024 characters after entities parsing
-    optional_t<string_t>                          parse_mode;               // Optional. Mode for parsing entities in the animation caption. See formatting options for more details.
-    optional_t<array_t<message_entity_t>>         caption_entities;         // Optional. List of special entities that appear in the caption, which can be specified instead of parse_mode
-    optional_t<boolean_t>                         show_caption_above_media; // Optional. Pass True, if the caption must be shown above the message media
-    optional_t<integer_t>                         width;                    // Optional. Animation width
-    optional_t<integer_t>                         height;                   // Optional. Animation height
-    optional_t<integer_t>                         duration;                 // Optional. Animation duration in seconds
-    optional_t<boolean_t>                         has_spoiler;              // Optional. Pass True if the animation needs to be covered with a spoiler animation
+    string_t                              type;                     // Type of the result, must be animation
+    string_t                              media;                    // File to send. Pass a file_id to send a file that exists on the Telegram servers (recommended), pass an HTTP URL for Telegram to get a file from the Internet, or pass “attach://<file_attach_name>” to upload a new one using multipart/form-data under <file_attach_name> name. More information on Sending Files »
+    optional_t<string_t>                  thumbnail;                // Optional. Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail's width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can't be reused and can be only uploaded as a new file, so you can pass “attach://<file_attach_name>” if the thumbnail was uploaded using multipart/form-data under <file_attach_name>. More information on Sending Files »
+    optional_t<string_t>                  caption;                  // Optional. Caption of the animation to be sent, 0-1024 characters after entities parsing
+    optional_t<string_t>                  parse_mode;               // Optional. Mode for parsing entities in the animation caption. See formatting options for more details.
+    optional_t<array_t<message_entity_t>> caption_entities;         // Optional. List of special entities that appear in the caption, which can be specified instead of parse_mode
+    optional_t<boolean_t>                 show_caption_above_media; // Optional. Pass True, if the caption must be shown above the message media
+    optional_t<integer_t>                 width;                    // Optional. Animation width
+    optional_t<integer_t>                 height;                   // Optional. Animation height
+    optional_t<integer_t>                 duration;                 // Optional. Animation duration in seconds
+    optional_t<boolean_t>                 has_spoiler;              // Optional. Pass True if the animation needs to be covered with a spoiler animation
 };
 
 // Represents an audio file to be treated as music to be sent.
 struct input_media_audio_t {
-    string_t                                      type;             // Type of the result, must be audio
-    string_t                                      media;            // File to send. Pass a file_id to send a file that exists on the Telegram servers (recommended), pass an HTTP URL for Telegram to get a file from the Internet, or pass “attach://<file_attach_name>” to upload a new one using multipart/form-data under <file_attach_name> name. More information on Sending Files »
-    optional_t<variant_t<input_file_t, string_t>> thumbnail;        // Optional. Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail's width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can't be reused and can be only uploaded as a new file, so you can pass “attach://<file_attach_name>” if the thumbnail was uploaded using multipart/form-data under <file_attach_name>. More information on Sending Files »
-    optional_t<string_t>                          caption;          // Optional. Caption of the audio to be sent, 0-1024 characters after entities parsing
-    optional_t<string_t>                          parse_mode;       // Optional. Mode for parsing entities in the audio caption. See formatting options for more details.
-    optional_t<array_t<message_entity_t>>         caption_entities; // Optional. List of special entities that appear in the caption, which can be specified instead of parse_mode
-    optional_t<integer_t>                         duration;         // Optional. Duration of the audio in seconds
-    optional_t<string_t>                          performer;        // Optional. Performer of the audio
-    optional_t<string_t>                          title;            // Optional. Title of the audio
+    string_t                              type;             // Type of the result, must be audio
+    string_t                              media;            // File to send. Pass a file_id to send a file that exists on the Telegram servers (recommended), pass an HTTP URL for Telegram to get a file from the Internet, or pass “attach://<file_attach_name>” to upload a new one using multipart/form-data under <file_attach_name> name. More information on Sending Files »
+    optional_t<string_t>                  thumbnail;        // Optional. Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail's width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can't be reused and can be only uploaded as a new file, so you can pass “attach://<file_attach_name>” if the thumbnail was uploaded using multipart/form-data under <file_attach_name>. More information on Sending Files »
+    optional_t<string_t>                  caption;          // Optional. Caption of the audio to be sent, 0-1024 characters after entities parsing
+    optional_t<string_t>                  parse_mode;       // Optional. Mode for parsing entities in the audio caption. See formatting options for more details.
+    optional_t<array_t<message_entity_t>> caption_entities; // Optional. List of special entities that appear in the caption, which can be specified instead of parse_mode
+    optional_t<integer_t>                 duration;         // Optional. Duration of the audio in seconds
+    optional_t<string_t>                  performer;        // Optional. Performer of the audio
+    optional_t<string_t>                  title;            // Optional. Title of the audio
 };
 
 // Represents a general file to be sent.
 struct input_media_document_t {
-    string_t                                      type;                           // Type of the result, must be document
-    string_t                                      media;                          // File to send. Pass a file_id to send a file that exists on the Telegram servers (recommended), pass an HTTP URL for Telegram to get a file from the Internet, or pass “attach://<file_attach_name>” to upload a new one using multipart/form-data under <file_attach_name> name. More information on Sending Files »
-    optional_t<variant_t<input_file_t, string_t>> thumbnail;                      // Optional. Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail's width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can't be reused and can be only uploaded as a new file, so you can pass “attach://<file_attach_name>” if the thumbnail was uploaded using multipart/form-data under <file_attach_name>. More information on Sending Files »
-    optional_t<string_t>                          caption;                        // Optional. Caption of the document to be sent, 0-1024 characters after entities parsing
-    optional_t<string_t>                          parse_mode;                     // Optional. Mode for parsing entities in the document caption. See formatting options for more details.
-    optional_t<array_t<message_entity_t>>         caption_entities;               // Optional. List of special entities that appear in the caption, which can be specified instead of parse_mode
-    optional_t<boolean_t>                         disable_content_type_detection; // Optional. Disables automatic server-side content type detection for files uploaded using multipart/form-data. Always True, if the document is sent as part of an album.
+    string_t                              type;                           // Type of the result, must be document
+    string_t                              media;                          // File to send. Pass a file_id to send a file that exists on the Telegram servers (recommended), pass an HTTP URL for Telegram to get a file from the Internet, or pass “attach://<file_attach_name>” to upload a new one using multipart/form-data under <file_attach_name> name. More information on Sending Files »
+    optional_t<string_t>                  thumbnail;                      // Optional. Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail's width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can't be reused and can be only uploaded as a new file, so you can pass “attach://<file_attach_name>” if the thumbnail was uploaded using multipart/form-data under <file_attach_name>. More information on Sending Files »
+    optional_t<string_t>                  caption;                        // Optional. Caption of the document to be sent, 0-1024 characters after entities parsing
+    optional_t<string_t>                  parse_mode;                     // Optional. Mode for parsing entities in the document caption. See formatting options for more details.
+    optional_t<array_t<message_entity_t>> caption_entities;               // Optional. List of special entities that appear in the caption, which can be specified instead of parse_mode
+    optional_t<boolean_t>                 disable_content_type_detection; // Optional. Disables automatic server-side content type detection for files uploaded using multipart/form-data. Always True, if the document is sent as part of an album.
 };
 
 // Represents a photo to be sent.
@@ -1834,18 +1844,20 @@ struct input_media_photo_t {
 
 // Represents a video to be sent.
 struct input_media_video_t {
-    string_t                                      type;                     // Type of the result, must be video
-    string_t                                      media;                    // File to send. Pass a file_id to send a file that exists on the Telegram servers (recommended), pass an HTTP URL for Telegram to get a file from the Internet, or pass “attach://<file_attach_name>” to upload a new one using multipart/form-data under <file_attach_name> name. More information on Sending Files »
-    optional_t<variant_t<input_file_t, string_t>> thumbnail;                // Optional. Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail's width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can't be reused and can be only uploaded as a new file, so you can pass “attach://<file_attach_name>” if the thumbnail was uploaded using multipart/form-data under <file_attach_name>. More information on Sending Files »
-    optional_t<string_t>                          caption;                  // Optional. Caption of the video to be sent, 0-1024 characters after entities parsing
-    optional_t<string_t>                          parse_mode;               // Optional. Mode for parsing entities in the video caption. See formatting options for more details.
-    optional_t<array_t<message_entity_t>>         caption_entities;         // Optional. List of special entities that appear in the caption, which can be specified instead of parse_mode
-    optional_t<boolean_t>                         show_caption_above_media; // Optional. Pass True, if the caption must be shown above the message media
-    optional_t<integer_t>                         width;                    // Optional. Video width
-    optional_t<integer_t>                         height;                   // Optional. Video height
-    optional_t<integer_t>                         duration;                 // Optional. Video duration in seconds
-    optional_t<boolean_t>                         supports_streaming;       // Optional. Pass True if the uploaded video is suitable for streaming
-    optional_t<boolean_t>                         has_spoiler;              // Optional. Pass True if the video needs to be covered with a spoiler animation
+    string_t                              type;                     // Type of the result, must be video
+    string_t                              media;                    // File to send. Pass a file_id to send a file that exists on the Telegram servers (recommended), pass an HTTP URL for Telegram to get a file from the Internet, or pass “attach://<file_attach_name>” to upload a new one using multipart/form-data under <file_attach_name> name. More information on Sending Files »
+    optional_t<string_t>                  thumbnail;                // Optional. Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail's width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can't be reused and can be only uploaded as a new file, so you can pass “attach://<file_attach_name>” if the thumbnail was uploaded using multipart/form-data under <file_attach_name>. More information on Sending Files »
+    optional_t<string_t>                  cover;                    // Optional. Cover for the video in the message. Pass a file_id to send a file that exists on the Telegram servers (recommended), pass an HTTP URL for Telegram to get a file from the Internet, or pass “attach://<file_attach_name>” to upload a new one using multipart/form-data under <file_attach_name> name. More information on Sending Files »
+    optional_t<integer_t>                 start_timestamp;          // Optional. Start timestamp for the video in the message
+    optional_t<string_t>                  caption;                  // Optional. Caption of the video to be sent, 0-1024 characters after entities parsing
+    optional_t<string_t>                  parse_mode;               // Optional. Mode for parsing entities in the video caption. See formatting options for more details.
+    optional_t<array_t<message_entity_t>> caption_entities;         // Optional. List of special entities that appear in the caption, which can be specified instead of parse_mode
+    optional_t<boolean_t>                 show_caption_above_media; // Optional. Pass True, if the caption must be shown above the message media
+    optional_t<integer_t>                 width;                    // Optional. Video width
+    optional_t<integer_t>                 height;                   // Optional. Video height
+    optional_t<integer_t>                 duration;                 // Optional. Video duration in seconds
+    optional_t<boolean_t>                 supports_streaming;       // Optional. Pass True if the uploaded video is suitable for streaming
+    optional_t<boolean_t>                 has_spoiler;              // Optional. Pass True if the video needs to be covered with a spoiler animation
 };
 
 // The paid media to send is a photo.
@@ -1856,13 +1868,15 @@ struct input_paid_media_photo_t {
 
 // The paid media to send is a video.
 struct input_paid_media_video_t {
-    string_t                                      type;               // Type of the media, must be video
-    string_t                                      media;              // File to send. Pass a file_id to send a file that exists on the Telegram servers (recommended), pass an HTTP URL for Telegram to get a file from the Internet, or pass “attach://<file_attach_name>” to upload a new one using multipart/form-data under <file_attach_name> name. More information on Sending Files »
-    optional_t<variant_t<input_file_t, string_t>> thumbnail;          // Optional. Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail's width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can't be reused and can be only uploaded as a new file, so you can pass “attach://<file_attach_name>” if the thumbnail was uploaded using multipart/form-data under <file_attach_name>. More information on Sending Files »
-    optional_t<integer_t>                         width;              // Optional. Video width
-    optional_t<integer_t>                         height;             // Optional. Video height
-    optional_t<integer_t>                         duration;           // Optional. Video duration in seconds
-    optional_t<boolean_t>                         supports_streaming; // Optional. Pass True if the uploaded video is suitable for streaming
+    string_t              type;               // Type of the media, must be video
+    string_t              media;              // File to send. Pass a file_id to send a file that exists on the Telegram servers (recommended), pass an HTTP URL for Telegram to get a file from the Internet, or pass “attach://<file_attach_name>” to upload a new one using multipart/form-data under <file_attach_name> name. More information on Sending Files »
+    optional_t<string_t>  thumbnail;          // Optional. Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail's width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can't be reused and can be only uploaded as a new file, so you can pass “attach://<file_attach_name>” if the thumbnail was uploaded using multipart/form-data under <file_attach_name>. More information on Sending Files »
+    optional_t<string_t>  cover;              // Optional. Cover for the video in the message. Pass a file_id to send a file that exists on the Telegram servers (recommended), pass an HTTP URL for Telegram to get a file from the Internet, or pass “attach://<file_attach_name>” to upload a new one using multipart/form-data under <file_attach_name> name. More information on Sending Files »
+    optional_t<integer_t> start_timestamp;    // Optional. Start timestamp for the video in the message
+    optional_t<integer_t> width;              // Optional. Video width
+    optional_t<integer_t> height;             // Optional. Video height
+    optional_t<integer_t> duration;           // Optional. Video duration in seconds
+    optional_t<boolean_t> supports_streaming; // Optional. Pass True if the uploaded video is suitable for streaming
 };
 
 // Represents a menu button, which opens the bot's list of commands.
@@ -2050,7 +2064,7 @@ struct revenue_withdrawal_state_succeeded_t {
     string_t  url;  // An HTTPS URL that can be used to see transaction details
 };
 
-// Describes a Telegram Star transaction.
+// Describes a Telegram Star transaction. Note that if the buyer initiates a chargeback with the payment provider from whom they acquired Stars (e.g., Apple, Google) following this transaction, the refunded Stars will be deducted from the bot's balance. This is outside of Telegram's control.
 struct star_transaction_t {
     string_t                          id;              // Unique identifier of the transaction. Coincides with the identifier of the original transaction for refund transactions. Coincides with SuccessfulPayment.telegram_payment_charge_id for successful incoming payments from users.
     integer_t                         amount;          // Integer amount of Telegram Stars transferred by the transaction

@@ -151,7 +151,7 @@
                     "type": "Array of ShippingOption"
                 },
                 {
-                    "description": "Required if ok is False. Error message in human readable form that explains why it is impossible to complete the order (e.g. \"Sorry, delivery to your desired address is unavailable'). Telegram will display this message to the user.",
+                    "description": "Required if ok is False. Error message in human readable form that explains why it is impossible to complete the order (e.g. “Sorry, delivery to your desired address is unavailable”). Telegram will display this message to the user.",
                     "name": "error_message",
                     "optional": true,
                     "type": "String"
@@ -303,6 +303,12 @@
                     "description": "Message identifier in the chat specified in from_chat_id",
                     "name": "message_id",
                     "optional": false,
+                    "type": "Integer"
+                },
+                {
+                    "description": "New start timestamp for the copied video in the message",
+                    "name": "video_start_timestamp",
+                    "optional": true,
                     "type": "Integer"
                 },
                 {
@@ -1279,6 +1285,12 @@
                     "type": "Integer or String"
                 },
                 {
+                    "description": "New start timestamp for the forwarded video in the message",
+                    "name": "video_start_timestamp",
+                    "optional": true,
+                    "type": "Integer"
+                },
+                {
                     "description": "Sends the message silently. Users will receive a notification with no sound.",
                     "name": "disable_notification",
                     "optional": true,
@@ -1342,7 +1354,7 @@
             "return_type": "Array of MessageId"
         },
         "getAvailableGifts": {
-            "desc": "Returns the list of gifts that can be sent by the bot to users. Requires no parameters. Returns a Gifts object.",
+            "desc": "Returns the list of gifts that can be sent by the bot to users and channel chats. Requires no parameters. Returns a Gifts object.",
             "params": [],
             "return_type": "Gifts"
         },
@@ -1609,7 +1621,7 @@
                     "type": "Integer"
                 },
                 {
-                    "description": "A JSON-serialized list of the update types you want your bot to receive. For example, specify [\"message\", \"edited_channel_post\", \"callback_query\"] to only receive updates of these types. See Update for a complete list of available update types. Specify an empty list to receive all update types except chat_member, message_reaction, and message_reaction_count (default). If not specified, the previous setting will be used.   Please note that this parameter doesn't affect updates created before the call to the getUpdates, so unwanted updates may be received for a short period of time.",
+                    "description": "A JSON-serialized list of the update types you want your bot to receive. For example, specify [\"message\", \"edited_channel_post\", \"callback_query\"] to only receive updates of these types. See Update for a complete list of available update types. Specify an empty list to receive all update types except chat_member, message_reaction, and message_reaction_count (default). If not specified, the previous setting will be used.   Please note that this parameter doesn't affect updates created before the call to getUpdates, so unwanted updates may be received for a short period of time.",
                     "name": "allowed_updates",
                     "optional": true,
                     "type": "Array of String"
@@ -1846,6 +1858,30 @@
                     "name": "telegram_payment_charge_id",
                     "optional": false,
                     "type": "String"
+                }
+            ],
+            "return_type": "Boolean"
+        },
+        "removeChatVerification": {
+            "desc": "Removes verification from a chat that is currently verified on behalf of the organization represented by the bot. Returns True on success.",
+            "params": [
+                {
+                    "description": "Unique identifier for the target chat or username of the target channel (in the format @channelusername)",
+                    "name": "chat_id",
+                    "optional": false,
+                    "type": "Integer or String"
+                }
+            ],
+            "return_type": "Boolean"
+        },
+        "removeUserVerification": {
+            "desc": "Removes verification from a user who is currently verified on behalf of the organization represented by the bot. Returns True on success.",
+            "params": [
+                {
+                    "description": "Unique identifier of the target user",
+                    "name": "user_id",
+                    "optional": false,
+                    "type": "Integer"
                 }
             ],
             "return_type": "Boolean"
@@ -2578,13 +2614,19 @@
             "return_type": "Message"
         },
         "sendGift": {
-            "desc": "Sends a gift to the given user. The gift can't be converted to Telegram Stars by the user. Returns True on success.",
+            "desc": "Sends a gift to the given user or channel chat. The gift can't be converted to Telegram Stars by the receiver. Returns True on success.",
             "params": [
                 {
-                    "description": "Unique identifier of the target user that will receive the gift",
+                    "description": "Required if chat_id is not specified. Unique identifier of the target user who will receive the gift.",
                     "name": "user_id",
-                    "optional": false,
+                    "optional": true,
                     "type": "Integer"
+                },
+                {
+                    "description": "Required if user_id is not specified. Unique identifier for the chat or username of the channel (in the format @channelusername) that will receive the gift.",
+                    "name": "chat_id",
+                    "optional": true,
+                    "type": "Integer or String"
                 },
                 {
                     "description": "Identifier of the gift",
@@ -2593,7 +2635,13 @@
                     "type": "String"
                 },
                 {
-                    "description": "Text that will be shown along with the gift; 0-255 characters",
+                    "description": "Pass True to pay for the gift upgrade from the bot's balance, thereby making the upgrade free for the receiver",
+                    "name": "pay_for_upgrade",
+                    "optional": true,
+                    "type": "Boolean"
+                },
+                {
+                    "description": "Text that will be shown along with the gift; 0-128 characters",
                     "name": "text",
                     "optional": true,
                     "type": "String"
@@ -3596,6 +3644,18 @@
                     "type": "InputFile or String"
                 },
                 {
+                    "description": "Cover for the video in the message. Pass a file_id to send a file that exists on the Telegram servers (recommended), pass an HTTP URL for Telegram to get a file from the Internet, or pass “attach://<file_attach_name>” to upload a new one using multipart/form-data under <file_attach_name> name. More information on Sending Files »",
+                    "name": "cover",
+                    "optional": true,
+                    "type": "InputFile or String"
+                },
+                {
+                    "description": "Start timestamp for the video in the message",
+                    "name": "start_timestamp",
+                    "optional": true,
+                    "type": "Integer"
+                },
+                {
                     "description": "Video caption (may also be used when resending videos by file_id), 0-1024 characters after entities parsing",
                     "name": "caption",
                     "optional": true,
@@ -4049,7 +4109,7 @@
             "return_type": "Message or Boolean"
         },
         "setMessageReaction": {
-            "desc": "Use this method to change the chosen reactions on a message. Service messages can't be reacted to. Automatically forwarded messages from a channel to its discussion group have the same available reactions as messages in the channel. Bots can't use paid reactions. Returns True on success.",
+            "desc": "Use this method to change the chosen reactions on a message. Service messages of some types can't be reacted to. Automatically forwarded messages from a channel to its discussion group have the same available reactions as messages in the channel. Bots can't use paid reactions. Returns True on success.",
             "params": [
                 {
                     "description": "Unique identifier for the target chat or username of the target channel (in the format @channelusername)",
@@ -4280,13 +4340,13 @@
                     "type": "Integer"
                 },
                 {
-                    "description": "A .WEBP or .PNG image with the thumbnail, must be up to 128 kilobytes in size and have a width and height of exactly 100px, or a .TGS animation with a thumbnail up to 32 kilobytes in size (see https://core.telegram.org/stickers#animation-requirements for animated sticker technical requirements), or a WEBM video with the thumbnail up to 32 kilobytes in size; see https://core.telegram.org/stickers#video-requirements for video sticker technical requirements. Pass a file_id as a String to send a file that already exists on the Telegram servers, pass an HTTP URL as a String for Telegram to get a file from the Internet, or upload a new one using multipart/form-data. More information on Sending Files ». Animated and video sticker set thumbnails can't be uploaded via HTTP URL. If omitted, then the thumbnail is dropped and the first sticker is used as the thumbnail.",
+                    "description": "A .WEBP or .PNG image with the thumbnail, must be up to 128 kilobytes in size and have a width and height of exactly 100px, or a .TGS animation with a thumbnail up to 32 kilobytes in size (see https://core.telegram.org/stickers#animation-requirements for animated sticker technical requirements), or a .WEBM video with the thumbnail up to 32 kilobytes in size; see https://core.telegram.org/stickers#video-requirements for video sticker technical requirements. Pass a file_id as a String to send a file that already exists on the Telegram servers, pass an HTTP URL as a String for Telegram to get a file from the Internet, or upload a new one using multipart/form-data. More information on Sending Files ». Animated and video sticker set thumbnails can't be uploaded via HTTP URL. If omitted, then the thumbnail is dropped and the first sticker is used as the thumbnail.",
                     "name": "thumbnail",
                     "optional": true,
                     "type": "InputFile or String"
                 },
                 {
-                    "description": "Format of the thumbnail, must be one of “static” for a .WEBP or .PNG image, “animated” for a .TGS animation, or “video” for a WEBM video",
+                    "description": "Format of the thumbnail, must be one of “static” for a .WEBP or .PNG image, “animated” for a .TGS animation, or “video” for a .WEBM video",
                     "name": "format",
                     "optional": false,
                     "type": "String"
@@ -4337,7 +4397,7 @@
             "return_type": "Boolean"
         },
         "setWebhook": {
-            "desc": "Use this method to specify a URL and receive incoming updates via an outgoing webhook. Whenever there is an update for the bot, we will send an HTTPS POST request to the specified URL, containing a JSON-serialized Update. In case of an unsuccessful request, we will give up after a reasonable amount of attempts. Returns True on success. If you'd like to make sure that the webhook was set by you, you can specify secret data in the parameter secret_token. If specified, the request will contain a header “X-Telegram-Bot-Api-Secret-Token” with the secret token as content.",
+            "desc": "Use this method to specify a URL and receive incoming updates via an outgoing webhook. Whenever there is an update for the bot, we will send an HTTPS POST request to the specified URL, containing a JSON-serialized Update. In case of an unsuccessful request (a request with response HTTP status code different from 2XY), we will repeat the request and give up after a reasonable amount of attempts. Returns True on success. If you'd like to make sure that the webhook was set by you, you can specify secret data in the parameter secret_token. If specified, the request will contain a header “X-Telegram-Bot-Api-Secret-Token” with the secret token as content.",
             "params": [
                 {
                     "description": "HTTPS URL to send updates to. Use an empty string to remove webhook integration",
@@ -4594,6 +4654,42 @@
                 }
             ],
             "return_type": "File"
+        },
+        "verifyChat": {
+            "desc": "Verifies a chat on behalf of the organization which is represented by the bot. Returns True on success.",
+            "params": [
+                {
+                    "description": "Unique identifier for the target chat or username of the target channel (in the format @channelusername)",
+                    "name": "chat_id",
+                    "optional": false,
+                    "type": "Integer or String"
+                },
+                {
+                    "description": "Custom description for the verification; 0-70 characters. Must be empty if the organization isn't allowed to provide a custom verification description.",
+                    "name": "custom_description",
+                    "optional": true,
+                    "type": "String"
+                }
+            ],
+            "return_type": "Boolean"
+        },
+        "verifyUser": {
+            "desc": "Verifies a user on behalf of the organization which is represented by the bot. Returns True on success.",
+            "params": [
+                {
+                    "description": "Unique identifier of the target user",
+                    "name": "user_id",
+                    "optional": false,
+                    "type": "Integer"
+                },
+                {
+                    "description": "Custom description for the verification; 0-70 characters. Must be empty if the organization isn't allowed to provide a custom verification description.",
+                    "name": "custom_description",
+                    "optional": true,
+                    "type": "String"
+                }
+            ],
+            "return_type": "Boolean"
         }
     },
     "types": {
@@ -4881,7 +4977,7 @@
             ]
         },
         "BackgroundTypePattern": {
-            "desc": "The background is a PNG or TGV (gzipped subset of SVG with MIME type “application/x-tgwallpattern”) pattern to be combined with the background fill chosen by the user.",
+            "desc": "The background is a .PNG or .TGV (gzipped subset of SVG with MIME type “application/x-tgwallpattern”) pattern to be combined with the background fill chosen by the user.",
             "fields": [
                 {
                     "default": "pattern",
@@ -5860,6 +5956,13 @@
                     "name": "permissions",
                     "optional": true,
                     "type": "ChatPermissions"
+                },
+                {
+                    "default": true,
+                    "description": "Optional. True, if gifts can be sent to the chat",
+                    "name": "can_send_gift",
+                    "optional": true,
+                    "type": "Boolean"
                 },
                 {
                     "default": true,
@@ -7224,6 +7327,12 @@
                     "type": "Integer"
                 },
                 {
+                    "description": "Optional. The number of Telegram Stars that must be paid to upgrade the gift to a unique one",
+                    "name": "upgrade_star_count",
+                    "optional": true,
+                    "type": "Integer"
+                },
+                {
                     "description": "Optional. The total number of the gifts of this type that can be sent; for limited gifts only",
                     "name": "total_count",
                     "optional": true,
@@ -7625,12 +7734,6 @@
                     "name": "url",
                     "optional": true,
                     "type": "String"
-                },
-                {
-                    "description": "Optional. Pass True if you don't want the URL to be shown in the message",
-                    "name": "hide_url",
-                    "optional": true,
-                    "type": "Boolean"
                 },
                 {
                     "description": "Optional. Short description of the result",
@@ -8431,7 +8534,7 @@
                     "type": "String"
                 },
                 {
-                    "description": "A valid URL for the GIF file. File size must not exceed 1MB",
+                    "description": "A valid URL for the GIF file",
                     "name": "gif_url",
                     "optional": false,
                     "type": "String"
@@ -8618,7 +8721,7 @@
                     "type": "String"
                 },
                 {
-                    "description": "A valid URL for the MPEG4 file. File size must not exceed 1MB",
+                    "description": "A valid URL for the MPEG4 file",
                     "name": "mpeg4_url",
                     "optional": false,
                     "type": "String"
@@ -9306,7 +9409,7 @@
                     "description": "Optional. Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail's width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can't be reused and can be only uploaded as a new file, so you can pass “attach://<file_attach_name>” if the thumbnail was uploaded using multipart/form-data under <file_attach_name>. More information on Sending Files »",
                     "name": "thumbnail",
                     "optional": true,
-                    "type": "InputFile or String"
+                    "type": "String"
                 },
                 {
                     "description": "Optional. Caption of the animation to be sent, 0-1024 characters after entities parsing",
@@ -9378,7 +9481,7 @@
                     "description": "Optional. Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail's width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can't be reused and can be only uploaded as a new file, so you can pass “attach://<file_attach_name>” if the thumbnail was uploaded using multipart/form-data under <file_attach_name>. More information on Sending Files »",
                     "name": "thumbnail",
                     "optional": true,
-                    "type": "InputFile or String"
+                    "type": "String"
                 },
                 {
                     "description": "Optional. Caption of the audio to be sent, 0-1024 characters after entities parsing",
@@ -9438,7 +9541,7 @@
                     "description": "Optional. Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail's width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can't be reused and can be only uploaded as a new file, so you can pass “attach://<file_attach_name>” if the thumbnail was uploaded using multipart/form-data under <file_attach_name>. More information on Sending Files »",
                     "name": "thumbnail",
                     "optional": true,
-                    "type": "InputFile or String"
+                    "type": "String"
                 },
                 {
                     "description": "Optional. Caption of the document to be sent, 0-1024 characters after entities parsing",
@@ -9534,7 +9637,19 @@
                     "description": "Optional. Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail's width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can't be reused and can be only uploaded as a new file, so you can pass “attach://<file_attach_name>” if the thumbnail was uploaded using multipart/form-data under <file_attach_name>. More information on Sending Files »",
                     "name": "thumbnail",
                     "optional": true,
-                    "type": "InputFile or String"
+                    "type": "String"
+                },
+                {
+                    "description": "Optional. Cover for the video in the message. Pass a file_id to send a file that exists on the Telegram servers (recommended), pass an HTTP URL for Telegram to get a file from the Internet, or pass “attach://<file_attach_name>” to upload a new one using multipart/form-data under <file_attach_name> name. More information on Sending Files »",
+                    "name": "cover",
+                    "optional": true,
+                    "type": "String"
+                },
+                {
+                    "description": "Optional. Start timestamp for the video in the message",
+                    "name": "start_timestamp",
+                    "optional": true,
+                    "type": "Integer"
                 },
                 {
                     "description": "Optional. Caption of the video to be sent, 0-1024 characters after entities parsing",
@@ -9652,7 +9767,19 @@
                     "description": "Optional. Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail's width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can't be reused and can be only uploaded as a new file, so you can pass “attach://<file_attach_name>” if the thumbnail was uploaded using multipart/form-data under <file_attach_name>. More information on Sending Files »",
                     "name": "thumbnail",
                     "optional": true,
-                    "type": "InputFile or String"
+                    "type": "String"
+                },
+                {
+                    "description": "Optional. Cover for the video in the message. Pass a file_id to send a file that exists on the Telegram servers (recommended), pass an HTTP URL for Telegram to get a file from the Internet, or pass “attach://<file_attach_name>” to upload a new one using multipart/form-data under <file_attach_name> name. More information on Sending Files »",
+                    "name": "cover",
+                    "optional": true,
+                    "type": "String"
+                },
+                {
+                    "description": "Optional. Start timestamp for the video in the message",
+                    "name": "start_timestamp",
+                    "optional": true,
+                    "type": "Integer"
                 },
                 {
                     "description": "Optional. Video width",
@@ -9713,7 +9840,7 @@
                     "type": "InputFile or String"
                 },
                 {
-                    "description": "Format of the added sticker, must be one of “static” for a .WEBP or .PNG image, “animated” for a .TGS animation, “video” for a WEBM video",
+                    "description": "Format of the added sticker, must be one of “static” for a .WEBP or .PNG image, “animated” for a .TGS animation, “video” for a .WEBM video",
                     "name": "format",
                     "optional": false,
                     "type": "String"
@@ -12221,7 +12348,7 @@
             ]
         },
         "StarTransaction": {
-            "desc": "Describes a Telegram Star transaction.",
+            "desc": "Describes a Telegram Star transaction. Note that if the buyer initiates a chargeback with the payment provider from whom they acquired Stars (e.g., Apple, Google) following this transaction, the refunded Stars will be deducted from the bot's balance. This is outside of Telegram's control.",
             "fields": [
                 {
                     "description": "Unique identifier of the transaction. Coincides with the identifier of the original transaction for refund transactions. Coincides with SuccessfulPayment.telegram_payment_charge_id for successful incoming payments from users.",
@@ -12421,7 +12548,7 @@
             ]
         },
         "SuccessfulPayment": {
-            "desc": "This object contains basic information about a successful payment.",
+            "desc": "This object contains basic information about a successful payment. Note that if the buyer initiates a chargeback with the relevant payment provider following this transaction, the funds may be debited from your balance. This is outside of Telegram's control.",
             "fields": [
                 {
                     "description": "Three-letter ISO 4217 currency code, or “XTR” for payments in Telegram Stars",
@@ -12553,13 +12680,13 @@
             ]
         },
         "TransactionPartner": {
-            "desc": "This object describes the source of a transaction, or its recipient for outgoing transactions. Currently, it can be one of TransactionPartnerUser; TransactionPartnerAffiliateProgram; TransactionPartnerFragment; TransactionPartnerTelegramAds; TransactionPartnerTelegramApi; TransactionPartnerOther",
+            "desc": "This object describes the source of a transaction, or its recipient for outgoing transactions. Currently, it can be one of TransactionPartnerUser; TransactionPartnerChat; TransactionPartnerAffiliateProgram; TransactionPartnerFragment; TransactionPartnerTelegramAds; TransactionPartnerTelegramApi; TransactionPartnerOther",
             "fields": [
                 {
                     "description": "",
                     "name": "__alias__",
                     "optional": false,
-                    "type": "TransactionPartnerUser or TransactionPartnerAffiliateProgram or TransactionPartnerFragment or TransactionPartnerTelegramAds or TransactionPartnerTelegramApi or TransactionPartnerOther"
+                    "type": "TransactionPartnerUser or TransactionPartnerChat or TransactionPartnerAffiliateProgram or TransactionPartnerFragment or TransactionPartnerTelegramAds or TransactionPartnerTelegramApi or TransactionPartnerOther"
                 }
             ]
         },
@@ -12584,6 +12711,30 @@
                     "name": "commission_per_mille",
                     "optional": false,
                     "type": "Integer"
+                }
+            ]
+        },
+        "TransactionPartnerChat": {
+            "desc": "Describes a transaction with a chat.",
+            "fields": [
+                {
+                    "default": "chat",
+                    "description": "Type of the transaction partner, always “chat”",
+                    "name": "type",
+                    "optional": false,
+                    "type": "String"
+                },
+                {
+                    "description": "Information about the chat",
+                    "name": "chat",
+                    "optional": false,
+                    "type": "Chat"
+                },
+                {
+                    "description": "Optional. The gift sent to the chat by the bot",
+                    "name": "gift",
+                    "optional": true,
+                    "type": "Gift"
                 }
             ]
         },
@@ -13065,6 +13216,18 @@
                     "name": "thumbnail",
                     "optional": true,
                     "type": "PhotoSize"
+                },
+                {
+                    "description": "Optional. Available sizes of the cover of the video in the message",
+                    "name": "cover",
+                    "optional": true,
+                    "type": "Array of PhotoSize"
+                },
+                {
+                    "description": "Optional. Timestamp in seconds from which the video will play in the message",
+                    "name": "start_timestamp",
+                    "optional": true,
+                    "type": "Integer"
                 },
                 {
                     "description": "Optional. Original filename as defined by the sender",

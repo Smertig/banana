@@ -191,6 +191,7 @@ struct successful_payment_t;
 struct switch_inline_query_chosen_chat_t;
 struct text_quote_t;
 struct transaction_partner_affiliate_program_t;
+struct transaction_partner_chat_t;
 struct transaction_partner_fragment_t;
 struct transaction_partner_other_t;
 struct transaction_partner_telegram_ads_t;
@@ -264,5 +265,5 @@ using reaction_type_t = variant_t<reaction_type_emoji_t, reaction_type_custom_em
 // This object describes the state of a revenue withdrawal operation. Currently, it can be one of RevenueWithdrawalStatePending; RevenueWithdrawalStateSucceeded; RevenueWithdrawalStateFailed
 using revenue_withdrawal_state_t = variant_t<revenue_withdrawal_state_pending_t, revenue_withdrawal_state_succeeded_t, revenue_withdrawal_state_failed_t>;
 
-// This object describes the source of a transaction, or its recipient for outgoing transactions. Currently, it can be one of TransactionPartnerUser; TransactionPartnerAffiliateProgram; TransactionPartnerFragment; TransactionPartnerTelegramAds; TransactionPartnerTelegramApi; TransactionPartnerOther
-using transaction_partner_t = variant_t<transaction_partner_user_t, transaction_partner_affiliate_program_t, transaction_partner_fragment_t, transaction_partner_telegram_ads_t, transaction_partner_telegram_api_t, transaction_partner_other_t>;
+// This object describes the source of a transaction, or its recipient for outgoing transactions. Currently, it can be one of TransactionPartnerUser; TransactionPartnerChat; TransactionPartnerAffiliateProgram; TransactionPartnerFragment; TransactionPartnerTelegramAds; TransactionPartnerTelegramApi; TransactionPartnerOther
+using transaction_partner_t = variant_t<transaction_partner_user_t, transaction_partner_chat_t, transaction_partner_affiliate_program_t, transaction_partner_fragment_t, transaction_partner_telegram_ads_t, transaction_partner_telegram_api_t, transaction_partner_other_t>;

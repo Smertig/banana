@@ -993,6 +993,34 @@ struct detail::by_request_type_impl<api::refund_star_payment_args_t> {
 };
 
 template <>
+struct api_traits<api::method::remove_chat_verification> {
+    static inline constexpr std::string_view native_name = "removeChatVerification";
+    static inline constexpr std::string_view pretty_name = "remove_chat_verification";
+
+    using request_type  = api::remove_chat_verification_args_t;
+    using response_type = boolean_t;
+};
+
+template <>
+struct detail::by_request_type_impl<api::remove_chat_verification_args_t> {
+    using type = api_traits<api::method::remove_chat_verification>;
+};
+
+template <>
+struct api_traits<api::method::remove_user_verification> {
+    static inline constexpr std::string_view native_name = "removeUserVerification";
+    static inline constexpr std::string_view pretty_name = "remove_user_verification";
+
+    using request_type  = api::remove_user_verification_args_t;
+    using response_type = boolean_t;
+};
+
+template <>
+struct detail::by_request_type_impl<api::remove_user_verification_args_t> {
+    using type = api_traits<api::method::remove_user_verification>;
+};
+
+template <>
 struct api_traits<api::method::reopen_forum_topic> {
     static inline constexpr std::string_view native_name = "reopenForumTopic";
     static inline constexpr std::string_view pretty_name = "reopen_forum_topic";
@@ -1830,5 +1858,33 @@ struct api_traits<api::method::upload_sticker_file> {
 template <>
 struct detail::by_request_type_impl<api::upload_sticker_file_args_t> {
     using type = api_traits<api::method::upload_sticker_file>;
+};
+
+template <>
+struct api_traits<api::method::verify_chat> {
+    static inline constexpr std::string_view native_name = "verifyChat";
+    static inline constexpr std::string_view pretty_name = "verify_chat";
+
+    using request_type  = api::verify_chat_args_t;
+    using response_type = boolean_t;
+};
+
+template <>
+struct detail::by_request_type_impl<api::verify_chat_args_t> {
+    using type = api_traits<api::method::verify_chat>;
+};
+
+template <>
+struct api_traits<api::method::verify_user> {
+    static inline constexpr std::string_view native_name = "verifyUser";
+    static inline constexpr std::string_view pretty_name = "verify_user";
+
+    using request_type  = api::verify_user_args_t;
+    using response_type = boolean_t;
+};
+
+template <>
+struct detail::by_request_type_impl<api::verify_user_args_t> {
+    using type = api_traits<api::method::verify_user>;
 };
 

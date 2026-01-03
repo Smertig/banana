@@ -70,6 +70,8 @@ enum class method {
     pin_chat_message,
     promote_chat_member,
     refund_star_payment,
+    remove_chat_verification,
+    remove_user_verification,
     reopen_forum_topic,
     reopen_general_forum_topic,
     replace_sticker_in_set,
@@ -130,9 +132,11 @@ enum class method {
     unpin_all_general_forum_topic_messages,
     unpin_chat_message,
     upload_sticker_file,
+    verify_chat,
+    verify_user,
 };
 
 struct method_traits {
   static constexpr auto first_method = method::add_sticker_to_set;
-  static constexpr auto last_method = method::upload_sticker_file;
+  static constexpr auto last_method = method::verify_user;
 };
