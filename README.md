@@ -14,7 +14,7 @@
  - **Single interface for both blocking, non-blocking and even coroutine-based operations**
  - Generic in terms of networking backend (bundled support for [`WinAPI`](https://docs.microsoft.com/en-us/windows/win32/api/wininet/nf-wininet-httpsendrequesta), [`cpr`](https://github.com/whoshuu/cpr) and [`boost::beast`](https://github.com/boostorg/beast))
  - Extendable (see [custom-agent](https://github.com/Smertig/banana/blob/master/examples/custom-agent-blocking.cpp) example)
- - Automatically generated from [Telegram Bot API](https://core.telegram.org/bots/api) 7.4 (thanks [ark0f/tg-bot-api](https://github.com/ark0f/tg-bot-api))
+ - Automatically generated from [Telegram Bot API](https://core.telegram.org/bots/api) 8.1 (thanks [ark0f/tg-bot-api](https://github.com/ark0f/tg-bot-api))
  - Cross-platform (tested on Windows, Linux, macOS)
 
 ## Example
